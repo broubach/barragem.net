@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+<f:loadBundle basename="message-bundle" var="msg" />
+
+<head>
+<title>#{msg.label_titulo}</title>
+</head>
+<body>
+<div class="centro-conteudo"><h:form>
+	<label class="label_regular">#{msg.label_bem_vindo}</label>
+	<br />
+
+	<label class="label_regular">#{msg.label_nome}</label>
+	<br />
+	<h:inputText value="#{barragemBean.barragem.nome}" />
+	<br />
+
+	<h:panelGrid columns="2" id="painelJogadores">
+		<label class="label_regular">#{msg.label_jogadores}</label>
+		<a4j:commandButton value="+" reRender="painelJogadores"
+			limitToList="true" actionListener="#{barragemBean.adicionaJogador}"
+			immediate="true" />
+
+		<c:forEach items="#{barragemBean.barragem.jogadores}" var="item"
+			varStatus="status">
+			<h:selectOneMenu
+				value="#{item}"
+				converter="JogadorConverter">
+				<f:selectItems value="#{lookupBean.listaJogadores}" />
+			</h:selectOneMenu>
+			<a4j:commandButton value="-" reRender="painelJogadores"
+				limitToList="true" actionListener="#{barragemBean.removeJogador}"
+				immediate="true">
+				<f:param name="index" value="#{item}" />
+			</a4j:commandButton>
+		</c:forEach>
+	</h:panelGrid>
+	<br />
+
+	<h:commandButton actionListener="#{jogoBarragemBean.salva}"
+		value="Salva!" />
+
+</h:form></div>
+</body>
+</html>

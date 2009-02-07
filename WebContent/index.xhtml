@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+<f:loadBundle basename="message-bundle" var="msg" />
+
+<head>
+<title>#{msg.label_titulo}</title>
+<script type="text/JavaScript" src="js/curvycorners.js"></script>
+<link rel="stylesheet" type="text/css" href="css/barragem.css" />
+<script type="text/JavaScript">
+	window.onload = function() {
+		/*For info on code bellow see: http://www.curvycorners.net/index.php*/
+		settings = {
+			tl : {
+				radius :10
+			},
+			tr : {
+				radius :10
+			},
+			bl : {
+				radius :10
+			},
+			br : {
+				radius :10
+			},
+			antiAlias :true,
+			autoPad :false,
+			validTags : [ "div" ]
+		}
+		var myBoxObject = new curvyCorners(settings, "esquerda-menu");
+		myBoxObject.applyCornersToAll();
+		myBoxObject = new curvyCorners(settings, "centro-conteudo");
+		myBoxObject.applyCornersToAll();
+		myBoxObject = new curvyCorners(settings, "direita-ads");
+		myBoxObject.applyCornersToAll();
+	}
+</script>
+</head>
+<body>
+<div class="esquerda-menu"></div>
+
+<div class="centro-conteudo"><h:form>
+	<label class="label_regular">#{msg.label_bem_vindo}</label>
+	<br />
+
+	<label class="label_regular">#{msg.label_data}</label>
+	<br />
+	<h:inputText value="#{jogoBarragemBean.jogoBarragem.data}" />
+	<br />
+
+	<label class="label_regular">#{msg.label_tipo}</label>
+	<br />
+	<h:selectOneMenu value="#{jogoBarragemBean.jogoBarragem.tipo}">
+		<f:selectItem itemValue="S" itemLabel="#{msg.label_simples}" />
+		<f:selectItem itemValue="D" itemLabel="#{msg.label_duplas}" />
+		<a4j:support event="onchange" reRender="comboJogador,parceiro"
+			ajaxSingle="true" limitToList="true" />
+	</h:selectOneMenu>
+	<br />
+
+	<label class="label_regular">#{msg.label_adversarios}</label>
+	<br />
+	<h:panelGrid id="comboJogador" columns="1">
+		<h:selectOneMenu
+			value="#{jogoBarragemBean.jogoBarragem.jogadoresEventos[1].jogador}"
+			converter="JogadorConverter">
+			<f:selectItems value="#{lookupBean.listaJogadores}" />
+		</h:selectOneMenu>
+		<h:selectOneMenu
+			rendered="#{jogoBarragemBean.jogoBarragem.tipo == 'D'}"
+			value="#{jogoBarragemBean.jogoBarragem.jogadoresEventos[2].jogador}"
+			converter="JogadorConverter">
+			<f:selectItems value="#{lookupBean.listaJogadores}" />
+		</h:selectOneMenu>
+	</h:panelGrid>
+
+	<h:panelGrid id="parceiro" column="1">
+		<c:if test="#{jogoBarragemBean.jogoBarragem.tipo == 'D'}">
+			<label class="label_regular">#{msg.label_parceiro}</label>
+			<h:selectOneMenu
+				value="#{jogoBarragemBean.jogoBarragem.jogadoresEventos[3].jogador}"
+				converter="JogadorConverter">
+				<f:selectItems value="#{lookupBean.listaJogadores}" />
+			</h:selectOneMenu>
+		</c:if>
+	</h:panelGrid>
+	<br />
+
+	<label class="label_regular">#{msg.label_placar}</label>
+	<br />
+
+	<label class="label_regular">#{msg.label_comentario}</label>
+	<br />
+	<h:inputTextarea
+		value="#{jogoBarragemBean.jogoBarragem.jogadoresEventos[0].comentario}" />
+	<br />
+
+	<h:commandButton actionListener="#{jogoBarragemBean.salva}"
+		value="Salva!" />
+
+</h:form></div>
+<div class="direita-ads"></div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd"
+	version="1.2">
+	<application>
+		<message-bundle>message-bundle</message-bundle>
+		<view-handler>com.sun.facelets.FaceletViewHandler</view-handler>
+	</application>
+	<converter>
+		<converter-id>JogadorConverter</converter-id>
+		<converter-class>net.barragem.view.converter.JogadorConverter</converter-class>
+	</converter>
+	<managed-bean>
+		<managed-bean-name>jogoBarragemBean</managed-bean-name>
+		<managed-bean-class>net.barragem.view.backingbean.CadastrarJogoDeBarragemBackingBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>lookupBean</managed-bean-name>
+		<managed-bean-class>net.barragem.view.backingbean.LookupBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>barragemBean</managed-bean-name>
+		<managed-bean-class>net.barragem.view.backingbean.CriarBarragemBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>jogadoresBean</managed-bean-name>
+		<managed-bean-class>net.barragem.view.backingbean.GerirJogadoresBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>loginBean</managed-bean-name>
+		<managed-bean-class>net.barragem.view.backingbean.LoginBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+</faces-config>

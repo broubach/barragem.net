@@ -1,0 +1,47 @@
+body {
+	background-color: #D7DC76; /*R: 215, G: 220, B: 118 - D7DC76*/
+}
+
+.esquerda-menu {
+	left: 0.3%;
+	width: 19.2%;
+	top: 2.5%;
+	height: 95%;
+	color: #000000;
+	border-color: #000000;
+	border-style: solid;
+	border-width: thin;
+	position: absolute;
+	background-color: #fff;
+}
+
+.centro-conteudo {
+	left: 20%;
+	top: 2.5%;
+	width: 59.5%;
+	height: 95%;
+	color: #000000;
+	border-color: #000000;
+	border-style: solid;
+	border-width: thin;
+	position: absolute;
+	background-color: #fff;
+}
+
+.direita-ads {
+	left: 80%;
+	top: 2.5%;
+	width: 19.5%;
+	height: 95%;
+	color: #000000;
+	border-color: #000000;
+	border-style: solid;
+	border-width: thin;
+	position: absolute;
+	background-color: #fff;
+}
+
+.label_regular {
+	font-family: verdana;
+	font-size: medium;
+}

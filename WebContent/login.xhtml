@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+<f:loadBundle basename="message-bundle" var="msg" />
+
+<head>
+<title>#{msg.label_titulo}</title>
+</head>
+<body>
+<div class="centro-conteudo"><h:form>
+	<label class="label_regular">#{msg.label_bem_vindo}</label>
+	<br />
+
+	<h:messages showDetail="true" globalOnly="false" showSummary="false" />
+
+	<h:panelGrid columns="2">
+		<label class="label_regular">#{msg.label_login}</label>
+		<h:inputText value="#{loginBean.login}" />
+
+		<label class="label_regular">#{msg.label_senha}</label>
+		<h:inputText value="#{loginBean.senha}" />
+	</h:panelGrid>
+
+	<h:commandButton actionListener="#{loginBean.login}" value="Login" />
+
+</h:form></div>
+<div class="direita-ads"></div>
+</body>
+</html>
