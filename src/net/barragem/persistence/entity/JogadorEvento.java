@@ -1,19 +1,12 @@
 package net.barragem.persistence.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "jogador_evento")
-public class JogadorEvento {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
-
+public class JogadorEvento extends BaseEntity {
 	@ManyToOne
 	private Evento evento;
 
@@ -21,14 +14,6 @@ public class JogadorEvento {
 	private Jogador jogador;
 
 	private String comentario;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	public Evento getEvento() {
 		return evento;

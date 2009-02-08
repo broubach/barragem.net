@@ -3,9 +3,6 @@ package net.barragem.persistence.entity;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -13,10 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Set {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+public class Set extends BaseEntity {
 	private Integer parcialVencedor;
 	private Integer parcialPerdedor;
 
@@ -30,14 +24,6 @@ public class Set {
 
 	@ManyToOne
 	private Placar placar;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	public Integer getParcialVencedor() {
 		return parcialVencedor;

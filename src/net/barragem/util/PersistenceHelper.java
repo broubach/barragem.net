@@ -4,18 +4,26 @@ import java.util.List;
 
 import javax.persistence.PersistenceException;
 
+import net.barragem.persistence.entity.BaseEntity;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 public class PersistenceHelper {
 
-	public static void persiste(Object entidade) {
+	public static void persiste(BaseEntity entidade) {
 		Session session = null;
 		Transaction t = null;
 		try {
 			session = HibernateUtil.getSession();
 			t = session.beginTransaction();
-			session.save(entidade);
+			if (entidade.getId() != null) {
+				session.update(entidade);
+			} else {
+				session.save(entidade);
+			}
+
+			session.merge(entidade);
 			t.commit();
 		} catch (PersistenceException pe) {
 			t.rollback();
