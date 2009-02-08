@@ -8,7 +8,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Jogador implements Comparable<Jogador> {
+public class Jogador {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
@@ -51,9 +51,5 @@ public class Jogador implements Comparable<Jogador> {
 
 	public void setUsuarioDono(Usuario usuarioDono) {
 		this.usuarioDono = usuarioDono;
-	}
-
-	public int compareTo(Jogador other) {
-		return nome.compareTo(other.nome);
 	}
 }

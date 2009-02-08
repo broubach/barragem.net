@@ -1,6 +1,6 @@
 package net.barragem.persistence.entity;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -24,7 +24,7 @@ public class Usuario {
 	private Jogador jogador;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioDono")
-	private Set<Jogador> jogadores;
+	private List<Jogador> jogadores;
 
 	public String getNome() {
 		return nome;
@@ -34,11 +34,11 @@ public class Usuario {
 		this.nome = nome;
 	}
 
-	public Set<Jogador> getJogadores() {
+	public List<Jogador> getJogadores() {
 		return jogadores;
 	}
 
-	public void setJogadores(Set<Jogador> jogadores) {
+	public void setJogadores(List<Jogador> jogadores) {
 		this.jogadores = jogadores;
 	}
 

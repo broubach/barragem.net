@@ -1,6 +1,6 @@
 package net.barragem.persistence.entity;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,7 +20,7 @@ public class Barragem {
 
 	@ManyToMany
 	@JoinTable(inverseJoinColumns = @JoinColumn(name = "jogador_id", referencedColumnName = "id"))
-	private java.util.Set<Jogador> jogadores;
+	private List<Jogador> jogadores;
 
 	public Integer getId() {
 		return id;
@@ -38,11 +38,11 @@ public class Barragem {
 		this.nome = nome;
 	}
 
-	public Set<Jogador> getJogadores() {
+	public List<Jogador> getJogadores() {
 		return jogadores;
 	}
 
-	public void setJogadores(Set<Jogador> jogadores) {
+	public void setJogadores(List<Jogador> jogadores) {
 		this.jogadores = jogadores;
 	}
 }

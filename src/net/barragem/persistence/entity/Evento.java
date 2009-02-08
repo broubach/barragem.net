@@ -1,7 +1,7 @@
 package net.barragem.persistence.entity;
 
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +23,7 @@ public class Evento {
 	private Date data;
 
 	@OneToMany(mappedBy = "evento")
-	protected Set<JogadorEvento> jogadoresEventos;
+	protected List<JogadorEvento> jogadoresEventos;
 
 	public Integer getId() {
 		return id;
@@ -41,11 +41,11 @@ public class Evento {
 		this.data = data;
 	}
 
-	public Set<JogadorEvento> getJogadoresEventos() {
+	public List<JogadorEvento> getJogadoresEventos() {
 		return jogadoresEventos;
 	}
 
-	public void setJogadoresEventos(Set<JogadorEvento> jogadoresEventos) {
+	public void setJogadoresEventos(List<JogadorEvento> jogadoresEventos) {
 		this.jogadoresEventos = jogadoresEventos;
 	}
 }

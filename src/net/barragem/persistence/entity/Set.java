@@ -1,5 +1,7 @@
 package net.barragem.persistence.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,11 +22,11 @@ public class Set {
 
 	@OneToMany
 	@JoinTable(name = "set_vencedor", inverseJoinColumns = @JoinColumn(name = "jogador_id", referencedColumnName = "id"))
-	private java.util.Set<Jogador> vencedores;
+	private List<Jogador> vencedores;
 
 	@ManyToMany
 	@JoinTable(name = "set_perdedor", inverseJoinColumns = @JoinColumn(name = "jogador_id", referencedColumnName = "id"))
-	private java.util.Set<Jogador> perdedores;
+	private List<Jogador> perdedores;
 
 	@ManyToOne
 	private Placar placar;
@@ -53,19 +55,19 @@ public class Set {
 		this.parcialPerdedor = parcialPerdedor;
 	}
 
-	public java.util.Set<Jogador> getVencedores() {
+	public List<Jogador> getVencedores() {
 		return vencedores;
 	}
 
-	public void setVencedores(java.util.Set<Jogador> vencedores) {
+	public void setVencedores(List<Jogador> vencedores) {
 		this.vencedores = vencedores;
 	}
 
-	public java.util.Set<Jogador> getPerdedores() {
+	public List<Jogador> getPerdedores() {
 		return perdedores;
 	}
 
-	public void setPerdedores(java.util.Set<Jogador> perdedores) {
+	public void setPerdedores(List<Jogador> perdedores) {
 		this.perdedores = perdedores;
 	}
 

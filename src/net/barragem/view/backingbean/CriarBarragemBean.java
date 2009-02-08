@@ -1,6 +1,6 @@
 package net.barragem.view.backingbean;
 
-import java.util.TreeSet;
+import java.util.ArrayList;
 
 import javax.faces.event.ActionEvent;
 
@@ -12,7 +12,7 @@ public class CriarBarragemBean extends BaseBean {
 
 	public CriarBarragemBean() {
 		barragem = new Barragem();
-		barragem.setJogadores(new TreeSet<Jogador>());
+		barragem.setJogadores(new ArrayList<Jogador>());
 	}
 
 	public void adicionaJogador(ActionEvent e) {

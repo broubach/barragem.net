@@ -1,6 +1,6 @@
 package net.barragem.view.backingbean;
 
-import java.util.TreeSet;
+import java.util.ArrayList;
 
 import javax.faces.event.ActionEvent;
 
@@ -14,7 +14,7 @@ public class GerirJogadoresBean extends BaseBean {
 	public GerirJogadoresBean() {
 		usuario = (Usuario) getSessionAttribute("usuario");
 		if (usuario.getJogadores() == null) {
-			usuario.setJogadores(new TreeSet<Jogador>());
+			usuario.setJogadores(new ArrayList<Jogador>());
 		}
 	}
 

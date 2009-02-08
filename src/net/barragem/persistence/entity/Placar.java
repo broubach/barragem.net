@@ -1,6 +1,6 @@
 package net.barragem.persistence.entity;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,15 +18,15 @@ public class Placar {
 	private Integer id;
 
 	@OneToMany(mappedBy = "placar")
-	private Set<net.barragem.persistence.entity.Set> sets;
+	private List<net.barragem.persistence.entity.Set> sets;
 
 	@ManyToMany
 	@JoinTable(name = "placar_vencedor", inverseJoinColumns = @JoinColumn(name = "jogador_id", referencedColumnName = "id"))
-	private Set<Jogador> vencedores;
+	private List<Jogador> vencedores;
 
 	@ManyToMany
 	@JoinTable(name = "placar_perdedor", inverseJoinColumns = @JoinColumn(name = "jogador_id", referencedColumnName = "id"))
-	private Set<Jogador> perdedores;
+	private List<Jogador> perdedores;
 
 	public Integer getId() {
 		return id;
@@ -36,27 +36,27 @@ public class Placar {
 		this.id = id;
 	}
 
-	public Set<net.barragem.persistence.entity.Set> getSets() {
+	public List<net.barragem.persistence.entity.Set> getSets() {
 		return sets;
 	}
 
-	public void setSets(Set<net.barragem.persistence.entity.Set> sets) {
+	public void setSets(List<net.barragem.persistence.entity.Set> sets) {
 		this.sets = sets;
 	}
 
-	public Set<Jogador> getVencedores() {
+	public List<Jogador> getVencedores() {
 		return vencedores;
 	}
 
-	public void setVencedores(Set<Jogador> vencedores) {
+	public void setVencedores(List<Jogador> vencedores) {
 		this.vencedores = vencedores;
 	}
 
-	public Set<Jogador> getPerdedores() {
+	public List<Jogador> getPerdedores() {
 		return perdedores;
 	}
 
-	public void setPerdedores(Set<Jogador> perdedores) {
+	public void setPerdedores(List<Jogador> perdedores) {
 		this.perdedores = perdedores;
 	}
 }

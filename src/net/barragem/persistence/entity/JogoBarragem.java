@@ -1,6 +1,6 @@
 package net.barragem.persistence.entity;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -21,7 +21,7 @@ public class JogoBarragem extends Jogo {
 	}
 
 	public void inicializaParaDuplas() {
-		jogadoresEventos = new HashSet<JogadorEvento>();
+		jogadoresEventos = new ArrayList<JogadorEvento>();
 		jogadoresEventos.add(new JogadorEvento());
 		jogadoresEventos.add(new JogadorEvento());
 		jogadoresEventos.add(new JogadorEvento());

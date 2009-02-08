@@ -28,17 +28,17 @@
 			limitToList="true" actionListener="#{barragemBean.adicionaJogador}"
 			immediate="true" />
 
-		<c:forEach items="#{barragemBean.barragem.jogadores}" var="item"
+		<c:forEach items="#{barragemBean.barragem.jogadores}"
 			varStatus="status">
 			<h:selectOneMenu
-				value="#{item}"
+				value="#{barragemBean.barragem.jogadores[status.index]}"
 				converter="JogadorConverter">
 				<f:selectItems value="#{lookupBean.listaJogadores}" />
 			</h:selectOneMenu>
 			<a4j:commandButton value="-" reRender="painelJogadores"
 				limitToList="true" actionListener="#{barragemBean.removeJogador}"
 				immediate="true">
-				<f:param name="index" value="#{item}" />
+				<f:param name="index" value="#{status.index}" />
 			</a4j:commandButton>
 		</c:forEach>
 	</h:panelGrid>
