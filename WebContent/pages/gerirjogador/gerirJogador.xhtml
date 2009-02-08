@@ -20,15 +20,15 @@
 	<h:panelGrid columns="2" id="painelJogadores">
 		<h:outputText value="#{msg.label_jogadores}" />
 		<a4j:commandButton value="+" reRender="painelJogadores"
-			limitToList="true" actionListener="#{jogadoresBean.adicionaJogador}"
+			limitToList="true" actionListener="#{gerirJogadorBean.adicionaJogador}"
 			immediate="true" />
 
-		<c:forEach items="#{jogadoresBean.usuario.jogadores}"
+		<c:forEach items="#{gerirJogadorBean.usuario.jogadores}"
 			varStatus="status">
 			<h:inputText
-				value="#{jogadoresBean.usuario.jogadores[status.index].nome}" />
+				value="#{gerirJogadorBean.usuario.jogadores[status.index].nome}" />
 			<a4j:commandButton value="-" reRender="painelJogadores"
-				limitToList="true" actionListener="#{jogadoresBean.removeJogador}"
+				limitToList="true" actionListener="#{gerirJogadorBean.removeJogador}"
 				immediate="true">
 				<f:param name="index" value="#{status.index}" />
 			</a4j:commandButton>
@@ -36,7 +36,7 @@
 	</h:panelGrid>
 	<br />
 
-	<h:commandButton actionListener="#{jogadoresBean.salva}" value="Salva!" />
+	<h:commandButton actionListener="#{gerirJogadorBean.salva}" value="Salva!" />
 
 </h:form></div>
 </body>

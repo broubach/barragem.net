@@ -5,10 +5,10 @@ import javax.faces.event.ActionEvent;
 import net.barragem.persistence.entity.JogoBarragem;
 import net.barragem.util.PersistenceHelper;
 
-public class CadastrarJogoDeBarragemBackingBean extends BaseBean {
+public class CadastrarJogoBarragemBean extends BaseBean {
 	private JogoBarragem jogoBarragem;
 
-	public CadastrarJogoDeBarragemBackingBean() {
+	public CadastrarJogoBarragemBean() {
 		jogoBarragem = new JogoBarragem();
 		jogoBarragem.inicializaParaDuplas();
 	}

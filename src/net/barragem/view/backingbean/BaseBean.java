@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import net.barragem.persistence.entity.Usuario;
+
 public class BaseBean {
 
 	protected HttpServletRequest getServletRequest() {
@@ -130,5 +132,13 @@ public class BaseBean {
 
 	public String getContextPath() {
 		return FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
+	}
+
+	protected Usuario getUsuarioLogado() {
+		return (Usuario) getSessionAttribute("usuario");
+	}
+
+	protected void setUsuarioLogado(Usuario usuario) {
+		setSessionAttribute("usuario", usuario);
 	}
 }

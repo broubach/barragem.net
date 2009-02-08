@@ -38,7 +38,7 @@ public class LoginBean extends BaseBean {
 			setErrorMessage("error bruto");
 		} else {
 			// coloca usuario na sessao
-			setSessionAttribute("usuario", usuarios.get(0));
+			setUsuarioLogado(usuarios.get(0));
 			// encaminha para pagina inicial da comunidade
 			sendRedirect("/index.xhtml");
 		}

@@ -13,7 +13,7 @@
 	</converter>
 	<managed-bean>
 		<managed-bean-name>jogoBarragemBean</managed-bean-name>
-		<managed-bean-class>net.barragem.view.backingbean.CadastrarJogoDeBarragemBackingBean</managed-bean-class>
+		<managed-bean-class>net.barragem.view.backingbean.CadastrarJogoBarragemBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
@@ -22,18 +22,18 @@
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
-		<managed-bean-name>barragemBean</managed-bean-name>
-		<managed-bean-class>net.barragem.view.backingbean.CriarBarragemBean</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-	</managed-bean>
-	<managed-bean>
-		<managed-bean-name>jogadoresBean</managed-bean-name>
-		<managed-bean-class>net.barragem.view.backingbean.GerirJogadoresBean</managed-bean-class>
+		<managed-bean-name>gerirJogadorBean</managed-bean-name>
+		<managed-bean-class>net.barragem.view.backingbean.GerirJogadorBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>loginBean</managed-bean-name>
 		<managed-bean-class>net.barragem.view.backingbean.LoginBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>gerirBarragemBean</managed-bean-name>
+		<managed-bean-class>net.barragem.view.backingbean.GerirBarragemBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 </faces-config>

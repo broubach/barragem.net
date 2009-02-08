@@ -8,10 +8,10 @@ import net.barragem.persistence.entity.Jogador;
 import net.barragem.persistence.entity.Usuario;
 import net.barragem.util.PersistenceHelper;
 
-public class GerirJogadoresBean extends BaseBean {
+public class GerirJogadorBean extends BaseBean {
 	private Usuario usuario;
 
-	public GerirJogadoresBean() {
+	public GerirJogadorBean() {
 		usuario = (Usuario) getSessionAttribute("usuario");
 		if (usuario.getJogadores() == null) {
 			usuario.setJogadores(new ArrayList<Jogador>());
@@ -38,5 +38,6 @@ public class GerirJogadoresBean extends BaseBean {
 
 	public void salva(ActionEvent e) {
 		PersistenceHelper.persiste(usuario);
+		setUsuarioLogado(usuario);
 	}
 }

@@ -20,6 +20,9 @@ public class Usuario extends BaseEntity {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioDono")
 	private List<Jogador> jogadores;
 
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "administrador")
+	private List<Barragem> barragens;
+
 	public String getNome() {
 		return nome;
 	}
@@ -58,5 +61,13 @@ public class Usuario extends BaseEntity {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public List<Barragem> getBarragens() {
+		return barragens;
+	}
+
+	public void setBarragens(List<Barragem> barragens) {
+		this.barragens = barragens;
 	}
 }
