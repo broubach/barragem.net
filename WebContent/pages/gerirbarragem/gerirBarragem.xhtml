@@ -15,24 +15,27 @@
 </head>
 <body>
 <div class="centro-conteudo"><h:form>
-	<label class="label_regular">#{msg.label_bem_vindo}</label>
+	<h:outputText styleClass="label_regular" value="#{msg.label_bem_vindo}" />
 	<br />
 
-	<label class="label_regular">#{msg.label_minhas_barragens}</label>
+	<h:outputText styleClass="label_regular"
+		value="#{msg.label_minhas_barragens}" />
 
 	<h:panelGrid columns="4" id="painelBarragens">
-		<label class="label_regular">#{msg.label_barragem}</label>
-		<label class="label_regular">#{msg.label_local}</label>
-		<label class="label_regular">#{msg.label_administrador}</label>
+		<h:outputText styleClass="label_regular" value="#{msg.label_barragem}" />
+		<h:outputText styleClass="label_regular" value="#{msg.label_local}" />
+		<h:outputText styleClass="label_regular"
+			value="#{msg.label_administrador}" />
 		<a4j:commandButton value="+"
 			actionListener="#{gerirBarragemBean.novaBarragem}"
 			oncomplete="Richfaces.showModalPanel('panel');" />
 
-		<c:forEach items="#{gerirBarragemBean.usuario.barragens}"
-			item="item" varStatus="status">
-			<label class="label_regular">#{item.local}</label>
-			<label class="label_regular">#{item.nome}</label>
-			<label class="label_regular">#{item.administrador}</label>
+		<c:forEach items="#{gerirBarragemBean.usuario.barragens}" item="item"
+			varStatus="status">
+			<h:outputText styleClass="label_regular" value="#{item.local}" />
+			<h:outputText styleClass="label_regular" value="#{item.nome}" />
+			<h:outputText styleClass="label_regular"
+				value="#{item.administrador}" />
 			<a4j:commandButton value="-" reRender="painelBarragens"
 				limitToList="true"
 				actionListener="#{gerirBarragemBean.removeBarragem}"
@@ -65,13 +68,13 @@
 				value="#{msg.label_administrador}" />
 			<h:inputText value="#{gerirBarragemBean.barragem.local}" />
 			<h:inputText value="#{gerirBarragemBean.barragem.nome}" />
-			<h:inputText
-				value="#{gerirBarragemBean.barragem.administrador.nome}"
+			<h:inputText value="#{gerirBarragemBean.barragem.administrador.nome}"
 				disabled="true" />
 		</h:panelGrid>
 
 		<h:panelGrid columns="2" id="painelJogadores">
-			<label class="label_regular">#{msg.label_jogadores}</label>
+			<h:outputText styleClass="label_regular"
+				value="#{msg.label_jogadores}" />
 			<a4j:commandButton value="+" reRender="painelJogadores"
 				limitToList="true"
 				actionListener="#{gerirBarragemBean.adicionaJogador}"
@@ -91,10 +94,15 @@
 					<f:param name="index" value="#{status.index}" />
 				</a4j:commandButton>
 			</c:forEach>
+
+			<a4j:commandButton actionListener="#{gerirBarragemBean.salva}"
+				value="#{msg.label_salvar}" immediate="true" />
 		</h:panelGrid>
-		<a4j:commandButton actionListener="#{gerirBarragemBean.salva}"
-			value="#{msg.label_salvar}" reRender="painelBarragens" />
 	</h:form>
+
+
+<a4j:log level="ALL" popup="false" width="400" height="200"/>
+
 </rich:modalPanel>
 
 </body>

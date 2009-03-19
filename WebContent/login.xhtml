@@ -14,16 +14,16 @@
 </head>
 <body>
 <div class="centro-conteudo"><h:form>
-	<label class="label_regular">#{msg.label_bem_vindo}</label>
+	<h:outputText styleClass="label_regular" value="#{msg.label_bem_vindo}" />
 	<br />
 
 	<h:messages showDetail="true" globalOnly="false" showSummary="false" />
 
 	<h:panelGrid columns="2">
-		<label class="label_regular">#{msg.label_login}</label>
+		<h:outputText styleClass="label_regular" value="#{msg.label_login}" />
 		<h:inputText value="#{loginBean.login}" />
 
-		<label class="label_regular">#{msg.label_senha}</label>
+		<h:outputText styleClass="label_regular" value="#{msg.label_senha}" />
 		<h:inputText value="#{loginBean.senha}" />
 	</h:panelGrid>
 
