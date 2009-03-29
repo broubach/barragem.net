@@ -55,7 +55,15 @@ public class GerirBarragemBean extends BaseBean {
 		barragem.setJogadores(new ArrayList<Jogador>());
 	}
 
-	public void salva(ActionEvent e) {
+	public void removeBarragem(ActionEvent e) {
+		usuario.getBarragens().remove(Integer.parseInt(getServletRequest().getParameter("index")));
+	}
+
+	public void salvaBarragem(ActionEvent e) {
 		PersistenceHelper.persiste(barragem);
+	}
+
+	public void salvaJogador(ActionEvent e) {
+		PersistenceHelper.persiste(usuario);
 	}
 }

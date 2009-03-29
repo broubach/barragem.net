@@ -26,11 +26,11 @@
 		<h:outputText styleClass="label_regular" value="#{msg.label_local}" />
 		<h:outputText styleClass="label_regular"
 			value="#{msg.label_administrador}" />
-		<a4j:commandButton value="+"
+		<a4j:commandButton value="+" reRender="panel"
 			actionListener="#{gerirBarragemBean.novaBarragem}"
 			oncomplete="Richfaces.showModalPanel('panel');" />
 
-		<c:forEach items="#{gerirBarragemBean.usuario.barragens}" item="item"
+		<c:forEach items="#{gerirBarragemBean.usuario.barragens}" var="item"
 			varStatus="status">
 			<h:outputText styleClass="label_regular" value="#{item.local}" />
 			<h:outputText styleClass="label_regular" value="#{item.nome}" />
@@ -46,7 +46,7 @@
 	</h:panelGrid>
 	<br />
 
-	<h:commandButton actionListener="#{gerirBarragemBean.salva}"
+	<h:commandButton actionListener="#{gerirBarragemBean.salvaJogador}"
 		value="Salva!" />
 
 </h:form></div>
@@ -80,8 +80,8 @@
 				actionListener="#{gerirBarragemBean.adicionaJogador}"
 				immediate="true" />
 
-			<c:forEach items="#{gerirBarragemBean.barragem.jogadores}"
-				item="item" varStatus="status">
+			<c:forEach items="#{gerirBarragemBean.barragem.jogadores}" var="item"
+				varStatus="status">
 				<h:selectOneMenu
 					value="#{gerirBarragemBean.barragem.jogadores[status.index]}"
 					converter="JogadorConverter">
@@ -95,14 +95,11 @@
 				</a4j:commandButton>
 			</c:forEach>
 
-			<a4j:commandButton actionListener="#{gerirBarragemBean.salva}"
-				value="#{msg.label_salvar}" immediate="true" />
+			<a4j:commandButton
+				actionListener="#{gerirBarragemBean.salvaBarragem}"
+				value="#{msg.label_salvar}" />
 		</h:panelGrid>
 	</h:form>
-
-
-<a4j:log level="ALL" popup="false" width="400" height="200"/>
-
 </rich:modalPanel>
 
 </body>
