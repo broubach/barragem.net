@@ -4,10 +4,12 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
+@NamedQuery(name = "loginQuery", query = "from Usuario usuario where usuario.login = :login and usuario.senha = :senha")
 public class Usuario extends BaseEntity {
 
 	private String nome;

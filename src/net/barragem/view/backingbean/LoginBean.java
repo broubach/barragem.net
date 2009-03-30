@@ -28,19 +28,14 @@ public class LoginBean extends BaseBean {
 	}
 
 	public void login(ActionEvent e) {
-		StringBuilder query = new StringBuilder();
-		query.append("from Usuario usuario left outer join fetch usuario.jogadores ");
-		query.append("where usuario.login ='").append(login).append("' ");
-		query.append("and usuario.senha = '").append(senha).append("' ");
-		query.append("");
-		List<Usuario> usuarios = PersistenceHelper.find(query.toString());
+		List<Usuario> usuarios = PersistenceHelper.findByNamedQuery("loginQuery", senha, login);
 		if (usuarios.isEmpty()) {
 			setErrorMessage("error bruto");
 		} else {
 			// coloca usuario na sessao
 			setUsuarioLogado(usuarios.get(0));
 			// encaminha para pagina inicial da comunidade
-			sendRedirect("/index.xhtml");
+			sendRedirect("/pages/gerirbarragem/gerirBarragem.xhtml");
 		}
 	}
 }

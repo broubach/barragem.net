@@ -7,63 +7,60 @@ import javax.faces.event.ActionEvent;
 
 import net.barragem.persistence.entity.Barragem;
 import net.barragem.persistence.entity.Jogador;
-import net.barragem.persistence.entity.Usuario;
 import net.barragem.util.PersistenceHelper;
 
 public class GerirBarragemBean extends BaseBean {
-	private Usuario usuario;
-	private Barragem barragem;
+	private Barragem barragemEmFoco;
+	private List<Barragem> barragens;
 
-	public Usuario getUsuario() {
-		if (usuario == null) {
-			StringBuilder query = new StringBuilder();
-			query.append("from Usuario usuario left outer join fetch usuario.barragens ");
-			query.append("where usuario.login ='").append(getUsuarioLogado().getLogin()).append("' ");
-			List<Usuario> usuarios = PersistenceHelper.find(query.toString());
-			usuario = usuarios.get(0);
-		}
-		return usuario;
+	public GerirBarragemBean() {
+		barragens = PersistenceHelper.findByNamedQuery("barragemPorUsuarioQuery", getUsuarioLogado());
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public List<Barragem> getBarragens() {
+		return barragens;
 	}
 
-	public Barragem getBarragem() {
-		return barragem;
+	public void removeBarragem(ActionEvent e) {
+		Barragem barragemARemover = barragens.get(Integer.parseInt(getServletRequest().getParameter("index")));
+		PersistenceHelper.remove(barragemARemover);
+		barragens.remove(barragemARemover);
 	}
 
-	public void setBarragem(Barragem barragem) {
-		this.barragem = barragem;
+	public Barragem getBarragemEmFoco() {
+		return barragemEmFoco;
+	}
+
+	public void setBarragemEmFoco(Barragem barragemEmFoco) {
+		this.barragemEmFoco = barragemEmFoco;
+	}
+
+	public void novaBarragem(ActionEvent e) {
+		barragemEmFoco = new Barragem();
+		barragemEmFoco.setAdministrador(getUsuarioLogado());
+		barragemEmFoco.setJogadores(new ArrayList<Jogador>());
 	}
 
 	public void adicionaJogador(ActionEvent e) {
-		if (barragem.getJogadores().size() < getUsuarioLogado().getJogadores().size()) {
+		if (barragemEmFoco.getJogadores().size() < getMaxJogadoresDoAdministrador()) {
 			Jogador jogador = new Jogador();
 			jogador.setUsuarioDono(getUsuarioLogado());
-			barragem.getJogadores().add(new Jogador());
+			barragemEmFoco.getJogadores().add(new Jogador());
 		}
 	}
 
 	public void removeJogador(ActionEvent e) {
-		barragem.getJogadores().remove(Integer.parseInt(getServletRequest().getParameter("index")));
-	}
-
-	public void novaBarragem(ActionEvent e) {
-		barragem = new Barragem();
-		barragem.setAdministrador(getUsuarioLogado());
-		barragem.setJogadores(new ArrayList<Jogador>());
-	}
-
-	public void removeBarragem(ActionEvent e) {
-		usuario.getBarragens().remove(Integer.parseInt(getServletRequest().getParameter("index")));
+		barragemEmFoco.getJogadores().remove(Integer.parseInt(getServletRequest().getParameter("index")));
 	}
 
 	public void salvaBarragem(ActionEvent e) {
-		PersistenceHelper.persiste(barragem);
+		PersistenceHelper.persiste(barragemEmFoco);
+		if (!barragens.contains(barragemEmFoco)) {
+			barragens.add(barragemEmFoco);
+		}
 	}
 
-	public void salvaJogador(ActionEvent e) {
-		PersistenceHelper.persiste(usuario);
+	private Long getMaxJogadoresDoAdministrador() {
+		return (Long) PersistenceHelper.findByNamedQuery("totalJogadoresDeUsuarioQuery", getUsuarioLogado()).get(0);
 	}
 }

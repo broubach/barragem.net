@@ -6,6 +6,7 @@ import javax.persistence.PersistenceException;
 
 import net.barragem.persistence.entity.BaseEntity;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -40,6 +41,42 @@ public class PersistenceHelper {
 		try {
 			session = HibernateUtil.getSession();
 			return session.createQuery(query).list();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+	}
+
+	public static List findByNamedQuery(String namedQuery, Object... paramValues) {
+		Session session = null;
+		try {
+			session = HibernateUtil.getSession();
+			Query query = session.getNamedQuery(namedQuery);
+			if (paramValues != null) {
+				for (int i = 0; i < query.getNamedParameters().length; i++) {
+					query.setParameter(query.getNamedParameters()[i], paramValues[i]);
+				}
+			}
+			return query.list();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+	}
+
+	public static void remove(Object entity) {
+		Session session = null;
+		Transaction t = null;
+		try {
+			session = HibernateUtil.getSession();
+			t = session.beginTransaction();
+			session.delete(entity);
+			t.commit();
+		} catch (PersistenceException pe) {
+			t.rollback();
+			throw pe;
 		} finally {
 			if (session != null) {
 				session.close();
