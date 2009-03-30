@@ -141,4 +141,8 @@ public class BaseBean {
 	protected void setUsuarioLogado(Usuario usuario) {
 		setSessionAttribute("usuario", usuario);
 	}
+
+	protected int getIndex() {
+		return Integer.parseInt(getServletRequest().getParameter("index"));
+	}
 }

@@ -32,10 +32,25 @@
 
 		<c:forEach items="#{gerirBarragemBean.barragens}" var="item"
 			varStatus="status">
-			<h:outputText styleClass="label_regular" value="#{item.local}" />
-			<h:outputText styleClass="label_regular" value="#{item.nome}" />
-			<h:outputText styleClass="label_regular"
-				value="#{item.administrador.nome}" />
+			<a4j:commandLink reRender="panel"
+				actionListener="#{gerirBarragemBean.detalhaBarragem}"
+				oncomplete="Richfaces.showModalPanel('panel');" immediate="true">
+				<f:param name="index" value="#{status.index}" />
+				<h:outputText styleClass="label_regular" value="#{item.local}" />
+			</a4j:commandLink>
+			<a4j:commandLink reRender="panel"
+				actionListener="#{gerirBarragemBean.detalhaBarragem}"
+				oncomplete="Richfaces.showModalPanel('panel');" immediate="true">
+				<f:param name="index" value="#{status.index}" />
+				<h:outputText styleClass="label_regular" value="#{item.nome}" />
+			</a4j:commandLink>
+			<a4j:commandLink reRender="panel"
+				actionListener="#{gerirBarragemBean.detalhaBarragem}"
+				oncomplete="Richfaces.showModalPanel('panel');" immediate="true">
+				<f:param name="index" value="#{status.index}" />
+				<h:outputText styleClass="label_regular"
+					value="#{item.administrador.nome}" />
+			</a4j:commandLink>
 			<a4j:commandButton value="-" reRender="painelBarragens"
 				actionListener="#{gerirBarragemBean.removeBarragem}"
 				immediate="true">
@@ -92,7 +107,8 @@
 
 			<a4j:commandButton
 				actionListener="#{gerirBarragemBean.salvaBarragem}"
-				value="#{msg.label_salvar}" reRender="painelBarragens,painelJogadores" />
+				value="#{msg.label_salvar}"
+				reRender="painelBarragens,painelJogadores" />
 		</h:panelGrid>
 	</h:form>
 

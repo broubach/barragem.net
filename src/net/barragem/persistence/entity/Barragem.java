@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 
 @Entity
-@NamedQuery(name = "barragemPorUsuarioQuery", query = "from Barragem barragem where barragem.administrador = :usuario")
+@NamedQuery(name = "barragemPorUsuarioQuery", query = "select distinct barragem from Barragem barragem join fetch barragem.jogadores where barragem.administrador = :usuario")
 public class Barragem extends BaseEntity {
 
 	private String nome;

@@ -22,7 +22,7 @@ public class GerirBarragemBean extends BaseBean {
 	}
 
 	public void removeBarragem(ActionEvent e) {
-		Barragem barragemARemover = barragens.get(Integer.parseInt(getServletRequest().getParameter("index")));
+		Barragem barragemARemover = barragens.get(getIndex());
 		PersistenceHelper.remove(barragemARemover);
 		barragens.remove(barragemARemover);
 	}
@@ -50,7 +50,7 @@ public class GerirBarragemBean extends BaseBean {
 	}
 
 	public void removeJogador(ActionEvent e) {
-		barragemEmFoco.getJogadores().remove(Integer.parseInt(getServletRequest().getParameter("index")));
+		barragemEmFoco.getJogadores().remove(getIndex());
 	}
 
 	public void salvaBarragem(ActionEvent e) {
@@ -62,5 +62,9 @@ public class GerirBarragemBean extends BaseBean {
 
 	private Long getMaxJogadoresDoAdministrador() {
 		return (Long) PersistenceHelper.findByNamedQuery("totalJogadoresDeUsuarioQuery", getUsuarioLogado()).get(0);
+	}
+
+	public void detalhaBarragem(ActionEvent e) {
+		barragemEmFoco = barragens.get(getIndex());
 	}
 }
