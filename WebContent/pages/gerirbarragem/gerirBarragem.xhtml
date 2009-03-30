@@ -14,7 +14,7 @@
 <title>#{msg.label_titulo}</title>
 </head>
 <body>
-<div class="centro-conteudo"><h:form id="yyy">
+<div class="centro-conteudo"><h:form>
 	<h:outputText styleClass="label_regular" value="#{msg.label_bem_vindo}" />
 	<br />
 
@@ -28,7 +28,7 @@
 			value="#{msg.label_administrador}" />
 		<a4j:commandButton value="+" reRender="panel"
 			actionListener="#{gerirBarragemBean.novaBarragem}"
-			oncomplete="Richfaces.showModalPanel('panel');" immediate="true"/>
+			oncomplete="Richfaces.showModalPanel('panel');" immediate="true" />
 
 		<c:forEach items="#{gerirBarragemBean.barragens}" var="item"
 			varStatus="status">
@@ -56,7 +56,7 @@
 		<a href="javascript:Richfaces.hideModalPanel('panel');">X</a>
 	</f:facet>
 
-	<h:form id="xxx">
+	<h:form>
 		<h:panelGrid columns="3">
 			<h:outputText styleClass="label_regular" value="#{msg.label_local}" />
 			<h:outputText styleClass="label_regular" value="#{msg.label_nome}" />
@@ -64,24 +64,26 @@
 				value="#{msg.label_administrador}" />
 			<h:inputText value="#{gerirBarragemBean.barragemEmFoco.local}" />
 			<h:inputText value="#{gerirBarragemBean.barragemEmFoco.nome}" />
-			<h:inputText value="#{gerirBarragemBean.barragemEmFoco.administrador.nome}"
+			<h:inputText
+				value="#{gerirBarragemBean.barragemEmFoco.administrador.nome}"
 				disabled="true" />
 		</h:panelGrid>
 
 		<h:panelGrid columns="2" id="painelJogadores">
 			<h:outputText styleClass="label_regular"
 				value="#{msg.label_jogadores}" />
-			<a4j:commandButton value="+" reRender="xxx"
-				actionListener="#{gerirBarragemBean.adicionaJogador}" immediate="true"/>
+			<a4j:commandButton value="+" reRender="painelJogadores"
+				actionListener="#{gerirBarragemBean.adicionaJogador}"
+				immediate="true" />
 
-			<c:forEach items="#{gerirBarragemBean.barragemEmFoco.jogadores}" var="item"
-				varStatus="status">
+			<c:forEach items="#{gerirBarragemBean.barragemEmFoco.jogadores}"
+				var="item" varStatus="status">
 				<h:selectOneMenu
 					value="#{gerirBarragemBean.barragemEmFoco.jogadores[status.index]}"
 					converter="JogadorConverter">
 					<f:selectItems value="#{lookupBean.listaJogadores}" />
 				</h:selectOneMenu>
-				<a4j:commandButton value="-" reRender="xxx"
+				<a4j:commandButton value="-" reRender="painelJogadores"
 					actionListener="#{gerirBarragemBean.removeJogador}"
 					immediate="true">
 					<f:param name="index" value="#{status.index}" />
@@ -90,13 +92,9 @@
 
 			<a4j:commandButton
 				actionListener="#{gerirBarragemBean.salvaBarragem}"
-				value="#{msg.label_salvar}" reRender="yyy,xxx"/>
+				value="#{msg.label_salvar}" reRender="painelBarragens,painelJogadores" />
 		</h:panelGrid>
 	</h:form>
-
-
-	<div style="width: 580px; height: 250px; overflow: auto;"><a4j:log
-		level="ALL" popup="false" width="400" height="200" /></div>
 
 </rich:modalPanel>
 
