@@ -99,8 +99,7 @@
 					<f:selectItems value="#{lookupBean.listaJogadores}" />
 				</h:selectOneMenu>
 				<a4j:commandButton value="-" reRender="painelJogadores"
-					actionListener="#{gerirBarragemBean.removeJogador}"
-					immediate="true">
+					actionListener="#{gerirBarragemBean.removeJogador}">
 					<f:param name="index" value="#{status.index}" />
 				</a4j:commandButton>
 			</c:forEach>

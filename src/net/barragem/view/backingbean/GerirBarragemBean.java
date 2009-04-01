@@ -65,6 +65,7 @@ public class GerirBarragemBean extends BaseBean {
 	}
 
 	public void detalhaBarragem(ActionEvent e) {
-		barragemEmFoco = barragens.get(getIndex());
+		barragemEmFoco = (Barragem) PersistenceHelper.findByPk(Barragem.class, barragens.get(getIndex()).getId(),
+				"jogadores");
 	}
 }
