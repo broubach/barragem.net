@@ -1,0 +1,120 @@
+/* Fixed Values */
+body {
+	margin: 0;
+}
+
+#conteudo, #cabecalho {
+	width: 100%;
+	position: relative;
+	float: left;
+	padding-bottom: 1em;
+}
+
+#menu_contextual {
+	margin-left: -100%;
+	position: relative;
+	float: left;
+}
+
+#ads {
+	margin-right: -100%;
+	position: relative;
+	float: left;
+}
+
+/* Chosen Values */
+#conteudo, #cabecalho  {
+	padding-right: 2em;
+	padding-left: 2em;
+}
+
+/*
+LC = Left column
+RC = Right column
+CC = Center column
+*/
+#menu_contextual {
+	width: 12em; /* LC width */
+	padding-right: 0.3em; /* LC right padding */
+	padding-left: 1em; /* LC left padding */
+}
+
+#ads {
+	width: 10em; /* RC width */
+	padding-right: 1em; /* RC right padding */
+	padding-left: 1em; /* RC left padding */
+}
+
+/* Calculated Values */
+body {
+	padding-left: 14em; /* LC width + LC right padding
+                          + LC left padding */
+	padding-right: 18em; /* RC width + RC right padding
+                          + RC left padding + CC left padding
+                          + CC right padding */
+	min-width: 15em; /* LC width + LC right padding
+                          + LC left padding + CC left padding
+                          + CC right padding */
+}
+
+#menu_contextual {
+	right: 18em; /* LC width + LC right padding
+                         + LC left padding
+                       + CC left padding + CC right padding */
+}
+
+html #left {
+	left: 12em; /* RC width + RC right padding + RC left padding*/
+}
+
+/*div#conteudo {
+  background: red;
+  border: solid;
+}
+
+div#menu_contextual {
+  background: green;
+  border: solid;
+}
+
+div#cabecalho {
+  background: yellow;
+  border: solid;
+}
+
+div#ads {
+  background: brown;
+  border: solid;
+}*/
+
+ul#menu {
+	padding: 0;
+	margin: 0;
+	font-family: arial, helvetica, sans-serif;
+	white-space: nowrap;
+	list-style-type: none;
+}
+
+ul#menu li {
+	display: inline;
+}
+
+ul#menu li a {
+	padding: 0.2em 1em;
+	text-decoration: none;
+	float: left;
+	border: 1px solid #000;
+}
+
+div#rodadas {
+	float: right;
+	width: 30%;
+}
+
+div#sair {
+	float: right;
+}
+
+div#controlesJogos {
+	float: right;
+}

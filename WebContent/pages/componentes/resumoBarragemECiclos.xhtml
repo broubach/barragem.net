@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+	<div id="ciclos">
+		<h4><h:outputText value="#{msg.label_local}" />: &#160;<h:outputText value="#{gerirCicloBean.barragemEmFoco.local}" /></h4>
+		<h4><h:outputText value="#{msg.label_barragem}" />: &#160;<h:outputText value="#{gerirCicloBean.barragemEmFoco.nome}" /></h4>
+		<hr/>
+		<h4><h:outputText value="#{msg.label_ciclos}"/>: &#160;</h4>
+		<ul>
+		<c:forEach items="#{gerirCicloBean.barragemEmFoco.ciclos}" var="item" varStatus="status">
+			<li>
+				<h5><h:commandLink action="editarCiclo" actionListener="#{gerirCicloBean.editaCiclo}" value="${item.nome}">
+					<f:param name="index" value="#{status.index}" />
+				</h:commandLink></h5>
+			</li>
+		</c:forEach>
+		</ul>
+	</div>
+</html>

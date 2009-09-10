@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+	<h:form>
+		<div id="sair"><h:commandLink action="login" actionListener="#{loginBean.sair}" value="#{msg.label_sair}"/></div>
+	</h:form>
+	<h1>barragem.net</h1>
+	<ul id="menu">
+		<li><a href="#{request.contextPath}/pages/index.xhtml"><h:outputText value="#{msg.label_home}"/></a></li>
+		<li><a href="#{request.contextPath}/pages/gerirbarragem/gerirBarragem.xhtml"><h:outputText value="#{msg.label_barragens}"/></a></li>
+		<li><a href="#{request.contextPath}/pages/gerirjogador/gerirJogador.xhtml"><h:outputText value="#{msg.label_jogadores}"/></a></li>
+	</ul>
+
+	<hr/>
+</html>

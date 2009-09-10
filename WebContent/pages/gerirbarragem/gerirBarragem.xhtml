@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+<ui:composition template="../../layout/layoutPrincipal.xhtml">
+	<ui:define name="conteudo">
+		<h:form>
+			<h4><h:outputText value="#{msg.label_minhas_barragens}" /></h4>
+		
+			<h:panelGrid columns="5" id="painelBarragens">
+				<h:outputText value="#{msg.label_local}" />
+				<h:outputText value="#{msg.label_barragem}" />
+				<h:outputText value="#{msg.label_administrador}" />
+				<a4j:commandButton value="+" reRender="painelParametros"
+					actionListener="#{gerirBarragemBean.novaBarragem}"
+					oncomplete="Richfaces.showModalPanel('painelParametros');"/>
+				&#160;
+		
+				<c:forEach items="#{gerirBarragemBean.barragens}" var="item"
+					varStatus="status">
+					<a4j:commandLink reRender="painelParametros"
+						actionListener="#{gerirBarragemBean.detalhaBarragem}" 
+						oncomplete="Richfaces.showModalPanel('painelParametros');">
+						<f:param name="index" value="#{status.index}" />
+						<h:outputText value="#{item.local}" />
+					</a4j:commandLink>
+					<a4j:commandLink reRender="painelParametros"
+						actionListener="#{gerirBarragemBean.detalhaBarragem}" 
+						oncomplete="Richfaces.showModalPanel('painelParametros');">
+						<f:param name="index" value="#{status.index}" />
+						<h:outputText value="#{item.nome}" />
+					</a4j:commandLink>
+					<a4j:commandLink reRender="painelParametros" 
+						actionListener="#{gerirBarragemBean.detalhaBarragem}"
+						oncomplete="Richfaces.showModalPanel('painelParametros');">
+						<f:param name="index" value="#{status.index}" />
+						<h:outputText value="#{item.administrador.nome}" />
+					</a4j:commandLink>
+					<a4j:commandButton value="-" reRender="painelBarragens"
+						actionListener="#{gerirBarragemBean.removeBarragem}"
+						immediate="true">
+						<f:param name="index" value="#{status.index}" />
+					</a4j:commandButton>
+					<h:commandLink value="#{msg.label_editar_ciclo}"
+						actionListener="#{gerirBarragemBean.editaCiclo}" action="editarCiclo"
+						immediate="true" >
+						<f:param name="index" value="#{status.index}" />
+					</h:commandLink>
+				</c:forEach>
+			</h:panelGrid>
+			<br />
+		
+		</h:form>
+	
+		<ui:include src="../componentes/painelParametros.xhtml" />
+	</ui:define>
+</ui:composition>
+
+</html>

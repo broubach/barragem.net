@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<ui:composition template="../../layout/layoutPrincipal.xhtml">
+	<ui:define name="conteudo">
+		<h:form>
+			<h4><h:outputText value="#{msg.label_ciclo}"/>:&#160; <h:outputText value="#{gerirCicloBean.cicloEmFoco.nome}"/></h4>
+			<ui:include src="../componentes/rodadas.xhtml" />
+			<ui:include src="../componentes/gridRanking.xhtml" />
+		</h:form>
+
+		<rich:modalPanel id="painelAdicaoJogadoresNaBarragem" width="350" height="280">
+			<f:facet name="header">
+				<h:outputText value="#{msg.label_jogador}" />
+			</f:facet>
+			<f:facet name="controls">
+				<a href="javascript:Richfaces.hideModalPanel('painelAdicaoJogadoresNaBarragem');">X</a>
+			</f:facet>
+
+			<h:form>
+				<h:outputText value="#{msg.label_escolha_os_jogadores_que_irao_participar_da_barragem}" />
+				<div style="overflow: auto; width: 260px; height: 200px;">
+					<h:panelGrid columns="2" id="gridJogadores">
+						<h:outputText value="#{msg.label_nome}"/>
+						<h:outputText>
+							#{msg.label_todos} <h:selectBooleanCheckbox value="#{gerirCicloBean.todos}">
+								<a4j:support event="onchange" reRender="gridJogadores" actionListener="#{gerirCicloBean.selecionaTodos}"/>
+							</h:selectBooleanCheckbox>
+						</h:outputText>
+						<c:forEach items="#{gerirCicloBean.jogadoresSelecionaveis}" var="item">
+							<h:outputText value="#{item.jogador.nome}"/>
+							<h:selectBooleanCheckbox value="#{item.selecionado}"/>
+						</c:forEach>
+					</h:panelGrid>
+				</div>
+				<a4j:commandButton actionListener="#{gerirCicloBean.adicionaJogadores}"
+					value="#{msg.label_ok}" reRender="gridRanking,gridJogadores" />
+				<a4j:commandButton immediate="true" oncomplete="Richfaces.hideModalPanel('painelAdicaoJogadoresNaBarragem')"
+					value="#{msg.label_fechar}" reRender="gridRanking" />
+			</h:form>
+		</rich:modalPanel>
+	</ui:define>
+	
+	<ui:define name="menu_contextual">
+		<h:form>
+			<ui:include src="../componentes/resumoBarragemECiclos.xhtml" />
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

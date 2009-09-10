@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+	<div id="rodadas">
+		<fieldset>
+			<legend><h:outputText value="#{msg.label_rodadas}"/></legend>
+			<h:panelGrid columns="#{fn:length(gerirCicloBean.cicloEmFoco.rodadas)}">
+				<c:forEach items="#{gerirCicloBean.cicloEmFoco.rodadas}"
+					var="item" varStatus="status">
+					<h:commandLink actionListener="#{gerirCicloBean.editaRodada}" action="editarRodada" value="${item.numero}">
+						<f:param name="index" value="#{status.index}" />
+					</h:commandLink>
+				</c:forEach>
+			</h:panelGrid>
+		</fieldset>
+	</div>
+</html>

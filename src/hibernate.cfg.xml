@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+
+        <!-- Database connection settings -->
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="connection.url">jdbc:mysql://localhost:3306/barragem_net</property>
+		<property name="connection.username">barra_gem</property>
+		<property name="connection.password">Ba2Nc8</property>
+
+        <!-- configuration pool via c3p0-->
+        <property name="connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
+        <property name="c3p0.acquire_increment">1</property>
+        <property name="c3p0.idle_test_period">100</property> <!-- seconds -->
+        <property name="c3p0.max_size">100</property> 
+        <property name="c3p0.max_statements">0</property> 
+        <property name="c3p0.min_size">10</property>
+
+        <!-- SQL dialect -->
+		<property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
+
+        <!-- Disable the second-level cache  -->
+		<property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+
+        <!-- Echo all executed SQL to stdout -->
+		<property name="show_sql">true</property>
+
+		<mapping class="net.barragem.persistence.entity.Barragem" />
+		<mapping class="net.barragem.persistence.entity.Ciclo" />
+		<mapping class="net.barragem.persistence.entity.CicloJogador" />
+		<mapping class="net.barragem.persistence.entity.Evento" />
+		<mapping class="net.barragem.persistence.entity.Jogador" />
+		<mapping class="net.barragem.persistence.entity.JogadorEvento" />
+		<mapping class="net.barragem.persistence.entity.JogadorJogo" />
+		<mapping class="net.barragem.persistence.entity.JogadorJogoBarragem" />
+		<mapping class="net.barragem.persistence.entity.Jogo" />
+		<mapping class="net.barragem.persistence.entity.JogoBarragem" />
+		<mapping class="net.barragem.persistence.entity.ParametroCiclo" />
+		<mapping class="net.barragem.persistence.entity.Placar" />
+		<mapping class="net.barragem.persistence.entity.Rodada" />
+		<mapping class="net.barragem.persistence.entity.Parcial" />
+		<mapping class="net.barragem.persistence.entity.Usuario" />
+	</session-factory>
+</hibernate-configuration>
