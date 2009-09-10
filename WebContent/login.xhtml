@@ -1,6 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="home" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -10,26 +9,145 @@
 <f:loadBundle basename="message-bundle" var="msg" />
 
 <head>
-<title>#{msg.label_titulo}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>#{msg.label_titulo}</title>
+	<link href="http://barragem.2km.com.br/favicon.ico" type="image/x-icon" rel="icon"/>
+	<link href="http://barragem.2km.com.br/favicon.ico" type="image/x-icon" rel="shortcut icon"/>
+	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/barragem.css"/>
+	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/typography.css"/>
+	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/grid.css"/>
+
+	<script type="text/javascript" src="#{request.contextPath}/js/jquery_002.js"/>
+	<script type="text/javascript" src="#{request.contextPath}/js/barragem.js"/>
+	<script type="text/javascript" src="#{request.contextPath}/js/injection_graph_func.js"/>
 </head>
 <body>
-<div class="centro-conteudo"><h:form>
-	<h:outputText styleClass="label_regular" value="#{msg.label_bem_vindo}" />
-	<br />
+	<div id="page" class="container_16">
+		<div id="header">
+			<h1><a href="http://barragem.2km.com.br/" class="brand">#{msg.label_brand}</a></h1>
+			<div class="sidebar-header">
+				<h:form id="loginForm">
+				<label for="login">#{msg.label_usuario}</label>
+				<h:inputText value="#{loginBean.login}" title="#{msg.label_usuario}" styleClass="input" />
+				<label for="passwd">#{msg.label_senha}</label>
+				<h:inputSecret value="#{loginBean.senha}" title="#{msg.label_senha}" styleClass="input" />
+				<h:commandButton actionListener="#{loginBean.login}" value="#{msg.label_login}" styleClass="login"/>
+				<div>
+					<a href="http://barragem.2km.com.br/usuarios/recuperar_senha" title="Esqueci a senha">#{msg.label_esqueci_senha}</a>
+				</div>
+				</h:form>
+			</div>
+			<div class="language">
+				<ul>
+					<li class="active"><a href="#" title="Português"><img src="#{request.contextPath}/img/flags/br.png" title="Escolha seu idioma" alt="" border="0"/> #{msg.label_escolha_seu_idioma}</a> </li>
+					<li><a href="#" title="Español"><img src="#{request.contextPath}/img/flags/es.png" title="Escolha seu idioma" alt="" border="0"/> #{msg.label_escolha_seu_idioma} </a></li>
+					<li><a href="#" title="English"><img src="#{request.contextPath}/img/flags/gb.png" title="Escolha seu idioma" alt="" border="0"/> #{msg.label_escolha_seu_idioma} </a></li>
+				</ul>
+			</div>
+			<form action="#" id="searchForm">
+			<label for="search">#{msg.label_pesquisar}</label>
+			<input value="#{msg.label_pesquisar}" title="#{msg.label_pesquisar}" type="text"/>
+			</form>
+		</div>
+		<div id="content">
+<script type="text/javascript">
+//<![CDATA[
 
-	<h:messages showDetail="true" globalOnly="false" showSummary="false" />
-
-	<h:panelGrid columns="2">
-		<h:outputText styleClass="label_regular" value="#{msg.label_login}" />
-		<h:inputText value="#{loginBean.login}" />
-
-		<h:outputText styleClass="label_regular" value="#{msg.label_senha}" />
-		<h:inputSecret value="#{loginBean.senha}" />
-	</h:panelGrid>
-
-	<h:commandButton actionListener="#{loginBean.login}" value="Login" />
-
-</h:form></div>
-<div class="direita-ads"></div>
+		$(function(){
+			$('#loginForm input, #searchForm input').each(function() {
+			if($(this).val() === '') {
+				$(this).val($(this).attr('title'));	
+			}
+			
+			$(this).focus(function() {
+				if($(this).val() == $(this).attr('title')) {
+					$(this).val('').addClass('focused');	
+				}
+			});
+			$(this).blur(function() {
+				if($(this).val() === '') {
+					$(this).val($(this).attr('title')).removeClass('focused');	
+				}
+			});
+		});
+		});
+	
+//]]>
+</script>
+			<h2 class="slogan">#{msg.label_slogan}</h2>
+			<div class="registrese prefix_10 grid_5">
+				<h3>#{msg.label_inscrevase_gratuitamente}</h3>
+				<form action="#" id="registerForm">
+				<div class="input">
+					<label for="nome">#{msg.label_nome}:</label>
+					<input id="nome" type="text"/>
+				</div>
+				<div class="input">
+					<label for="sobrenome">#{msg.label_sobrenome}:</label>
+					<input id="sobrenome" type="text"/>
+				</div>
+				<div class="input">
+					<label for="email">#{msg.label_email}:</label>
+					<input id="email" type="text"/>
+				</div>
+				<div class="input">
+					<label for="passwd">#{msg.label_senha}:</label>
+					<input id="passwd" type="password"/>
+				</div>
+				<div class="input">
+					<label for="sexo">#{msg.label_eu_sou}:</label>
+					<select id="sexo">
+						<option selected="selected">#{msg.label_selecione_seu_sexo}</option>
+					</select>
+				</div>
+				<div class="input">
+					<label for="dia">#{msg.label_aniversario}:</label>
+					<select id="dia">
+						<option selected="selected">#{msg.label_dia}</option>
+					</select>
+					<select>
+						<option selected="selected">#{msg.label_mes}</option>
+					</select>
+					<select>
+						<option selected="selected">#{msg.label_ano}</option>
+					</select>
+				</div>
+				<div class="submit">
+					<input value="#{msg.label_cadastrar}" type="submit"/>
+				</div>
+				</form>
+			</div>
+			<div class="clear"></div>
+			<div class="grid_16 destaques-home">
+				<div class="header-bloco grid_4 alpha push_1">
+					<div class="bloco-home">
+						<h2>#{msg.label_caixa1}</h2>
+						<p>#{msg.label_caixa1_conteudo}</p>
+					</div>
+				</div>
+				<div class="header-bloco grid_4 push_2">
+					<div class="bloco-home">
+						<h2>#{msg.label_caixa2}</h2>
+						<p>#{msg.label_caixa2_conteudo}</p>
+					</div>
+				</div>
+				<div class="header-bloco grid_4 omega push_3">
+					<div class="bloco-home">
+						<h2>#{msg.label_caixa3}</h2>
+						<p>#{msg.label_caixa3_conteudo}</p>
+					</div>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div id="footer">
+			<ul>
+				<li><a href="http://barragem.2km.com.br/sobre">#{msg.label_sobre_barragemnet}</a> |</li>
+				<li><a href="http://barragem.2km.com.br/ajuda">#{msg.label_ajuda}</a> |</li>
+				<li><a href="http://barragem.2km.com.br/contato">#{msg.label_contato}</a></li>
+			</ul>
+			<a href="http://www.2km.com.br/" class="externo"><img src="#{request.contextPath}/img/logo-2km.gif" alt="2km interativa!" border="0"/></a>
+		</div>
+	</div>
 </body>
 </html>

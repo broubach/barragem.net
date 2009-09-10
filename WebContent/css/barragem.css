@@ -1,120 +1,589 @@
-/* Fixed Values */
-body {
-	margin: 0;
+@CHARSET "UTF-8";
+/* Reset */
+* {
+	margin:0;
+	padding:0
 }
-
-#conteudo, #cabecalho {
-	width: 100%;
-	position: relative;
+a {outline:none}
+img {border:none;}
+html {
+	background:#bfbfbf url(../img/fundo-home-borda.gif) repeat-y 50%
+}
+body {background: transparent url(../img/fundo-internas.gif) no-repeat 50% 90px;}
+.home body{
+	background: transparent url(../img/fundo-home.gif) no-repeat 50% 90px;
+}
+#header {
+	height:90px;
+position:relative;
+}
+#header h1 {
+    float:left;
+    margin-top:10px;
+}
+#header a.brand {
+    margin:10px;
+    background: transparent url(../img/logo-barragem.gif);    
+    display:block;
+    width:318px;
+    height:56px;
+    text-indent:-9999px;
+}
+/* Sidebar header */
+.sidebar-header {
+    margin-left:20px;
+    margin-top:20px;
+    float:left;
+    background: #596e94;
+    padding:10px;
+    -moz-border-radius: 10px;
+    width:300px;
+    position:relative;
+    height:40px;
+}
+.sidebar-header p {
+    line-height:1.8em;
+	font-size:.9em;
+	color:#fff;
+}
+.sidebar-header a {
+	color:#fff;
+	text-decoration:none;
+	border-bottom: 1px solid navy;
+}
+.sidebar-header .logout {
+    position:absolute;
+    top:4px;
+    right:10px;
+    border:none;
+}
+/* Sidebar */
+.sidebar {
+    background:#EEF1F3;
+    -moz-border-radius: 5px;
+    min-height:600px;
+    padding:2px;
+}
+.sidebar li {
+	list-style:none;
+}
+.sidebar a {
+	text-decoration:none;
+}
+.dados-jogador dt {
+    float:left;
+    text-align:right;
+    width:70px;
+}
+.dados-jogador dd {
+    text-align:left;
+    margin-left:75px
+}
+/* Menu */
+.internas .menu a {
+    background: #596E94;
+    padding-bottom:2px;
+    margin-bottom:2px;
+    margin-left:4px;
+    margin-right: 4px;
+    color:#fff;
+    -moz-border-radius:3px;
+}
+.internas .menu a:hover {
+    background:#0D286F;
+}
+#loginForm input {
+	border:1px solid #f9f9f9;
+	background: #fff;
+	-moz-border-radius: 3px;
+}
+#loginForm .login {
+	background: #6c88be;
+	color:#fff;
+	font-weight:bold;
+    height:20px;
+    -moz-border-radius: 3px;
+    position:absolute;
+    right:15px;
+}
+#loginForm .input {
+    width:117px;
+}
+#loginForm a {
+    text-decoration:none;
+    color:#fff;
+    font-size:.7em;
+    margin-top:4px;
+    display:block;
+    border:none;
+}
+/* forms */
+label {
+	width: 6em;
 	float: left;
-	padding-bottom: 1em;
+	text-align: right;
+	margin-right: 0.5em;
+	display: block
+}
+input {
+	height:14px;
+	padding:2px;
+	font-size:10px;
+}
+.internas input {
+	background: #dde4ef;
+	border: 1px solid #fff;
+}
+.input {
+    margin-bottom:4px;
+}
+.submit input {
+	margin-left: 7em;
+    height:19px;
+    background:#7baf7b;
+    color:#fff;
+    font-weight:bold;
+    border: 1px solid #666;
+   	-moz-border-radius: 3px;
+}
+/* Botões */
+.btn_deletar {
+	background: transparent url(../img/btn-deletar.gif) no-repeat;
+}
+.registrese {
+	height:275px
+}
+#registerForm {
+    margin-top:60px;
+}
+.bloco-home {
+    background: #fff url(../img/fundo-blocos-home.gif) no-repeat center 0;
+    padding:10px;
+    height:150px;
+}
+.header-bloco h2 {
+	color:#069;
+}
+.header-bloco p {
+	font-size:.8em;
+	color:#444;
 }
 
-#menu_contextual {
-	margin-left: -100%;
-	position: relative;
-	float: left;
+#loginForm label, #searchForm label  { display:none}
+
+/*Rodapé*/
+#footer {
+	background: #fff url(../img/fundo-rodape.gif) repeat-x;
+	padding-top:.5em;
+    margin:.5em 0;
+    text-align:right;
+    padding-right:1em;
+    color:#aaa;
+    position:relative;
+}
+#footer li {
+    list-style:none;
+    display:inline;   
+}
+#footer a {
+    color:#aaa;
+	font-size: .9em;
+    text-decoration:none;
+}
+#footer .externo {
+	position:absolute;
+	left:10px;
+	top:15px;
+}
+#searchForm {
+    position:absolute;
+    right:20px;
+    top:50px
+}
+#searchForm input {
+    background: transparent url(../img/pesquisa.gif) right 0 no-repeat;
+    border:none;
+    padding-top:4px;
+    width:169px;
+    height:18px;
+}
+.language {
+    position:absolute;
+    top:20px;
+    right:70px;
+    z-index:1000;
+    background:#ccc;
+    -moz-border-radius: 3px;
+}
+.language ul {
+    padding: 0 4px;
+}
+.language li {
+	list-style:none;
+    line-height:16px;
+    display:none;
+}
+.language li.active {
+	display:block;
+}
+.language a {
+    text-decoration:none;
+    font-size:.7em;
+    color:#333;
+}
+#content {
+    margin-top:20px;
+}
+.maincontent {
+	min-height:400px;
+	/*background: transparent url(../img/fundo-conteudo.png) no-repeat;*/
+	background: #EEF1F3;
+	-moz-border-radius: 5px;
+	padding:10px;
+}
+.maincontent h2 {
+	margin-bottom:10px;
+}
+/* ADS */
+.ads dt {
+    margin-top:15px;
+}
+.ads img {
+	margin-top:1em;
+	float:right;
 }
 
-#ads {
-	margin-right: -100%;
-	position: relative;
-	float: left;
+/* bloco */
+.bloco {
+	background: transparent url(../img/border-sidebar.gif) no-repeat bottom;
+    padding-bottom:10px;
+    margin:10px 0;
+}
+/* Menu */
+.menu li {
+	list-style:none;
+    text-align:left;
+}
+.menu a {
+    background: transparent url(../img/marcador-menu.gif) 4px 10px no-repeat;
+    display:block;
+    padding-left:12px;
+    text-decoration:none;
+}
+.suas-barragens a {
+    background: transparent url(../img/marcador-menu.gif) 4px 10px no-repeat;
+    display:block;
+    padding-left:12px;
+}
+.suas-barragens h3 {
+    margin-bottom:10px;
+}
+.jogadores .input {
+    float:left;
 }
 
-/* Chosen Values */
-#conteudo, #cabecalho  {
-	padding-right: 2em;
-	padding-left: 2em;
+.input .btn_deletar {
+    text-indent:-999px;
+    display:block;
+    width:16px;
+    float:left;
+}
+.lista-jogadores {
+    margin-top:1em;
+    width: 200px;
+}
+.lista-jogadores input {
+    float:left;
+}
+/* Button */
+.btn-novo {
+    position:absolute;
+    right:40px;
+    top:10px;
+    background: #95c396;
+    -moz-border-radius: 5px;
+    height:25px;
+}
+.btn-novo a {
+    color: #fff;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:.8em;
+    display:block;
+    padding: 4px 8px;
+}
+.btn-novo a span {
+    padding-left:20px;
+    background: transparent url(../img/btn-novo.gif) no-repeat left 0;
 }
 
-/*
-LC = Left column
-RC = Right column
-CC = Center column
-*/
-#menu_contextual {
-	width: 12em; /* LC width */
-	padding-right: 0.3em; /* LC right padding */
-	padding-left: 1em; /* LC left padding */
+/* Tables */
+
+.gradient {
+	text-align: left;
+	border-collapse: collapse;
+	width:100%;
+}
+.gradient th {
+	padding: 8px;
+	background: #b9c9fe url('../img/tables/head.png') repeat-x;
+	border-top: 2px solid #d3ddff;
+	border-bottom: 1px solid #fff;
+	color: #039;
+}
+.gradient td {
+	padding: 6px; 
+	border-bottom: 1px solid #fff;
+	color: #333;
+	border-top: 1px solid #fff;
+}
+.gradient tr {
+	background: #e8edff url('../img/tables/bg-cell-blue.png') repeat-x;
+}
+.gradient tr.alt {
+	background: #EEE4E4 url('../img/tables/bg-cell-red.png') repeat-x;
+}
+.gradient tfoot tr td {
+	background: #e8edff;
+	font-size: 12px;
+	color: #99c;
+}
+.gradient tbody tr:hover {
+	background: #DEDFFF url('../img/tables/bg-cell-hover.png') repeat-x;
+	color: #339;
+}
+th.actions {
+	text-align:center;
+}
+.actions a {
+	display:block;
+	padding-left:4px;
+	float:left;
+	width:18px;
+	height:18px;
 }
 
-#ads {
-	width: 10em; /* RC width */
-	padding-right: 1em; /* RC right padding */
-	padding-left: 1em; /* RC left padding */
+.versus {
+    background:transparent url(../img/versus.png) no-repeat 50%;
 }
 
-/* Calculated Values */
-body {
-	padding-left: 14em; /* LC width + LC right padding
-                          + LC left padding */
-	padding-right: 18em; /* RC width + RC right padding
-                          + RC left padding + CC left padding
-                          + CC right padding */
-	min-width: 15em; /* LC width + LC right padding
-                          + LC left padding + CC left padding
-                          + CC right padding */
+/* Modal */
+#cboxLoadedContent{margin-top:28px;}
+#cboxClose{top:0;width:20px;height:20px;background: transparent url(../img/buttons/btn-fechar.png) no-repeat scroll;}
+#cboxClose.hover{background-position:0 -20px;}
+#cboxTitle{top:0;height:20px;text-align:left;color:#333;} 
+
+.dados-barragem {
+    width:600px;
+}
+.dados-barragem label {
+	color:#444;
+	width:400px;
+	border-right: 1px solid #888;
+    padding-right:5px;
+}
+.dados-barragem .input {
+	clear:both;
+}
+.dados-barragem .salvar {
+    float:right;
+    margin-right:114px;
+}
+.dados-barragem .submit {
+    background:green;
+    color:#fff;
+    padding:4px 20px;
+    height:24px;
+    font-weight:bold;
+    -moz-border-radius: 6px;
+}
+.dados-basicos-barragem {
+    background-color:#596E94;
+	height:40px;
+	padding-left:20px;
+	margin-bottom:10px
+}
+.dados-basicos-barragem .input {
+    float:left;
+    width:150px;
+}
+.input .disabled {
+	background:#D3D7DE;
+}
+.dados-basicos-barragem label {
+    text-align:left;
+    color:#fff;
+    font-size:.8em;
 }
 
-#menu_contextual {
-	right: 18em; /* LC width + LC right padding
-                         + LC left padding
-                       + CC left padding + CC right padding */
+/* Fieldsets */
+fieldset {
+    width:440px;
+    padding:5px;
+    border: 1px solid #95a3ba;
+    -moz-border-radius:10px;
+    float:left;
+    clear:both;
+}
+legend {
+    padding: 0 5px;
+    font-size:.8em;
+    color:#333;
+}
+.rodadas, .ciclos {
+    margin-left:10px;
+    margin-bottom:10px;
+    width:80px;
+    clear:none;
+}
+li {
+	list-style:none;
+}
+.maincontent a {
+    text-decoration:none;
+}
+.editar-ciclo .maincontent li {
+	display:inline;
 }
 
-html #left {
-	left: 12em; /* RC width + RC right padding + RC left padding*/
+.ciclos a {
+    background: transparent url(../img/marcador-ciclo.gif) no-repeat 0 4px;
+    padding-left:12px;
+    color:#333;
+}
+.ciclos .atual {
+    border-bottom:1px solid orange;
+    font-weight:bold;
+}
+.rodadas li {
+   line-height:18px;
+}
+.rodadas a {
+    background: transparent url(../img/fundo-link-rodadas.gif) no-repeat 0 50%;
+    color: #fff;
+    display:block;
+    float:left;
+    margin-left:4px;
+    padding-left:5px;
+    width:11px;
+}
+.rodadas a:hover, .rodadas a.atual {
+	background: transparent url(../img/fundo-link-rodadas-atual.gif) no-repeat 0 50%;
+	color:#333;
+}
+.editar-ciclo .dados-barragem {
+    margin-bottom: 10px;
+}
+.editar-ciclo .dados-barragem dt {
+    color:#fff;
+    background: #596e94;
+    float:left;
+    width:80px;
+    text-align:right;
+    margin-right: 8px;
+    padding:2px;
+    clear:both;
+    border-bottom:1px solid 
+}
+.editar-ciclo .dados-barragem dd {
+    padding:2px;
+}
+.editar-ciclo .btn-novo {
+    right:120px;
+    top:60px;
 }
 
-/*div#conteudo {
-  background: red;
-  border: solid;
+/* Slogan */
+.home h2.slogan {
+    width:180px;
+    position:absolute;
+    left:520px;
+    top:140px;
+    color:#656565;
 }
 
-div#menu_contextual {
-  background: green;
-  border: solid;
+.registrese h3 {
+    margin:0;position:absolute;
+    top:20px;
+    color:#2C6695;
+    left:570px;
+}
+.rodada .btn-novo, .editar-ciclo .btn-novo {
+	position:relative;
+	top:0;
+	right:0;
+	margin-bottom:10px;
+	width:105px;
+	float:right;
+}
+/* Fixme */
+.editar-ciclo .btn-novo {
+	width:160px;
+}
+.menu-rodada {
+    margin-bottom:10px;
+}
+.menu-rodada li {
+	display:inline;
+}
+.menu-rodada a {
+    background:#B1C3FE;
+    color:#000;
+    -moz-border-radius:4px;
+    padding:3px;
+    font-size:.8em;
+}
+.rodada td.last {
+    width:50px;
+}
+.add-jogador .submit, .add-jogo .submit {
+	margin-top:10px;
+    background:green;
+    color:#fff;
+    padding:4px 20px;
+    height:24px;
+    font-weight:bold;
+    -moz-border-radius: 6px;
+}
+.add-jogador label {
+    float:none;
+    display:inline;
+    padding-left:10px;
+    color: #333;
+    font-size:.8em;
+}
+.add-jogador .input {
+    float:none;
+}
+.checkbox {
+    clear:left;
 }
 
-div#cabecalho {
-  background: yellow;
-  border: solid;
+/* Page specific */
+.parciais {
+	margin-left:50px;
+}
+.parciais-jogadores .select {
+    display:inline;
+}
+.parciais-jogadores img {
+    margin:0 5px;
+}
+.add-jogo label, .add-jogo .input span {
+    font-size:.8em;
+    color: #333;
 }
 
-div#ads {
-  background: brown;
-  border: solid;
-}*/
-
-ul#menu {
-	padding: 0;
-	margin: 0;
-	font-family: arial, helvetica, sans-serif;
-	white-space: nowrap;
-	list-style-type: none;
+.add-jogo input {
+    width:90px
 }
-
-ul#menu li {
-	display: inline;
+.add-jogo .wo {
+	width:20px;
 }
-
-ul#menu li a {
-	padding: 0.2em 1em;
-	text-decoration: none;
-	float: left;
-	border: 1px solid #000;
+.resultado-parcial {
+    float:left;
+    margin-right:20px;
 }
-
-div#rodadas {
-	float: right;
-	width: 30%;
-}
-
-div#sair {
-	float: right;
-}
-
-div#controlesJogos {
-	float: right;
+.resultados-parciais {
+    margin-left:25px
 }
