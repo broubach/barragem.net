@@ -1,6 +1,6 @@
-$(function(){
-	$('.language li').not('.active').fadeOut();
-	$('.language li').click(function(){
-	    $(this).siblings().toggle('slow');
+$j(function(){
+	$j('.language li').not('.active').fadeOut();
+	$j('.language li').click(function(){
+	    $j(this).siblings().toggle('slow');
 	})	
 })

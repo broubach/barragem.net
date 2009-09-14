@@ -10,55 +10,69 @@
 
 <ui:composition template="../../layout/layoutPrincipal.xhtml">
 	<ui:define name="conteudo">
-		<h:form>
-			<h4><h:outputText value="#{msg.label_minhas_barragens}" /></h4>
-		
-			<h:panelGrid columns="5" id="painelBarragens">
-				<h:outputText value="#{msg.label_local}" />
-				<h:outputText value="#{msg.label_barragem}" />
-				<h:outputText value="#{msg.label_administrador}" />
-				<a4j:commandButton value="+" reRender="painelParametros"
-					actionListener="#{gerirBarragemBean.novaBarragem}"
-					oncomplete="Richfaces.showModalPanel('painelParametros');"/>
-				&#160;
-		
-				<c:forEach items="#{gerirBarragemBean.barragens}" var="item"
-					varStatus="status">
-					<a4j:commandLink reRender="painelParametros"
-						actionListener="#{gerirBarragemBean.detalhaBarragem}" 
-						oncomplete="Richfaces.showModalPanel('painelParametros');">
-						<f:param name="index" value="#{status.index}" />
+		<div class="maincontent">
+<script type="text/javascript">
+//<![CDATA[
+
+		$j(function(){
+			$j(".popup").colorbox({overlayClose: false});
+		})
+
+//]]>
+</script>
+			<h:form>
+				<h2><h:outputText value="#{msg.label_minhas_barragens}" /></h2>
+				<div class="btn-novo">
+					<a href="#{request.contextPath}/pages/componentes/painelParametros.xhtml" class="popup" title="Nova Barragem">
+						<span>Adicionar barragem</span>
+					</a>
+				</div>
+
+				<h:dataTable id="painelBarragens" styleClass="gradient" rowClasses=",alt" value="#{gerirBarragemBean.barragens}" var="item">
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{msg.label_local}" />
+						</f:facet>
 						<h:outputText value="#{item.local}" />
-					</a4j:commandLink>
-					<a4j:commandLink reRender="painelParametros"
-						actionListener="#{gerirBarragemBean.detalhaBarragem}" 
-						oncomplete="Richfaces.showModalPanel('painelParametros');">
-						<f:param name="index" value="#{status.index}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{msg.label_barragem}" />
+						</f:facet>
 						<h:outputText value="#{item.nome}" />
-					</a4j:commandLink>
-					<a4j:commandLink reRender="painelParametros" 
-						actionListener="#{gerirBarragemBean.detalhaBarragem}"
-						oncomplete="Richfaces.showModalPanel('painelParametros');">
-						<f:param name="index" value="#{status.index}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{msg.label_administrador}" />
+						</f:facet>
 						<h:outputText value="#{item.administrador.nome}" />
-					</a4j:commandLink>
-					<a4j:commandButton value="-" reRender="painelBarragens"
-						actionListener="#{gerirBarragemBean.removeBarragem}"
-						immediate="true">
-						<f:param name="index" value="#{status.index}" />
-					</a4j:commandButton>
-					<h:commandLink value="#{msg.label_editar_ciclo}"
-						actionListener="#{gerirBarragemBean.editaCiclo}" action="editarCiclo"
-						immediate="true" >
-						<f:param name="index" value="#{status.index}" />
-					</h:commandLink>
-				</c:forEach>
-			</h:panelGrid>
-			<br />
-		
-		</h:form>
-	
-		<ui:include src="../componentes/painelParametros.xhtml" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{msg.label_acoes}" />
+						</f:facet>
+						<a4j:commandLink reRender="painelBarragens"
+							actionListener="#{gerirBarragemBean.removeBarragem}">
+							<h:graphicImage value="#{requestScope.contextPath}/img/buttons/btn-deletar.png"></h:graphicImage>
+							<f:param name="index" value="#{status.index}" />
+						</a4j:commandLink>
+						<a4j:commandLink  reRender="painelParametros"
+							actionListener="#{gerirBarragemBean.detalhaBarragem}" 
+							oncomplete="Richfaces.showModalPanel('painelParametros');">
+							<h:graphicImage value="#{requestScope.contextPath}/img/buttons/btn-editar.png"></h:graphicImage>
+							<f:param name="index" value="#{status.index}" />
+						</a4j:commandLink>
+						<h:commandLink actionListener="#{gerirBarragemBean.editaCiclo}" action="editarCiclo">
+							<h:graphicImage value="#{requestScope.contextPath}/img/buttons/btn-editar-ciclo.png"></h:graphicImage>
+							<f:param name="index" value="#{status.index}" />
+						</h:commandLink>
+					</h:column>
+				</h:dataTable>
+			</h:form>
+		</div>
 	</ui:define>
 </ui:composition>
 
