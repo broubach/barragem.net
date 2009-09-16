@@ -1,0 +1,139 @@
+@CHARSET "UTF-8";
+body {
+	font-family:"lucida grande",tahoma,verdana,arial,sans-serif;
+	font-size:12px;
+}
+#loginForm .login {
+	width:40px;
+}
+#loginForm a {
+    font-size:11px;
+}
+.home h2.slogan {
+    width:180px;
+    position:absolute;
+    color:#656565;
+}
+#registerForm {
+	margin-top:50px;
+}
+#registerForm label {
+	color: #2c6695;
+	font-weight:bold;
+	font-size:11px;
+}
+#registerForm .input input[type=text] {
+	padding:2px;
+	font-size:11px;
+}
+#registerForm .input {
+	margin-bottom:2px;
+}
+.registrese h3 {
+	padding-bottom:2px;
+}
+.maincontent {
+	min-height: 400px;
+	_height: auto !important;
+	height: 400px;
+}
+.sidebar {
+	_height:auto !important;
+    height:600px;
+}
+.language a {
+    font-size:.8em;
+}
+.rodadas ul {
+	width:85px;
+}
+.btn-novo {
+	font-size:13px;
+}
+.dados-jogador dt {
+	color:#4F6AAD;
+}
+.maincontent h2 {
+    color:#4f6aad;
+}
+.sidebar h3 {
+	color:#4F6AAD;
+	font-size:14px;
+	text-transform:uppercase;
+}
+.suas-barragens h3 {
+	font-size:14px;
+	text-transform:none;
+}
+.suas-barragens li {
+    text-align:left;
+}
+.suas-barragens a {
+    font-size: .9em;
+    display:block;
+    color:#333;
+}
+.sidebar {
+	text-align:center;	
+}
+.salvar {
+	clear:both;
+}
+/*
+.dados-barragem .submit {
+    background:green;
+    color:#fff;
+    padding:4px 20px;
+    height:24px;
+    font-weight:bold;
+}
+*/
+.add-jogador .submit, .salvar .submit {
+	margin-top:10px;
+    background:green;
+    color:#fff;
+    padding:4px 20px;
+    height:24px;
+    font-weight:bold;
+}
+#cboxTitle {
+	font-weight: bold;
+	font-size:1.2em;
+}
+.add-jogo .wo {
+	width:20px;
+	display:inline;
+}
+.add-jogador label {
+	color:#333333;
+	display:inline;
+	float:none;
+	font-size:0.8em;
+	padding-left:10px;
+}
+.internas label {
+	float: none;
+	display: inline;
+}
+.add-barragens label {
+	float:left;
+	display:block;
+}
+.internas .checkbox input {
+	background:transparent;
+}
+
+#footer {
+	background: transparent url(../img/fundo-rodape.gif) repeat-x;
+	margin-left:1px;
+	padding-bottom:10px;
+}
+#footer .externo {
+	position:absolute;
+	left:10px;
+	top:10px;
+}
+/** TYPOGRAPHY **/
+.home h2.slogan {
+	font-size:16px;
+}

@@ -15,7 +15,7 @@ body {background: transparent url(../img/fundo-internas.gif) no-repeat 50% 90px;
 }
 #header {
 	height:90px;
-position:relative;
+    position:relative;
 }
 #header h1 {
     float:left;
@@ -112,19 +112,26 @@ position:relative;
 #loginForm a {
     text-decoration:none;
     color:#fff;
-    font-size:.7em;
     margin-top:4px;
     display:block;
     border:none;
 }
 /* forms */
-label {
-	width: 6em;
+#registerForm label {
+	width: 68px;
 	float: left;
 	text-align: right;
-	margin-right: 0.5em;
+	margin-right: 5px;
 	display: block
 }
+
+.internas label {
+	float: left;
+	text-align: right;
+	margin-right: 5px;
+	display: block
+}
+
 input {
 	height:14px;
 	padding:2px;
@@ -138,7 +145,6 @@ input {
     margin-bottom:4px;
 }
 .submit input {
-	margin-left: 7em;
     height:19px;
     background:#7baf7b;
     color:#fff;
@@ -146,15 +152,19 @@ input {
     border: 1px solid #666;
    	-moz-border-radius: 3px;
 }
+#registerForm .submit {
+	margin-left: 73px;	
+}
 /* Botões */
 .btn_deletar {
-	background: transparent url(../img/btn-deletar.gif) no-repeat;
+	background: transparent url(../img/buttons/btn-deletar.gif) no-repeat;
 }
 .registrese {
 	height:275px
 }
 #registerForm {
-    margin-top:60px;
+    margin-top:55px;
+    margin-left:30px;
 }
 .bloco-home {
     background: #fff url(../img/fundo-blocos-home.gif) no-repeat center 0;
@@ -163,9 +173,9 @@ input {
 }
 .header-bloco h2 {
 	color:#069;
+	margin-bottom:0.3em;
 }
 .header-bloco p {
-	font-size:.8em;
 	color:#444;
 }
 
@@ -236,7 +246,6 @@ input {
 }
 .maincontent {
 	min-height:400px;
-	/*background: transparent url(../img/fundo-conteudo.png) no-repeat;*/
 	background: #EEF1F3;
 	-moz-border-radius: 5px;
 	padding:10px;
@@ -308,13 +317,12 @@ input {
     color: #fff;
     text-decoration:none;
     font-weight:bold;
-    font-size:.8em;
     display:block;
     padding: 4px 8px;
 }
 .btn-novo a span {
     padding-left:20px;
-    background: transparent url(../img/btn-novo.gif) no-repeat left 0;
+    background: transparent url(../img/buttons/btn-novo.gif) no-repeat left 0;
 }
 
 /* Tables */
@@ -385,9 +393,10 @@ th.actions {
 .dados-barragem .input {
 	clear:both;
 }
+
 .dados-barragem .salvar {
-    float:right;
-    margin-right:114px;
+    margin-left:400px;
+    clear:both;
 }
 .dados-barragem .submit {
     background:green;
@@ -412,8 +421,12 @@ th.actions {
 }
 .dados-basicos-barragem label {
     text-align:left;
+    float:left;
     color:#fff;
-    font-size:.8em;
+    width:80px;
+}
+.dados-basicos-barragem input {
+	clear:both;
 }
 
 /* Fieldsets */
@@ -427,7 +440,6 @@ fieldset {
 }
 legend {
     padding: 0 5px;
-    font-size:.8em;
     color:#333;
 }
 .rodadas, .ciclos {
@@ -435,6 +447,9 @@ legend {
     margin-bottom:10px;
     width:80px;
     clear:none;
+}
+.detalhes-jogo {
+	padding-left:30px;
 }
 li {
 	list-style:none;
@@ -457,6 +472,7 @@ li {
 }
 .rodadas li {
    line-height:18px;
+   display:inline;
 }
 .rodadas a {
     background: transparent url(../img/fundo-link-rodadas.gif) no-repeat 0 50%;
@@ -495,10 +511,9 @@ li {
 
 /* Slogan */
 .home h2.slogan {
+	padding-top:20px;
     width:180px;
     position:absolute;
-    left:520px;
-    top:140px;
     color:#656565;
 }
 
@@ -561,7 +576,7 @@ li {
 
 /* Page specific */
 .parciais {
-	margin-left:50px;
+	margin-left:30px;
 }
 .parciais-jogadores .select {
     display:inline;
@@ -573,7 +588,6 @@ li {
     font-size:.8em;
     color: #333;
 }
-
 .add-jogo input {
     width:90px
 }
@@ -586,4 +600,123 @@ li {
 }
 .resultados-parciais {
     margin-left:25px
+}
+
+/* Ajustes */
+#registerForm .input input[type=text], #registerForm .input input[type=password] {
+    width:180px;
+}
+#registerForm .input select {
+    font-size:.8em;
+} 
+#registerForm .input .select-dia {
+	width:20px;
+}
+
+
+/********* TYPOGRAPHY ************/
+body {
+	font-family: Tahoma, Arial, Helvetica, sans serif;
+	font-size:95%;
+	line-height:1.125em;
+}
+label {
+	color: #2c6695;
+}
+.dados-basicos-barragem label {
+    font-size:12px;
+}
+#registerForm label {
+	font-size: .7em;
+	font-weight:bold;
+}
+
+#registerForm .input select {
+    font-size:13px;
+} 
+#registerForm .input .select-dia {
+	width:20px;
+}
+#loginForm a {
+    font-size:10px;
+}
+input {
+	border: 1px solid #6a9bcd;
+}
+.sidebar-header {
+	font-size:.8em;
+}
+.sidebar {
+	text-align:center;	
+}
+.sidebar h3 {
+	font-size:.9em;
+	color: #4f6aad;
+    text-transform:uppercase;
+}
+.ads dt {
+    font-size:.9em;
+}
+.ads dd {
+    font-size:.7em;
+}
+.ads a {
+	color:navy;
+}
+.maincontent h2 {
+    color:#4f6aad;
+}
+.menu a {
+	color:#4f6aad;	
+}
+.dados-jogador {
+	font-size: .8em;
+}
+.suas-barragens h3 {
+    text-transform:none;
+    font-size:.8em;
+}
+.suas-barragens li {
+    text-align:left;
+}
+.suas-barragens a {
+    font-size: .8em;
+    display:block;
+    color:#333;
+}
+.dados-jogador dt {
+	color:#4f6aad;
+}
+/* Tables */
+.gradient {
+	font-family: Arial, Helvetica, Sans-Serif;
+    font-size: 12px;
+}
+.gradient th {
+	font-weight: normal;
+}
+
+/* Modal */
+.dados-barragem label {
+	font-size:.8em;
+}
+
+.ciclos a, .rodadas a, .editar-ciclo .dados-barragem dt,.editar-ciclo .dados-barragem dd {
+    font-size: .8em;
+}
+
+.home h2.slogan {
+    font-size:1em;
+}
+#cboxTitle {
+	font-weight: bold;
+}
+.btn-novo a {
+	font-size:13px;
+}
+.header-bloco p {
+	font-size:12px;
+}
+legend {
+    font-size:11px;
 }

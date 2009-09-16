@@ -28,16 +28,6 @@
 
 			<div class="dados-barragem">
 				<div class="input text">
-					<label for="campo0">#{msg.label_duracao_ciclo_barragem}</label>
-					<h:inputText value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.duracaoEmMeses}" />
-				</div>
-				<div class="input text">
-					<label for="campo1">#{msg.label_modalidade_sets_barragem}</label>
-					<h:selectOneMenu value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.modalidadeDeSets}">
-						<f:selectItems value="#{lookupBean.modalidades}" />
-					</h:selectOneMenu>
-				</div>
-				<div class="input text">
 					<label for="campo2">#{msg.label_raio_para_sorteio_de_jogos_no_ranking}</label>
 					<h:inputText value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.raioParaSorteioDeJogosNoRanking}"/>
 				</div>
@@ -98,7 +88,14 @@
 				</div>
 				<div class="salvar">
 						<a4j:commandButton actionListener="#{gerirBarragemBean.salvaBarragem}"
-							value="#{msg.label_salvar}" reRender="painelBarragens" styleClass="submit"/>
+							value="#{msg.label_salvar}" reRender="painelBarragens,mensagemSucesso" styleClass="submit"/>
+					<h:panelGrid columns="1" id="mensagemSucesso">
+						<h:panelGrid columns="1" rendered="#{! empty facesContext.maximumSeverity}">
+							<script>
+								alert('ah!');
+							</script>
+						</h:panelGrid>
+					</h:panelGrid>
 				</div>
 			</div>
 		</h:form>

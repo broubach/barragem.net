@@ -23,9 +23,10 @@
 			<h:form>
 				<h2><h:outputText value="#{msg.label_minhas_barragens}" /></h2>
 				<div class="btn-novo">
-					<a href="#{request.contextPath}/pages/componentes/painelParametros.xhtml" class="popup" title="Nova Barragem">
+					<a4j:commandLink actionListener="#{gerirBarragemBean.novaBarragem}" oncomplete="$j('.popup').click()">
 						<span>Adicionar barragem</span>
-					</a>
+					</a4j:commandLink>
+					<a href="#{request.contextPath}/pages/componentes/painelParametros.xhtml" class="popup" title="Nova Barragem" style="visibility:hidden"/>
 				</div>
 
 				<h:dataTable id="painelBarragens" styleClass="gradient" rowClasses=",alt" value="#{gerirBarragemBean.barragens}" var="item">

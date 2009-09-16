@@ -20,11 +20,18 @@ public class BaseBean {
 		return ((HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest());
 	}
 
-	public static void addErrorMessage(String msgKey, String... parameters) {
+	public static void addErrorMessage(String clientId, String msgKey, String... parameters) {
 		FacesMessage facesMessage = new FacesMessage();
 		facesMessage.setSummary(MessageUtils.getInstance().get(msgKey, parameters));
 		facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
-		FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+		FacesContext.getCurrentInstance().addMessage(clientId, facesMessage);
+	}
+
+	public static void addInfoMessage(String clientId, String msgKey, String... parameters) {
+		FacesMessage facesMessage = new FacesMessage();
+		facesMessage.setSummary(MessageUtils.getInstance().get(msgKey, parameters));
+		facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
+		FacesContext.getCurrentInstance().addMessage(clientId, facesMessage);
 	}
 
 	public Boolean getExistemErros() {
