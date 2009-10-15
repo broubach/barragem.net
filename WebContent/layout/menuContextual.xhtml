@@ -4,8 +4,44 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:c="http://java.sun.com/jstl/core"
-	xmlns:a4j="http://richfaces.org/a4j"
-	xmlns:rich="http://richfaces.org/rich"
-	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+	xmlns:c="http://java.sun.com/jstl/core">
+
+    <div class="sidebar">
+        <h3>Gustavo Kuerten</h3>
+        <img src="#{request.contextPath}/img/foto-jogador.gif" alt="" />
+        <div class="dados-jogador bloco">
+            <dl>
+                <dt>#{msg.label_tecnico}:</dt>
+                <dd>Larri Passos</dd>
+                <dt>#{msg.label_joga_com}:</dt>
+                <dd>Esquerda</dd>
+                <dt>#{msg.label_joga_ha}:</dt>
+                <dd>10 anos</dd>
+            </dl>
+            <div class="clear"></div>
+        </div>
+        <div class="menu bloco">
+            <ul>
+                <li>
+                    <a href="#{request.contextPath}">Home</a>
+                </li>
+                <li>
+                    <a href="#{request.contextPath}/pages/gerirjogador/gerirJogador.xhtml">Jogadores</a>
+                </li>
+                <li>
+                    <a href="#{request.contextPath}/pages/gerirbarragem/gerirBarragem.xhtml">Barragens</a>
+                </li>
+                <li>
+                    <a href="#">Fotos</a>
+                </li>
+                <li>
+                    <a href="#">Jogos</a>
+                </li>
+                <li>
+                    <a href="#">Mensagens</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
 </html>
