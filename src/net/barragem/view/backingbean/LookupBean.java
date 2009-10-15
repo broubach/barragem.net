@@ -1,6 +1,7 @@
 package net.barragem.view.backingbean;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 
@@ -43,6 +44,15 @@ public class LookupBean extends BaseBean {
 				.getInstance().get("label_melhor_de_tres_sets_com_super_tiebreak_no_ultimo_set")));
 		items.add(new SelectItem(ModalidadeDeSetsEnum.SetProfissionalUnico, MessageUtils.getInstance().get(
 				"label_set_profissional_unico")));
+		return items;
+	}
+
+	public List<SelectItem> getListaAnosDesde1900Desc() {
+		List<SelectItem> items = new ArrayList<SelectItem>();
+		int anoAtual = Calendar.getInstance().get(Calendar.YEAR);
+		for (int i = anoAtual; i >= 1900; i--) {
+			items.add(new SelectItem(i, String.valueOf(i)));
+		}
 		return items;
 	}
 }
