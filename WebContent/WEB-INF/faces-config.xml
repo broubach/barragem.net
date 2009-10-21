@@ -33,7 +33,7 @@
 	<managed-bean>
 		<managed-bean-name>gerirBarragemBean</managed-bean-name>
 		<managed-bean-class>net.barragem.view.backingbean.GerirBarragemBean</managed-bean-class>
-		<managed-bean-scope>request</managed-bean-scope>
+		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>gerirCicloBean</managed-bean-name>
@@ -48,6 +48,11 @@
 	<managed-bean>
 		<managed-bean-name>gerirJogoBarragemBean</managed-bean-name>
 		<managed-bean-class>net.barragem.view.backingbean.GerirJogoBarragemBean</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>messageBean</managed-bean-name>
+		<managed-bean-class>net.barragem.view.backingbean.MessageBean</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	<navigation-rule>

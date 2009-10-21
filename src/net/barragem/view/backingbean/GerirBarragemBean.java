@@ -8,7 +8,6 @@ import javax.faces.event.ActionEvent;
 import net.barragem.persistence.entity.Barragem;
 import net.barragem.util.PersistenceHelper;
 
-//@KeepAlive
 public class GerirBarragemBean extends BaseBean {
 	private Barragem barragemEmFoco;
 	private List<Barragem> barragens;

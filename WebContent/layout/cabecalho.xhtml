@@ -4,20 +4,39 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:c="http://java.sun.com/jstl/core"
-	xmlns:a4j="http://richfaces.org/a4j"
-	xmlns:rich="http://richfaces.org/rich"
-	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+	xmlns:c="http://java.sun.com/jstl/core">
 
-	<h:form>
-		<div id="sair"><h:commandLink action="login" actionListener="#{loginBean.sair}" value="#{msg.label_sair}"/></div>
-	</h:form>
-	<h1>barragem.net</h1>
-	<ul id="menu">
-		<li><a href="#{request.contextPath}/pages/index.xhtml"><h:outputText value="#{msg.label_home}"/></a></li>
-		<li><a href="#{request.contextPath}/pages/gerirbarragem/gerirBarragem.xhtml"><h:outputText value="#{msg.label_barragens}"/></a></li>
-		<li><a href="#{request.contextPath}/pages/gerirjogador/gerirJogador.xhtml"><h:outputText value="#{msg.label_jogadores}"/></a></li>
-	</ul>
-
-	<hr/>
+	<h1>
+	    <a href="/barragem/" class="brand">#{msg.label_brand}</a>
+	</h1>
+	<div class="sidebar-header rounded">
+	 <h:form>
+	     <p>Ola <strong>Gustavo</strong> <a href="/barragem/usuarios/perfil">#{msg.label_editar_perfil}</a>
+	     </p>
+	     <h:commandLink action="login" actionListener="#{loginBean.sair}" title="Sair" styleClass="logout">
+	         <img src="#{request.contextPath}/img/buttons/btn_sair.gif" alt="" />
+	     </h:commandLink>
+	     <p>Seu ultimo login foi em 04 de Setembro de 2009.</p>
+	 </h:form>
+	</div>
+	<div class="language">
+	    <ul>
+	        <li class="active">
+	            <a href="#" title="Portugues">
+	                <img src="#{request.contextPath}/img/flags/br.png" border="0" title="Escolha seu idioma" alt="" /> #{msg.label_escolha_seu_idioma}</a>
+	        </li>
+	        <li>
+	            <a href="#" title="Espanol">
+	                <img src="#{request.contextPath}/img/flags/es.png" border="0" title="Escolha seu idioma" alt="" /> #{msg.label_escolha_seu_idioma}</a>
+	        </li>
+	        <li>
+	            <a href="#" title="English">
+	                <img src="#{request.contextPath}/img/flags/gb.png" border="0" title="Escolha seu idioma" alt="" /> #{msg.label_escolha_seu_idioma}</a>
+	        </li>
+	    </ul>
+	</div>
+	<form action="#" id="searchForm">
+	    <label for="search">#{msg.label_pesquisar}</label>
+	    <input type="text" title="#{msg.label_pesquisar}"/>
+	</form>
 </html>

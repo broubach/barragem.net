@@ -36,20 +36,20 @@
 	</servlet-mapping>
 
 	<!-- RichFaces config  -->
-	<!-- Plugging the "Blue Sky" skin into the project -->
+	<!-- Defines how the RichFaces style files are loaded to application. -->
 	<context-param>
-		<param-name>org.richfaces.SKIN</param-name>
-		<param-value>blueSky</param-value>
+		<param-name>org.richfaces.LoadStyleStrategy</param-name>
+		<param-value>NONE</param-value>
 	</context-param>
-
-	<!-- Making the RichFaces skin spread to standard HTML controls -->
+	
+	<!-- Defines how the RichFaces script files are loaded to application. -->
 	<context-param>
-		<param-name>org.richfaces.CONTROL_SKINNING</param-name>
-		<param-value>enable</param-value>
+		<param-name>org.richfaces.LoadScriptStrategy</param-name>
+		<param-value>NONE</param-value>
 	</context-param>
 
 	<!-- Defining and mapping the RichFaces filter -->
-	<!-- filter>
+	<filter>
 		<display-name>RichFaces Filter</display-name>
 		<filter-name>richfaces</filter-name>
 		<filter-class>org.ajax4jsf.Filter</filter-class>
@@ -60,7 +60,7 @@
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 		<dispatcher>INCLUDE</dispatcher>
-	</filter-mapping-->
+	</filter-mapping>
 
 	<filter>
 		<display-name>Usuario Filter</display-name>
