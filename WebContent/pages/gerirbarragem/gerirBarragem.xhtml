@@ -12,7 +12,7 @@
       <div class="maincontent">
 
 	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/jquery.colorbox.css" />
-	        <script type="text/javascript" src="#{request.contextPath}/js/jquery.colorbox.js"></script>
+	        <script type="text/javascript" src="#{request.contextPath}/js/jquery.colorbox-min.js"></script>
 			<script>
 	            $(function(){
 		            $(".popup").colorbox({overlayClose:false, inline:true, href:".add-barragens"});
@@ -23,7 +23,7 @@
 			<h:form>
 				<h2><h:outputText value="#{msg.label_minhas_barragens}" /></h2>
 				<div class="btn-novo">
-					<a4j:commandLink actionListener="#{gerirBarragemBean.novaBarragem}" oncomplete="$('.popup').click()">
+					<a4j:commandLink actionListener="#{gerirBarragemBean.novaBarragem}" reRender="add-barragens" oncomplete="$('.popup').click()">
 						<span>Adicionar barragem</span>
 					</a4j:commandLink>
 					<a href="#" title="Nova Barragem" class="popup" style="visibility:hidden"/>
