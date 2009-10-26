@@ -1,11 +1,15 @@
 package net.barragem.view.backingbean;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Collection;
+import java.util.Iterator;
 
 import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.application.ViewHandler;
 import javax.faces.component.UIViewRoot;
+import javax.faces.component.html.HtmlDataTable;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,7 +18,19 @@ import javax.servlet.http.HttpSession;
 import net.barragem.persistence.entity.Usuario;
 import net.barragem.util.MessageUtils;
 
+import org.apache.commons.beanutils.BeanUtils;
+
 public class BaseBean {
+
+	private HtmlDataTable dataTable;
+
+	public HtmlDataTable getDataTable() {
+		return dataTable;
+	}
+
+	public void setDataTable(HtmlDataTable dataTable) {
+		this.dataTable = dataTable;
+	}
 
 	protected HttpServletRequest getServletRequest() {
 		return ((HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest());
@@ -152,10 +168,37 @@ public class BaseBean {
 	}
 
 	protected int getIndex() {
-		String index = getServletRequest().getParameter("index");
-		if (index == null || "".equals(index)) {
-			index = (String) getRequestAttribute("index");
+		return Integer.valueOf(getDataTable().getRowIndex());
+	}
+
+	protected int getId() {
+		String id = getServletRequest().getParameter("id");
+		if (id == null || "".equals(id)) {
+			id = (String) getRequestAttribute("id");
 		}
-		return Integer.parseInt(index);
+		return Integer.parseInt(id);
+	}
+
+	protected Object getById(Collection<? extends Object> collection, int id) {
+		try {
+			for (Iterator<? extends Object> it = collection.iterator(); it.hasNext();) {
+				Object o = it.next();
+				int idFound;
+				idFound = Integer.valueOf(BeanUtils.getSimpleProperty(o, "id"));
+
+				if (idFound == id) {
+					return o;
+				}
+			}
+			return null;
+		} catch (NumberFormatException e) {
+			throw e;
+		} catch (IllegalAccessException e) {
+			throw new RuntimeException(e);
+		} catch (InvocationTargetException e) {
+			throw new RuntimeException(e);
+		} catch (NoSuchMethodException e) {
+			throw new RuntimeException(e);
+		}
 	}
 }
