@@ -11,77 +11,77 @@
 		<h:form id="add-barragens">
 			<div class="dados-basicos-barragem">
 				<div class="input text">
-					<label for="local">#{msg.label_local}</label>
-					<h:inputText value="#{gerirBarragemBean.barragemEmFoco.local}" />
+					<label for="add-barragens:local">#{msg.label_local}</label>
+					<h:inputText id="local" value="#{gerirBarragemBean.barragemEmFoco.local}" size="35" maxlength="45"/>
 				</div>
 				<div class="input text">
-					<label for="nome">#{msg.label_nome}</label>
-					<h:inputText value="#{gerirBarragemBean.barragemEmFoco.nome}" />
+					<label for="add-barragens:nome">#{msg.label_nome}</label>
+					<h:inputText id="nome" value="#{gerirBarragemBean.barragemEmFoco.nome}" size="35" maxlength="45"/>
 				</div>
 				<div class="input text">
-					<label for="administrador">#{msg.label_administrador}</label>
-					<h:inputText value="#{gerirBarragemBean.barragemEmFoco.administrador.nome}" disabled="true" styleClass="disabled"/>
+					<label for="add-barragens:administrador">#{msg.label_administrador}</label>
+					<h:inputText id="administrador" value="#{gerirBarragemBean.barragemEmFoco.administrador.nome}" disabled="true" styleClass="disabled" size="35"/>
 				</div>
 			</div>
 
 			<div class="dados-barragem">
 				<div class="input text">
 					<label for="campo2">#{msg.label_raio_para_sorteio_de_jogos_no_ranking}</label>
-					<h:inputText value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.raioParaSorteioDeJogosNoRanking}"/>
+					<h:inputText value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.raioParaSorteioDeJogosNoRanking}" alt="small-integer"/>
 				</div>
 				<div class="input text">
 					<label for="campo3">#{msg.label_pontuacao_de_vitoria_por_wo}</label>
-					<h:inputText value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoVitoriaPorWo}"/>
+					<h:inputText value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoVitoriaPorWo}" alt="small-integer"/>
 				</div>
 				<div class="input text">
 					<label for="campo4">#{msg.label_pontuacao_de_vencedor_na_primeira_rodada}</label>
-					<h:inputText value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoVencedorPrimeiraRodada}"/>
+					<h:inputText value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoVencedorPrimeiraRodada}" alt="small-integer"/>
 				</div>
 				<div class="input text">
 					<label for="campo5">#{msg.label_pontuacao_de_perdedor_na_primeira_rodada}</label>
-					<h:inputText value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoPerdedorPrimeiraRodada}"/>
+					<h:inputText value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoPerdedorPrimeiraRodada}" alt="small-integer"/>
 				</div>
 				<div class="input text">
 					<label for="campo6">#{msg.label_rodadas_de_historico_mantidas_para_calculo_do_ranking}</label>
-					<h:inputText value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.rodadasDeHistoricoMantidasParaCalculoDoRanking}"/>
+					<h:inputText value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.rodadasDeHistoricoMantidasParaCalculoDoRanking}" alt="small-integer"/>
 				</div>
 				<h3>#{msg.label_pontuacoes}</h3>
 				<h4>#{msg.label_pontuacao_vencedor}</h4>
 				<div class="pontuacao_vencedor">
 					<div class="input text">
 						<label for="vencedor0">#{msg.label_vencedor_abaixo_adversario_sem_perder_sets}</label>
-						<h:inputText value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoVencedorAbaixoDoAdversarioSemPerderParciais}" />
+						<h:inputText value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoVencedorAbaixoDoAdversarioSemPerderParciais}" alt="small-integer"/>
 					</div>
 					<div class="input text">
 						<label for="vencedor1">#{msg.label_vencedor_abaixo_adversario_perdendo_sets}</label>
-						<h:inputText value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoVencedorAbaixoDoAdversarioPerdendoParciais}" />
+						<h:inputText value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoVencedorAbaixoDoAdversarioPerdendoParciais}" alt="small-integer"/>
 					</div>
 					<div class="input text">
 						<label for="vencedor2">#{msg.label_vencedor_acima_adversario_sem_perder_sets}</label>
-						<h:inputText value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoVencedorAcimaDoAdversarioSemPerderParciais}" />
+						<h:inputText value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoVencedorAcimaDoAdversarioSemPerderParciais}" alt="small-integer"/>
 					</div>
 					<div class="input text">
 						<label for="vencedor3">#{msg.label_vencedor_acima_adversario_perdendo_sets}</label>
-						<h:inputText value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoVencedorAcimaDoAdversarioPerdendoParciais}" />
+						<h:inputText value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoVencedorAcimaDoAdversarioPerdendoParciais}" alt="small-integer"/>
 					</div>
 				</div>
 				<h4>#{msg.label_pontuacao_perdedor}</h4>
 				<div class="pontuacao_perdedor">
 					<div class="input text">
 						<label for="perdedor0">#{msg.label_perdedor_abaixo_adversario_sem_marcar_sets}</label>
-						<h:inputText value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoPerdedorAbaixoDoAdversarioSemMarcarParciais}" />
+						<h:inputText value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoPerdedorAbaixoDoAdversarioSemMarcarParciais}" alt="small-integer"/>
 					</div>
 					<div class="input text">
 						<label for="perdedor1">#{msg.label_perdedor_abaixo_adversario_marcando_sets}</label>
-						<h:inputText value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoPerdedorAbaixoDoAdversarioMarcandoParciais}" />
+						<h:inputText value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoPerdedorAbaixoDoAdversarioMarcandoParciais}" alt="small-integer"/>
 					</div>
 					<div class="input text">
 						<label for="perdedor2">#{msg.label_perdedor_acima_adversario_sem_marcar_sets}</label>
-						<h:inputText value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoPerdedorAcimaDoAdversarioSemMarcarParciais}" />
+						<h:inputText value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoPerdedorAcimaDoAdversarioSemMarcarParciais}" alt="small-integer" />
 					</div>
 					<div class="input text">
 						<label for="perdedor3">#{msg.label_perdedor_acima_adversario_marcando_sets}</label>
-						<h:inputText value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoPerdedorAcimaDoAdversarioMarcandoParciais}" />
+						<h:inputText value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoPerdedorAcimaDoAdversarioMarcandoParciais}" alt="small-integer"/>
 					</div>
 				</div>
 				<div class="salvar">
