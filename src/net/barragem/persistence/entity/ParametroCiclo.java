@@ -1,28 +1,47 @@
 package net.barragem.persistence.entity;
 
+import java.util.List;
+
 import javax.persistence.Embeddable;
 
+import net.barragem.util.ValidatableSampleImpl;
+
 @Embeddable
-public class ParametroCiclo extends BaseEntity {
+public class ParametroCiclo extends BaseEntity implements Validatable {
 
 	private Integer duracaoEmMeses = new Integer(2);
+
 	private ModalidadeDeSetsEnum modalidadeDeSets = ModalidadeDeSetsEnum.MelhorDeTresSets;
+
+	@ValidateRequired
 	private Integer raioParaSorteioDeJogosNoRanking = new Integer(4);
 
+	@ValidateRequired
 	private Integer pontuacaoVencedorAbaixoDoAdversarioSemPerderParciais = new Integer(16);
+	@ValidateRequired
 	private Integer pontuacaoVencedorAbaixoDoAdversarioPerdendoParciais = new Integer(13);
+	@ValidateRequired
 	private Integer pontuacaoVencedorAcimaDoAdversarioSemPerderParciais = new Integer(14);
+	@ValidateRequired
 	private Integer pontuacaoVencedorAcimaDoAdversarioPerdendoParciais = new Integer(11);
 
+	@ValidateRequired
 	private Integer pontuacaoPerdedorAbaixoDoAdversarioSemMarcarParciais = new Integer(3);
+	@ValidateRequired
 	private Integer pontuacaoPerdedorAbaixoDoAdversarioMarcandoParciais = new Integer(6);
+	@ValidateRequired
 	private Integer pontuacaoPerdedorAcimaDoAdversarioSemMarcarParciais = new Integer(1);
+	@ValidateRequired
 	private Integer pontuacaoPerdedorAcimaDoAdversarioMarcandoParciais = new Integer(4);
 
+	@ValidateRequired
 	private Integer pontuacaoVitoriaPorWo = new Integer(14);
+	@ValidateRequired
 	private Integer pontuacaoVencedorPrimeiraRodada = new Integer(16);
+	@ValidateRequired
 	private Integer pontuacaoPerdedorPrimeiraRodada = new Integer(6);
 
+	@ValidateRequired
 	private Integer rodadasDeHistoricoMantidasParaCalculoDoRanking = new Integer(5);
 
 	public Integer getDuracaoEmMeses() {
@@ -151,5 +170,9 @@ public class ParametroCiclo extends BaseEntity {
 
 	public void setRodadasDeHistoricoMantidasParaCalculoDoRanking(Integer rodadasDeHistoricoMantidasParaCalculoDoRanking) {
 		this.rodadasDeHistoricoMantidasParaCalculoDoRanking = rodadasDeHistoricoMantidasParaCalculoDoRanking;
+	}
+
+	public List<String> validate() {
+		return new ValidatableSampleImpl(this).validate();
 	}
 }

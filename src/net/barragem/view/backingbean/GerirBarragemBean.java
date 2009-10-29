@@ -2,7 +2,6 @@ package net.barragem.view.backingbean;
 
 import java.util.List;
 
-import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import net.barragem.persistence.entity.Barragem;
@@ -40,13 +39,22 @@ public class GerirBarragemBean extends BaseBean {
 	}
 
 	public void salvaBarragem(ActionEvent e) {
-		PersistenceHelper.persiste(barragemEmFoco);
-		if (!barragens.contains(barragemEmFoco)) {
-			barragens.add(barragemEmFoco);
+		if (valida(barragemEmFoco)) {
+			PersistenceHelper.persiste(barragemEmFoco);
+			if (!barragens.contains(barragemEmFoco)) {
+				barragens.add(barragemEmFoco);
+			}
+
+			messages.addInfoMessage(null, "label_informacao_atualizada_com_sucesso");
+		}
+	}
+
+	private boolean valida(Barragem barragemEmFoco) {
+		for (String clientId : barragemEmFoco.validate()) {
+			messages.addErrorMessage(clientId, "label_true");
 		}
 
-		addInfoMessage(null, "label_informacao_atualizada_com_sucesso");
-		FacesContext.getCurrentInstance().getMaximumSeverity();
+		return messages.getErrorMessages().isEmpty();
 	}
 
 	public void detalhaBarragem(ActionEvent e) {

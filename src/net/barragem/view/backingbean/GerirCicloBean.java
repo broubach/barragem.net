@@ -11,7 +11,7 @@ import net.barragem.persistence.entity.Ciclo;
 import net.barragem.persistence.entity.CicloJogador;
 import net.barragem.persistence.entity.Jogador;
 import net.barragem.persistence.entity.Rodada;
-import net.barragem.util.MessageUtils;
+import net.barragem.util.MessageBundleUtils;
 import net.barragem.util.PersistenceHelper;
 import net.barragem.view.dto.JogadorSelecionavelDto;
 
@@ -119,7 +119,7 @@ public class GerirCicloBean extends BaseBean {
 
 	public String getMensagemRodadasSugeridas() {
 		int rodadasSugeridas = cicloEmFoco.getParametros().getDuracaoEmMeses() * 3;
-		return MessageUtils.getInstance().get(
+		return MessageBundleUtils.getInstance().get(
 				"label_rodadas_sugeridas",
 				new String[] { String.valueOf(cicloEmFoco.getParametros().getDuracaoEmMeses()),
 						String.valueOf(rodadasSugeridas) });

@@ -398,6 +398,11 @@ th.actions {
     margin-left:400px;
     clear:both;
 }
+
+.dados-barragem .campos_obrigatorios span {
+    font-size:0.8em;
+}
+
 .dados-barragem .submit {
     background:green;
     color:#fff;
@@ -427,6 +432,10 @@ th.actions {
 }
 .dados-basicos-barragem input {
 	clear:both;
+}
+
+.dados-basicos-barragem .error {
+	border:1px solid #FF0000;
 }
 
 /* Fieldsets */
@@ -699,6 +708,10 @@ input {
 /* Modal */
 .dados-barragem label {
 	font-size:.8em;
+}
+
+.dados-barragem .error {
+	border:1px solid #FF0000;
 }
 
 .ciclos a, .rodadas a, .editar-ciclo .dados-barragem dt,.editar-ciclo .dados-barragem dd {

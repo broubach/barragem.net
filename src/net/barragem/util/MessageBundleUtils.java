@@ -4,18 +4,18 @@ import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-public class MessageUtils {
+public class MessageBundleUtils {
 
-	static private MessageUtils instance;
+	static private MessageBundleUtils instance;
 	private final ResourceBundle rb;
 
-	private MessageUtils(ClassLoader classLoader) {
+	private MessageBundleUtils(ClassLoader classLoader) {
 		rb = ResourceBundle.getBundle("message-bundle", Locale.getDefault(), classLoader);
 	}
 
-	public static synchronized MessageUtils getInstance() {
+	public static synchronized MessageBundleUtils getInstance() {
 		if (null == instance) {
-			instance = new MessageUtils(MessageUtils.class.getClassLoader());
+			instance = new MessageBundleUtils(MessageBundleUtils.class.getClassLoader());
 		}
 
 		return instance;

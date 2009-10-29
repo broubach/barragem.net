@@ -6,7 +6,6 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import javax.faces.application.Application;
-import javax.faces.application.FacesMessage;
 import javax.faces.application.ViewHandler;
 import javax.faces.component.UIViewRoot;
 import javax.faces.component.html.HtmlDataTable;
@@ -16,13 +15,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import net.barragem.persistence.entity.Usuario;
-import net.barragem.util.MessageUtils;
 
 import org.apache.commons.beanutils.BeanUtils;
 
 public class BaseBean {
 
 	private HtmlDataTable dataTable;
+
+	protected final MessageBean messages = new MessageBean();
 
 	public HtmlDataTable getDataTable() {
 		return dataTable;
@@ -34,24 +34,6 @@ public class BaseBean {
 
 	protected HttpServletRequest getServletRequest() {
 		return ((HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest());
-	}
-
-	public static void addErrorMessage(String clientId, String msgKey, String... parameters) {
-		FacesMessage facesMessage = new FacesMessage();
-		facesMessage.setSummary(MessageUtils.getInstance().get(msgKey, parameters));
-		facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
-		FacesContext.getCurrentInstance().addMessage(clientId, facesMessage);
-	}
-
-	public static void addInfoMessage(String clientId, String msgKey, String... parameters) {
-		FacesMessage facesMessage = new FacesMessage();
-		facesMessage.setSummary(MessageUtils.getInstance().get(msgKey, parameters));
-		facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
-		FacesContext.getCurrentInstance().addMessage(clientId, facesMessage);
-	}
-
-	public Boolean getExistemErros() {
-		return FacesContext.getCurrentInstance().getMessages().hasNext();
 	}
 
 	public static void setApplicationAttribute(String key, Object value) {

@@ -87,7 +87,7 @@
         </div>
 
 		<h:panelGrid columns="1" id="mensagemSucesso">
-			<h:panelGrid columns="1" rendered="#{! empty facesContext.maximumSeverity}">
+			<h:panelGrid columns="1" rendered="#{messageBean.firstInfoMessage != null}">
 				<script>
 					alert('#{messageBean.firstInfoMessage.summary}');
 				</script>

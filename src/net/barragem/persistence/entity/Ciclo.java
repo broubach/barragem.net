@@ -15,7 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
-import net.barragem.util.MessageUtils;
+import net.barragem.util.MessageBundleUtils;
 import net.barragem.util.PersistenceHelper;
 
 @Entity
@@ -70,7 +70,7 @@ public class Ciclo extends BaseEntity {
 
 	public String getNome() {
 		if (nome == null) {
-			return MessageUtils.getInstance().get("label_mes_" + nomeAlternativoBaseadoEmMes);
+			return MessageBundleUtils.getInstance().get("label_mes_" + nomeAlternativoBaseadoEmMes);
 		}
 		return nome;
 	}

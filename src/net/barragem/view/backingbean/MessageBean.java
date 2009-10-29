@@ -1,13 +1,15 @@
 package net.barragem.view.backingbean;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
+import java.util.Map;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
-public class MessageBean extends BaseBean {
+import net.barragem.util.MessageBundleUtils;
+
+public class MessageBean {
 
 	public FacesMessage getFirstInfoMessage() {
 		FacesMessage message = null;
@@ -20,15 +22,34 @@ public class MessageBean extends BaseBean {
 		return null;
 	}
 
-	public List<FacesMessage> getErrorMessages(String id) {
-		List<FacesMessage> messages = new ArrayList<FacesMessage>();
+	public Map<String, FacesMessage> getErrorMessages() {
+		Map<String, FacesMessage> errors = new HashMap<String, FacesMessage>();
 		FacesMessage message = null;
-		for (Iterator<FacesMessage> it = FacesContext.getCurrentInstance().getMessages(); it.hasNext();) {
-			message = it.next();
-			if (message.getSeverity() == FacesMessage.SEVERITY_ERROR) {
-				messages.add(message);
+		String clientId = null;
+		for (Iterator<String> it = FacesContext.getCurrentInstance().getClientIdsWithMessages(); it.hasNext();) {
+			clientId = it.next();
+			for (Iterator<FacesMessage> itMessages = FacesContext.getCurrentInstance().getMessages(clientId); itMessages
+					.hasNext();) {
+				message = itMessages.next();
+				if (message.getSeverity() == FacesMessage.SEVERITY_ERROR) {
+					errors.put(clientId, message);
+				}
 			}
 		}
-		return messages;
+		return errors;
+	}
+
+	public void addErrorMessage(String clientId, String msgKey, String... parameters) {
+		FacesMessage facesMessage = new FacesMessage();
+		facesMessage.setSummary(MessageBundleUtils.getInstance().get(msgKey, parameters));
+		facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+		FacesContext.getCurrentInstance().addMessage(clientId, facesMessage);
+	}
+
+	public void addInfoMessage(String clientId, String msgKey, String... parameters) {
+		FacesMessage facesMessage = new FacesMessage();
+		facesMessage.setSummary(MessageBundleUtils.getInstance().get(msgKey, parameters));
+		facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
+		FacesContext.getCurrentInstance().addMessage(clientId, facesMessage);
 	}
 }

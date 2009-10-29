@@ -94,10 +94,10 @@ public class GerirJogoBarragemBean extends BaseBean {
 					&& mestreDetalhe.getMestre().getJogadorJogoBarragem(jogadorEvento.getJogador()).getEvento().getId() != null
 					&& !mestreDetalhe.getMestre().getJogadorJogoBarragem(jogadorEvento.getJogador()).getEvento()
 							.getId().equals(mestreDetalhe.getDetalheEmFoco().getId())) {
-				addErrorMessage(null, "error_jogador_ja_jogou_rodada", jogadorEvento.getJogador().getNome());
+				messages.addErrorMessage(null, "error_jogador_ja_jogou_rodada", jogadorEvento.getJogador().getNome());
 			}
 		}
-		if (getExistemErros()) {
+		if (!messages.getErrorMessages().isEmpty()) {
 			return;
 		}
 

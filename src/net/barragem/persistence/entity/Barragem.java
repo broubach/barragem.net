@@ -11,13 +11,19 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import net.barragem.util.ValidatableSampleImpl;
+
 @Entity
 @NamedQuery(name = "barragemPorUsuarioQuery", query = "from Barragem barragem where barragem.administrador = :usuario")
 @Table(name = "barragem")
-public class Barragem extends BaseEntity {
+public class Barragem extends BaseEntity implements Validatable {
 
+	@ValidateRequired
 	private String nome;
+
+	@ValidateRequired
 	private String local;
+
 	private ParametroCiclo parametrosIniciais = new ParametroCiclo();
 
 	@ManyToOne
@@ -85,5 +91,12 @@ public class Barragem extends BaseEntity {
 			}
 		}
 		return null;
+	}
+
+	public List<String> validate() {
+		List<String> result = new ArrayList<String>();
+		result.addAll(new ValidatableSampleImpl(this).validate());
+		result.addAll(parametrosIniciais.validate());
+		return result;
 	}
 }
