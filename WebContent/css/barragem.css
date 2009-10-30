@@ -399,8 +399,12 @@ th.actions {
     clear:both;
 }
 
-.dados-barragem .campos_obrigatorios span {
-    font-size:0.8em;
+.dados-barragem .campos_obrigatorios {
+    font-size:12px;
+}
+
+.dados-barragem .error {
+	border:1px solid #FF0000;
 }
 
 .dados-barragem .submit {
@@ -708,10 +712,6 @@ input {
 /* Modal */
 .dados-barragem label {
 	font-size:.8em;
-}
-
-.dados-barragem .error {
-	border:1px solid #FF0000;
 }
 
 .ciclos a, .rodadas a, .editar-ciclo .dados-barragem dt,.editar-ciclo .dados-barragem dd {

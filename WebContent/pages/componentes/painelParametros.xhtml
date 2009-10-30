@@ -94,7 +94,7 @@
 						value="#{msg.label_salvar}" reRender="add-barragens,painelBarragens,mensagemSucesso" styleClass="submit"/>
 				</div>
 				<div class="campos_obrigatorios">
-					<span class="#{ ! empty messageBean.errorMessages ? 'error' : ''}">#{msg.label_campos_marcados_sao_obrigatorios}</span>
+					#{msg.label_campos_marcados_sao_obrigatorios}
 				</div>
 			</div>
 		</h:form>
