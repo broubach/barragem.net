@@ -79,16 +79,8 @@ body {
 .salvar {
 	clear:both;
 }
-/*
-.dados-barragem .submit {
-    background:green;
-    color:#fff;
-    padding:4px 20px;
-    height:24px;
-    font-weight:bold;
-}
-*/
-.add-jogador .submit, .salvar .submit {
+
+.add-jogador .submit {
 	margin-top:10px;
     background:green;
     color:#fff;

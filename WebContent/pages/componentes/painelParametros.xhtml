@@ -14,6 +14,11 @@
 	            	$('input:text').setMask();
 	            });
 	         </script>
+	        <c:if test="#{! empty messageBean.errorMessages}">
+		        <div class="mensagem-erro">
+	        		<span>#{msg.label_preencha_os_campos_obrigatorios}</span>
+		        </div>
+	        </c:if>
 			<div class="dados-basicos-barragem">
 				<div class="input text">
 					<label for="add-barragens:local">#{msg.label_local}*</label>
@@ -90,11 +95,9 @@
 					</div>
 				</div>
 				<div class="salvar">
+					<label class="campos_obrigatorios">#{msg.label_campos_marcados_sao_obrigatorios}</label>
 					<a4j:commandButton actionListener="#{gerirBarragemBean.salvaBarragem}"
-						value="#{msg.label_salvar}" reRender="add-barragens,painelBarragens,mensagemSucesso" styleClass="submit"/>
-				</div>
-				<div class="campos_obrigatorios">
-					#{msg.label_campos_marcados_sao_obrigatorios}
+						value="#{msg.label_salvar}" reRender="add-barragens,painelBarragens,mensagemSucesso" styleClass="submit" oncomplete="$.fn.colorbox.resize()"/>
 				</div>
 			</div>
 		</h:form>

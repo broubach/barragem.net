@@ -1,0 +1,5 @@
+/* Modal */
+#cboxLoadedContent{margin-top:28px; margin-bottom:5px;}
+#cboxClose{top:0;width:20px;height:20px;background: transparent url(../img/buttons/btn-fechar.png) no-repeat scroll;}
+#cboxClose.hover{background-position:0 -20px;}
+#cboxTitle{top:0;height:20px;text-align:left;color:#333;font-weight: bold;} 

@@ -12,11 +12,12 @@
       <div class="maincontent">
 
 	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/jquery.colorbox.css" />
+	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/jquery.colorbox-barragem.css" />
 			<script type="text/javascript" src="#{request.contextPath}/js/jquery.meio.mask.min_custom.js" charset="utf-8" ></script>
 	        <script type="text/javascript" src="#{request.contextPath}/js/jquery.colorbox-min.js"></script>
 			<script>
 	            $(function(){
-		            $(".popup").colorbox({overlayClose:false, inline:true, href:".add-barragens"});
+		            $(".popup").colorbox({overlayClose:false, inline:true, href:".add-barragens", scrollbars:false});
 	            });
 	         </script>
 			<script type="text/javascript" src="#{request.contextPath}/js/3_3_0.GAorg.ajax4jsf.javascript.AjaxScript.js"></script>
