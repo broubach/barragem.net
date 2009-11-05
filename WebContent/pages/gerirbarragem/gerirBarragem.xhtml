@@ -28,7 +28,7 @@
 					<a4j:commandLink actionListener="#{gerirBarragemBean.novaBarragem}" reRender="add-barragens" oncomplete="$('.popup').click()">
 						<span>#{msg.label_adicionar_barragem}</span>
 					</a4j:commandLink>
-					<a href="#" title="Nova Barragem" class="popup" style="visibility:hidden"/>
+					<a href="#" title="#{msg.label_barragem}" class="popup" style="visibility:hidden"/>
 				</div>
 				<h:dataTable id="painelBarragens" styleClass="gradient" rowClasses=",alt" value="#{gerirBarragemBean.barragens}" var="item" binding="#{gerirBarragemBean.dataTable}">
 					<h:column>

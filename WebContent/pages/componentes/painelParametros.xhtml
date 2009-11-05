@@ -16,7 +16,12 @@
 	         </script>
 	        <c:if test="#{! empty messageBean.errorMessages}">
 		        <div class="mensagem-erro">
-	        		<span>#{msg.label_preencha_os_campos_obrigatorios}</span>
+			        <c:if test="#{messageBean.errorMessages['label_barragem_jah_existente'] == null}">
+	    	    		<span>#{msg.label_preencha_os_campos_obrigatorios}</span>
+	    	    	</c:if>
+			        <c:if test="#{messageBean.errorMessages['label_barragem_jah_existente'] != null}">
+	    	    		<span>#{messageBean.errorMessages['label_barragem_jah_existente'].summary}</span>
+			        </c:if>
 		        </div>
 	        </c:if>
 			<div class="dados-basicos-barragem">

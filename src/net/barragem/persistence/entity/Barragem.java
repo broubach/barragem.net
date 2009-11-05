@@ -1,5 +1,6 @@
 package net.barragem.persistence.entity;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -13,10 +14,12 @@ import javax.persistence.Table;
 
 import net.barragem.util.ValidatableSampleImpl;
 
+import org.apache.commons.beanutils.BeanUtils;
+
 @Entity
 @NamedQuery(name = "barragemPorUsuarioQuery", query = "from Barragem barragem where barragem.administrador = :usuario")
 @Table(name = "barragem")
-public class Barragem extends BaseEntity implements Validatable {
+public class Barragem extends BaseEntity implements Validatable, Cloneable {
 
 	@ValidateRequired
 	private String nome;
@@ -98,5 +101,21 @@ public class Barragem extends BaseEntity implements Validatable {
 		result.addAll(new ValidatableSampleImpl(this).validate());
 		result.addAll(parametrosIniciais.validate());
 		return result;
+	}
+
+	public Object clone() {
+		try {
+			Barragem result = (Barragem) BeanUtils.cloneBean(this);
+			result.setParametrosIniciais((ParametroCiclo) parametrosIniciais.clone());
+			return result;
+		} catch (IllegalAccessException e) {
+			throw new RuntimeException(e);
+		} catch (InstantiationException e) {
+			throw new RuntimeException(e);
+		} catch (InvocationTargetException e) {
+			throw new RuntimeException(e);
+		} catch (NoSuchMethodException e) {
+			throw new RuntimeException(e);
+		}
 	}
 }

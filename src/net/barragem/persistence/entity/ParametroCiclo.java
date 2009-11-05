@@ -1,13 +1,16 @@
 package net.barragem.persistence.entity;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import javax.persistence.Embeddable;
 
 import net.barragem.util.ValidatableSampleImpl;
 
+import org.apache.commons.beanutils.BeanUtils;
+
 @Embeddable
-public class ParametroCiclo extends BaseEntity implements Validatable {
+public class ParametroCiclo extends BaseEntity implements Validatable, Cloneable {
 
 	private Integer duracaoEmMeses = new Integer(2);
 
@@ -174,5 +177,19 @@ public class ParametroCiclo extends BaseEntity implements Validatable {
 
 	public List<String> validate() {
 		return new ValidatableSampleImpl(this).validate();
+	}
+
+	public Object clone() {
+		try {
+			return BeanUtils.cloneBean(this);
+		} catch (IllegalAccessException e) {
+			throw new RuntimeException(e);
+		} catch (InstantiationException e) {
+			throw new RuntimeException(e);
+		} catch (InvocationTargetException e) {
+			throw new RuntimeException(e);
+		} catch (NoSuchMethodException e) {
+			throw new RuntimeException(e);
+		}
 	}
 }

@@ -7,12 +7,14 @@ import javax.faces.event.ActionEvent;
 import net.barragem.persistence.entity.Barragem;
 import net.barragem.util.PersistenceHelper;
 
+import org.hibernate.exception.ConstraintViolationException;
+
 public class GerirBarragemBean extends BaseBean {
 	private Barragem barragemEmFoco;
 	private List<Barragem> barragens;
 
 	public GerirBarragemBean() {
-		barragens = PersistenceHelper.findByNamedQuery("barragemPorUsuarioQuery", getUsuarioLogado());
+		lista();
 	}
 
 	public List<Barragem> getBarragens() {
@@ -40,13 +42,18 @@ public class GerirBarragemBean extends BaseBean {
 
 	public void salvaBarragem(ActionEvent e) {
 		if (valida(barragemEmFoco)) {
-			PersistenceHelper.persiste(barragemEmFoco);
-			if (!barragens.contains(barragemEmFoco)) {
-				barragens.add(barragemEmFoco);
+			try {
+				PersistenceHelper.persiste(barragemEmFoco);
+				lista();
+				messages.addInfoMessage(null, "label_informacao_atualizada_com_sucesso");
+			} catch (ConstraintViolationException e1) {
+				messages.addErrorMessage("label_barragem_jah_existente", "label_barragem_jah_existente");
 			}
-
-			messages.addInfoMessage(null, "label_informacao_atualizada_com_sucesso");
 		}
+	}
+
+	private void lista() {
+		barragens = PersistenceHelper.findByNamedQuery("barragemPorUsuarioQuery", getUsuarioLogado());
 	}
 
 	private boolean valida(Barragem barragemEmFoco) {
@@ -58,7 +65,7 @@ public class GerirBarragemBean extends BaseBean {
 	}
 
 	public void detalhaBarragem(ActionEvent e) {
-		barragemEmFoco = barragens.get(getIndex());
+		barragemEmFoco = (Barragem) barragens.get(getIndex()).clone();
 	}
 
 	public void editaCiclo(ActionEvent e) {
