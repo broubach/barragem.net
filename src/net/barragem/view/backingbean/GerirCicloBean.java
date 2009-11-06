@@ -65,23 +65,6 @@ public class GerirCicloBean extends BaseBean {
 		cicloJogadoresRemovidos = new ArrayList<CicloJogador>();
 	}
 
-	public void salvaCiclo(ActionEvent e) {
-		for (Rodada rodada : cicloEmFoco.getRodadas()) {
-			PersistenceHelper.initialize("jogos", rodada);
-		}
-		for (CicloJogador cicloJogador : cicloJogadoresRemovidos) {
-			if (!cicloEmFoco.existeJogoComJogador(cicloJogador.getJogador())) {
-				PersistenceHelper.remove(cicloJogador);
-			} else {
-				cicloEmFoco.getRanking().add(cicloJogador);
-				cicloJogador.setCiclo(cicloEmFoco);
-			}
-		}
-		cicloEmFoco.recalculaRanking();
-		PersistenceHelper.persiste(cicloEmFoco);
-		cicloJogadoresRemovidos = new ArrayList<CicloJogador>();
-	}
-
 	public void carregaUltimoCiclo(Barragem barragem) {
 		setBarragemEmFoco(barragem);
 		setCicloEmFoco(barragem.getCiclos().get(barragem.getCiclos().size() - 1));
@@ -90,11 +73,14 @@ public class GerirCicloBean extends BaseBean {
 	}
 
 	public void adicionaJogadores(ActionEvent e) {
+		boolean salvaCiclo = false;
 		JogadorSelecionavelDto jogadorSelecionavel = null;
 		for (Iterator<JogadorSelecionavelDto> it = jogadoresSelecionaveis.iterator(); it.hasNext();) {
 			jogadorSelecionavel = it.next();
 			if (!jogadorSelecionavel.isSelecionado()) {
 				continue;
+			} else {
+				salvaCiclo = true;
 			}
 			CicloJogador cicloJogador = new CicloJogador();
 			if (!cicloEmFoco.getRanking().isEmpty()) {
@@ -109,6 +95,27 @@ public class GerirCicloBean extends BaseBean {
 			cicloEmFoco.getRanking().add(cicloJogador);
 			it.remove();
 		}
+
+		if (salvaCiclo) {
+			salvaCiclo(e);
+		}
+	}
+
+	private void salvaCiclo(ActionEvent e) {
+		for (Rodada rodada : cicloEmFoco.getRodadas()) {
+			PersistenceHelper.initialize("jogos", rodada);
+		}
+		for (CicloJogador cicloJogador : cicloJogadoresRemovidos) {
+			if (!cicloEmFoco.existeJogoComJogador(cicloJogador.getJogador())) {
+				PersistenceHelper.remove(cicloJogador);
+			} else {
+				cicloEmFoco.getRanking().add(cicloJogador);
+				cicloJogador.setCiclo(cicloEmFoco);
+			}
+		}
+		cicloEmFoco.recalculaRanking();
+		PersistenceHelper.persiste(cicloEmFoco);
+		cicloJogadoresRemovidos = new ArrayList<CicloJogador>();
 	}
 
 	public void removeJogador(ActionEvent e) {

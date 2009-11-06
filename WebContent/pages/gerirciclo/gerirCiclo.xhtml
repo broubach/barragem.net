@@ -10,49 +10,130 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
 <ui:composition template="../../layout/layoutPrincipal.xhtml">
+	<ui:param name="pageStyle" value="editar-ciclo"/>
 	<ui:define name="conteudo">
-		<h:form>
-			<h4><h:outputText value="#{msg.label_ciclo}"/>:&#160; <h:outputText value="#{gerirCicloBean.cicloEmFoco.nome}"/></h4>
-			<ui:include src="../componentes/rodadas.xhtml" />
-			<ui:include src="../componentes/gridRanking.xhtml" />
-		</h:form>
+		<div class="maincontent">
 
-		<rich:modalPanel id="painelAdicaoJogadoresNaBarragem" width="350" height="280">
-			<f:facet name="header">
-				<h:outputText value="#{msg.label_jogador}" />
-			</f:facet>
-			<f:facet name="controls">
-				<a href="javascript:Richfaces.hideModalPanel('painelAdicaoJogadoresNaBarragem');">X</a>
-			</f:facet>
+	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/jquery.colorbox.css" />
+	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/jquery.colorbox-barragem.css" />
+	        <script type="text/javascript" src="#{request.contextPath}/js/jquery.colorbox-min.js"></script>
+			<script>
+	            $(function(){
+		            $(".popup").colorbox({overlayClose:false, inline:true, href:".add-jogador", scrollbars:false});
+	            });
+	         </script>
+			<script type="text/javascript" src="#{request.contextPath}/js/3_3_0.GAorg.ajax4jsf.javascript.AjaxScript.js"></script>
 
+			<h2>#{msg.label_ciclo}: #{gerirCicloBean.cicloEmFoco.nome}</h2>
+			<div class="dados-barragem">
+			    <dl>
+			        <dt>#{msg.label_local}:</dt>
+			        <dd>#{gerirCicloBean.barragemEmFoco.local}</dd>
+			        <dt>#{msg.label_barragem}:</dt>
+			        <dd>#{gerirCicloBean.barragemEmFoco.nome}</dd>
+			    </dl>
+			</div>
+			
 			<h:form>
-				<h:outputText value="#{msg.label_escolha_os_jogadores_que_irao_participar_da_barragem}" />
-				<div style="overflow: auto; width: 260px; height: 200px;">
-					<h:panelGrid columns="2" id="gridJogadores">
-						<h:outputText value="#{msg.label_nome}"/>
-						<h:outputText>
-							#{msg.label_todos} <h:selectBooleanCheckbox value="#{gerirCicloBean.todos}">
-								<a4j:support event="onchange" reRender="gridJogadores" actionListener="#{gerirCicloBean.selecionaTodos}"/>
-							</h:selectBooleanCheckbox>
-						</h:outputText>
-						<c:forEach items="#{gerirCicloBean.jogadoresSelecionaveis}" var="item">
-							<h:outputText value="#{item.jogador.nome}"/>
-							<h:selectBooleanCheckbox value="#{item.selecionado}"/>
+				<fieldset>
+				    <legend>#{msg.label_ranking}</legend>
+		
+					<div class="btn-novo">
+						<a4j:commandLink actionListener="#{gerirCicloBean.criaJogadoresSelecionaveis}" reRender="add-jogador" oncomplete="$('.popup').click();">
+							<span>#{msg.label_adicionar_jogador}</span>
+						</a4j:commandLink>
+						<a href="#" title="#{msg.label_jogadores}" class="popup" style="visibility:hidden"/>
+					</div>
+		
+				    <h:dataTable id="ranking" styleClass="gradient" rowClasses=",alt" value="#{gerirCicloBean.cicloEmFoco.ranking}" var="item" binding="#{gerirCicloBean.dataTable}">
+					    <h:column>
+						    <f:facet name="header">
+								#{msg.label_colocacao}
+						    </f:facet>
+							#{gerirCicloBean.cicloEmFoco.ranking[gerirCicloBean.dataTable.rowIndex].ranking}
+					    </h:column>
+					    <h:column>
+						    <f:facet name="header">
+								#{msg.label_pontuacao}
+						    </f:facet>
+							#{gerirCicloBean.cicloEmFoco.ranking[gerirCicloBean.dataTable.rowIndex].pontuacao}
+					    </h:column>
+					    <h:column>
+						    <f:facet name="header">
+								#{msg.label_jogador}
+						    </f:facet>
+							#{gerirCicloBean.cicloEmFoco.ranking[gerirCicloBean.dataTable.rowIndex].jogador.nome}
+					    </h:column>
+					    <h:column headerClass="actions">
+						    <f:facet name="header">
+								#{msg.label_acoes}
+						    </f:facet>
+							<div class="actions">
+								<h:commandLink reRender="add-jogador" styleClass="deletar"  onclick="return confirm('#{msg.label_confirma_exclusao}');"
+									actionListener="#{gerirCicloBean.removeJogador}">
+									<img src="#{request.contextPath}/img/buttons/btn-deletar.png"/>
+								</h:commandLink>
+							</div>
+					    </h:column>
+				    </h:dataTable>
+				</fieldset>
+			
+				<fieldset class="rodadas">
+				    <legend>#{msg.label_rodadas}</legend>
+				    <ul>
+						<c:forEach items="#{gerirCicloBean.cicloEmFoco.rodadas}"
+							var="item" varStatus="status">
+					        <li>
+								<h:commandLink actionListener="#{gerirCicloBean.editaRodada}" action="editarRodada" value="${item.numero}" title="#{msg.label_rodada} #{item.numero}">
+									<f:param name="index" value="#{status.index}" />
+								</h:commandLink>
+					        </li>
 						</c:forEach>
-					</h:panelGrid>
-				</div>
-				<a4j:commandButton actionListener="#{gerirCicloBean.adicionaJogadores}"
-					value="#{msg.label_ok}" reRender="gridRanking,gridJogadores" />
-				<a4j:commandButton immediate="true" oncomplete="Richfaces.hideModalPanel('painelAdicaoJogadoresNaBarragem')"
-					value="#{msg.label_fechar}" reRender="gridRanking" />
+				    </ul>
+				</fieldset>
+			
+				<fieldset class="ciclos">
+				    <legend>#{msg.label_ciclos}</legend>
+				    <ul>
+						<c:forEach items="#{gerirCicloBean.barragemEmFoco.ciclos}" var="item" varStatus="status">
+							<li>
+								<h:commandLink action="editarCiclo" actionListener="#{gerirCicloBean.editaCiclo}" value="#{item.nome}" class="#{gerirCicloBean.cicloEmFoco.nome == item.nome ? 'atual' : ''}" title="#{msg.label_ciclo} de #{item.nome}">
+									<f:param name="index" value="#{status.index}" />
+								</h:commandLink>
+							</li>
+						</c:forEach>
+				    </ul>
+				</fieldset>
+				<div class="clear"></div>
 			</h:form>
-		</rich:modalPanel>
+		</div>
+
+		<div style="display:none">
+			<div class="add-jogador">
+				<h:form id="add-jogador">
+					<fieldset>
+						<legend>#{msg.label_escolha_os_jogadores_que_irao_participar_da_barragem}</legend>
+						<div style="overflow: auto; width: 260px; height: 200px;">
+							<div class="input checkbox">
+								<h:selectBooleanCheckbox id="todos" value="#{gerirCicloBean.todos}" onclick="$('form#add-jogador INPUT[type=checkbox]').attr('checked', $('#add-jogador\\:todos').is(':checked'));"/>
+								#{msg.label_todos}
+							</div>
+							<c:forEach items="#{gerirCicloBean.jogadoresSelecionaveis}" var="item">
+								<div class="input checkbox">
+									<h:selectBooleanCheckbox value="#{item.selecionado}"/>
+									#{item.jogador.nome}
+								</div>
+							</c:forEach>
+						</div>
+					</fieldset>
+					<div class="salvar">
+						<a4j:commandButton actionListener="#{gerirCicloBean.adicionaJogadores}" styleClass="submit"
+							value="#{msg.label_salvar}" reRender="ranking" oncomplete="$.fn.colorbox.close()"/>
+					</div>
+				</h:form>
+			</div>
+		</div>
 	</ui:define>
-	
-	<ui:define name="menu_contextual">
-		<h:form>
-			<ui:include src="../componentes/resumoBarragemECiclos.xhtml" />
-		</h:form>
-	</ui:define>
+
 </ui:composition>
 </html>
