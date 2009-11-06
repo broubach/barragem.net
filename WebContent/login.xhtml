@@ -22,21 +22,21 @@
         
                 $(function(){
                     $('#loginForm input, #searchForm input').each(function() {
-                    if($(this).val() === '') {
-                        $(this).val($(this).attr('title'));	
-                    }
-                    
-                    $(this).focus(function() {
-                        if($(this).val() == $(this).attr('title')) {
-                            $(this).val('').addClass('focused');	
-                        }
-                    });
-                    $(this).blur(function() {
-                        if($(this).val() === '') {
-                            $(this).val($(this).attr('title')).removeClass('focused');	
-                        }
-                    });
-                });
+	                    if($(this).val() === '') {
+	                        $(this).val($(this).attr('title'));	
+	                    }
+	                    $(this).focus(function() {
+	                        if($(this).val() == $(this).attr('title')) {
+	                            $(this).val('').addClass('focused');	
+	                        }
+	                    });
+	                    $(this).blur(function() {
+	                        if($(this).val() === '') {
+	                            $(this).val($(this).attr('title')).removeClass('focused');	
+	                        }
+	                    });
+	                });
+                    $('#registerForm\\:nome').focus();
                 });
             
         //]]>
@@ -55,10 +55,10 @@
 				</h1>
 				<div class="sidebar-header rounded">
 					<h:form id="loginForm">
-						<label for="login">#{msg.label_usuario}</label>
-						<h:inputText value="#{loginBean.login}" title="#{msg.label_usuario}" styleClass="input" />
-						<label for="passwd">#{msg.label_senha}</label>
-						<h:inputSecret value="#{loginBean.senha}" title="#{msg.label_senha}" styleClass="input" />
+						<label for="loginForm:login">#{msg.label_usuario}</label>
+						<h:inputText id="login" value="#{loginBean.login}" title="#{msg.label_usuario}" styleClass="input" />
+						<label for="loginForm:passwd">#{msg.label_senha}</label>
+						<h:inputSecret id="passwd" value="#{loginBean.senha}" title="#{msg.label_senha}" styleClass="input" />
 						<h:commandButton actionListener="#{loginBean.login}" value="#{msg.label_login}" styleClass="login"/>
 						<div>
 							<a href="/usuarios/recuperar_senha" title="#{msg.label_esqueci_senha}">#{msg.label_esqueci_senha}</a>
