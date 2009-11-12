@@ -99,17 +99,14 @@
 						    <f:facet name="header">
 								#{msg.label_acoes}
 						    </f:facet>
-							<div class="nowrap">
-								<h:commandLink reRender="add-jogo" styleClass="deletar" onclick="return confirm('#{msg.label_confirma_exclusao}');"  disabled="#{gerirRodadaBean.rodadaEmFoco.inoperavel == true}"
-									actionListener="#{gerirRodadaBean.removeJogo}">
-									<img src="#{request.contextPath}/img/buttons/btn-deletar.png" alt="#{msg.label_excluir}"/>
-								</h:commandLink>
-								<a4j:commandLink actionListener="#{gerirRodadaBean.editaJogo}" disabled="#{gerirRodadaBean.rodadaEmFoco.inoperavel == true}"
-									oncomplete="$('.popup').click();" reRender="add-jogo">
-									<f:param name="index" value="#{status.index}" />
-                                    <img src="#{request.contextPath}/img/buttons/btn-editar.png" alt="#{msg.label_editar}" />
-								</a4j:commandLink>
-							</div>
+							<h:commandLink reRender="add-jogo" styleClass="deletar" onclick="return confirm('#{msg.label_confirma_exclusao}');"  disabled="#{gerirRodadaBean.rodadaEmFoco.inoperavel == true}"
+								actionListener="#{gerirRodadaBean.removeJogo}">
+								<img src="#{request.contextPath}/img/buttons/btn-deletar.png" alt="#{msg.label_excluir}" title="#{msg.label_excluir}"/>
+							</h:commandLink>
+							<a4j:commandLink actionListener="#{gerirRodadaBean.editaJogo}" disabled="#{gerirRodadaBean.rodadaEmFoco.inoperavel == true}"
+								oncomplete="$('.popup').click();" reRender="add-jogo">
+                                <img src="#{request.contextPath}/img/buttons/btn-editar.png" alt="#{msg.label_editar}" title="#{msg.label_editar}"/>
+							</a4j:commandLink>
 					    </h:column>
 				    </h:dataTable>
 			    </fieldset>

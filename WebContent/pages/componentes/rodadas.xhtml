@@ -12,7 +12,7 @@
 			<c:forEach items="#{gerirCicloBean.cicloEmFoco.rodadas}"
 				var="item" varStatus="status">
 		        <li>
-					<h:commandLink actionListener="#{gerirCicloBean.editaRodada}" action="editarRodada" value="${item.numero}" title="#{msg.label_rodada} #{item.numero}">
+					<h:commandLink actionListener="#{gerirCicloBean.editaRodada}" action="editarRodada" value="#{item.numero}" title="#{msg.label_rodada} #{item.numero}" class="#{gerirRodadaBean.rodadaEmFoco != null and gerirRodadaBean.rodadaEmFoco.numero == item.numero ? 'atual' : ''}">
 						<f:param name="index" value="#{status.index}" />
 					</h:commandLink>
 		        </li>
