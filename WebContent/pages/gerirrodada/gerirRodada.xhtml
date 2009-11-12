@@ -10,70 +10,121 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
 <ui:composition template="../../layout/layoutPrincipal.xhtml">
+	<ui:param name="pageStyle" value="rodada"/>
 	<ui:define name="conteudo">
-		<h:form>
-			<ui:include src="../componentes/rodadas.xhtml" />
-			<h4><h:outputText value="#{msg.label_rodada}"/>:&#160; <h:outputText value="#{gerirRodadaBean.rodadaEmFoco.numero}"/>&#160;&#160;/&#160;&#160;<h:outputText value="#{msg.label_status}"/>:&#160; <h:outputText value="#{gerirRodadaBean.rodadaEmFoco.fechada ? msg.label_fechada : msg.label_aberta}"/></h4>
-			<br/>
-			
-			<fieldset>
-				<legend><h:outputText value="#{msg.label_jogos}" id="label_jogos"/></legend>
-				<h:panelGrid columns="9" id="gridJogos">
-					<h:outputText value="#{msg.label_branco}" />
-					<h:outputText value="#{msg.label_pts}" />
-					<h:outputText value="#{msg.label_branco}" />
-					<h:outputText value="#{msg.label_branco}" />
-					<h:outputText value="#{msg.label_pts}" />
-					<h:outputText value="#{msg.label_placar}" />
-					<h:outputText value="#{msg.label_data}" />
-					<a4j:commandButton value="+" reRender="painelJogoBarragem"
-						actionListener="#{gerirRodadaBean.adicionaJogo}" disabled="#{gerirRodadaBean.rodadaEmFoco.inoperavel == true}"
-						oncomplete="Richfaces.showModalPanel('painelJogoBarragem');aplicarMascaras();" />
-					&#160;
-			
-					<c:forEach items="#{gerirRodadaBean.rodadaEmFoco.jogos}" var="item"
-						varStatus="status">
-						<h:outputText value="#{item.jogadoresEventos[0].jogador.nome}" />
-						<h:outputText value="#{item.jogadoresEventos[0].pontuacaoObtida}" />
-						X
-						<h:outputText value="#{item.jogadoresEventos[1].jogador.nome}" />
-						<h:outputText value="#{item.jogadoresEventos[1].pontuacaoObtida}" />
-						<h:outputText value="#{item.placar}" />
-						<h:outputText value="#{item.data}" >
-							<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
-						</h:outputText>
-						<a4j:commandButton value="-" reRender="gridJogos" disabled="#{gerirRodadaBean.rodadaEmFoco.inoperavel == true}"
-							actionListener="#{gerirRodadaBean.removeJogo}">
-							<f:param name="index" value="#{status.index}" />
-						</a4j:commandButton>
-						<a4j:commandLink actionListener="#{gerirRodadaBean.editaJogo}" disabled="#{gerirRodadaBean.rodadaEmFoco.inoperavel == true}"
-							oncomplete="Richfaces.showModalPanel('painelJogoBarragem');aplicarMascaras();" reRender="painelJogoBarragem">
-							<f:param name="index" value="#{status.index}" />
-							<h:outputText value="#{msg.label_editar}" />
-						</a4j:commandLink>
-					</c:forEach>
-				</h:panelGrid>
-				
-				<h:commandButton actionListener="#{gerirRodadaBean.salvaRodada}" value="#{msg.label_salvar}" disabled="#{gerirRodadaBean.rodadaEmFoco.inoperavel == true}"/>
-			</fieldset>
-		</h:form>
+		<div class="maincontent">
+
+	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/jquery.colorbox.css" />
+	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/jquery.colorbox-barragem.css" />
+	        <script type="text/javascript" src="#{request.contextPath}/js/jquery.colorbox-min.js"></script>
+			<script type="text/javascript" src="#{request.contextPath}/js/jquery.maskedinput-1.2.2.min.js"></script>
+			<script>
+	            $(function(){
+		            $(".popup").colorbox({overlayClose:false, inline:true, href:".add-jogo", scrollbars:false}, function(){$('#add-jogo\\:data').focus();});
+	            });
+	         </script>
+			<script type="text/javascript" src="#{request.contextPath}/js/3_3_0.GAorg.ajax4jsf.javascript.AjaxScript.js"></script>
+
+			<h:form>
+			    <h2>#{msg.label_rodada}: #{gerirRodadaBean.rodadaEmFoco.numero} / #{msg.label_status}: #{gerirRodadaBean.rodadaEmFoco.fechada ? msg.label_fechada : msg.label_aberta}</h2>
+			    <div class="menu-rodada">
+			        <ul>
+			            <li>
+							<h:commandLink actionListener="#{gerirRodadaBean.sorteiaJogos}" value="#{msg.label_sortear_jogos}" disabled="#{gerirRodadaBean.rodadaEmFoco.inoperavel == true}"/>
+			            </li>
+			            <li>
+							<h:commandLink actionListener="#{gerirRodadaBean.recalculaRankingEFechaRodada}" value="#{msg.label_fechar_rodada}" disabled="#{gerirRodadaBean.rodadaEmFoco.inoperavel == true or not gerirRodadaBean.rodadaEmFoco.todosOsJogosCompletos}"/>
+			            </li>
+			            <li>
+							<h:commandLink actionListener="#{gerirRodadaBean.criaNovaRodada}" value="#{msg.label_criar_rodada}" />
+			            </li>
+			        </ul>
+			    </div>
+			    <fieldset id="jogos">
+			        <legend>#{msg.label_jogos}</legend>
 	
-		<ui:include src="../gerirjogobarragem/gerirJogoBarragem.xhtml" />
+					<div class="btn-novo">
+						<a4j:commandLink actionListener="#{gerirRodadaBean.adicionaJogo}" reRender="add-jogo" oncomplete="$('.popup').click();" disabled="#{gerirRodadaBean.rodadaEmFoco.inoperavel == true}">
+							<span>#{msg.label_adicionar_jogo}</span>
+						</a4j:commandLink>
+						<a href="#" title="#{msg.label_jogo}" class="popup" style="visibility:hidden"/>
+					</div>
+	
+				    <h:dataTable id="jogos" styleClass="gradient" rowClasses=",alt" columnClasses=",,versus,,,nowrap,nowrap," value="#{gerirRodadaBean.rodadaEmFoco.jogos}" var="item" binding="#{gerirRodadaBean.dataTable}">
+					    <h:column>
+						    <f:facet name="header">
+								#{msg.label_jogador}
+						    </f:facet>
+							#{item.jogadoresEventos[0].jogador.nome}
+					    </h:column>
+					    <h:column>
+						    <f:facet name="header">
+								#{msg.label_pts}
+						    </f:facet>
+							#{item.jogadoresEventos[0].pontuacaoObtida}
+					    </h:column>
+					    <h:column headerClass="versus">
+						    <f:facet name="header">
+								#{msg.label_branco}
+						    </f:facet>
+							#{msg.label_branco}
+					    </h:column>
+					    <h:column>
+						    <f:facet name="header">
+								#{msg.label_jogador}
+						    </f:facet>
+							#{item.jogadoresEventos[1].jogador.nome}
+					    </h:column>
+					    <h:column>
+						    <f:facet name="header">
+								#{msg.label_pts}
+						    </f:facet>
+							#{item.jogadoresEventos[1].pontuacaoObtida}
+					    </h:column>
+					    <h:column>
+						    <f:facet name="header">
+								#{msg.label_placar}
+						    </f:facet>
+							#{item.placar}
+					    </h:column>
+					    <h:column>
+						    <f:facet name="header">
+								#{msg.label_data}
+						    </f:facet>
+							<h:outputText value="#{item.data}" >
+								<f:convertDateTime pattern="dd MMM"/>
+							</h:outputText>
+					    </h:column>
+					    <h:column headerClass="actions">
+						    <f:facet name="header">
+								#{msg.label_acoes}
+						    </f:facet>
+							<div class="nowrap">
+								<h:commandLink reRender="add-jogo" styleClass="deletar" onclick="return confirm('#{msg.label_confirma_exclusao}');"  disabled="#{gerirRodadaBean.rodadaEmFoco.inoperavel == true}"
+									actionListener="#{gerirRodadaBean.removeJogo}">
+									<img src="#{request.contextPath}/img/buttons/btn-deletar.png" alt="#{msg.label_excluir}"/>
+								</h:commandLink>
+								<a4j:commandLink actionListener="#{gerirRodadaBean.editaJogo}" disabled="#{gerirRodadaBean.rodadaEmFoco.inoperavel == true}"
+									oncomplete="$('.popup').click();" reRender="add-jogo">
+									<f:param name="index" value="#{status.index}" />
+                                    <img src="#{request.contextPath}/img/buttons/btn-editar.png" alt="#{msg.label_editar}" />
+								</a4j:commandLink>
+							</div>
+					    </h:column>
+				    </h:dataTable>
+			    </fieldset>
+				<ui:include src="../componentes/rodadas.xhtml" />
+				<ui:include src="../componentes/ciclos.xhtml" />
+			    <div class="clear"></div>
+			    <div class="clear"></div>
+			</h:form>
+            <div class="clear"></div>
+			<div style="display:none">
+				<ui:include src="../gerirjogobarragem/gerirJogoBarragem.xhtml" />
+			</div>
+		</div>
 	</ui:define>
 
-	<ui:define name="menu_contextual">
-		<h:form>
-			<ui:include src="../componentes/resumoBarragemECiclos.xhtml" />
-			<hr/>
-
-			<h5><h:commandLink actionListener="#{gerirRodadaBean.sorteiaJogos}" value="#{msg.label_sortear_jogos_da_rodada}" disabled="#{gerirRodadaBean.rodadaEmFoco.inoperavel == true}"/></h5>
-		
-			<h5><h:commandLink actionListener="#{gerirRodadaBean.recalculaRankingEFechaRodada}" value="#{msg.label_recalcular_ranking_e_fechar_rodada}" 
-				disabled="#{gerirRodadaBean.rodadaEmFoco.inoperavel == true or not gerirRodadaBean.rodadaEmFoco.todosOsJogosCompletos}"/></h5>
-
-			<h5><h:commandLink actionListener="#{gerirRodadaBean.criaNovaRodada}" value="#{msg.label_cria_nova_rodada}" /></h5>
-		</h:form>
-	</ui:define>
 </ui:composition>
 
 </html>

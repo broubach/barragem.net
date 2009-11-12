@@ -6,16 +6,15 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:c="http://java.sun.com/jstl/core">
 
-	<fieldset class="rodadas">
-	    <legend>#{msg.label_rodadas}</legend>
+	<fieldset class="ciclos">
+	    <legend>#{msg.label_ciclos}</legend>
 	    <ul>
-			<c:forEach items="#{gerirCicloBean.cicloEmFoco.rodadas}"
-				var="item" varStatus="status">
-		        <li>
-					<h:commandLink actionListener="#{gerirCicloBean.editaRodada}" action="editarRodada" value="${item.numero}" title="#{msg.label_rodada} #{item.numero}">
+			<c:forEach items="#{gerirCicloBean.barragemEmFoco.ciclos}" var="item" varStatus="status">
+				<li>
+					<h:commandLink action="editarCiclo" actionListener="#{gerirCicloBean.editaCiclo}" value="#{item.nome}" class="#{gerirCicloBean.cicloEmFoco.nome == item.nome ? 'atual' : ''}" title="#{msg.label_ciclo} de #{item.nome}">
 						<f:param name="index" value="#{status.index}" />
 					</h:commandLink>
-		        </li>
+				</li>
 			</c:forEach>
 	    </ul>
 	</fieldset>

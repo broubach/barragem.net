@@ -35,7 +35,7 @@
 			</div>
 			
 			<h:form>
-				<fieldset>
+				<fieldset id="ranking">
 				    <legend>#{msg.label_ranking}</legend>
 		
 					<div class="btn-novo">
@@ -78,32 +78,10 @@
 				    </h:dataTable>
 				</fieldset>
 			
-				<fieldset class="rodadas">
-				    <legend>#{msg.label_rodadas}</legend>
-				    <ul>
-						<c:forEach items="#{gerirCicloBean.cicloEmFoco.rodadas}"
-							var="item" varStatus="status">
-					        <li>
-								<h:commandLink actionListener="#{gerirCicloBean.editaRodada}" action="editarRodada" value="${item.numero}" title="#{msg.label_rodada} #{item.numero}">
-									<f:param name="index" value="#{status.index}" />
-								</h:commandLink>
-					        </li>
-						</c:forEach>
-				    </ul>
-				</fieldset>
+				<ui:include src="../componentes/rodadas.xhtml" />
 			
-				<fieldset class="ciclos">
-				    <legend>#{msg.label_ciclos}</legend>
-				    <ul>
-						<c:forEach items="#{gerirCicloBean.barragemEmFoco.ciclos}" var="item" varStatus="status">
-							<li>
-								<h:commandLink action="editarCiclo" actionListener="#{gerirCicloBean.editaCiclo}" value="#{item.nome}" class="#{gerirCicloBean.cicloEmFoco.nome == item.nome ? 'atual' : ''}" title="#{msg.label_ciclo} de #{item.nome}">
-									<f:param name="index" value="#{status.index}" />
-								</h:commandLink>
-							</li>
-						</c:forEach>
-				    </ul>
-				</fieldset>
+				<ui:include src="../componentes/ciclos.xhtml" />
+
 				<div class="clear"></div>
 			</h:form>
 		</div>

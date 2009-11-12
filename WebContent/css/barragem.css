@@ -319,6 +319,7 @@ input {
     font-weight:bold;
     display:block;
     padding: 4px 8px;
+    white-space: nowrap;
 }
 .btn-novo a span {
     padding-left:20px;
@@ -375,9 +376,27 @@ th.actions {
     background:transparent url(../img/versus.png) no-repeat 50%;
 }
 
+.columnGrid img, .columnGrid select {
+    margin-right: 5px;
+}
+
+.nowrap {
+	white-space: nowrap;
+}
+
+.labelGrid {
+	display:block;
+	color:#333333;
+	font-size: 0.8em;
+	float:left;
+	margin-right:5px;
+	text-align:right;
+}
+
 .dados-barragem {
     width:600px;
 }
+
 .dados-barragem label {
 	color:#444;
 	width:400px;
@@ -444,22 +463,25 @@ th.actions {
 
 /* Fieldsets */
 fieldset {
-    width:440px;
     padding:5px;
     border: 1px solid #95a3ba;
     -moz-border-radius:10px;
-    float:left;
     clear:both;
 }
+fieldset#ranking, fieldset#jogos {
+	float: left;
+	width: 440px;
+}
+
 legend {
     padding: 0 5px;
     color:#333;
 }
 .rodadas, .ciclos {
-    margin-left:10px;
-    margin-bottom:10px;
-    width:80px;
-    clear:none;
+	clear:none;
+	float:right;
+	margin-bottom:10px;
+	width:80px;
 }
 .detalhes-jogo {
 	padding-left:30px;
@@ -541,7 +563,6 @@ li {
 	top:0;
 	right:0;
 	margin-bottom:10px;
-	width:105px;
 	float:right;
 }
 /* Fixme */
@@ -561,9 +582,7 @@ li {
     padding:3px;
     font-size:.8em;
 }
-.rodada td.last {
-    width:50px;
-}
+
 .add-jogador .submit, .add-jogo .submit {
 	margin-top:10px;
     background:green;
@@ -590,9 +609,7 @@ li {
 /* Page specific */
 .parciais {
 	margin-left:30px;
-}
-.parciais-jogadores .select {
-    display:inline;
+	margin-right:30px;
 }
 .parciais-jogadores img {
     margin:0 5px;
@@ -606,13 +623,6 @@ li {
 }
 .add-jogo .wo {
 	width:20px;
-}
-.resultado-parcial {
-    float:left;
-    margin-right:20px;
-}
-.resultados-parciais {
-    margin-left:25px
 }
 
 /* Ajustes */

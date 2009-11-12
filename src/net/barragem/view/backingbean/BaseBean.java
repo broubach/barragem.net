@@ -150,7 +150,15 @@ public class BaseBean {
 	}
 
 	protected int getIndex() {
-		return Integer.valueOf(getDataTable().getRowIndex());
+		String index = getServletRequest().getParameter("index");
+		if (index == null || "".equals(index)) {
+			index = (String) getRequestAttribute("index");
+			if (index == null || "".equals(index)) {
+				return Integer.valueOf(getDataTable().getRowIndex());
+			}
+		}
+		return Integer.parseInt(index);
+
 	}
 
 	protected int getId() {
