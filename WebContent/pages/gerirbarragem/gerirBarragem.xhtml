@@ -32,7 +32,7 @@
 					</a4j:commandLink>
 					<a href="#" title="#{msg.label_barragem}" class="popup" style="visibility:hidden"/>
 				</div>
-				<h:dataTable id="painelBarragens" styleClass="gradient" rowClasses=",alt" value="#{gerirBarragemBean.barragens}" var="item" binding="#{gerirBarragemBean.dataTable}">
+				<h:dataTable id="painelBarragens" styleClass="gradient" rowClasses=",alt" columnClasses=",,,actions" value="#{gerirBarragemBean.barragens}" var="item" binding="#{gerirBarragemBean.dataTable}">
 					<h:column>
 						<f:facet name="header">
 							<h:outputText value="#{msg.label_local}" />
@@ -54,7 +54,7 @@
 						<h:outputText value="#{item.administrador.nome}" />
 					</h:column>
 				
-					<h:column>
+					<h:column headerClass="actions">
 						<f:facet name="header">
 							<h:outputText value="#{msg.label_acoes}" />
 						</f:facet>

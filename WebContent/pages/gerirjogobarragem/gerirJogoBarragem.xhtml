@@ -11,9 +11,6 @@
 
 	<div class="add-jogo">
 		<h:form id="add-jogo">
-			<script>
-				aplicarMascaras();
-			</script>
 	        <c:if test="#{! empty messageBean.errorMessages}">
 		        <div class="mensagem-erro">
 			        <c:forEach var="item" items="#{messageBean.errorMessages}">
@@ -81,8 +78,8 @@
 				</div>
 			</fieldset>
 			<div style="clear:both;">
-				<a4j:commandButton actionListener="#{gerirJogoBarragemBean.salvaJogo}" id="botaoSalvar" styleClass="submit" reRender="add-jogo,jogos,mensagemSucesso"
-					value="#{msg.label_salvar}" oncomplete="$.fn.colorbox.resize()"/>
+				<a4j:commandButton actionListener="#{gerirJogoBarragemBean.salvaJogo}" id="botaoSalvar" styleClass="submit" reRender="add-jogo,jogos,mensagemSucesso" oncomplete="$.fn.colorbox.resize();aplicarMascaras();"
+					value="#{msg.label_salvar}" />
 			</div>
 		</h:form>
 	</div>

@@ -45,7 +45,7 @@
 						<a href="#" title="#{msg.label_jogadores}" class="popup" style="visibility:hidden"/>
 					</div>
 		
-				    <h:dataTable id="ranking" styleClass="gradient" rowClasses=",alt" value="#{gerirCicloBean.cicloEmFoco.ranking}" var="item" binding="#{gerirCicloBean.dataTable}">
+				    <h:dataTable id="ranking" styleClass="gradient" rowClasses=",alt" columnClasses=",,,actions" value="#{gerirCicloBean.cicloEmFoco.ranking}" var="item" binding="#{gerirCicloBean.dataTable}">
 					    <h:column>
 						    <f:facet name="header">
 								#{msg.label_colocacao}

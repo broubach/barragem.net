@@ -364,12 +364,8 @@ input {
 th.actions {
 	text-align:center;
 }
-.actions a {
-	display:block;
-	padding-left:4px;
-	float:left;
-	width:18px;
-	height:18px;
+td.actions {
+	text-align:center;
 }
 
 .versus {
