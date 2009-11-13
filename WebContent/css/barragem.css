@@ -4,15 +4,48 @@
 	margin:0;
 	padding:0
 }
+
+/********************* GERAL *********************/
 a {outline:none}
 img {border:none;}
 html {
 	background:#bfbfbf url(../img/fundo-home-borda.gif) repeat-y 50%
 }
 body {background: transparent url(../img/fundo-internas.gif) no-repeat 50% 90px;}
-.home body{
+input {
+	height:14px;
+	padding:2px;
+	border: 1px solid #6a9bcd;
+}
+li {
+	list-style:none;
+}
+legend {
+    padding: 0 5px;
+}
+fieldset {
+    padding:5px;
+    border: 1px solid #95a3ba;
+    -moz-border-radius:10px;
+    clear:both;
+}
+
+/********************* HOME *********************/
+.home body {
 	background: transparent url(../img/fundo-home.gif) no-repeat 50% 90px;
 }
+.bloco-home {
+    background: #fff url(../img/fundo-blocos-home.gif) no-repeat center 0;
+    padding:10px;
+    height:150px;
+}
+.home h2.slogan {
+	padding-top:20px;
+    width:180px;
+    position:absolute;
+}
+
+/********************* CABECALHO *********************/
 #header {
 	height:90px;
     position:relative;
@@ -29,193 +62,8 @@ body {background: transparent url(../img/fundo-internas.gif) no-repeat 50% 90px;
     height:56px;
     text-indent:-9999px;
 }
-/* Sidebar header */
-.sidebar-header {
-    margin-left:20px;
-    margin-top:20px;
-    float:left;
-    background: #596e94;
-    padding:10px;
-    -moz-border-radius: 10px;
-    width:300px;
-    position:relative;
-    height:40px;
-}
-.sidebar-header p {
-    line-height:1.8em;
-	font-size:.9em;
-	color:#fff;
-}
-.sidebar-header a {
-	color:#fff;
-	text-decoration:none;
-	border-bottom: 1px solid navy;
-}
-.sidebar-header .logout {
-    position:absolute;
-    top:4px;
-    right:10px;
-    border:none;
-}
-/* Sidebar */
-.sidebar {
-    background:#EEF1F3;
-    -moz-border-radius: 5px;
-    min-height:600px;
-    padding:2px;
-}
-.sidebar li {
-	list-style:none;
-}
-.sidebar a {
-	text-decoration:none;
-}
-.dados-jogador dt {
-    float:left;
-    text-align:right;
-    width:70px;
-}
-.dados-jogador dd {
-    text-align:left;
-    margin-left:75px
-}
-/* Menu */
-.internas .menu a {
-    background: #596E94;
-    padding-bottom:2px;
-    margin-bottom:2px;
-    margin-left:4px;
-    margin-right: 4px;
-    color:#fff;
-    -moz-border-radius:3px;
-}
-.internas .menu a:hover {
-    background:#0D286F;
-}
-#loginForm input {
-	border:1px solid #f9f9f9;
-	background: #fff;
-	-moz-border-radius: 3px;
-}
-#loginForm .login {
-	background: #6c88be;
-	color:#fff;
-	font-weight:bold;
-    height:20px;
-    -moz-border-radius: 3px;
-    position:absolute;
-    right:15px;
-}
-#loginForm .input {
-    width:117px;
-}
-#loginForm a {
-    text-decoration:none;
-    color:#fff;
-    margin-top:4px;
-    display:block;
-    border:none;
-}
-/* forms */
-#registerForm label {
-	width: 68px;
-	float: left;
-	text-align: right;
-	margin-right: 5px;
-	display: block
-}
-
-.internas label {
-	float: left;
-	text-align: right;
-	margin-right: 5px;
-	display: block
-}
-
-input {
-	height:14px;
-	padding:2px;
-	font-size:10px;
-}
-.internas input {
-	background: #dde4ef;
-	border: 1px solid #fff;
-}
-.input {
-    margin-bottom:4px;
-}
-.submit input {
-    height:19px;
-    background:#7baf7b;
-    color:#fff;
-    font-weight:bold;
-    border: 1px solid #666;
-   	-moz-border-radius: 3px;
-}
-#registerForm .submit {
-	margin-left: 73px;	
-}
-/* Botões */
-.btn_deletar {
-	background: transparent url(../img/buttons/btn-deletar.gif) no-repeat;
-}
-.registrese {
-	height:275px
-}
-#registerForm {
-    margin-top:55px;
-    margin-left:30px;
-}
-.bloco-home {
-    background: #fff url(../img/fundo-blocos-home.gif) no-repeat center 0;
-    padding:10px;
-    height:150px;
-}
 .header-bloco h2 {
-	color:#069;
 	margin-bottom:0.3em;
-}
-.header-bloco p {
-	color:#444;
-}
-
-#loginForm label, #searchForm label  { display:none}
-
-/*Rodapé*/
-#footer {
-	background: #fff url(../img/fundo-rodape.gif) repeat-x;
-	padding-top:.5em;
-    margin:.5em 0;
-    text-align:right;
-    padding-right:1em;
-    color:#aaa;
-    position:relative;
-}
-#footer li {
-    list-style:none;
-    display:inline;   
-}
-#footer a {
-    color:#aaa;
-	font-size: .9em;
-    text-decoration:none;
-}
-#footer .externo {
-	position:absolute;
-	left:10px;
-	top:15px;
-}
-#searchForm {
-    position:absolute;
-    right:20px;
-    top:50px
-}
-#searchForm input {
-    background: transparent url(../img/pesquisa.gif) right 0 no-repeat;
-    border:none;
-    padding-top:4px;
-    width:169px;
-    height:18px;
 }
 .language {
     position:absolute;
@@ -230,7 +78,6 @@ input {
 }
 .language li {
 	list-style:none;
-    line-height:16px;
     display:none;
 }
 .language li.active {
@@ -238,8 +85,194 @@ input {
 }
 .language a {
     text-decoration:none;
-    font-size:.7em;
-    color:#333;
+}
+
+/********************* SIDEBAR HEADER *********************/
+.sidebar-header {
+    margin-left:20px;
+    margin-top:20px;
+    float:left;
+    background: #596e94;
+    padding:10px;
+    -moz-border-radius: 10px;
+    width:300px;
+    height:40px;
+}
+.sidebar-header a {
+	text-decoration:none;
+	border-bottom: 1px solid navy;
+}
+.sidebar-header .logout {
+    float:right;
+    top:4px;
+    right:10px;
+    border:none;
+}
+/********************* SIDEBAR *********************/
+.sidebar {
+    background:#EEF1F3;
+    -moz-border-radius: 5px;
+    min-height:600px;
+    padding:2px;
+}
+.sidebar li {
+	list-style:none;
+}
+.sidebar a {
+	text-decoration:none;
+}
+.sidebar {
+	text-align:center;	
+}
+
+/********************* MENU *********************/
+.internas .menu a {
+    background: #596E94;
+    padding-bottom:2px;
+    margin-bottom:2px;
+    margin-left:4px;
+    margin-right: 4px;
+    -moz-border-radius:3px;
+}
+.internas .menu a:hover {
+    background:#0D286F;
+}
+
+/********************* FORMS *********************/
+#loginForm input {
+	border:1px solid #f9f9f9;
+	background: #fff;
+	-moz-border-radius: 3px;
+	margin-left:3px;
+    width:117px;
+}
+#loginForm input[type=submit] {
+	background: #6c88be;
+    height:20px;
+    -moz-border-radius: 3px;
+    width: 40px;
+    position:absolute;
+}
+#loginForm a {
+    text-decoration:none;
+    margin-top:4px;
+    display:block;
+    border:none;
+}
+#loginForm label {
+	display:none
+}
+#searchForm label {
+	display:none
+}
+#registerForm label {
+	width: 68px;
+	float: left;
+	text-align: right;
+	margin-right: 5px;
+	display: block
+}
+#registerForm {
+    margin-top:55px;
+    margin-left:30px;
+}
+#registerForm .submit {
+	margin-left: 73px;	
+}
+#searchForm {
+    position:absolute;
+    right:20px;
+    top:50px
+}
+#searchForm input {
+    background: transparent url(../img/pesquisa.gif) right 0 no-repeat;
+    border:none;
+    padding-top:4px;
+    width:169px;
+    height:18px;
+}
+
+#registerForm .input input[type=text], #registerForm .input input[type=password] {
+    width:180px;
+}
+
+#registerForm .input .select-dia {
+	width:20px;
+}
+
+.internas label {
+	float: left;
+	text-align: right;
+	margin-right: 5px;
+	display: block
+}
+
+.internas input {
+	background: #dde4ef;
+	border: 1px solid #fff;
+}
+.input {
+    margin-bottom:4px;
+}
+.submit input {
+    height:19px;
+    background:#7baf7b;
+    border: 1px solid #666;
+   	-moz-border-radius: 3px;
+}
+
+/********************* BOTOES *********************/
+.btn-novo {
+    position:absolute;
+    right:40px;
+    top:10px;
+    background: #95c396;
+    -moz-border-radius: 5px;
+    height:25px;
+}
+.btn-novo a {
+    text-decoration:none;
+    display:block;
+    padding: 4px 8px;
+    white-space: nowrap;
+}
+.btn-novo a span {
+    padding-left:20px;
+    background: transparent url(../img/buttons/btn-novo.gif) no-repeat left 0;
+}
+.btn_deletar {
+	background: transparent url(../img/buttons/btn-deletar.gif) no-repeat;
+}
+.input .btn_deletar {
+    text-indent:-999px;
+    display:block;
+    width:16px;
+    float:left;
+}
+.registrese {
+	height:275px
+}
+
+/********************* RODAPE *********************/
+#footer {
+	background: #fff url(../img/fundo-rodape.gif) repeat-x;
+	padding-top:.5em;
+    margin:.5em 0;
+    text-align:right;
+    padding-right:1em;
+    position:relative;
+}
+#footer li {
+    list-style:none;
+    display:inline;   
+}
+#footer a {
+    text-decoration:none;
+}
+#footer .externo {
+	position:absolute;
+	left:10px;
+	top:15px;
 }
 #content {
     margin-top:20px;
@@ -250,10 +283,11 @@ input {
 	-moz-border-radius: 5px;
 	padding:10px;
 }
-.maincontent h2 {
+.maincontent h2, .maincontent h3 {
 	margin-bottom:10px;
 }
-/* ADS */
+
+/********************* ADS *********************/
 .ads dt {
     margin-top:15px;
 }
@@ -262,13 +296,14 @@ input {
 	float:right;
 }
 
-/* bloco */
+/********************* BLOCO *********************/
 .bloco {
 	background: transparent url(../img/border-sidebar.gif) no-repeat bottom;
     padding-bottom:10px;
     margin:10px 0;
 }
-/* Menu */
+
+/********************* MENU *********************/
 .menu li {
 	list-style:none;
     text-align:left;
@@ -279,22 +314,7 @@ input {
     padding-left:12px;
     text-decoration:none;
 }
-.suas-barragens a {
-    background: transparent url(../img/marcador-menu.gif) 4px 10px no-repeat;
-    display:block;
-    padding-left:12px;
-}
-.suas-barragens h3 {
-    margin-bottom:10px;
-}
 .jogadores .input {
-    float:left;
-}
-
-.input .btn_deletar {
-    text-indent:-999px;
-    display:block;
-    width:16px;
     float:left;
 }
 .lista-jogadores {
@@ -304,30 +324,19 @@ input {
 .lista-jogadores input {
     float:left;
 }
-/* Button */
-.btn-novo {
-    position:absolute;
-    right:40px;
-    top:10px;
-    background: #95c396;
-    -moz-border-radius: 5px;
-    height:25px;
-}
-.btn-novo a {
-    color: #fff;
-    text-decoration:none;
-    font-weight:bold;
+.suas-barragens a {
+    background: transparent url(../img/marcador-menu.gif) 4px 10px no-repeat;
     display:block;
-    padding: 4px 8px;
-    white-space: nowrap;
+    padding-left:12px;
 }
-.btn-novo a span {
-    padding-left:20px;
-    background: transparent url(../img/buttons/btn-novo.gif) no-repeat left 0;
+.suas-barragens h3 {
+    margin-bottom:10px;
+}
+.suas-barragens a {
+    display:block;
 }
 
-/* Tables */
-
+/********************* TABLES *********************/
 .gradient {
 	text-align: left;
 	border-collapse: collapse;
@@ -338,12 +347,10 @@ input {
 	background: #b9c9fe url('../img/tables/head.png') repeat-x;
 	border-top: 2px solid #d3ddff;
 	border-bottom: 1px solid #fff;
-	color: #039;
 }
 .gradient td {
 	padding: 6px; 
 	border-bottom: 1px solid #fff;
-	color: #333;
 	border-top: 1px solid #fff;
 }
 .gradient tr {
@@ -354,12 +361,9 @@ input {
 }
 .gradient tfoot tr td {
 	background: #e8edff;
-	font-size: 12px;
-	color: #99c;
 }
 .gradient tbody tr:hover {
 	background: #DEDFFF url('../img/tables/bg-cell-hover.png') repeat-x;
-	color: #339;
 }
 th.actions {
 	text-align:center;
@@ -367,34 +371,43 @@ th.actions {
 td.actions {
 	text-align:center;
 }
-
 .versus {
     background:transparent url(../img/versus.png) no-repeat 50%;
 }
-
 .columnGrid img, .columnGrid select {
     margin-right: 5px;
 }
-
 .nowrap {
 	white-space: nowrap;
 }
-
 .labelGrid {
 	display:block;
-	color:#333333;
-	font-size: 0.8em;
 	float:left;
 	margin-right:5px;
 	text-align:right;
 }
 
+/********************* DADOS BARRAGEM *********************/
 .dados-barragem {
     width:600px;
 }
-
+.dados-barragem {
+    margin-bottom: 10px;
+}
+.dados-barragem dt {
+    background: #596e94;
+    float:left;
+    width:80px;
+    text-align:right;
+    margin-right: 8px;
+    padding:2px;
+    clear:both;
+    border-bottom:1px solid 
+}
+.dados-barragem dd {
+    padding:2px;
+}
 .dados-barragem label {
-	color:#444;
 	width:400px;
 	border-right: 1px solid #888;
     padding-right:5px;
@@ -402,34 +415,30 @@ td.actions {
 .dados-barragem .input {
 	clear:both;
 }
-
 .dados-barragem .salvar {
 	padding-top: 10px;
 }
-
 .dados-barragem .campos_obrigatorios {
 	border-right: 0px;
-	font-size: 12px;
 }
-
 .dados-barragem .error {
 	border:1px solid #FF0000;
 }
-
-.mensagem-erro {
-    font-size:12px;
-	color: #FF0000;
-	margin-bottom: 5px;
-}
-
 .dados-barragem .submit {
     background:green;
-    color:#fff;
     padding:4px 20px;
     height:24px;
-    font-weight:bold;
     -moz-border-radius: 6px;
 }
+
+.mensagem-erro {
+	margin-bottom: 5px;
+}
+.input .disabled {
+	background:#D3D7DE;
+}
+
+/********************* DADOS BASICOS BARRAGEM *********************/
 .dados-basicos-barragem {
     background-color:#596E94;
 	height:40px;
@@ -440,74 +449,65 @@ td.actions {
     float:left;
     width:180px;
 }
-.input .disabled {
-	background:#D3D7DE;
-}
 .dados-basicos-barragem label {
     text-align:left;
     float:left;
-    color:#fff;
     width:80px;
 }
 .dados-basicos-barragem input {
 	clear:both;
 }
-
 .dados-basicos-barragem .error {
 	border:1px solid #FF0000;
 }
 
-/* Fieldsets */
-fieldset {
-    padding:5px;
-    border: 1px solid #95a3ba;
-    -moz-border-radius:10px;
-    clear:both;
-}
+/********************* FIELDSETS *********************/
 fieldset#ranking, fieldset#jogos {
 	float: left;
 	width: 440px;
 }
-
-legend {
-    padding: 0 5px;
-    color:#333;
+.detalhes-jogo {
+	padding-left:30px;
 }
-.rodadas, .ciclos {
+.maincontent a {
+    text-decoration:none;
+}
+
+/********************* CICLOS *********************/
+.ciclos a {
+    background: transparent url(../img/marcador-ciclo.gif) no-repeat 0 4px;
+    padding-left:12px;
+}
+.ciclos .atual {
+    border-bottom:1px solid orange;
+}
+.editar-ciclo .btn-novo {
+    right:120px;
+    top:60px;
+}
+.ciclos {
 	clear:none;
 	float:right;
 	margin-bottom:10px;
 	width:80px;
 }
-.detalhes-jogo {
-	padding-left:30px;
-}
-li {
-	list-style:none;
-}
-.maincontent a {
-    text-decoration:none;
-}
 .editar-ciclo .maincontent li {
 	display:inline;
 }
+.editar-ciclo .btn-novo {
+	position:relative;
+	top:0;
+	right:0;
+	margin-bottom:10px;
+	float:right;
+}
 
-.ciclos a {
-    background: transparent url(../img/marcador-ciclo.gif) no-repeat 0 4px;
-    padding-left:12px;
-    color:#333;
-}
-.ciclos .atual {
-    border-bottom:1px solid orange;
-    font-weight:bold;
-}
+/********************* RODADAS *********************/
 .rodadas li {
-   line-height:18px;
    display:inline;
 }
 .rodadas a {
     background: transparent url(../img/fundo-link-rodadas.gif) no-repeat 0 50%;
-    color: #fff;
     display:block;
     float:left;
     margin-left:4px;
@@ -516,52 +516,92 @@ li {
 }
 .rodadas a:hover, .rodadas a.atual {
 	background: transparent url(../img/fundo-link-rodadas-atual.gif) no-repeat 0 50%;
-	color:#333;
-}
-.editar-ciclo .dados-barragem {
-    margin-bottom: 10px;
-}
-.editar-ciclo .dados-barragem dt {
-    color:#fff;
-    background: #596e94;
-    float:left;
-    width:80px;
-    text-align:right;
-    margin-right: 8px;
-    padding:2px;
-    clear:both;
-    border-bottom:1px solid 
-}
-.editar-ciclo .dados-barragem dd {
-    padding:2px;
-}
-.editar-ciclo .btn-novo {
-    right:120px;
-    top:60px;
 }
 
-/* Slogan */
-.home h2.slogan {
-	padding-top:20px;
-    width:180px;
-    position:absolute;
-    color:#656565;
+.rodadas a.fechada {
+	background: transparent url(../img/fundo-link-rodadas-desabilitado.gif) no-repeat 0 50%;
 }
-
+.rodadas {
+	clear:none;
+	float:right;
+	margin-bottom:10px;
+	width:80px;
+} 
 .registrese h3 {
-    margin:0;position:absolute;
+    margin:0;
+    position:absolute;
     top:20px;
-    color:#2C6695;
     left:570px;
 }
-.rodada .btn-novo, .editar-ciclo .btn-novo {
+.rodada .btn-novo {
 	position:relative;
 	top:0;
 	right:0;
 	margin-bottom:10px;
 	float:right;
 }
-/* Fixme */
+	
+/********************* ADD JOGADOR *********************/
+.add-jogador .submit {
+	margin-top:10px;
+    background:green;
+    padding:4px 20px;
+    height:24px;
+    -moz-border-radius: 6px;
+}
+.add-jogador label {
+    float:none;
+    display:inline;
+    padding-left:10px;
+}
+.add-jogador .input {
+    float:none;
+}
+
+/********************* ADD JOGO *********************/
+.add-jogo .submit {
+	margin-top:10px;
+    background:green;
+    padding:4px 20px;
+    height:24px;
+    -moz-border-radius: 6px;
+}
+.add-jogo input {
+    width:90px
+}
+.add-jogo .wo {
+	width:20px;
+}
+.checkbox {
+    clear:left;
+}
+
+/********************* DADOS JOGADOR *********************/
+.dados-jogador dt {
+    float:left;
+    text-align:right;
+    width:70px;
+}
+.dados-jogador dd {
+    text-align:left;
+    margin-left:75px
+}
+
+/********************* PARCIAIS *********************/
+.parciais {
+	margin-left:30px;
+	margin-right:30px;
+}
+.parciais-jogadores img {
+    margin:0 5px;
+}
+
+/********************* DADOS BARRAGEM *********************/
+.dados-barragem dd a, .dados-barragem dd a:hover {
+	text-decoration: underline;
+}
+
+/********************* FIXME *********************/
 .editar-ciclo .btn-novo {
 	width:160px;
 }
@@ -579,61 +619,7 @@ li {
     font-size:.8em;
 }
 
-.add-jogador .submit, .add-jogo .submit {
-	margin-top:10px;
-    background:green;
-    color:#fff;
-    padding:4px 20px;
-    height:24px;
-    font-weight:bold;
-    -moz-border-radius: 6px;
-}
-.add-jogador label {
-    float:none;
-    display:inline;
-    padding-left:10px;
-    color: #333;
-    font-size:.8em;
-}
-.add-jogador .input {
-    float:none;
-}
-.checkbox {
-    clear:left;
-}
-
-/* Page specific */
-.parciais {
-	margin-left:30px;
-	margin-right:30px;
-}
-.parciais-jogadores img {
-    margin:0 5px;
-}
-.add-jogo label, .add-jogo .input span {
-    font-size:.8em;
-    color: #333;
-}
-.add-jogo input {
-    width:90px
-}
-.add-jogo .wo {
-	width:20px;
-}
-
-/* Ajustes */
-#registerForm .input input[type=text], #registerForm .input input[type=password] {
-    width:180px;
-}
-#registerForm .input select {
-    font-size:.8em;
-} 
-#registerForm .input .select-dia {
-	width:20px;
-}
-
-
-/********* TYPOGRAPHY ************/
+/********************* TYPOGRAPHY *********************/
 body {
 	font-family: Tahoma, Arial, Helvetica, sans serif;
 	font-size:95%;
@@ -642,31 +628,15 @@ body {
 label {
 	color: #2c6695;
 }
-.dados-basicos-barragem label {
-    font-size:12px;
-}
 #registerForm label {
 	font-size: .7em;
 	font-weight:bold;
 }
-
-#registerForm .input select {
-    font-size:13px;
-} 
 #registerForm .input .select-dia {
 	width:20px;
 }
-#loginForm a {
-    font-size:10px;
-}
-input {
-	border: 1px solid #6a9bcd;
-}
-.sidebar-header {
-	font-size:.8em;
-}
-.sidebar {
-	text-align:center;	
+#registerForm .input select {
+    font-size:.8em;
 }
 .sidebar h3 {
 	font-size:.9em;
@@ -682,14 +652,15 @@ input {
 .ads a {
 	color:navy;
 }
-.maincontent h2 {
+.maincontent h2, .maincontent h3, .maincontent dd a {
     color:#4f6aad;
+}
+.maincontent h2 span {
+    font-size: 85%;
+    font-style: italic;
 }
 .menu a {
 	color:#4f6aad;	
-}
-.dados-jogador {
-	font-size: .8em;
 }
 .suas-barragens h3 {
     text-transform:none;
@@ -703,36 +674,157 @@ input {
     display:block;
     color:#333;
 }
-.dados-jogador dt {
+.dados-jogador {
+	font-size: .8em;
 	color:#4f6aad;
 }
-/* Tables */
+input {
+	font-size:10px;
+}
+.home h2.slogan {
+    font-size:1em;
+	color:#656565;
+}
+.header-bloco h2 {
+	color:#069;
+}
+.header-bloco p {
+	color:#444;
+	font-size:12px;
+}
+.sidebar-header {
+	font-size:.8em;
+}
+.sidebar-header p {
+	font-size:.9em;
+	color:#fff;
+    line-height:1.8em;
+}
+.sidebar-header a {
+	color:#fff;
+}
+.internas .menu a {
+    color:#fff;
+}
+#loginForm .login {
+	color:#fff;
+	font-weight:bold;
+}
+#loginForm a {
+    font-size:10px;
+    color:#fff;
+}
+.submit input {
+    color:#fff;
+    font-weight:bold;
+}
+.btn-novo a {
+    color: #fff;
+    font-weight:bold;
+	font-size:13px;
+}
+#footer {
+    color:#aaa;
+}
+#footer a {
+    color:#aaa;
+	font-size: .9em;
+}
+.language a {
+    font-size:.7em;
+    color:#333;
+}
+.language li {
+    line-height:16px;
+}
+.gradient th {
+	color: #039;
+	font-weight: normal;
+}
+.gradient td {
+	color: #333;
+}
+.gradient tfoot tr td {
+	font-size: 12px;
+	color: #99c;
+}
+.gradient tbody tr:hover {
+	color: #339;
+}
 .gradient {
 	font-family: Arial, Helvetica, Sans-Serif;
     font-size: 12px;
 }
-.gradient th {
-	font-weight: normal;
+.labelGrid {
+	color:#333333;
+	font-size: 0.8em;
 }
-
-/* Modal */
+.dados-barragem .campos_obrigatorios {
+	font-size: 12px;
+}
+.dados-barragem .submit {
+    color:#fff;
+    font-weight:bold;
+}
 .dados-barragem label {
+	color:#444;
 	font-size:.8em;
 }
-
-.ciclos a, .rodadas a, .editar-ciclo .dados-barragem dt,.editar-ciclo .dados-barragem dd {
+.dados-barragem dt {
+    color:#fff;
+}
+.dados-barragem dt, .dados-barragem dd  {
+	font-size: 1.2em;
+	font-weight: bold;
+}
+.mensagem-erro {
+    font-size:12px;
+	color: #FF0000;
+}
+.dados-basicos-barragem label {
+    font-size:12px;
+    color:#fff;
+}
+.ciclos .atual {
+    font-weight:bold;
+}
+.ciclos a {
+    font-size: .8em;
+    color:#333;
+}
+.rodadas a:hover, .rodadas a.atual {
+	color:#333;
+}
+.rodadas a.fechada {
+	color:#333;
+}
+.rodadas a {
+    color: #fff;
     font-size: .8em;
 }
-
-.home h2.slogan {
-    font-size:1em;
+.rodadas li {
+   line-height:18px;
 }
-.btn-novo a {
-	font-size:13px;
+.add-jogador .submit {
+    color:#fff;
+    font-weight:bold;
 }
-.header-bloco p {
-	font-size:12px;
+.add-jogador label {
+    color: #333;
+    font-size:.8em;
+}
+.add-jogo .submit {
+    color:#fff;
+    font-weight:bold;
+}
+.add-jogo label, .add-jogo .input span {
+    font-size:.8em;
+    color: #333;
+}
+.registrese h3 {
+    color:#2C6695;
 }
 legend {
     font-size:11px;
+    color:#333;
 }

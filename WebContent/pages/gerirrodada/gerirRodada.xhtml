@@ -26,7 +26,15 @@
 			<script type="text/javascript" src="#{request.contextPath}/js/3_3_0.GAorg.ajax4jsf.javascript.AjaxScript.js"></script>
 
 			<h:form>
-			    <h2>#{msg.label_rodada}: #{gerirRodadaBean.rodadaEmFoco.numero} / #{msg.label_status}: #{gerirRodadaBean.rodadaEmFoco.fechada ? msg.label_fechada : msg.label_aberta}</h2>
+				<h2>#{gerirCicloBean.barragemEmFoco.local} <span>#{gerirCicloBean.barragemEmFoco.nome}</span></h2>
+				<div class="dados-barragem">
+				    <dl>
+				        <dt>#{msg.label_ciclo}</dt>
+				        <dd><h:commandLink actionListener="#{gerirBarragemBean.editaCiclo}" action="editarCiclo">#{gerirCicloBean.cicloEmFoco.nome}</h:commandLink></dd>
+				        <dt>#{msg.label_rodada}</dt>
+				        <dd><h:commandLink actionListener="#{gerirCicloBean.editaRodada}" action="editarRodada"><f:param name="index" value="#{gerirRodadaBean.rodadaEmFoco.numero-1}"/>#{gerirRodadaBean.rodadaEmFoco.numero}, #{gerirRodadaBean.rodadaEmFoco.fechada ? msg.label_fechada : msg.label_aberta}</h:commandLink></dd>
+				    </dl>
+			    </div>
 			    <div class="menu-rodada">
 			        <ul>
 			            <li>

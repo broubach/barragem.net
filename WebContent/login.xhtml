@@ -42,7 +42,6 @@
         //]]>
         </script>
 		<!--[if lte IE 7]>
-			<link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/ie-fix.css" />
 			<script type="text/javascript" src="#{request.contextPath}/js/jquery.corner.js"></script>
 			<script type="text/javascript" src="#{request.contextPath}/js/ie-fix.js"></script>
 		<![endif]-->
@@ -51,18 +50,14 @@
 		<div id="page" class="container_16">
 			<div id="header">
 				<h1>
-					<a href="/" class="brand">#{msg.label_brand}</a>
+					<a href="#{request.contextPath}/" class="brand">#{msg.label_brand}</a>
 				</h1>
 				<div class="sidebar-header rounded">
 					<h:form id="loginForm">
-						<label for="loginForm:login">#{msg.label_usuario}</label>
 						<h:inputText id="login" value="#{loginBean.login}" title="#{msg.label_usuario}" styleClass="input" />
-						<label for="loginForm:passwd">#{msg.label_senha}</label>
 						<h:inputSecret id="passwd" value="#{loginBean.senha}" title="#{msg.label_senha}" styleClass="input" />
 						<h:commandButton actionListener="#{loginBean.login}" value="#{msg.label_login}" styleClass="login"/>
-						<div>
-							<a href="/usuarios/recuperar_senha" title="#{msg.label_esqueci_senha}">#{msg.label_esqueci_senha}</a>
-						</div>
+						<a href="/usuarios/recuperar_senha" title="#{msg.label_esqueci_senha}">#{msg.label_esqueci_senha}</a>
 					</h:form>
 				</div>
 				<div class="language">
@@ -214,7 +209,7 @@
 					</li>
 				</ul>
 				<a href="http://www.2km.com.br/" class="externo">
-					<img src="img/logo-2km.gif" alt="2km interativa!" border="0" />
+					<img src="#{request.contextPath}/img/logo-2km.gif" alt="2km interativa!" border="0" />
 				</a>
 			</div>
 		</div>

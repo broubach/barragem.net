@@ -24,17 +24,15 @@
 	         </script>
 			<script type="text/javascript" src="#{request.contextPath}/js/3_3_0.GAorg.ajax4jsf.javascript.AjaxScript.js"></script>
 
-			<h2>#{msg.label_ciclo}: #{gerirCicloBean.cicloEmFoco.nome}</h2>
-			<div class="dados-barragem">
-			    <dl>
-			        <dt>#{msg.label_local}:</dt>
-			        <dd>#{gerirCicloBean.barragemEmFoco.local}</dd>
-			        <dt>#{msg.label_barragem}:</dt>
-			        <dd>#{gerirCicloBean.barragemEmFoco.nome}</dd>
-			    </dl>
-			</div>
-			
 			<h:form>
+				<h2>#{gerirCicloBean.barragemEmFoco.local} <span>#{gerirCicloBean.barragemEmFoco.nome}</span></h2>
+				<div class="dados-barragem">
+				    <dl>
+				        <dt>#{msg.label_ciclo}</dt>
+				        <dd><h:commandLink actionListener="#{gerirBarragemBean.editaCiclo}" action="editarCiclo">#{gerirCicloBean.cicloEmFoco.nome}</h:commandLink></dd>
+				    </dl>
+				</div>
+			
 				<fieldset id="ranking">
 				    <legend>#{msg.label_ranking}</legend>
 		

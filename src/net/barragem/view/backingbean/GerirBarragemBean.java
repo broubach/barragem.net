@@ -71,8 +71,13 @@ public class GerirBarragemBean extends BaseBean {
 	}
 
 	public void editaCiclo(ActionEvent e) {
-		barragemEmFoco = (Barragem) PersistenceHelper.findByPk(Barragem.class, barragens.get(getIndex()).getId(),
-				"ciclos");
+		if (getIndex() != -1) {
+			barragemEmFoco = (Barragem) PersistenceHelper.findByPk(Barragem.class, barragens.get(getIndex()).getId(),
+					"ciclos");
+		} else {
+			GerirBarragemBean bean = (GerirBarragemBean) getRequestAttribute("gerirBarragemBean");
+			barragemEmFoco = bean.getBarragemEmFoco();
+		}
 		if (barragemEmFoco.getCiclos().isEmpty()) {
 			PersistenceHelper.persiste(barragemEmFoco.criaCicloERodada());
 		}
