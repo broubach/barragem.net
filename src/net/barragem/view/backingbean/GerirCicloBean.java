@@ -60,8 +60,12 @@ public class GerirCicloBean extends BaseBean {
 
 	public void editaCiclo(ActionEvent e) {
 		barragemEmFoco = PersistenceHelper.findByPk(Barragem.class, barragemEmFoco.getId(), "ciclos");
-		Ciclo ciclo = barragemEmFoco.getCiclos().get(getIndex());
-		cicloEmFoco = (Ciclo) PersistenceHelper.findByPk(Ciclo.class, ciclo.getId(), "ranking", "rodadas");
+		if (getIndex() != -1) {
+			Ciclo ciclo = barragemEmFoco.getCiclos().get(getIndex());
+			cicloEmFoco = (Ciclo) PersistenceHelper.findByPk(Ciclo.class, ciclo.getId(), "ranking", "rodadas");
+		} else {
+			cicloEmFoco = (Ciclo) PersistenceHelper.findByPk(Ciclo.class, cicloEmFoco.getId(), "ranking", "rodadas");
+		}
 		cicloJogadoresRemovidos = new ArrayList<CicloJogador>();
 	}
 
@@ -97,11 +101,11 @@ public class GerirCicloBean extends BaseBean {
 		}
 
 		if (salvaCiclo) {
-			salvaCiclo(e);
+			salvaCiclo();
 		}
 	}
 
-	private void salvaCiclo(ActionEvent e) {
+	private void salvaCiclo() {
 		for (Rodada rodada : cicloEmFoco.getRodadas()) {
 			PersistenceHelper.initialize("jogos", rodada);
 		}
@@ -118,10 +122,17 @@ public class GerirCicloBean extends BaseBean {
 		cicloJogadoresRemovidos = new ArrayList<CicloJogador>();
 	}
 
+	public void salvaCiclo(ActionEvent e) {
+		salvaCiclo();
+		editaCiclo(e);
+		addMensagemAtualizacaoComSucesso();
+	}
+
 	public void removeJogador(ActionEvent e) {
 		cicloEmFoco.getRanking().get(getIndex()).setCiclo(null);
 		cicloJogadoresRemovidos.add(cicloEmFoco.getRanking().get(getIndex()));
 		cicloEmFoco.getRanking().remove(getIndex());
+		salvaCiclo();
 	}
 
 	public String getMensagemRodadasSugeridas() {
@@ -160,5 +171,19 @@ public class GerirCicloBean extends BaseBean {
 			jogadorSelecionavel = it.next();
 			jogadorSelecionavel.setSelecionado(todos);
 		}
+	}
+
+	public void criaNovoCiclo(ActionEvent e) {
+		Integer proximoNome = barragemEmFoco.getCiclos().get(barragemEmFoco.getCiclos().size() - 1)
+				.getNomeAlternativoBaseadoEmMes() + 1;
+		if (proximoNome > 11) {
+			proximoNome = 0;
+		}
+		PersistenceHelper.persiste(barragemEmFoco.criaCicloERodada(proximoNome));
+
+		GerirCicloBean cicloBean = new GerirCicloBean();
+		cicloBean.carregaUltimoCiclo(barragemEmFoco);
+
+		setRequestAttribute("gerirCicloBean", cicloBean);
 	}
 }

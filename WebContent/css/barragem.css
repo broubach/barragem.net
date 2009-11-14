@@ -388,8 +388,8 @@ td.actions {
 }
 
 /********************* DADOS BARRAGEM *********************/
-.dados-barragem {
-    width:600px;
+.dados-barragem dd a, .dados-barragem dd a:hover {
+	text-decoration: underline;
 }
 .dados-barragem {
     margin-bottom: 10px;
@@ -407,30 +407,34 @@ td.actions {
 .dados-barragem dd {
     padding:2px;
 }
-.dados-barragem label {
+
+/********************* DADOS POPUP *********************/
+.add-barragens .dados-popup label {
 	width:400px;
+}
+
+.dados-popup label {
 	border-right: 1px solid #888;
     padding-right:5px;
 }
-.dados-barragem .input {
+.dados-popup .input {
 	clear:both;
 }
-.dados-barragem .salvar {
+.dados-popup .salvar {
 	padding-top: 10px;
 }
-.dados-barragem .campos_obrigatorios {
+.dados-popup .campos_obrigatorios {
 	border-right: 0px;
 }
-.dados-barragem .error {
+.dados-popup .error {
 	border:1px solid #FF0000;
 }
-.dados-barragem .submit {
+.dados-popup .submit {
     background:green;
     padding:4px 20px;
     height:24px;
     -moz-border-radius: 6px;
 }
-
 .mensagem-erro {
 	margin-bottom: 5px;
 }
@@ -490,9 +494,6 @@ fieldset#ranking, fieldset#jogos {
 	float:right;
 	margin-bottom:10px;
 	width:80px;
-}
-.editar-ciclo .maincontent li {
-	display:inline;
 }
 .editar-ciclo .btn-novo {
 	position:relative;
@@ -596,27 +597,27 @@ fieldset#ranking, fieldset#jogos {
     margin:0 5px;
 }
 
-/********************* DADOS BARRAGEM *********************/
-.dados-barragem dd a, .dados-barragem dd a:hover {
-	text-decoration: underline;
-}
-
 /********************* FIXME *********************/
 .editar-ciclo .btn-novo {
 	width:160px;
 }
-.menu-rodada {
+
+/********************* MENU CONTEXTUAL *********************/
+.menu-contextual {
     margin-bottom:10px;
 }
-.menu-rodada li {
+.menu-contextual li {
 	display:inline;
 }
-.menu-rodada a {
+.menu-contextual a {
     background:#B1C3FE;
-    color:#000;
     -moz-border-radius:4px;
     padding:3px;
-    font-size:.8em;
+}
+.menu-contextual span {
+	border: 1px solid #6a9bcd;
+    -moz-border-radius:4px;
+    padding:3px;
 }
 
 /********************* TYPOGRAPHY *********************/
@@ -759,14 +760,14 @@ input {
 	color:#333333;
 	font-size: 0.8em;
 }
-.dados-barragem .campos_obrigatorios {
+.dados-popup .campos_obrigatorios {
 	font-size: 12px;
 }
-.dados-barragem .submit {
+.dados-popup .submit {
     color:#fff;
     font-weight:bold;
 }
-.dados-barragem label {
+.dados-popup label {
 	color:#444;
 	font-size:.8em;
 }
@@ -827,4 +828,8 @@ input {
 legend {
     font-size:11px;
     color:#333;
+}
+.menu-contextual a, .menu-contextual span {
+    color:#000;
+    font-size:.8em;
 }

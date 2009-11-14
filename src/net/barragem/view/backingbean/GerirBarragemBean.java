@@ -47,7 +47,7 @@ public class GerirBarragemBean extends BaseBean {
 			try {
 				PersistenceHelper.persiste(barragemEmFoco);
 				lista();
-				messages.addInfoMessage(null, "label_informacao_atualizada_com_sucesso");
+				addMensagemAtualizacaoComSucesso();
 			} catch (ConstraintViolationException e1) {
 				messages.addErrorMessage("label_barragem_jah_existente", "label_barragem_jah_existente");
 			}

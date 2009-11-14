@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<div class="rename-ciclo">
+		<h:form id="rename-ciclo">
+	        <c:if test="#{! empty messageBean.errorMessages}">
+		        <div class="mensagem-erro">
+			        <c:forEach var="item" items="#{messageBean.errorMessages}">
+	    	    		<span>#{item.value.summary}</span>
+			        </c:forEach>
+		        </div>
+	        </c:if>
+			<div class="dados-popup">
+				<div class="input text">
+					<label for="rename-ciclo:nome">#{msg.label_novo_nome}*</label>
+					<h:inputText id="nome" value="#{gerirCicloBean.cicloEmFoco.nome}" size="35" maxlength="45" styleClass="#{messageBean.errorMessages['nome'] != null ? 'error' : ''}"/>
+				</div>
+				<div class="salvar">
+					<label class="campos_obrigatorios">#{msg.label_campos_marcados_sao_obrigatorios}</label>
+					<a4j:commandButton actionListener="#{gerirCicloBean.salvaCiclo}"
+						value="#{msg.label_salvar}" reRender="dados-barragem,ciclos,mensagemSucesso" styleClass="submit" oncomplete="$.fn.colorbox.resize()"/>
+				</div>
+			</div>
+		</h:form>
+	</div>
+</html>

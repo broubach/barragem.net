@@ -56,7 +56,7 @@ public class GerirJogoBarragemBean extends BaseBean {
 
 			mestreDetalhe.preparaJogoParaEdicao();
 
-			messages.addInfoMessage(null, "label_informacao_atualizada_com_sucesso");
+			addMensagemAtualizacaoComSucesso();
 		}
 	}
 

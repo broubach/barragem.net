@@ -191,4 +191,8 @@ public class BaseBean {
 			throw new RuntimeException(e);
 		}
 	}
+
+	protected void addMensagemAtualizacaoComSucesso() {
+		messages.addInfoMessage(null, "label_informacao_atualizada_com_sucesso");
+	}
 }

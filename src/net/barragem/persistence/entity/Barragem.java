@@ -77,8 +77,12 @@ public class Barragem extends BaseEntity implements Validatable, Cloneable {
 	}
 
 	public Ciclo criaCicloERodada() {
+		return criaCicloERodada(Calendar.getInstance().get(Calendar.MONTH));
+	}
+
+	public Ciclo criaCicloERodada(Integer nomeAlternativoBaseadoEmMes) {
 		Ciclo ciclo = new Ciclo();
-		ciclo.setNomeAlternativoBaseadoEmMes(Calendar.getInstance().get(Calendar.MONTH));
+		ciclo.setNomeAlternativoBaseadoEmMes(nomeAlternativoBaseadoEmMes);
 		ciclo.setParametros(getParametrosIniciais());
 		ciclo.setRodadas(new ArrayList<Rodada>());
 		ciclo.adicionaRodada();

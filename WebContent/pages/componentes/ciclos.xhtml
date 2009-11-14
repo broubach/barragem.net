@@ -6,16 +6,19 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:c="http://java.sun.com/jstl/core">
 
+	<h:panelGroup id="ciclos">
 	<fieldset class="ciclos">
 	    <legend>#{msg.label_ciclos}</legend>
 	    <ul>
 			<c:forEach items="#{gerirCicloBean.barragemEmFoco.ciclos}" var="item" varStatus="status">
 				<li>
-					<h:commandLink action="editarCiclo" actionListener="#{gerirCicloBean.editaCiclo}" value="#{item.nome}" class="#{gerirCicloBean.cicloEmFoco.nome == item.nome ? 'atual' : ''}" title="#{msg.label_ciclo} de #{item.nome}">
+					<h:commandLink action="editarCiclo" actionListener="#{gerirCicloBean.editaCiclo}" value="#{item.nome}" class="#{gerirCicloBean.cicloEmFoco.id == item.id ? 'atual' : ''}" title="#{msg.label_ciclo} de #{item.nome}">
 						<f:param name="index" value="#{status.index}" />
 					</h:commandLink>
 				</li>
 			</c:forEach>
 	    </ul>
 	</fieldset>
+	</h:panelGroup>
+
 </html>
