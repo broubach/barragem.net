@@ -11,20 +11,18 @@
 		<h:form id="rename-ciclo">
 	        <c:if test="#{! empty messageBean.errorMessages}">
 		        <div class="mensagem-erro">
-			        <c:forEach var="item" items="#{messageBean.errorMessages}">
-	    	    		<span>#{item.value.summary}</span>
-			        </c:forEach>
+    	    		<span>#{msg.label_preencha_os_campos_obrigatorios}</span>
 		        </div>
 	        </c:if>
 			<div class="dados-popup">
 				<div class="input text">
 					<label for="rename-ciclo:nome">#{msg.label_novo_nome}*</label>
-					<h:inputText id="nome" value="#{gerirCicloBean.cicloEmFoco.nome}" size="35" maxlength="45" styleClass="#{messageBean.errorMessages['nome'] != null ? 'error' : ''}"/>
+					<h:inputText id="nome" value="#{gerirCicloBean.novoNome}" size="35" maxlength="45" styleClass="#{messageBean.errorMessages['nome'] != null ? 'error' : ''}"/>
 				</div>
 				<div class="salvar">
 					<label class="campos_obrigatorios">#{msg.label_campos_marcados_sao_obrigatorios}</label>
 					<a4j:commandButton actionListener="#{gerirCicloBean.salvaCiclo}"
-						value="#{msg.label_salvar}" reRender="dados-barragem,ciclos,mensagemSucesso" styleClass="submit" oncomplete="$.fn.colorbox.resize()"/>
+						value="#{msg.label_salvar}" reRender="rename-ciclo,dados-barragem,ciclos,mensagemSucesso" styleClass="submit" oncomplete="$.fn.colorbox.resize()"/>
 				</div>
 			</div>
 		</h:form>

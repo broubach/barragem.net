@@ -25,6 +25,15 @@ public class GerirCicloBean extends BaseBean {
 	private List<CicloJogador> cicloJogadoresRemovidos;
 	private List<JogadorSelecionavelDto> jogadoresSelecionaveis;
 	private Boolean todos;
+	private String novoNome;
+
+	public String getNovoNome() {
+		return novoNome;
+	}
+
+	public void setNovoNome(String novoNome) {
+		this.novoNome = novoNome;
+	}
 
 	public Barragem getBarragemEmFoco() {
 		return barragemEmFoco;
@@ -67,6 +76,10 @@ public class GerirCicloBean extends BaseBean {
 			cicloEmFoco = (Ciclo) PersistenceHelper.findByPk(Ciclo.class, cicloEmFoco.getId(), "ranking", "rodadas");
 		}
 		cicloJogadoresRemovidos = new ArrayList<CicloJogador>();
+	}
+
+	public void preparaRenomea(ActionEvent e) {
+		novoNome = cicloEmFoco.getNome();
 	}
 
 	public void carregaUltimoCiclo(Barragem barragem) {
@@ -123,9 +136,20 @@ public class GerirCicloBean extends BaseBean {
 	}
 
 	public void salvaCiclo(ActionEvent e) {
-		salvaCiclo();
-		editaCiclo(e);
-		addMensagemAtualizacaoComSucesso();
+		if (valida(cicloEmFoco)) {
+			cicloEmFoco.setNome(novoNome);
+			salvaCiclo();
+			editaCiclo(e);
+			addMensagemAtualizacaoComSucesso();
+		}
+	}
+
+	private boolean valida(Ciclo ciclo) {
+		if (novoNome == null || novoNome.isEmpty()) {
+			messages.addErrorMessage("nome", "label_true");
+			return false;
+		}
+		return true;
 	}
 
 	public void removeJogador(ActionEvent e) {

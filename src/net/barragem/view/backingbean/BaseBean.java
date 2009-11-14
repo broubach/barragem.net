@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import net.barragem.persistence.entity.Usuario;
+import net.barragem.persistence.entity.Validatable;
 
 import org.apache.commons.beanutils.BeanUtils;
 
@@ -194,5 +195,13 @@ public class BaseBean {
 
 	protected void addMensagemAtualizacaoComSucesso() {
 		messages.addInfoMessage(null, "label_informacao_atualizada_com_sucesso");
+	}
+
+	protected boolean valida(Validatable validatable) {
+		for (String clientId : validatable.validate()) {
+			messages.addErrorMessage(clientId, "label_true");
+		}
+
+		return messages.getErrorMessages().isEmpty();
 	}
 }

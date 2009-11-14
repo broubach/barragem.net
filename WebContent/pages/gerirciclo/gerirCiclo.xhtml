@@ -40,7 +40,7 @@
 							<h:commandLink actionListener="#{gerirCicloBean.criaNovoCiclo}" value="#{msg.label_criar_ciclo}"/>
 			            </li>
 			            <li>
-							<a4j:commandLink reRender="rename-ciclo" oncomplete="$('.popupRenomearCiclo').click();" value="#{msg.label_renomear_ciclo}">
+							<a4j:commandLink actionListener="#{gerirCicloBean.preparaRenomea}" reRender="rename-ciclo" oncomplete="$('.popupRenomearCiclo').click();" value="#{msg.label_renomear_ciclo}">
 								<f:param name="index" value="#{status.index}" />
 							</a4j:commandLink>
 			            </li>

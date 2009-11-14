@@ -58,14 +58,6 @@ public class GerirBarragemBean extends BaseBean {
 		barragens = PersistenceHelper.findByNamedQuery("barragemPorUsuarioQuery", getUsuarioLogado());
 	}
 
-	private boolean valida(Barragem barragemEmFoco) {
-		for (String clientId : barragemEmFoco.validate()) {
-			messages.addErrorMessage(clientId, "label_true");
-		}
-
-		return messages.getErrorMessages().isEmpty();
-	}
-
 	public void detalhaBarragem(ActionEvent e) {
 		barragemEmFoco = (Barragem) barragens.get(getIndex()).clone();
 	}
