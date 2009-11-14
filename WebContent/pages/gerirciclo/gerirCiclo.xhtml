@@ -46,6 +46,13 @@
 			            </li>
 			        </ul>
 			    </div>
+		        <c:if test="#{! empty messageBean.errorMessages}">
+			        <div class="mensagem-erro">
+				        <c:forEach var="item" items="#{messageBean.errorMessages}">
+		    	    		<span>#{item.value.summary}</span>
+				        </c:forEach>
+			        </div>
+		        </c:if>
 				<fieldset id="ranking">
 				    <legend>#{msg.label_ranking}</legend>
 		

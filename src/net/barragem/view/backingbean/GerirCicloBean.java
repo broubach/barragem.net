@@ -24,7 +24,6 @@ public class GerirCicloBean extends BaseBean {
 	private Ciclo cicloEmFoco;
 	private List<CicloJogador> cicloJogadoresRemovidos;
 	private List<JogadorSelecionavelDto> jogadoresSelecionaveis;
-	private Boolean todos;
 	private String novoNome;
 
 	public String getNovoNome() {
@@ -57,14 +56,6 @@ public class GerirCicloBean extends BaseBean {
 
 	public void setJogadoresSelecionaveis(List<JogadorSelecionavelDto> jogadoresSelecionaveis) {
 		this.jogadoresSelecionaveis = jogadoresSelecionaveis;
-	}
-
-	public Boolean getTodos() {
-		return todos;
-	}
-
-	public void setTodos(Boolean todos) {
-		this.todos = todos;
 	}
 
 	public void editaCiclo(ActionEvent e) {
@@ -126,6 +117,7 @@ public class GerirCicloBean extends BaseBean {
 			if (!cicloEmFoco.existeJogoComJogador(cicloJogador.getJogador())) {
 				PersistenceHelper.remove(cicloJogador);
 			} else {
+				messages.addErrorMessage(null, "error_jogador_nao_pode_ser_excluido");
 				cicloEmFoco.getRanking().add(cicloJogador);
 				cicloJogador.setCiclo(cicloEmFoco);
 			}
@@ -185,15 +177,6 @@ public class GerirCicloBean extends BaseBean {
 				jogadorSelecionavel.setJogador(jogador);
 				jogadoresSelecionaveis.add(jogadorSelecionavel);
 			}
-		}
-		todos = Boolean.FALSE;
-	}
-
-	public void selecionaTodos(ActionEvent e) {
-		JogadorSelecionavelDto jogadorSelecionavel = null;
-		for (Iterator<JogadorSelecionavelDto> it = jogadoresSelecionaveis.iterator(); it.hasNext();) {
-			jogadorSelecionavel = it.next();
-			jogadorSelecionavel.setSelecionado(todos);
 		}
 	}
 

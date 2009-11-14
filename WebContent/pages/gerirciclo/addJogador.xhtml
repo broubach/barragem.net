@@ -13,7 +13,7 @@
 				<legend>#{msg.label_escolha_os_jogadores_que_irao_participar_da_barragem}</legend>
 				<div style="overflow: auto; width: 260px; height: 200px;">
 					<div class="input checkbox">
-						<h:selectBooleanCheckbox id="todos" value="#{gerirCicloBean.todos}" onclick="$('form#add-jogador INPUT[type=checkbox]').attr('checked', $('#add-jogador\\:todos').is(':checked'));"/>
+						<h:selectBooleanCheckbox id="todos" onclick="$('form#add-jogador INPUT[type=checkbox]').attr('checked', $('#add-jogador\\:todos').is(':checked'));"/>
 						#{msg.label_todos}
 					</div>
 					<c:forEach items="#{gerirCicloBean.jogadoresSelecionaveis}" var="item">
