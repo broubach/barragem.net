@@ -2,10 +2,12 @@ package net.barragem.view.backingbean;
 
 import javax.faces.event.ActionEvent;
 
+import net.barragem.persistence.entity.Jogador;
 import net.barragem.persistence.entity.JogadorEvento;
 import net.barragem.persistence.entity.JogoBarragem;
 import net.barragem.persistence.entity.Parcial;
 import net.barragem.persistence.entity.Rodada;
+import net.barragem.persistence.entity.SimplesDuplasEnum;
 import net.barragem.util.PersistenceHelper;
 import net.barragem.view.backingbean.componentes.MestreDetalheImpl;
 import net.barragem.view.backingbean.componentes.RodadaJogosBarragemMestreDetalhe;
@@ -17,6 +19,15 @@ import org.ajax4jsf.model.KeepAlive;
 public class GerirJogoBarragemBean extends BaseBean {
 
 	public RodadaJogosBarragemMestreDetalhe mestreDetalhe = new RodadaJogosBarragemMestreDetalhe();
+	public Jogador jogadorVencedorWo;
+
+	public Jogador getJogadorVencedorWo() {
+		return jogadorVencedorWo;
+	}
+
+	public void setJogadorVencedorWo(Jogador jogadorVencedor) {
+		this.jogadorVencedorWo = jogadorVencedor;
+	}
 
 	public RodadaJogosBarragemMestreDetalhe getMestreDetalhe() {
 		return mestreDetalhe;
@@ -61,12 +72,27 @@ public class GerirJogoBarragemBean extends BaseBean {
 	}
 
 	private boolean valida(RodadaJogosBarragemMestreDetalhe mestreDetalhe) {
+		validaCamposObrigatorios(mestreDetalhe.getDetalheEmFoco());
 		validaJogadorJahJogouNaRodada(mestreDetalhe);
 		validaExisteVencedor(mestreDetalhe);
 		if (!messages.getErrorMessages().isEmpty()) {
 			return false;
 		}
 		return true;
+	}
+
+	private void validaCamposObrigatorios(JogoBarragem jogoBarragem) {
+		super.valida(jogoBarragem);
+		if (jogoBarragem.getTipo().equals(SimplesDuplasEnum.Simples)) {
+			Jogador jogador1 = jogoBarragem.getJogadoresEventos().get(0).getJogador();
+			Jogador jogador2 = jogoBarragem.getJogadoresEventos().get(1).getJogador();
+			if (jogador1 != null && jogador2 != null && jogador1.equals(jogador2)) {
+				messages.addErrorMessage(null, "error_jogadores_selecionados_devem_ser_diferentes");
+			}
+			if (jogador1 == null || jogador2 == null) {
+				messages.addErrorMessage("jogador", "label_true");
+			}
+		}
 	}
 
 	private void validaJogadorJahJogouNaRodada(MestreDetalheImpl<Rodada, JogoBarragem> mestreDetalhe) {

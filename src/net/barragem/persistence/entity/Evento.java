@@ -17,6 +17,7 @@ import javax.persistence.Table;
 @Table(name = "evento")
 public class Evento extends BaseEntity {
 
+	@ValidateRequired
 	private Date data;
 
 	@OneToMany(mappedBy = "evento", cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)

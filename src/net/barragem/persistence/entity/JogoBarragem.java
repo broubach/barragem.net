@@ -8,10 +8,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import net.barragem.util.ValidatableSampleImpl;
+
 @Entity
 @Table(name = "jogobarragem")
 @PrimaryKeyJoinColumn(name = "id")
-public class JogoBarragem extends Jogo implements Cloneable {
+public class JogoBarragem extends Jogo implements Cloneable, Validatable {
 
 	@ManyToOne
 	private Rodada rodada;
@@ -76,6 +78,10 @@ public class JogoBarragem extends Jogo implements Cloneable {
 		} else if (!getId().equals(other.getId()))
 			return false;
 		return true;
+	}
+
+	public List<String> validate() {
+		return new ValidatableSampleImpl(this).validate();
 	}
 
 }

@@ -12,11 +12,15 @@ public class ReflectionHelper {
 
 	public static List<Field> getValidateRequiredFields(Validatable validatable) {
 		List<Field> result = new ArrayList<Field>();
-		for (Field field : validatable.getClass().getDeclaredFields()) {
-			field.getAnnotations();
-			if (field.isAnnotationPresent(ValidateRequired.class)) {
-				result.add(field);
+		Class clazz = validatable.getClass();
+		while (!clazz.getSimpleName().equals(Object.class.getSimpleName())) {
+			for (Field field : clazz.getDeclaredFields()) {
+				field.getAnnotations();
+				if (field.isAnnotationPresent(ValidateRequired.class)) {
+					result.add(field);
+				}
 			}
+			clazz = clazz.getSuperclass();
 		}
 		return result;
 	}

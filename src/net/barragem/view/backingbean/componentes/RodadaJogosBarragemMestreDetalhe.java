@@ -106,7 +106,7 @@ public class RodadaJogosBarragemMestreDetalhe extends MestreDetalheImpl<Rodada, 
 			if ((parcial.getParcialVencedor() == null || parcial.getParcialPerdedor() == null) && i > 0) {
 				continue;
 			} else if (parcial.getParcialVencedor() == null || parcial.getParcialPerdedor() == null) {
-				throw new BusinessException("error_primeiro_set_obrigatorio", "error_primeiro_set_obrigatorio");
+				throw new BusinessException("primeiro_set", "label_true");
 			}
 			if (parcial.getParcialVencedor() > parcial.getParcialPerdedor()) {
 				totalSetsVencidos.put(teoricoVencedor, totalSetsVencidos.get(teoricoVencedor) + 1);

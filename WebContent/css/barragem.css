@@ -412,7 +412,18 @@ td.actions {
 .add-barragens .dados-popup label {
 	width:400px;
 }
-
+.add-jogo .dados-popup {
+	width:350px;
+	padding-right: 10px;
+}
+.add-jogo .dados-popup label {
+	width:60px;
+}
+.add-jogo .dados-popup .blank {
+	width:auto;
+	border-right: 0px;
+	padding-right: 0px;
+}
 .dados-popup label {
 	border-right: 1px solid #888;
     padding-right:5px;
@@ -425,9 +436,7 @@ td.actions {
 }
 .dados-popup .campos_obrigatorios {
 	border-right: 0px;
-}
-.dados-popup .error {
-	border:1px solid #FF0000;
+	min-width: 245px;
 }
 .dados-popup .submit {
     background:green;
@@ -460,9 +469,6 @@ td.actions {
 }
 .dados-basicos-barragem input {
 	clear:both;
-}
-.dados-basicos-barragem .error {
-	border:1px solid #FF0000;
 }
 
 /********************* FIELDSETS *********************/
@@ -561,7 +567,6 @@ fieldset#ranking, fieldset#jogos {
 
 /********************* ADD JOGO *********************/
 .add-jogo .submit {
-	margin-top:10px;
     background:green;
     padding:4px 20px;
     height:24px;
@@ -576,6 +581,10 @@ fieldset#ranking, fieldset#jogos {
 .checkbox {
     clear:left;
 }
+.vencedorWo { 
+	display:none;
+	float:right;
+}
 
 /********************* DADOS JOGADOR *********************/
 .dados-jogador dt {
@@ -589,10 +598,6 @@ fieldset#ranking, fieldset#jogos {
 }
 
 /********************* PARCIAIS *********************/
-.parciais {
-	margin-left:30px;
-	margin-right:30px;
-}
 .parciais-jogadores img {
     margin:0 5px;
 }
@@ -832,4 +837,7 @@ legend {
 .menu-contextual a, .menu-contextual span {
     color:#000;
     font-size:.8em;
+}
+label.error {
+	color: #FF0000;
 }

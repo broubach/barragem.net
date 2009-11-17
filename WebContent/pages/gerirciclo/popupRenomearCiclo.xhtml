@@ -16,8 +16,8 @@
 	        </c:if>
 			<div class="dados-popup">
 				<div class="input text">
-					<label for="rename-ciclo:nome">#{msg.label_novo_nome}*</label>
-					<h:inputText id="nome" value="#{gerirCicloBean.novoNome}" size="35" maxlength="45" styleClass="#{messageBean.errorMessages['nome'] != null ? 'error' : ''}"/>
+					<label for="rename-ciclo:nome" class="#{messageBean.errorMessages['nome'] != null ? 'error' : ''}">#{msg.label_novo_nome}*</label>
+					<h:inputText id="nome" value="#{gerirCicloBean.novoNome}" size="35" maxlength="45"/>
 				</div>
 				<div class="salvar">
 					<label class="campos_obrigatorios">#{msg.label_campos_marcados_sao_obrigatorios}</label>
