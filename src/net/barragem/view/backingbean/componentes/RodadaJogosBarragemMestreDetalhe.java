@@ -18,6 +18,16 @@ import net.barragem.view.exception.BusinessException;
 
 public class RodadaJogosBarragemMestreDetalhe extends MestreDetalheImpl<Rodada, JogoBarragem> {
 
+	public Jogador jogadorVencedorWo;
+
+	public Jogador getJogadorVencedorWo() {
+		return jogadorVencedorWo;
+	}
+
+	public void setJogadorVencedorWo(Jogador jogadorVencedorWo) {
+		this.jogadorVencedorWo = jogadorVencedorWo;
+	}
+
 	public void preparaJogoParaEdicao(int index) {
 		preparaJogoParaEdicao(getDetalhes().get(index));
 	}
@@ -95,6 +105,11 @@ public class RodadaJogosBarragemMestreDetalhe extends MestreDetalheImpl<Rodada, 
 	}
 
 	public Jogador obtemVencedor() throws BusinessException {
+		if (getDetalheEmFoco().getPlacar().getWo() && jogadorVencedorWo == null) {
+			throw new BusinessException("wo", "label_true");
+		} else if (getDetalheEmFoco().getPlacar().getWo() && jogadorVencedorWo != null) {
+			return jogadorVencedorWo;
+		}
 		Map<Jogador, Integer> totalSetsVencidos = new HashMap<Jogador, Integer>();
 		Jogador teoricoVencedor = getDetalheEmFoco().getJogadoresEventos().get(0).getJogador();
 		Jogador teoricoPerdedor = getDetalheEmFoco().getJogadoresEventos().get(1).getJogador();

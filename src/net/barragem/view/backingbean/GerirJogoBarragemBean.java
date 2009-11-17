@@ -1,6 +1,11 @@
 package net.barragem.view.backingbean;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import javax.faces.event.ActionEvent;
+import javax.faces.model.SelectItem;
 
 import net.barragem.persistence.entity.Jogador;
 import net.barragem.persistence.entity.JogadorEvento;
@@ -19,15 +24,6 @@ import org.ajax4jsf.model.KeepAlive;
 public class GerirJogoBarragemBean extends BaseBean {
 
 	public RodadaJogosBarragemMestreDetalhe mestreDetalhe = new RodadaJogosBarragemMestreDetalhe();
-	public Jogador jogadorVencedorWo;
-
-	public Jogador getJogadorVencedorWo() {
-		return jogadorVencedorWo;
-	}
-
-	public void setJogadorVencedorWo(Jogador jogadorVencedor) {
-		this.jogadorVencedorWo = jogadorVencedor;
-	}
 
 	public RodadaJogosBarragemMestreDetalhe getMestreDetalhe() {
 		return mestreDetalhe;
@@ -112,5 +108,22 @@ public class GerirJogoBarragemBean extends BaseBean {
 		} catch (BusinessException e) {
 			messages.addErrorMessage(e.getClientId(), e.getMessageKey());
 		}
+	}
+
+	public List<SelectItem> getListaJogadoresSelecionados() {
+		List<SelectItem> items = new ArrayList<SelectItem>();
+		JogadorEvento jogadorEvento = null;
+		if (mestreDetalhe.getDetalheEmFoco() == null) {
+			return items;
+		}
+		for (Iterator<JogadorEvento> it = mestreDetalhe.getDetalheEmFoco().getJogadoresEventos().iterator(); it
+				.hasNext();) {
+			jogadorEvento = it.next();
+			if (jogadorEvento.getJogador() != null) {
+				SelectItem selectItem = new SelectItem(jogadorEvento.getJogador(), jogadorEvento.getJogador().getNome());
+				items.add(selectItem);
+			}
+		}
+		return items;
 	}
 }

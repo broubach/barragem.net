@@ -388,7 +388,7 @@ td.actions {
 }
 
 /********************* DADOS BARRAGEM *********************/
-.dados-barragem dd a, .dados-barragem dd a:hover {
+.dados-barragem dd a:hover {
 	text-decoration: underline;
 }
 .dados-barragem {
@@ -413,7 +413,7 @@ td.actions {
 	width:400px;
 }
 .add-jogo .dados-popup {
-	width:350px;
+	width:380px;
 	padding-right: 10px;
 }
 .add-jogo .dados-popup label {
@@ -476,8 +476,9 @@ fieldset#ranking, fieldset#jogos {
 	float: left;
 	width: 440px;
 }
-.detalhes-jogo {
-	padding-left:30px;
+fieldset#detalhes-jogo {
+	padding-right:10px;
+	min-height:90px;
 }
 .maincontent a {
     text-decoration:none;
@@ -582,7 +583,7 @@ fieldset#ranking, fieldset#jogos {
     clear:left;
 }
 .vencedorWo { 
-	display:none;
+    display:none; 
 	float:right;
 }
 

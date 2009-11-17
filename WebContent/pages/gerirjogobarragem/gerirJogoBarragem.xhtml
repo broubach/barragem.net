@@ -28,7 +28,7 @@
 				<a4j:commandLink actionListener="#{gerirJogoBarragemBean.editaProximoJogo}" value="#{msg.label_proximo}" rendered="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.id != null}" reRender="add-jogo" oncomplete="aplicarMascaras();"/>
 			</div>
 			<div class="dados-popup">
-				<fieldset>
+				<fieldset id="detalhes-jogo">
 					<legend>#{msg.label_detalhes_jogo}</legend>
 					<div class="input text">
 						<label for="add-jogo:data" class="#{messageBean.errorMessages['data'] != null ? 'error' : '' }" >#{msg.label_data}*</label>
@@ -40,19 +40,15 @@
 						<label>#{msg.label_tipo}</label>
 						<span>#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.tipo}</span>
 					</div>
-					<div class="input">
-						<label for="add-jogo:wo">#{msg.label_wo}</label>
-						<span>
-							<h:selectBooleanCheckbox id="wo" value="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.placar.wo}" class="wo" onchange="$('div.vencedorWo').slideToggle('fast');">
-								<a4j:support event="onchange" reRender="gridPlacar"/>
-							</h:selectBooleanCheckbox>
-						</span>
-						<div class="vencedorWo">
-							<label for="add-jogo:vencedor" class="blank">#{msg.label_selecione_o_vencedor}*:</label>
-							<h:selectOneMenu id="vencedor" value="#{gerirJogoBarragemBean.jogadorVencedorWo}" converter="JogadorConverter">
-								<f:selectItems value="#{lookupBean.listaJogadores}" />
+					<div class="input text">
+						<div class="vencedorWo" style="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.placar.wo == true ? 'display:block' : '' }">
+							<label for="add-jogo:vencedor" class="blank" style="#{messageBean.errorMessages['wo'] != null ? 'color: #FF0000' : ''}">#{msg.label_selecione_o_vencedor}*:</label>
+							<h:selectOneMenu id="vencedorWo" value="#{gerirJogoBarragemBean.mestreDetalhe.jogadorVencedorWo}" converter="JogadorConverter">
+								<f:selectItems value="#{gerirJogoBarragemBean.listaJogadoresSelecionados}" />
 							</h:selectOneMenu>
 						</div>
+						<label for="add-jogo:wo">#{msg.label_wo}</label>
+						<h:selectBooleanCheckbox id="wo" value="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.placar.wo}" class="wo" onclick="$('#labelVencedorParcialWo1').slideToggle('fast');$('#labelVencedorParcial1').slideToggle('fast');$('div.vencedorWo').slideToggle('fast');$('#add-jogo\\:vencedorParcial1,#add-jogo\\:vencedorParcial2,#add-jogo\\:vencedorParcial3,#add-jogo\\:perdedorParcial1,#add-jogo\\:perdedorParcial2,#add-jogo\\:perdedorParcial3').attr('disabled', $('#add-jogo\\:wo').is(':checked'));"/>
 					</div>
 				</fieldset>
 				<fieldset>
@@ -60,16 +56,19 @@
 					<h:panelGrid id="gridPlacar" columns="4" columnClasses=",columnGrid,columnGrid,">
 						<label for="add-jogo:jogadorVencedor" class="#{messageBean.errorMessages['jogador'] != null ? 'error' : '' }">#{msg.label_jogadores}*</label>
 						<h:selectOneMenu id="jogadorVencedor" value="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.jogadoresEventos[0].jogador}" converter="JogadorConverter" disabled="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.id != null}">
+							<a4j:support event="onchange" reRender="vencedorWo"/>
 							<f:selectItem itemLabel="" />
 							<f:selectItems value="#{lookupBean.listaJogadores}" />
 						</h:selectOneMenu>
 						<img src="#{request.contextPath}/img/versus.png"/>
 						<h:selectOneMenu value="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.jogadoresEventos[1].jogador}" converter="JogadorConverter" disabled="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.id != null}">
+							<a4j:support event="onchange" reRender="vencedorWo"/>
 							<f:selectItem itemLabel="" />
 							<f:selectItems value="#{lookupBean.listaJogadores}" />
 						</h:selectOneMenu>
 	
-						<label for="add-jogo:vencedorParcial1" class="#{messageBean.errorMessages['primeiro_set'] != null ? 'error' : '' }">#{msg.label_primeiro_set}*</label>
+						<label id="labelVencedorParcialWo1" for="add-jogo:vencedorParcial1" style="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.placar.wo ? '' : 'display:none'}" class="#{messageBean.errorMessages['primeiro_set'] != null ? 'error' : '' }">#{msg.label_primeiro_set}</label>
+						<label id="labelVencedorParcial1" for="add-jogo:vencedorParcial1" style="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.placar.wo ? 'display:none' : ''}" class="#{messageBean.errorMessages['primeiro_set'] != null ? 'error' : '' }">#{msg.label_primeiro_set}*</label>
 						<h:inputText value="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.placar.parciais[0].parcialVencedor}" size="2" styleClass="parcial" disabled="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.placar.wo}" id="vencedorParcial1" onkeyup="if (event.keyCode != 16 &amp;&amp; event.charCode != 16 &amp;&amp; event.keyCode != 9 &amp;&amp; event.charCode != 9 &amp;&amp; $('#add-jogo\\:vencedorParcial1').val().replace('_','').length > 0) $('#add-jogo\\:perdedorParcial1').focus();"/>
 						#{msg.label_branco}
 						<h:inputText value="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.placar.parciais[0].parcialPerdedor}" size="2" styleClass="parcial" disabled="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.placar.wo}" id="perdedorParcial1" onkeyup="if (event.keyCode != 16 &amp;&amp; event.charCode != 16 &amp;&amp; event.keyCode != 9 &amp;&amp; event.charCode != 9 &amp;&amp; $('#add-jogo\\:perdedorParcial1').val().replace('_','').length) $('#add-jogo\\:vencedorParcial2').focus();"/>
