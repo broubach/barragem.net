@@ -23,9 +23,9 @@
     	    		</c:if>
 		        </div>
 	        </c:if>
-			<div style="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.id != null ? 'margin-left:250px;float:none' : 'display:none'}">
-				<a4j:commandLink actionListener="#{gerirJogoBarragemBean.editaJogoAnterior}" value="#{msg.label_anterior}" rendered="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.id != null}" reRender="add-jogo" oncomplete="aplicarMascaras();"/>&#160;
-				<a4j:commandLink actionListener="#{gerirJogoBarragemBean.editaProximoJogo}" value="#{msg.label_proximo}" rendered="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.id != null}" reRender="add-jogo" oncomplete="aplicarMascaras();"/>
+			<div class="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.id != null ? 'anterior_proximo' : 'hidden'}">
+				<a4j:commandLink actionListener="#{gerirJogoBarragemBean.editaJogoAnterior}" styleClass="anterior" value="#{msg.label_anterior}" rendered="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.id != null}" reRender="add-jogo" oncomplete="aplicarMascaras();"/>&#160;
+				<a4j:commandLink actionListener="#{gerirJogoBarragemBean.editaProximoJogo}" styleClass="proximo" value="#{msg.label_proximo}" rendered="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.id != null}" reRender="add-jogo" oncomplete="aplicarMascaras();"/>
 			</div>
 			<div class="dados-popup">
 				<fieldset id="detalhes-jogo">

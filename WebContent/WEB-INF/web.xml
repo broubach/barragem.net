@@ -72,4 +72,22 @@
 		<url-pattern>/pages/*</url-pattern>
 	</filter-mapping>
 
+	<!-- Captcha config  -->
+    <servlet>
+        <servlet-name>BarragemCaptchaServlet</servlet-name>
+        <servlet-class>net.barragem.util.BarragemCaptchaServlet</servlet-class>
+        <init-param>
+            <param-name>width</param-name>
+            <param-value>250</param-value>
+        </init-param>
+        <init-param>
+            <param-name>height</param-name>
+            <param-value>60</param-value>
+        </init-param>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>BarragemCaptchaServlet</servlet-name>
+        <url-pattern>/captcha-barragem</url-pattern>
+    </servlet-mapping>
 </web-app>

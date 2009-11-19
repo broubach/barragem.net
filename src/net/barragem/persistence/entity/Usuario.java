@@ -1,5 +1,6 @@
 package net.barragem.persistence.entity;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -10,16 +11,23 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@NamedQuery(name = "loginQuery", query = "from Usuario usuario where usuario.login = :login and usuario.senha = :senha")
+@NamedQuery(name = "loginQuery", query = "from Usuario usuario where usuario.email = :email and usuario.senha = :senha")
 @Table(name = "usuario")
 public class Usuario extends BaseEntity {
 
 	private String nome;
-	private String login;
+	private String sobrenome;
+	private String email;
 	private String senha;
+	private SexoEnum sexo;
+	private Date aniversario;
+	private Date dataUltimoAcesso;
 
 	@OneToOne(mappedBy = "usuarioCorrespondente")
 	private Jogador jogador;
+
+	@OneToOne(mappedBy = "usuario")
+	private DetalhePerfil detalhePerfil;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioDono")
 	private List<Jogador> jogadores;
@@ -35,12 +43,20 @@ public class Usuario extends BaseEntity {
 		this.nome = nome;
 	}
 
-	public String getLogin() {
-		return login;
+	public String getSobrenome() {
+		return sobrenome;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
+	public void setSobrenome(String sobrenome) {
+		this.sobrenome = sobrenome;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String login) {
+		this.email = login;
 	}
 
 	public String getSenha() {
@@ -73,5 +89,37 @@ public class Usuario extends BaseEntity {
 
 	public void setBarragens(List<Barragem> barragens) {
 		this.barragens = barragens;
+	}
+
+	public Date getAniversario() {
+		return aniversario;
+	}
+
+	public void setAniversario(Date aniversario) {
+		this.aniversario = aniversario;
+	}
+
+	public DetalhePerfil getDetalhePerfil() {
+		return detalhePerfil;
+	}
+
+	public void setDetalhePerfil(DetalhePerfil detalhePerfil) {
+		this.detalhePerfil = detalhePerfil;
+	}
+
+	public SexoEnum getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(SexoEnum sexo) {
+		this.sexo = sexo;
+	}
+
+	public Date getDataUltimoAcesso() {
+		return dataUltimoAcesso;
+	}
+
+	public void setDataUltimoAcesso(Date dataUltimoAcesso) {
+		this.dataUltimoAcesso = dataUltimoAcesso;
 	}
 }

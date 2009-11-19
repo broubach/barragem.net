@@ -100,7 +100,9 @@ fieldset {
 }
 .sidebar-header a {
 	text-decoration:none;
-	border-bottom: 1px solid navy;
+}
+.sidebar-header a:hover {
+	text-decoration:underline;
 }
 .sidebar-header .logout {
     float:right;
@@ -159,10 +161,10 @@ fieldset {
     display:block;
     border:none;
 }
-#loginForm label {
-	display:none
+#loginForm a:hover {
+	text-decoration:underline;
 }
-#searchForm label {
+#loginForm label {
 	display:none
 }
 #registerForm label {
@@ -179,6 +181,28 @@ fieldset {
 #registerForm .submit {
 	margin-left: 73px;	
 }
+#registerForm .input input[type=text], #registerForm .input input[type=password] {
+    width:180px;
+}
+#registerForm .input .select-dia {
+	width:20px;
+}
+#registerFormSeguranca {
+    margin-top:55px;
+    margin-left:30px;
+}
+#registerFormSeguranca .submit {
+	margin-left: 73px;	
+}
+#registerFormSeguranca input[type=text], #registerFormSeguranca input[type=password] {
+    width:180px;
+}
+#registerFormSeguranca .select-dia {
+	width:20px;
+}
+#searchForm label {
+	display:none
+}
 #searchForm {
     position:absolute;
     right:20px;
@@ -191,15 +215,6 @@ fieldset {
     width:169px;
     height:18px;
 }
-
-#registerForm .input input[type=text], #registerForm .input input[type=password] {
-    width:180px;
-}
-
-#registerForm .input .select-dia {
-	width:20px;
-}
-
 .internas label {
 	float: left;
 	text-align: right;
@@ -497,7 +512,7 @@ fieldset#detalhes-jogo {
     top:60px;
 }
 .ciclos {
-	clear:none;
+	clear:right;
 	float:right;
 	margin-bottom:10px;
 	width:80px;
@@ -513,21 +528,23 @@ fieldset#detalhes-jogo {
 /********************* RODADAS *********************/
 .rodadas li {
    display:inline;
+   line-height:23px;
 }
 .rodadas a {
-    background: transparent url(../img/fundo-link-rodadas.gif) no-repeat 0 50%;
+    background: transparent url(../img/fundo-link-rodadas.gif) no-repeat 0 0;
     display:block;
     float:left;
-    margin-left:4px;
-    padding-left:5px;
-    width:11px;
+    margin-left:2px;
+    margin-bottom:2px;
+    width:23px;
+    text-align:center;
 }
 .rodadas a:hover, .rodadas a.atual {
-	background: transparent url(../img/fundo-link-rodadas-atual.gif) no-repeat 0 50%;
+	background: transparent url(../img/fundo-link-rodadas-atual.gif) no-repeat 0 0;
 }
 
 .rodadas a.fechada {
-	background: transparent url(../img/fundo-link-rodadas-desabilitado.gif) no-repeat 0 50%;
+	background: transparent url(../img/fundo-link-rodadas-desabilitado.gif) no-repeat 0 0;
 }
 .rodadas {
 	clear:none;
@@ -585,6 +602,31 @@ fieldset#detalhes-jogo {
 .vencedorWo { 
     display:none; 
 	float:right;
+}
+.anterior_proximo {
+	margin-left: 250px;
+	float: none;
+	height: 18px;
+}
+.anterior_proximo a {
+    padding-bottom: 3px;
+}
+.anterior_proximo .anterior {
+    background: transparent url(../img/buttons/btn-anterior.gif) no-repeat 0 0;
+    padding-left: 17px;
+}
+.anterior_proximo .proximo {
+    background: transparent url(../img/buttons/btn-proximo.gif) no-repeat 100% 0;
+    padding-right: 17px;
+}
+.anterior_proximo a {
+	text-decoration: none;
+}
+.anterior_proximo a:hover {
+	text-decoration: underline;
+}
+.hidden {
+	display:none;
 }
 
 /********************* DADOS JOGADOR *********************/
@@ -644,6 +686,9 @@ label {
 }
 #registerForm .input select {
     font-size:.8em;
+}
+#registerFormSeguranca h4 {
+	color:#2C6695;
 }
 .sidebar h3 {
 	font-size:.9em;
@@ -809,9 +854,6 @@ input {
     color: #fff;
     font-size: .8em;
 }
-.rodadas li {
-   line-height:18px;
-}
 .add-jogador .submit {
     color:#fff;
     font-weight:bold;
@@ -841,4 +883,8 @@ legend {
 }
 label.error {
 	color: #FF0000;
+}
+.anterior_proximo a {
+	color:#333333;
+	font-size:0.8em;
 }

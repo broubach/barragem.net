@@ -1,24 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf12328693642340" configfile="/Barragem/WebContent/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="pages/gerirbarragem/gerirBarragem.xhtml" x="122" y="178" id="pf12401137250000" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf12401178032963" path="/pages/gerirbarragem/gerirBarragem.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="pages/gerirciclo/gerirCiclo.xhtml" x="372" y="456" id="pf12401178032964" referenceLink="//@navigationRule.3/@navigationCase.0/@toViewId|" outlinks="pf12407746429060 pf12425767039534" inlinks="pf12401178032963 pf12424828817180 pf12425767039534" path="/pages/gerirciclo/gerirCiclo.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="pages/gerirrodada/gerirRodada.xhtml" x="122" y="562" id="pf12407746429061" referenceLink="//@navigationRule.3/@navigationCase.1/@toViewId|" outlinks="pf12424828817180 pf12425698417653" inlinks="pf12407746429060 pf12425698417653" path="/pages/gerirrodada/gerirRodada.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="946" id="pf12425693088280" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf12425693088281" path="*"/>
-  <nodes xsi:type="pageflow:PFPage" name="login.xhtml" x="338" y="946" id="pf12425693088282" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf12425693088281" path="/login.xhtml"/>
-  <links id="pf12401178032963" target="pf12401178032964" source="pf12401137250000" outcome="editarCiclo"/>
-  <links id="pf12407746429060" target="pf12407746429061" source="pf12401178032964" outcome="editarRodada"/>
-  <links id="pf12424828817180" target="pf12401178032964" source="pf12407746429061" outcome="editarCiclo">
-    <bendPoints d1Width="95" d1Height="-81" d2Width="96" d2Height="89"/>
-  </links>
-  <links id="pf12425693088281" target="pf12425693088282" source="pf12425693088280" outcome="login"/>
-  <links id="pf12425698417653" target="pf12407746429061" source="pf12407746429061" outcome="editarRodada">
+  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="178" id="pf12585715512182" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf12585715512183" path="*"/>
+  <nodes xsi:type="pageflow:PFPage" name="login.xhtml" x="338" y="178" id="pf12585715512344" referenceLink="//@navigationRule.4/@fromViewId|" outlinks="pf12585715512345" inlinks="pf12585715512183" path="/login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/gerirbarragem/gerirBarragem.xhtml" x="122" y="562" id="pf12585715512346" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf12585715512347" path="/pages/gerirbarragem/gerirBarragem.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/gerirciclo/gerirCiclo.xhtml" x="338" y="946" id="pf12585715512348" referenceLink="//@navigationRule.3/@navigationCase.0/@toViewId|" outlinks="pf12585715512349 pf125857155123410" inlinks="pf12585715512347 pf125857155123410 pf125857155123411" path="/pages/gerirciclo/gerirCiclo.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/gerirrodada/gerirRodada.xhtml" x="122" y="946" id="pf125857155123412" referenceLink="//@navigationRule.3/@navigationCase.1/@toViewId|" outlinks="pf125857155123411 pf125857155123413" inlinks="pf12585715512349 pf125857155123413" path="/pages/gerirrodada/gerirRodada.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="novousuario/passo-1-seguranca.xhtml" x="554" y="178" id="pf125857155123414" referenceLink="//@navigationRule.5/@fromViewId|" outlinks="pf12586425865780" inlinks="pf12585715512345" path="/novousuario/passo-1-seguranca.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="novousuario/passo-2-perfil.xhtml" x="770" y="178" id="pf12586425865781" referenceLink="//@navigationRule.6/@fromViewId|" outlinks="pf12586539178125" inlinks="pf12586425865780" path="/novousuario/passo-2-perfil.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="novousuario/passo-2-perfil.xhtml" x="122" y="1330" id="pf12586464531252" referenceLink="//@navigationRule.6/@fromViewId|" path="/novousuario/passo-2-perfil.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="novousuario/passo-3-foto.xhtml" x="986" y="178" id="pf12586464531254" referenceLink="//@navigationRule.7/@fromViewId|" outlinks="pf12586539178126" inlinks="pf12586539178125" path="/novousuario/passo-3-foto.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/index.xhtml" x="1202" y="178" id="pf12586539178127" referenceLink="//@navigationRule.7/@navigationCase.0/@toViewId|" inlinks="pf12586539178126" path="/pages/index.xhtml"/>
+  <links id="pf12585715512183" target="pf12585715512344" source="pf12585715512182" outcome="login"/>
+  <links id="pf12585715512347" target="pf12585715512348" source="pf12585715512346" outcome="editarCiclo"/>
+  <links id="pf12585715512349" target="pf125857155123412" source="pf12585715512348" outcome="editarRodada"/>
+  <links id="pf125857155123411" target="pf12585715512348" source="pf125857155123412" outcome="editarCiclo"/>
+  <links id="pf12585715512345" target="pf125857155123414" source="pf12585715512344" outcome="passo1"/>
+  <links id="pf12586425865780" target="pf12586425865781" source="pf125857155123414" outcome="passo2"/>
+  <links id="pf12586539178125" target="pf12586464531254" source="pf12586425865781" outcome="passo3"/>
+  <links id="pf12586539178126" target="pf12586539178127" source="pf12586464531254" outcome="fim"/>
+  <links id="pf125857155123410" target="pf12585715512348" source="pf12585715512348" outcome="editarCiclo">
     <bendPoints d1Height="-36" d2Height="-36"/>
     <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
     <bendPoints d1Width="-64" d2Width="-64"/>
   </links>
-  <links id="pf12425767039534" target="pf12401178032964" source="pf12401178032964" outcome="editarCiclo">
+  <links id="pf125857155123413" target="pf125857155123412" source="pf125857155123412" outcome="editarRodada">
     <bendPoints d1Height="-36" d2Height="-36"/>
-    <bendPoints d1Width="106" d1Height="-37" d2Width="106" d2Height="-37"/>
-    <bendPoints d1Width="107" d1Height="1" d2Width="107" d2Height="1"/>
+    <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
+    <bendPoints d1Width="-64" d2Width="-64"/>
   </links>
 </pageflow:Pageflow>

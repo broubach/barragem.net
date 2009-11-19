@@ -14,9 +14,9 @@
 	     <h:commandLink action="login" actionListener="#{loginBean.sair}" title="Sair" styleClass="logout">
 	         <img src="#{request.contextPath}/img/buttons/btn_sair.gif" alt="#{msg.label_sair}" />
 	     </h:commandLink>
-	     <p>Ola <strong>Gustavo</strong> <a href="/barragem/usuarios/perfil">#{msg.label_editar_perfil}</a>
+	     <p>#{msg.label_ola} #{sessionScope['usuario'].nome}! <strong><a href="/barragem/usuarios/perfil">#{msg.label_editar_perfil}</a></strong>
 	     </p>
-	     <p>Seu ultimo login foi em 04 de Setembro de 2009.</p>
+	     <p>#{msg.label_seu_ultimo_acesso_foi_em}&#160;<h:outputText value="#{sessionScope['usuario'].dataUltimoAcesso}"><f:convertDateTime type="date" dateStyle="long"/></h:outputText></p>
 	 </h:form>
 	</div>
 	<div class="language">

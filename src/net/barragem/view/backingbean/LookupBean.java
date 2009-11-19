@@ -9,6 +9,7 @@ import javax.faces.model.SelectItem;
 
 import net.barragem.persistence.entity.Jogador;
 import net.barragem.persistence.entity.ModalidadeDeSetsEnum;
+import net.barragem.persistence.entity.SexoEnum;
 import net.barragem.util.MessageBundleUtils;
 import net.barragem.util.PersistenceHelper;
 
@@ -44,6 +45,13 @@ public class LookupBean extends BaseBean {
 				.getInstance().get("label_melhor_de_tres_sets_com_super_tiebreak_no_ultimo_set")));
 		items.add(new SelectItem(ModalidadeDeSetsEnum.SetProfissionalUnico, MessageBundleUtils.getInstance().get(
 				"label_set_profissional_unico")));
+		return items;
+	}
+
+	public List<SelectItem> getSexos() {
+		List<SelectItem> items = new ArrayList<SelectItem>();
+		items.add(new SelectItem(SexoEnum.Masculino, MessageBundleUtils.getInstance().get("label_masculino")));
+		items.add(new SelectItem(SexoEnum.Feminino, MessageBundleUtils.getInstance().get("label_feminino")));
 		return items;
 	}
 

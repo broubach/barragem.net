@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+<ui:composition template="../layout/layoutPosNovoUsuario.xhtml">
+	<ui:define name="conteudo">
+		<div class="maincontent">
+			<h:form>
+				#{msg.label_em_qual_clube_voce_joga_com_mais_frequencia}
+				<h:inputText />
+				
+				#{msg.label_em_que_cidade_esta_situada_a_academia}
+				<h:inputText />
+				
+				#{msg.label_qual_nome_do_tecnico}
+				<h:inputText />
+				
+				#{msg.label_quando_comecou_a_jogar_tenis}
+				<h:inputText />
+				
+				#{msg.label_em_qual_lado_voce_executa_o_forehand}
+				<h:inputText />
+				
+				#{msg.label_seu_backhand_e_de_quantas_maos}
+				<h:inputText />
+				
+				#{msg.label_faca_um_resumo_sobre_voce_ou_seu_jogo_para_aparecer_em_seu_perfil_publico}
+				<h:inputText />
+				
+				<h:commandButton action="passo3" value="#{msg.label_pular_esse_passo}"/>
+				
+				<h:commandButton action="passo3" value="#{msg.label_salvar_e_continuar}"/>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>
+
+</html>

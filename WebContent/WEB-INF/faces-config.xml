@@ -55,6 +55,16 @@
 		<managed-bean-class>net.barragem.view.backingbean.MessageBean</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>registrarNovoUsuarioBean</managed-bean-name>
+		<managed-bean-class>net.barragem.view.backingbean.RegistrarNovoUsuarioBean</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>detalharPerfilBean</managed-bean-name>
+		<managed-bean-class>net.barragem.view.backingbean.DetalharPerfilBean</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
@@ -92,6 +102,42 @@
 		<navigation-case>
 			<from-outcome>editarRodada</from-outcome>
 			<to-view-id>/pages/gerirrodada/gerirRodada.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>login.xhtml</display-name>
+		<from-view-id>/login.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>passo1</from-outcome>
+			<to-view-id>/novousuario/passo-1-seguranca.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>esqueciMinhaSenha</from-outcome>
+			<to-view-id>/novousuario/esqueciMinhaSenha.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>novousuario/passo-1-seguranca.xhtml</display-name>
+		<from-view-id>/novousuario/passo-1-seguranca.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>passo2</from-outcome>
+			<to-view-id>/novousuario/passo-2-perfil.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>novousuario/passo-2-perfil.xhtml</display-name>
+		<from-view-id>/novousuario/passo-2-perfil.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>passo3</from-outcome>
+			<to-view-id>/novousuario/passo-3-foto.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>novousuario/passo-3-foto.xhtml</display-name>
+		<from-view-id>/novousuario/passo-3-foto.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>fim</from-outcome>
+			<to-view-id>/pages/index.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<lifecycle>

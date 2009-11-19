@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core">
+
+<f:loadBundle basename="message-bundle" var="msg" />
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>#{msg.label_titulo}</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+		<link href="/favicon.ico" type="image/x-icon" rel="icon" />
+		<link href="/favicon.ico" type="image/x-icon" rel="shortcut icon" />
+		<link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/barragem.css"/>
+		<link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/grid.css"/>
+		<script type="text/javascript" src="#{request.contextPath}/js/jquery-1.3.2.min.js"></script>
+		<script type="text/javascript" src="#{request.contextPath}/js/barragem.js"></script>
+        <script type="text/javascript">
+        //<![CDATA[
+        
+                $(function(){
+                    $('#loginForm input, #searchForm input').each(function() {
+	                    if($(this).val() === '') {
+	                        $(this).val($(this).attr('title'));	
+	                    }
+	                    $(this).focus(function() {
+	                        if($(this).val() == $(this).attr('title')) {
+	                            $(this).val('').addClass('focused');	
+	                        }
+	                    });
+	                    $(this).blur(function() {
+	                        if($(this).val() === '') {
+	                            $(this).val($(this).attr('title')).removeClass('focused');	
+	                        }
+	                    });
+	                });
+                    $('#registerForm\\:nome').focus();
+                });
+            
+        //]]>
+        </script>
+		<!--[if lte IE 7]>
+			<script type="text/javascript" src="#{request.contextPath}/js/jquery.corner.js"></script>
+			<script type="text/javascript" src="#{request.contextPath}/js/ie-fix.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div id="page" class="container_16">
+			<div id="header">
+				<h1>
+					<a href="#{request.contextPath}/" class="brand">#{msg.label_brand}</a>
+				</h1>
+				<div class="sidebar-header rounded">
+					<h:form id="loginForm">
+						<h:inputText id="login" value="#{loginBean.login}" title="#{msg.label_usuario}" styleClass="input" />
+						<h:inputSecret id="passwd" value="#{loginBean.senha}" title="#{msg.label_senha}" styleClass="input" />
+						<h:commandButton actionListener="#{loginBean.login}" value="#{msg.label_login}" styleClass="login"/>
+						<h:commandLink action="esqueciMinhaSenha" title="#{msg.label_esqueci_minha_senha}">#{msg.label_esqueci_minha_senha}</h:commandLink>
+					</h:form>
+				</div>
+				<div class="language">
+					<ul>
+						<li class="active">
+							<a href="#" title="PortuguÃªs">
+								<img src="#{request.contextPath}/img/flags/br.png" border="0" title="Escolha seu idioma" alt="" /> #{msg.label_escolha_seu_idioma}</a>
+						</li>
+						<li>
+							<a href="#" title="EspaÃ±ol">
+								<img src="#{request.contextPath}/img/flags/es.png" border="0" title="Escolha seu idioma" alt="" /> #{msg.label_escolha_seu_idioma}</a>
+						</li>
+						<li>
+							<a href="#" title="English">
+								<img src="#{request.contextPath}/img/flags/gb.png" border="0" title="Escolha seu idioma" alt="" /> #{msg.label_escolha_seu_idioma}</a>
+						</li>
+					</ul>
+				</div>
+				<form action="#" id="searchForm">
+					<label for="search">#{msg.label_pesquisar}</label>
+					<input type="text" title="#{msg.label_pesquisar}"/>
+				</form>
+			</div>
+			<div id="content">
+				<div class="grid_1 prefix_5">
+					<h2 class="slogan">#{msg.label_slogan}</h2>
+				</div>
+				<div class="registrese prefix_9 grid_6">
+					<h3>#{msg.label_inscrevase_gratuitamente}</h3>
+	               	<ui:insert name="caixaDireita">
+	               		<ui:include src="loginCaixaDireita.xhtml" />
+	               	</ui:insert>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div id="footer">
+				<ul>
+					<li>
+						<a href="/sobre">#{msg.label_sobre_barragemnet}</a> |</li>
+					<li>
+						<a href="/ajuda">#{msg.label_ajuda}</a> |</li>
+					<li>
+						<a href="/contato">#{msg.label_contato}</a>
+					</li>
+				</ul>
+				<a href="http://www.2km.com.br/" class="externo">
+					<img src="#{request.contextPath}/img/logo-2km.gif" alt="2km interativa!" border="0" />
+				</a>
+			</div>
+		</div>
+	</body>
+</html>

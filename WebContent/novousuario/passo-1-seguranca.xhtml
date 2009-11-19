@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+<ui:composition template="../layout/layoutLogin.xhtml">
+	<ui:define name="caixaDireita">
+		<h:form id="registerFormSeguranca">
+			<h4>#{msg.label_controle_seguranca}</h4>
+			<div class="input">
+				<div style="background-color: white; width: 250px;">
+					<img src="#{request.contextPath}/captcha-barragem"/>
+				</div>
+			</div>
+			<label for="registerForm:nome">#{msg.label_digite_a_frase_captcha}:</label>
+			<div class="input">
+				<h:inputText value="#{registrarNovoUsuarioBean.captchaAnswer}"/>
+			</div>
+			<div class="submit">
+				<h:commandButton value="#{msg.label_cadastrar}" actionListener="#{registrarNovoUsuarioBean.registraNovoUsuario}" action="passo2"/>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
+
+</html>

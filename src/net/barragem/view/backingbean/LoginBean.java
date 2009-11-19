@@ -1,7 +1,6 @@
 package net.barragem.view.backingbean;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.event.ActionEvent;
@@ -34,29 +33,13 @@ public class LoginBean extends BaseBean {
 		if (usuarios.isEmpty()) {
 			messages.addErrorMessage(null, "label_login_senha_invalidos");
 		} else {
+			// atualiza hora do ultimo acesso
+			usuarios.get(0).setDataUltimoAcesso(new Date());
+			PersistenceHelper.persiste(usuarios.get(0));
 			// coloca usuario na sessao
 			setUsuarioLogado(usuarios.get(0));
 			// encaminha para pagina inicial da comunidade
 			sendRedirect("/pages/index.xhtml");
-		}
-	}
-
-	private String encriptMd5(String senha) {
-		byte[] defaultBytes = senha.getBytes();
-		MessageDigest algorithm;
-		try {
-			algorithm = MessageDigest.getInstance("MD5");
-			algorithm.reset();
-			algorithm.update(defaultBytes);
-			byte messageDigest[] = algorithm.digest();
-
-			StringBuffer hexString = new StringBuffer();
-			for (int i = 0; i < messageDigest.length; i++) {
-				hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
-			}
-			return hexString.toString();
-		} catch (NoSuchAlgorithmException e) {
-			throw new RuntimeException(e);
 		}
 	}
 

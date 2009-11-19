@@ -43,5 +43,6 @@
 		<mapping class="net.barragem.persistence.entity.Rodada" />
 		<mapping class="net.barragem.persistence.entity.Parcial" />
 		<mapping class="net.barragem.persistence.entity.Usuario" />
+		<mapping class="net.barragem.persistence.entity.DetalhePerfil" />
 	</session-factory>
 </hibernate-configuration>

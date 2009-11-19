@@ -2,6 +2,8 @@ package net.barragem.view.backingbean;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -203,5 +205,24 @@ public class BaseBean {
 		}
 
 		return messages.getErrorMessages().isEmpty();
+	}
+
+	protected String encriptMd5(String senha) {
+		byte[] defaultBytes = senha.getBytes();
+		MessageDigest algorithm;
+		try {
+			algorithm = MessageDigest.getInstance("MD5");
+			algorithm.reset();
+			algorithm.update(defaultBytes);
+			byte messageDigest[] = algorithm.digest();
+	
+			StringBuffer hexString = new StringBuffer();
+			for (int i = 0; i < messageDigest.length; i++) {
+				hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
+			}
+			return hexString.toString();
+		} catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException(e);
+		}
 	}
 }
