@@ -188,17 +188,29 @@ fieldset {
 	width:20px;
 }
 #registerFormSeguranca {
-    margin-top:55px;
+    margin-top:45px;
     margin-left:30px;
+}
+#registerFormSeguranca .label {
+	width: 68px;
+	float: left;
+	text-align: right;
+	margin-right: 5px;
+	display: block
 }
 #registerFormSeguranca .submit {
 	margin-left: 73px;	
 }
-#registerFormSeguranca input[type=text], #registerFormSeguranca input[type=password] {
-    width:180px;
+#registerFormSeguranca input[type=text] {
+    width:100px;
 }
 #registerFormSeguranca .select-dia {
 	width:20px;
+}
+#registerFormSeguranca .captcha {
+	background-color: #FFF; 
+	width: 250px; 
+	height: 60px;
 }
 #searchForm label {
 	display:none
@@ -677,7 +689,7 @@ body {
 label {
 	color: #2c6695;
 }
-#registerForm label {
+#registerForm label, #registerFormSeguranca .label {
 	font-size: .7em;
 	font-weight:bold;
 }

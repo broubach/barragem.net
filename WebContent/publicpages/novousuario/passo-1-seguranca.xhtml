@@ -7,21 +7,25 @@
 	xmlns:c="http://java.sun.com/jstl/core"
 	xmlns:a4j="http://richfaces.org/a4j">
 
-<ui:composition template="../layout/layoutLogin.xhtml">
+<ui:composition template="../../layout/layoutLogin.xhtml">
 	<ui:define name="caixaDireita">
 		<h:form id="registerFormSeguranca">
 			<h4>#{msg.label_controle_seguranca}</h4>
 			<div class="input">
-				<div style="background-color: white; width: 250px;">
+				<label>#{msg.label_insira_palavra_mostrada_aqui_em_baixo}</label>
+				<label>#{msg.label_nao_consegue_entender_a_palavra}</label>&#160;<h:commandLink>#{msg.label_tente_com_outras_palavras}</h:commandLink>
+			</div>
+			<div class="input">
+				<div class="captcha">
 					<img src="#{request.contextPath}/captcha-barragem"/>
 				</div>
 			</div>
-			<label for="registerForm:nome">#{msg.label_digite_a_frase_captcha}:</label>
 			<div class="input">
-				<h:inputText value="#{registrarNovoUsuarioBean.captchaAnswer}"/>
+				<label for="registerForm:nome" class="label">#{msg.label_insira_aqui}:</label>
+				<h:inputText value="#{registrarNovoUsuarioBean.captchaAnswer}" maxlength="5"/>
 			</div>
 			<div class="submit">
-				<h:commandButton value="#{msg.label_cadastrar}" actionListener="#{registrarNovoUsuarioBean.registraNovoUsuario}" action="passo2"/>
+				<h:commandButton value="#{msg.label_enviar}" actionListener="#{registrarNovoUsuarioBean.registraNovoUsuario}" action="passo2"/>
 			</div>
 		</h:form>
 	</ui:define>
