@@ -1,7 +1,9 @@
 package net.barragem.persistence.entity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -33,6 +35,63 @@ public class JogoBarragem extends Jogo implements Cloneable, Validatable {
 			}
 		}
 		return null;
+	}
+
+	public Jogador obtemVencedor(Jogador jogadorVencedorWo) {
+		if (getPlacar().getWo() && jogadorVencedorWo == null) {
+			return null;
+		} else if (getPlacar().getWo() && jogadorVencedorWo != null) {
+			return jogadorVencedorWo;
+		}
+		Map<Jogador, Integer> totalSetsVencidos = new HashMap<Jogador, Integer>();
+		Jogador teoricoVencedor = getJogadoresEventos().get(0).getJogador();
+		Jogador teoricoPerdedor = getJogadoresEventos().get(1).getJogador();
+		totalSetsVencidos.put(teoricoVencedor, new Integer(0));
+		totalSetsVencidos.put(teoricoPerdedor, new Integer(0));
+		Parcial parcial = null;
+		for (int i = 0; i < getPlacar().getParciais().size(); i++) {
+			parcial = getPlacar().getParciais().get(i);
+			if (parcial.getParcialVencedor() == null || parcial.getParcialPerdedor() == null) {
+				continue;
+			}
+			if (parcial.getParcialVencedor() > parcial.getParcialPerdedor()) {
+				totalSetsVencidos.put(teoricoVencedor, totalSetsVencidos.get(teoricoVencedor) + 1);
+			} else if (parcial.getParcialPerdedor() > parcial.getParcialVencedor()) {
+				totalSetsVencidos.put(teoricoPerdedor, totalSetsVencidos.get(teoricoPerdedor) + 1);
+			}
+		}
+		if (totalSetsVencidos.get(teoricoVencedor) > totalSetsVencidos.get(teoricoPerdedor)) {
+			return teoricoVencedor;
+		}
+		if (totalSetsVencidos.get(teoricoPerdedor) > totalSetsVencidos.get(teoricoVencedor)) {
+			return teoricoPerdedor;
+		}
+
+		return null;
+	}
+
+	public void marcaVencedor(Jogador vencedor) {
+		JogadorJogoBarragem jogadorJogoBarragem = null;
+		for (int i = 0; i < getJogadoresEventos().size(); i++) {
+			jogadorJogoBarragem = (JogadorJogoBarragem) getJogadoresEventos().get(i);
+			if (jogadorJogoBarragem.getJogador() == vencedor) {
+				jogadorJogoBarragem.setVencedor(true);
+			} else {
+				jogadorJogoBarragem.setVencedor(false);
+			}
+		}
+	}
+
+	public void desmarcaVencedor() {
+		JogadorJogoBarragem jogadorJogoBarragem = null;
+		for (int i = 0; i < getJogadoresEventos().size(); i++) {
+			jogadorJogoBarragem = (JogadorJogoBarragem) getJogadoresEventos().get(i);
+			jogadorJogoBarragem.setVencedor(false);
+		}
+	}
+
+	public List<String> validate() {
+		return new ValidatableSampleImpl(this).validate();
 	}
 
 	public Object clone() {
@@ -79,9 +138,4 @@ public class JogoBarragem extends Jogo implements Cloneable, Validatable {
 			return false;
 		return true;
 	}
-
-	public List<String> validate() {
-		return new ValidatableSampleImpl(this).validate();
-	}
-
 }

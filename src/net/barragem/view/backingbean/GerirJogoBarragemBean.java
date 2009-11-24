@@ -16,7 +16,6 @@ import net.barragem.persistence.entity.SimplesDuplasEnum;
 import net.barragem.util.PersistenceHelper;
 import net.barragem.view.backingbean.componentes.MestreDetalheImpl;
 import net.barragem.view.backingbean.componentes.RodadaJogosBarragemMestreDetalhe;
-import net.barragem.view.exception.BusinessException;
 
 import org.ajax4jsf.model.KeepAlive;
 
@@ -70,7 +69,6 @@ public class GerirJogoBarragemBean extends BaseBean {
 	private boolean valida(RodadaJogosBarragemMestreDetalhe mestreDetalhe) {
 		validaCamposObrigatorios(mestreDetalhe.getDetalheEmFoco());
 		validaJogadorJahJogouNaRodada(mestreDetalhe);
-		validaExisteVencedor(mestreDetalhe);
 		if (!messages.getErrorMessages().isEmpty()) {
 			return false;
 		}
@@ -99,14 +97,6 @@ public class GerirJogoBarragemBean extends BaseBean {
 							.getId().equals(mestreDetalhe.getDetalheEmFoco().getId())) {
 				messages.addErrorMessage(null, "error_jogador_ja_jogou_rodada", jogadorEvento.getJogador().getNome());
 			}
-		}
-	}
-
-	private void validaExisteVencedor(RodadaJogosBarragemMestreDetalhe mestreDetalhe) {
-		try {
-			mestreDetalhe.obtemVencedor();
-		} catch (BusinessException e) {
-			messages.addErrorMessage(e.getClientId(), e.getMessageKey());
 		}
 	}
 

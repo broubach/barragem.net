@@ -1,20 +1,17 @@
 package net.barragem.view.backingbean.componentes;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 
 import net.barragem.persistence.entity.Jogador;
 import net.barragem.persistence.entity.JogadorJogo;
-import net.barragem.persistence.entity.JogadorJogoBarragem;
 import net.barragem.persistence.entity.Jogo;
 import net.barragem.persistence.entity.JogoBarragem;
 import net.barragem.persistence.entity.Parcial;
+import net.barragem.persistence.entity.Placar;
 import net.barragem.persistence.entity.Rodada;
 import net.barragem.persistence.entity.SimplesDuplasEnum;
 import net.barragem.util.PersistenceHelper;
-import net.barragem.view.exception.BusinessException;
 
 public class RodadaJogosBarragemMestreDetalhe extends MestreDetalheImpl<Rodada, JogoBarragem> {
 
@@ -45,7 +42,7 @@ public class RodadaJogosBarragemMestreDetalhe extends MestreDetalheImpl<Rodada, 
 		completaSetsSeNecessario();
 	}
 
-	public void ordena() {
+	private void ordena() {
 		for (Jogo jogo : getDetalhes()) {
 			Collections.sort(jogo.getJogadoresEventos(), new JogadorEventoComparatorVencedorPrimeiro());
 		}
@@ -77,74 +74,22 @@ public class RodadaJogosBarragemMestreDetalhe extends MestreDetalheImpl<Rodada, 
 	}
 
 	public void preparaJogoParaAtualizacao() {
-		marcaVencedor();
-		removeSetsIncompletos();
-		inverteParciaisVencedorasEPerdadorasSeNecessario();
+		Jogador vencedor = getDetalheEmFoco().obtemVencedor(getJogadorVencedorWo());
+		if (vencedor != null) {
+			getDetalheEmFoco().marcaVencedor(vencedor);
+			inverteParciaisVencedorasEPerdadorasSeNecessario();
+		} else {
+			getDetalheEmFoco().desmarcaVencedor();
+		}
+		removeSetsIncompletos(getDetalheEmFoco().getPlacar());
 		adicionaDetalheNaLista();
 	}
 
-	private void marcaVencedor() {
-		Jogador vencedor;
-		try {
-			vencedor = obtemVencedor();
-		} catch (BusinessException e) {
-			// excessao nao pode ocorrer, pois verificacao jah ocorreu. Se
-			// ocorrer, que comprometa todo o sistema para avisar que existe
-			// algo de errado
-			throw new RuntimeException(e);
-		}
-		JogadorJogoBarragem jogadorJogoBarragem = null;
-		for (int i = 0; i < getDetalheEmFoco().getJogadoresEventos().size(); i++) {
-			jogadorJogoBarragem = (JogadorJogoBarragem) getDetalheEmFoco().getJogadoresEventos().get(i);
-			if (jogadorJogoBarragem.getJogador() == vencedor) {
-				jogadorJogoBarragem.setVencedor(true);
-			} else {
-				jogadorJogoBarragem.setVencedor(false);
-			}
-		}
-	}
-
-	public Jogador obtemVencedor() throws BusinessException {
-		if (getDetalheEmFoco().getPlacar().getWo() && jogadorVencedorWo == null) {
-			throw new BusinessException("wo", "label_true");
-		} else if (getDetalheEmFoco().getPlacar().getWo() && jogadorVencedorWo != null) {
-			return jogadorVencedorWo;
-		}
-		Map<Jogador, Integer> totalSetsVencidos = new HashMap<Jogador, Integer>();
-		Jogador teoricoVencedor = getDetalheEmFoco().getJogadoresEventos().get(0).getJogador();
-		Jogador teoricoPerdedor = getDetalheEmFoco().getJogadoresEventos().get(1).getJogador();
-		totalSetsVencidos.put(teoricoVencedor, new Integer(0));
-		totalSetsVencidos.put(teoricoPerdedor, new Integer(0));
+	private void removeSetsIncompletos(Placar r) {
 		Parcial parcial = null;
-		for (int i = 0; i < getDetalheEmFoco().getPlacar().getParciais().size(); i++) {
-			parcial = getDetalheEmFoco().getPlacar().getParciais().get(i);
-			if ((parcial.getParcialVencedor() == null || parcial.getParcialPerdedor() == null) && i > 0) {
-				continue;
-			} else if (parcial.getParcialVencedor() == null || parcial.getParcialPerdedor() == null) {
-				throw new BusinessException("primeiro_set", "label_true");
-			}
-			if (parcial.getParcialVencedor() > parcial.getParcialPerdedor()) {
-				totalSetsVencidos.put(teoricoVencedor, totalSetsVencidos.get(teoricoVencedor) + 1);
-			} else if (parcial.getParcialPerdedor() > parcial.getParcialVencedor()) {
-				totalSetsVencidos.put(teoricoPerdedor, totalSetsVencidos.get(teoricoPerdedor) + 1);
-			}
-		}
-		if (totalSetsVencidos.get(teoricoVencedor) > totalSetsVencidos.get(teoricoPerdedor)) {
-			return teoricoVencedor;
-		}
-		if (totalSetsVencidos.get(teoricoPerdedor) > totalSetsVencidos.get(teoricoVencedor)) {
-			return teoricoPerdedor;
-		}
-
-		throw new BusinessException(null, "error_jogo_nao_possui_vencedor");
-	}
-
-	private void removeSetsIncompletos() {
-		Parcial parcial = null;
-		for (Iterator<Parcial> it = getDetalheEmFoco().getPlacar().getParciais().iterator(); it.hasNext();) {
+		for (Iterator<Parcial> it = r.getParciais().iterator(); it.hasNext();) {
 			parcial = it.next();
-			if (parcial.getParcialVencedor() == null || parcial.getParcialPerdedor() == null
-					|| getDetalheEmFoco().getPlacar().getWo()) {
+			if (parcial.getParcialVencedor() == null || parcial.getParcialPerdedor() == null || r.getWo()) {
 				if (parcial.getId() != null) {
 					parcial.setPlacar(null);
 					PersistenceHelper.remove(parcial);
@@ -155,7 +100,7 @@ public class RodadaJogosBarragemMestreDetalhe extends MestreDetalheImpl<Rodada, 
 	}
 
 	private void inverteParciaisVencedorasEPerdadorasSeNecessario() {
-		if (getDetalheEmFoco().getTipo().equals(SimplesDuplasEnum.Simples)) {
+		if (getDetalheEmFoco().getTipo().equals(SimplesDuplasEnum.Simples) && !getDetalheEmFoco().getPlacar().getWo()) {
 			if (((JogadorJogo) getDetalheEmFoco().getJogadoresEventos().get(1)).getVencedor()) {
 				getDetalheEmFoco().inverteParciaisVencedorasEPerdedoras();
 			}
