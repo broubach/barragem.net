@@ -668,6 +668,7 @@ fieldset#detalhes-jogo {
 }
 .menu-contextual li {
 	display:inline;
+	margin-right: 3px;
 }
 .menu-contextual a {
     background:#B1C3FE;

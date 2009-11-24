@@ -35,7 +35,7 @@
 				        <dd><h:commandLink actionListener="#{gerirCicloBean.editaRodada}" action="editarRodada"><f:param name="index" value="#{gerirRodadaBean.rodadaEmFoco.numero-1}"/>#{gerirRodadaBean.rodadaEmFoco.numero}, #{gerirRodadaBean.rodadaEmFoco.fechada ? msg.label_fechada : msg.label_aberta}</h:commandLink></dd>
 				    </dl>
 			    </h:panelGroup>
-			    <div class="menu-contextual">
+				<h:panelGroup id="menu-contextual" styleClass="menu-contextual" layout="block">
 			        <ul>
 			            <li>
 							<h:commandLink actionListener="#{gerirRodadaBean.sorteiaJogos}" value="#{msg.label_sortear_jogos}" disabled="#{gerirRodadaBean.rodadaEmFoco.inoperavel == true}"/>
@@ -47,7 +47,7 @@
 							<h:commandLink actionListener="#{gerirRodadaBean.criaNovaRodada}" value="#{msg.label_criar_rodada}" />
 			            </li>
 			        </ul>
-			    </div>
+				</h:panelGroup>
 			    <fieldset id="jogos">
 			        <legend>#{msg.label_jogos}</legend>
 	
