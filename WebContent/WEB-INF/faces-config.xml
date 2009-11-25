@@ -73,35 +73,35 @@
 		</navigation-case>
 	</navigation-rule>	
 	<navigation-rule>
-		<display-name>pages/gerirbarragem/gerirBarragem.xhtml</display-name>
-		<from-view-id>/pages/gerirbarragem/gerirBarragem.xhtml</from-view-id>
+		<display-name>protectedpages/gerirbarragem/gerirBarragem.xhtml</display-name>
+		<from-view-id>/protectedpages/gerirbarragem/gerirBarragem.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>editarCiclo</from-outcome>
-			<to-view-id>/pages/gerirciclo/gerirCiclo.xhtml</to-view-id>
+			<to-view-id>/protectedpages/gerirciclo/gerirCiclo.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
-		<display-name>pages/gerirciclo/gerirCiclo.xhtml</display-name>
-		<from-view-id>/pages/gerirciclo/gerirCiclo.xhtml</from-view-id>
+		<display-name>protectedpages/gerirciclo/gerirCiclo.xhtml</display-name>
+		<from-view-id>/protectedpages/gerirciclo/gerirCiclo.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>editarRodada</from-outcome>
-			<to-view-id>/pages/gerirrodada/gerirRodada.xhtml</to-view-id>
+			<to-view-id>/protectedpages/gerirrodada/gerirRodada.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>editarCiclo</from-outcome>
-			<to-view-id>/pages/gerirciclo/gerirCiclo.xhtml</to-view-id>
+			<to-view-id>/protectedpages/gerirciclo/gerirCiclo.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
-		<display-name>pages/gerirrodada/gerirRodada.xhtml</display-name>
-		<from-view-id>/pages/gerirrodada/gerirRodada.xhtml</from-view-id>
+		<display-name>protectedpages/gerirrodada/gerirRodada.xhtml</display-name>
+		<from-view-id>/protectedpages/gerirrodada/gerirRodada.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>editarCiclo</from-outcome>
-			<to-view-id>/pages/gerirciclo/gerirCiclo.xhtml</to-view-id>
+			<to-view-id>/protectedpages/gerirciclo/gerirCiclo.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>editarRodada</from-outcome>
-			<to-view-id>/pages/gerirrodada/gerirRodada.xhtml</to-view-id>
+			<to-view-id>/protectedpages/gerirrodada/gerirRodada.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>

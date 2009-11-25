@@ -39,7 +39,7 @@ public class LoginBean extends BaseBean {
 			// coloca usuario na sessao
 			setUsuarioLogado(usuarios.get(0));
 			// encaminha para pagina inicial da comunidade
-			sendRedirect("/pages/index.xhtml");
+			sendRedirect("/protectedpages/index.xhtml");
 		}
 	}
 
