@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core" class="home">
+
+<f:loadBundle basename="message-bundle" var="msg" />
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>#{msg.label_titulo}</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+		<link href="/favicon.ico" type="image/x-icon" rel="icon" />
+		<link href="/favicon.ico" type="image/x-icon" rel="shortcut icon" />
+		<link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/barragem.css"/>
+		<link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/grid.css"/>
+		<script type="text/javascript" src="#{request.contextPath}/js/jquery-1.3.2.min.js"></script>
+		<script type="text/javascript" src="#{request.contextPath}/js/barragem.js"></script>
+        <script type="text/javascript">
+        //<![CDATA[
+        
+                $(function(){
+                    $('#loginForm input, #searchForm input').each(function() {
+	                    if($(this).val() === '') {
+	                        $(this).val($(this).attr('title'));	
+	                    }
+	                    $(this).focus(function() {
+	                        if($(this).val() == $(this).attr('title')) {
+	                            $(this).val('').addClass('focused');	
+	                        }
+	                    });
+	                    $(this).blur(function() {
+	                        if($(this).val() === '') {
+	                            $(this).val($(this).attr('title')).removeClass('focused');	
+	                        }
+	                    });
+	                });
+                    $('#registerForm\\:nome').focus();
+                });
+            
+        //]]>
+        </script>
+		<!--[if lte IE 7]>
+			<script type="text/javascript" src="#{request.contextPath}/js/jquery.corner.js"></script>
+			<script type="text/javascript" src="#{request.contextPath}/js/ie-fix.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div id="page" class="container_16">
+			<div id="header">
+               	<ui:insert name="cabecalhoLogin">
+               		<ui:include src="../componentes/cabecalhoLogin.xhtml" />
+               	</ui:insert>
+			</div>
+			<div id="content">
+				<div class="grid_1 prefix_5">
+					<h2 class="slogan">#{msg.label_slogan}</h2>
+				</div>
+				<div class="registrese prefix_9 grid_6">
+					<h3>#{msg.label_inscrevase_gratuitamente}</h3>
+	               	<ui:insert name="caixaDireita">
+	               		<ui:include src="../componentes/loginCaixaDireita.xhtml" />
+	               	</ui:insert>
+				</div>
+				<div class="clear"></div>
+				<div class="grid_16 destaques-home">
+					<div class="header-bloco grid_4 alpha push_1">
+						<div class="bloco-home">
+							<h2>#{msg.label_caixa1}</h2>
+							<p>#{msg.label_caixa1_conteudo}</p>
+						</div>
+					</div>
+					<div class="header-bloco grid_4 push_2">
+						<div class="bloco-home">
+							<h2>#{msg.label_caixa2}</h2>
+							<p>#{msg.label_caixa2_conteudo}</p>
+						</div>
+					</div>
+					<div class="header-bloco grid_4 omega push_3">
+						<div class="bloco-home">
+							<h2>#{msg.label_caixa3}</h2>
+							<p>#{msg.label_caixa3_conteudo}</p>
+						</div>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div id="footer">
+               	<ui:insert name="rodape">
+               		<ui:include src="../componentes/rodape.xhtml" />
+               	</ui:insert>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+ 	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core" class="#{pageStyle}">
+
+	<f:loadBundle basename="message-bundle" var="msg" />
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>#{msg.label_titulo}</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+        <link href="/favicon.ico" type="image/x-icon" rel="icon" />
+        <link href="/favicon.ico" type="image/x-icon" rel="shortcut icon" />
+        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/grid.css" />
+        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/barragem.css" />
+        <script type="text/javascript" src="#{request.contextPath}/js/jquery-1.3.2.min.js"></script>
+        <script type="text/javascript" src="#{request.contextPath}/js/barragem.js"></script>
+        <script type="text/javascript">
+        //<![CDATA[
+                $(function(){
+                    $('#searchForm input').each(function() {
+	                    if($(this).val() === '') {
+	                        $(this).val($(this).attr('title'));	
+	                    }
+	                    
+	                    $(this).focus(function() {
+	                        if($(this).val() == $(this).attr('title')) {
+	                            $(this).val('').addClass('focused');	
+	                        }
+	                    });
+	                    $(this).blur(function() {
+	                        if($(this).val() === '') {
+	                            $(this).val($(this).attr('title')).removeClass('focused');	
+	                        }
+	                    });
+                	});
+                });
+        //]]>
+        </script>
+        <!--[if lte IE 7]>
+            <script type="text/javascript" src="#{request.contextPath}/js/jquery.corner.js"></script>
+            <script type="text/javascript" src="#{request.contextPath}/js/ie-fix.js"></script>
+        <![endif]-->
+    </head>
+    <body class="internas">
+        <div id="page" class="container_16">
+            <div id="header">
+               	<ui:insert name="cabecalho">
+               		<ui:include src="../componentes/cabecalho.xhtml" />
+               	</ui:insert>
+            </div>
+            <div id="content">
+                <div class="grid_3">
+                	<ui:insert name="menuLateral">
+                		<ui:include src="../componentes/menuLateral.xhtml" />
+                	</ui:insert>
+                </div>
+                <div class="grid_10">
+					<ui:insert name="conteudo">
+						<ui:include src="../componentes/conteudo.xhtml" />
+					</ui:insert>
+                </div>
+                <div class="grid_3">
+					<ui:insert name="ads">
+						<ui:include src="../componentes/ads.xhtml" />
+					</ui:insert>
+                </div>
+                <div class="clear"></div>
+                <div id="footer">
+                	<ui:insert name="rodape">
+                		<ui:include src="../componentes/rodape.xhtml" />
+                	</ui:insert>
+                </div>
+            </div>
+        </div>
+
+		<h:panelGrid columns="1" id="mensagemSucesso">
+			<h:panelGrid columns="1" rendered="#{messageBean.firstInfoMessage != null}">
+				<script>
+					alert('#{messageBean.firstInfoMessage.summary}');
+				</script>
+			</h:panelGrid>
+		</h:panelGrid>
+    </body>
+</html>
