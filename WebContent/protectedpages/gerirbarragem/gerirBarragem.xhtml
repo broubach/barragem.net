@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+<ui:composition template="/publicpages/layout/layoutPrincipal.xhtml">
+	<ui:param name="pageStyle" value="barragens"/>
+
+	<ui:define name="conteudo">
+      <div class="maincontent">
+
+	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/jquery.colorbox.css" />
+	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/jquery.colorbox-barragem.css" />
+			<script type="text/javascript" src="#{request.contextPath}/js/jquery.meio.mask.min_custom.js" charset="utf-8" ></script>
+	        <script type="text/javascript" src="#{request.contextPath}/js/jquery.colorbox-min.js"></script>
+			<script>
+	            $(function(){
+		            $(".popup").colorbox({overlayClose:false, inline:true, href:".add-barragens", scrollbars:false}, function(){$('#add-barragens\\:local').focus();});
+	            });
+	         </script>
+			<script type="text/javascript" src="#{request.contextPath}/js/3_3_0.GAorg.ajax4jsf.javascript.AjaxScript.js"></script>
+
+			<h:form>
+				<h2><h:outputText value="#{msg.label_minhas_barragens}" /></h2>
+				<div class="btn-novo">
+					<a4j:commandLink actionListener="#{gerirBarragemBean.novaBarragem}" reRender="add-barragens" oncomplete="$('.popup').click();">
+						<span>#{msg.label_adicionar_barragem}</span>
+					</a4j:commandLink>
+					<a href="#" title="#{msg.label_barragem}" class="popup" style="visibility:hidden"/>
+				</div>
+				<h:dataTable id="painelBarragens" styleClass="gradient" rowClasses=",alt" columnClasses=",,,actions" value="#{gerirBarragemBean.barragens}" var="item" binding="#{gerirBarragemBean.dataTable}">
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{msg.label_local}" />
+						</f:facet>
+						<h:outputText value="#{item.local}" />
+					</h:column>
+				
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{msg.label_barragem}" />
+						</f:facet>
+						<h:outputText value="#{item.nome}" />
+					</h:column>
+				
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{msg.label_administrador}" />
+						</f:facet>
+						<h:outputText value="#{item.administrador.nome}" />
+					</h:column>
+				
+					<h:column headerClass="actions">
+						<f:facet name="header">
+							<h:outputText value="#{msg.label_acoes}" />
+						</f:facet>
+						<h:commandLink reRender="painelBarragens" onclick="return confirm('#{msg.label_confirma_exclusao}');"
+							actionListener="#{gerirBarragemBean.removeBarragem}">
+							<img src="#{request.contextPath}/img/buttons/btn-deletar.png" alt="#{msg.label_excluir}" title="#{msg.label_excluir}"/>
+						</h:commandLink>
+						<a4j:commandLink actionListener="#{gerirBarragemBean.detalhaBarragem}" reRender="add-barragens" 
+							oncomplete="$('.popup').click()">
+							<img src="#{request.contextPath}/img/buttons/btn-editar.png" alt="#{msg.label_editar}" title="#{msg.label_editar}"/>
+						</a4j:commandLink>
+						<h:commandLink actionListener="#{gerirBarragemBean.editaCiclo}" action="editarCiclo">
+							<img src="#{request.contextPath}/img/buttons/btn-editar-ciclo.png" alt="#{msg.label_editar_ciclos}" title="#{msg.label_editar_ciclos}"/>
+						</h:commandLink>
+					</h:column>
+				</h:dataTable>
+			</h:form>
+            <div class="clear"></div>
+			<div style="display:none">
+				<ui:include src="popupBarragem.xhtml" />
+			</div>
+      </div>
+	</ui:define>
+</ui:composition>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<div class="add-jogador">
+		<h:form id="add-jogador">
+			<fieldset>
+				<legend>#{msg.label_escolha_os_jogadores_que_irao_participar_da_barragem}</legend>
+				<div style="overflow: auto; width: 260px; height: 200px;">
+					<div class="input checkbox">
+						<h:selectBooleanCheckbox id="todos" onclick="$('form#add-jogador INPUT[type=checkbox]').attr('checked', $('#add-jogador\\:todos').is(':checked'));"/>
+						#{msg.label_todos}
+					</div>
+					<c:forEach items="#{gerirCicloBean.jogadoresSelecionaveis}" var="item">
+						<div class="input checkbox">
+							<h:selectBooleanCheckbox value="#{item.selecionado}"/>
+							#{item.jogador.nome}
+						</div>
+					</c:forEach>
+				</div>
+			</fieldset>
+			<div class="salvar">
+				<a4j:commandButton actionListener="#{gerirCicloBean.adicionaJogadores}" styleClass="submit"
+					value="#{msg.label_salvar}" reRender="ranking" oncomplete="$.fn.colorbox.close()"/>
+			</div>
+		</h:form>
+	</div>
+</html>

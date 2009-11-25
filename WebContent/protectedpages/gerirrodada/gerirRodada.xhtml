@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<ui:composition template="/publicpages/layout/layoutPrincipal.xhtml">
+	<ui:param name="pageStyle" value="rodada"/>
+	<ui:define name="conteudo">
+		<div class="maincontent">
+
+	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/jquery.colorbox.css" />
+	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/jquery.colorbox-barragem.css" />
+	        <script type="text/javascript" src="#{request.contextPath}/js/jquery.colorbox-min.js"></script>
+			<script type="text/javascript" src="#{request.contextPath}/js/jquery.maskedinput-1.2.2.min.js"></script>
+			<script>
+	            $(function(){
+		            $(".popup").colorbox({overlayClose:false, inline:true, href:".add-jogo", scrollbars:false}, function(){aplicarMascaras();$('#add-jogo\\:data').focus();});
+	            });
+	         </script>
+			<script type="text/javascript" src="#{request.contextPath}/js/3_3_0.GAorg.ajax4jsf.javascript.AjaxScript.js"></script>
+
+			<h:form>
+				<h2>#{gerirCicloBean.barragemEmFoco.local} <span>#{gerirCicloBean.barragemEmFoco.nome}</span></h2>
+				<h:panelGroup id="dados-barragem" styleClass="dados-barragem" layout="block">
+				    <dl>
+				        <dt>#{msg.label_ciclo}</dt>
+				        <dd><h:commandLink actionListener="#{gerirCicloBean.editaCiclo}" action="editarCiclo">#{gerirCicloBean.cicloEmFoco.nome}</h:commandLink></dd>
+				        <dt>#{msg.label_rodada}</dt>
+				        <dd><h:commandLink actionListener="#{gerirCicloBean.editaRodada}" action="editarRodada"><f:param name="index" value="#{gerirRodadaBean.rodadaEmFoco.numero-1}"/>#{gerirRodadaBean.rodadaEmFoco.numero}, #{gerirRodadaBean.rodadaEmFoco.fechada ? msg.label_fechada : msg.label_aberta}</h:commandLink></dd>
+				    </dl>
+			    </h:panelGroup>
+				<h:panelGroup id="menu-contextual" styleClass="menu-contextual" layout="block">
+			        <ul>
+			            <li>
+							<h:commandLink actionListener="#{gerirRodadaBean.sorteiaJogos}" value="#{msg.label_sortear_jogos}" disabled="#{gerirRodadaBean.rodadaEmFoco.inoperavel == true}"/>
+			            </li>
+			            <li>
+							<h:commandLink actionListener="#{gerirRodadaBean.recalculaRankingEFechaRodada}" value="#{msg.label_fechar_rodada}" disabled="#{gerirRodadaBean.rodadaEmFoco.inoperavel == true or not gerirRodadaBean.rodadaEmFoco.todosOsJogosCompletos or gerirRodadaBean.rodadaAnteriorEmAberto or empty gerirRodadaBean.rodadaEmFoco.jogos}"/>
+			            </li>
+			            <li>
+							<h:commandLink actionListener="#{gerirRodadaBean.criaNovaRodada}" value="#{msg.label_criar_rodada}" />
+			            </li>
+			        </ul>
+				</h:panelGroup>
+			    <fieldset id="jogos">
+			        <legend>#{msg.label_jogos}</legend>
+	
+					<div class="btn-novo">
+						<a4j:commandLink actionListener="#{gerirRodadaBean.adicionaJogo}" reRender="add-jogo" oncomplete="$('.popup').click();" disabled="#{gerirRodadaBean.rodadaEmFoco.inoperavel == true}">
+							<span>#{msg.label_adicionar_jogo}</span>
+						</a4j:commandLink>
+						<a href="#" title="#{msg.label_jogo}" class="popup" style="visibility:hidden"/>
+					</div>
+	
+				    <h:dataTable id="jogos" styleClass="gradient" rowClasses=",alt" columnClasses=",,versus,,,nowrap,nowrap," value="#{gerirRodadaBean.rodadaEmFoco.jogos}" var="item" binding="#{gerirRodadaBean.dataTable}">
+					    <h:column>
+						    <f:facet name="header">
+								#{msg.label_jogador}
+						    </f:facet>
+							#{item.jogadoresEventos[0].jogador.nome}
+					    </h:column>
+					    <h:column>
+						    <f:facet name="header">
+								#{msg.label_pts}
+						    </f:facet>
+							#{item.jogadoresEventos[0].pontuacaoObtida}
+					    </h:column>
+					    <h:column headerClass="versus">
+						    <f:facet name="header">
+								#{msg.label_branco}
+						    </f:facet>
+							#{msg.label_branco}
+					    </h:column>
+					    <h:column>
+						    <f:facet name="header">
+								#{msg.label_jogador}
+						    </f:facet>
+							#{item.jogadoresEventos[1].jogador.nome}
+					    </h:column>
+					    <h:column>
+						    <f:facet name="header">
+								#{msg.label_pts}
+						    </f:facet>
+							#{item.jogadoresEventos[1].pontuacaoObtida}
+					    </h:column>
+					    <h:column>
+						    <f:facet name="header">
+								#{msg.label_placar}
+						    </f:facet>
+							#{item.placar}
+					    </h:column>
+					    <h:column>
+						    <f:facet name="header">
+								#{msg.label_data}
+						    </f:facet>
+							<h:outputText value="#{item.data}" >
+								<f:convertDateTime pattern="dd MMM"/>
+							</h:outputText>
+					    </h:column>
+					    <h:column headerClass="actions">
+						    <f:facet name="header">
+								#{msg.label_acoes}
+						    </f:facet>
+							<h:commandLink reRender="add-jogo" styleClass="deletar" onclick="return confirm('#{msg.label_confirma_exclusao}');"  disabled="#{gerirRodadaBean.rodadaEmFoco.inoperavel == true}"
+								actionListener="#{gerirRodadaBean.removeJogo}">
+								<img src="#{request.contextPath}/img/buttons/btn-deletar.png" alt="#{msg.label_excluir}" title="#{msg.label_excluir}"/>
+							</h:commandLink>
+							<a4j:commandLink actionListener="#{gerirRodadaBean.editaJogo}" disabled="#{gerirRodadaBean.rodadaEmFoco.inoperavel == true}"
+								oncomplete="$('.popup').click();" reRender="add-jogo">
+                                <img src="#{request.contextPath}/img/buttons/btn-editar.png" alt="#{msg.label_editar}" title="#{msg.label_editar}"/>
+							</a4j:commandLink>
+					    </h:column>
+				    </h:dataTable>
+			    </fieldset>
+				<ui:include src="../componentes/rodadas.xhtml" />
+				<ui:include src="../componentes/ciclos.xhtml" />
+			    <div class="clear"></div>
+			    <div class="clear"></div>
+			</h:form>
+            <div class="clear"></div>
+			<div style="display:none">
+				<ui:include src="../gerirjogobarragem/gerirJogoBarragem.xhtml" />
+			</div>
+		</div>
+	</ui:define>
+
+</ui:composition>
+
+</html>
