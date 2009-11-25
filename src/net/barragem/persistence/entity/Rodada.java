@@ -84,7 +84,7 @@ public class Rodada extends BaseEntity {
 			int indexNaLista = getCiclo().getIndexNaLista(jogador);
 			int pontuacaoAtual = getCiclo().getRanking().get(indexNaLista).getPontuacao();
 			int pontuacaoNova = pontuacaoAtual + pontuacaoPorJogador.get(jogador)
-					- getCiclo().getPontuacaoExcedente(jogador);
+					- getCiclo().getPontuacaoExcedente(getNumero(), jogador);
 			getCiclo().getRanking().get(indexNaLista).setPontuacao(pontuacaoNova);
 		}
 	}

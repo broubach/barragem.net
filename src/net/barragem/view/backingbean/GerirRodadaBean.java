@@ -85,6 +85,9 @@ public class GerirRodadaBean extends BaseBean {
 		rodadaEmFoco.getCiclo().getRodadas().remove(rodadaEmFoco);
 		rodadaEmFoco.getCiclo().getRodadas().add(rodadaEmFoco);
 		PersistenceHelper.persiste(rodadaEmFoco.getCiclo());
+
+		GerirCicloBean cicloBean = (GerirCicloBean) getRequestAttribute("gerirCicloBean");
+		cicloBean.editaCiclo(e);
 	}
 
 	public void criaNovaRodada(ActionEvent e) {
@@ -111,5 +114,14 @@ public class GerirRodadaBean extends BaseBean {
 		}
 		Collections.sort(rodadaEmFoco.getJogos(), new JogoBarragemComparator());
 		PersistenceHelper.initialize("parciais", proxys.toArray());
+	}
+
+	public boolean isRodadaAnteriorEmAberto() {
+		if (rodadaEmFoco.getNumero().equals(new Integer(1))) {
+			return false;
+		}
+
+		PersistenceHelper.initialize("rodadas", rodadaEmFoco.getCiclo());
+		return !rodadaEmFoco.getCiclo().getRodadas().get(rodadaEmFoco.getNumero() - 2).getFechada();
 	}
 }

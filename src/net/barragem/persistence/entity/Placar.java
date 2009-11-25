@@ -56,7 +56,8 @@ public class Placar extends BaseEntity implements Cloneable {
 
 	public boolean isVencedorPerdeuAlgumaParcial() {
 		for (Parcial parcial : parciais) {
-			if (parcial.getParcialPerdedor() > parcial.getParcialVencedor()) {
+			if (parcial.getParcialPerdedor() != null && parcial.getParcialVencedor() != null
+					&& (parcial.getParcialPerdedor() > parcial.getParcialVencedor())) {
 				return true;
 			}
 		}

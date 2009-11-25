@@ -176,11 +176,11 @@ public class Ciclo extends BaseEntity {
 		return false;
 	}
 
-	public int getPontuacaoExcedente(Jogador jogador) {
+	public int getPontuacaoExcedente(Integer numero, Jogador jogador) {
 		if (getParametros().getRodadasDeHistoricoMantidasParaCalculoDoRanking() != null
-				&& getRodadas().size() > getParametros().getRodadasDeHistoricoMantidasParaCalculoDoRanking()) {
-			int indiceRodadaExcedente = getRodadas().size()
-					- getParametros().getRodadasDeHistoricoMantidasParaCalculoDoRanking() - 1;
+				&& numero > getParametros().getRodadasDeHistoricoMantidasParaCalculoDoRanking()) {
+			int indiceRodadaExcedente = numero - getParametros().getRodadasDeHistoricoMantidasParaCalculoDoRanking()
+					- 1;
 			return getRodadas().get(indiceRodadaExcedente).getJogadorJogoBarragem(jogador).getPontuacaoObtida();
 		}
 
