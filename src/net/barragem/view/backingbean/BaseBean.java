@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.MessageFormat;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -12,6 +13,10 @@ import javax.faces.application.ViewHandler;
 import javax.faces.component.UIViewRoot;
 import javax.faces.component.html.HtmlDataTable;
 import javax.faces.context.FacesContext;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.Session;
+import javax.jms.TextMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,6 +25,9 @@ import net.barragem.persistence.entity.Usuario;
 import net.barragem.persistence.entity.Validatable;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 public class BaseBean {
 
@@ -224,5 +232,19 @@ public class BaseBean {
 		} catch (NoSuchAlgorithmException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	protected void sendMail(String from, String to, String subject, String body) {
+		final String jmsTextMessage = new MessageFormat("{0}&{1}&{2}&{3}").format(new Object[] { from, to, subject,
+				body });
+	
+		JmsTemplate template = (JmsTemplate) WebApplicationContextUtils.getWebApplicationContext(
+				getServletRequest().getSession().getServletContext()).getBean("jmsTemplate");
+		template.send(new MessageCreator() {
+			public Message createMessage(Session session) throws JMSException {
+				TextMessage message = session.createTextMessage(jmsTextMessage);
+				return message;
+			}
+		});
 	}
 }

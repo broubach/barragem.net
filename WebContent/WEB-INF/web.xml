@@ -90,4 +90,14 @@
         <servlet-name>BarragemCaptchaServlet</servlet-name>
         <url-pattern>/captcha-barragem</url-pattern>
     </servlet-mapping>
+    
+    <!-- Spring config -->
+   	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/sprCtxMail.xml /WEB-INF/sprCtxJmsServer.xml /WEB-INF/sprCtxJmsClient.xml</param-value>
+	</context-param>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
 </web-app>

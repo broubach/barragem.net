@@ -78,6 +78,9 @@ public class RegistrarNovoUsuarioBean extends BaseBean {
 				PersistenceHelper.persiste(usuarioEmFoco);
 				setUsuarioLogado(usuarioEmFoco);
 
+				sendMail("no-reply@barragem.net", usuarioEmFoco.getEmail(), "Bem-vindo ao Barragem.net",
+						"Você se registrou no Barragem.net. O Email registrado é...");
+
 			}
 		} catch (UnsupportedEncodingException e1) {
 			throw new RuntimeException(e1);
