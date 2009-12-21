@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.text.MessageFormat;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -14,18 +13,18 @@ import javax.faces.component.UIViewRoot;
 import javax.faces.component.html.HtmlDataTable;
 import javax.faces.context.FacesContext;
 import javax.jms.JMSException;
+import javax.jms.MapMessage;
 import javax.jms.Message;
 import javax.jms.Session;
-import javax.jms.TextMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import net.barragem.persistence.entity.Usuario;
 import net.barragem.persistence.entity.Validatable;
+import net.barragem.util.BarragemJmsTemplate;
 
 import org.apache.commons.beanutils.BeanUtils;
-import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -223,7 +222,7 @@ public class BaseBean {
 			algorithm.reset();
 			algorithm.update(defaultBytes);
 			byte messageDigest[] = algorithm.digest();
-	
+
 			StringBuffer hexString = new StringBuffer();
 			for (int i = 0; i < messageDigest.length; i++) {
 				hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
@@ -234,17 +233,20 @@ public class BaseBean {
 		}
 	}
 
-	protected void sendMail(String from, String to, String subject, String body) {
-		final String jmsTextMessage = new MessageFormat("{0}&{1}&{2}&{3}").format(new Object[] { from, to, subject,
-				body });
-	
-		JmsTemplate template = (JmsTemplate) WebApplicationContextUtils.getWebApplicationContext(
+	protected void sendMail(final String from, final String to, final String subject, final String body) {
+		BarragemJmsTemplate template = (BarragemJmsTemplate) WebApplicationContextUtils.getWebApplicationContext(
 				getServletRequest().getSession().getServletContext()).getBean("jmsTemplate");
-		template.send(new MessageCreator() {
-			public Message createMessage(Session session) throws JMSException {
-				TextMessage message = session.createTextMessage(jmsTextMessage);
-				return message;
-			}
-		});
+		if (template.getEnabled()) {
+			template.send(new MessageCreator() {
+				public Message createMessage(Session session) throws JMSException {
+					MapMessage message = session.createMapMessage();
+					message.setString("from", from);
+					message.setString("to", to);
+					message.setString("subject", subject);
+					message.setString("body", body);
+					return message;
+				}
+			});
+		}
 	}
 }
