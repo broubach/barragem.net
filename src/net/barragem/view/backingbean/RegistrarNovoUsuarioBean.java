@@ -61,6 +61,63 @@ public class RegistrarNovoUsuarioBean extends BaseBean {
 		this.captchaAnswer = captcha;
 	}
 
+	public String valida() {
+		boolean possuiCampoVazio = false;
+
+		// nome
+		if (usuarioEmFoco.getNome() == null || usuarioEmFoco.getNome().trim().equals("")) {
+			possuiCampoVazio = true;
+		}
+
+		// sobrenome
+		if (usuarioEmFoco.getSobrenome() == null || usuarioEmFoco.getSobrenome().trim().equals("")) {
+			possuiCampoVazio = true;
+		}
+
+		// email
+		if (usuarioEmFoco.getEmail() == null || usuarioEmFoco.getEmail().trim().equals("")) {
+			possuiCampoVazio = true;
+		}
+
+		// senha
+		if (usuarioEmFoco.getSenha() == null || usuarioEmFoco.getSenha().trim().equals("")) {
+			possuiCampoVazio = true;
+		}
+
+		// sexo
+		if (usuarioEmFoco.getSexo() == null) {
+			possuiCampoVazio = true;
+		}
+
+		// aniversario
+		if (aniversarioDia == null || new Integer(0).equals(aniversarioDia)) {
+			possuiCampoVazio = true;
+		}
+		if (aniversarioMes == null || new Integer(0).equals(aniversarioMes)) {
+			possuiCampoVazio = true;
+		}
+		if (aniversarioAno == null || new Integer(0).equals(aniversarioAno)) {
+			possuiCampoVazio = true;
+		}
+
+		if (possuiCampoVazio) {
+			messages.addErrorMessage(null, "error_favor_preencher_todos_os_campos");
+		} else {
+			if (usuarioEmFoco.getEmail().indexOf('@') == -1 || usuarioEmFoco.getEmail().indexOf('.') == -1) {
+				messages.addErrorMessage(null, "error_digite_um_email_valido");
+			} else if (!PersistenceHelper.findByNamedQuery("emailExistenteQuery", usuarioEmFoco.getEmail()).isEmpty()) {
+				messages.addErrorMessage(null, "error_email_especificado_jah_existe");
+			} else if (usuarioEmFoco.getSenha().length() < 6) {
+				messages.addErrorMessage(null, "error_a_senha_deve_conter_no_minimo_6_caracteres");
+			}
+		}
+
+		if (messages.getErrorMessages().isEmpty()) {
+			return "passo1";
+		}
+		return null;
+	}
+
 	public void registraNovoUsuario(ActionEvent e) {
 		try {
 			Captcha captcha = (Captcha) getSessionAttribute(Captcha.NAME);

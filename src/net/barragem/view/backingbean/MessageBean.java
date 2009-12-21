@@ -22,6 +22,17 @@ public class MessageBean {
 		return null;
 	}
 
+	public FacesMessage getFirstErrorMessage() {
+		FacesMessage message = null;
+		for (Iterator<FacesMessage> it = FacesContext.getCurrentInstance().getMessages(); it.hasNext();) {
+			message = it.next();
+			if (message.getSeverity() == FacesMessage.SEVERITY_ERROR) {
+				return message;
+			}
+		}
+		return null;
+	}
+
 	public Map<String, FacesMessage> getErrorMessages() {
 		Map<String, FacesMessage> errors = new HashMap<String, FacesMessage>();
 		FacesMessage message = null;

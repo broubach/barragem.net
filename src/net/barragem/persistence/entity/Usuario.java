@@ -5,13 +5,16 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@NamedQuery(name = "loginQuery", query = "from Usuario usuario where usuario.email = :email and usuario.senha = :senha")
+@NamedQueries( {
+		@NamedQuery(name = "loginQuery", query = "from Usuario usuario where usuario.email = :email and usuario.senha = :senha"),
+		@NamedQuery(name = "emailExistenteQuery", query = "select 1 from Usuario usuario where usuario.email = :email") })
 @Table(name = "usuario")
 public class Usuario extends BaseEntity {
 

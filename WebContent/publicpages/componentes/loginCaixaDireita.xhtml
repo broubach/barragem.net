@@ -10,6 +10,7 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
 	<h:form id="registerForm">
+		<div id="loginSpan"/>
 		<div class="input">
 			<label for="registerForm:nome">#{msg.label_nome}:</label>
 			<h:inputText id="nome" value="#{registrarNovoUsuarioBean.usuarioEmFoco.nome}"/>
@@ -34,9 +35,9 @@
 			</h:selectOneMenu>
 		</div>
 		<div class="input">
-			<label for="dia">#{msg.label_aniversario}:</label>
-			<h:selectOneMenu value="#{registrarNovoUsuarioBean.aniversarioDia}">
-				<f:selectItem itemLabel="#{msg.label_dia}"/>
+			<label for="registerForm:dia">#{msg.label_aniversario}:</label>
+			<h:selectOneMenu id="dia" value="#{registrarNovoUsuarioBean.aniversarioDia}">
+				<f:selectItem itemValue="0" itemLabel="#{msg.label_dia}"/>
 				<f:selectItem itemValue="1" itemLabel="1"/>
 				<f:selectItem itemValue="2" itemLabel="2"/>
 				<f:selectItem itemValue="3" itemLabel="3"/>
@@ -71,7 +72,7 @@
 			</h:selectOneMenu>
 			
 			<h:selectOneMenu styleClass="select-mes" value="#{registrarNovoUsuarioBean.aniversarioMes}">
-				<f:selectItem itemLabel="#{msg.label_mes}"/>
+				<f:selectItem itemValue="0" itemLabel="#{msg.label_mes}"/>
 				<f:selectItem itemValue="1" itemLabel="#{msg.label_janeiro}"/>
 				<f:selectItem itemValue="2" itemLabel="#{msg.label_fevereiro}"/>
 				<f:selectItem itemValue="3" itemLabel="#{msg.label_marco}"/>
@@ -87,12 +88,20 @@
 			</h:selectOneMenu>
 			
 			<h:selectOneMenu styleClass="select-ano" value="#{registrarNovoUsuarioBean.aniversarioAno}">
-				<f:selectItem itemLabel="#{msg.label_ano}"/>
+				<f:selectItem itemValue="0" itemLabel="#{msg.label_ano}"/>
 				<f:selectItems value="#{lookupBean.listaAnosDesde1900Desc}"/>
 			</h:selectOneMenu>
 		</div>
 		<div class="submit">
-			<h:commandButton value="#{msg.label_cadastrar}" action="passo1"/>
+			<h:commandButton value="#{msg.label_cadastrar}" action="#{registrarNovoUsuarioBean.valida}"/>
+		</div>
+		<div class="error" style="#{empty messageBean.errorMessages ? 'display:none' : 'display:visible'}">
+			<c:if test="#{not empty messageBean.errorMessages}">
+				 <script type="text/javascript">
+				 	$('#loginSpan').slideToggle('fast');
+				</script>
+			</c:if>
+			#{messageBean.firstErrorMessage.summary}
 		</div>
 	</h:form>
 </html>

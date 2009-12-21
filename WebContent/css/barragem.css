@@ -175,7 +175,7 @@ fieldset {
 	display: block
 }
 #registerForm {
-    margin-top:55px;
+    margin-top:45px;
     margin-left:30px;
 }
 #registerForm .submit {
@@ -186,6 +186,16 @@ fieldset {
 }
 #registerForm .input .select-dia {
 	width:20px;
+}
+#loginSpan {
+	height: 10px;
+}
+div.error {
+	background:#FFEBE8 none repeat scroll 0 0; 
+	border:1px solid #DD3C10; 
+	margin-top: 2px; 
+	text-align:center; 
+	width: 255px; 
 }
 #registerFormSeguranca {
     margin-top:45px;
@@ -900,4 +910,7 @@ label.error {
 .anterior_proximo a {
 	color:#333333;
 	font-size:0.8em;
+}
+div.error {
+	font-size: 0.7em; 
 }
