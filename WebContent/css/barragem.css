@@ -575,7 +575,8 @@ fieldset#detalhes-jogo {
 	width:80px;
 } 
 .registrese h3 {
-    margin:0;
+	line-height: normal;
+	margin:0;
     position:absolute;
     top:20px;
     left:570px;

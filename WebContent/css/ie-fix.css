@@ -1,0 +1,9 @@
+#registerForm {
+	margin-top:45px;
+}
+#registerForm .input input[type=text] {
+	padding:2px;
+}
+#registerForm .input {
+	margin-bottom:2px;
+}
