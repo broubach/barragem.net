@@ -120,6 +120,10 @@
 		<display-name>publicpages/novousuario/passo-1-seguranca.xhtml</display-name>
 		<from-view-id>/publicpages/novousuario/passo-1-seguranca.xhtml</from-view-id>
 		<navigation-case>
+			<from-outcome>passo0</from-outcome>
+			<to-view-id>/login.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
 			<from-outcome>passo2</from-outcome>
 			<to-view-id>/publicpages/novousuario/passo-2-perfil.xhtml</to-view-id>
 		</navigation-case>

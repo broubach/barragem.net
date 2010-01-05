@@ -10,6 +10,7 @@
 <ui:composition template="../layout/layoutLogin.xhtml">
 	<ui:define name="caixaDireita">
 		<h:form id="registerFormSeguranca">
+			<div id="loginSpan"/>
 			<h4>#{msg.label_controle_seguranca}</h4>
 			<div class="input">
 				<label>#{msg.label_insira_palavra_mostrada_aqui_em_baixo}</label>
@@ -24,8 +25,21 @@
 				<label for="registerForm:nome" class="label">#{msg.label_insira_aqui}:</label>
 				<h:inputText value="#{registrarNovoUsuarioBean.captchaAnswer}" maxlength="5"/>
 			</div>
-			<div class="submit">
-				<h:commandButton value="#{msg.label_enviar}" actionListener="#{registrarNovoUsuarioBean.registraNovoUsuario}" action="passo2"/>
+			<div>
+				<div id="voltar">
+					<h:commandLink value="#{msg.label_voltar}" action="passo0"/>
+				</div>
+				<div class="submit">
+					<h:commandButton value="#{msg.label_enviar}" action="#{registrarNovoUsuarioBean.registraNovoUsuario}"/>
+				</div>
+			</div>
+			<div class="error" style="#{empty messageBean.errorMessages ? 'display:none' : 'display:visible'}">
+				<c:if test="#{not empty messageBean.errorMessages}">
+					 <script type="text/javascript">
+					 	$('#loginSpan').slideToggle('fast');
+					</script>
+				</c:if>
+				#{messageBean.firstErrorMessage.summary}
 			</div>
 		</h:form>
 	</ui:define>

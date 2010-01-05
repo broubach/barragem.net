@@ -33,7 +33,8 @@ public class BarragemCaptchaServlet extends HttpServlet {
 
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Captcha captcha = new Captcha.Builder(_width, _height).addText().gimp().addBorder().build();
+		Captcha captcha = new Captcha.Builder(_width, _height).addText(new CustomWordRenderer()).gimp().addBorder()
+				.build();
 
 		CaptchaServletUtil.writeImage(resp, captcha.getImage());
 		req.getSession().setAttribute(Captcha.NAME, captcha);

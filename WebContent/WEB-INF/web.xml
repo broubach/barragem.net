@@ -82,7 +82,7 @@
         </init-param>
         <init-param>
             <param-name>height</param-name>
-            <param-value>60</param-value>
+            <param-value>40</param-value>
         </init-param>
     </servlet>
 

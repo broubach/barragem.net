@@ -220,8 +220,22 @@ div.error {
 #registerFormSeguranca .captcha {
 	background-color: #FFF; 
 	width: 250px; 
-	height: 60px;
+	height: 40px;
 }
+#voltar {
+    background: transparent url(../img/buttons/btn-voltar.png) no-repeat 0 0;
+    padding-left: 17px;
+}
+#registerFormSeguranca #voltar {
+	float: left;
+}
+#voltar a {
+	text-decoration: none;
+}
+#voltar a:hover {
+	text-decoration: underline;
+}
+
 #searchForm label {
 	display:none
 }
@@ -914,4 +928,8 @@ label.error {
 }
 div.error {
 	font-size: 0.7em; 
+}
+#voltar a {
+	color:#333333;
+	font-size:0.8em;
 }

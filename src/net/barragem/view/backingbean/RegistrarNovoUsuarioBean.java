@@ -4,8 +4,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 import java.util.Date;
 
-import javax.faces.event.ActionEvent;
-
 import net.barragem.persistence.entity.Usuario;
 import net.barragem.util.PersistenceHelper;
 import nl.captcha.Captcha;
@@ -118,7 +116,7 @@ public class RegistrarNovoUsuarioBean extends BaseBean {
 		return null;
 	}
 
-	public void registraNovoUsuario(ActionEvent e) {
+	public String registraNovoUsuario() {
 		try {
 			Captcha captcha = (Captcha) getSessionAttribute(Captcha.NAME);
 			getRequest().setCharacterEncoding("UTF-8");
@@ -137,7 +135,11 @@ public class RegistrarNovoUsuarioBean extends BaseBean {
 
 				sendMail("no-reply@barragem.net", usuarioEmFoco.getEmail(), "Bem-vindo ao Barragem.net",
 						"Você se registrou no Barragem.net. O Email registrado é...");
+				return "passo2";
 
+			} else {
+				messages.addErrorMessage(null, "error_o_texto_inserido_nao_corresponde_ao_controle_de_seguranca");
+				return null;
 			}
 		} catch (UnsupportedEncodingException e1) {
 			throw new RuntimeException(e1);
