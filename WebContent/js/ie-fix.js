@@ -1,7 +1,33 @@
-$(function(){
-	$('.rounded').corner();
-	$('.sidebar,.maincontent').corner('cc:#F6F6F6 tr tl').corner('br bl');
-	$('.btn-novo').corner('cc:#EEF1F3 5px');
-	$('.menu a').corner('cc:#F6F6F6 3px');
-	$('.menu-rodada a').corner('cc:#F6F6F6 3px');
+$(function() {
+  	// elementos restantes para arredondar em um segundo momento, descritos no ticket #36
+
+	var settings = {
+		      tl: { radius: 10 },
+		      tr: { radius: 10 },
+		      bl: { radius: 10 },
+		      br: { radius: 10 },
+		      antiAlias: true
+	};
+	curvyCorners(settings, "fieldset");
+	curvyCorners(settings, ".sidebar-header");
+
+	settings = {
+		      tl: { radius: 3 },
+		      tr: { radius: 3 },
+		      bl: { radius: 3 },
+		      br: { radius: 3 },
+		      antiAlias: true
+	};
+  	curvyCorners(settings, ".language");
+
+	settings = {
+		      tl: { radius: 5 },
+		      tr: { radius: 5 },
+		      bl: { radius: 5 },
+		      br: { radius: 5 },
+		      antiAlias: true
+	};
+  	curvyCorners(settings, ".sidebar");
+  	curvyCorners(settings, ".btn-novo");
+  	curvyCorners(settings, ".maincontent");
 })

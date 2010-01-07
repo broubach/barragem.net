@@ -40,32 +40,36 @@
         //]]>
         </script>
         <!--[if lte IE 7]>
-            <script type="text/javascript" src="#{request.contextPath}/js/jquery.corner.js"></script>
-            <script type="text/javascript" src="#{request.contextPath}/js/ie-fix.js"></script>
+			<script type="text/javascript">
+				var curvyCornersNoAutoScan = true;
+			</script>
+ 			<script type="text/javascript" src="#{request.contextPath}/js/curvycorners.js"></script>
+ 			<script type="text/javascript" src="#{request.contextPath}/js/ie-fix.js"></script>
+            <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/ie-fix.css" />
         <![endif]-->
     </head>
     <body class="internas">
         <div id="page" class="container_16">
             <div id="header">
                	<ui:insert name="cabecalho">
-               		<ui:include src="../componentes/cabecalho.xhtml" />
+               		<ui:include src="../../publicpages/componentes/cabecalho.xhtml" />
                	</ui:insert>
             </div>
             <div id="content">
                 <div class="grid_12">
 					<ui:insert name="conteudo">
-						<ui:include src="../componentes/conteudo.xhtml" />
+						<ui:include src="../../publicpages/componentes/conteudo.xhtml" />
 					</ui:insert>
                 </div>
                 <div class="grid_4">
 					<ui:insert name="ads">
-						<ui:include src="../componentes/ads.xhtml" />
+						<ui:include src="../../publicpages/componentes/ads.xhtml" />
 					</ui:insert>
                 </div>
                 <div class="clear"></div>
                 <div id="footer">
                 	<ui:insert name="rodape">
-                		<ui:include src="../componentes/rodape.xhtml" />
+                		<ui:include src="../../publicpages/componentes/rodape.xhtml" />
                 	</ui:insert>
                 </div>
             </div>

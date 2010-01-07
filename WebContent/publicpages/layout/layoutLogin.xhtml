@@ -41,11 +41,14 @@
             
         //]]>
         </script>
-		<!--[if lte IE 7]>
+        <!--[if lte IE 7]>
+			<script type="text/javascript">
+				var curvyCornersNoAutoScan = true;
+			</script>
+ 			<script type="text/javascript" src="#{request.contextPath}/js/curvycorners.js"></script>
+ 			<script type="text/javascript" src="#{request.contextPath}/js/ie-fix.js"></script>
             <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/ie-fix.css" />
-			<script type="text/javascript" src="#{request.contextPath}/js/jquery.corner.js"></script>
-			<script type="text/javascript" src="#{request.contextPath}/js/ie-fix.js"></script>
-		<![endif]-->
+        <![endif]-->
 	</head>
 	<body>
 		<div id="page" class="container_16">

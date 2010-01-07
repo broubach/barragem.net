@@ -10,27 +10,48 @@
 <ui:composition template="../layout/layoutPosNovoUsuario.xhtml">
 	<ui:define name="conteudo">
 		<div class="maincontent">
+
+			<style type="text/css">
+				.passo2, .passo1 {
+				  -moz-border-radius: 10px;
+				  -webkit-border-radius: 10px;
+				}
+			</style>
+
+			<div id="tituloPerfil" style="display: inline-table; width: 70%; text-align: center;">
+				<div id="passo2" class="passo2" style="width: 100px; background-color: #ffffff; padding: 15px; float: right; margin-left: 10px;">
+					<h4>Passo 2</h4>
+					Atualizar Foto
+				</div>
+	
+				<div id="passo1" class="passo1" style="width: 100px; background-color:#596E94; padding: 15px; float: right;">
+					<h2 style="color: #FFFFFF">Passo 1</h2>
+					Editar Perfil
+				</div>
+			</div>
+			<br/>
+		
 			<h:form>
 				#{msg.label_em_qual_clube_voce_joga_com_mais_frequencia}
-				<h:inputText />
+				<h:inputText /><br/>
 				
 				#{msg.label_em_que_cidade_esta_situada_a_academia}
-				<h:inputText />
+				<h:inputText /><br/>
 				
 				#{msg.label_qual_nome_do_tecnico}
-				<h:inputText />
+				<h:inputText /><br/>
 				
 				#{msg.label_quando_comecou_a_jogar_tenis}
-				<h:inputText />
+				<h:inputText /><br/>
 				
 				#{msg.label_em_qual_lado_voce_executa_o_forehand}
-				<h:inputText />
+				<h:inputText /><br/>
 				
 				#{msg.label_seu_backhand_e_de_quantas_maos}
-				<h:inputText />
+				<h:inputText /><br/>
 				
 				#{msg.label_faca_um_resumo_sobre_voce_ou_seu_jogo_para_aparecer_em_seu_perfil_publico}
-				<h:inputText />
+				<h:inputText /><br/>
 				
 				<h:commandButton action="passo3" value="#{msg.label_pular_esse_passo}"/>
 				

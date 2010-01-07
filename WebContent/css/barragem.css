@@ -27,6 +27,7 @@ fieldset {
     padding:5px;
     border: 1px solid #95a3ba;
     -moz-border-radius:10px;
+	-webkit-border-radius: 10px;
     clear:both;
 }
 
@@ -72,6 +73,7 @@ fieldset {
     z-index:1000;
     background:#ccc;
     -moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
 }
 .language ul {
     padding: 0 4px;
@@ -95,6 +97,7 @@ fieldset {
     background: #596e94;
     padding:10px;
     -moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
     width:300px;
     height:40px;
 }
@@ -114,6 +117,7 @@ fieldset {
 .sidebar {
     background:#EEF1F3;
     -moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
     min-height:600px;
     padding:2px;
 }
@@ -135,6 +139,7 @@ fieldset {
     margin-left:4px;
     margin-right: 4px;
     -moz-border-radius:3px;
+	-webkit-border-radius: 3px;
 }
 .internas .menu a:hover {
     background:#0D286F;
@@ -144,14 +149,16 @@ fieldset {
 #loginForm input {
 	border:1px solid #f9f9f9;
 	background: #fff;
-	-moz-border-radius: 3px;
 	margin-left:3px;
     width:117px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
 }
 #loginForm input[type=submit] {
 	background: #6c88be;
     height:20px;
     -moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
     width: 40px;
     position:absolute;
 }
@@ -270,6 +277,7 @@ div.error {
     background:#7baf7b;
     border: 1px solid #666;
    	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
 }
 
 /********************* BOTOES *********************/
@@ -279,6 +287,7 @@ div.error {
     top:10px;
     background: #95c396;
     -moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
     height:25px;
 }
 .btn-novo a {
@@ -332,6 +341,7 @@ div.error {
 	min-height:400px;
 	background: #EEF1F3;
 	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
 	padding:10px;
 }
 .maincontent h2, .maincontent h3 {
@@ -494,6 +504,7 @@ td.actions {
     padding:4px 20px;
     height:24px;
     -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
 }
 .mensagem-erro {
 	margin-bottom: 5px;
@@ -610,6 +621,7 @@ fieldset#detalhes-jogo {
     padding:4px 20px;
     height:24px;
     -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
 }
 .add-jogador label {
     float:none;
@@ -626,6 +638,7 @@ fieldset#detalhes-jogo {
     padding:4px 20px;
     height:24px;
     -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
 }
 .add-jogo input {
     width:90px
@@ -698,11 +711,13 @@ fieldset#detalhes-jogo {
 .menu-contextual a {
     background:#B1C3FE;
     -moz-border-radius:4px;
+	-webkit-border-radius: 4px;
     padding:3px;
 }
 .menu-contextual span {
 	border: 1px solid #6a9bcd;
     -moz-border-radius:4px;
+	-webkit-border-radius: 4px;
     padding:3px;
 }
 
