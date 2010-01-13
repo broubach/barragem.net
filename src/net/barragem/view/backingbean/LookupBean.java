@@ -8,8 +8,10 @@ import java.util.List;
 import javax.faces.model.SelectItem;
 
 import net.barragem.persistence.entity.Jogador;
+import net.barragem.persistence.entity.LadoForehandEnum;
 import net.barragem.persistence.entity.ModalidadeDeSetsEnum;
 import net.barragem.persistence.entity.SexoEnum;
+import net.barragem.persistence.entity.TipoBackhandEnum;
 import net.barragem.util.MessageBundleUtils;
 import net.barragem.util.PersistenceHelper;
 
@@ -61,6 +63,20 @@ public class LookupBean extends BaseBean {
 		for (int i = anoAtual; i >= 1900; i--) {
 			items.add(new SelectItem(i, String.valueOf(i)));
 		}
+		return items;
+	}
+
+	public List<SelectItem> getListaLadosForehand() {
+		List<SelectItem> items = new ArrayList<SelectItem>();
+		items.add(new SelectItem(LadoForehandEnum.Direito, MessageBundleUtils.getInstance().get("label_direito")));
+		items.add(new SelectItem(LadoForehandEnum.Esquerdo, MessageBundleUtils.getInstance().get("label_esquerdo")));
+		return items;
+	}
+
+	public List<SelectItem> getListaTiposBackhand() {
+		List<SelectItem> items = new ArrayList<SelectItem>();
+		items.add(new SelectItem(TipoBackhandEnum.UmaMao, MessageBundleUtils.getInstance().get("label_uma_mao")));
+		items.add(new SelectItem(TipoBackhandEnum.DuasMaos, MessageBundleUtils.getInstance().get("label_duas_maos")));
 		return items;
 	}
 }

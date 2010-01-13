@@ -8,5 +8,6 @@ $(function(){
 function aplicarMascaras() {
 	$('.date').mask("99/99/9999"); 
 	$('.dateTime').mask("99/99/9999 99:99"); 
+	$('.MMyyyy').mask("99/9999"); 
 	$('.parcial').mask("9");
 }

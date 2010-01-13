@@ -15,9 +15,8 @@ public class DetalhePerfil extends BaseEntity {
 	private Boolean professor;
 	private String professorNome;
 	private Date dataInicioPratica;
-	private LadoForehandEnum ladoForhand;
+	private LadoForehandEnum ladoForehand;
 	private TipoBackhandEnum tipoBackhand;
-	private String resumo;
 
 	@OneToOne
 	private Usuario usuario;
@@ -62,20 +61,12 @@ public class DetalhePerfil extends BaseEntity {
 		this.dataInicioPratica = dataInicioPratica;
 	}
 
-	public String getResumo() {
-		return resumo;
+	public LadoForehandEnum getLadoForehand() {
+		return ladoForehand;
 	}
 
-	public void setResumo(String resumo) {
-		this.resumo = resumo;
-	}
-
-	public LadoForehandEnum getLadoForhand() {
-		return ladoForhand;
-	}
-
-	public void setLadoForhand(LadoForehandEnum ladoForhand) {
-		this.ladoForhand = ladoForhand;
+	public void setLadoForehand(LadoForehandEnum ladoForhand) {
+		this.ladoForehand = ladoForhand;
 	}
 
 	public TipoBackhandEnum getTipoBackhand() {

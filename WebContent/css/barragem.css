@@ -258,7 +258,7 @@ div.error {
     width:169px;
     height:18px;
 }
-.internas label {
+.internas label, .dados .exemplo {
 	float: left;
 	text-align: right;
 	margin-right: 5px;
@@ -467,6 +467,80 @@ td.actions {
 }
 .dados-barragem dd {
     padding:2px;
+}
+
+/********************* TITULO PERFIL *************/
+.tituloPerfil {
+	display: inline-table; 
+	width: 485px; 
+	text-align: center;
+}
+.tituloPerfil .passoInativo {
+	width: 100px; 
+	background-color: #ffffff; 
+	padding: 15px; 
+	float: right; 
+	margin-left: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+.tituloPerfil .passoAtivo {
+	color: #ffffff; 
+	width: 100px; 
+	background-color:#596E94; 
+	padding: 15px; 
+	float: right;
+	margin-left: 10px;
+	-moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+.tituloPerfil .passoAtivo h2 {
+	color: #ffffff;
+}
+
+/********************* FILEUPLOAD COMPONENT *********************/
+.rich-fileupload-list-decor {
+	float: right;
+	border: 0px;
+}
+.rich-fileupload-toolbar-decor {
+	margin-left: 5px;
+}
+
+	
+/********************* DADOS *********************/
+.dados {
+	padding-right: 10px;
+}
+.dados label, .dados .exemplo {
+	width:380px;
+    padding-right:5px;
+}
+.dados label {
+	border-right: 1px solid #888;
+}
+.dados .input {
+	clear:both;
+}
+.dados .salvar {
+	padding-top: 10px;
+	width: 496px;
+}
+.dados .salvarPasso3 {
+	padding-top: 10px;
+	width: 536px;
+}
+.dados .campos_obrigatorios {
+	border-right: 0px;
+	min-width: 245px;
+}
+.dados .submit {
+	float: right;
+    background:green;
+    padding:4px 20px;
+    height:24px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
 }
 
 /********************* DADOS POPUP *********************/
@@ -947,4 +1021,16 @@ div.error {
 #voltar a {
 	color:#333333;
 	font-size:0.8em;
+}
+.dados .submit {
+    color:#fff;
+    font-weight:bold;
+}
+.dados label {
+	color:#444;
+	font-size:.8em;
+}
+.dados label, .dados .exemplo, .dados .complemento {
+	color:#444;
+	font-size:.8em;
 }
