@@ -34,10 +34,10 @@
 				<div class="dados">
 					<div class="input text">
 						<label for="perfil:dataInicioPratica">#{msg.label_quando_comecou_a_jogar_tenis}</label>
-						<span class="exemplo">#{msg.label_data_inicio_pratica_exemplo}</span>
 						<h:inputText id="dataInicioPratica" value="#{detalharPerfilBean.detalhePerfilEmFoco.dataInicioPratica}" styleClass="MMyyyy" size="10">
 							<f:convertDateTime pattern="MM/yyyy"/>
 						</h:inputText>
+						<span class="exemplo">#{msg.label_data_inicio_pratica_exemplo}</span>
 					</div>
 					<div class="input text">
 						<label for="perfil:ladoForehand">#{msg.label_em_qual_lado_voce_executa_o_forehand}</label>
@@ -59,14 +59,14 @@
 					</div>
 					<div class="input text">
 						<label for="perfil:clubeMaisFrequentadoNome">#{msg.label_em_qual_clube_voce_joga_com_mais_frequencia}</label>
-						<span class="exemplo">#{msg.label_clube_mais_frequentado_exemplo}</span>
 						<h:inputText id="clubeMaisFrequentadoNome" value="#{detalharPerfilBean.detalhePerfilEmFoco.clubeMaisFrequentadoNome}" maxlength="45" size="30"/>
 						<input id="isCasa" type="checkbox" onclick="if ($j(this).is(':checked')) {$j('#perfil\\:clubeMaisFrequentadoNome').attr('value', 'casa').attr('disabled', true) } else { $j('#perfil\\:clubeMaisFrequentadoNome').attr('value', '').attr('disabled', false)};"/> <span class="complemento">jogo em casa</span>
+						<span class="exemplo">#{msg.label_clube_mais_frequentado_exemplo}</span>
 					</div>
 					<div class="input text">
 						<label for="perfil:clubeMaisFrequentadoCidade">#{msg.label_em_que_cidade_esta_situada_a_academia}</label>
-						<span class="exemplo">#{msg.label_clube_mais_frequentado_cidade_exemplo}</span>
 						<h:inputText id="clubeMaisFrequentadoCidade" value="#{detalharPerfilBean.detalhePerfilEmFoco.clubeMaisFrequentadoCidade}" maxlength="45" size="30"/>
+						<span class="exemplo">#{msg.label_clube_mais_frequentado_cidade_exemplo}</span>
 					</div>
 					<br/>
 
