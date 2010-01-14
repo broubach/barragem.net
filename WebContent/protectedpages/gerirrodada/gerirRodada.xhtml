@@ -19,8 +19,8 @@
 	        <script type="text/javascript" src="#{request.contextPath}/js/jquery.colorbox-min.js"></script>
 			<script type="text/javascript" src="#{request.contextPath}/js/jquery.maskedinput-1.2.2.min.js"></script>
 			<script>
-	            $(function(){
-		            $(".popup").colorbox({overlayClose:false, inline:true, href:".add-jogo", scrollbars:false}, function(){aplicarMascaras();$('#add-jogo\\:data').focus();});
+	            $j(function(){
+		            $j(".popup").colorbox({overlayClose:false, inline:true, href:".add-jogo", scrollbars:false}, function(){aplicarMascaras();$j('#add-jogo\\:data').focus();});
 	            });
 	         </script>
 			<script type="text/javascript" src="#{request.contextPath}/js/3_3_0.GAorg.ajax4jsf.javascript.AjaxScript.js"></script>
@@ -52,7 +52,7 @@
 			        <legend>#{msg.label_jogos}</legend>
 	
 					<div class="btn-novo">
-						<a4j:commandLink actionListener="#{gerirRodadaBean.adicionaJogo}" reRender="add-jogo" oncomplete="$('.popup').click();" disabled="#{gerirRodadaBean.rodadaEmFoco.inoperavel == true}">
+						<a4j:commandLink actionListener="#{gerirRodadaBean.adicionaJogo}" reRender="add-jogo" oncomplete="$j('.popup').click();" disabled="#{gerirRodadaBean.rodadaEmFoco.inoperavel == true}">
 							<span>#{msg.label_adicionar_jogo}</span>
 						</a4j:commandLink>
 						<a href="#" title="#{msg.label_jogo}" class="popup" style="visibility:hidden"/>
@@ -112,7 +112,7 @@
 								<img src="#{request.contextPath}/img/buttons/btn-deletar.png" alt="#{msg.label_excluir}" title="#{msg.label_excluir}"/>
 							</h:commandLink>
 							<a4j:commandLink actionListener="#{gerirRodadaBean.editaJogo}" disabled="#{gerirRodadaBean.rodadaEmFoco.inoperavel == true}"
-								oncomplete="$('.popup').click();" reRender="add-jogo">
+								oncomplete="$j('.popup').click();" reRender="add-jogo">
                                 <img src="#{request.contextPath}/img/buttons/btn-editar.png" alt="#{msg.label_editar}" title="#{msg.label_editar}"/>
 							</a4j:commandLink>
 					    </h:column>

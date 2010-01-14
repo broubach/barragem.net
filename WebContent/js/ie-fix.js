@@ -1,4 +1,4 @@
-$(function() {
+$j(function() {
   	// elementos restantes para arredondar em um segundo momento, descritos no ticket #36
 
 	var settings = {
@@ -10,6 +10,8 @@ $(function() {
 	};
 	curvyCorners(settings, "fieldset");
 	curvyCorners(settings, ".sidebar-header");
+	curvyCorners(settings, ".passoInativo");
+	curvyCorners(settings, ".passoAtivo");
 
 	settings = {
 		      tl: { radius: 3 },

@@ -24,28 +24,23 @@
 			</div>
 			<br/>
 			<br/>
-		
-	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/fileupload/eAELXT5DOhSIAQ!sA18_basic.css" />
-	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/fileupload/eAELXT5DOhSIAQ!sA18_extended.css" />
+
 	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/fileupload/eAELXT5DOhSIAQ!sA18_fileupload.css" />
-	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/fileupload/eAELXT5DOhSIAQ!sA18_progressbar.css" />
 	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/fileupload/eAELXT5DOhSIAQ!sA18_panel.css" />
-	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/fileupload/eAELXT5DOhSIAQ!sA18_table.css" />
 	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/barragem.css" />
-	
+
 	        <script type="text/javascript" src="#{request.contextPath}/js/fileupload/3_3_0.GAorg.ajax4jsf.javascript.PrototypeScript.js"></script>
 	        <script type="text/javascript" src="#{request.contextPath}/js/3_3_0.GAorg.ajax4jsf.javascript.AjaxScript.js"></script>
 	        <script type="text/javascript" src="#{request.contextPath}/js/fileupload/utils.js"></script>
 	        <script type="text/javascript" src="#{request.contextPath}/js/fileupload/json-dom.js"></script>
 	        <script type="text/javascript" src="#{request.contextPath}/js/fileupload/FileUpload.js"></script>
-	        <script type="text/javascript" src="#{request.contextPath}/js/fileupload/swfobject.js"></script>
 	        <script type="text/javascript" src="#{request.contextPath}/js/fileupload/progressBar.js"></script>
 	        <script type="text/javascript" src="#{request.contextPath}/js/fileupload/form.js"></script>
 	        <script type="text/javascript" src="#{request.contextPath}/js/fileupload/skinning.js"></script>
 
 		    <h:form>
 				<div class="dados">
-			        <h:panelGroup style="width: 370px; display: inline-block" layout="block">
+			        <h:panelGroup styleClass="fileupload-image-container" layout="block">
 			            <rich:fileUpload fileUploadListener="#{fileUploadBean.listener}" listHeight="0" listWidth="0"
 			                id="upload" immediateUpload="true"
 			                acceptedTypes="jpg, gif, png, bmp" allowFlash="false" cleanButtonClass="hidden" addControlLabel="#{msg.label_upload_addControlLabel}" 
@@ -56,9 +51,9 @@
 							transferErrorLabel="#{msg.label_upload_transferErrorLabel}" uploadControlLabel="#{msg.label_upload_uploadControlLabel}">
 			                <a4j:support event="onuploadcomplete" reRender="info, upload" />
 			            </rich:fileUpload>
-						<rich:panel style="float: right">
+						<rich:panel styleClass="float-right">
 							<a4j:mediaOutput id="info" element="img" mimeType="image/jpeg" 
-							    createContent="#{fileUploadBean.paint}" style="width:123px; height:162px;"
+							    createContent="#{fileUploadBean.paint}" styleClass="foto-perfil"
 							    cacheable="false">
 							    <f:param value="#{fileUploadBean.timeStamp}" name="time"/>  
 							</a4j:mediaOutput>

@@ -16,29 +16,34 @@
         <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/grid.css" />
         <c:if test="#{not notRenderJQueryInclude}">
 	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/barragem.css" />
-        	<script type="text/javascript" src="#{request.contextPath}/js/jquery-1.3.2.min.js"></script>
-        </c:if>
+	    </c:if>
+       	<script type="text/javascript" src="#{request.contextPath}/js/jquery-1.3.2.min.js"></script>
+        <script type="text/javascript">
+        //<![CDATA[
+        	var $j = jQuery;
+        //]]>
+        </script>
         <script type="text/javascript" src="#{request.contextPath}/js/barragem.js"></script>
         <script type="text/javascript">
         //<![CDATA[
-                $(function(){
-                    $('#searchForm input').each(function() {
-	                    if($(this).val() === '') {
-	                        $(this).val($(this).attr('title'));	
-	                    }
-	                    
-	                    $(this).focus(function() {
-	                        if($(this).val() == $(this).attr('title')) {
-	                            $(this).val('').addClass('focused');	
-	                        }
-	                    });
-	                    $(this).blur(function() {
-	                        if($(this).val() === '') {
-	                            $(this).val($(this).attr('title')).removeClass('focused');	
-	                        }
-	                    });
-                	});
-                });
+        	$j(function () {
+			    $j('#searchForm input').each(function() {
+			        if($j(this).val() === '') {
+			            $j(this).val($j(this).attr('title'));	
+			        }
+			        
+			        $j(this).focus(function() {
+			            if($j(this).val() == $j(this).attr('title')) {
+			                $j(this).val('').addClass('focused');	
+			            }
+			        });
+			        $j(this).blur(function() {
+			            if($j(this).val() === '') {
+			                $j(this).val($j(this).attr('title')).removeClass('focused');	
+			            }
+			        });
+				});
+        	});
         //]]>
         </script>
         <!--[if lte IE 7]>

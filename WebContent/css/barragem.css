@@ -506,6 +506,17 @@ td.actions {
 .rich-fileupload-toolbar-decor {
 	margin-left: 5px;
 }
+.fileupload-image-container {
+	width: 370px; 
+	display: inline-block;
+}
+.float-right {
+	float: right;
+}
+.foto-perfil {
+	width: 123px; 
+	height: 162px;
+}
 
 	
 /********************* DADOS *********************/

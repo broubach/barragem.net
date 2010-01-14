@@ -18,9 +18,9 @@
 	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/jquery.colorbox-barragem.css" />
 	        <script type="text/javascript" src="#{request.contextPath}/js/jquery.colorbox-min.js"></script>
 			<script>
-	            $(function(){
-		            $(".popup").colorbox({overlayClose:false, inline:true, href:".add-jogador", scrollbars:false});
-		            $(".popupRenomearCiclo").colorbox({overlayClose:false, inline:true, href:".rename-ciclo", scrollbars:false}, function() {$('#rename-ciclo\\:nome').focus();});
+	            $j(function(){
+		            $j(".popup").colorbox({overlayClose:false, inline:true, href:".add-jogador", scrollbars:false});
+		            $j(".popupRenomearCiclo").colorbox({overlayClose:false, inline:true, href:".rename-ciclo", scrollbars:false}, function() {$j('#rename-ciclo\\:nome').focus();});
 	            });
 	         </script>
 			<script type="text/javascript" src="#{request.contextPath}/js/3_3_0.GAorg.ajax4jsf.javascript.AjaxScript.js"></script>
@@ -40,7 +40,7 @@
 							<h:commandLink actionListener="#{gerirCicloBean.criaNovoCiclo}" value="#{msg.label_criar_ciclo}"/>
 			            </li>
 			            <li>
-							<a4j:commandLink actionListener="#{gerirCicloBean.preparaRenomea}" reRender="rename-ciclo" oncomplete="$('.popupRenomearCiclo').click();" value="#{msg.label_renomear_ciclo}">
+							<a4j:commandLink actionListener="#{gerirCicloBean.preparaRenomea}" reRender="rename-ciclo" oncomplete="$j('.popupRenomearCiclo').click();" value="#{msg.label_renomear_ciclo}">
 								<f:param name="index" value="#{status.index}" />
 							</a4j:commandLink>
 			            </li>
@@ -57,7 +57,7 @@
 				    <legend>#{msg.label_ranking}</legend>
 		
 					<div class="btn-novo">
-						<a4j:commandLink actionListener="#{gerirCicloBean.criaJogadoresSelecionaveis}" reRender="add-jogador" oncomplete="$('.popup').click();">
+						<a4j:commandLink actionListener="#{gerirCicloBean.criaJogadoresSelecionaveis}" reRender="add-jogador" oncomplete="$j('.popup').click();">
 							<span>#{msg.label_adicionar_jogador}</span>
 						</a4j:commandLink>
 						<a href="#" class="popup" title="#{msg.label_jogadores}" style="visibility:hidden"/>

@@ -36,7 +36,7 @@
 			<div class="error" style="#{empty messageBean.errorMessages ? 'display:none' : 'display:visible'}">
 				<c:if test="#{not empty messageBean.errorMessages}">
 					 <script type="text/javascript">
-					 	$('#loginSpan').slideToggle('fast');
+					 	$j('#loginSpan').slideToggle('fast');
 					</script>
 				</c:if>
 				#{messageBean.firstErrorMessage.summary}

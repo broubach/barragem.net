@@ -18,8 +18,8 @@
 			<script type="text/javascript" src="#{request.contextPath}/js/jquery.meio.mask.min_custom.js" charset="utf-8" ></script>
 	        <script type="text/javascript" src="#{request.contextPath}/js/jquery.colorbox-min.js"></script>
 			<script>
-	            $(function(){
-		            $(".popup").colorbox({overlayClose:false, inline:true, href:".add-barragens", scrollbars:false}, function(){$('#add-barragens\\:local').focus();});
+	            $j(function(){
+		            $j(".popup").colorbox({overlayClose:false, inline:true, href:".add-barragens", scrollbars:false}, function(){$j('#add-barragens\\:local').focus();});
 	            });
 	         </script>
 			<script type="text/javascript" src="#{request.contextPath}/js/3_3_0.GAorg.ajax4jsf.javascript.AjaxScript.js"></script>
@@ -27,7 +27,7 @@
 			<h:form>
 				<h2><h:outputText value="#{msg.label_minhas_barragens}" /></h2>
 				<div class="btn-novo">
-					<a4j:commandLink actionListener="#{gerirBarragemBean.novaBarragem}" reRender="add-barragens" oncomplete="$('.popup').click();">
+					<a4j:commandLink actionListener="#{gerirBarragemBean.novaBarragem}" reRender="add-barragens" oncomplete="$j('.popup').click();">
 						<span>#{msg.label_adicionar_barragem}</span>
 					</a4j:commandLink>
 					<a href="#" title="#{msg.label_barragem}" class="popup" style="visibility:hidden"/>
@@ -63,7 +63,7 @@
 							<img src="#{request.contextPath}/img/buttons/btn-deletar.png" alt="#{msg.label_excluir}" title="#{msg.label_excluir}"/>
 						</h:commandLink>
 						<a4j:commandLink actionListener="#{gerirBarragemBean.detalhaBarragem}" reRender="add-barragens" 
-							oncomplete="$('.popup').click()">
+							oncomplete="$j('.popup').click()">
 							<img src="#{request.contextPath}/img/buttons/btn-editar.png" alt="#{msg.label_editar}" title="#{msg.label_editar}"/>
 						</a4j:commandLink>
 						<h:commandLink actionListener="#{gerirBarragemBean.editaCiclo}" action="editarCiclo">

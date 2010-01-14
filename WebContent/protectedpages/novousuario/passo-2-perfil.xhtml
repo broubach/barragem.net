@@ -12,7 +12,7 @@
 
 		<script type="text/javascript" src="#{request.contextPath}/js/jquery.maskedinput-1.2.2.min.js"></script>
 		<script>
-            $(function(){
+            $j(function(){
 				aplicarMascaras();
 			});
 		</script>
@@ -61,7 +61,7 @@
 						<label for="perfil:clubeMaisFrequentadoNome">#{msg.label_em_qual_clube_voce_joga_com_mais_frequencia}</label>
 						<span class="exemplo">#{msg.label_clube_mais_frequentado_exemplo}</span>
 						<h:inputText id="clubeMaisFrequentadoNome" value="#{detalharPerfilBean.detalhePerfilEmFoco.clubeMaisFrequentadoNome}" maxlength="45" size="30"/>
-						<input id="isCasa" type="checkbox" onclick="if ($(this).is(':checked')) {$('#perfil\\:clubeMaisFrequentadoNome').attr('value', 'casa').attr('disabled', true) } else { $('#perfil\\:clubeMaisFrequentadoNome').attr('value', '').attr('disabled', false)};"/> <span class="complemento">jogo em casa</span>
+						<input id="isCasa" type="checkbox" onclick="if ($j(this).is(':checked')) {$j('#perfil\\:clubeMaisFrequentadoNome').attr('value', 'casa').attr('disabled', true) } else { $j('#perfil\\:clubeMaisFrequentadoNome').attr('value', '').attr('disabled', false)};"/> <span class="complemento">jogo em casa</span>
 					</div>
 					<div class="input text">
 						<label for="perfil:clubeMaisFrequentadoCidade">#{msg.label_em_que_cidade_esta_situada_a_academia}</label>
