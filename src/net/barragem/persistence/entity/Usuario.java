@@ -30,7 +30,7 @@ public class Usuario extends BaseEntity {
 	private Jogador jogador;
 
 	@OneToOne(mappedBy = "usuario")
-	private DetalhePerfil detalhePerfil;
+	private Perfil perfil;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioDono")
 	private List<Jogador> jogadores;
@@ -102,12 +102,12 @@ public class Usuario extends BaseEntity {
 		this.aniversario = aniversario;
 	}
 
-	public DetalhePerfil getDetalhePerfil() {
-		return detalhePerfil;
+	public Perfil getPerfil() {
+		return perfil;
 	}
 
-	public void setDetalhePerfil(DetalhePerfil detalhePerfil) {
-		this.detalhePerfil = detalhePerfil;
+	public void setPerfil(Perfil perfil) {
+		this.perfil = perfil;
 	}
 
 	public SexoEnum getSexo() {
