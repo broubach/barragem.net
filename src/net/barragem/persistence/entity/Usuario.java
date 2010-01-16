@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @NamedQueries( {
-		@NamedQuery(name = "loginQuery", query = "from Usuario usuario where usuario.email = :email and usuario.senha = :senha"),
+		@NamedQuery(name = "loginQuery", query = "from Usuario u join u.perfil p join fetch p.foto where u.email = :email and u.senha = :senha"),
 		@NamedQuery(name = "emailExistenteQuery", query = "select 1 from Usuario usuario where usuario.email = :email") })
 @Table(name = "usuario")
 public class Usuario extends BaseEntity {
@@ -124,5 +124,9 @@ public class Usuario extends BaseEntity {
 
 	public void setDataUltimoAcesso(Date dataUltimoAcesso) {
 		this.dataUltimoAcesso = dataUltimoAcesso;
+	}
+
+	public String getNomeCompletoUpper() {
+		return new StringBuilder().append(nome).append(" ").append(sobrenome).toString().toUpperCase();
 	}
 }

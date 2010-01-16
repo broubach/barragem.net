@@ -3,6 +3,7 @@ package net.barragem.persistence.entity;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -18,7 +19,7 @@ public class Arquivo extends BaseEntity {
 	private Date data;
 	private String mime;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Usuario dono;
 
 	public byte[] getDado() {

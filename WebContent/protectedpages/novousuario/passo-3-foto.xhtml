@@ -40,7 +40,7 @@
 		    <h:form>
 				<div class="dados">
 			        <h:panelGroup styleClass="fileupload-image-container" layout="block">
-			            <rich:fileUpload fileUploadListener="#{criarPerfilBean.listener}" listHeight="0" listWidth="0"
+			            <rich:fileUpload fileUploadListener="#{criarPerfilBean.atualizaFotoUpload}" listHeight="0" listWidth="0"
 			                id="upload" immediateUpload="true"
 			                acceptedTypes="jpg, gif, png, bmp" allowFlash="false" cleanButtonClass="hidden" addControlLabel="#{msg.label_upload_addControlLabel}" 
 			                cancelEntryControlLabel="#{msg.label_upload_cancelEntryControlLabel}" clearAllControlLabel="#{msg.label_upload_clearAllControlLabel}"
@@ -51,8 +51,8 @@
 			                <a4j:support event="onuploadcomplete" reRender="upload, info" />
 			            </rich:fileUpload>
 						<rich:panel styleClass="float-right">
-							<a4j:mediaOutput id="info" element="img" mimeType="image/jpeg"
-							    createContent="#{criarPerfilBean.paint}" styleClass="foto-perfil"
+							<a4j:mediaOutput id="info" element="img" mimeType="#{criarPerfilBean.fotoEmFoco.mime}"
+							    createContent="#{criarPerfilBean.paintFotoUpload}" styleClass="foto-perfil"
 							    cacheable="false">
 							    <f:param value="#{criarPerfilBean.timeStamp}" name="time"/>  
 							</a4j:mediaOutput>
@@ -61,7 +61,7 @@
 					<br/>
 
 					<div class="salvarPasso3">
-						<h:commandButton action="fim" actionListener="#{criarPerfilBean.salva}" value="#{msg.label_salvar_e_continuar}" styleClass="submit"/>
+						<h:commandButton action="fim" actionListener="#{criarPerfilBean.salvaPerfil}" value="#{msg.label_salvar_e_continuar}" styleClass="submit"/>
 						<h:commandButton action="fim" value="#{msg.label_pular_esse_passo}" styleClass="submit"/>
 						<h:commandButton action="passo2" value="#{msg.label_voltar}" styleClass="submit"/>
 					</div>

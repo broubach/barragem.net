@@ -4,15 +4,22 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:c="http://java.sun.com/jstl/core">
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j">
 
     <div class="sidebar">
-        <h3>Gustavo Kuerten</h3>
-        <img src="#{request.contextPath}/img/foto-jogador.png" alt="" />
+        <h3>#{sessionScope['usuario'].nomeCompletoUpper}</h3>
+		<a4j:mediaOutput id="info" element="img" mimeType="image/jpeg"
+		    createContent="#{arquivoBean.paintFotoPerfil}" styleClass="foto-perfil"
+		    cacheable="false">
+		</a4j:mediaOutput>
+
         <div class="dados-jogador bloco">
             <dl>
-                <dt>#{msg.label_tecnico}:</dt>
-                <dd>Larri Passos</dd>
+            	<c:if test="#{sessionScope[usuario].perfil.professorNome != ''}">
+	                <dt>#{msg.label_tecnico}:</dt>
+	                <dd>#{sessionScope['usuario'].perfil.professorNome}</dd>
+                </c:if>
                 <dt>#{msg.label_joga_com}:</dt>
                 <dd>Esquerda</dd>
                 <dt>#{msg.label_joga_ha}:</dt>

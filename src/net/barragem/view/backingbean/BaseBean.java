@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import net.barragem.persistence.entity.Arquivo;
 import net.barragem.persistence.entity.Usuario;
 import net.barragem.persistence.entity.Validatable;
 import net.barragem.util.BarragemJmsTemplate;
@@ -30,6 +31,9 @@ import org.springframework.jms.core.MessageCreator;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 public class BaseBean {
+
+	public static final String FOTO_DEFAULT_JOGADOR_KEY = "foto-jogador";
+	public static final Integer FOTO_DEFAULT_JOGADOR_ID = new Integer(2);
 
 	private HtmlDataTable dataTable;
 
@@ -253,5 +257,9 @@ public class BaseBean {
 
 	protected ServletContext getServletContext() {
 		return getSession().getServletContext();
+	}
+
+	protected Arquivo getFotoDefaultJogador() {
+		return (Arquivo) getServletContext().getAttribute(FOTO_DEFAULT_JOGADOR_KEY);
 	}
 }

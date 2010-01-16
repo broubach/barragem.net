@@ -80,6 +80,16 @@
 		<url-pattern>/protectedpages/*</url-pattern>
 	</filter-mapping>
 
+	<filter>
+		<display-name>Foto Default Jogador Filter</display-name>
+		<filter-name>fotoDefaultJogadorFilter</filter-name>
+		<filter-class>net.barragem.view.filter.FotoDefaultJogadorFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>fotoDefaultJogadorFilter</filter-name>
+		<url-pattern>/protectedpages/*</url-pattern>
+	</filter-mapping>
+
 	<!-- Captcha config  -->
     <servlet>
         <servlet-name>BarragemCaptchaServlet</servlet-name>
