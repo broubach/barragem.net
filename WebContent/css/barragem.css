@@ -164,8 +164,6 @@ fieldset {
 }
 #loginForm a {
     text-decoration:none;
-    margin-top:4px;
-    display:block;
     border:none;
 }
 #loginForm a:hover {
@@ -203,6 +201,13 @@ div.error {
 	margin-top: 2px; 
 	text-align:center; 
 	width: 255px; 
+}
+div.loginError {
+	background:#FFEBE8 none repeat scroll 0 0; 
+	border:1px solid #DD3C10; 
+	margin-top: 2px; 
+	text-align:center;
+	float: right; 
 }
 #registerFormSeguranca {
     margin-top:45px;

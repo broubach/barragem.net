@@ -31,7 +31,7 @@ public class LoginBean extends BaseBean {
 	public void login(ActionEvent e) {
 		List<Usuario> usuarios = PersistenceHelper.findByNamedQuery("loginQuery", encriptMd5(senha), login);
 		if (usuarios.isEmpty()) {
-			messages.addErrorMessage(null, "label_login_senha_invalidos");
+			messages.addErrorMessage("login", "label_login_senha_invalidos");
 		} else {
 			if (usuarios.get(0).getPerfil() != null) {
 				PersistenceHelper.initialize("foto", usuarios.get(0).getPerfil());

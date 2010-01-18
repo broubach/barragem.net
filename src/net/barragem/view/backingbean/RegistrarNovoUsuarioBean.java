@@ -13,6 +13,7 @@ import org.ajax4jsf.model.KeepAlive;
 @KeepAlive
 public class RegistrarNovoUsuarioBean extends BaseBean {
 
+	private static final String REGISTRAR_NOVO_USUARIO = "registrarNovoUsuario";
 	private Usuario usuarioEmFoco = new Usuario();
 	private Integer aniversarioDia;
 	private Integer aniversarioMes;
@@ -99,14 +100,14 @@ public class RegistrarNovoUsuarioBean extends BaseBean {
 		}
 
 		if (possuiCampoVazio) {
-			messages.addErrorMessage(null, "error_favor_preencher_todos_os_campos");
+			messages.addErrorMessage(REGISTRAR_NOVO_USUARIO, "error_favor_preencher_todos_os_campos");
 		} else {
 			if (usuarioEmFoco.getEmail().indexOf('@') == -1 || usuarioEmFoco.getEmail().indexOf('.') == -1) {
-				messages.addErrorMessage(null, "error_digite_um_email_valido");
+				messages.addErrorMessage(REGISTRAR_NOVO_USUARIO, "error_digite_um_email_valido");
 			} else if (!PersistenceHelper.findByNamedQuery("emailExistenteQuery", usuarioEmFoco.getEmail()).isEmpty()) {
-				messages.addErrorMessage(null, "error_email_especificado_jah_existe");
+				messages.addErrorMessage(REGISTRAR_NOVO_USUARIO, "error_email_especificado_jah_existe");
 			} else if (usuarioEmFoco.getSenha().length() < 6) {
-				messages.addErrorMessage(null, "error_a_senha_deve_conter_no_minimo_6_caracteres");
+				messages.addErrorMessage(REGISTRAR_NOVO_USUARIO, "error_a_senha_deve_conter_no_minimo_6_caracteres");
 			}
 		}
 
@@ -138,7 +139,8 @@ public class RegistrarNovoUsuarioBean extends BaseBean {
 				return "passo2";
 
 			} else {
-				messages.addErrorMessage(null, "error_o_texto_inserido_nao_corresponde_ao_controle_de_seguranca");
+				messages.addErrorMessage(REGISTRAR_NOVO_USUARIO,
+						"error_o_texto_inserido_nao_corresponde_ao_controle_de_seguranca");
 				return null;
 			}
 		} catch (UnsupportedEncodingException e1) {

@@ -95,13 +95,13 @@
 		<div class="submit">
 			<h:commandButton value="#{msg.label_cadastrar}" action="#{registrarNovoUsuarioBean.valida}"/>
 		</div>
-		<div class="error" style="#{empty messageBean.errorMessages ? 'display:none' : 'display:visible'}">
-			<c:if test="#{not empty messageBean.errorMessages}">
+		<div class="error" style="#{messageBean.errorMessages['registrarNovoUsuario'] == null ? 'display:none' : 'display:visible'}">
+			<c:if test="#{messageBean.errorMessages['registrarNovoUsuario'] != null}">
 				 <script type="text/javascript">
 				 	$j('#loginSpan').slideToggle('fast');
 				</script>
 			</c:if>
-			#{messageBean.firstErrorMessage.summary}
+			#{messageBean.errorMessages['registrarNovoUsuario'].summary}
 		</div>
 	</h:form>
 </html>
