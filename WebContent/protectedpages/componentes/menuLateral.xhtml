@@ -9,43 +9,39 @@
 
     <div class="sidebar">
         <h3>#{sessionScope['usuario'].nomeCompletoUpper}</h3>
-		<a4j:mediaOutput id="info" element="img" mimeType="image/jpeg"
+		<a4j:mediaOutput id="info" element="img" mimeType="#{sessionScope['usuario'].perfil.foto.mime}"
 		    createContent="#{arquivoBean.paintFotoPerfil}" styleClass="foto-perfil"
 		    cacheable="false">
 		</a4j:mediaOutput>
-
-        <div class="dados-jogador bloco">
-            <dl>
-            	<c:if test="#{sessionScope[usuario].perfil.professorNome != ''}">
-	                <dt>#{msg.label_tecnico}:</dt>
-	                <dd>#{sessionScope['usuario'].perfil.professorNome}</dd>
-                </c:if>
-                <dt>#{msg.label_joga_com}:</dt>
-                <dd>Esquerda</dd>
-                <dt>#{msg.label_joga_ha}:</dt>
-                <dd>10 anos</dd>
-            </dl>
-            <div class="clear"></div>
-        </div>
+       	<c:if test="#{sessionScope['usuario'].perfil != null}">
+	        <div class="dados-jogador bloco">
+	            <dl>
+	            	<c:if test="#{sessionScope['usuario'].perfil.professorNome != ''}">
+		                <dt>#{msg.label_tecnico}:</dt>
+		                <dd>#{sessionScope['usuario'].perfil.professorNome}</dd>
+	                </c:if>
+	            	<c:if test="#{sessionScope['usuario'].perfil.ladoForehand != null}">
+		                <dt>#{msg.label_joga_com}:</dt>
+		                <dd>#{msg[sessionScope['usuario'].perfil.ladoForehand.labelKey]}</dd>
+	                </c:if>
+	            	<c:if test="#{sessionScope['usuario'].perfil.dataInicioPratica != null}">
+		                <dt>#{msg.label_joga_ha}:</dt>
+		                <dd>#{sessionScope['usuario'].perfil.jogoHa} #{msg[sessionScope['usuario'].perfil.jogoHaUnidadeKey]}</dd>
+	                </c:if>
+	            </dl>
+	            <div class="clear"></div>
+	        </div>
+        </c:if>
         <div class="menu bloco">
             <ul>
                 <li>
-                    <a href="#{request.contextPath}">Home</a>
+                    <a href="#{request.contextPath}">#{msg.label_home}</a>
                 </li>
                 <li>
-                    <a href="#{request.contextPath}/protectedpages/gerirjogador/gerirJogador.xhtml">Jogadores</a>
+                    <a href="#{request.contextPath}/protectedpages/gerirjogador/gerirJogador.xhtml">#{msg.label_jogadores}</a>
                 </li>
                 <li>
-                    <a href="#{request.contextPath}/protectedpages/gerirbarragem/gerirBarragem.xhtml">Barragens</a>
-                </li>
-                <li>
-                    <a href="#">Fotos</a>
-                </li>
-                <li>
-                    <a href="#">Jogos</a>
-                </li>
-                <li>
-                    <a href="#">Mensagens</a>
+                    <a href="#{request.contextPath}/protectedpages/gerirbarragem/gerirBarragem.xhtml">#{msg.label_barragens}</a>
                 </li>
             </ul>
         </div>

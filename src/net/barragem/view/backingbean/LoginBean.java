@@ -33,6 +33,9 @@ public class LoginBean extends BaseBean {
 		if (usuarios.isEmpty()) {
 			messages.addErrorMessage(null, "label_login_senha_invalidos");
 		} else {
+			if (usuarios.get(0).getPerfil() != null) {
+				PersistenceHelper.initialize("foto", usuarios.get(0).getPerfil());
+			}
 			// atualiza hora do ultimo acesso
 			usuarios.get(0).setDataUltimoAcesso(new Date());
 			PersistenceHelper.persiste(usuarios.get(0));

@@ -866,7 +866,6 @@ label {
 }
 .dados-jogador {
 	font-size: .8em;
-	color:#4f6aad;
 }
 input {
 	font-size:10px;
@@ -1044,4 +1043,7 @@ div.error {
 .dados label, .dados .exemplo, .dados .complemento {
 	color:#444;
 	font-size:.8em;
+}
+.dados-jogador dt {
+	color:#4F6AAD;
 }

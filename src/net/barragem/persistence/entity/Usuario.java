@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @NamedQueries( {
-		@NamedQuery(name = "loginQuery", query = "from Usuario u join u.perfil p join fetch p.foto where u.email = :email and u.senha = :senha"),
+		@NamedQuery(name = "loginQuery", query = "select u from Usuario u left outer join u.perfil p where u.email = :email and u.senha = :senha"),
 		@NamedQuery(name = "emailExistenteQuery", query = "select 1 from Usuario usuario where usuario.email = :email") })
 @Table(name = "usuario")
 public class Usuario extends BaseEntity {

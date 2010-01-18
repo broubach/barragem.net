@@ -1,5 +1,6 @@
 package net.barragem.persistence.entity;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -104,5 +105,53 @@ public class Perfil extends BaseEntity {
 
 	public void setClubeMaisFrequentadoNome(String clubeMaisFrequentadoNome) {
 		this.clubeMaisFrequentadoNome = clubeMaisFrequentadoNome;
+	}
+
+	public String getJogoHa() {
+		if (dataInicioPratica == null) {
+			return null;
+		}
+		Float meses = getNumeroMeses();
+		if (meses <= 365) {
+			return String.valueOf(new Float(meses / 30.0f).intValue());
+		}
+
+		Float anos = meses / 365.0f;
+		return String.valueOf(anos.intValue());
+	}
+
+	private Float getNumeroMeses() {
+		Calendar calendar = Calendar.getInstance();
+
+		calendar.setTime(dataInicioPratica);
+		calendar.set(Calendar.DATE, 1);
+		calendar.set(Calendar.HOUR, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
+		long msInicial = calendar.getTimeInMillis();
+
+		calendar.setTimeInMillis(System.currentTimeMillis());
+		calendar.set(Calendar.DATE, 1);
+		calendar.set(Calendar.HOUR, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
+		long msFinal = calendar.getTimeInMillis();
+
+		Float meses = (((((msFinal - msInicial) / 1000.0f/* ms */) / 60.0f/* sec */) / 60.0f/* min */) / 24.0f/* hou */);
+		return meses;
+	}
+
+	public String getJogoHaUnidadeKey() {
+		if (dataInicioPratica == null) {
+			return null;
+		}
+		Float meses = getNumeroMeses();
+		if (meses <= 365) {
+			return "label_meses";
+		}
+
+		return "label_anos";
 	}
 }
