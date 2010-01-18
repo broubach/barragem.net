@@ -129,4 +129,20 @@ public class Usuario extends BaseEntity {
 	public String getNomeCompletoUpper() {
 		return new StringBuilder().append(nome).append(" ").append(sobrenome).toString().toUpperCase();
 	}
+
+	public String getNomeCompletoCapital() {
+		StringBuilder strBuilder = new StringBuilder();
+		String nomeCompleto = getNomeCompletoUpper();
+		String[] words = nomeCompleto.split(" ");
+		for (String s : words) {
+			strBuilder.append(capitalize(s)).append(" ");
+		}
+		return strBuilder.toString();
+	}
+
+	public static String capitalize(String s) {
+		if (s.length() == 0)
+			return s;
+		return s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
+	}
 }

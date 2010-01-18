@@ -1,9 +1,12 @@
 package net.barragem.view.backingbean;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
+import net.barragem.persistence.entity.Jogador;
 import net.barragem.persistence.entity.Usuario;
 import net.barragem.util.PersistenceHelper;
 import nl.captcha.Captcha;
@@ -130,6 +133,16 @@ public class RegistrarNovoUsuarioBean extends BaseBean {
 				usuarioEmFoco.setAniversario(calendar.getTime());
 				usuarioEmFoco.setSenha(encriptMd5(usuarioEmFoco.getSenha()));
 				usuarioEmFoco.setDataUltimoAcesso(new Date());
+
+				Jogador jogador = new Jogador();
+				jogador.setNome(usuarioEmFoco.getNomeCompletoCapital());
+				jogador.setUsuarioCorrespondente(usuarioEmFoco);
+				jogador.setUsuarioDono(usuarioEmFoco);
+				usuarioEmFoco.setJogador(jogador);
+
+				List<Jogador> jogadores = new ArrayList<Jogador>();
+				jogadores.add(jogador);
+				usuarioEmFoco.setJogadores(jogadores);
 
 				PersistenceHelper.persiste(usuarioEmFoco);
 				setUsuarioLogado(usuarioEmFoco);
