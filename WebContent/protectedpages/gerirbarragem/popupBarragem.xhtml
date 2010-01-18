@@ -40,69 +40,75 @@
 			</div>
 
 			<div class="dados-popup">
-				<div class="input text">
-					<label for="add-barragens:raioParaSorteioDeJogosNoRanking" class="#{messageBean.errorMessages['raioParaSorteioDeJogosNoRanking'] != null ? 'error' : ''}">#{msg.label_raio_para_sorteio_de_jogos_no_ranking}*</label>
-					<h:inputText id="raioParaSorteioDeJogosNoRanking" value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.raioParaSorteioDeJogosNoRanking}" alt="small-integer"/>
-				</div>
-				<div class="input text">
-					<label for="add-barragens:pontuacaoVitoriaPorWo" class="#{messageBean.errorMessages['pontuacaoVitoriaPorWo'] != null ? 'error' : ''}">#{msg.label_pontuacao_de_vitoria_por_wo}*</label>
-					<h:inputText id="pontuacaoVitoriaPorWo" value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoVitoriaPorWo}" alt="small-integer"/>
-				</div>
-				<div class="input text">
-					<label for="add-barragens:pontuacaoVencedorPrimeiraRodada" class="#{messageBean.errorMessages['pontuacaoVencedorPrimeiraRodada'] != null ? 'error' : ''}">#{msg.label_pontuacao_de_vencedor_na_primeira_rodada}*</label>
-					<h:inputText id="pontuacaoVencedorPrimeiraRodada" value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoVencedorPrimeiraRodada}" alt="small-integer"/>
-				</div>
-				<div class="input text">
-					<label for="add-barragens:pontuacaoPerdedorPrimeiraRodada" class="#{messageBean.errorMessages['pontuacaoPerdedorPrimeiraRodada'] != null ? 'error' : ''}">#{msg.label_pontuacao_de_perdedor_na_primeira_rodada}*</label>
-					<h:inputText id="pontuacaoPerdedorPrimeiraRodada" value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoPerdedorPrimeiraRodada}" alt="small-integer"/>
-				</div>
-				<div class="input text">
-					<label for="add-barragens:rodadasDeHistoricoMantidasParaCalculoDoRanking" class="#{messageBean.errorMessages['rodadasDeHistoricoMantidasParaCalculoDoRanking'] != null ? 'error' : ''}">#{msg.label_rodadas_de_historico_mantidas_para_calculo_do_ranking}*</label>
-					<h:inputText id="rodadasDeHistoricoMantidasParaCalculoDoRanking" value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.rodadasDeHistoricoMantidasParaCalculoDoRanking}" alt="small-integer"/>
-				</div>
-				<h3>#{msg.label_pontuacoes}</h3>
-				<h4>#{msg.label_pontuacao_vencedor}</h4>
-				<div class="pontuacao_vencedor">
+				<div id="hidden" class="hidden">
 					<div class="input text">
-						<label for="add-barragens:pontuacaoVencedorAbaixoDoAdversarioSemPerderParciais" class="#{messageBean.errorMessages['pontuacaoVencedorAbaixoDoAdversarioSemPerderParciais'] != null ? 'error' : ''}">#{msg.label_vencedor_abaixo_adversario_sem_perder_sets}*</label>
-						<h:inputText id="pontuacaoVencedorAbaixoDoAdversarioSemPerderParciais" value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoVencedorAbaixoDoAdversarioSemPerderParciais}" alt="small-integer"/>
+						<label for="add-barragens:raioParaSorteioDeJogosNoRanking" class="#{messageBean.errorMessages['raioParaSorteioDeJogosNoRanking'] != null ? 'error' : ''}">#{msg.label_raio_para_sorteio_de_jogos_no_ranking}*</label>
+						<h:inputText id="raioParaSorteioDeJogosNoRanking" value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.raioParaSorteioDeJogosNoRanking}" alt="small-integer"/>
 					</div>
 					<div class="input text">
-						<label for="add-barragens:pontuacaoVencedorAbaixoDoAdversarioPerdendoParciais" class="#{messageBean.errorMessages['pontuacaoVencedorAbaixoDoAdversarioPerdendoParciais'] != null ? 'error' : ''}">#{msg.label_vencedor_abaixo_adversario_perdendo_sets}*</label>
-						<h:inputText id="pontuacaoVencedorAbaixoDoAdversarioPerdendoParciais" value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoVencedorAbaixoDoAdversarioPerdendoParciais}" alt="small-integer"/>
+						<label for="add-barragens:pontuacaoVitoriaPorWo" class="#{messageBean.errorMessages['pontuacaoVitoriaPorWo'] != null ? 'error' : ''}">#{msg.label_pontuacao_de_vitoria_por_wo}*</label>
+						<h:inputText id="pontuacaoVitoriaPorWo" value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoVitoriaPorWo}" alt="small-integer"/>
 					</div>
 					<div class="input text">
-						<label for="add-barragens:pontuacaoVencedorAcimaDoAdversarioSemPerderParciais" class="#{messageBean.errorMessages['pontuacaoVencedorAcimaDoAdversarioSemPerderParciais'] != null ? 'error' : ''}">#{msg.label_vencedor_acima_adversario_sem_perder_sets}*</label>
-						<h:inputText id="pontuacaoVencedorAcimaDoAdversarioSemPerderParciais" value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoVencedorAcimaDoAdversarioSemPerderParciais}" alt="small-integer"/>
+						<label for="add-barragens:pontuacaoVencedorPrimeiraRodada" class="#{messageBean.errorMessages['pontuacaoVencedorPrimeiraRodada'] != null ? 'error' : ''}">#{msg.label_pontuacao_de_vencedor_na_primeira_rodada}*</label>
+						<h:inputText id="pontuacaoVencedorPrimeiraRodada" value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoVencedorPrimeiraRodada}" alt="small-integer"/>
 					</div>
 					<div class="input text">
-						<label for="add-barragens:pontuacaoVencedorAcimaDoAdversarioPerdendoParciais" class="#{messageBean.errorMessages['pontuacaoVencedorAcimaDoAdversarioPerdendoParciais'] != null ? 'error' : ''}">#{msg.label_vencedor_acima_adversario_perdendo_sets}*</label>
-						<h:inputText id="pontuacaoVencedorAcimaDoAdversarioPerdendoParciais" value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoVencedorAcimaDoAdversarioPerdendoParciais}" alt="small-integer"/>
-					</div>
-				</div>
-				<h4>#{msg.label_pontuacao_perdedor}</h4>
-				<div class="pontuacao_perdedor">
-					<div class="input text">
-						<label for="add-barragens:pontuacaoPerdedorAbaixoDoAdversarioSemMarcarParciais" class="#{messageBean.errorMessages['pontuacaoPerdedorAbaixoDoAdversarioSemMarcarParciais'] != null ? 'error' : ''}">#{msg.label_perdedor_abaixo_adversario_sem_marcar_sets}*</label>
-						<h:inputText id="pontuacaoPerdedorAbaixoDoAdversarioSemMarcarParciais" value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoPerdedorAbaixoDoAdversarioSemMarcarParciais}" alt="small-integer"/>
+						<label for="add-barragens:pontuacaoPerdedorPrimeiraRodada" class="#{messageBean.errorMessages['pontuacaoPerdedorPrimeiraRodada'] != null ? 'error' : ''}">#{msg.label_pontuacao_de_perdedor_na_primeira_rodada}*</label>
+						<h:inputText id="pontuacaoPerdedorPrimeiraRodada" value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoPerdedorPrimeiraRodada}" alt="small-integer"/>
 					</div>
 					<div class="input text">
-						<label for="add-barragens:pontuacaoPerdedorAbaixoDoAdversarioMarcandoParciais" class="#{messageBean.errorMessages['pontuacaoPerdedorAbaixoDoAdversarioMarcandoParciais'] != null ? 'error' : ''}">#{msg.label_perdedor_abaixo_adversario_marcando_sets}*</label>
-						<h:inputText id="pontuacaoPerdedorAbaixoDoAdversarioMarcandoParciais" value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoPerdedorAbaixoDoAdversarioMarcandoParciais}" alt="small-integer"/>
+						<label for="add-barragens:rodadasDeHistoricoMantidasParaCalculoDoRanking" class="#{messageBean.errorMessages['rodadasDeHistoricoMantidasParaCalculoDoRanking'] != null ? 'error' : ''}">#{msg.label_rodadas_de_historico_mantidas_para_calculo_do_ranking}*</label>
+						<h:inputText id="rodadasDeHistoricoMantidasParaCalculoDoRanking" value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.rodadasDeHistoricoMantidasParaCalculoDoRanking}" alt="small-integer"/>
 					</div>
-					<div class="input text">
-						<label for="add-barragens:pontuacaoPerdedorAcimaDoAdversarioSemMarcarParciais" class="#{messageBean.errorMessages['pontuacaoPerdedorAcimaDoAdversarioSemMarcarParciais'] != null ? 'error' : ''}">#{msg.label_perdedor_acima_adversario_sem_marcar_sets}*</label>
-						<h:inputText id="pontuacaoPerdedorAcimaDoAdversarioSemMarcarParciais" value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoPerdedorAcimaDoAdversarioSemMarcarParciais}" alt="small-integer"/>
+					<h3>#{msg.label_pontuacoes}</h3>
+					<h4>#{msg.label_pontuacao_vencedor}</h4>
+					<div class="pontuacao_vencedor">
+						<div class="input text">
+							<label for="add-barragens:pontuacaoVencedorAbaixoDoAdversarioSemPerderParciais" class="#{messageBean.errorMessages['pontuacaoVencedorAbaixoDoAdversarioSemPerderParciais'] != null ? 'error' : ''}">#{msg.label_vencedor_abaixo_adversario_sem_perder_sets}*</label>
+							<h:inputText id="pontuacaoVencedorAbaixoDoAdversarioSemPerderParciais" value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoVencedorAbaixoDoAdversarioSemPerderParciais}" alt="small-integer"/>
+						</div>
+						<div class="input text">
+							<label for="add-barragens:pontuacaoVencedorAbaixoDoAdversarioPerdendoParciais" class="#{messageBean.errorMessages['pontuacaoVencedorAbaixoDoAdversarioPerdendoParciais'] != null ? 'error' : ''}">#{msg.label_vencedor_abaixo_adversario_perdendo_sets}*</label>
+							<h:inputText id="pontuacaoVencedorAbaixoDoAdversarioPerdendoParciais" value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoVencedorAbaixoDoAdversarioPerdendoParciais}" alt="small-integer"/>
+						</div>
+						<div class="input text">
+							<label for="add-barragens:pontuacaoVencedorAcimaDoAdversarioSemPerderParciais" class="#{messageBean.errorMessages['pontuacaoVencedorAcimaDoAdversarioSemPerderParciais'] != null ? 'error' : ''}">#{msg.label_vencedor_acima_adversario_sem_perder_sets}*</label>
+							<h:inputText id="pontuacaoVencedorAcimaDoAdversarioSemPerderParciais" value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoVencedorAcimaDoAdversarioSemPerderParciais}" alt="small-integer"/>
+						</div>
+						<div class="input text">
+							<label for="add-barragens:pontuacaoVencedorAcimaDoAdversarioPerdendoParciais" class="#{messageBean.errorMessages['pontuacaoVencedorAcimaDoAdversarioPerdendoParciais'] != null ? 'error' : ''}">#{msg.label_vencedor_acima_adversario_perdendo_sets}*</label>
+							<h:inputText id="pontuacaoVencedorAcimaDoAdversarioPerdendoParciais" value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoVencedorAcimaDoAdversarioPerdendoParciais}" alt="small-integer"/>
+						</div>
 					</div>
-					<div class="input text">
-						<label for="add-barragens:pontuacaoPerdedorAcimaDoAdversarioMarcandoParciais" class="#{messageBean.errorMessages['pontuacaoPerdedorAcimaDoAdversarioMarcandoParciais'] != null ? 'error' : ''}">#{msg.label_perdedor_acima_adversario_marcando_sets}*</label>
-						<h:inputText id="pontuacaoPerdedorAcimaDoAdversarioMarcandoParciais" value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoPerdedorAcimaDoAdversarioMarcandoParciais}" alt="small-integer"/>
+					<h4>#{msg.label_pontuacao_perdedor}</h4>
+					<div class="pontuacao_perdedor">
+						<div class="input text">
+							<label for="add-barragens:pontuacaoPerdedorAbaixoDoAdversarioSemMarcarParciais" class="#{messageBean.errorMessages['pontuacaoPerdedorAbaixoDoAdversarioSemMarcarParciais'] != null ? 'error' : ''}">#{msg.label_perdedor_abaixo_adversario_sem_marcar_sets}*</label>
+							<h:inputText id="pontuacaoPerdedorAbaixoDoAdversarioSemMarcarParciais" value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoPerdedorAbaixoDoAdversarioSemMarcarParciais}" alt="small-integer"/>
+						</div>
+						<div class="input text">
+							<label for="add-barragens:pontuacaoPerdedorAbaixoDoAdversarioMarcandoParciais" class="#{messageBean.errorMessages['pontuacaoPerdedorAbaixoDoAdversarioMarcandoParciais'] != null ? 'error' : ''}">#{msg.label_perdedor_abaixo_adversario_marcando_sets}*</label>
+							<h:inputText id="pontuacaoPerdedorAbaixoDoAdversarioMarcandoParciais" value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoPerdedorAbaixoDoAdversarioMarcandoParciais}" alt="small-integer"/>
+						</div>
+						<div class="input text">
+							<label for="add-barragens:pontuacaoPerdedorAcimaDoAdversarioSemMarcarParciais" class="#{messageBean.errorMessages['pontuacaoPerdedorAcimaDoAdversarioSemMarcarParciais'] != null ? 'error' : ''}">#{msg.label_perdedor_acima_adversario_sem_marcar_sets}*</label>
+							<h:inputText id="pontuacaoPerdedorAcimaDoAdversarioSemMarcarParciais" value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoPerdedorAcimaDoAdversarioSemMarcarParciais}" alt="small-integer"/>
+						</div>
+						<div class="input text">
+							<label for="add-barragens:pontuacaoPerdedorAcimaDoAdversarioMarcandoParciais" class="#{messageBean.errorMessages['pontuacaoPerdedorAcimaDoAdversarioMarcandoParciais'] != null ? 'error' : ''}">#{msg.label_perdedor_acima_adversario_marcando_sets}*</label>
+							<h:inputText id="pontuacaoPerdedorAcimaDoAdversarioMarcandoParciais" value="#{gerirBarragemBean.barragemEmFoco.parametrosIniciais.pontuacaoPerdedorAcimaDoAdversarioMarcandoParciais}" alt="small-integer"/>
+						</div>
 					</div>
 				</div>
 				<div class="salvar">
 					<label class="campos_obrigatorios">#{msg.label_campos_marcados_sao_obrigatorios}</label>
 					<a4j:commandButton actionListener="#{gerirBarragemBean.salvaBarragem}"
 						value="#{msg.label_salvar}" reRender="add-barragens,painelBarragens,mensagemSucesso" styleClass="submit" oncomplete="$.fn.colorbox.resize()"/>
+					<a4j:commandButton id="mostraOpcoesAvancadas"
+						value="#{msg.label_mostra_opcoes_avancadas}" styleClass="submit" onclick="$j('#hidden').toggle(); $j('#add-barragens\\:mostraOpcoesAvancadas').toggle(); $j('#add-barragens\\:escondeOpcoesAvancadas').toggle();" oncomplete="$.fn.colorbox.resize();"/>
+					<a4j:commandButton id="escondeOpcoesAvancadas" style="display:none;"
+						value="#{msg.label_esconde_opcoes_avancadas}" styleClass="submit" onclick="$j('#hidden').toggle(); $j('#add-barragens\\:mostraOpcoesAvancadas').toggle(); $j('#add-barragens\\:escondeOpcoesAvancadas').toggle();" oncomplete="$.fn.colorbox.resize();"/>
 				</div>
 			</div>
 		</h:form>
