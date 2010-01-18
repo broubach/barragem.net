@@ -13,9 +13,9 @@
 		    createContent="#{arquivoBean.paintFotoPerfil}" styleClass="foto-perfil"
 		    cacheable="false">
 		</a4j:mediaOutput>
-       	<c:if test="#{sessionScope['usuario'].perfil != null}">
-	        <div class="dados-jogador bloco">
-	            <dl>
+        <div class="dados-jogador bloco">
+            <dl>
+		       	<c:if test="#{sessionScope['usuario'].perfil != null}">
 	            	<c:if test="#{sessionScope['usuario'].perfil.professorNome != ''}">
 		                <dt>#{msg.label_tecnico}:</dt>
 		                <dd>#{sessionScope['usuario'].perfil.professorNome}</dd>
@@ -28,10 +28,10 @@
 		                <dt>#{msg.label_joga_ha}:</dt>
 		                <dd>#{sessionScope['usuario'].perfil.jogoHa} #{msg[sessionScope['usuario'].perfil.jogoHaUnidadeKey]}</dd>
 	                </c:if>
-	            </dl>
-	            <div class="clear"></div>
-	        </div>
-        </c:if>
+		        </c:if>
+            </dl>
+            <div class="clear"></div>
+        </div>
         <div class="menu bloco">
             <ul>
                 <li>
