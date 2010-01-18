@@ -20,22 +20,24 @@
 			</div>
 		</h:form>
 	</div>
-	<div class="language">
-		<ul>
-			<li class="active">
-				<a href="#" title="Português">
-					<img src="#{request.contextPath}/img/flags/br.png" border="0" title="Escolha seu idioma" alt="" /> #{msg.label_escolha_seu_idioma}</a>
-			</li>
-			<li>
-				<a href="#" title="Español">
-					<img src="#{request.contextPath}/img/flags/es.png" border="0" title="Escolha seu idioma" alt="" /> #{msg.label_escolha_seu_idioma}</a>
-			</li>
-			<li>
-				<a href="#" title="English">
-					<img src="#{request.contextPath}/img/flags/gb.png" border="0" title="Escolha seu idioma" alt="" /> #{msg.label_escolha_seu_idioma}</a>
-			</li>
-		</ul>
-	</div>
+	<c:if test="false">
+		<div class="language">
+			<ul>
+				<li class="active">
+					<a href="#" title="Português">
+						<img src="#{request.contextPath}/img/flags/br.png" border="0" title="Escolha seu idioma" alt="" /> #{msg.label_escolha_seu_idioma}</a>
+				</li>
+				<li>
+					<a href="#" title="Español">
+						<img src="#{request.contextPath}/img/flags/es.png" border="0" title="Escolha seu idioma" alt="" /> #{msg.label_escolha_seu_idioma}</a>
+				</li>
+				<li>
+					<a href="#" title="English">
+						<img src="#{request.contextPath}/img/flags/gb.png" border="0" title="Escolha seu idioma" alt="" /> #{msg.label_escolha_seu_idioma}</a>
+				</li>
+			</ul>
+		</div>
+	</c:if>
 	<form action="#" id="searchForm">
 		<label for="search">#{msg.label_pesquisar}</label>
 		<input type="text" title="#{msg.label_pesquisar}"/>
