@@ -10,14 +10,19 @@
 	    <a href="/barragem/" class="brand">#{msg.label_brand}</a>
 	</h1>
 	<div class="sidebar-header">
-	 <h:form>
-	     <h:commandLink action="login" actionListener="#{loginBean.sair}" title="Sair" styleClass="logout">
+	<h:form>
+	     <h:commandLink action="login" actionListener="#{loginBean.sair}" title="#{msg.label_sair}" styleClass="logout">
 	         <img src="#{request.contextPath}/img/buttons/btn_sair.gif" alt="#{msg.label_sair}" />
 	     </h:commandLink>
-	     <p>#{msg.label_ola} #{sessionScope['usuario'].nome}! <strong><a href="/barragem/usuarios/perfil">#{msg.label_editar_perfil}</a></strong>
+	     <p>#{msg.label_ola} #{sessionScope['usuario'].nome}! 
+		     <c:if test="#{not naoMostrarEditarPerfil}">
+			     <strong><h:commandLink action="editarPerfil" actionListener="#{editarPerfilBean.editaPerfil}">#{msg.label_editar_perfil}</h:commandLink></strong>
+		     </c:if>
 	     </p>
-	     <p>#{msg.label_seu_ultimo_acesso_foi_em}&#160;<h:outputText value="#{sessionScope['usuario'].dataUltimoAcesso}"><f:convertDateTime type="date" dateStyle="long"/></h:outputText></p>
-	 </h:form>
+	     <c:if test="#{not naoMostrarEditarPerfil}">
+		     <p>#{msg.label_seu_ultimo_acesso_foi_em}&#160;<h:outputText value="#{sessionScope['usuario'].dataUltimoAcesso}"><f:convertDateTime type="date" dateStyle="long"/></h:outputText></p>
+	     </c:if>
+	</h:form>
 	</div>
 	<c:if test="false">
 		<div class="language">
@@ -36,7 +41,7 @@
 		        </li>
 		    </ul>
 		</div>
-		</c:if>
+	</c:if>
 	<form action="#" id="searchForm">
 	    <label for="search">#{msg.label_pesquisar}</label>
 	    <input type="text" title="#{msg.label_pesquisar}"/>

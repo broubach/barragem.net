@@ -9,9 +9,10 @@ $j(function() {
 		      antiAlias: true
 	};
 	curvyCorners(settings, "fieldset");
-	curvyCorners(settings, ".sidebar-header");
 	curvyCorners(settings, ".passoInativo");
 	curvyCorners(settings, ".passoAtivo");
+	curvyCorners(settings, ".sidebar-header");
+	curvyCorners(settings, ".perfilContainer");
 
 	settings = {
 		      tl: { radius: 3 },
@@ -29,7 +30,15 @@ $j(function() {
 		      br: { radius: 5 },
 		      antiAlias: true
 	};
-  	curvyCorners(settings, ".sidebar");
   	curvyCorners(settings, ".btn-novo");
+
+	settings = {
+		      tl: { radius: 20 },
+		      tr: { radius: 20 },
+		      bl: { radius: 20 },
+		      br: { radius: 20 },
+		      antiAlias: true
+	};
   	curvyCorners(settings, ".maincontent");
-})
+  	curvyCorners(settings, ".sidebar");
+});

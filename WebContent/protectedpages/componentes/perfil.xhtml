@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+	<script type="text/javascript" src="#{request.contextPath}/js/jquery.maskedinput-1.2.2.min.js"></script>
+	<script>
+           $j(function(){
+			aplicarMascaras();
+			if ($j('#perfil\\:clubeMaisFrequentadoNome').val() == '#{msg.label_casa}') {
+				$j('#isCasa').attr('checked', true); 
+				$j('#perfil\\:clubeMaisFrequentadoNome').attr('readonly', true);
+			} 
+		});
+	</script>
+
+	<div class="dados">
+		<div class="input text">
+			<label for="perfil:dataInicioPratica">#{msg.label_quando_comecou_a_jogar_tenis}</label>
+			<h:inputText id="dataInicioPratica" value="#{editarPerfilBean.perfilEmFoco.dataInicioPratica}" styleClass="MMyyyy" size="10">
+				<f:convertDateTime pattern="MM/yyyy"/>
+			</h:inputText>
+			<span class="exemplo">#{msg.label_data_inicio_pratica_exemplo}</span>
+		</div>
+		<div class="input text">
+			<label for="perfil:ladoForehand">#{msg.label_em_qual_lado_voce_executa_o_forehand}</label>
+			<h:selectOneMenu id="ladoForehand" value="#{editarPerfilBean.perfilEmFoco.ladoForehand}">
+				<f:selectItem itemLabel="" itemValue=""/>
+				<f:selectItems value="#{lookupBean.listaLadosForehand}"/>
+			</h:selectOneMenu>
+		</div>
+		<div class="input text">
+			<label for="perfil:tipoBackhand">#{msg.label_seu_backhand_e_de_quantas_maos}</label>
+			<h:selectOneMenu id="tipoBackhand" value="#{editarPerfilBean.perfilEmFoco.tipoBackhand}">
+				<f:selectItem itemLabel="" itemValue=""/>
+				<f:selectItems value="#{lookupBean.listaTiposBackhand}"/>
+			</h:selectOneMenu>
+		</div>
+		<div class="input text">
+			<label for="perfil:professorNome">#{msg.label_qual_nome_do_tecnico}</label>
+			<h:inputText id="professorNome" value="#{editarPerfilBean.perfilEmFoco.professorNome}" maxlength="45" size="60"/>
+		</div>
+		<div class="input text">
+			<label for="perfil:clubeMaisFrequentadoNome">#{msg.label_em_qual_clube_voce_joga_com_mais_frequencia}</label>
+			<h:inputText id="clubeMaisFrequentadoNome" value="#{editarPerfilBean.perfilEmFoco.clubeMaisFrequentadoNome}" maxlength="45" size="30"/>
+			<input id="isCasa" type="checkbox" onclick="if ($j(this).is(':checked')) {$j('#perfil\\:clubeMaisFrequentadoNome').attr('value', '#{msg.label_casa}').attr('readonly', true) } else { $j('#perfil\\:clubeMaisFrequentadoNome').attr('value', '').attr('readonly', false)};"/> <span class="complemento">#{msg.label_jogo_em_casa}</span>
+			<span class="exemplo">#{msg.label_clube_mais_frequentado_exemplo}</span>
+		</div>
+		<div class="input text">
+			<label for="perfil:clubeMaisFrequentadoCidade">#{msg.label_em_que_cidade_esta_situada_a_academia}</label>
+			<h:inputText id="clubeMaisFrequentadoCidade" value="#{editarPerfilBean.perfilEmFoco.clubeMaisFrequentadoCidade}" maxlength="45" size="30"/>
+			<span class="exemplo">#{msg.label_clube_mais_frequentado_cidade_exemplo}</span>
+		</div>
+	</div>
+</html>

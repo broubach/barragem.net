@@ -13,7 +13,7 @@ import net.barragem.util.PersistenceHelper;
 import org.richfaces.event.UploadEvent;
 import org.richfaces.model.UploadItem;
 
-public class CriarPerfilBean extends BaseBean {
+public class EditarPerfilBean extends BaseBean {
 
 	private Perfil perfilEmFoco = new Perfil();
 	private Arquivo fotoEmFoco;
@@ -32,6 +32,15 @@ public class CriarPerfilBean extends BaseBean {
 
 	public void setFotoEmFoco(Arquivo fotoEmFoco) {
 		this.fotoEmFoco = fotoEmFoco;
+	}
+
+	public void editaPerfil(ActionEvent e) {
+		perfilEmFoco = getUsuarioLogado().getPerfil();
+		if (perfilEmFoco == null) {
+			perfilEmFoco = new Perfil();
+		} else if (perfilEmFoco.getFoto() != null) {
+			fotoEmFoco = perfilEmFoco.getFoto();
+		}
 	}
 
 	public void salvaPerfil(ActionEvent e) {
