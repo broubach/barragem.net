@@ -78,4 +78,11 @@ public class GerirBarragemBean extends BaseBean {
 
 		setRequestAttribute("gerirCicloBean", cicloBean);
 	}
+
+	public void exibePainelBarragem(ActionEvent e) {
+		Barragem barragem = (Barragem) PersistenceHelper.findByPk(Barragem.class, barragens.get(getIndex()).getId(),
+				"ciclos");
+		ExibirPainelBarragemBean painelBarragemBean = new ExibirPainelBarragemBean();
+		painelBarragemBean.setCicloEmFoco(barragem.getCiclos().get(0));
+	}
 }

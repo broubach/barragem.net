@@ -70,6 +70,11 @@
 		<managed-bean-class>net.barragem.view.backingbean.EditarPerfilBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>exibirPainelBarragemBean</managed-bean-name>
+		<managed-bean-class>net.barragem.view.backingbean.ExibirPainelBarragemBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
@@ -83,6 +88,10 @@
 		<navigation-case>
 			<from-outcome>editarCiclo</from-outcome>
 			<to-view-id>/protectedpages/gerirciclo/gerirCiclo.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>exibirPainelBarragem</from-outcome>
+			<to-view-id>/protectedpages/exibirpainelbarragem/exibirPainelBarragem.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
