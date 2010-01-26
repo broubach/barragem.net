@@ -78,8 +78,4 @@ public class EditarPerfilBean extends BaseBean {
 
 		event.getUploadItems().clear();
 	}
-
-	public long getTimeStamp() {
-		return System.currentTimeMillis();
-	}
 }

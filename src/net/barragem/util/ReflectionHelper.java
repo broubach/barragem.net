@@ -30,7 +30,16 @@ public class ReflectionHelper {
 		return object.getClass().getMethod(getGetterMethod(field), null).invoke(object, null);
 	}
 
+	public static void set(Object container, String field, Object value) throws IllegalArgumentException,
+			SecurityException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+		container.getClass().getMethod(getSetterMethod(field), value.getClass()).invoke(container, value);
+	}
+
 	private static String getGetterMethod(String field) {
 		return "get" + field.substring(0, 1).toUpperCase() + field.substring(1);
+	}
+
+	private static String getSetterMethod(String field) {
+		return "set" + field.substring(0, 1).toUpperCase() + field.substring(1);
 	}
 }

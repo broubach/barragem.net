@@ -12,309 +12,95 @@
 <ui:composition template="/protectedpages/layout/layoutPrincipal.xhtml">
 	<ui:define name="conteudo">
 		<div class="maincontent">
-			<h2>Nome da Barragem</h2>
-			<h3>Ciclo1</h3>
+			<script type="text/javascript" src="#{request.contextPath}/js/jquery.meio.mask.min_custom.js" charset="utf-8" ></script>
+			<script>
+				$j(function(){
+					$j('input:text').setMask();
+				});
+			</script>
+			<h:form>
+			<h2>#{exibirPainelBarragemBean.cicloEmFoco.barragem.nome}</h2>
+		    <div class="menu-contextual">
+		        <ul>
+					<c:forEach items="#{exibirPainelBarragemBean.cicloEmFoco.barragem.ciclos}" var="item" varStatus="status">
+						<li>
+							<h:commandLink actionListener="#{exibirPainelBarragemBean.visualizaCiclo}" value="#{item.nome}" disabled="#{exibirPainelBarragemBean.cicloEmFoco.id == item.id ? 'true' : 'false'}">
+								<f:param name="index" value="#{status.index}" />
+							</h:commandLink>
+						</li>
+					</c:forEach>
+		        </ul>
+		    </div>
 
-			<div style="width: 38%; float: left; padding:3px">
-				<table style="width: 100%; border-collapse:collapse; -moz-border-radius:10px; -webkit-border-radius:10px;background-color: #adc0fe;font-family:Arial,Helvetica,Sans-Serif;font-size:12px;">
-					<thead>
-						<tr style="moz-border-radius-topright: 10px; -moz-border-radius-topleft: 10px;">
-							<th style="padding: 4px;border-bottom:1px solid #FFFFFF;" colspan="2">Ranking</th>
-							<th style="padding: 4px;border-bottom:1px solid #FFFFFF;">Pts</th>
-							<th style="padding: 4px;border-bottom:1px solid #FFFFFF;">Nome</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr style="background-color: #dce4ff">
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;"><img src="#{request.contextPath}/img/foto-jogador.png" width="37" height="49"/></td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">1</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">0</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-						</tr>
-						<tr style="background-color: #e8d9d9">
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;"><img src="#{request.contextPath}/img/foto-jogador.png" width="37" height="49"/></td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">2</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">0</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-						</tr>
-						<tr style="background-color: #dce4ff">
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;"><img src="#{request.contextPath}/img/foto-jogador.png" width="37" height="49"/></td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">3</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">0</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-						</tr>
-						<tr style="background-color: #e8d9d9">
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;"><img src="#{request.contextPath}/img/foto-jogador.png" width="37" height="49"/></td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">4</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">0</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-						</tr>
-						<tr style="background-color: #dce4ff">
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;"><img src="#{request.contextPath}/img/foto-jogador.png" width="37" height="49"/></td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">5</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">0</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-						</tr>
-						<tr style="background-color: #e8d9d9">
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;"><img src="#{request.contextPath}/img/foto-jogador.png" width="37" height="49"/></td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">6</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">0</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-						</tr>
-						<tr style="background-color: #dce4ff">
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;"><img src="#{request.contextPath}/img/foto-jogador.png" width="37" height="49"/></td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">7</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">0</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-						</tr>
-						<tr style="background-color: #e8d9d9">
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;"><img src="#{request.contextPath}/img/foto-jogador.png" width="37" height="49"/></td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">8</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">0</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-						</tr>
-						<tr style="background-color: #dce4ff">
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;"><img src="#{request.contextPath}/img/foto-jogador.png" width="37" height="49"/></td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">9</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">0</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-						</tr>
-						<tr style="background-color: #e8d9d9">
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;"><img src="#{request.contextPath}/img/foto-jogador.png" width="37" height="49"/></td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">10</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">0</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-						</tr>
-						<tr style="background-color: #dce4ff">
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;"><img src="#{request.contextPath}/img/foto-jogador.png" width="37" height="49"/></td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">11</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">0</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-						</tr>
-						<tr style="background-color: #e8d9d9">
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;"><img src="#{request.contextPath}/img/foto-jogador.png" width="37" height="49"/></td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">12</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">0</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-						</tr>
-						<tr style="background-color: #dce4ff">
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;"><img src="#{request.contextPath}/img/foto-jogador.png" width="37" height="49"/></td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">13</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">0</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-						</tr>
-						<tr style="background-color: #e8d9d9">
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;"><img src="#{request.contextPath}/img/foto-jogador.png" width="37" height="49"/></td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">14</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">0</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-						</tr>
-						<tr style="background-color: #dce4ff">
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;"><img src="#{request.contextPath}/img/foto-jogador.png" width="37" height="49"/></td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">15</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">0</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-						</tr>
-						<tr style="background-color: #e8d9d9">
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;"><img src="#{request.contextPath}/img/foto-jogador.png" width="37" height="49"/></td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">16</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">0</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-						</tr>
-						<tr style="background-color: #dce4ff">
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;"><img src="#{request.contextPath}/img/foto-jogador.png" width="37" height="49"/></td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">17</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">0</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-						</tr>
-						<tr style="background-color: #e8d9d9">
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;"><img src="#{request.contextPath}/img/foto-jogador.png" width="37" height="49"/></td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">18</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">0</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-						</tr>
-						<tr style="background-color: #dce4ff">
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;"><img src="#{request.contextPath}/img/foto-jogador.png" width="37" height="49"/></td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">19</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">0</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-						</tr>
-						<tr style="background-color: #e8d9d9">
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;"><img src="#{request.contextPath}/img/foto-jogador.png" width="37" height="49"/></td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">20</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">0</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-						</tr>
-					</tbody>
-				</table>
+			<div class="exibirPainelBarragemRanking">
+			    <h:dataTable styleClass="exibirPainelBarragemRankingTable" rowClasses="exibirPainelBarragemRankingBodyBackground,exibirPainelBarragemRankingBodyBackgroundAlt" columnClasses="exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBody" value="#{exibirPainelBarragemBean.rankingFetch}" var="item" headerClass="exibirPainelBarragemRankingTableHead">
+					<f:facet name="header">
+						#{msg.label_ranking}
+					</f:facet>
+				    <h:column>
+						<a4j:mediaOutput id="info" element="img" mimeType="#{item.jogador.usuarioCorrespondente.perfil.foto.mime}"
+						    createContent="#{item.jogador.usuarioCorrespondente.perfil.foto.paintFoto}" styleClass="foto-perfil-small"
+						    cacheable="false" rendered="#{item.jogador.usuarioCorrespondente != null and item.jogador.usuarioCorrespondente.perfil != null and item.jogador.usuarioCorrespondente.perfil.foto != null}">
+						    <f:param name="time" value="#{exibirPainelBarragemBean.timeStamp}"/>  
+						</a4j:mediaOutput>
+						<a4j:mediaOutput id="info" element="img" mimeType="#{arquivoBean.fotoDefaultJogador.mime}"
+						    createContent="#{arquivoBean.fotoDefaultJogador.paintFoto}" styleClass="foto-perfil-small"
+						    cacheable="false" rendered="#{item.jogador.usuarioCorrespondente != null and (item.jogador.usuarioCorrespondente.perfil == null or item.jogador.usuarioCorrespondente.perfil.foto == null)}">
+						    <f:param name="time" value="#{exibirPainelBarragemBean.timeStamp}"/>  
+						</a4j:mediaOutput>
+				    </h:column>
+				    <h:column>
+						#{item.ranking}
+				    </h:column>
+				    <h:column>
+						#{item.pontuacao}
+				    </h:column>
+				    <h:column>
+						#{item.jogador.nome}
+				    </h:column>
+			    </h:dataTable>
 			</div>
 
-			<div style="width:58%; float: right; padding:3px">
-				<table style="width: 100%; border-collapse:collapse; -moz-border-radius:10px; -webkit-border-radius:10px;background-color: #adc0fe;font-family:Arial,Helvetica,Sans-Serif;font-size:12px;">
-					<thead>
-						<tr style="moz-border-radius-topright: 10px; -moz-border-radius-topleft: 10px;">
-							<th style="padding: 4px;border-bottom:1px solid #FFFFFF;">Rodada 7</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr style="background-color: #dce4ff">
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">X</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF; white-space: nowrap">6/3, 6/2</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF; white-space: nowrap">17/01/2010 17:00</td>
-						</tr>
-						<tr style="background-color: #e8d9d9">
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Rafael Nadal</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">X</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF; white-space: nowrap">6/3, 6/2</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF; white-space: nowrap">17/01/2010 17:00</td>
-						</tr>
-						<tr style="background-color: #dce4ff">
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">X</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF; white-space: nowrap">6/3, 6/2</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF; white-space: nowrap">17/01/2010 17:00</td>
-						</tr>
-						<tr style="background-color: #e8d9d9">
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Rafael Nadal</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">X</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF; white-space: nowrap">6/3, 6/2</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF; white-space: nowrap">17/01/2010 17:00</td>
-						</tr>
-						<tr style="background-color: #dce4ff">
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">X</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF; white-space: nowrap">6/3, 6/2</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF; white-space: nowrap">17/01/2010 17:00</td>
-						</tr>
-						<tr style="background-color: #e8d9d9">
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Rafael Nadal</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">X</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF; white-space: nowrap">6/3, 6/2</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF; white-space: nowrap">17/01/2010 17:00</td>
-						</tr>
-						<tr style="background-color: #dce4ff">
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">X</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF; white-space: nowrap">6/3, 6/2</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF; white-space: nowrap">17/01/2010 17:00</td>
-						</tr>
-						<tr style="background-color: #e8d9d9">
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Rafael Nadal</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">X</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF; white-space: nowrap">6/3, 6/2</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF; white-space: nowrap">17/01/2010 17:00</td>
-						</tr>
-						<tr style="background-color: #dce4ff">
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">X</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF; white-space: nowrap">6/3, 6/2</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF; white-space: nowrap">17/01/2010 17:00</td>
-						</tr>
-						<tr style="background-color: #e8d9d9">
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Rafael Nadal</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">X</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF; white-space: nowrap">6/3, 6/2</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF; white-space: nowrap">17/01/2010 17:00</td>
-						</tr>
-					</tbody>
-				</table>
-				<br/>
-		
-				<table style="width: 100%; border-collapse:collapse; -moz-border-radius:10px; -webkit-border-radius:10px;background-color: #adc0fe;font-family:Arial,Helvetica,Sans-Serif;font-size:12px;">
-					<thead>
-						<tr style="moz-border-radius-topright: 10px; -moz-border-radius-topleft: 10px;">
-							<th style="padding: 4px;border-bottom:1px solid #FFFFFF;">Rodada 7</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr style="background-color: #dce4ff">
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">X</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF; white-space: nowrap">6/3, 6/2</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF; white-space: nowrap">17/01/2010 17:00</td>
-						</tr>
-						<tr style="background-color: #e8d9d9">
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Rafael Nadal</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">X</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF; white-space: nowrap">6/3, 6/2</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF; white-space: nowrap">17/01/2010 17:00</td>
-						</tr>
-						<tr style="background-color: #dce4ff">
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">X</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF; white-space: nowrap">6/3, 6/2</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF; white-space: nowrap">17/01/2010 17:00</td>
-						</tr>
-						<tr style="background-color: #e8d9d9">
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Rafael Nadal</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">X</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF; white-space: nowrap">6/3, 6/2</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF; white-space: nowrap">17/01/2010 17:00</td>
-						</tr>
-						<tr style="background-color: #dce4ff">
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">X</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF; white-space: nowrap">6/3, 6/2</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF; white-space: nowrap">17/01/2010 17:00</td>
-						</tr>
-						<tr style="background-color: #e8d9d9">
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Rafael Nadal</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">X</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF; white-space: nowrap">6/3, 6/2</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF; white-space: nowrap">17/01/2010 17:00</td>
-						</tr>
-						<tr style="background-color: #dce4ff">
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">X</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF; white-space: nowrap">6/3, 6/2</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF; white-space: nowrap">17/01/2010 17:00</td>
-						</tr>
-						<tr style="background-color: #e8d9d9">
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Rafael Nadal</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">X</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF; white-space: nowrap">6/3, 6/2</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF; white-space: nowrap">17/01/2010 17:00</td>
-						</tr>
-						<tr style="background-color: #dce4ff">
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">X</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF; white-space: nowrap">6/3, 6/2</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF; white-space: nowrap">17/01/2010 17:00</td>
-						</tr>
-						<tr style="background-color: #e8d9d9">
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Rafael Nadal</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">X</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF;">Yevgeny Kafelnikov</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF; white-space: nowrap">6/3, 6/2</td>
-							<td style="padding: 2px; border-bottom:1px solid #FFFFFF; border-top:1px solid #FFFFFF; white-space: nowrap">17/01/2010 17:00</td>
-						</tr>
-					</tbody>
-				</table>
-				<br/>
-				Esta barragem possui 8 rodada(s).<br/>
-				Digite o numero da rodada a ser visualizada: <input type="text"/> <input type="submit" value="Visualizar" class="submit"/><br/>
+			<div class="exibirPainelBarragemRodada">
+				<c:forEach items="#{exibirPainelBarragemBean.rodadasFetch}" var="rodadaAtual" begin="#{exibirPainelBarragemBean.startIndex}" end="#{exibirPainelBarragemBean.endIndex}">
+				    <h:dataTable styleClass="exibirPainelBarragemRodadaTable" rowClasses="exibirPainelBarragemRankingBodyBackground,exibirPainelBarragemRankingBodyBackgroundAlt" columnClasses="exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBody,exibirPainelBarragemRodadaBodyVersus,exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBodyNoWrap,exibirPainelBarragemRankingBodyNoWrap" value="#{rodadaAtual.jogos}" var="item" headerClass="exibirPainelBarragemRankingTableHead">
+						<f:facet name="header">
+							#{msg.label_rodada} #{rodadaAtual.numero}
+						</f:facet>
+					    <h:column>
+							#{item.jogadoresEventos[0].jogador.nome}
+					    </h:column>
+					    <h:column>
+							#{item.jogadoresEventos[0].pontuacaoObtida}
+					    </h:column>
+					    <h:column>
+							&#160;
+					    </h:column>
+					    <h:column>
+							#{item.jogadoresEventos[1].jogador.nome}
+					    </h:column>
+					    <h:column>
+							#{item.jogadoresEventos[1].pontuacaoObtida}
+					    </h:column>
+					    <h:column>
+							#{item.placar}
+					    </h:column>
+					    <h:column>
+							<h:outputText value="#{item.data}" >
+								<f:convertDateTime pattern="dd/MM HH:mm"/>
+							</h:outputText>
+					    </h:column>
+				    </h:dataTable>
+					<br/>
+				</c:forEach>
+
+				<div class="dados">
+					#{msg.label_esta_barragem_possui} #{fn:length(exibirPainelBarragemBean.rodadasFetch)} #{msg.label__rodadas}.<br/>
+					#{msg.label_confira_outra_rodada}:&#160;<h:inputText value="#{exibirPainelBarragemBean.numeroRodada}" alt="small-integer" maxlength="3" size="3"/>&#160;<h:commandButton actionListener="#{exibirPainelBarragemBean.visualizar}" value="#{msg.label_visualizar}" styleClass="submit" /><br/>
+				</div>
 			</div>
             <div class="clear"></div>
+            </h:form>
 		</div>
 	</ui:define>
 

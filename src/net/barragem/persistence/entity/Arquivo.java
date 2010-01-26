@@ -1,5 +1,7 @@
 package net.barragem.persistence.entity;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -68,5 +70,9 @@ public class Arquivo extends BaseEntity {
 
 	public void setMime(String mime) {
 		this.mime = mime;
+	}
+
+	public void paintFoto(OutputStream stream, Object object) throws IOException {
+		stream.write(dado);
 	}
 }

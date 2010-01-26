@@ -13,7 +13,9 @@ $j(function() {
 	curvyCorners(settings, ".passoAtivo");
 	curvyCorners(settings, ".sidebar-header");
 	curvyCorners(settings, ".perfilContainer");
-
+//	curvyCorners(settings, ".exibirPainelBarragemRankingTable");
+//	curvyCorners(settings, ".exibirPainelBarragemRodadaTable");
+	
 	settings = {
 		      tl: { radius: 3 },
 		      tr: { radius: 3 },

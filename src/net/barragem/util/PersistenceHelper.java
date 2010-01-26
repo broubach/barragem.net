@@ -116,16 +116,26 @@ public class PersistenceHelper {
 		}
 	}
 
-	public static void initialize(String collectionName, Object... proxys) {
-		if (proxys == null) {
+	public static void initialize(String proxyName, Object... entities) {
+		if (entities == null) {
 			return;
 		}
 		Session session = null;
+		Object proxy = null;
 		try {
 			session = HibernateUtil.getSession();
-			for (Object proxy : proxys) {
-				session.lock(proxy, LockMode.NONE);
-				Hibernate.initialize(BeanUtils.getProperty(proxy, collectionName));
+			for (Object entity : entities) {
+				session.lock(entity, LockMode.NONE);
+				proxy = ReflectionHelper.get(entity, proxyName);
+				if (proxy instanceof BaseEntity) {
+					List result = find("select o from " + entity.getClass().getName() + " o join fetch o." + proxyName
+							+ " where o.id=" + ((BaseEntity) entity).getId());
+					if (!result.isEmpty()) {
+						ReflectionHelper.set(entity, proxyName, ReflectionHelper.get(result.get(0), proxyName));
+					}
+				} else {
+					Hibernate.initialize(proxy);
+				}
 			}
 		} catch (HibernateException e) {
 			throw new RuntimeException(e);

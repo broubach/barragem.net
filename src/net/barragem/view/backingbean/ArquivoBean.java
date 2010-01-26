@@ -14,6 +14,6 @@ public class ArquivoBean extends BaseBean {
 		} else {
 			arquivo = getUsuarioLogado().getPerfil().getFoto();
 		}
-		stream.write(arquivo.getDado());
+		arquivo.paintFoto(stream, object);
 	}
 }

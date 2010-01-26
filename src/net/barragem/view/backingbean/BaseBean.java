@@ -7,6 +7,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
 import java.util.Iterator;
 
+import javax.el.ValueExpression;
 import javax.faces.application.Application;
 import javax.faces.application.ViewHandler;
 import javax.faces.component.UIViewRoot;
@@ -261,5 +262,17 @@ public class BaseBean {
 
 	protected Arquivo getFotoDefaultJogador() {
 		return (Arquivo) getServletContext().getAttribute(FOTO_DEFAULT_JOGADOR_KEY);
+	}
+
+	protected Object evaluateElExpression(String elExpression) {
+		FacesContext context = FacesContext.getCurrentInstance();
+		Application app = context.getApplication();
+		ValueExpression expression = app.getExpressionFactory().createValueExpression(context.getELContext(),
+				elExpression, Object.class);
+		return expression.getValue(context.getELContext());
+	}
+
+	public long getTimeStamp() {
+		return System.currentTimeMillis();
 	}
 }
