@@ -38,15 +38,14 @@
 						#{msg.label_ranking}
 					</f:facet>
 				    <h:column>
-						<a4j:mediaOutput id="info" element="img" mimeType="#{item.jogador.usuarioCorrespondente.perfil.foto.mime}"
-						    createContent="#{item.jogador.usuarioCorrespondente.perfil.foto.paintFoto}" styleClass="foto-perfil-small"
+						<a4j:mediaOutput element="img" mimeType="#{item.jogador.usuarioCorrespondente.perfil.foto.mime}"
+						    createContent="#{exibirPainelBarragemBean.paintFoto}" styleClass="foto-perfil-small"
 						    cacheable="false" rendered="#{item.jogador.usuarioCorrespondente != null and item.jogador.usuarioCorrespondente.perfil != null and item.jogador.usuarioCorrespondente.perfil.foto != null}">
-						    <f:param name="time" value="#{exibirPainelBarragemBean.timeStamp}"/>  
+						    <f:param name="id" value="#{item.jogador.usuarioCorrespondente.perfil.id}"/>
 						</a4j:mediaOutput>
-						<a4j:mediaOutput id="info" element="img" mimeType="#{arquivoBean.fotoDefaultJogador.mime}"
+						<a4j:mediaOutput element="img" mimeType="#{arquivoBean.fotoDefaultJogador.mime}"
 						    createContent="#{arquivoBean.fotoDefaultJogador.paintFoto}" styleClass="foto-perfil-small"
 						    cacheable="false" rendered="#{item.jogador.usuarioCorrespondente != null and (item.jogador.usuarioCorrespondente.perfil == null or item.jogador.usuarioCorrespondente.perfil.foto == null)}">
-						    <f:param name="time" value="#{exibirPainelBarragemBean.timeStamp}"/>  
 						</a4j:mediaOutput>
 				    </h:column>
 				    <h:column>

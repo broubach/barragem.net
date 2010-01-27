@@ -9,7 +9,7 @@
 
     <div class="sidebar">
         <h3>#{sessionScope['usuario'].nomeCompletoUpper}</h3>
-		<a4j:mediaOutput id="info" element="img" mimeType="#{sessionScope['usuario'].perfil.foto.mime}"
+		<a4j:mediaOutput element="img" mimeType="#{sessionScope['usuario'].perfil.foto.mime}"
 		    createContent="#{arquivoBean.paintFotoPerfil}" styleClass="foto-perfil"
 		    cacheable="false">
 		</a4j:mediaOutput>

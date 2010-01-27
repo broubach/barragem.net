@@ -26,7 +26,7 @@ public class Usuario extends BaseEntity {
 	private Date aniversario;
 	private Date dataUltimoAcesso;
 
-	@OneToOne(mappedBy = "usuarioCorrespondente")
+	@OneToOne
 	private Jogador jogador;
 
 	@OneToOne(mappedBy = "usuario")

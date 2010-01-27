@@ -31,8 +31,8 @@ public class LookupBean extends BaseBean {
 
 		List<SelectItem> items = new ArrayList<SelectItem>();
 		Jogador jogador = null;
-		for (Iterator it = jogadores.iterator(); it.hasNext();) {
-			jogador = (Jogador) it.next();
+		for (Iterator<Jogador> it = jogadores.iterator(); it.hasNext();) {
+			jogador = it.next();
 			SelectItem selectItem = new SelectItem(jogador, jogador.getNome());
 			items.add(selectItem);
 		}

@@ -9,6 +9,7 @@ import javax.faces.event.ActionEvent;
 import net.barragem.persistence.entity.Ciclo;
 import net.barragem.persistence.entity.CicloJogador;
 import net.barragem.persistence.entity.Jogo;
+import net.barragem.persistence.entity.Placar;
 import net.barragem.persistence.entity.Rodada;
 import net.barragem.util.PersistenceHelper;
 import net.barragem.view.backingbean.componentes.JogadorEventoComparatorVencedorPrimeiro;
@@ -72,7 +73,7 @@ public class GerirRodadaBean extends BaseBean {
 	public void recalculaRankingEFechaRodada(ActionEvent e) {
 		PersistenceHelper.initialize("rodadas", rodadaEmFoco.getCiclo());
 		PersistenceHelper.initialize("ranking", rodadaEmFoco.getCiclo());
-		List proxys = new ArrayList();
+		List<Rodada> proxys = new ArrayList<Rodada>();
 		for (Rodada rodada : rodadaEmFoco.getCiclo().getRodadas()) {
 			proxys.add(rodada);
 		}
@@ -107,7 +108,7 @@ public class GerirRodadaBean extends BaseBean {
 		rodadaEmFoco = (Rodada) PersistenceHelper
 				.findByPk(Rodada.class, ciclo.getRodadas().get(index).getId(), "jogos");
 		PersistenceHelper.initialize("ranking", rodadaEmFoco.getCiclo());
-		List proxys = new ArrayList();
+		List<Placar> proxys = new ArrayList<Placar>();
 		for (Jogo jogo : rodadaEmFoco.getJogos()) {
 			proxys.add(jogo.getPlacar());
 			Collections.sort(jogo.getJogadoresEventos(), new JogadorEventoComparatorVencedorPrimeiro());

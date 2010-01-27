@@ -85,6 +85,6 @@ public class GerirBarragemBean extends BaseBean {
 
 		ExibirPainelBarragemBean painelBarragemBean = new ExibirPainelBarragemBean();
 		painelBarragemBean.setCicloEmFoco(barragem.getCiclos().get(0));
-		setRequestAttribute("exibirPainelBarragemBean", painelBarragemBean);
+		setSessionAttribute("exibirPainelBarragemBean", painelBarragemBean);
 	}
 }

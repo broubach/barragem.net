@@ -1,12 +1,17 @@
 package net.barragem.view.backingbean;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.event.ActionEvent;
 
 import net.barragem.persistence.entity.Ciclo;
 import net.barragem.persistence.entity.CicloJogador;
 import net.barragem.persistence.entity.JogoBarragem;
+import net.barragem.persistence.entity.Perfil;
 import net.barragem.persistence.entity.Rodada;
 import net.barragem.util.PersistenceHelper;
 
@@ -19,6 +24,7 @@ public class ExibirPainelBarragemBean extends BaseBean {
 	private Integer startIndex = new Integer(0);
 	private Integer endIndex = new Integer(1);
 	private Integer numeroRodada;
+	private Map<Integer, Perfil> cacheFotos = new HashMap<Integer, Perfil>();
 
 	public Ciclo getCicloEmFoco() {
 		return cicloEmFoco;
@@ -61,6 +67,10 @@ public class ExibirPainelBarragemBean extends BaseBean {
 		}
 	}
 
+	public void paintFoto(OutputStream stream, Object object) throws IOException {
+		cacheFotos.get(getId()).getFoto().paintFoto(stream, object);
+	}
+
 	public List<Rodada> getRodadasFetch() {
 		PersistenceHelper.initialize("rodadas", cicloEmFoco);
 		for (int i = startIndex; i < endIndex; i++) {
@@ -77,7 +87,16 @@ public class ExibirPainelBarragemBean extends BaseBean {
 		for (CicloJogador cicloJogador : cicloEmFoco.getRanking()) {
 			if (cicloJogador.getJogador().getUsuarioCorrespondente() != null
 					&& cicloJogador.getJogador().getUsuarioCorrespondente().getPerfil() != null) {
-				PersistenceHelper.initialize("foto", cicloJogador.getJogador().getUsuarioCorrespondente().getPerfil());
+				Perfil perfil = cacheFotos
+						.get(cicloJogador.getJogador().getUsuarioCorrespondente().getPerfil().getId());
+				if (perfil == null) {
+					PersistenceHelper.initialize("foto", cicloJogador.getJogador().getUsuarioCorrespondente()
+							.getPerfil());
+					perfil = cicloJogador.getJogador().getUsuarioCorrespondente().getPerfil();
+					cacheFotos.put(cicloJogador.getJogador().getUsuarioCorrespondente().getPerfil().getId(), perfil);
+				} else {
+					cicloJogador.getJogador().getUsuarioCorrespondente().setPerfil(perfil);
+				}
 			}
 		}
 		return cicloEmFoco.getRanking();

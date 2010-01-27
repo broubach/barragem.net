@@ -10,6 +10,7 @@ import java.util.Iterator;
 import javax.el.ValueExpression;
 import javax.faces.application.Application;
 import javax.faces.application.ViewHandler;
+import javax.faces.component.UIComponent;
 import javax.faces.component.UIViewRoot;
 import javax.faces.component.html.HtmlDataTable;
 import javax.faces.context.FacesContext;
@@ -46,10 +47,6 @@ public class BaseBean {
 
 	public void setDataTable(HtmlDataTable dataTable) {
 		this.dataTable = dataTable;
-	}
-
-	protected HttpServletRequest getServletRequest() {
-		return ((HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest());
 	}
 
 	public static void setApplicationAttribute(String key, Object value) {
@@ -166,7 +163,7 @@ public class BaseBean {
 	}
 
 	protected int getIndex() {
-		String index = getServletRequest().getParameter("index");
+		String index = getRequest().getParameter("index");
 		if (index == null || "".equals(index)) {
 			index = (String) getRequestAttribute("index");
 			if (index == null || "".equals(index)) {
@@ -178,7 +175,7 @@ public class BaseBean {
 	}
 
 	protected int getId() {
-		String id = getServletRequest().getParameter("id");
+		String id = getRequest().getParameter("id");
 		if (id == null || "".equals(id)) {
 			id = (String) getRequestAttribute("id");
 		}
@@ -241,7 +238,7 @@ public class BaseBean {
 
 	protected void sendMail(final String from, final String to, final String subject, final String body) {
 		BarragemJmsTemplate template = (BarragemJmsTemplate) WebApplicationContextUtils.getWebApplicationContext(
-				getServletRequest().getSession().getServletContext()).getBean("jmsTemplate");
+				getRequest().getSession().getServletContext()).getBean("jmsTemplate");
 		if (template.getEnabled()) {
 			template.send(new MessageCreator() {
 				public Message createMessage(Session session) throws JMSException {
@@ -274,5 +271,19 @@ public class BaseBean {
 
 	public long getTimeStamp() {
 		return System.currentTimeMillis();
+	}
+
+	protected UIComponent findComponent(UIComponent c, String id) {
+		if (id.equals(c.getId())) {
+			return c;
+		}
+		Iterator<UIComponent> kids = c.getFacetsAndChildren();
+		while (kids.hasNext()) {
+			UIComponent found = findComponent(kids.next(), id);
+			if (found != null) {
+				return found;
+			}
+		}
+		return null;
 	}
 }
