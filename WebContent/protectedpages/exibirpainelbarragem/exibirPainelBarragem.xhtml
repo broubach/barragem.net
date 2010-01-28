@@ -62,7 +62,7 @@
 
 			<div class="exibirPainelBarragemRodada">
 				<c:forEach items="#{exibirPainelBarragemBean.rodadasFetch}" var="rodadaAtual" begin="#{exibirPainelBarragemBean.startIndex}" end="#{exibirPainelBarragemBean.endIndex}">
-				    <h:dataTable styleClass="exibirPainelBarragemRodadaTable" rowClasses="exibirPainelBarragemRankingBodyBackground,exibirPainelBarragemRankingBodyBackgroundAlt" columnClasses="exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBody,exibirPainelBarragemRodadaBodyVersus,exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBodyNoWrap,exibirPainelBarragemRankingBodyNoWrap" value="#{rodadaAtual.jogos}" var="item" headerClass="exibirPainelBarragemRankingTableHead">
+				    <h:dataTable styleClass="exibirPainelBarragemRodadaTable" rowClasses="exibirPainelBarragemRankingBodyBackground,exibirPainelBarragemRankingBodyBackgroundAlt" columnClasses="exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBody,exibirPainelBarragemRodadaBodyVersus,exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBodyNoWrap,exibirPainelBarragemRankingBodyNoWrap" value="#{rodadaAtual.jogos}" var="item" headerClass="exibirPainelBarragemRankingTableHead">
 						<f:facet name="header">
 							#{msg.label_rodada} #{rodadaAtual.numero}
 						</f:facet>
@@ -73,7 +73,7 @@
 							#{item.jogadoresEventos[0].pontuacaoObtida}
 					    </h:column>
 					    <h:column>
-							&#160;
+							&#160;&#160;
 					    </h:column>
 					    <h:column>
 							#{item.jogadoresEventos[1].jogador.nome}
@@ -95,7 +95,7 @@
 
 				<div class="dados">
 					#{msg.label_esta_barragem_possui} #{fn:length(exibirPainelBarragemBean.rodadasFetch)} #{msg.label__rodadas}.<br/>
-					#{msg.label_confira_outra_rodada}:&#160;<h:inputText value="#{exibirPainelBarragemBean.numeroRodada}" alt="small-integer" maxlength="3" size="3"/>&#160;<h:commandButton actionListener="#{exibirPainelBarragemBean.visualizar}" value="#{msg.label_visualizar}" styleClass="submit" /><br/>
+					#{msg.label_confira_outra_rodada}:&#160;<h:inputText value="#{exibirPainelBarragemBean.numeroRodada}" alt="small-integer" maxlength="3" size="3"/>&#160;<h:commandButton actionListener="#{exibirPainelBarragemBean.visualizaRodada}" value="#{msg.label_visualizar}" styleClass="submit" /><br/>
 				</div>
 			</div>
             <div class="clear"></div>

@@ -89,7 +89,11 @@ public class RodadaJogosBarragemMestreDetalhe extends MestreDetalheImpl<Rodada, 
 		Parcial parcial = null;
 		for (Iterator<Parcial> it = r.getParciais().iterator(); it.hasNext();) {
 			parcial = it.next();
-			if (parcial.getParcialVencedor() == null || parcial.getParcialPerdedor() == null || r.getWo()) {
+			if (parcial.getParcialVencedor() == null
+					|| parcial.getParcialPerdedor() == null
+					|| r.getWo()
+					|| (parcial.getParcialVencedor().equals(new Integer(0)) && parcial.getParcialPerdedor().equals(
+							new Integer(0)))) {
 				if (parcial.getId() != null) {
 					parcial.setPlacar(null);
 					PersistenceHelper.remove(parcial);

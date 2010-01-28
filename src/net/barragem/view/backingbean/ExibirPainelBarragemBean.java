@@ -2,6 +2,8 @@ package net.barragem.view.backingbean;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,19 +69,35 @@ public class ExibirPainelBarragemBean extends BaseBean {
 		}
 	}
 
+	public void visualizaRodada(ActionEvent e) {
+		if (numeroRodada != null && numeroRodada > 0 && numeroRodada <= cicloEmFoco.getRodadas().size()) {
+			startIndex = cicloEmFoco.getRodadas().size() - numeroRodada;
+			endIndex = startIndex + 1;
+		} else {
+			numeroRodada = cicloEmFoco.getRodadas().size();
+			startIndex = 0;
+			endIndex = 1;
+		}
+		refreshView();
+	}
+
 	public void paintFoto(OutputStream stream, Object object) throws IOException {
 		cacheFotos.get(getId()).getFoto().paintFoto(stream, object);
 	}
 
 	public List<Rodada> getRodadasFetch() {
 		PersistenceHelper.initialize("rodadas", cicloEmFoco);
-		for (int i = startIndex; i < endIndex; i++) {
-			PersistenceHelper.initialize("jogos", cicloEmFoco.getRodadas().get(i));
-			for (JogoBarragem jogoBarragem : cicloEmFoco.getRodadas().get(i).getJogos()) {
-				PersistenceHelper.initialize("parciais", jogoBarragem.getPlacar());
+		List<Rodada> result = new ArrayList<Rodada>(cicloEmFoco.getRodadas());
+		Collections.reverse(result);
+		for (int i = startIndex; i <= endIndex; i++) {
+			if (i < result.size()) {
+				PersistenceHelper.initialize("jogos", result.get(i));
+				for (JogoBarragem jogoBarragem : result.get(i).getJogos()) {
+					PersistenceHelper.initialize("parciais", jogoBarragem.getPlacar());
+				}
 			}
 		}
-		return cicloEmFoco.getRodadas();
+		return result;
 	}
 
 	public List<CicloJogador> getRankingFetch() {
