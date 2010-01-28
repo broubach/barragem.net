@@ -75,6 +75,7 @@ public class EditarPerfilBean extends BaseBean {
 			perfilEmFoco.setFoto(fotoEmFoco);
 		}
 		PersistenceHelper.persiste(perfilEmFoco);
+		addMensagemAtualizacaoComSucesso();
 	}
 
 	public void paintFotoUpload(OutputStream stream, Object object) throws IOException {

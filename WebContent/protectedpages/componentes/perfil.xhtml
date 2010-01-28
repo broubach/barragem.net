@@ -9,12 +9,22 @@
 
 	<script type="text/javascript" src="#{request.contextPath}/js/jquery.maskedinput-1.2.2.min.js"></script>
 	<script>
-           $j(function(){
+        $j(function(){
 			aplicarMascaras();
 		});
 	</script>
 
 	<div class="dados">
+		<div class="input text">
+			<label for="perfil:clubeMaisFrequentadoNome">#{msg.label_em_qual_clube_voce_joga_com_mais_frequencia}</label>
+			<h:inputText id="clubeMaisFrequentadoNome" value="#{editarPerfilBean.perfilEmFoco.clubeMaisFrequentadoNome}" maxlength="45" size="30"/>
+			<span class="exemplo">#{msg.label_clube_mais_frequentado_exemplo}</span>
+		</div>
+		<div class="input text">
+			<label for="perfil:clubeMaisFrequentadoCidade">#{msg.label_em_qual_cidade_voce_joga_com_mais_frequencia}</label>
+			<h:inputText id="clubeMaisFrequentadoCidade" value="#{editarPerfilBean.perfilEmFoco.clubeMaisFrequentadoCidade}" maxlength="45" size="30"/>
+			<span class="exemplo">#{msg.label_clube_mais_frequentado_cidade_exemplo}</span>
+		</div>
 		<div class="input text">
 			<label for="perfil:dataInicioPratica">#{msg.label_quando_comecou_a_jogar_tenis}</label>
 			<h:inputText id="dataInicioPratica" value="#{editarPerfilBean.perfilEmFoco.dataInicioPratica}" styleClass="MMyyyy" size="10">
@@ -45,18 +55,17 @@
 			</span>
 		</div>
 		<div class="input text">
+			<label for="perfil:raquete">#{msg.label_qual_raquete_voce_joga}</label>
+			<h:inputText id="raquete" value="#{editarPerfilBean.perfilEmFoco.raquete}" maxlength="45" size="60"/>
+			<span class="exemplo">#{msg.label_raquete_exemplo}</span>
+		</div>
+		<div class="input text">
+			<label for="perfil:professor">#{msg.label_voce_e_professor}</label>
+			<h:selectBooleanCheckbox id="professor" value="#{editarPerfilBean.perfilEmFoco.professor}"/>
+		</div>
+		<div class="input text">
 			<label for="perfil:professorNome">#{msg.label_qual_nome_do_tecnico}</label>
 			<h:inputText id="professorNome" value="#{editarPerfilBean.perfilEmFoco.professorNome}" maxlength="45" size="60"/>
-		</div>
-		<div class="input text">
-			<label for="perfil:clubeMaisFrequentadoNome">#{msg.label_em_qual_clube_voce_joga_com_mais_frequencia}</label>
-			<h:inputText id="clubeMaisFrequentadoNome" value="#{editarPerfilBean.perfilEmFoco.clubeMaisFrequentadoNome}" maxlength="45" size="30"/>
-			<span class="exemplo">#{msg.label_clube_mais_frequentado_exemplo}</span>
-		</div>
-		<div class="input text">
-			<label for="perfil:clubeMaisFrequentadoCidade">#{msg.label_em_que_cidade_esta_situada_a_academia}</label>
-			<h:inputText id="clubeMaisFrequentadoCidade" value="#{editarPerfilBean.perfilEmFoco.clubeMaisFrequentadoCidade}" maxlength="45" size="30"/>
-			<span class="exemplo">#{msg.label_clube_mais_frequentado_cidade_exemplo}</span>
 		</div>
 	</div>
 </html>
