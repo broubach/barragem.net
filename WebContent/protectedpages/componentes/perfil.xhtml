@@ -11,10 +11,6 @@
 	<script>
            $j(function(){
 			aplicarMascaras();
-			if ($j('#perfil\\:clubeMaisFrequentadoNome').val() == '#{msg.label_casa}') {
-				$j('#isCasa').attr('checked', true); 
-				$j('#perfil\\:clubeMaisFrequentadoNome').attr('readonly', true);
-			} 
 		});
 	</script>
 
@@ -41,13 +37,20 @@
 			</h:selectOneMenu>
 		</div>
 		<div class="input text">
+			<label for="perfil:categoria">#{msg.label_em_quais_categorias_joga}</label>
+			<span>
+				<h:selectManyCheckbox id="categoria" value="#{editarPerfilBean.selectedItems}" layout="pageDirection" class="categoria">
+					<f:selectItems value="#{lookupBean.listaCategorias}"/>
+				</h:selectManyCheckbox>
+			</span>
+		</div>
+		<div class="input text">
 			<label for="perfil:professorNome">#{msg.label_qual_nome_do_tecnico}</label>
 			<h:inputText id="professorNome" value="#{editarPerfilBean.perfilEmFoco.professorNome}" maxlength="45" size="60"/>
 		</div>
 		<div class="input text">
 			<label for="perfil:clubeMaisFrequentadoNome">#{msg.label_em_qual_clube_voce_joga_com_mais_frequencia}</label>
 			<h:inputText id="clubeMaisFrequentadoNome" value="#{editarPerfilBean.perfilEmFoco.clubeMaisFrequentadoNome}" maxlength="45" size="30"/>
-			<input id="isCasa" type="checkbox" onclick="if ($j(this).is(':checked')) {$j('#perfil\\:clubeMaisFrequentadoNome').attr('value', '#{msg.label_casa}').attr('readonly', true) } else { $j('#perfil\\:clubeMaisFrequentadoNome').attr('value', '').attr('readonly', false)};"/> <span class="complemento">#{msg.label_jogo_em_casa}</span>
 			<span class="exemplo">#{msg.label_clube_mais_frequentado_exemplo}</span>
 		</div>
 		<div class="input text">

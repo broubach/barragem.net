@@ -151,4 +151,19 @@ public class PersistenceHelper {
 			}
 		}
 	}
+
+	public static <T> List<T> findAll(Class<T> c) {
+		Session session = null;
+		try {
+			session = HibernateUtil.getSession();
+			return session.createCriteria(c).list();
+
+		} catch (HibernateException e) {
+			throw new RuntimeException(e);
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+	}
 }

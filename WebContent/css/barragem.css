@@ -621,7 +621,17 @@ td.actions {
 	width: 37px; 
 	height: 49px;
 }
-	
+.dados .categoria {
+	display: inline;
+}
+.dados .categoria label {
+	float: right;
+	width: auto;
+	white-space: nowrap;
+	border: none;
+	margin-left: 5px;
+}
+
 /********************* DADOS *********************/
 .dados .salvarPerfil {
 	padding-top:10px;

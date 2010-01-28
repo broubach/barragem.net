@@ -2,11 +2,14 @@ package net.barragem.view.backingbean;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.faces.event.ActionEvent;
 
 import net.barragem.persistence.entity.Arquivo;
+import net.barragem.persistence.entity.Categoria;
 import net.barragem.persistence.entity.Perfil;
 import net.barragem.util.PersistenceHelper;
 
@@ -17,6 +20,7 @@ public class EditarPerfilBean extends BaseBean {
 
 	private Perfil perfilEmFoco = new Perfil();
 	private Arquivo fotoEmFoco;
+	private List<String> selectedItems;
 
 	public Perfil getPerfilEmFoco() {
 		return perfilEmFoco;
@@ -34,6 +38,14 @@ public class EditarPerfilBean extends BaseBean {
 		this.fotoEmFoco = fotoEmFoco;
 	}
 
+	public List<String> getSelectedItems() {
+		return selectedItems;
+	}
+
+	public void setSelectedItems(List<String> selectedItems) {
+		this.selectedItems = selectedItems;
+	}
+
 	public void editaPerfil(ActionEvent e) {
 		perfilEmFoco = getUsuarioLogado().getPerfil();
 		if (perfilEmFoco == null) {
@@ -41,10 +53,23 @@ public class EditarPerfilBean extends BaseBean {
 		} else if (perfilEmFoco.getFoto() != null) {
 			fotoEmFoco = perfilEmFoco.getFoto();
 		}
+		if (perfilEmFoco.getCategorias() != null && !perfilEmFoco.getCategorias().isEmpty()) {
+			selectedItems = new ArrayList<String>();
+			for (Categoria categoria : perfilEmFoco.getCategorias()) {
+				selectedItems.add(categoria.getId().toString());
+			}
+		}
 	}
 
 	public void salvaPerfil(ActionEvent e) {
 		perfilEmFoco.setUsuario(getUsuarioLogado());
+		if (selectedItems != null) {
+			List<Categoria> categorias = new ArrayList<Categoria>();
+			for (String selectedItem : selectedItems) {
+				categorias.add(PersistenceHelper.findByPk(Categoria.class, Integer.valueOf(selectedItem)));
+			}
+			perfilEmFoco.setCategorias(categorias);
+		}
 		getUsuarioLogado().setPerfil(perfilEmFoco);
 		if (fotoEmFoco != null) {
 			perfilEmFoco.setFoto(fotoEmFoco);

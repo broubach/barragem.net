@@ -30,6 +30,7 @@
 
 		<mapping class="net.barragem.persistence.entity.Arquivo" />
 		<mapping class="net.barragem.persistence.entity.Barragem" />
+		<mapping class="net.barragem.persistence.entity.Categoria" />
 		<mapping class="net.barragem.persistence.entity.Ciclo" />
 		<mapping class="net.barragem.persistence.entity.CicloJogador" />
 		<mapping class="net.barragem.persistence.entity.Evento" />

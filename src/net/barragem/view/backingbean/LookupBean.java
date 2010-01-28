@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.faces.model.SelectItem;
 
+import net.barragem.persistence.entity.Categoria;
 import net.barragem.persistence.entity.Jogador;
 import net.barragem.persistence.entity.LadoForehandEnum;
 import net.barragem.persistence.entity.ModalidadeDeSetsEnum;
@@ -34,6 +35,20 @@ public class LookupBean extends BaseBean {
 		for (Iterator<Jogador> it = jogadores.iterator(); it.hasNext();) {
 			jogador = it.next();
 			SelectItem selectItem = new SelectItem(jogador, jogador.getNome());
+			items.add(selectItem);
+		}
+		return items;
+	}
+
+	public List<SelectItem> getListaCategorias() {
+		List<Categoria> categorias = PersistenceHelper.findAll(Categoria.class);
+
+		List<SelectItem> items = new ArrayList<SelectItem>();
+		Categoria categoria = null;
+		for (Iterator<Categoria> it = categorias.iterator(); it.hasNext();) {
+			categoria = it.next();
+			SelectItem selectItem = new SelectItem(categoria.getId(), MessageBundleUtils.getInstance().get(
+					categoria.getNome()));
 			items.add(selectItem);
 		}
 		return items;

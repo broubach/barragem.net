@@ -2,10 +2,14 @@ package net.barragem.persistence.entity;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -28,11 +32,23 @@ public class Perfil extends BaseEntity {
 	@OneToOne
 	private Usuario usuario;
 
+	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
+	@JoinTable(name = "perfilcategoria", joinColumns = { @JoinColumn(name = "perfil_id") }, inverseJoinColumns = { @JoinColumn(name = "categoria_id") })
+	private List<Categoria> categorias;
+
 	public Perfil() {
 	}
 
 	public Perfil(Arquivo foto) {
 		this.foto = foto;
+	}
+
+	public List<Categoria> getCategorias() {
+		return categorias;
+	}
+
+	public void setCategorias(List<Categoria> categorias) {
+		this.categorias = categorias;
 	}
 
 	public String getClubeMaisFrequentadoNome() {
