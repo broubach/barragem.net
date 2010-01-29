@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<ui:composition template="/protectedpages/layout/layoutPrincipal.xhtml">
+	<ui:define name="conteudo">
+		<div class="maincontent">
+			<h:form id="perfil">
+				<h3>#{msg.label_perfil}</h3> <h2>#{exibirPerfilBean.usuarioEmFoco.nome}</h2>
+				<h:panelGroup id="menu-contextual" styleClass="menu-contextual" layout="block">
+			        <ul>
+			            <li>
+							<h:commandLink value="#{msg.label_adicionar_jogador}" actionListener="#{exibirPerfilBean.adicionaUsuario}" disabled="#{exibirPerfilBean.usuarioJahAdicionado}"/>
+			            </li>
+			        </ul>
+				</h:panelGroup>
+				
+				<div style="float:right">
+					<a4j:mediaOutput cacheable="false" element="img" mimeType="image/jpeg" styleClass="foto-perfil" 
+					    createContent="#{arquivoBean.paintFoto}" value="#{exibirPerfilBean.usuarioEmFoco.perfil}"
+					    rendered="#{exibirPerfilBean.usuarioEmFoco.perfil != null and exibirPerfilBean.usuarioEmFoco.perfil.foto != null}">
+					</a4j:mediaOutput>
+					<a4j:mediaOutput cacheable="false" element="img" mimeType="image/jpeg" styleClass="foto-perfil"
+					    createContent="#{arquivoBean.paintFoto}" value="#{exibirPerfilBean.fotoDefaultJogador}"
+					    rendered="#{exibirPerfilBean.usuarioEmFoco.perfil == null or exibirPerfilBean.usuarioEmFoco.perfil.foto == null}">
+					</a4j:mediaOutput>
+				</div>
+				
+				<div class="dados">
+					<div class="input text">
+						<label>#{msg.label_clube_mais_frequentado}</label>
+						<span>#{exibirPerfilBean.usuarioEmFoco.perfil.clubeMaisFrequentadoNome}</span>
+					</div>
+					<div class="input text">
+						<label>#{msg.label_cidade_onde_joga}</label>
+						<span>#{exibirPerfilBean.usuarioEmFoco.perfil.clubeMaisFrequentadoCidade}</span>
+					</div>
+					<div class="input text">
+						<label>#{msg.label_ha_quanto_tempo_joga}</label>
+						<h:outputText id="dataInicioPratica" value="#{exibirPerfilBean.usuarioEmFoco.perfil.dataInicioPratica}">
+							<f:convertDateTime pattern="MM/yyyy"/>
+						</h:outputText>
+					</div>
+					<div class="input text">
+						<label>#{msg.label_lado_do_forehand}</label>
+						<span>#{msg[exibirPerfilBean.usuarioEmFoco.perfil.ladoForehand.labelKey]}</span>
+					</div>
+					<div class="input text">
+						<label>#{msg.label_tipo_backhand}</label>
+						#{msg[exibirPerfilBean.usuarioEmFoco.perfil.tipoBackhand.labelKey]}
+					</div>
+				</div>
+			</h:form>
+		</div>
+	</ui:define>
+
+</ui:composition>
+</html>

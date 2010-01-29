@@ -49,7 +49,7 @@
 						</a4j:mediaOutput>
 				    </h:column>
 				    <h:column>
-						#{item.ranking}
+						<h:commandLink action="exibirPerfil" actionListener="#{exibirPerfilBean.exibePerfil}">#{item.ranking}<f:param name="id" value="#{item.jogador.usuarioCorrespondente.id}"/></h:commandLink>
 				    </h:column>
 				    <h:column>
 						#{item.pontuacao}

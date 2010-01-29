@@ -154,7 +154,7 @@ public class BaseBean {
 		return FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
 	}
 
-	protected Usuario getUsuarioLogado() {
+	public Usuario getUsuarioLogado() {
 		return (Usuario) getSessionAttribute("usuario");
 	}
 
@@ -257,7 +257,7 @@ public class BaseBean {
 		return getSession().getServletContext();
 	}
 
-	protected Arquivo getFotoDefaultJogador() {
+	public Arquivo getFotoDefaultJogador() {
 		return (Arquivo) getServletContext().getAttribute(FOTO_DEFAULT_JOGADOR_KEY);
 	}
 
