@@ -49,18 +49,23 @@ public class EditarPerfilBean extends BaseBean {
 	}
 
 	public void editaPerfil(ActionEvent e) {
-		perfilEmFoco = getUsuarioLogado().getPerfil();
-		if (perfilEmFoco == null) {
-			perfilEmFoco = new Perfil();
-		} else if (perfilEmFoco.getFoto() != null) {
-			fotoEmFoco = perfilEmFoco.getFoto();
+		EditarPerfilBean editarPerfilBean = new EditarPerfilBean();
+		editarPerfilBean.setPerfilEmFoco(getUsuarioLogado().getPerfil());
+		if (editarPerfilBean.getPerfilEmFoco() == null) {
+			editarPerfilBean.setPerfilEmFoco(new Perfil());
+		} else if (editarPerfilBean.getPerfilEmFoco().getFoto() != null) {
+			PersistenceHelper.initialize("foto", editarPerfilBean.getPerfilEmFoco());
+			editarPerfilBean.setFotoEmFoco(editarPerfilBean.getPerfilEmFoco().getFoto());
 		}
-		if (perfilEmFoco.getCategorias() != null && !perfilEmFoco.getCategorias().isEmpty()) {
-			selectedItems = new ArrayList<String>();
-			for (Categoria categoria : perfilEmFoco.getCategorias()) {
-				selectedItems.add(categoria.getId().toString());
+		if (editarPerfilBean.getPerfilEmFoco().getCategorias() != null
+				&& !editarPerfilBean.getPerfilEmFoco().getCategorias().isEmpty()) {
+			editarPerfilBean.setSelectedItems(new ArrayList<String>());
+			for (Categoria categoria : editarPerfilBean.getPerfilEmFoco().getCategorias()) {
+				editarPerfilBean.getSelectedItems().add(categoria.getId().toString());
 			}
 		}
+
+		setSessionAttribute("editarPerfilBean", editarPerfilBean);
 	}
 
 	public void salvaPerfil(ActionEvent e) {
@@ -74,11 +79,17 @@ public class EditarPerfilBean extends BaseBean {
 		}
 		getUsuarioLogado().setPerfil(perfilEmFoco);
 		if (fotoEmFoco != null) {
-			perfilEmFoco
-					.setHash(encriptMd5(fillLeft(perfilEmFoco.getId().toString(), MAX_HASH_SIZE, FILL_LEFT_CHAR)));
+			if (perfilEmFoco.getId() != null) {
+				perfilEmFoco
+						.setHash(encriptMd5(fillLeft(perfilEmFoco.getId().toString(), MAX_HASH_SIZE, FILL_LEFT_CHAR)));
+			}
 			perfilEmFoco.setFoto(fotoEmFoco);
 		}
 		PersistenceHelper.persiste(perfilEmFoco);
+		if (fotoEmFoco != null && perfilEmFoco.getHash() == null) {
+			perfilEmFoco.setHash(encriptMd5(fillLeft(perfilEmFoco.getId().toString(), MAX_HASH_SIZE, FILL_LEFT_CHAR)));
+			PersistenceHelper.persiste(perfilEmFoco);
+		}
 		addMensagemAtualizacaoComSucesso();
 	}
 

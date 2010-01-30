@@ -24,8 +24,8 @@
 		<h:panelGroup styleClass="perfilFotoContainer" layout="block">
 			<div>
 				<rich:panel>
-					<a4j:mediaOutput id="info" element="img" mimeType="#{editarPerfilBean.fotoEmFoco.mime}"
-					    createContent="#{editarPerfilBean.paintFotoUpload}" styleClass="foto-perfil"
+					<a4j:mediaOutput id="info" element="img" styleClass="foto-perfil"
+					    createContent="#{editarPerfilBean.paintFotoUpload}"
 					    cacheable="false">
 					    <f:param value="#{editarPerfilBean.timeStamp}" name="time"/>  
 					</a4j:mediaOutput>
