@@ -1,13 +1,10 @@
 package net.barragem.view.backingbean;
 
-import java.io.IOException;
-import java.io.OutputStream;
 import java.util.List;
 
 import javax.faces.event.ActionEvent;
 
 import net.barragem.persistence.entity.Jogador;
-import net.barragem.persistence.entity.Perfil;
 import net.barragem.persistence.entity.Usuario;
 import net.barragem.util.PersistenceHelper;
 
@@ -28,12 +25,6 @@ public class ExibirPerfilBean extends BaseBean {
 
 	public boolean getUsuarioJahAdicionado() {
 		return getUsuarioLogado().getJogadores().contains(usuarioEmFoco.getJogador());
-	}
-
-	public void usuarioEmFocoPaintFoto(OutputStream stream, Object object) throws IOException {
-		Perfil perfil = (Perfil) object;
-		PersistenceHelper.initialize("foto", perfil);
-		stream.write(perfil.getFoto().getDado());
 	}
 
 	public void adicionaUsuario(ActionEvent e) {

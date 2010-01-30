@@ -23,14 +23,10 @@
 				</h:panelGroup>
 				
 				<div style="float:right">
-					<a4j:mediaOutput cacheable="false" element="img" mimeType="image/jpeg" styleClass="foto-perfil" 
-					    createContent="#{arquivoBean.paintFoto}" value="#{exibirPerfilBean.usuarioEmFoco.perfil}"
-					    rendered="#{exibirPerfilBean.usuarioEmFoco.perfil != null and exibirPerfilBean.usuarioEmFoco.perfil.foto != null}">
-					</a4j:mediaOutput>
-					<a4j:mediaOutput cacheable="false" element="img" mimeType="image/jpeg" styleClass="foto-perfil"
-					    createContent="#{arquivoBean.paintFoto}" value="#{exibirPerfilBean.fotoDefaultJogador}"
-					    rendered="#{exibirPerfilBean.usuarioEmFoco.perfil == null or exibirPerfilBean.usuarioEmFoco.perfil.foto == null}">
-					</a4j:mediaOutput>
+			        <h:graphicImage value="/protectedpages/exibirimagem/exibirImagem?hash=#{exibirPerfilBean.usuarioEmFoco.perfil.hash}" styleClass="foto-perfil" 
+			        	rendered="#{exibirPerfilBean.usuarioEmFoco.perfil != null and exibirPerfilBean.usuarioEmFoco.perfil.hash != null}"/>
+			        <h:graphicImage value="/protectedpages/exibirimagem/exibirImagem?hash=default" styleClass="foto-perfil" 
+			        	rendered="#{exibirPerfilBean.usuarioEmFoco.perfil == null or exibirPerfilBean.usuarioEmFoco.perfil.hash == null}"/>
 				</div>
 				
 				<div class="dados">

@@ -18,6 +18,8 @@ import org.richfaces.model.UploadItem;
 
 public class EditarPerfilBean extends BaseBean {
 
+	private static final char FILL_LEFT_CHAR = '0';
+	private static final int MAX_HASH_SIZE = 9;
 	private Perfil perfilEmFoco = new Perfil();
 	private Arquivo fotoEmFoco;
 	private List<String> selectedItems;
@@ -72,6 +74,8 @@ public class EditarPerfilBean extends BaseBean {
 		}
 		getUsuarioLogado().setPerfil(perfilEmFoco);
 		if (fotoEmFoco != null) {
+			perfilEmFoco
+					.setHash(encriptMd5(fillLeft(perfilEmFoco.getId().toString(), MAX_HASH_SIZE, FILL_LEFT_CHAR)));
 			perfilEmFoco.setFoto(fotoEmFoco);
 		}
 		PersistenceHelper.persiste(perfilEmFoco);

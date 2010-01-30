@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -234,6 +235,17 @@ public class BaseBean {
 		} catch (NoSuchAlgorithmException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	protected String fillLeft(String toBeFilled, int size, char fillChar) {
+		char[] fill = new char[size];
+		Arrays.fill(fill, fillChar);
+
+		char[] toBeFilledArray = toBeFilled.toCharArray();
+		for (int i = 0; i < toBeFilledArray.length; i++) {
+			fill[9 - (toBeFilledArray.length - i)] = toBeFilledArray[i];
+		}
+		return String.valueOf(fill);
 	}
 
 	protected void sendMail(final String from, final String to, final String subject, final String body) {

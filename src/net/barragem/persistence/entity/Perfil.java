@@ -26,6 +26,7 @@ public class Perfil extends BaseEntity {
 	private LadoForehandEnum ladoForehand;
 	private TipoBackhandEnum tipoBackhand;
 	private String raquete;
+	private String hash;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
 	private Arquivo foto;
@@ -130,6 +131,14 @@ public class Perfil extends BaseEntity {
 
 	public void setRaquete(String raquete) {
 		this.raquete = raquete;
+	}
+
+	public String getHash() {
+		return hash;
+	}
+
+	public void setHash(String hashFoto) {
+		this.hash = hashFoto;
 	}
 
 	public String getJogoHa() {

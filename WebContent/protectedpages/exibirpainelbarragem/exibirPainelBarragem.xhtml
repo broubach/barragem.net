@@ -38,15 +38,10 @@
 						#{msg.label_ranking}
 					</f:facet>
 				    <h:column>
-						<a4j:mediaOutput element="img" mimeType="#{item.jogador.usuarioCorrespondente.perfil.foto.mime}"
-						    createContent="#{exibirPainelBarragemBean.paintFoto}" styleClass="foto-perfil-small"
-						    cacheable="false" rendered="#{item.jogador.usuarioCorrespondente != null and item.jogador.usuarioCorrespondente.perfil != null and item.jogador.usuarioCorrespondente.perfil.foto != null}">
-						    <f:param name="id" value="#{item.jogador.usuarioCorrespondente.perfil.id}"/>
-						</a4j:mediaOutput>
-						<a4j:mediaOutput element="img" mimeType="#{arquivoBean.fotoDefaultJogador.mime}"
-						    createContent="#{arquivoBean.fotoDefaultJogador.paintFoto}" styleClass="foto-perfil-small"
-						    cacheable="false" rendered="#{item.jogador.usuarioCorrespondente != null and (item.jogador.usuarioCorrespondente.perfil == null or item.jogador.usuarioCorrespondente.perfil.foto == null)}">
-						</a4j:mediaOutput>
+				        <h:graphicImage value="/protectedpages/exibirimagem/exibirImagem?hash=#{item.jogador.usuarioCorrespondente.perfil.hash}" styleClass="foto-perfil-small" 
+				        	rendered="#{item.jogador.usuarioCorrespondente != null and item.jogador.usuarioCorrespondente.perfil != null and item.jogador.usuarioCorrespondente.perfil.hash != null}"/>
+				        <h:graphicImage value="/protectedpages/exibirimagem/exibirImagem?hash=default" styleClass="foto-perfil-small" 
+				        	rendered="#{item.jogador.usuarioCorrespondente != null and (item.jogador.usuarioCorrespondente.perfil == null or item.jogador.usuarioCorrespondente.perfil.hash == null)}"/>
 				    </h:column>
 				    <h:column>
 						<h:commandLink action="exibirPerfil" actionListener="#{exibirPerfilBean.exibePerfil}">#{item.ranking}<f:param name="id" value="#{item.jogador.usuarioCorrespondente.id}"/></h:commandLink>

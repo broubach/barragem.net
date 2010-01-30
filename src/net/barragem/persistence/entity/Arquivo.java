@@ -8,9 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
+@NamedQueries( { @NamedQuery(name = "fotoIdQueryByHash", query = "select foto.id from Perfil perfil join perfil.foto foto where perfil.hash = :hash") })
 @Table(name = "arquivo")
 public class Arquivo extends BaseEntity {
 

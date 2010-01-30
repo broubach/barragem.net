@@ -9,10 +9,8 @@
 
     <div class="sidebar">
         <h3>#{sessionScope['usuario'].nomeCompletoUpper}</h3>
-		<a4j:mediaOutput element="img" mimeType="#{sessionScope['usuario'].perfil.foto.mime}"
-		    createContent="#{arquivoBean.paintFotoPerfil}" styleClass="foto-perfil"
-		    cacheable="false">
-		</a4j:mediaOutput>
+        <h:graphicImage value="/protectedpages/exibirimagem/exibirImagem?hash=#{sessionScope['usuario'].perfil.hash}" styleClass="foto-perfil" rendered="#{sessionScope['usuario'].perfil != null and sessionScope['usuario'].perfil.hash != null}"/>
+        <h:graphicImage value="/protectedpages/exibirimagem/exibirImagem?hash=default" styleClass="foto-perfil" rendered="#{sessionScope['usuario'].perfil == null or sessionScope['usuario'].perfil.hash == null}"/>
         <div class="dados-jogador bloco">
             <dl>
 		       	<c:if test="#{sessionScope['usuario'].perfil != null}">
