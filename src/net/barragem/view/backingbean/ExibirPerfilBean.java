@@ -24,7 +24,7 @@ public class ExibirPerfilBean extends BaseBean {
 	}
 
 	public boolean getUsuarioJahAdicionado() {
-		return getUsuarioLogado().getJogadores().contains(usuarioEmFoco.getJogador());
+		return getUsuarioLogado().hasJogador(usuarioEmFoco);
 	}
 
 	public void adicionaUsuario(ActionEvent e) {
