@@ -34,6 +34,7 @@ public class LoginBean extends BaseBean {
 			messages.addErrorMessage("login", "label_login_senha_invalidos");
 		} else {
 			// atualiza hora do ultimo acesso
+			usuarios.get(0).setDataPenultimoAcesso(usuarios.get(0).getDataUltimoAcesso());
 			usuarios.get(0).setDataUltimoAcesso(new Date());
 			PersistenceHelper.persiste(usuarios.get(0));
 			// coloca usuario na sessao

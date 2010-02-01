@@ -53,4 +53,8 @@ public class ExibirPerfilBean extends BaseBean {
 		painelBarragemBean.setCicloEmFoco(barragem.getCiclos().get(0));
 		setSessionAttribute("exibirPainelBarragemBean", painelBarragemBean);
 	}
+
+	public List<Barragem> getBarragens() {
+		return (List<Barragem>) PersistenceHelper.findByNamedQuery("barragensDeUsuarioQuery", usuarioEmFoco.getId());
+	}
 }

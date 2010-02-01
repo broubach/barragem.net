@@ -1,6 +1,8 @@
 package net.barragem.persistence.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -15,6 +17,7 @@ import javax.persistence.Table;
 @NamedQueries( {
 		@NamedQuery(name = "loginQuery", query = "select u from Usuario u left outer join u.perfil p where u.email = :email and u.senha = :senha"),
 		@NamedQuery(name = "perfilQuery", query = "select u from Usuario u left outer join u.perfil p where u.id = :id"),
+		@NamedQuery(name = "barragensDeUsuarioQuery", query = "select distinct c.barragem from Ciclo c join c.ranking r join r.jogador j join j.usuarioCorrespondente uc where uc.id = :id"),
 		@NamedQuery(name = "emailExistenteQuery", query = "select 1 from Usuario usuario where usuario.email = :email") })
 @Table(name = "usuario")
 public class Usuario extends BaseEntity {
@@ -26,6 +29,7 @@ public class Usuario extends BaseEntity {
 	private SexoEnum sexo;
 	private Date aniversario;
 	private Date dataUltimoAcesso;
+	private Date dataPenultimoAcesso;
 
 	@OneToOne
 	private Jogador jogador;
@@ -127,6 +131,14 @@ public class Usuario extends BaseEntity {
 		this.dataUltimoAcesso = dataUltimoAcesso;
 	}
 
+	public Date getDataPenultimoAcesso() {
+		return dataPenultimoAcesso;
+	}
+
+	public void setDataPenultimoAcesso(Date dataPenultimoAcesso) {
+		this.dataPenultimoAcesso = dataPenultimoAcesso;
+	}
+
 	public String getNomeCompletoUpper() {
 		return new StringBuilder().append(nome).append(" ").append(sobrenome).toString().toUpperCase();
 	}
@@ -154,5 +166,19 @@ public class Usuario extends BaseEntity {
 			}
 		}
 		return false;
+	}
+
+	public List<Jogador> getJogadoresSemOUsuarioCorrespondente() {
+		List<Jogador> result = new ArrayList<Jogador>();
+		result.addAll(getJogadores());
+		Jogador jogador = null;
+		for (Iterator<Jogador> it = result.iterator(); it.hasNext();) {
+			jogador = it.next();
+			if (jogador.getUsuarioCorrespondente() != null
+					&& jogador.getUsuarioCorrespondente().getId().equals(getId())) {
+				it.remove();
+			}
+		}
+		return result;
 	}
 }

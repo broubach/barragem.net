@@ -600,6 +600,36 @@ td.actions {
 .perfilBtnUploadFotoContainer {
 	float: left;
 }
+/********************* EXIBIR PERFIL *********************/
+
+.dadosExibirPerfil {
+	float: left;
+}
+.dadosExibirPerfilLinhas {
+	margin-bottom: 5px;
+	display: inline-table;
+}
+.dadosExibirPerfilColunaEsquerda {
+    padding-right: 5px;
+	border-right: 1px solid #888;
+	float: left;
+	width: 200px;
+}
+.dadosExibirPerfil .dadosExibirPerfilColunaDireita {
+	float: left;
+	width: 200px;
+	text-align: left;
+}
+.foto-exibir-perfil {
+	width: 123px; 
+	height: 162px;
+	padding: 10px;
+	background-color: #ffffff;
+	-moz-border-radius: 10px; 
+    -webkit-border-radius: 10px;
+    float: right;
+}
+
 /********************* FILEUPLOAD COMPONENT *********************/
 .rich-fileupload-list-decor {
 	border: 0px;
@@ -620,14 +650,6 @@ td.actions {
 .foto-perfil-small {
 	width: 37px; 
 	height: 49px;
-}
-.foto-exibir-perfil {
-	width: 123px; 
-	height: 162px;
-	padding: 10px;
-	background-color: #ffffff;
-	-moz-border-radius: 10px; 
-    -webkit-border-radius: 10px;
 }
 .dados .categoria {
 	display: inline;
@@ -1166,7 +1188,7 @@ div.error {
     color:#fff;
     font-weight:bold;
 }
-.dados label, .dados .exemplo, .dados .complemento {
+.dados label, .dados .exemplo, .dados .complemento, .dadosExibirPerfil label {
 	color:#444;
 	font-size:.8em;
 }

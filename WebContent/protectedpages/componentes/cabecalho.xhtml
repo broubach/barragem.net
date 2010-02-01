@@ -19,8 +19,8 @@
 			     <strong><h:commandLink action="editarPerfil" actionListener="#{editarPerfilBean.editaPerfil}">#{msg.label_editar_perfil}</h:commandLink></strong>
 		     </c:if>
 	     </p>
-	     <c:if test="#{not naoMostrarEditarPerfil}">
-		     <p>#{msg.label_seu_ultimo_acesso_foi_em}&#160;<h:outputText value="#{sessionScope['usuario'].dataUltimoAcesso}"><f:convertDateTime type="date" dateStyle="long"/></h:outputText></p>
+	     <c:if test="#{not naoMostrarEditarPerfil and sessionScope['usuario'].dataPenultimoAcesso != null}">
+		     <p>#{msg.label_seu_ultimo_acesso_foi_em}&#160;<h:outputText value="#{sessionScope['usuario'].dataPenultimoAcesso}"><f:convertDateTime type="date" dateStyle="long"/></h:outputText></p>
 	     </c:if>
 	</h:form>
 	</div>

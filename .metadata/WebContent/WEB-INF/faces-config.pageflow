@@ -45,5 +45,5 @@
     <bendPoints d1Width="-64" d2Width="-64"/>
   </links>
   <links id="pf12649456925141" target="pf12647703369621" source="pf12647703369621" outcome="exibirPerfil"/>
-  <links id="pf12649456925140" target="pf12644321560521" source="pf12647703369621" outcome="exibiraPainelBarragem"/>
+  <links id="pf12649456925140" target="pf12644321560521" source="pf12647703369621" outcome="exibirPainelBarragem"/>
 </pageflow:Pageflow>
