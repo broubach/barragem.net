@@ -621,6 +621,14 @@ td.actions {
 	width: 37px; 
 	height: 49px;
 }
+.foto-exibir-perfil {
+	width: 123px; 
+	height: 162px;
+	padding: 10px;
+	background-color: #ffffff;
+	-moz-border-radius: 10px; 
+    -webkit-border-radius: 10px;
+}
 .dados .categoria {
 	display: inline;
 }

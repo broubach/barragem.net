@@ -15,8 +15,8 @@
   <nodes xsi:type="pageflow:PFPage" name="protectedpages/*" x="122" y="2482" id="pf12638559426415" referenceLink="//@navigationRule.9/@fromViewId|" outlinks="pf12638559426416" path="/protectedpages/*"/>
   <nodes xsi:type="pageflow:PFPage" name="protectedpages/editarperfil/editarPerfil.xhtml" x="338" y="2482" id="pf12638559426417" referenceLink="//@navigationRule.9/@navigationCase.0/@toViewId|" outlinks="pf12639050985760" inlinks="pf12638559426416" path="/protectedpages/editarperfil/editarPerfil.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="protectedpages/editarperfil/editarFoto.xhtml" x="554" y="2482" id="pf12639050985761" referenceLink="//@navigationRule.8/@navigationCase.0/@toViewId|" inlinks="pf12639050985760" path="/protectedpages/editarperfil/editarFoto.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="protectedpages/exibirpainelbarragem/exibirPainelBarragem.xhtml" x="338" y="1714" id="pf12644321560521" referenceLink="//@navigationRule.10/@fromViewId|" outlinks="pf12647703369620" inlinks="pf12644321560510" path="/protectedpages/exibirpainelbarragem/exibirPainelBarragem.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="protectedpages/exibirperfil/exibirPerfil.xhtml" x="554" y="1714" id="pf12647703369621" referenceLink="//@navigationRule.10/@navigationCase.0/@toViewId|" inlinks="pf12647703369620" path="/protectedpages/exibirperfil/exibirPerfil.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="protectedpages/exibirpainelbarragem/exibirPainelBarragem.xhtml" x="338" y="1714" id="pf12644321560521" referenceLink="//@navigationRule.11/@navigationCase.1/@toViewId|" outlinks="pf12647703369620" inlinks="pf12644321560510 pf12649456925140" path="/protectedpages/exibirpainelbarragem/exibirPainelBarragem.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="protectedpages/exibirperfil/exibirPerfil.xhtml" x="554" y="1714" id="pf12647703369621" referenceLink="//@navigationRule.11/@fromViewId|" outlinks="pf12649456925141 pf12649456925140" inlinks="pf12647703369620 pf12649456925141" path="/protectedpages/exibirperfil/exibirPerfil.xhtml"/>
   <links id="pf12585715512183" target="pf12585715512344" source="pf12585715512182" outcome="login"/>
   <links id="pf12586750970150" target="pf12586750970152" source="pf12585715512344" outcome="passo1"/>
   <links id="pf12591191172030" target="pf12591191172031" source="pf12585715512344" outcome="esqueciMinhaSenha"/>
@@ -44,4 +44,6 @@
     <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
     <bendPoints d1Width="-64" d2Width="-64"/>
   </links>
+  <links id="pf12649456925141" target="pf12647703369621" source="pf12647703369621" outcome="exibirPerfil"/>
+  <links id="pf12649456925140" target="pf12644321560521" source="pf12647703369621" outcome="exibiraPainelBarragem"/>
 </pageflow:Pageflow>

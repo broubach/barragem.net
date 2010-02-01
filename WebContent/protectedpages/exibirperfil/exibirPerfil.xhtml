@@ -13,51 +13,128 @@
 	<ui:define name="conteudo">
 		<div class="maincontent">
 			<h:form id="perfil">
-				<h3>#{msg.label_perfil}</h3> <h2>#{exibirPerfilBean.usuarioEmFoco.nome}</h2>
+				<h3>#{msg.label_perfil}</h3> <h2>#{exibirPerfilBean.usuarioEmFoco.nomeCompletoCapital}</h2>
 				<h:panelGroup id="menu-contextual" styleClass="menu-contextual" layout="block">
 			        <ul>
 			            <li>
-							<h:commandLink value="#{msg.label_adicionar_jogador}" actionListener="#{exibirPerfilBean.adicionaUsuario}" disabled="#{exibirPerfilBean.usuarioJahAdicionado}"/>
+							<h:commandLink value="#{msg.label_adicionar_a_minha_lista_de_jogadores}" actionListener="#{exibirPerfilBean.adicionaUsuario}" disabled="#{exibirPerfilBean.usuarioJahAdicionado}"/>
 			            </li>
 			        </ul>
 				</h:panelGroup>
+
+	            <div class="clear"></div>
 				
-				<div style="float:right">
+				<div class="dados">
+					<c:if test="#{exibirPerfilBean.usuarioEmFoco.perfil != null and fn:length(exibirPerfilBean.usuarioEmFoco.perfil.clubeMaisFrequentadoNome) > 0}">
+						<div class="input text">
+							<label>#{msg.label_clube_mais_frequentado}</label>
+							<span class="spanPerfil">#{exibirPerfilBean.usuarioEmFoco.perfil.clubeMaisFrequentadoNome}</span>
+						</div>
+					</c:if>
+					<c:if test="#{exibirPerfilBean.usuarioEmFoco.perfil != null and fn:length(exibirPerfilBean.usuarioEmFoco.perfil.clubeMaisFrequentadoCidade) > 0}">
+						<div class="input text">
+							<label>#{msg.label_cidade_onde_joga}</label>
+							<span>#{exibirPerfilBean.usuarioEmFoco.perfil.clubeMaisFrequentadoCidade}</span>
+						</div>
+					</c:if>
+					<c:if test="#{exibirPerfilBean.usuarioEmFoco.perfil != null and exibirPerfilBean.usuarioEmFoco.perfil.dataInicioPratica != null}">
+						<div class="input text">
+							<label>#{msg.label_ha_quanto_tempo_joga}</label>
+							<h:outputText id="dataInicioPratica" value="#{exibirPerfilBean.usuarioEmFoco.perfil.dataInicioPratica}">
+								<f:convertDateTime pattern="MM/yyyy"/>
+							</h:outputText>
+						</div>
+					</c:if>
+					<c:if test="#{exibirPerfilBean.usuarioEmFoco.perfil != null and exibirPerfilBean.usuarioEmFoco.perfil.ladoForehand != null}">
+						<div class="input text">
+							<label>#{msg.label_lado_do_forehand}</label>
+							<span class="spanPerfil">#{msg[exibirPerfilBean.usuarioEmFoco.perfil.ladoForehand.labelKey]}</span>
+						</div>
+					</c:if>
+					<c:if test="#{exibirPerfilBean.usuarioEmFoco.perfil != null and exibirPerfilBean.usuarioEmFoco.perfil.tipoBackhand != null}">
+						<div class="input text">
+							<label>#{msg.label_tipo_backhand}</label>
+							<span class="spanPerfil">#{msg[exibirPerfilBean.usuarioEmFoco.perfil.tipoBackhand.labelKey]}</span>
+						</div>
+					</c:if>
+					<c:if test="#{exibirPerfilBean.usuarioEmFoco.perfil != null and fn:length(exibirPerfilBean.usuarioEmFoco.perfil.csCategorias) > 0}">
+						<div class="input text">
+							<label>#{msg.label_em_quais_categorias_joga}</label>
+							<span class="spanPerfil">#{exibirPerfilBean.usuarioEmFoco.perfil.csCategorias}</span>
+						</div>
+					</c:if>
+					<c:if test="#{exibirPerfilBean.usuarioEmFoco.perfil != null and fn:length(exibirPerfilBean.usuarioEmFoco.perfil.raquete) > 0}">
+						<div class="input text">
+							<label>#{msg.label_qual_raquete_voce_joga}</label>
+							<span class="spanPerfil">#{exibirPerfilBean.usuarioEmFoco.perfil.raquete}</span>
+						</div>
+					</c:if>
+					<c:if test="#{exibirPerfilBean.usuarioEmFoco.perfil != null and exibirPerfilBean.usuarioEmFoco.perfil.professor != null}">
+						<div class="input text">
+							<label>#{msg.label_voce_e_professor}</label>
+							<span class="spanPerfil">#{exibirPerfilBean.usuarioEmFoco.perfil.professor ? msg.label_sim : msg.label_nao}</span>
+						</div>
+					</c:if>
+					<c:if test="#{exibirPerfilBean.usuarioEmFoco.perfil != null and fn:length(exibirPerfilBean.usuarioEmFoco.perfil.professorNome) > 0}">
+						<div class="input text">
+							<label>#{msg.label_qual_nome_do_tecnico}</label>
+							<span class="spanPerfil">#{exibirPerfilBean.usuarioEmFoco.perfil.professorNome}</span>
+						</div>
+					</c:if>
+				</div>
+				
+				<div class="foto-exibir-perfil" style="float: left; position: relative;">
 			        <h:graphicImage value="/protectedpages/exibirimagem/exibirImagem?hash=#{exibirPerfilBean.usuarioEmFoco.perfil.hash}" styleClass="foto-perfil" 
 			        	rendered="#{exibirPerfilBean.usuarioEmFoco.perfil != null and exibirPerfilBean.usuarioEmFoco.perfil.hash != null}"/>
 			        <h:graphicImage value="/protectedpages/exibirimagem/exibirImagem?hash=default" styleClass="foto-perfil" 
 			        	rendered="#{exibirPerfilBean.usuarioEmFoco.perfil == null or exibirPerfilBean.usuarioEmFoco.perfil.hash == null}"/>
 				</div>
 				
-				<div class="dados">
-					<div class="input text">
-						<label>#{msg.label_clube_mais_frequentado}</label>
-						<span>#{exibirPerfilBean.usuarioEmFoco.perfil.clubeMaisFrequentadoNome}</span>
-					</div>
-					<div class="input text">
-						<label>#{msg.label_cidade_onde_joga}</label>
-						<span>#{exibirPerfilBean.usuarioEmFoco.perfil.clubeMaisFrequentadoCidade}</span>
-					</div>
-					<div class="input text">
-						<label>#{msg.label_ha_quanto_tempo_joga}</label>
-						<h:outputText id="dataInicioPratica" value="#{exibirPerfilBean.usuarioEmFoco.perfil.dataInicioPratica}">
-							<f:convertDateTime pattern="MM/yyyy"/>
-						</h:outputText>
-					</div>
-					<div class="input text">
-						<label>#{msg.label_lado_do_forehand}</label>
-						<span>#{msg[exibirPerfilBean.usuarioEmFoco.perfil.ladoForehand.labelKey]}</span>
-					</div>
-					<div class="input text">
-						<label>#{msg.label_tipo_backhand}</label>
-						#{msg[exibirPerfilBean.usuarioEmFoco.perfil.tipoBackhand.labelKey]}
-					</div>
+	            <div class="clear"></div>
+
+				#{msg.label_barragens_que_participa}
+				<div class="exibirPainelBarragemRanking">
+				    <h:dataTable styleClass="exibirPainelBarragemRankingTable" rowClasses="exibirPainelBarragemRankingBodyBackground,exibirPainelBarragemRankingBodyBackgroundAlt" columnClasses="exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBody" value="#{exibirPerfilBean.usuarioEmFoco.barragens}" var="item" headerClass="exibirPainelBarragemRankingTableHead">
+					    <h:column>
+							<f:facet name="header">
+								#{msg.label_local}
+							</f:facet>
+							<h:commandLink action="exibirPainelBarragem" actionListener="#{exibirPerfilBean.exibePainelBarragem}">#{item.local}<f:param name="id" value="#{item.id}"/></h:commandLink>
+					    </h:column>
+					    <h:column>
+							<f:facet name="header">
+								#{msg.label_nome}
+							</f:facet>
+							<h:commandLink action="exibirPainelBarragem" actionListener="#{exibirPerfilBean.exibePainelBarragem}">#{item.nome}<f:param name="id" value="#{item.id}"/></h:commandLink>
+					    </h:column>
+				    </h:dataTable>
 				</div>
 				
-				Barragens
+				#{msg.label_ultimos_jogos}
 				
-				
-				Amigos
+				{msg.label_lista_de_jogadores}
+				<div class="exibirPainelBarragemRanking">
+				    <h:dataTable styleClass="exibirPainelBarragemRankingTable" rowClasses="exibirPainelBarragemRankingBodyBackground,exibirPainelBarragemRankingBodyBackgroundAlt" columnClasses="exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBody" value="#{exibirPerfilBean.usuarioEmFoco.jogadores}" var="item" headerClass="exibirPainelBarragemRankingTableHead">
+					    <h:column>
+					        <h:graphicImage value="/protectedpages/exibirimagem/exibirImagem?hash=#{item.usuarioCorrespondente.perfil.hash}" styleClass="foto-perfil-small" 
+					        	rendered="#{item.usuarioCorrespondente != null and item.usuarioCorrespondente.perfil != null and item.usuarioCorrespondente.perfil.hash != null}"/>
+					        <h:graphicImage value="/protectedpages/exibirimagem/exibirImagem?hash=default" styleClass="foto-perfil-small" 
+					        	rendered="#{item.usuarioCorrespondente != null and (item.usuarioCorrespondente.perfil == null or item.usuarioCorrespondente.perfil.hash == null)}"/>
+					    </h:column>
+					    <h:column>
+							<f:facet name="header">
+								#{msg.label_nome}
+							</f:facet>
+							<c:if test="#{item.usuarioCorrespondente != null}">
+								<h:commandLink action="exibirPerfil" actionListener="#{exibirPerfilBean.exibePerfil}">#{item.nome}<f:param name="id" value="#{item.usuarioCorrespondente.id}"/></h:commandLink>
+							</c:if>
+							<c:if test="#{item.usuarioCorrespondente == null}">
+								#{item.nome}
+							</c:if>
+					    </h:column>
+				    </h:dataTable>
+				</div>
+
 			</h:form>
 		</div>
 	</ui:define>

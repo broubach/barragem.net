@@ -147,6 +147,7 @@ public class RegistrarNovoUsuarioBean extends BaseBean {
 				PersistenceHelper.persiste(usuarioEmFoco);
 				setUsuarioLogado(usuarioEmFoco);
 
+				// TODO: redigir conteudo de email
 				sendMail("no-reply@barragem.net", usuarioEmFoco.getEmail(), "Bem-vindo ao Barragem.net",
 						"Você se registrou no Barragem.net. O Email registrado é...");
 				return "passo2";

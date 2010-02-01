@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import net.barragem.util.MessageBundleUtils;
+
 @Entity
 @Table(name = "perfil")
 public class Perfil extends BaseEntity {
@@ -187,5 +189,16 @@ public class Perfil extends BaseEntity {
 		}
 
 		return "label_anos";
+	}
+
+	public String getCsCategorias() {
+		if (categorias != null && !categorias.isEmpty()) {
+			StringBuilder stb = new StringBuilder();
+			for (Categoria categoria : categorias) {
+				stb.append(MessageBundleUtils.getInstance().get(categoria.getNome())).append(", ");
+			}
+			return stb.toString().substring(0, stb.toString().length() - 2);
+		}
+		return "";
 	}
 }

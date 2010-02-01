@@ -13,6 +13,7 @@ $j(function() {
 	curvyCorners(settings, ".passoAtivo");
 	curvyCorners(settings, ".sidebar-header");
 	curvyCorners(settings, ".perfilContainer");
+  	curvyCorners(settings, ".foto-exibir-perfil");
 //	curvyCorners(settings, ".exibirPainelBarragemRankingTable");
 //	curvyCorners(settings, ".exibirPainelBarragemRodadaTable");
 	

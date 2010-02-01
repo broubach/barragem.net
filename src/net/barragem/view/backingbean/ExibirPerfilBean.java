@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.faces.event.ActionEvent;
 
+import net.barragem.persistence.entity.Barragem;
 import net.barragem.persistence.entity.Jogador;
 import net.barragem.persistence.entity.Usuario;
 import net.barragem.util.PersistenceHelper;
@@ -34,12 +35,22 @@ public class ExibirPerfilBean extends BaseBean {
 		novoJogador.setUsuarioDono(getUsuarioLogado());
 		PersistenceHelper.persiste(novoJogador);
 		addMensagemAtualizacaoComSucesso();
+		// TODO: redigir conteudo de email
 	}
 
 	public void exibePerfil(ActionEvent e) {
 		List<Usuario> usuarios = PersistenceHelper.findByNamedQuery("perfilQuery", getId());
-		PersistenceHelper.initialize("jogadores", getUsuarioLogado());
-
 		usuarioEmFoco = usuarios.get(0);
+		PersistenceHelper.initialize("jogadores", getUsuarioLogado());
+		PersistenceHelper.initialize("jogadores", usuarioEmFoco);
+		PersistenceHelper.initialize("barragens", usuarioEmFoco);
+	}
+
+	public void exibePainelBarragem(ActionEvent e) {
+		Barragem barragem = (Barragem) PersistenceHelper.findByPk(Barragem.class, getId(), "ciclos");
+
+		ExibirPainelBarragemBean painelBarragemBean = new ExibirPainelBarragemBean();
+		painelBarragemBean.setCicloEmFoco(barragem.getCiclos().get(0));
+		setSessionAttribute("exibirPainelBarragemBean", painelBarragemBean);
 	}
 }
