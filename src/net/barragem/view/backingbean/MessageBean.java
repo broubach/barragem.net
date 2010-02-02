@@ -13,7 +13,7 @@ public class MessageBean {
 
 	public FacesMessage getFirstInfoMessage() {
 		FacesMessage message = null;
-		for (Iterator<FacesMessage> it = FacesContext.getCurrentInstance().getMessages(); it.hasNext();) {
+		for (Iterator<FacesMessage> it = FacesContext.getCurrentInstance().getMessages(null); it.hasNext();) {
 			message = it.next();
 			if (message.getSeverity() == FacesMessage.SEVERITY_INFO) {
 				return message;
@@ -43,6 +43,23 @@ public class MessageBean {
 					.hasNext();) {
 				message = itMessages.next();
 				if (message.getSeverity() == FacesMessage.SEVERITY_ERROR) {
+					errors.put(clientId, message);
+				}
+			}
+		}
+		return errors;
+	}
+
+	public Map<String, FacesMessage> getInfoMessages() {
+		Map<String, FacesMessage> errors = new HashMap<String, FacesMessage>();
+		FacesMessage message = null;
+		String clientId = null;
+		for (Iterator<String> it = FacesContext.getCurrentInstance().getClientIdsWithMessages(); it.hasNext();) {
+			clientId = it.next();
+			for (Iterator<FacesMessage> itMessages = FacesContext.getCurrentInstance().getMessages(clientId); itMessages
+					.hasNext();) {
+				message = itMessages.next();
+				if (message.getSeverity() == FacesMessage.SEVERITY_INFO) {
 					errors.put(clientId, message);
 				}
 			}

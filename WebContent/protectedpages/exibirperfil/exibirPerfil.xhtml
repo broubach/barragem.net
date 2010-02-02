@@ -126,23 +126,9 @@
 				<br/>
 				
 				#{msg.label_lista_de_jogadores}<br/>
-				<div class="exibirPainelBarragemRanking">
-				    <h:dataTable styleClass="exibirPainelBarragemRankingTable" rowClasses="exibirPainelBarragemRankingBodyBackground,exibirPainelBarragemRankingBodyBackgroundAlt" columnClasses="exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBody" value="#{exibirPerfilBean.usuarioEmFoco.jogadoresSemOUsuarioCorrespondente}" var="item" headerClass="exibirPainelBarragemRankingTableHead">
-					    <h:column>
-					        <h:graphicImage value="/protectedpages/exibirimagem/exibirImagem?hash=#{item.usuarioCorrespondente.perfil.hash}" styleClass="foto-perfil-small" 
-					        	rendered="#{item.usuarioCorrespondente != null and item.usuarioCorrespondente.perfil != null and item.usuarioCorrespondente.perfil.hash != null}"/>
-					        <h:graphicImage value="/protectedpages/exibirimagem/exibirImagem?hash=default" styleClass="foto-perfil-small" 
-					        	rendered="#{item.usuarioCorrespondente != null and (item.usuarioCorrespondente.perfil == null or item.usuarioCorrespondente.perfil.hash == null)}"/>
-					    </h:column>
-					    <h:column>
-							<f:facet name="header">
-								#{msg.label_nome}
-							</f:facet>
-							<h:commandLink action="exibirPerfil" actionListener="#{exibirPerfilBean.exibePerfil}" rendered="#{item.usuarioCorrespondente != null}">#{item.nome}<f:param name="id" value="#{item.usuarioCorrespondente.id}"/></h:commandLink>
-							<h:outputText rendered="#{item.usuarioCorrespondente == null}">#{item.nome}</h:outputText>
-					    </h:column>
-				    </h:dataTable>
-				</div>
+				<ui:include src="../componentes/jogadores.xhtml">
+					<ui:param name="jogadores" value="#{exibirPerfilBean.usuarioEmFoco.jogadoresSemOUsuarioCorrespondente}"/>
+				</ui:include>
 	            <div class="clear"></div>
 
 			</h:form>

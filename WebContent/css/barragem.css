@@ -259,20 +259,33 @@ div.loginError {
 	text-decoration: underline;
 }
 
-#searchForm label {
-	display:none
-}
 #searchForm {
     position:absolute;
     right:20px;
     top:50px
 }
-#searchForm input {
+#searchForm .searchFormInput {
     background: transparent url(../img/pesquisa.gif) right 0 no-repeat;
-    border:none;
-    padding-top:4px;
     width:169px;
     height:18px;
+}
+#gerirJogador .searchFormInput {
+    background-color: #DDE4EF;
+    height:17px;
+    padding: 1px;
+    vertical-align: bottom;
+}
+#gerirJogador .searchFormButton {
+	border: none;
+	background-color: inherit;
+	padding: 0px;
+	margin: 0px;
+    height: auto;
+	width: auto;
+    vertical-align: bottom;
+}
+.dados .searchFormLabel {
+	width: auto;
 }
 .internas label, .dados .exemplo {
 	float: left;
@@ -1121,6 +1134,10 @@ input {
 .mensagem-erro {
     font-size:12px;
 	color: #FF0000;
+}
+.mensagem-info {
+    font-size:12px;
+	color: #000000;
 }
 .dados-basicos-barragem label {
     font-size:12px;

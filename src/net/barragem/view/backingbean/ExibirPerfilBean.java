@@ -33,7 +33,8 @@ public class ExibirPerfilBean extends BaseBean {
 		novoJogador.setNome(usuarioEmFoco.getNomeCompletoCapital());
 		novoJogador.setUsuarioCorrespondente(usuarioEmFoco);
 		novoJogador.setUsuarioDono(getUsuarioLogado());
-		PersistenceHelper.persiste(novoJogador);
+		getUsuarioLogado().getJogadores().add(novoJogador);
+		PersistenceHelper.persiste(getUsuarioLogado());
 		addMensagemAtualizacaoComSucesso();
 		// TODO: redigir conteudo de email
 	}

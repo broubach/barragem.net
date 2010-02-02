@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+	<div class="exibirPainelBarragemRanking">
+	    <h:dataTable styleClass="exibirPainelBarragemRankingTable" rowClasses="exibirPainelBarragemRankingBodyBackground,exibirPainelBarragemRankingBodyBackgroundAlt" columnClasses="exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBody" value="#{jogadores}" var="item" headerClass="exibirPainelBarragemRankingTableHead">
+			<f:facet name="header">
+				#{msg.label_jogadores}
+			</f:facet>
+		    <h:column>
+		        <h:graphicImage value="/protectedpages/exibirimagem/exibirImagem?hash=#{item.usuarioCorrespondente.perfil.hash}" styleClass="foto-perfil-small" 
+		        	rendered="#{item.usuarioCorrespondente != null and item.usuarioCorrespondente.perfil != null and item.usuarioCorrespondente.perfil.hash != null}"/>
+		        <h:graphicImage value="/protectedpages/exibirimagem/exibirImagem?hash=default" styleClass="foto-perfil-small" 
+		        	rendered="#{item.usuarioCorrespondente != null and (item.usuarioCorrespondente.perfil == null or item.usuarioCorrespondente.perfil.hash == null)}"/>
+		    </h:column>
+		    <h:column>
+				<h:commandLink action="exibirPerfil" actionListener="#{exibirPerfilBean.exibePerfil}" rendered="#{item.usuarioCorrespondente != null}">#{item.nome}<f:param name="id" value="#{item.usuarioCorrespondente.id}"/></h:commandLink>
+				<h:outputText rendered="#{item.usuarioCorrespondente == null}">#{item.nome}</h:outputText>
+		    </h:column>
+	    </h:dataTable>
+	</div>
+
+</html>
