@@ -1,6 +1,7 @@
 package net.barragem.persistence.entity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -13,12 +14,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import net.barragem.util.JogadoresComCorrespondenciaPrimeiroComparator;
+
 @Entity
 @NamedQueries( {
 		@NamedQuery(name = "loginQuery", query = "select u from Usuario u left outer join u.perfil p where u.email = :email and u.senha = :senha"),
 		@NamedQuery(name = "perfilQuery", query = "select u from Usuario u left outer join u.perfil p where u.id = :id"),
 		@NamedQuery(name = "barragensDeUsuarioQuery", query = "select distinct c.barragem from Ciclo c join c.ranking r join r.jogador j join j.usuarioCorrespondente uc where uc.id = :id"),
-		@NamedQuery(name = "pesquisaUsuarioQuery", query = "select u.jogador from Usuario u left outer join u.perfil p where upper(u.nome) like :p or upper(u.sobrenome) like :p or upper(p.clubeMaisFrequentadoNome) like :p or upper(p.clubeMaisFrequentadoCidade) like :p or upper(p.professorNome) like :p or upper(p.raquete) like :p"),
+		@NamedQuery(name = "pesquisaUsuarioQuery", query = "select u.jogador from Usuario u left outer join u.perfil p where upper(u.nome) like :p or upper(u.sobrenome) like :p or upper(p.clubeMaisFrequentadoNome) like :p or upper(p.clubeMaisFrequentadoCidade) like :p or upper(p.professorNome) like :p or upper(p.raquete) like :p order by u.nome, u.sobrenome"),
 		@NamedQuery(name = "emailExistenteQuery", query = "select 1 from Usuario usuario where usuario.email = :email") })
 @Table(name = "usuario")
 public class Usuario extends BaseEntity {
@@ -181,6 +184,7 @@ public class Usuario extends BaseEntity {
 				it.remove();
 			}
 		}
+		Collections.sort(result, new JogadoresComCorrespondenciaPrimeiroComparator());
 		return result;
 	}
 }

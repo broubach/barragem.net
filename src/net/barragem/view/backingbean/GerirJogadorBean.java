@@ -1,9 +1,13 @@
 package net.barragem.view.backingbean;
 
+import java.util.Collections;
+import java.util.List;
+
 import javax.faces.event.ActionEvent;
 
 import net.barragem.persistence.entity.Jogador;
 import net.barragem.persistence.entity.Usuario;
+import net.barragem.util.JogadoresComCorrespondenciaPrimeiroComparator;
 import net.barragem.util.PersistenceHelper;
 
 import org.ajax4jsf.model.KeepAlive;
@@ -15,7 +19,6 @@ public class GerirJogadorBean extends BaseBean {
 
 	public GerirJogadorBean() {
 		usuarioEmFoco = getUsuarioLogado();
-		PersistenceHelper.initialize("jogadores", usuarioEmFoco);
 	}
 
 	public Usuario getUsuarioEmFoco() {
@@ -49,5 +52,10 @@ public class GerirJogadorBean extends BaseBean {
 
 	public void removeJogador(ActionEvent e) {
 		PersistenceHelper.remove(usuarioEmFoco.getJogadores().remove(getIndex()));
+	}
+
+	public List<Jogador> getJogadores() {
+		Collections.sort(usuarioEmFoco.getJogadores(), new JogadoresComCorrespondenciaPrimeiroComparator());
+		return usuarioEmFoco.getJogadores();
 	}
 }

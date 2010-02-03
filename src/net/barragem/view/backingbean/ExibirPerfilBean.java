@@ -42,7 +42,6 @@ public class ExibirPerfilBean extends BaseBean {
 	public void exibePerfil(ActionEvent e) {
 		List<Usuario> usuarios = PersistenceHelper.findByNamedQuery("perfilQuery", getId());
 		usuarioEmFoco = usuarios.get(0);
-		PersistenceHelper.initialize("jogadores", getUsuarioLogado());
 		PersistenceHelper.initialize("jogadores", usuarioEmFoco);
 		PersistenceHelper.initialize("barragens", usuarioEmFoco);
 	}

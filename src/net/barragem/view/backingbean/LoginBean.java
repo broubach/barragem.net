@@ -37,6 +37,7 @@ public class LoginBean extends BaseBean {
 			usuarios.get(0).setDataPenultimoAcesso(usuarios.get(0).getDataUltimoAcesso());
 			usuarios.get(0).setDataUltimoAcesso(new Date());
 			PersistenceHelper.persiste(usuarios.get(0));
+			PersistenceHelper.initialize("jogadores", usuarios.get(0));
 			// coloca usuario na sessao
 			setUsuarioLogado(usuarios.get(0));
 			// encaminha para pagina inicial da comunidade

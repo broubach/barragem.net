@@ -65,10 +65,11 @@ public class PesquisarBean extends BaseBean {
 	}
 
 	public void pesquisaBarragem(ActionEvent e) {
+		// TODO
 
 	}
 
 	public void pesquisaGeral(ActionEvent e) {
-
+		// TODO
 	}
 }
