@@ -1,5 +1,6 @@
 package net.barragem.view.backingbean;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -16,9 +17,14 @@ import org.ajax4jsf.model.KeepAlive;
 public class GerirJogadorBean extends BaseBean {
 	private Usuario usuarioEmFoco;
 	private String usuarioNome;
+	private String pesquisa;
+	private Integer tipoPesquisa = new Integer(1);
+	private List<Jogador> jogadores = new ArrayList<Jogador>();
 
 	public GerirJogadorBean() {
 		usuarioEmFoco = getUsuarioLogado();
+		jogadores = new ArrayList<Jogador>(usuarioEmFoco.getJogadores());
+		Collections.sort(jogadores, new JogadoresComCorrespondenciaPrimeiroComparator());
 	}
 
 	public Usuario getUsuarioEmFoco() {
@@ -35,6 +41,30 @@ public class GerirJogadorBean extends BaseBean {
 
 	public void setUsuarioNome(String usuarioNome) {
 		this.usuarioNome = usuarioNome;
+	}
+
+	public String getPesquisa() {
+		return pesquisa;
+	}
+
+	public void setPesquisa(String pesquisa) {
+		this.pesquisa = pesquisa;
+	}
+
+	public Integer getTipoPesquisa() {
+		return tipoPesquisa;
+	}
+
+	public void setTipoPesquisa(Integer tipoPesquisa) {
+		this.tipoPesquisa = tipoPesquisa;
+	}
+
+	public void setJogadores(List<Jogador> jogadores) {
+		this.jogadores = jogadores;
+	}
+
+	public List<Jogador> getJogadores() {
+		return jogadores;
 	}
 
 	public void adicionaJogador(ActionEvent e) {
@@ -54,8 +84,14 @@ public class GerirJogadorBean extends BaseBean {
 		PersistenceHelper.remove(usuarioEmFoco.getJogadores().remove(getIndex()));
 	}
 
-	public List<Jogador> getJogadores() {
-		Collections.sort(usuarioEmFoco.getJogadores(), new JogadoresComCorrespondenciaPrimeiroComparator());
-		return usuarioEmFoco.getJogadores();
+	public String pesquisaJogador() {
+		if (tipoPesquisa.equals(new Integer(1))) {
+			PesquisarBean pesquisarBean = new PesquisarBean();
+			setRequestAttribute("pesquisarBean", pesquisarBean);
+			return pesquisarBean.pesquisaJogador(pesquisa);
+		}
+		jogadores = PersistenceHelper.findByNamedQuery("pesquisaJogadorDeUsuarioQuery", getUsuarioLogado(),
+				new StringBuilder().append("%").append(pesquisa).append("%").toString().toUpperCase());
+		return "";
 	}
 }

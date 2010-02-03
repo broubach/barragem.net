@@ -14,7 +14,19 @@
 				<h2><h:outputText value="#{msg.label_lista_de_jogadores}"/></h2>
 				<br/>
 				<div class="dados">
-					<label class="searchFormLabel">#{msg.label_pesquisa_de_jogadores}</label>&#160;<h:inputText styleClass="searchFormInput" size="60" value="#{pesquisarBean.pesquisa}"/><h:commandButton action="#{pesquisarBean.pesquisaJogador}" image="../../img/pesquisaLen.gif" styleClass="searchFormButton" alt="#{msg.label_pesquisar_}" title="#{msg.label_pesquisar_}"/><br/>
+					<div class="input text">
+						<label class="searchFormLabel">#{msg.label_pesquisa_de_jogadores}</label>
+						<h:inputText styleClass="searchFormInput" size="60" value="#{gerirJogadorBean.pesquisa}"/><h:commandButton action="#{gerirJogadorBean.pesquisaJogador}" image="../../img/pesquisaLen.gif" styleClass="searchFormButton" alt="#{msg.label_pesquisar_}" title="#{msg.label_pesquisar_}"/>
+					</div>
+					<div class="input text">
+						<label class="searchFormLabel">#{msg.label_tipo_pesquisa}</label>
+						<span>
+							<h:selectOneRadio value="#{gerirJogadorBean.tipoPesquisa}" styleClass="tipoPesquisa" layout="pageDirection">
+								<f:selectItem itemLabel="#{msg.label_em_todo_site}" itemValue="1"/>
+								<f:selectItem itemLabel="#{msg.label_apenas_em_minha_lista_de_jogadores}" itemValue="2" />
+							</h:selectOneRadio>
+						</span>
+					</div>
 				</div>
 		        <c:if test="#{! empty messageBean.errorMessages}">
 			        <div class="mensagem-erro">
@@ -33,6 +45,7 @@
 					<ui:param name="jogadores" value="#{gerirJogadorBean.jogadores}"/>
 				</ui:include>
 		    </h:form>
+			<div class="clear"></div>
 	    </div>
 	</ui:define>
 </ui:composition>

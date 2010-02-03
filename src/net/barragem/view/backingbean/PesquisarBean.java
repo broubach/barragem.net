@@ -13,10 +13,10 @@ import org.ajax4jsf.model.KeepAlive;
 @KeepAlive
 public class PesquisarBean extends BaseBean {
 
-	private String pesquisa;
 	private List<Jogador> jogadores;
 	private List<Barragem> barragens;
 	private List<Object> geral;
+	private String pesquisa;
 
 	public List<Jogador> getJogadores() {
 		return jogadores;
@@ -51,12 +51,17 @@ public class PesquisarBean extends BaseBean {
 	}
 
 	public String pesquisaJogador() {
+		return pesquisaJogador(pesquisa);
+	}
+
+	public String pesquisaJogador(String pesquisa) {
 		if (pesquisa != null && pesquisa.length() > 0) {
-			jogadores = PersistenceHelper.findByNamedQuery("pesquisaUsuarioQuery", new StringBuilder().append("%")
+			jogadores = PersistenceHelper.findByNamedQuery("pesquisaJogadorQuery", new StringBuilder().append("%")
 					.append(pesquisa).append("%").toString().toUpperCase());
 			if (jogadores.size() > 0) {
 				return "sucessoPesquisa";
 			}
+
 			messages.addInfoMessage("label_nenhum_resultado_encontrado", "label_nenhum_resultado_encontrado");
 		} else {
 			messages.addErrorMessage(null, "label_insira_um_texto_para_pesquisa");

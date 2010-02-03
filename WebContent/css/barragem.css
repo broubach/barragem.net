@@ -285,7 +285,18 @@ div.loginError {
     vertical-align: bottom;
 }
 .dados .searchFormLabel {
+	width: 150px;
+}
+#gerirJogador .tipoPesquisa {
+	display: inline;
+	border-collapse: collapse;
+}
+#gerirJogador .tipoPesquisa label {
 	width: auto;
+	border: 0px;
+	padding: 0px;
+	width: 200px;
+	white-space: nowrap;
 }
 .internas label, .dados .exemplo {
 	float: left;
