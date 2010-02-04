@@ -128,7 +128,7 @@ public class GerirCicloBean extends BaseBean {
 	}
 
 	public void salvaCiclo(ActionEvent e) {
-		if (valida(cicloEmFoco)) {
+		if (valida()) {
 			cicloEmFoco.setNome(novoNome);
 			salvaCiclo();
 			editaCiclo(e);
@@ -136,7 +136,7 @@ public class GerirCicloBean extends BaseBean {
 		}
 	}
 
-	private boolean valida(Ciclo ciclo) {
+	private boolean valida() {
 		if (novoNome == null || novoNome.isEmpty()) {
 			messages.addErrorMessage("nome", "label_true");
 			return false;

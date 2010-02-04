@@ -284,6 +284,9 @@ div.loginError {
 	width: auto;
     vertical-align: bottom;
 }
+#gerirJogador .btnEditar {
+	float: right;
+}
 .dados .searchFormLabel {
 	width: 150px;
 }

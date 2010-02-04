@@ -10,10 +10,21 @@
 <ui:composition template="/protectedpages/layout/layoutPrincipal.xhtml">
 	<ui:define name="conteudo">
 		<div class="maincontent">
+	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/jquery.colorbox.css" />
+	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/jquery.colorbox-barragem.css" />
+	        <script type="text/javascript" src="#{request.contextPath}/js/jquery.colorbox-min.js"></script>
+			<script>
+	            $j(function(){
+		            $j(".popupRenomearJogador").colorbox({overlayClose:false, inline:true, href:".rename-ciclo", scrollbars:false}, function() {$j('#rename-ciclo\\:nome').focus();});
+	            });
+	         </script>
+			<script type="text/javascript" src="#{request.contextPath}/js/3_3_0.GAorg.ajax4jsf.javascript.AjaxScript.js"></script>
+
 			<h:form id="gerirJogador">
 				<h2><h:outputText value="#{msg.label_lista_de_jogadores}"/></h2>
 				<br/>
 				<div class="dados">
+					<a href="#" class="popupRenomearJogador" title="#{msg.label_editar_jogador}" style="visibility:hidden"/>
 					<div class="input text">
 						<label class="searchFormLabel">#{msg.label_pesquisa_de_jogadores}</label>
 						<h:inputText styleClass="searchFormInput" size="60" value="#{gerirJogadorBean.pesquisa}"/><h:commandButton action="#{gerirJogadorBean.pesquisaJogador}" image="../../img/pesquisaLen.gif" styleClass="searchFormButton" alt="#{msg.label_pesquisar_}" title="#{msg.label_pesquisar_}"/>
@@ -43,10 +54,34 @@
 				<br/>
 				<ui:include src="../componentes/jogadores.xhtml">
 					<ui:param name="jogadores" value="#{gerirJogadorBean.jogadores}"/>
+					<ui:param name="podeEditarJogadores" value="true"/>
 				</ui:include>
 		    </h:form>
 			<div class="clear"></div>
 	    </div>
+
+		<div style="display:none">
+			<div class="rename-ciclo">
+				<h:form id="rename-ciclo">
+			        <c:if test="#{! empty messageBean.errorMessages}">
+				        <div class="mensagem-erro">
+		    	    		<span>#{msg.label_preencha_os_campos_obrigatorios}</span>
+				        </div>
+			        </c:if>
+					<div class="dados-popup">
+						<div class="input text">
+							<label for="rename-ciclo:nome" class="#{messageBean.errorMessages['nome'] != null ? 'error' : ''}">#{msg.label_novo_nome}*</label>
+							<h:inputText id="nome" value="#{gerirJogadorBean.novoNome}" size="35" maxlength="45"/>
+						</div>
+						<div class="salvar">
+							<label class="campos_obrigatorios">#{msg.label_campos_marcados_sao_obrigatorios}</label>
+							<a4j:commandButton actionListener="#{gerirJogadorBean.salvaJogador}"
+								value="#{msg.label_salvar}" reRender="rename-ciclo,tabelaJogadores,mensagemSucesso" styleClass="submit" oncomplete="$.fn.colorbox.resize()"/>
+						</div>
+					</div>
+				</h:form>
+			</div>
+		</div>
 	</ui:define>
 </ui:composition>
 

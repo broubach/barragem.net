@@ -128,6 +128,7 @@
 				#{msg.label_lista_de_jogadores}<br/>
 				<ui:include src="../componentes/jogadores.xhtml">
 					<ui:param name="jogadores" value="#{exibirPerfilBean.usuarioEmFoco.jogadoresSemOUsuarioCorrespondente}"/>
+					<ui:param name="podeEditarJogadores" value="false"/>
 				</ui:include>
 	            <div class="clear"></div>
 

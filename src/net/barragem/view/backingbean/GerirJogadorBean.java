@@ -1,10 +1,10 @@
 package net.barragem.view.backingbean;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import javax.faces.event.ActionEvent;
+import javax.faces.model.ListDataModel;
 
 import net.barragem.persistence.entity.Jogador;
 import net.barragem.persistence.entity.Usuario;
@@ -12,19 +12,23 @@ import net.barragem.util.JogadoresComCorrespondenciaPrimeiroComparator;
 import net.barragem.util.PersistenceHelper;
 
 import org.ajax4jsf.model.KeepAlive;
+import org.hibernate.exception.ConstraintViolationException;
 
 @KeepAlive
 public class GerirJogadorBean extends BaseBean {
 	private Usuario usuarioEmFoco;
+	private Jogador jogadorEmFoco;
+	private String novoNome;
 	private String usuarioNome;
 	private String pesquisa;
 	private Integer tipoPesquisa = new Integer(1);
-	private List<Jogador> jogadores = new ArrayList<Jogador>();
+	private ListDataModel jogadores;
 
 	public GerirJogadorBean() {
 		usuarioEmFoco = getUsuarioLogado();
-		jogadores = new ArrayList<Jogador>(usuarioEmFoco.getJogadores());
-		Collections.sort(jogadores, new JogadoresComCorrespondenciaPrimeiroComparator());
+		jogadores = new ListDataModel(usuarioEmFoco.getJogadores());
+		Collections.sort((List<Jogador>) jogadores.getWrappedData(),
+				new JogadoresComCorrespondenciaPrimeiroComparator());
 	}
 
 	public Usuario getUsuarioEmFoco() {
@@ -43,6 +47,22 @@ public class GerirJogadorBean extends BaseBean {
 		this.usuarioNome = usuarioNome;
 	}
 
+	public String getNovoNome() {
+		return novoNome;
+	}
+
+	public void setNovoNome(String novoNome) {
+		this.novoNome = novoNome;
+	}
+
+	public Jogador getJogadorEmFoco() {
+		return jogadorEmFoco;
+	}
+
+	public void setJogadorEmFoco(Jogador jogadorEmFoco) {
+		this.jogadorEmFoco = jogadorEmFoco;
+	}
+
 	public String getPesquisa() {
 		return pesquisa;
 	}
@@ -59,11 +79,11 @@ public class GerirJogadorBean extends BaseBean {
 		this.tipoPesquisa = tipoPesquisa;
 	}
 
-	public void setJogadores(List<Jogador> jogadores) {
+	public void setJogadores(ListDataModel jogadores) {
 		this.jogadores = jogadores;
 	}
 
-	public List<Jogador> getJogadores() {
+	public ListDataModel getJogadores() {
 		return jogadores;
 	}
 
@@ -90,8 +110,45 @@ public class GerirJogadorBean extends BaseBean {
 			setRequestAttribute("pesquisarBean", pesquisarBean);
 			return pesquisarBean.pesquisaJogador(pesquisa);
 		}
-		jogadores = PersistenceHelper.findByNamedQuery("pesquisaJogadorDeUsuarioQuery", getUsuarioLogado(),
-				new StringBuilder().append("%").append(pesquisa).append("%").toString().toUpperCase());
+		jogadores = new ListDataModel(PersistenceHelper.findByNamedQuery("pesquisaJogadorDeUsuarioQuery",
+				getUsuarioLogado(), new StringBuilder().append("%").append(pesquisa).append("%").toString()
+						.toUpperCase()));
 		return "";
+	}
+
+	public void preparaEdicao(ActionEvent e) {
+		jogadorEmFoco = (Jogador) getJogadores().getRowData();
+		novoNome = jogadorEmFoco.getNome();
+	}
+
+	public void salvaJogador(ActionEvent e) {
+		if (valida()) {
+			jogadorEmFoco.setNome(novoNome);
+			PersistenceHelper.persiste(usuarioEmFoco);
+			addMensagemAtualizacaoComSucesso();
+		}
+	}
+
+	private boolean valida() {
+		if (novoNome == null || novoNome.isEmpty()) {
+			messages.addErrorMessage("nome", "label_true");
+			return false;
+		}
+		return true;
+	}
+
+	public void remove(ActionEvent e) {
+		try {
+			Jogador jogador = (Jogador) getJogadores().getRowData();
+			PersistenceHelper.remove(jogador);
+
+			usuarioEmFoco.getJogadores().remove(jogador);
+			PersistenceHelper.persiste(usuarioEmFoco);
+
+			jogadores = new ListDataModel(usuarioEmFoco.getJogadores());
+		} catch (ConstraintViolationException e1) {
+			messages.addErrorMessage(null,
+					"label_jogador_nao_pode_ser_removido_pois_eh_utilizado_em_algum_jogo_barragem");
+		}
 	}
 }
