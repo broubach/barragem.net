@@ -19,16 +19,15 @@ public class GerirJogadorBean extends BaseBean {
 	private Usuario usuarioEmFoco;
 	private Jogador jogadorEmFoco;
 	private String novoNome;
-	private String usuarioNome;
+	private String jogadorNome;
 	private String pesquisa;
 	private Integer tipoPesquisa = new Integer(1);
 	private ListDataModel jogadores;
 
 	public GerirJogadorBean() {
 		usuarioEmFoco = getUsuarioLogado();
+		Collections.sort(usuarioEmFoco.getJogadores(), new JogadoresComCorrespondenciaPrimeiroComparator());
 		jogadores = new ListDataModel(usuarioEmFoco.getJogadores());
-		Collections.sort((List<Jogador>) jogadores.getWrappedData(),
-				new JogadoresComCorrespondenciaPrimeiroComparator());
 	}
 
 	public Usuario getUsuarioEmFoco() {
@@ -39,12 +38,12 @@ public class GerirJogadorBean extends BaseBean {
 		this.usuarioEmFoco = usuarioEmFoco;
 	}
 
-	public String getUsuarioNome() {
-		return usuarioNome;
+	public String getJogadorNome() {
+		return jogadorNome;
 	}
 
-	public void setUsuarioNome(String usuarioNome) {
-		this.usuarioNome = usuarioNome;
+	public void setJogadorNome(String jogadorNome) {
+		this.jogadorNome = jogadorNome;
 	}
 
 	public String getNovoNome() {
@@ -88,13 +87,16 @@ public class GerirJogadorBean extends BaseBean {
 	}
 
 	public void adicionaJogador(ActionEvent e) {
-		if (usuarioNome != null && usuarioNome.length() > 0) {
+		if (jogadorNome != null && jogadorNome.length() > 0) {
 			Jogador jogador = new Jogador();
-			jogador.setNome(usuarioNome);
+			jogador.setNome(jogadorNome);
 			jogador.setUsuarioDono(usuarioEmFoco);
 			usuarioEmFoco.getJogadores().add(jogador);
 
 			PersistenceHelper.persiste(usuarioEmFoco);
+
+			Collections.sort(usuarioEmFoco.getJogadores(), new JogadoresComCorrespondenciaPrimeiroComparator());
+			addMensagemAtualizacaoComSucesso();
 		} else {
 			messages.addErrorMessage(null, "label_digite_o_nome_do_novo_jogador");
 		}
@@ -110,9 +112,14 @@ public class GerirJogadorBean extends BaseBean {
 			setRequestAttribute("pesquisarBean", pesquisarBean);
 			return pesquisarBean.pesquisaJogador(pesquisa);
 		}
-		jogadores = new ListDataModel(PersistenceHelper.findByNamedQuery("pesquisaJogadorDeUsuarioQuery",
+		List<Jogador> resultado = PersistenceHelper.findByNamedQuery("pesquisaJogadorDeUsuarioQuery",
 				getUsuarioLogado(), new StringBuilder().append("%").append(pesquisa).append("%").toString()
-						.toUpperCase()));
+						.toUpperCase());
+		if (resultado.isEmpty()) {
+			messages.addInfoMessage("label_nenhum_resultado_encontrado", "label_nenhum_resultado_encontrado");
+		} else {
+			jogadores = new ListDataModel(resultado);
+		}
 		return "";
 	}
 

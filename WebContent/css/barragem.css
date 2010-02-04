@@ -287,8 +287,15 @@ div.loginError {
 #gerirJogador .btnEditar {
 	float: right;
 }
+#gerirJogador .adicionarJogadorLabel {
+	width: auto;
+}
+#gerirJogador .adicionarJogadorInput {
+	float: left;
+	margin-right: 5px;
+}
 .dados .searchFormLabel {
-	width: 150px;
+	width: 130px;
 }
 #gerirJogador .tipoPesquisa {
 	display: inline;
@@ -325,6 +332,14 @@ div.loginError {
 }
 
 /********************* BOTOES *********************/
+.btn-novo-relative {
+    position:relative;
+    background: #95c396;
+    -moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+    height:25px;
+    float: left;
+}
 .btn-novo {
     position:absolute;
     right:40px;
@@ -334,13 +349,13 @@ div.loginError {
 	-webkit-border-radius: 5px;
     height:25px;
 }
-.btn-novo a {
+.btn-novo a, .btn-novo-relative a {
     text-decoration:none;
     display:block;
     padding: 4px 8px;
     white-space: nowrap;
 }
-.btn-novo a span {
+.btn-novo a span, .btn-novo-relative a span {
     padding-left:20px;
     background: transparent url(../img/buttons/btn-novo.gif) no-repeat left 0;
 }
@@ -1086,7 +1101,7 @@ input {
     color:#fff;
     font-weight:bold;
 }
-.btn-novo a {
+.btn-novo a, .btn-novo-relative a {
     color: #fff;
     font-weight:bold;
 	font-size:13px;

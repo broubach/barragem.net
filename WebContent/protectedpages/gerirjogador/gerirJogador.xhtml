@@ -23,8 +23,20 @@
 			<h:form id="gerirJogador">
 				<h2><h:outputText value="#{msg.label_lista_de_jogadores}"/></h2>
 				<br/>
+		        <c:if test="#{! empty messageBean.errorMessages}">
+			        <div class="mensagem-erro">
+				        <c:forEach var="item" items="#{messageBean.errorMessages}">
+		    	    		<span>#{item.value.summary}</span>
+				        </c:forEach>
+			        </div>
+		        </c:if>
+		        <c:if test="#{! empty messageBean.infoMessages['label_nenhum_resultado_encontrado']}">
+			        <div class="mensagem-info">
+	    	    		<span>#{messageBean.infoMessages['label_nenhum_resultado_encontrado'].summary}</span>
+			        </div>
+		        </c:if>
+				<a href="#" class="popupRenomearJogador" title="#{msg.label_editar_jogador}" style="visibility:hidden"/>
 				<div class="dados">
-					<a href="#" class="popupRenomearJogador" title="#{msg.label_editar_jogador}" style="visibility:hidden"/>
 					<div class="input text">
 						<label class="searchFormLabel">#{msg.label_pesquisa_de_jogadores}</label>
 						<h:inputText styleClass="searchFormInput" size="60" value="#{gerirJogadorBean.pesquisa}"/><h:commandButton action="#{gerirJogadorBean.pesquisaJogador}" image="../../img/pesquisaLen.gif" styleClass="searchFormButton" alt="#{msg.label_pesquisar_}" title="#{msg.label_pesquisar_}"/>
@@ -39,19 +51,18 @@
 						</span>
 					</div>
 				</div>
-		        <c:if test="#{! empty messageBean.errorMessages}">
-			        <div class="mensagem-erro">
-				        <c:forEach var="item" items="#{messageBean.errorMessages}">
-		    	    		<span>#{item.value.summary}</span>
-				        </c:forEach>
-			        </div>
-		        </c:if>
-		        <c:if test="#{! empty messageBean.infoMessages['label_nenhum_resultado_encontrado']}">
-			        <div class="mensagem-info">
-	    	    		<span>#{messageBean.infoMessages['label_nenhum_resultado_encontrado'].summary}</span>
-			        </div>
-		        </c:if>
 				<br/>
+				<div class="dados">
+					<div class="input text">
+						<label class="adicionarJogadorLabel">#{msg.label_nome}</label>
+						<h:inputText size="60" styleClass="adicionarJogadorInput" value="#{gerirJogadorBean.jogadorNome}"/>
+						<div class="btn-novo-relative">
+							<h:commandLink actionListener="#{gerirJogadorBean.adicionaJogador}" reRender="tabelaJogadores">
+								<span>#{msg.label_adicionar_jogador}</span>
+							</h:commandLink>
+						</div>
+					</div>
+				</div>
 				<ui:include src="../componentes/jogadores.xhtml">
 					<ui:param name="jogadores" value="#{gerirJogadorBean.jogadores}"/>
 					<ui:param name="podeEditarJogadores" value="true"/>
