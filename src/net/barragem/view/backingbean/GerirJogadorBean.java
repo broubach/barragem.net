@@ -21,7 +21,8 @@ public class GerirJogadorBean extends BaseBean {
 	private String novoNome;
 	private String jogadorNome;
 	private String pesquisa;
-	private Integer tipoPesquisa = new Integer(1);
+	private String pesquisaSalva;
+	private Integer tipoPesquisa = new Integer(2);
 	private ListDataModel jogadores;
 
 	public GerirJogadorBean() {
@@ -68,6 +69,14 @@ public class GerirJogadorBean extends BaseBean {
 
 	public void setPesquisa(String pesquisa) {
 		this.pesquisa = pesquisa;
+	}
+
+	public String getPesquisaSalva() {
+		return pesquisaSalva;
+	}
+
+	public void setPesquisaSalva(String pesquisaSalva) {
+		this.pesquisaSalva = pesquisaSalva;
 	}
 
 	public Integer getTipoPesquisa() {
@@ -119,6 +128,7 @@ public class GerirJogadorBean extends BaseBean {
 			messages.addInfoMessage("label_nenhum_resultado_encontrado", "label_nenhum_resultado_encontrado");
 		} else {
 			jogadores = new ListDataModel(resultado);
+			pesquisaSalva = pesquisa;
 		}
 		return "";
 	}
@@ -157,5 +167,10 @@ public class GerirJogadorBean extends BaseBean {
 			messages.addErrorMessage(null,
 					"label_jogador_nao_pode_ser_removido_pois_eh_utilizado_em_algum_jogo_barragem");
 		}
+	}
+
+	public void limpaFiltro(ActionEvent e) {
+		pesquisaSalva = null;
+		jogadores = new ListDataModel(usuarioEmFoco.getJogadores());
 	}
 }

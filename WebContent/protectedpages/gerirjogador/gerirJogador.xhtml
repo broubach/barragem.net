@@ -36,7 +36,7 @@
 			        </div>
 		        </c:if>
 				<a href="#" class="popupRenomearJogador" title="#{msg.label_editar_jogador}" style="visibility:hidden"/>
-				<div class="dados">
+				<div class="dadosGerirJogador">
 					<div class="input text">
 						<label class="searchFormLabel">#{msg.label_pesquisa_de_jogadores}</label>
 						<h:inputText styleClass="searchFormInput" size="60" value="#{gerirJogadorBean.pesquisa}"/><h:commandButton action="#{gerirJogadorBean.pesquisaJogador}" image="../../img/pesquisaLen.gif" styleClass="searchFormButton" alt="#{msg.label_pesquisar_}" title="#{msg.label_pesquisar_}"/>
@@ -45,14 +45,16 @@
 						<label class="searchFormLabel">#{msg.label_tipo_pesquisa}</label>
 						<span>
 							<h:selectOneRadio value="#{gerirJogadorBean.tipoPesquisa}" styleClass="tipoPesquisa" layout="pageDirection">
-								<f:selectItem itemLabel="#{msg.label_em_todo_site}" itemValue="1"/>
 								<f:selectItem itemLabel="#{msg.label_apenas_em_minha_lista_de_jogadores}" itemValue="2" />
+								<f:selectItem itemLabel="#{msg.label_em_todo_site}" itemValue="1"/>
 							</h:selectOneRadio>
 						</span>
 					</div>
 				</div>
 				<br/>
-				<div class="dados">
+				<hr class="divisaoGerirJogador"/>
+				<br/>
+				<div class="dadosGerirJogadorListaJogadores">
 					<div class="input text">
 						<label class="adicionarJogadorLabel">#{msg.label_nome}</label>
 						<h:inputText size="60" styleClass="adicionarJogadorInput" value="#{gerirJogadorBean.jogadorNome}"/>
@@ -63,6 +65,7 @@
 						</div>
 					</div>
 				</div>
+				<br/>
 				<ui:include src="../componentes/jogadores.xhtml">
 					<ui:param name="jogadores" value="#{gerirJogadorBean.jogadores}"/>
 					<ui:param name="podeEditarJogadores" value="true"/>

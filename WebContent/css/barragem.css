@@ -148,6 +148,65 @@ fieldset {
     background:#0D286F;
 }
 
+/********************* GERIR JOGADOR *********************/
+#gerirJogador .tipoPesquisa {
+	display: inline;
+	border-collapse: collapse;
+}
+#gerirJogador .tipoPesquisa label {
+	width: auto;
+	border: 0px;
+	padding: 0px;
+	width: 200px;
+	white-space: nowrap;
+}
+#gerirJogador .searchFormInput {
+    background-color: #DDE4EF;
+    height:17px;
+    padding: 1px;
+    vertical-align: bottom;
+}
+#gerirJogador .searchFormButton {
+	border: none;
+	background-color: inherit;
+	padding: 0px;
+	margin: 0px;
+    height: auto;
+	width: auto;
+    vertical-align: bottom;
+}
+#gerirJogador .btnEditar {
+	float: right;
+}
+#gerirJogador .adicionarJogadorLabel {
+	width: auto;
+}
+#gerirJogador .adicionarJogadorInput {
+	float: left;
+	margin-right: 5px;
+}
+#gerirJogador .linkLimpaFiltro {
+	float: right;
+	padding-right: 5px;
+}
+.dadosGerirJogador label, .dadosGerirJogadorListaJogadores label {
+	padding-right: 5px;
+	width: 130px;
+}
+.dadosGerirJogador {
+	width: 430px;
+	margin: auto;
+}
+.dadosGerirJogadorListaJogadores {
+	width: 475px;
+	margin: auto;
+}
+.divisaoGerirJogador {
+	width: 60%; 
+	margin: auto;
+	color: #444;
+}
+
 /********************* FORMS *********************/
 #loginForm input {
 	border:1px solid #f9f9f9;
@@ -269,44 +328,8 @@ div.loginError {
     width:169px;
     height:18px;
 }
-#gerirJogador .searchFormInput {
-    background-color: #DDE4EF;
-    height:17px;
-    padding: 1px;
-    vertical-align: bottom;
-}
-#gerirJogador .searchFormButton {
-	border: none;
-	background-color: inherit;
-	padding: 0px;
-	margin: 0px;
-    height: auto;
-	width: auto;
-    vertical-align: bottom;
-}
-#gerirJogador .btnEditar {
-	float: right;
-}
-#gerirJogador .adicionarJogadorLabel {
-	width: auto;
-}
-#gerirJogador .adicionarJogadorInput {
-	float: left;
-	margin-right: 5px;
-}
 .dados .searchFormLabel {
 	width: 130px;
-}
-#gerirJogador .tipoPesquisa {
-	display: inline;
-	border-collapse: collapse;
-}
-#gerirJogador .tipoPesquisa label {
-	width: auto;
-	border: 0px;
-	padding: 0px;
-	width: 200px;
-	white-space: nowrap;
 }
 .internas label, .dados .exemplo {
 	float: left;
@@ -726,7 +749,7 @@ td.actions {
     padding-right:5px;
     clear: both;
 }
-.dados label {
+.dados label, .dadosGerirJogador label, .dadosGerirJogadorListaJogadores label {
 	border-right: 1px solid #888;
 }
 .dados .input {
@@ -1234,7 +1257,7 @@ div.error {
     color:#fff;
     font-weight:bold;
 }
-.dados label, .dados .exemplo, .dados .complemento, .dadosExibirPerfil label {
+.dados label, .dados .exemplo, .dados .complemento, .dadosExibirPerfil label, .dadosGerirJogador label, .dadosGerirJogadorListaJogadores label {
 	color:#444;
 	font-size:.8em;
 }
