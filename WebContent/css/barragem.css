@@ -685,6 +685,12 @@ td.actions {
 	width: 200px;
 	text-align: left;
 }
+.dadosExibirPerfil .dadosExibirPerfilColunaDireitaAusente {
+	float: left;
+	width: 200px;
+	text-align: left;
+	font-style: italic;
+}
 .foto-exibir-perfil {
 	width: 123px; 
 	height: 162px;

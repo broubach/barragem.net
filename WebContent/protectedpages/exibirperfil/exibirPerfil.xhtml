@@ -33,76 +33,103 @@
 				</div>
 				
 				<div class="dadosExibirPerfil">
-					<c:if test="#{exibirPerfilBean.usuarioEmFoco.perfil != null and fn:length(exibirPerfilBean.usuarioEmFoco.perfil.clubeMaisFrequentadoNome) > 0}">
-						<div class="dadosExibirPerfilLinhas">
-							<label class="dadosExibirPerfilColunaEsquerda">#{msg.label_clube_mais_frequentado}</label>
+					<div class="dadosExibirPerfilLinhas">
+						<label class="dadosExibirPerfilColunaEsquerda">#{msg.label_clube_mais_frequentado}</label>
+						<c:if test="#{exibirPerfilBean.usuarioEmFoco.perfil != null and fn:length(exibirPerfilBean.usuarioEmFoco.perfil.clubeMaisFrequentadoNome) > 0}">
 							<label class="dadosExibirPerfilColunaDireita">#{exibirPerfilBean.usuarioEmFoco.perfil.clubeMaisFrequentadoNome}</label>
-						</div>
-			            <div class="clear"></div>
-					</c:if>
-					<c:if test="#{exibirPerfilBean.usuarioEmFoco.perfil != null and fn:length(exibirPerfilBean.usuarioEmFoco.perfil.clubeMaisFrequentadoCidade) > 0}">
-						<div class="dadosExibirPerfilLinhas">
-							<label class="dadosExibirPerfilColunaEsquerda">#{msg.label_cidade_onde_joga}</label>
+						</c:if>
+						<c:if test="#{exibirPerfilBean.usuarioEmFoco.perfil == null or fn:length(exibirPerfilBean.usuarioEmFoco.perfil.clubeMaisFrequentadoNome) == 0}">
+							<label class="dadosExibirPerfilColunaDireitaAusente">#{msg.label_nao_informado}</label>
+						</c:if>
+					</div>
+		            <div class="clear"></div>
+					<div class="dadosExibirPerfilLinhas">
+						<label class="dadosExibirPerfilColunaEsquerda">#{msg.label_cidade_onde_joga}</label>
+						<c:if test="#{exibirPerfilBean.usuarioEmFoco.perfil != null and fn:length(exibirPerfilBean.usuarioEmFoco.perfil.clubeMaisFrequentadoCidade) > 0}">
 							<label class="dadosExibirPerfilColunaDireita">#{exibirPerfilBean.usuarioEmFoco.perfil.clubeMaisFrequentadoCidade}</label>
-						</div>
-			            <div class="clear"></div>
-					</c:if>
-					<c:if test="#{exibirPerfilBean.usuarioEmFoco.perfil != null and exibirPerfilBean.usuarioEmFoco.perfil.dataInicioPratica != null}">
-						<div class="dadosExibirPerfilLinhas">
-							<label class="dadosExibirPerfilColunaEsquerda">#{msg.label_ha_quanto_tempo_joga}</label>
+						</c:if>
+						<c:if test="#{exibirPerfilBean.usuarioEmFoco.perfil == null or fn:length(exibirPerfilBean.usuarioEmFoco.perfil.clubeMaisFrequentadoCidade) == 0}">
+							<label class="dadosExibirPerfilColunaDireitaAusente">#{msg.label_nao_informado}</label>
+						</c:if>
+					</div>
+		            <div class="clear"></div>
+					<div class="dadosExibirPerfilLinhas">
+						<label class="dadosExibirPerfilColunaEsquerda">#{msg.label_ha_quanto_tempo_joga}</label>
+						<c:if test="#{exibirPerfilBean.usuarioEmFoco.perfil != null and exibirPerfilBean.usuarioEmFoco.perfil.dataInicioPratica != null}">
 							<label class="dadosExibirPerfilColunaDireita"><h:outputText id="dataInicioPratica" value="#{exibirPerfilBean.usuarioEmFoco.perfil.dataInicioPratica}">
 								<f:convertDateTime pattern="MM/yyyy"/>
 							</h:outputText></label>
-						</div>
-			            <div class="clear"></div>
-					</c:if>
-					<c:if test="#{exibirPerfilBean.usuarioEmFoco.perfil != null and exibirPerfilBean.usuarioEmFoco.perfil.ladoForehand != null}">
-						<div class="dadosExibirPerfilLinhas">
-							<label class="dadosExibirPerfilColunaEsquerda">#{msg.label_lado_do_forehand}</label>
+						</c:if>
+						<c:if test="#{exibirPerfilBean.usuarioEmFoco.perfil == null or exibirPerfilBean.usuarioEmFoco.perfil.dataInicioPratica == null}">
+							<label class="dadosExibirPerfilColunaDireitaAusente">#{msg.label_nao_informado}</label>
+						</c:if>
+					</div>
+		            <div class="clear"></div>
+					<div class="dadosExibirPerfilLinhas">
+						<label class="dadosExibirPerfilColunaEsquerda">#{msg.label_lado_do_forehand}</label>
+						<c:if test="#{exibirPerfilBean.usuarioEmFoco.perfil != null and exibirPerfilBean.usuarioEmFoco.perfil.ladoForehand != null}">
 							<label class="dadosExibirPerfilColunaDireita">#{msg[exibirPerfilBean.usuarioEmFoco.perfil.ladoForehand.labelKey]}</label>
-						</div>
-			            <div class="clear"></div>
-					</c:if>
-					<c:if test="#{exibirPerfilBean.usuarioEmFoco.perfil != null and exibirPerfilBean.usuarioEmFoco.perfil.tipoBackhand != null}">
-						<div class="dadosExibirPerfilLinhas">
-							<label class="dadosExibirPerfilColunaEsquerda">#{msg.label_tipo_backhand}</label>
+						</c:if>
+						<c:if test="#{exibirPerfilBean.usuarioEmFoco.perfil == null or exibirPerfilBean.usuarioEmFoco.perfil.ladoForehand == null}">
+							<label class="dadosExibirPerfilColunaDireitaAusente">#{msg.label_nao_informado}</label>
+						</c:if>
+					</div>
+		            <div class="clear"></div>
+					<div class="dadosExibirPerfilLinhas">
+						<label class="dadosExibirPerfilColunaEsquerda">#{msg.label_tipo_backhand}</label>
+						<c:if test="#{exibirPerfilBean.usuarioEmFoco.perfil != null and exibirPerfilBean.usuarioEmFoco.perfil.tipoBackhand != null}">
 							<label class="dadosExibirPerfilColunaDireita">#{msg[exibirPerfilBean.usuarioEmFoco.perfil.tipoBackhand.labelKey]}</label>
-						</div>
-			            <div class="clear"></div>
-					</c:if>
-					<c:if test="#{exibirPerfilBean.usuarioEmFoco.perfil != null and fn:length(exibirPerfilBean.usuarioEmFoco.perfil.csCategorias) > 0}">
-						<div class="dadosExibirPerfilLinhas">
-							<label class="dadosExibirPerfilColunaEsquerda">#{msg.label_categorias}</label>
+						</c:if>
+						<c:if test="#{exibirPerfilBean.usuarioEmFoco.perfil == null or exibirPerfilBean.usuarioEmFoco.perfil.tipoBackhand == null}">
+							<label class="dadosExibirPerfilColunaDireitaAusente">#{msg.label_nao_informado}</label>
+						</c:if>
+					</div>
+		            <div class="clear"></div>
+					<div class="dadosExibirPerfilLinhas">
+						<label class="dadosExibirPerfilColunaEsquerda">#{msg.label_categorias}</label>
+						<c:if test="#{exibirPerfilBean.usuarioEmFoco.perfil != null and fn:length(exibirPerfilBean.usuarioEmFoco.perfil.csCategorias) > 0}">
 							<label class="dadosExibirPerfilColunaDireita">#{exibirPerfilBean.usuarioEmFoco.perfil.csCategorias}</label>
-						</div>
-			            <div class="clear"></div>
-					</c:if>
-					<c:if test="#{exibirPerfilBean.usuarioEmFoco.perfil != null and fn:length(exibirPerfilBean.usuarioEmFoco.perfil.raquete) > 0}">
-						<div class="dadosExibirPerfilLinhas">
-							<label class="dadosExibirPerfilColunaEsquerda">#{msg.label_raquete}</label>
+						</c:if>
+						<c:if test="#{exibirPerfilBean.usuarioEmFoco.perfil == null or fn:length(exibirPerfilBean.usuarioEmFoco.perfil.csCategorias) == 0}">
+							<label class="dadosExibirPerfilColunaDireitaAusente">#{msg.label_nao_informado}</label>
+						</c:if>
+					</div>
+		            <div class="clear"></div>
+					<div class="dadosExibirPerfilLinhas">
+						<label class="dadosExibirPerfilColunaEsquerda">#{msg.label_raquete}</label>
+						<c:if test="#{exibirPerfilBean.usuarioEmFoco.perfil != null and fn:length(exibirPerfilBean.usuarioEmFoco.perfil.raquete) > 0}">
 							<label class="dadosExibirPerfilColunaDireita">#{exibirPerfilBean.usuarioEmFoco.perfil.raquete}</label>
-						</div>
-			            <div class="clear"></div>
-					</c:if>
-					<c:if test="#{exibirPerfilBean.usuarioEmFoco.perfil != null and exibirPerfilBean.usuarioEmFoco.perfil.professor != null}">
-						<div class="dadosExibirPerfilLinhas">
-							<label class="dadosExibirPerfilColunaEsquerda">#{msg.label_professor}</label>
+						</c:if>
+						<c:if test="#{exibirPerfilBean.usuarioEmFoco.perfil == null or fn:length(exibirPerfilBean.usuarioEmFoco.perfil.raquete) == 0}">
+							<label class="dadosExibirPerfilColunaDireitaAusente">#{msg.label_nao_informado}</label>
+						</c:if>
+					</div>
+		            <div class="clear"></div>
+					<div class="dadosExibirPerfilLinhas">
+						<label class="dadosExibirPerfilColunaEsquerda">#{msg.label_professor}</label>
+						<c:if test="#{exibirPerfilBean.usuarioEmFoco.perfil != null and exibirPerfilBean.usuarioEmFoco.perfil.professor != null}">
 							<label class="dadosExibirPerfilColunaDireita">#{exibirPerfilBean.usuarioEmFoco.perfil.professor ? msg.label_sim : msg.label_nao}</label>
-						</div>
-			            <div class="clear"></div>
-					</c:if>
-					<c:if test="#{exibirPerfilBean.usuarioEmFoco.perfil != null and fn:length(exibirPerfilBean.usuarioEmFoco.perfil.professorNome) > 0}">
-						<div class="dadosExibirPerfilLinhas">
-							<label class="dadosExibirPerfilColunaEsquerda">#{msg.label_nome_professor}</label>
+						</c:if>
+						<c:if test="#{exibirPerfilBean.usuarioEmFoco.perfil == null or exibirPerfilBean.usuarioEmFoco.perfil.professor == null}">
+							<label class="dadosExibirPerfilColunaDireitaAusente">#{msg.label_nao_informado}</label>
+						</c:if>
+					</div>
+		            <div class="clear"></div>
+					<div class="dadosExibirPerfilLinhas">
+						<label class="dadosExibirPerfilColunaEsquerda">#{msg.label_nome_professor}</label>
+						<c:if test="#{exibirPerfilBean.usuarioEmFoco.perfil != null and fn:length(exibirPerfilBean.usuarioEmFoco.perfil.professorNome) > 0}">
 							<label class="dadosExibirPerfilColunaDireita">#{exibirPerfilBean.usuarioEmFoco.perfil.professorNome}</label>
-						</div>
-					</c:if>
+						</c:if>
+						<c:if test="#{exibirPerfilBean.usuarioEmFoco.perfil == null or fn:length(exibirPerfilBean.usuarioEmFoco.perfil.professorNome) == 0}">
+							<label class="dadosExibirPerfilColunaDireitaAusente">#{msg.label_nao_informado}</label>
+						</c:if>
+					</div>
 				</div>
 	            <div class="clear"></div>
 	            <br/>
 	            <br/>
 
-				#{msg.label_barragens_que_participa}<br/>
+				<h3>#{msg.label_barragens_que_participa}</h3>
 				<div class="exibirPainelBarragemRanking">
 				    <h:dataTable styleClass="exibirPainelBarragemRankingTable" rowClasses="exibirPainelBarragemRankingBodyBackground,exibirPainelBarragemRankingBodyBackgroundAlt" columnClasses="exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBody" value="#{exibirPerfilBean.barragens}" var="item" headerClass="exibirPainelBarragemRankingTableHead">
 					    <h:column>
@@ -122,10 +149,7 @@
 	            <div class="clear"></div>
 				<br/>
 				
-				#{msg.label_ultimos_jogos}<br/>
-				<br/>
-				
-				#{msg.label_lista_de_jogadores}<br/>
+				<h3>#{msg.label_lista_de_jogadores}</h3>
 				<ui:include src="../componentes/jogadores.xhtml">
 					<ui:param name="jogadores" value="#{exibirPerfilBean.usuarioEmFoco.jogadoresSemOUsuarioCorrespondente}"/>
 					<ui:param name="podeEditarJogadores" value="false"/>
