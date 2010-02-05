@@ -24,7 +24,7 @@
 				<h:commandLink action="exibirPerfil" actionListener="#{exibirPerfilBean.exibePerfil}" rendered="#{item.usuarioCorrespondente != null}">#{item.nome}<f:param name="id" value="#{item.usuarioCorrespondente.id}"/></h:commandLink>
 				<h:outputText value="#{item.nome}" rendered="#{item.usuarioCorrespondente == null}"/> 
 				<a4j:commandLink actionListener="#{gerirJogadorBean.preparaEdicao}" reRender="rename-ciclo" oncomplete="$j('.popupRenomearJogador').click();"
-					rendered="#{item.usuarioCorrespondente == null}">
+					rendered="#{item.usuarioCorrespondente == null and podeEditarJogadores}">
 					<img src="#{request.contextPath}/img/buttons/btn-editar.png" alt="#{msg.label_editar}" title="#{msg.label_editar}" class="btnEditar"/>
 				</a4j:commandLink>
 		    </h:column>
@@ -36,6 +36,10 @@
 				<h:commandLink action="exibirPerfil" actionListener="#{exibirPerfilBean.exibePerfil}" rendered="#{item.usuarioCorrespondente != null}">
 					<f:param name="id" value="#{item.usuarioCorrespondente.id}"/>
 					<img src="#{request.contextPath}/img/buttons/btn-view.png" alt="#{msg.label_visualizar}" title="#{msg.label_visualizar}"/>
+				</h:commandLink>
+				<h:commandLink action="exibirPerfil" actionListener="#{exibirPerfilBean.exibePerfil}" rendered="#{item.usuarioCorrespondente == null}">
+					<f:param name="id" value="#{item.usuarioCorrespondente.id}"/>
+					<img src="#{request.contextPath}/img/buttons/btn-link.png" alt="#{msg.label_vincular_jogador_a_usuario_existente}" title="#{msg.label_vincular_jogador_a_usuario_existente}"/>
 				</h:commandLink>
 			</h:column>
 			<f:facet name="footer">

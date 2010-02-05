@@ -106,6 +106,7 @@ public class GerirJogadorBean extends BaseBean {
 
 			Collections.sort(usuarioEmFoco.getJogadores(), new JogadoresComCorrespondenciaPrimeiroComparator());
 			addMensagemAtualizacaoComSucesso();
+			jogadorNome = null;
 		} else {
 			messages.addErrorMessage(null, "label_digite_o_nome_do_novo_jogador");
 		}

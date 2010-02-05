@@ -820,6 +820,9 @@ td.actions {
 .input .disabled {
 	background:#D3D7DE;
 }
+.add-jogador #add-jogador .checkbox {
+    float: left;
+}
 
 /********************* DADOS BASICOS BARRAGEM *********************/
 .dados-basicos-barragem {

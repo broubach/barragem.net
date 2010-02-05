@@ -7,7 +7,7 @@
 	xmlns:c="http://java.sun.com/jstl/core"
 	xmlns:a4j="http://richfaces.org/a4j">
 
-    <div class="sidebar">
+    <div class="sidebar equalheights">
         <h3>#{sessionScope['usuario'].nomeCompletoUpper}</h3>
         <h:graphicImage value="/protectedpages/exibirimagem/exibirImagem?hash=#{sessionScope['usuario'].perfil.hash}" styleClass="foto-perfil" rendered="#{sessionScope['usuario'].perfil != null and sessionScope['usuario'].perfil.hash != null}"/>
         <h:graphicImage value="/protectedpages/exibirimagem/exibirImagem?hash=default" styleClass="foto-perfil" rendered="#{sessionScope['usuario'].perfil == null or sessionScope['usuario'].perfil.hash == null}"/>
