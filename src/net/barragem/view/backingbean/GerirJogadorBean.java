@@ -122,7 +122,7 @@ public class GerirJogadorBean extends BaseBean {
 			setRequestAttribute("pesquisarBean", pesquisarBean);
 			return pesquisarBean.pesquisaJogador(pesquisa);
 		}
-		if (pesquisa != null && pesquisa.length() > 0) {
+		if (pesquisa == null || pesquisa.length() == 0) {
 			messages.addErrorMessage(null, "label_insira_um_texto_para_pesquisa");
 			return "";
 		}
