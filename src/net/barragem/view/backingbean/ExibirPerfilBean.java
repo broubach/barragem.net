@@ -55,6 +55,6 @@ public class ExibirPerfilBean extends BaseBean {
 	}
 
 	public List<Barragem> getBarragens() {
-		return (List<Barragem>) PersistenceHelper.findByNamedQuery("barragensDeUsuarioQuery", usuarioEmFoco.getId());
+		return getBarragens(usuarioEmFoco.getId());
 	}
 }

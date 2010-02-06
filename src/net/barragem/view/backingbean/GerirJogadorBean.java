@@ -10,7 +10,6 @@ import net.barragem.persistence.entity.Jogador;
 import net.barragem.persistence.entity.Usuario;
 import net.barragem.util.JogadoresComCorrespondenciaPrimeiroComparator;
 import net.barragem.util.PersistenceHelper;
-import net.barragem.util.VincularJogadorBean;
 
 import org.ajax4jsf.model.KeepAlive;
 import org.hibernate.exception.ConstraintViolationException;
@@ -123,12 +122,17 @@ public class GerirJogadorBean extends BaseBean {
 			setRequestAttribute("pesquisarBean", pesquisarBean);
 			return pesquisarBean.pesquisaJogador(pesquisa);
 		}
+		if (pesquisa != null && pesquisa.length() > 0) {
+			messages.addErrorMessage(null, "label_insira_um_texto_para_pesquisa");
+			return "";
+		}
 		List<Jogador> resultado = PersistenceHelper.findByNamedQuery("pesquisaJogadorDeUsuarioQuery",
 				getUsuarioLogado(), new StringBuilder().append("%").append(pesquisa).append("%").toString()
 						.toUpperCase());
 		if (resultado.isEmpty()) {
 			messages.addInfoMessage("label_nenhum_resultado_encontrado", "label_nenhum_resultado_encontrado");
 		} else {
+			Collections.sort(resultado, new JogadoresComCorrespondenciaPrimeiroComparator());
 			jogadores = new ListDataModel(resultado);
 			pesquisaSalva = pesquisa;
 		}

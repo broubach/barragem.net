@@ -1,11 +1,13 @@
-package net.barragem.util;
+package net.barragem.view.backingbean;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.faces.event.ActionEvent;
 
 import net.barragem.persistence.entity.Jogador;
-import net.barragem.view.backingbean.BaseBean;
+import net.barragem.util.JogadoresComCorrespondenciaPrimeiroComparator;
+import net.barragem.util.PersistenceHelper;
 
 import org.ajax4jsf.model.KeepAlive;
 
@@ -45,6 +47,7 @@ public class VincularJogadorBean extends BaseBean {
 			jogadores = PersistenceHelper.findByNamedQuery("pesquisaJogadorForaDaListaQuery", getUsuarioLogado(),
 					new StringBuilder().append("%").append(pesquisa).append("%").toString().toUpperCase());
 			if (jogadores.size() > 0) {
+				Collections.sort(jogadores, new JogadoresComCorrespondenciaPrimeiroComparator());
 				return;
 			}
 

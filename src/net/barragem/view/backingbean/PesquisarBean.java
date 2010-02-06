@@ -1,11 +1,13 @@
 package net.barragem.view.backingbean;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.faces.event.ActionEvent;
 
 import net.barragem.persistence.entity.Barragem;
 import net.barragem.persistence.entity.Jogador;
+import net.barragem.util.JogadoresComCorrespondenciaPrimeiroComparator;
 import net.barragem.util.PersistenceHelper;
 
 import org.ajax4jsf.model.KeepAlive;
@@ -59,6 +61,7 @@ public class PesquisarBean extends BaseBean {
 			jogadores = PersistenceHelper.findByNamedQuery("pesquisaJogadorQuery", new StringBuilder().append("%")
 					.append(pesquisa).append("%").toString().toUpperCase());
 			if (jogadores.size() > 0) {
+				Collections.sort(jogadores, new JogadoresComCorrespondenciaPrimeiroComparator());
 				return "sucessoPesquisa";
 			}
 

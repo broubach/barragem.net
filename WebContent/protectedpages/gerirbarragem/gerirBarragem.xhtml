@@ -26,12 +26,22 @@
 
 			<h:form>
 				<h2><h:outputText value="#{msg.label_minhas_barragens}" /></h2>
+				<br/>
+
+				<h3><h:outputText value="#{msg.label_barragens_que_participo}" /></h3>
+				<ui:include src="../componentes/barragens.xhtml">
+					<ui:param name="barragens" value="#{gerirBarragemBean.barragens}"/>
+				</ui:include>
+	            <div class="clear"></div>
+	            <br/>
+
 				<div class="btn-novo">
 					<a4j:commandLink actionListener="#{gerirBarragemBean.novaBarragem}" reRender="add-barragens" oncomplete="$j('.popup').click();">
 						<span>#{msg.label_adicionar_barragem}</span>
 					</a4j:commandLink>
 					<a href="#" title="#{msg.label_barragem}" class="popup" style="visibility:hidden"/>
 				</div>
+				<h3><h:outputText value="#{msg.label_barragens_que_administro}" /></h3>
 				<h:dataTable id="painelBarragens" styleClass="gradient" rowClasses=",alt" columnClasses=",,,actions" value="#{gerirBarragemBean.barragens}" var="item" binding="#{gerirBarragemBean.dataTable}">
 					<h:column>
 						<f:facet name="header">
@@ -74,8 +84,9 @@
 						</h:commandLink>
 					</h:column>
 				</h:dataTable>
+	            <div class="clear"></div>
 			</h:form>
-            <div class="clear"></div>
+
 			<div style="display:none">
 				<ui:include src="popupBarragem.xhtml" />
 			</div>

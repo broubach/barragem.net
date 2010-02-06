@@ -87,7 +87,7 @@
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>vincularJogadorBean</managed-bean-name>
-		<managed-bean-class>net.barragem.util.VincularJogadorBean</managed-bean-class>
+		<managed-bean-class>net.barragem.view.backingbean.VincularJogadorBean</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	<navigation-rule>

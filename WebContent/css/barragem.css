@@ -149,6 +149,10 @@ fieldset {
 }
 
 /********************* GERIR JOGADOR *********************/
+.btn-visualiza {
+	float:right;
+	padding-right:3px;
+}
 #gerirJogador .tipoPesquisa {
 	display: inline;
 	border-collapse: collapse;
@@ -364,13 +368,12 @@ div.loginError {
     float: left;
 }
 .btn-novo {
-    position:absolute;
-    right:40px;
-    top:10px;
     background: #95c396;
     -moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
     height:25px;
+	float:right;
+	margin-bottom:3px;
 }
 .btn-novo a, .btn-novo-relative a {
     text-decoration:none;

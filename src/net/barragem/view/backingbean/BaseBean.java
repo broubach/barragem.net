@@ -7,6 +7,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.el.ValueExpression;
 import javax.faces.application.Application;
@@ -25,9 +26,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import net.barragem.persistence.entity.Arquivo;
+import net.barragem.persistence.entity.Barragem;
 import net.barragem.persistence.entity.Usuario;
 import net.barragem.persistence.entity.Validatable;
 import net.barragem.util.BarragemJmsTemplate;
+import net.barragem.util.PersistenceHelper;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.jms.core.MessageCreator;
@@ -297,5 +300,13 @@ public class BaseBean {
 			}
 		}
 		return null;
+	}
+
+	public List<Barragem> getBarragens() {
+		return getBarragens(getUsuarioLogado().getId());
+	}
+
+	protected List<Barragem> getBarragens(Integer usuarioId) {
+		return (List<Barragem>) PersistenceHelper.findByNamedQuery("barragensDeUsuarioQuery", usuarioId);
 	}
 }
