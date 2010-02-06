@@ -160,13 +160,13 @@ fieldset {
 	width: 200px;
 	white-space: nowrap;
 }
-#gerirJogador .searchFormInput {
+#gerirJogador .searchFormInput, #vincular-jogador .searchFormInput {
     background-color: #DDE4EF;
     height:17px;
     padding: 1px;
     vertical-align: bottom;
 }
-#gerirJogador .searchFormButton {
+#gerirJogador .searchFormButton, #vincular-jogador .searchFormButton {
 	border: none;
 	background-color: inherit;
 	padding: 0px;

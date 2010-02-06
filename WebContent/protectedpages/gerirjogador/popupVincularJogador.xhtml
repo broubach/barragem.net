@@ -9,6 +9,13 @@
 
 	<div class="vincular-jogador">
 		<h:form id="vincular-jogador">
+	        <c:if test="#{! empty messageBean.errorMessages}">
+		        <div class="mensagem-erro">
+			        <c:forEach var="item" items="#{messageBean.errorMessages}">
+	    	    		<span>#{item.value.summary}</span>
+			        </c:forEach>
+		        </div>
+	        </c:if>
 	        <c:if test="#{! empty messageBean.infoMessages['label_nenhum_resultado_encontrado']}">
 		        <div class="mensagem-info">
     	    		<span>#{messageBean.infoMessages['label_nenhum_resultado_encontrado'].summary}</span>
@@ -18,7 +25,7 @@
 				<div class="input text">
 					<label for="vincular-jogador:pesquisa" class="#{messageBean.errorMessages['pesquisa'] != null ? 'error' : 'searchFormLabel'}">#{msg.label_pesquisa_de_jogadores}</label>
 					<h:inputText id="pesquisa" styleClass="searchFormInput" size="60" maxlength="45" value="#{vincularJogadorBean.pesquisa}"/>
-					<a4j:commandButton actionListener="#{vincularJogadorBean.pesquisaJogador}" image="#{request.contextPath}/img/pesquisaLen.gif" styleClass="searchFormButton" alt="#{msg.label_pesquisar_}" title="#{msg.label_pesquisar_}" reRender="vincular-jogador,tabelaJogadores" oncomplete="$.fn.colorbox.resize()"/>
+					<a4j:commandButton actionListener="#{vincularJogadorBean.pesquisaJogador}" image="/img/pesquisaLen.gif" styleClass="searchFormButton" alt="#{msg.label_pesquisar_}" title="#{msg.label_pesquisar_}" reRender="vincular-jogador,tabelaJogadores" oncomplete="$.fn.colorbox.resize()"/>
 				</div>
 			</div>
 			<div style="overflow: auto; width: 260px; height: 200px;">
