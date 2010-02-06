@@ -10,6 +10,7 @@ import net.barragem.persistence.entity.Jogador;
 import net.barragem.persistence.entity.Usuario;
 import net.barragem.util.JogadoresComCorrespondenciaPrimeiroComparator;
 import net.barragem.util.PersistenceHelper;
+import net.barragem.util.VincularJogadorBean;
 
 import org.ajax4jsf.model.KeepAlive;
 import org.hibernate.exception.ConstraintViolationException;
@@ -173,5 +174,12 @@ public class GerirJogadorBean extends BaseBean {
 	public void limpaFiltro(ActionEvent e) {
 		pesquisaSalva = null;
 		jogadores = new ListDataModel(usuarioEmFoco.getJogadores());
+	}
+
+	public void preparaVinculo(ActionEvent e) {
+		Jogador jogador = (Jogador) getJogadores().getRowData();
+		VincularJogadorBean vincularJogadorBean = new VincularJogadorBean();
+		vincularJogadorBean.setJogadorEmFoco(jogador);
+		setRequestAttribute("vincularJogadorBean", vincularJogadorBean);
 	}
 }

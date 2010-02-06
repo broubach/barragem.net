@@ -580,13 +580,18 @@ td.actions {
 	border-top:1px solid #FFFFFF;
 	background:transparent url(../img/versus.png) no-repeat 50%;
 }
-.exibirPainelBarragemRankingBodyNoWrap {
+.exibirPainelBarragem-ranking-nowrap {
 	padding: 2px; 
 	border-bottom:1px solid #FFFFFF; 
 	border-top:1px solid #FFFFFF; 
 	white-space: nowrap;
 }
-
+.float-left {
+	float: left;
+}
+.float-right {
+	float: right;
+}	
 
 /********************* DADOS BARRAGEM *********************/
 .dados-barragem dd a:hover {

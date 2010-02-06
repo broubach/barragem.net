@@ -60,7 +60,7 @@
 
 			<div class="exibirPainelBarragemRodada">
 				<c:forEach items="#{exibirPainelBarragemBean.rodadasFetch}" var="rodadaAtual" begin="#{exibirPainelBarragemBean.startIndex}" end="#{exibirPainelBarragemBean.endIndex}">
-				    <h:dataTable styleClass="exibirPainelBarragemRodadaTable" rowClasses="exibirPainelBarragemRankingBodyBackground,exibirPainelBarragemRankingBodyBackgroundAlt" columnClasses="exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBody,exibirPainelBarragemRodadaBodyVersus,exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBodyNoWrap,exibirPainelBarragemRankingBodyNoWrap" value="#{rodadaAtual.jogos}" var="item" headerClass="exibirPainelBarragemRankingTableHead">
+				    <h:dataTable styleClass="exibirPainelBarragemRodadaTable" rowClasses="exibirPainelBarragemRankingBodyBackground,exibirPainelBarragemRankingBodyBackgroundAlt" columnClasses="exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBody,exibirPainelBarragemRodadaBodyVersus,exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBody,exibirPainelBarragem-ranking-nowrap,exibirPainelBarragem-ranking-nowrap" value="#{rodadaAtual.jogos}" var="item" headerClass="exibirPainelBarragemRankingTableHead">
 						<f:facet name="header">
 							#{msg.label_rodada} #{rodadaAtual.numero}
 						</f:facet>

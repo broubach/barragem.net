@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+	<div class="editar-jogador">
+		<h:form id="editar-jogador">
+	        <c:if test="#{! empty messageBean.errorMessages}">
+		        <div class="mensagem-erro">
+    	    		<span>#{msg.label_preencha_os_campos_obrigatorios}</span>
+		        </div>
+	        </c:if>
+			<div class="dados-popup">
+				<div class="input text">
+					<label for="editar-jogador:nome" class="#{messageBean.errorMessages['nome'] != null ? 'error' : ''}">#{msg.label_novo_nome}*</label>
+					<h:inputText id="nome" value="#{gerirJogadorBean.novoNome}" size="35" maxlength="45"/>
+				</div>
+				<div class="salvar">
+					<label class="campos_obrigatorios">#{msg.label_campos_marcados_sao_obrigatorios}</label>
+					<a4j:commandButton actionListener="#{gerirJogadorBean.salvaJogador}"
+						value="#{msg.label_salvar}" reRender="editar-jogador,tabelaJogadores,mensagemSucesso" styleClass="submit" oncomplete="$.fn.colorbox.resize()"/>
+				</div>
+			</div>
+		</h:form>
+	</div>
+</html>

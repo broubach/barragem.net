@@ -10,7 +10,7 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
 	<div class="exibirPainelBarragemRanking">
-	    <h:dataTable id="tabelaJogadores" styleClass="exibirPainelBarragemRankingTable" rowClasses="exibirPainelBarragemRankingBodyBackground,exibirPainelBarragemRankingBodyBackgroundAlt" columnClasses="exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBody" value="#{jogadores}" var="item" headerClass="exibirPainelBarragemRankingTableHead">
+	    <h:dataTable id="tabelaJogadores" styleClass="exibirPainelBarragemRankingTable" rowClasses="exibirPainelBarragemRankingBodyBackground,exibirPainelBarragemRankingBodyBackgroundAlt" columnClasses="exibirPainelBarragemRankingBody,exibirPainelBarragem-ranking-nowrap,exibirPainelBarragemRankingBody" value="#{jogadores}" var="item" headerClass="exibirPainelBarragemRankingTableHead">
 			<f:facet name="header">
 				#{msg.label_jogadores}
 			</f:facet>
@@ -21,12 +21,18 @@
 		        	rendered="#{item.usuarioCorrespondente != null and (item.usuarioCorrespondente.perfil == null or item.usuarioCorrespondente.perfil.hash == null)}"/>
 		    </h:column>
 		    <h:column>
-				<h:commandLink action="exibirPerfil" actionListener="#{exibirPerfilBean.exibePerfil}" rendered="#{item.usuarioCorrespondente != null}">#{item.nome}<f:param name="id" value="#{item.usuarioCorrespondente.id}"/></h:commandLink>
-				<h:outputText value="#{item.nome}" rendered="#{item.usuarioCorrespondente == null}"/> 
-				<a4j:commandLink actionListener="#{gerirJogadorBean.preparaEdicao}" reRender="rename-ciclo" oncomplete="$j('.popupRenomearJogador').click();"
-					rendered="#{item.usuarioCorrespondente == null and podeEditarJogadores}">
-					<img src="#{request.contextPath}/img/buttons/btn-editar.png" alt="#{msg.label_editar}" title="#{msg.label_editar}" class="btnEditar"/>
-				</a4j:commandLink>
+				<h:commandLink action="exibirPerfil" actionListener="#{exibirPerfilBean.exibePerfil}" rendered="#{item.usuarioCorrespondente != null and !podeVincularJogadores}" onclick="">#{item.nome}<f:param name="id" value="#{item.usuarioCorrespondente.id}"/></h:commandLink>
+				<h:commandLink actionListener="#{vincularJogadorBean.vinculaJogador}" rendered="#{item.usuarioCorrespondente != null and podeVincularJogadores}" onclick="return confirm('#{msg.label_confirma_vincular1} #{vincularJogadorBean.jogadorEmFoco.nome}#{msg.label_confirma_vincular2} #{item.nome}?');">
+					#{item.nome}
+					<f:param name="id" value="#{item.id}"/>
+				</h:commandLink>
+				<div class="float-left"><h:outputText value="#{item.nome}" rendered="#{item.usuarioCorrespondente == null}" /></div>
+				<div class="float-right"> 
+					<a4j:commandLink actionListener="#{gerirJogadorBean.preparaEdicao}" reRender="editar-jogador" oncomplete="$j('.popupRenomearJogador').click();"
+						rendered="#{item.usuarioCorrespondente == null and podeEditarJogadores}">
+						<img src="#{request.contextPath}/img/buttons/btn-editar.png" alt="#{msg.label_editar}" title="#{msg.label_editar}"/>
+					</a4j:commandLink>
+				</div>
 		    </h:column>
 			<h:column rendered="#{podeEditarJogadores}">
 				<h:commandLink onclick="return confirm('#{msg.label_confirma_exclusao}');"
@@ -37,10 +43,9 @@
 					<f:param name="id" value="#{item.usuarioCorrespondente.id}"/>
 					<img src="#{request.contextPath}/img/buttons/btn-view.png" alt="#{msg.label_visualizar}" title="#{msg.label_visualizar}"/>
 				</h:commandLink>
-				<h:commandLink action="exibirPerfil" actionListener="#{exibirPerfilBean.exibePerfil}" rendered="#{item.usuarioCorrespondente == null}">
-					<f:param name="id" value="#{item.usuarioCorrespondente.id}"/>
+				<a4j:commandLink actionListener="#{gerirJogadorBean.preparaVinculo}"  reRender="vincular-jogador" oncomplete="$j('.popupVincularJogador').click();" rendered="#{item.usuarioCorrespondente == null}">
 					<img src="#{request.contextPath}/img/buttons/btn-link.png" alt="#{msg.label_vincular_jogador_a_usuario_existente}" title="#{msg.label_vincular_jogador_a_usuario_existente}"/>
-				</h:commandLink>
+				</a4j:commandLink>
 			</h:column>
 			<f:facet name="footer">
 				<h:commandLink actionListener="#{gerirJogadorBean.limpaFiltro}" rendered="#{gerirJogadorBean.pesquisaSalva != null}" styleClass="linkLimpaFiltro">#{msg.label_limpar_filtro_pesquisa}</h:commandLink>
