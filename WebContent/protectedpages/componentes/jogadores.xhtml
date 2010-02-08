@@ -15,9 +15,9 @@
 				#{msg.label_jogadores}
 			</f:facet>
 		    <h:column>
-		        <h:graphicImage value="/protectedpages/exibirimagem/exibirImagem?hash=#{item.usuarioCorrespondente.perfil.hash}" styleClass="foto-perfil-small" 
+		        <h:graphicImage value="/protectedpages/exibirimagem/exibirImagem.do?hash=#{item.usuarioCorrespondente.perfil.hash}" styleClass="foto-perfil-small" 
 		        	rendered="#{item.usuarioCorrespondente != null and item.usuarioCorrespondente.perfil != null and item.usuarioCorrespondente.perfil.hash != null}"/>
-		        <h:graphicImage value="/protectedpages/exibirimagem/exibirImagem?hash=default" styleClass="foto-perfil-small" 
+		        <h:graphicImage value="/protectedpages/exibirimagem/exibirImagem.do?hash=default" styleClass="foto-perfil-small" 
 		        	rendered="#{item.usuarioCorrespondente != null and (item.usuarioCorrespondente.perfil == null or item.usuarioCorrespondente.perfil.hash == null)}"/>
 		    </h:column>
 		    <h:column>

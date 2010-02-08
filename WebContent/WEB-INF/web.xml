@@ -135,6 +135,6 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Image Servlet</servlet-name>
-		<url-pattern>/protectedpages/exibirimagem/exibirImagem</url-pattern>
+		<url-pattern>/protectedpages/exibirimagem/exibirImagem.do</url-pattern>
 	</servlet-mapping>
 </web-app>
