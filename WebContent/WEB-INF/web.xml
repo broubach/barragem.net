@@ -5,7 +5,7 @@
 	id="WebApp_ID" version="2.5">
 	<display-name>barragem</display-name>
 	<welcome-file-list>
-		<welcome-file>protectedpages/index.xhtml</welcome-file>
+		<welcome-file>login.xhtml</welcome-file>
 	</welcome-file-list>
 
 	<!-- Facelets config -->
@@ -71,13 +71,21 @@
 	</filter-mapping>
 
 	<filter>
-		<display-name>Usuario Filter</display-name>
-		<filter-name>usuarioFilter</filter-name>
-		<filter-class>net.barragem.view.filter.UsuarioFilter</filter-class>
+		<filter-name>ProtectedPagesFilter</filter-name>
+		<filter-class>net.barragem.view.filter.ProtectedPagesFilter</filter-class>
 	</filter>
 	<filter-mapping>
-		<filter-name>usuarioFilter</filter-name>
+		<filter-name>ProtectedPagesFilter</filter-name>
 		<url-pattern>/protectedpages/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>LoginProtectionFilter</filter-name>
+		<filter-class>net.barragem.view.filter.LoginProtectionFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>LoginProtectionFilter</filter-name>
+		<url-pattern>/login.xhtml</url-pattern>
 	</filter-mapping>
 
 	<filter>

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.barragem.persistence.entity.Usuario;
 
-public class UsuarioFilter implements Filter {
+public class ProtectedPagesFilter implements Filter {
 
 	public void destroy() {
 	}
