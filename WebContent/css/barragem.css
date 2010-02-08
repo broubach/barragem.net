@@ -331,6 +331,7 @@ div.loginError {
     background: transparent url(../img/pesquisa.gif) right 0 no-repeat;
     width:169px;
     height:18px;
+    border: none;
 }
 .dados .searchFormLabel {
 	width: 130px;
