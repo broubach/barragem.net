@@ -1,0 +1,343 @@
+@CHARSET "UTF-8";
+/* Reset */
+* {
+	margin:0;
+	padding:0
+}
+
+/********************* FORMULARIO DE SEGURANCA *********************/
+#registerFormSeguranca {
+    margin-top:45px;
+    margin-left:30px;
+}
+#registerFormSeguranca .label {
+	width: 68px;
+	float: left;
+	text-align: right;
+	margin-right: 5px;
+	display: block
+}
+#registerFormSeguranca .submit {
+	margin-left: 73px;	
+}
+#registerFormSeguranca input[type=text] {
+    width:100px;
+}
+#registerFormSeguranca .captcha {
+	background-color: #FFF; 
+	width: 250px; 
+	height: 40px;
+}
+#voltar {
+    background: transparent url(../img/buttons/btn-voltar.png) no-repeat 0 0;
+    padding-left: 17px;
+}
+#registerFormSeguranca #voltar {
+	float: left;
+}
+
+/********************* GERAL *********************/
+a {outline:none}
+img {border:none;}
+html {
+	background:#bfbfbf url(../img/fundo-home-borda.gif) repeat-y 50%
+}
+body {background: transparent url(../img/fundo-internas.gif) no-repeat 50% 90px;}
+input {
+	height:14px;
+	padding:2px;
+	border: 1px solid #6a9bcd;
+}
+li {
+	list-style:none;
+}
+
+/********************* HOME *********************/
+.home body {
+	background: transparent url(../img/fundo-home.gif) no-repeat 50% 90px;
+}
+.bloco-home {
+    background: #fff url(../img/fundo-blocos-home.gif) no-repeat center 0;
+    padding:10px;
+    height:150px;
+}
+.home h2.slogan {
+	padding-top:20px;
+    width:180px;
+    position:absolute;
+}
+
+/********************* CABECALHO *********************/
+#header {
+	height:90px;
+    position:relative;
+}
+#header h1 {
+    float:left;
+    margin-top:10px;
+}
+#header a.brand {
+    margin:10px;
+    background: transparent url(../img/logo-barragem.gif);    
+    display:block;
+    width:318px;
+    height:56px;
+    text-indent:-9999px;
+}
+.header-bloco h2 {
+	margin-bottom:0.3em;
+}
+
+/********************* SIDEBAR HEADER *********************/
+.sidebar-header {
+    margin-left:20px;
+    margin-top:20px;
+    float:left;
+    background: #596e94;
+    padding:10px;
+    -moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+    width:305px;
+    height:40px;
+}
+.sidebar-header a {
+	text-decoration:none;
+}
+.sidebar-header a:hover {
+	text-decoration:underline;
+}
+
+/********************* MENU *********************/
+.internas .menu a:hover {
+    background:#0D286F;
+}
+
+/********************* FORMS *********************/
+#loginForm input {
+	border:1px solid #f9f9f9;
+	background: #fff;
+	margin-left:3px;
+    width:130px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+#loginForm input[type=password] {
+	border:1px solid #f9f9f9;
+	background: #fff;
+	margin-left:3px;
+    width:117px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+#loginForm input[type=submit] {
+	background: #6c88be;
+    height:20px;
+    -moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+    width: 40px;
+    position:absolute;
+}
+#loginForm a {
+    text-decoration:none;
+    border:none;
+}
+#loginForm a:hover {
+	text-decoration:underline;
+}
+#registerForm label {
+	width: 68px;
+	float: left;
+	text-align: right;
+	margin-right: 5px;
+	display: block
+}
+#registerForm {
+    margin-top:45px;
+    margin-left:30px;
+}
+#registerForm .submit {
+	margin-left: 73px;	
+}
+#registerForm .input input[type=text], #registerForm .input input[type=password] {
+    width:180px;
+}
+#loginSpan {
+	height: 10px;
+}
+div.error {
+	background:#FFEBE8 none repeat scroll 0 0; 
+	border:1px solid #DD3C10; 
+	margin-top: 2px; 
+	text-align:center; 
+	width: 255px; 
+}
+div.loginError {
+	background:#FFEBE8 none repeat scroll 0 0; 
+	border:1px solid #DD3C10; 
+	margin-top: 2px; 
+	text-align:center;
+	float: right; 
+}
+#voltar a:hover {
+	text-decoration: underline;
+}
+
+#searchForm {
+    position:absolute;
+    right:20px;
+    top:50px
+}
+#searchForm .searchFormInput {
+    background: transparent url(../img/pesquisa.gif) right 0 no-repeat;
+    width:169px;
+    height:18px;
+    border: none;
+}
+
+.input {
+    margin-bottom: 4px;
+	display:inline-block;
+}
+.submit input {
+    height:19px;
+    background:#7baf7b;
+    border: 1px solid #666;
+   	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+/********************* BOTOES *********************/
+.registrese {
+	height:275px
+}
+
+/********************* RODAPE *********************/
+#footer {
+	background: #fff url(../img/fundo-rodape.gif) repeat-x;
+	padding-top:.5em;
+    margin:.5em 0;
+    text-align:right;
+    padding-right:1em;
+    position:relative;
+}
+#footer li {
+    list-style:none;
+    display:inline;   
+}
+#footer a {
+    text-decoration:none;
+}
+#footer .externo {
+	position:absolute;
+	left:10px;
+	top:15px;
+}
+#content {
+    margin-top:20px;
+}
+
+/********************* TABLES *********************/
+.gradient tbody tr:hover {
+	background: #DEDFFF url('../img/tables/bg-cell-hover.png') repeat-x;
+}
+
+/********************* DADOS BARRAGEM *********************/
+.dados-barragem dd a:hover {
+	text-decoration: underline;
+}
+
+/********************* RODADAS *********************/
+.rodadas a:hover, .rodadas a.atual {
+	background: transparent url(../img/fundo-link-rodadas-atual.gif) no-repeat 0 0;
+}
+
+.registrese h3 {
+	line-height: normal;
+	margin:0;
+    position:absolute;
+    top:20px;
+    left:570px;
+}
+	
+/********************* ADD JOGO *********************/
+.anterior_proximo a:hover {
+	text-decoration: underline;
+}
+
+/********************* TYPOGRAPHY *********************/
+body {
+	font-family: Tahoma, Arial, Helvetica, sans serif;
+	font-size:95%;
+	line-height:1.125em;
+}
+label {
+	color: #2c6695;
+}
+#registerForm label, #registerFormSeguranca .label {
+	font-size: .7em;
+	font-weight:bold;
+}
+#registerForm .input select {
+    font-size:.8em;
+}
+input {
+	font-size:10px;
+}
+.home h2.slogan {
+    font-size:1em;
+	color:#656565;
+}
+.header-bloco h2 {
+	color:#069;
+}
+.header-bloco p {
+	color:#444;
+	font-size:12px;
+}
+.sidebar-header {
+	font-size:.8em;
+}
+.sidebar-header a {
+	color:#fff;
+}
+#loginForm .login {
+	color:#fff;
+	font-weight:bold;
+}
+#loginForm a {
+    font-size:10px;
+    color:#fff;
+}
+.submit input {
+    color:#fff;
+    font-weight:bold;
+}
+#footer {
+    color:#aaa;
+}
+#footer a {
+    color:#aaa;
+	font-size: .9em;
+}
+.gradient tbody tr:hover {
+	color: #339;
+}
+.rodadas a:hover, .rodadas a.atual {
+	color:#333;
+}
+.registrese h3 {
+    color:#2C6695;
+}
+div.error {
+	font-size: 0.7em; 
+}
+#voltar a {
+	text-decoration: none;
+}
+#registerFormSeguranca h4 {
+	color:#2C6695;
+}
+#voltar a {
+	color:#333333;
+	font-size:0.8em;
+}

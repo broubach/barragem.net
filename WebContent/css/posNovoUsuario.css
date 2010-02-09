@@ -1,0 +1,315 @@
+@CHARSET "UTF-8";
+/* Reset */
+* {
+	margin:0;
+	padding:0
+}
+
+/********************* GERAL *********************/
+a {outline:none}
+img {border:none;}
+html {
+	background:#bfbfbf url(../img/fundo-home-borda.gif) repeat-y 50%
+}
+body {background: transparent url(../img/fundo-internas.gif) no-repeat 50% 90px;}
+input {
+	height:14px;
+	padding:2px;
+	border: 1px solid #6a9bcd;
+}
+li {
+	list-style:none;
+}
+
+/********************* CABECALHO *********************/
+#header {
+	height:90px;
+    position:relative;
+}
+#header h1 {
+    float:left;
+    margin-top:10px;
+}
+#header a.brand {
+    margin:10px;
+    background: transparent url(../img/logo-barragem.gif);    
+    display:block;
+    width:318px;
+    height:56px;
+    text-indent:-9999px;
+}
+
+/********************* SIDEBAR HEADER *********************/
+.sidebar-header {
+    margin-left:20px;
+    margin-top:20px;
+    float:left;
+    background: #596e94;
+    padding:10px;
+    -moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+    width:305px;
+    height:40px;
+}
+.sidebar-header a {
+	text-decoration:none;
+}
+.sidebar-header a:hover {
+	text-decoration:underline;
+}
+.sidebar-header .logout {
+    float:right;
+    top:4px;
+    right:10px;
+    border:none;
+}
+
+/********************* MENU *********************/
+.internas .menu a:hover {
+    background:#0D286F;
+}
+
+/********************* FORMS *********************/
+#loginForm a:hover {
+	text-decoration:underline;
+}
+#voltar a:hover {
+	text-decoration: underline;
+}
+
+#searchForm {
+    position:absolute;
+    right:20px;
+    top:50px
+}
+#searchForm .searchFormInput {
+    background: transparent url(../img/pesquisa.gif) right 0 no-repeat;
+    width:169px;
+    height:18px;
+    border: none;
+}
+.internas label, .dados .exemplo {
+	float: left;
+	text-align: right;
+	margin-right: 5px;
+	display: block
+}
+
+.internas input {
+	background: #dde4ef;
+	border: 1px solid #fff;
+}
+.input {
+    margin-bottom: 4px;
+	display:inline-block;
+}
+
+/********************* RODAPE *********************/
+#footer {
+	background: #fff url(../img/fundo-rodape.gif) repeat-x;
+	padding-top:.5em;
+    margin:.5em 0;
+    text-align:right;
+    padding-right:1em;
+    position:relative;
+}
+#footer li {
+    list-style:none;
+    display:inline;   
+}
+#footer a {
+    text-decoration:none;
+}
+#footer .externo {
+	position:absolute;
+	left:10px;
+	top:15px;
+}
+#content {
+    margin-top:20px;
+}
+.maincontent {
+	min-height:450px;
+	background: #EEF1F3;
+	-moz-border-radius: 20px;
+	-webkit-border-radius: 20px;
+    padding:10px;
+}
+.maincontent h2, .maincontent h3 {
+	margin-bottom:10px;
+}
+
+/********************* TABLES *********************/
+.gradient tbody tr:hover {
+	background: #DEDFFF url('../img/tables/bg-cell-hover.png') repeat-x;
+}
+
+/********************* DADOS BARRAGEM *********************/
+.dados-barragem dd a:hover {
+	text-decoration: underline;
+}
+
+/********************* PERFIL *************/
+.tituloPerfil {
+	text-align: center;
+	display:table;
+	margin-left:auto;
+	margin-right:auto;
+	text-align:center;
+	width:290px;
+}
+.tituloPerfil .passoInativo {
+	width: 100px; 
+	background-color: #ffffff; 
+	padding: 15px; 
+	float: left; 
+	margin-left: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+.tituloPerfil .passoAtivo {
+	color: #ffffff; 
+	width: 100px; 
+	background-color:#596E94; 
+	padding: 15px; 
+	float: left;
+	margin-left: 10px;
+	-moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+.tituloPerfil .passoAtivo h2 {
+	color: #ffffff;
+}
+.perfilContainer {
+	padding: 2px; 
+	width: 580px; 
+	background-color: #ffffff; 
+	-moz-border-radius: 10px; 
+    -webkit-border-radius: 10px;
+	margin-left: auto; 
+	margin-right: auto;
+}
+.perfilBtnContainer {
+	padding: 2px; 
+	width: 500px;
+	text-align: center; 
+	margin-left: auto; 
+	margin-right: auto;
+}
+.perfilFotoContainer {
+	width: 260px; 
+	margin-left: auto; 
+	margin-right: auto; 
+	display: table;
+}
+.perfilBtnUploadFotoContainer {
+	float: left;
+}
+.rich-fileupload-list-decor {
+	border: 0px;
+}
+.rich-fileupload-toolbar-decor {
+	margin-left: 5px;
+}
+.dr-pnl {
+	float: left;
+}
+.foto-perfil {
+	width: 123px; 
+	height: 162px;
+}
+.hidden {
+	display:none;
+}
+
+/********************* FILEUPLOAD COMPONENT *********************/
+.dados .categoria {
+	display: inline;
+}
+.dados .categoria label {
+	float: right;
+	width: auto;
+	white-space: nowrap;
+	border: none;
+	margin-left: 5px;
+}
+
+/********************* DADOS *********************/
+.dados {
+	padding-right: 10px;
+}
+.dados label, .dados .exemplo {
+	width:250px;
+    padding-right:5px;
+    clear: both;
+}
+.dados label, .dadosGerirJogador label, .dadosGerirJogadorListaJogadores label {
+	border-right: 1px solid #888;
+}
+.dados .input {
+	clear:both;
+}
+.dados .submit, .perfilBtnContainer .submit {
+    background:green;
+    padding:4px 20px;
+    height:24px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+}
+
+/********************* RODADAS *********************/
+.rodadas a:hover, .rodadas a.atual {
+	background: transparent url(../img/fundo-link-rodadas-atual.gif) no-repeat 0 0;
+}
+
+/********************* ADD JOGO *********************/
+.anterior_proximo a:hover {
+	text-decoration: underline;
+}
+/********************* TYPOGRAPHY *********************/
+body {
+	font-family: Tahoma, Arial, Helvetica, sans serif;
+	font-size:95%;
+	line-height:1.125em;
+}
+label {
+	color: #2c6695;
+}
+.maincontent h2, .maincontent h3, .maincontent dd a {
+    color:#4f6aad;
+}
+input {
+	font-size:10px;
+}
+.sidebar-header {
+	font-size:.8em;
+}
+.sidebar-header p {
+	font-size:.9em;
+	color:#fff;
+    line-height:1.8em;
+}
+.sidebar-header a {
+	color:#fff;
+}
+#footer {
+    color:#aaa;
+}
+#footer a {
+    color:#aaa;
+	font-size: .9em;
+}
+.gradient tbody tr:hover {
+	color: #339;
+}
+.rodadas a:hover, .rodadas a.atual {
+	color:#333;
+}
+.dados .submit, .perfilBtnContainer .submit {
+    color:#fff;
+    font-weight:bold;
+}
+.dados label, .dados .exemplo, .dados .complemento, .dadosExibirPerfil label, .dadosGerirJogador label, .dadosGerirJogadorListaJogadores label {
+	color:#444;
+	font-size:.8em;
+}

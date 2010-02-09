@@ -1,0 +1,13 @@
+<project name="Barragens' Tasks" default="generateProductionWar">
+	<!-- script para automatização de tarefas da barragem-->
+
+	<property file="build.properties" />
+
+	<target name="generateProductionWar">
+		<!-- Configura hibernate.cfg.xml - show_sql false -->
+		
+		<!-- Configura web.xml - facelets.DEVELOPMENT false - com.sun.faces.verifyObjects false - -->
+		<!-- Agrupa todos os CSSs - layout css + grid layout css = layout css - remove chamada para grid layout css -->
+		<!-- Minifica todos os CSSs - todos os css dentro da pasta css -->
+	</target>
+</project>
