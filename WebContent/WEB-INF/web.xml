@@ -117,7 +117,7 @@
 
     <servlet-mapping>
         <servlet-name>BarragemCaptchaServlet</servlet-name>
-        <url-pattern>/captcha-barragem</url-pattern>
+        <url-pattern>/captcha-barragem.do</url-pattern>
     </servlet-mapping>
     
     <!-- Spring config -->
