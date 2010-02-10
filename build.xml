@@ -1,13 +1,29 @@
 <project name="Barragens' Tasks" default="generateProductionWar">
 	<!-- script para automatização de tarefas da barragem-->
 
-	<property file="build.properties" />
-
 	<target name="generateProductionWar">
-		<!-- Configura hibernate.cfg.xml - show_sql false -->
+		<mkdir dir="${basedir}/temp" />
+
+		<!-- copia conteudo de WebContent para diretorio temporario -->
+		<copy todir="${basedir}/temp" includeemptydirs="false">
+			<fileset dir="WebContent">
+				<include name="**/*" />
+			</fileset>
+		</copy>
+		<!-- copia recursos compilados para WEB-INF/classes -->
+		<copy todir="${basedir}/temp/WEB-INF/classes" includeemptydirs="false">
+			<fileset dir="bin">
+				<include name="**/*" />
+			</fileset>
+		</copy>
 		
-		<!-- Configura web.xml - facelets.DEVELOPMENT false - com.sun.faces.verifyObjects false - -->
-		<!-- Agrupa todos os CSSs - layout css + grid layout css = layout css - remove chamada para grid layout css -->
+		<!-- Altera hibernate.cfg.xml - show_sql false -->
+		<replace dir="${basedir}/temp/WEB-INF/classes" replacefilterfile="tokens.properties" includes="hibernate.cfg.xml" defaultexcludes="false" />
+
+		<!-- Altera web.xml - facelets.DEVELOPMENT false - com.sun.faces.verifyObjects false - -->
+		<replace dir="${basedir}/temp/WEB-INF" replacefilterfile="tokens.properties" includes="web.xml" defaultexcludes="false" />
+
 		<!-- Minifica todos os CSSs - todos os css dentro da pasta css -->
+		<!-- TODO: MINIFICAR!! -->
 	</target>
 </project>
