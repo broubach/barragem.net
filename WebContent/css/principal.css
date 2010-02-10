@@ -216,6 +216,17 @@ fieldset#detalhes-jogo {
     float:none;
 }
 
+/********************* PERFIL *************/
+.perfilFotoContainer {
+	width: 260px; 
+	margin-left: auto; 
+	margin-right: auto; 
+	display: table;
+}
+.perfilBtnUploadFotoContainer {
+	float: left;
+}
+
 /********************* EXIBIR PERFIL *********************/
 .dadosExibirPerfil {
 	float: left;
@@ -625,6 +636,15 @@ td.actions {
 }
 
 /********************* FILEUPLOAD COMPONENT *********************/
+.rich-fileupload-list-decor {
+	border: 0px;
+}
+.rich-fileupload-toolbar-decor {
+	margin-left: 5px;
+}
+.dr-pnl {
+	float: left;
+}
 .foto-perfil {
 	width: 123px; 
 	height: 162px;
