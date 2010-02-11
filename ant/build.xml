@@ -24,77 +24,77 @@
 		<replace dir="${basedir}/temp/WEB-INF" replacefilterfile="tokens.properties" includes="web.xml" defaultexcludes="false" />
 
 		<!-- Minifica todos os CSSs - todos os css dentro da pasta css -->
-		<java classname="JSMin" output="${basedir}/temp/fileupload.css">
+		<java jar="yuicompressor-2.4.2.jar" fork="true" output="${basedir}/temp/fileupload.css">
 	         <classpath>
 	           <pathelement location="${basedir}"/>
 	           <pathelement path="${java.class.path}"/>
 	         </classpath>
 			<arg value="${basedir}/temp/css/fileupload/fileupload.css"/>
 		</java>
-		<java classname="JSMin" output="${basedir}/temp/ie-fix.css">
+		<java jar="yuicompressor-2.4.2.jar" fork="true" output="${basedir}/temp/ie-fix.css">
 	         <classpath>
 	           <pathelement location="${basedir}"/>
 	           <pathelement path="${java.class.path}"/>
 	         </classpath>
 			<arg value="${basedir}/temp/css/ie-fix.css"/>
 		</java>
-		<java classname="JSMin" output="${basedir}/temp/jquery.colorbox-barragem.css">
+		<java jar="yuicompressor-2.4.2.jar" fork="true" output="${basedir}/temp/jquery.colorbox-barragem.css">
 	         <classpath>
 	           <pathelement location="${basedir}"/>
 	           <pathelement path="${java.class.path}"/>
 	         </classpath>
 			<arg value="${basedir}/temp/css/jquery.colorbox-barragem.css"/>
 		</java>
-		<java classname="JSMin" output="${basedir}/temp/jquery.colorbox-ie.css">
+		<java jar="yuicompressor-2.4.2.jar" fork="true" output="${basedir}/temp/jquery.colorbox-ie.css">
 	         <classpath>
 	           <pathelement location="${basedir}"/>
 	           <pathelement path="${java.class.path}"/>
 	         </classpath>
 			<arg value="${basedir}/temp/css/jquery.colorbox-ie.css"/>
 		</java>
-		<java classname="JSMin" output="${basedir}/temp/jquery.colorbox.css">
+		<java jar="yuicompressor-2.4.2.jar" fork="true" output="${basedir}/temp/jquery.colorbox.css">
 			<classpath>
 	           <pathelement location="${basedir}"/>
 	           <pathelement path="${java.class.path}"/>
 			</classpath>
 			<arg value="${basedir}/temp/css/jquery.colorbox.css"/>
 		</java>
-		<java classname="JSMin" output="${basedir}/temp/login.css">
+		<java jar="yuicompressor-2.4.2.jar" fork="true" output="${basedir}/temp/login.css">
 	         <classpath>
 	           <pathelement location="${basedir}"/>
 	           <pathelement path="${java.class.path}"/>
 	         </classpath>
 			<arg value="${basedir}/temp/css/login.css"/>
 		</java>
-		<java classname="JSMin" output="${basedir}/temp/loginGrid.css">
+		<java jar="yuicompressor-2.4.2.jar" fork="true" output="${basedir}/temp/loginGrid.css">
 	         <classpath>
 	           <pathelement location="${basedir}"/>
 	           <pathelement path="${java.class.path}"/>
 	         </classpath>
 			<arg value="${basedir}/temp/css/loginGrid.css"/>
 		</java>
-		<java classname="JSMin" output="${basedir}/temp/posNovoUsuario.css">
+		<java jar="yuicompressor-2.4.2.jar" fork="true" output="${basedir}/temp/posNovoUsuario.css">
 	         <classpath>
 	           <pathelement location="${basedir}"/>
 	           <pathelement path="${java.class.path}"/>
 	         </classpath>
 			<arg value="${basedir}/temp/css/posNovoUsuario.css"/>
 		</java>
-		<java classname="JSMin" output="${basedir}/temp/posNovoUsuarioGrid.css">
+		<java jar="yuicompressor-2.4.2.jar" fork="true" output="${basedir}/temp/posNovoUsuarioGrid.css">
 	         <classpath>
 	           <pathelement location="${basedir}"/>
 	           <pathelement path="${java.class.path}"/>
 	         </classpath>
 			<arg value="${basedir}/temp/css/posNovoUsuarioGrid.css"/>
 		</java>
-		<java classname="JSMin" output="${basedir}/temp/principal.css">
+		<java jar="yuicompressor-2.4.2.jar" fork="true" output="${basedir}/temp/principal.css">
 	         <classpath>
 	           <pathelement location="${basedir}"/>
 	           <pathelement path="${java.class.path}"/>
 	         </classpath>
 			<arg value="${basedir}/temp/css/principal.css"/>
 		</java>
-		<java classname="JSMin" output="${basedir}/temp/principalGrid.css">
+		<java jar="yuicompressor-2.4.2.jar" fork="true" output="${basedir}/temp/principalGrid.css">
 	         <classpath>
 	           <pathelement location="${basedir}"/>
 	           <pathelement path="${java.class.path}"/>
