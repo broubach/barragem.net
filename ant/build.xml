@@ -6,13 +6,13 @@
 
 		<!-- copia conteudo de WebContent para diretorio temporario -->
 		<copy todir="${basedir}/temp" includeemptydirs="false">
-			<fileset dir="WebContent">
+			<fileset dir="../WebContent">
 				<include name="**/*" />
 			</fileset>
 		</copy>
 		<!-- copia recursos compilados para WEB-INF/classes -->
 		<copy todir="${basedir}/temp/WEB-INF/classes" includeemptydirs="false">
-			<fileset dir="bin">
+			<fileset dir="../bin">
 				<include name="**/*" />
 			</fileset>
 		</copy>
@@ -24,6 +24,19 @@
 		<replace dir="${basedir}/temp/WEB-INF" replacefilterfile="tokens.properties" includes="web.xml" defaultexcludes="false" />
 
 		<!-- Minifica todos os CSSs - todos os css dentro da pasta css -->
-		<!-- TODO: MINIFICAR!! -->
+		<java classname="JSMin" output="${basedir}/temp/css/principal.css">
+	         <classpath>
+	           <pathelement location="${basedir}"/>
+	           <pathelement path="${java.class.path}"/>
+	         </classpath>
+			<arg value="${basedir}/temp/css/principal.css"/>
+		</java>
+		<java classname="JSMin" output="${basedir}/temp/css/principalGrid.css">
+	         <classpath>
+	           <pathelement location="${basedir}"/>
+	           <pathelement path="${java.class.path}"/>
+	         </classpath>
+			<arg value="${basedir}/temp/css/principalGrid.css"/>
+		</java>
 	</target>
 </project>
