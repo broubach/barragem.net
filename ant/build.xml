@@ -24,19 +24,98 @@
 		<replace dir="${basedir}/temp/WEB-INF" replacefilterfile="tokens.properties" includes="web.xml" defaultexcludes="false" />
 
 		<!-- Minifica todos os CSSs - todos os css dentro da pasta css -->
-		<java classname="JSMin" output="${basedir}/temp/css/principal.css">
+		<java classname="JSMin" output="${basedir}/temp/fileupload.css">
+	         <classpath>
+	           <pathelement location="${basedir}"/>
+	           <pathelement path="${java.class.path}"/>
+	         </classpath>
+			<arg value="${basedir}/temp/css/fileupload/fileupload.css"/>
+		</java>
+		<java classname="JSMin" output="${basedir}/temp/ie-fix.css">
+	         <classpath>
+	           <pathelement location="${basedir}"/>
+	           <pathelement path="${java.class.path}"/>
+	         </classpath>
+			<arg value="${basedir}/temp/css/ie-fix.css"/>
+		</java>
+		<java classname="JSMin" output="${basedir}/temp/jquery.colorbox-barragem.css">
+	         <classpath>
+	           <pathelement location="${basedir}"/>
+	           <pathelement path="${java.class.path}"/>
+	         </classpath>
+			<arg value="${basedir}/temp/css/jquery.colorbox-barragem.css"/>
+		</java>
+		<java classname="JSMin" output="${basedir}/temp/jquery.colorbox-ie.css">
+	         <classpath>
+	           <pathelement location="${basedir}"/>
+	           <pathelement path="${java.class.path}"/>
+	         </classpath>
+			<arg value="${basedir}/temp/css/jquery.colorbox-ie.css"/>
+		</java>
+		<java classname="JSMin" output="${basedir}/temp/jquery.colorbox.css">
+			<classpath>
+	           <pathelement location="${basedir}"/>
+	           <pathelement path="${java.class.path}"/>
+			</classpath>
+			<arg value="${basedir}/temp/css/jquery.colorbox.css"/>
+		</java>
+		<java classname="JSMin" output="${basedir}/temp/login.css">
+	         <classpath>
+	           <pathelement location="${basedir}"/>
+	           <pathelement path="${java.class.path}"/>
+	         </classpath>
+			<arg value="${basedir}/temp/css/login.css"/>
+		</java>
+		<java classname="JSMin" output="${basedir}/temp/loginGrid.css">
+	         <classpath>
+	           <pathelement location="${basedir}"/>
+	           <pathelement path="${java.class.path}"/>
+	         </classpath>
+			<arg value="${basedir}/temp/css/loginGrid.css"/>
+		</java>
+		<java classname="JSMin" output="${basedir}/temp/posNovoUsuario.css">
+	         <classpath>
+	           <pathelement location="${basedir}"/>
+	           <pathelement path="${java.class.path}"/>
+	         </classpath>
+			<arg value="${basedir}/temp/css/posNovoUsuario.css"/>
+		</java>
+		<java classname="JSMin" output="${basedir}/temp/posNovoUsuarioGrid.css">
+	         <classpath>
+	           <pathelement location="${basedir}"/>
+	           <pathelement path="${java.class.path}"/>
+	         </classpath>
+			<arg value="${basedir}/temp/css/posNovoUsuarioGrid.css"/>
+		</java>
+		<java classname="JSMin" output="${basedir}/temp/principal.css">
 	         <classpath>
 	           <pathelement location="${basedir}"/>
 	           <pathelement path="${java.class.path}"/>
 	         </classpath>
 			<arg value="${basedir}/temp/css/principal.css"/>
 		</java>
-		<java classname="JSMin" output="${basedir}/temp/css/principalGrid.css">
+		<java classname="JSMin" output="${basedir}/temp/principalGrid.css">
 	         <classpath>
 	           <pathelement location="${basedir}"/>
 	           <pathelement path="${java.class.path}"/>
 	         </classpath>
 			<arg value="${basedir}/temp/css/principalGrid.css"/>
 		</java>
+		
+		<!-- Move arquivos minificados -->
+		<move todir="${basedir}/temp/css/fileupload">
+			<fileset dir="${basedir}/temp">
+				<include name="fileupload.css"/>
+			</fileset>
+		</move>
+		<move todir="${basedir}/temp/css">
+			<fileset dir="${basedir}/temp">
+				<include name="*.css"/>
+			</fileset>
+		</move>
+		
+		<!-- Compacta todo o conteudo em barragem.war -->
+		<zip destfile="${basedir}/barragem.war" basedir="${basedir}/temp" level="9"/>
+		
 	</target>
 </project>
