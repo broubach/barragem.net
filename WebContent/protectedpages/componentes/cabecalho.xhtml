@@ -12,7 +12,7 @@
 	<div class="sidebar-header">
 	<h:form>
 	     <h:commandLink action="login" actionListener="#{loginBean.sair}" title="#{msg.label_sair}" styleClass="logout">
-	         <img src="#{request.contextPath}/img/buttons/btn_sair.gif" alt="#{msg.label_sair}" />
+	         <img src="#{request.contextPath}/img/buttons/btn_sair.gif" alt="#{msg.label_sair}" width="58px" height="25px"/>
 	     </h:commandLink>
 	     <p>#{msg.label_ola} #{sessionScope['usuario'].nome}! 
 		     <c:if test="#{not naoMostrarEditarPerfil}">

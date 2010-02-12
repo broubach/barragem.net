@@ -70,17 +70,17 @@
 						</f:facet>
 						<h:commandLink onclick="return confirm('#{msg.label_confirma_exclusao}');"
 							actionListener="#{gerirBarragemBean.removeBarragem}">
-							<img src="#{request.contextPath}/img/buttons/btn-deletar.png" alt="#{msg.label_excluir}" title="#{msg.label_excluir}"/>
+							<img src="#{request.contextPath}/img/buttons/btn-deletar.png" alt="#{msg.label_excluir}" title="#{msg.label_excluir}" width="18px" height="18px"/>
 						</h:commandLink>
 						<a4j:commandLink actionListener="#{gerirBarragemBean.detalhaBarragem}" reRender="add-barragens" 
 							oncomplete="$j('.popup').click()">
-							<img src="#{request.contextPath}/img/buttons/btn-editar.png" alt="#{msg.label_editar}" title="#{msg.label_editar}"/>
+							<img src="#{request.contextPath}/img/buttons/btn-editar.png" alt="#{msg.label_editar}" title="#{msg.label_editar}" width="18px" height="18px"/>
 						</a4j:commandLink>
 						<h:commandLink action="exibirPainelBarragem" actionListener="#{gerirBarragemBean.exibePainelBarragem}">
-							<img src="#{request.contextPath}/img/buttons/btn-view.png" alt="#{msg.label_visualizar}" title="#{msg.label_visualizar}"/>
+							<img src="#{request.contextPath}/img/buttons/btn-view.png" alt="#{msg.label_visualizar}" title="#{msg.label_visualizar}" width="16px" height="16px"/>
 						</h:commandLink>
 						<h:commandLink actionListener="#{gerirBarragemBean.editaCiclo}" action="editarCiclo">
-							<img src="#{request.contextPath}/img/buttons/btn-editar-ciclo.png" alt="#{msg.label_editar_ciclos}" title="#{msg.label_editar_ciclos}"/>
+							<img src="#{request.contextPath}/img/buttons/btn-editar-ciclo.png" alt="#{msg.label_editar_ciclos}" title="#{msg.label_editar_ciclos}" width="18px" height="18px"/>
 						</h:commandLink>
 					</h:column>
 				</h:dataTable>

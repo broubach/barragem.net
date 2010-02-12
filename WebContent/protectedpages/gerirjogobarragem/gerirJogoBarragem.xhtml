@@ -60,7 +60,7 @@
 							<f:selectItem itemLabel="" />
 							<f:selectItems value="#{lookupBean.listaJogadores}" />
 						</h:selectOneMenu>
-						<img src="#{request.contextPath}/img/versus.png"/>
+						<img src="#{request.contextPath}/img/versus.png" width="9px" height="11px"/>
 						<h:selectOneMenu value="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.jogadoresEventos[1].jogador}" converter="JogadorConverter" disabled="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.id != null}">
 							<a4j:support event="onchange" reRender="vencedorWo"/>
 							<f:selectItem itemLabel="" />

@@ -82,14 +82,13 @@ public class EditarPerfilBean extends BaseBean {
 		getUsuarioLogado().setPerfil(perfilEmFoco);
 		if (fotoEmFoco != null) {
 			if (perfilEmFoco.getId() != null) {
-				perfilEmFoco
-						.setHash(encriptMd5(fillLeft(perfilEmFoco.getId().toString(), MAX_HASH_SIZE, FILL_LEFT_CHAR)));
+				perfilEmFoco.setHash(encriptMd5(fotoEmFoco.getDado().toString()));
 			}
 			perfilEmFoco.setFoto(fotoEmFoco);
 		}
 		PersistenceHelper.persiste(perfilEmFoco);
 		if (fotoEmFoco != null && perfilEmFoco.getHash() == null) {
-			perfilEmFoco.setHash(encriptMd5(fillLeft(perfilEmFoco.getId().toString(), MAX_HASH_SIZE, FILL_LEFT_CHAR)));
+			perfilEmFoco.setHash(encriptMd5(fotoEmFoco.getDado().toString()));
 			PersistenceHelper.persiste(perfilEmFoco);
 		}
 		addMensagemAtualizacaoComSucesso();
