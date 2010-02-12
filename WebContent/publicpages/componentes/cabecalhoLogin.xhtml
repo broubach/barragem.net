@@ -14,10 +14,10 @@
 			<h:inputText id="login" value="#{loginBean.login}" title="#{msg.label_usuario}" styleClass="input" />
 			<h:inputSecret id="passwd" value="#{loginBean.senha}" title="#{msg.label_senha}" styleClass="input" />
 			<h:commandButton actionListener="#{loginBean.login}" value="#{msg.label_login}" styleClass="login"/><br/>
-			<h:commandLink action="esqueciMinhaSenha" title="#{msg.label_esqueci_minha_senha}">#{msg.label_esqueci_minha_senha}</h:commandLink>
 			<div class="loginError" style="#{messageBean.errorMessages['login'] == null ? 'display:none' : 'display:visible'}">
 				#{messageBean.errorMessages['login'].summary}
 			</div>
+			<h:commandLink action="esqueciMinhaSenha" title="#{msg.label_esqueci_minha_senha}">#{msg.label_esqueci_minha_senha}</h:commandLink>
 		</h:form>
 	</div>
 	<c:if test="false">
