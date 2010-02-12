@@ -508,12 +508,19 @@ td.actions {
 .dados .categoria {
 	display: inline;
 }
-.dados .categoria label {
+.dados .categoria td {
+	width: 120px;
+}
+.dados .categoria input {
 	float: right;
+	width: auto;
+	margin-left: 5px;
+}
+.dados .categoria label {
 	width: auto;
 	white-space: nowrap;
 	border: none;
-	margin-left: 5px;
+	clear: none;
 }
 
 /********************* DADOS POPUP *********************/
