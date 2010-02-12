@@ -13,11 +13,9 @@ import net.barragem.persistence.entity.Categoria;
 import net.barragem.persistence.entity.Perfil;
 import net.barragem.util.PersistenceHelper;
 
-import org.ajax4jsf.model.KeepAlive;
 import org.richfaces.event.UploadEvent;
 import org.richfaces.model.UploadItem;
 
-@KeepAlive
 public class EditarPerfilBean extends BaseBean {
 
 	private static final char FILL_LEFT_CHAR = '0';

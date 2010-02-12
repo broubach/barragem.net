@@ -15,9 +15,6 @@ import net.barragem.util.MessageBundleUtils;
 import net.barragem.util.PersistenceHelper;
 import net.barragem.view.dto.JogadorSelecionavelDto;
 
-import org.ajax4jsf.model.KeepAlive;
-
-@KeepAlive
 public class GerirCicloBean extends BaseBean {
 
 	private Barragem barragemEmFoco;
@@ -163,7 +160,7 @@ public class GerirCicloBean extends BaseBean {
 		GerirRodadaBean rodadaBean = new GerirRodadaBean();
 		rodadaBean.carregaRodada(cicloEmFoco, getIndex());
 
-		setRequestAttribute("gerirRodadaBean", rodadaBean);
+		setSessionAttribute("gerirRodadaBean", rodadaBean);
 	}
 
 	public void criaJogadoresSelecionaveis(ActionEvent e) {
@@ -191,6 +188,6 @@ public class GerirCicloBean extends BaseBean {
 		GerirCicloBean cicloBean = new GerirCicloBean();
 		cicloBean.carregaUltimoCiclo(barragemEmFoco);
 
-		setRequestAttribute("gerirCicloBean", cicloBean);
+		setSessionAttribute("gerirCicloBean", cicloBean);
 	}
 }

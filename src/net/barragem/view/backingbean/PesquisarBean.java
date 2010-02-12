@@ -10,9 +10,6 @@ import net.barragem.persistence.entity.Jogador;
 import net.barragem.util.JogadoresComCorrespondenciaPrimeiroComparator;
 import net.barragem.util.PersistenceHelper;
 
-import org.ajax4jsf.model.KeepAlive;
-
-@KeepAlive
 public class PesquisarBean extends BaseBean {
 
 	private List<Jogador> jogadores;

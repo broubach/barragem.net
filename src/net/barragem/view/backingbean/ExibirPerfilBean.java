@@ -9,9 +9,6 @@ import net.barragem.persistence.entity.Jogador;
 import net.barragem.persistence.entity.Usuario;
 import net.barragem.util.PersistenceHelper;
 
-import org.ajax4jsf.model.KeepAlive;
-
-@KeepAlive
 public class ExibirPerfilBean extends BaseBean {
 
 	private Usuario usuarioEmFoco;

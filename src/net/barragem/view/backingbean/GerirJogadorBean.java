@@ -11,10 +11,8 @@ import net.barragem.persistence.entity.Usuario;
 import net.barragem.util.JogadoresComCorrespondenciaPrimeiroComparator;
 import net.barragem.util.PersistenceHelper;
 
-import org.ajax4jsf.model.KeepAlive;
 import org.hibernate.exception.ConstraintViolationException;
 
-@KeepAlive
 public class GerirJogadorBean extends BaseBean {
 	private Usuario usuarioEmFoco;
 	private Jogador jogadorEmFoco;
@@ -119,7 +117,7 @@ public class GerirJogadorBean extends BaseBean {
 	public String pesquisaJogador() {
 		if (tipoPesquisa.equals(new Integer(1))) {
 			PesquisarBean pesquisarBean = new PesquisarBean();
-			setRequestAttribute("pesquisarBean", pesquisarBean);
+			setSessionAttribute("pesquisarBean", pesquisarBean);
 			return pesquisarBean.pesquisaJogador(pesquisa);
 		}
 		if (pesquisa == null || pesquisa.length() == 0) {
@@ -184,6 +182,6 @@ public class GerirJogadorBean extends BaseBean {
 		Jogador jogador = (Jogador) getJogadores().getRowData();
 		VincularJogadorBean vincularJogadorBean = new VincularJogadorBean();
 		vincularJogadorBean.setJogadorEmFoco(jogador);
-		setRequestAttribute("vincularJogadorBean", vincularJogadorBean);
+		setSessionAttribute("vincularJogadorBean", vincularJogadorBean);
 	}
 }

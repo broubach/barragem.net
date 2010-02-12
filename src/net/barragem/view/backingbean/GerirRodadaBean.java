@@ -15,9 +15,6 @@ import net.barragem.util.PersistenceHelper;
 import net.barragem.view.backingbean.componentes.JogadorEventoComparatorVencedorPrimeiro;
 import net.barragem.view.backingbean.componentes.JogoBarragemComparator;
 
-import org.ajax4jsf.model.KeepAlive;
-
-@KeepAlive
 public class GerirRodadaBean extends BaseBean {
 
 	private Rodada rodadaEmFoco;
@@ -34,14 +31,14 @@ public class GerirRodadaBean extends BaseBean {
 		GerirJogoBarragemBean jogoBarragemBean = new GerirJogoBarragemBean();
 		jogoBarragemBean.carregaJogo(rodadaEmFoco, getIndex());
 
-		setRequestAttribute("gerirJogoBarragemBean", jogoBarragemBean);
+		setSessionAttribute("gerirJogoBarragemBean", jogoBarragemBean);
 	}
 
 	public void adicionaJogo(ActionEvent e) {
 		GerirJogoBarragemBean jogoBarragemBean = new GerirJogoBarragemBean();
 		jogoBarragemBean.adicionaJogo(rodadaEmFoco);
 
-		setRequestAttribute("gerirJogoBarragemBean", jogoBarragemBean);
+		setSessionAttribute("gerirJogoBarragemBean", jogoBarragemBean);
 	}
 
 	public void removeJogo(ActionEvent e) {

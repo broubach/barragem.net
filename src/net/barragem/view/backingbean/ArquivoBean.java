@@ -7,9 +7,6 @@ import net.barragem.persistence.entity.Arquivo;
 import net.barragem.persistence.entity.Perfil;
 import net.barragem.util.PersistenceHelper;
 
-import org.ajax4jsf.model.KeepAlive;
-
-@KeepAlive
 public class ArquivoBean extends BaseBean {
 
 	public void paintFoto(OutputStream stream, Object object) throws IOException {
