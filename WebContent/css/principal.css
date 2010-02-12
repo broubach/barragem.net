@@ -243,7 +243,7 @@ fieldset#detalhes-jogo {
 }
 .dadosExibirPerfil .dadosExibirPerfilColunaDireita {
 	float: left;
-	width: 200px;
+	width: 180px;
 	text-align: left;
 }
 .foto-exibir-perfil {
@@ -723,6 +723,23 @@ td.actions {
     display:none; 
 	float:right;
 }
+.anterior_proximo {
+	margin-left: 250px;
+	float: none;
+	height: 18px;
+}
+.anterior_proximo a {
+    padding-bottom: 3px;
+	text-decoration: none;
+}
+.anterior_proximo .anterior {
+    background: transparent url(../img/buttons/btn-anterior.gif) no-repeat 0 0;
+    padding-left: 17px;
+}
+.anterior_proximo .proximo {
+    background: transparent url(../img/buttons/btn-proximo.gif) no-repeat 100% 0;
+    padding-right: 17px;
+}
 
 /********************* DADOS JOGADOR *********************/
 .dados-jogador dt {
@@ -882,4 +899,8 @@ legend {
 .add-jogo label, .add-jogo .input span {
     font-size:.8em;
     color: #333;
+}
+.anterior_proximo a {
+	color:#333333;
+	font-size:0.8em;
 }
