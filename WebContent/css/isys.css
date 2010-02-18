@@ -1,0 +1,16 @@
+.sidebar-header .iSys {
+	font-size: 44px;
+    line-height: 40px;
+}
+.sidebar-header {
+	float: right;
+    margin-right: 20px;
+    text-align: center;
+}
+#content {
+	padding: 20px;
+}
+#page #content li {
+	list-style: disc;
+	margin-left: 20px;
+}

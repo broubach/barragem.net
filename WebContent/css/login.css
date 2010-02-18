@@ -235,6 +235,14 @@ div.loginError {
 #content {
     margin-top:20px;
 }
+.doiskm-class {
+	vertical-align: top; 
+}
+.isys-class {
+	vertical-align: top; 
+	border-right:1px solid; 
+	padding-right:4px;
+}
 
 /********************* TABLES *********************/
 .gradient tbody tr:hover {

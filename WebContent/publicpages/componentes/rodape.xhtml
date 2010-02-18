@@ -7,15 +7,17 @@
 	xmlns:c="http://java.sun.com/jstl/core">
 
 	<ul>
-		<li>
-			<a href="/sobre">#{msg.label_sobre_barragemnet}</a> |</li>
-		<li>
-			<a href="/ajuda">#{msg.label_ajuda}</a> |</li>
-		<li>
-			<a href="/contato">#{msg.label_contato}</a>
-		</li>
+		<li><a href="#{request.contextPath}/staticpages/isys.html">#{msg.label_sobre_barragemnet}</a> |</li>
+		<li><a href="#{request.contextPath}/staticpages/isys.html">#{msg.label_faq}</a> |</li>
+		<li><a href="#{request.contextPath}/staticpages/isys.html">#{msg.label_contato}</a> |</li>
+		<li><a href="#{request.contextPath}/staticpages/isys.html">#{msg.label_publicidade}</a> </li>
 	</ul>
-	<a href="http://www.2km.com.br/" class="externo">
-	    <img src="#{request.contextPath}/img/logo-2km.gif" alt="2km interativa!" border="0" width="24px" height="9px"/>
-	</a>
+	<div class="externo">
+		<a href="#{request.contextPath}/staticpages/isys.html">
+		    <img src="#{request.contextPath}/img/isys.gif" alt="iSys Tecnologia" border="0" width="24px" height="10px" class="isys-class"/>
+		</a>
+		<a href="http://www.2km.com.br/">
+		    <img src="#{request.contextPath}/img/logo-2km.gif" alt="2km interativa!" border="0" width="24px" height="9px" class="doiskm-class"/>
+		</a>
+	</div>
 </html>

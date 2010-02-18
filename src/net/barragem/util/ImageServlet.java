@@ -18,14 +18,18 @@ public class ImageServlet extends HttpServlet {
 		Arquivo fotoDefault = (Arquivo) getServletContext().getAttribute(BaseBean.FOTO_DEFAULT_JOGADOR_KEY);
 		String hash = req.getParameter("hash");
 		if (hash.equals("default")) {
+			resp.setContentType(fotoDefault.getMime());
 			resp.getOutputStream().write(fotoDefault.getDado());
 		} else {
 			List<Integer> fotoIds = PersistenceHelper.findByNamedQuery("fotoIdQueryByHash", hash);
 			if (fotoIds.size() > 0) {
 				if (fotoIds.get(0).equals(fotoDefault.getId())) {
+					resp.setContentType(fotoDefault.getMime());
 					resp.getOutputStream().write(fotoDefault.getDado());
 				} else {
-					resp.getOutputStream().write(PersistenceHelper.findByPk(Arquivo.class, fotoIds.get(0)).getDado());
+					Arquivo arquivo = PersistenceHelper.findByPk(Arquivo.class, fotoIds.get(0));
+					resp.setContentType(arquivo.getMime());
+					resp.getOutputStream().write(arquivo.getDado());
 				}
 			}
 		}

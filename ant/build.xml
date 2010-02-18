@@ -22,6 +22,9 @@
 
 		<!-- Altera web.xml - facelets.DEVELOPMENT false - com.sun.faces.verifyObjects false - -->
 		<replace dir="${basedir}/temp/WEB-INF" replacefilterfile="tokens.properties" includes="web.xml" defaultexcludes="false" />
+		
+		<!-- Altera o isys.html -->
+		<replace dir="${basedir}/temp/staticpages" token="/barragem/" value="/" includes=".html" defaultexcludes="false" />
 
 		<!-- Minifica todos os CSSs - todos os css dentro da pasta css -->
 		<java jar="yuicompressor-2.4.2.jar" fork="true" output="${basedir}/temp/fileupload.css">

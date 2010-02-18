@@ -138,6 +138,14 @@ li {
 .maincontent h2, .maincontent h3 {
 	margin-bottom:10px;
 }
+.doiskm-class {
+	vertical-align: top; 
+}
+.isys-class {
+	vertical-align: top; 
+	border-right:1px solid; 
+	padding-right:4px;
+}
 
 /********************* TABLES *********************/
 .gradient tbody tr:hover {
