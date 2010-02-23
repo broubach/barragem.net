@@ -3,6 +3,7 @@ package net.barragem.persistence.entity;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -10,6 +11,7 @@ import javax.persistence.Table;
 @Table(name = "operacao")
 public class Operacao extends BaseEntity {
 
+	@OneToOne
 	private Conta conta;
 	private Integer quantidade;
 

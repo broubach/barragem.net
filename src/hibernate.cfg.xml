@@ -49,6 +49,7 @@
 		<mapping class="net.barragem.persistence.entity.Operacao" />
 		<mapping class="net.barragem.persistence.entity.OperacaoDebitoJogoBarragem" />
 		<mapping class="net.barragem.persistence.entity.OperacaoCarga" />
+		<mapping class="net.barragem.persistence.entity.OperacaoDevolucao" />
 		<mapping class="net.barragem.persistence.entity.Conta" />
 	</session-factory>
 </hibernate-configuration>

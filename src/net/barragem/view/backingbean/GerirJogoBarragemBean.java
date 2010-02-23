@@ -57,6 +57,9 @@ public class GerirJogoBarragemBean extends BaseBean {
 
 			PersistenceHelper.persiste(mestreDetalhe.getDetalheEmFoco());
 
+			PersistenceHelper.persiste(getContaUsuario().criaOperacaoDebitoJogoBarragem(1));
+			PersistenceHelper.persiste(getContaUsuario());
+
 			mestreDetalhe.preparaJogoParaEdicao();
 
 			addMensagemAtualizacaoComSucesso();

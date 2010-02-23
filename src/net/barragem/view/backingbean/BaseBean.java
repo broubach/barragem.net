@@ -27,6 +27,7 @@ import javax.servlet.http.HttpSession;
 
 import net.barragem.persistence.entity.Arquivo;
 import net.barragem.persistence.entity.Barragem;
+import net.barragem.persistence.entity.Conta;
 import net.barragem.persistence.entity.Usuario;
 import net.barragem.persistence.entity.Validatable;
 import net.barragem.util.BarragemJmsTemplate;
@@ -308,5 +309,13 @@ public class BaseBean {
 
 	protected List<Barragem> getBarragens(Integer usuarioId) {
 		return (List<Barragem>) PersistenceHelper.findByNamedQuery("barragensDeUsuarioQuery", usuarioId);
+	}
+
+	protected void setContaUsuario(Conta conta) {
+		setSessionAttribute("conta", conta);
+	}
+
+	protected Conta getContaUsuario() {
+		return (Conta) getSessionAttribute("conta");
 	}
 }

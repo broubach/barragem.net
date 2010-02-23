@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import net.barragem.persistence.entity.Conta;
 import net.barragem.persistence.entity.Jogador;
 import net.barragem.persistence.entity.Usuario;
 import net.barragem.util.PersistenceHelper;
@@ -143,6 +144,11 @@ public class RegistrarNovoUsuarioBean extends BaseBean {
 
 				PersistenceHelper.persiste(usuarioEmFoco);
 				setUsuarioLogado(usuarioEmFoco);
+
+				Conta conta = new Conta();
+				conta.setProprietario(usuarioEmFoco);
+				PersistenceHelper.persiste(conta);
+				setContaUsuario(conta);
 
 				// TODO: redigir conteudo de email
 				sendMail("no-reply@barragem.net", usuarioEmFoco.getEmail(), "Bem-vindo ao Barragem.net",

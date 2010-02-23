@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.faces.event.ActionEvent;
 
+import net.barragem.persistence.entity.Conta;
 import net.barragem.persistence.entity.Usuario;
 import net.barragem.util.PersistenceHelper;
 
@@ -40,6 +41,9 @@ public class LoginBean extends BaseBean {
 			PersistenceHelper.initialize("jogadores", usuarios.get(0));
 			// coloca usuario na sessao
 			setUsuarioLogado(usuarios.get(0));
+			// coloca conta do usuario na sessao
+			setContaUsuario((Conta) PersistenceHelper.findByNamedQuery("findContaPorUsuarioQuery", usuarios.get(0))
+					.get(0));
 			// encaminha para pagina inicial da comunidade
 			sendRedirect("/protectedpages/index.xhtml");
 		}

@@ -9,6 +9,7 @@ import javax.faces.event.ActionEvent;
 import net.barragem.persistence.entity.Ciclo;
 import net.barragem.persistence.entity.CicloJogador;
 import net.barragem.persistence.entity.Jogo;
+import net.barragem.persistence.entity.JogoBarragem;
 import net.barragem.persistence.entity.Placar;
 import net.barragem.persistence.entity.Rodada;
 import net.barragem.util.PersistenceHelper;
@@ -43,21 +44,35 @@ public class GerirRodadaBean extends BaseBean {
 
 	public void removeJogo(ActionEvent e) {
 		PersistenceHelper.remove(rodadaEmFoco.getJogos().remove(getIndex()));
+		PersistenceHelper.persiste(getContaUsuario().criaOperacaoDevolucao(1));
+		PersistenceHelper.persiste(getContaUsuario());
 	}
 
 	public void sorteiaJogos(ActionEvent e) {
 		PersistenceHelper.initialize("ranking", rodadaEmFoco.getCiclo());
 		List<CicloJogador> jogadores = new ArrayList<CicloJogador>(rodadaEmFoco.getCiclo().getRanking());
 		CicloJogador.removeJogadoresQuePossuemJogos(jogadores, rodadaEmFoco.getJogadoresDosJogos());
+
+		// reduz o numero de jogadores para se adequar ao saldo da conta
+		if (getContaUsuario().getSaldo() * 2 < jogadores.size()) {
+			jogadores = jogadores.subList(0, getContaUsuario().getSaldo() * 2);
+		}
+
+		// sorteia jogos
+		List<JogoBarragem> jogosSorteados = new ArrayList<JogoBarragem>();
 		while (jogadores.size() >= 2) {
 			int posicaoJogadorSorteado = rodadaEmFoco.getCiclo().sorteiaBaseadoNoRaio(jogadores.size());
-			rodadaEmFoco.getJogos().add(
-					rodadaEmFoco.criaJogoBarragem(jogadores.get(0).getJogador(), jogadores.get(posicaoJogadorSorteado)
-							.getJogador()));
+			jogosSorteados.add(rodadaEmFoco.criaJogoBarragem(jogadores.get(0).getJogador(), jogadores.get(
+					posicaoJogadorSorteado).getJogador()));
 
 			jogadores.remove(posicaoJogadorSorteado);
 			jogadores.remove(0);
 		}
+		rodadaEmFoco.getJogos().addAll(jogosSorteados);
+
+		// cria operacao de debito e atualiza saldo da conta
+		PersistenceHelper.persiste(getContaUsuario().criaOperacaoDebitoJogoBarragem(jogosSorteados.size()));
+		PersistenceHelper.persiste(getContaUsuario());
 
 		salvaRodada(e);
 	}
