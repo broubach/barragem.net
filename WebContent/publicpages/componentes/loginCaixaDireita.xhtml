@@ -13,15 +13,15 @@
 		<div id="loginSpan"/>
 		<div class="input">
 			<label for="registerForm:nome">#{msg.label_nome}:</label>
-			<h:inputText id="nome" value="#{registrarNovoUsuarioBean.usuarioEmFoco.nome}"/>
+			<h:inputText id="nome" value="#{registrarNovoUsuarioBean.usuarioEmFoco.nome}" maxlength="45"/>
 		</div>
 		<div class="input">
 			<label for="registerForm:sobrenome">#{msg.label_sobrenome}:</label>
-			<h:inputText id="sobrenome" value="#{registrarNovoUsuarioBean.usuarioEmFoco.sobrenome}"/>
+			<h:inputText id="sobrenome" value="#{registrarNovoUsuarioBean.usuarioEmFoco.sobrenome}" maxlength="45"/>
 		</div>
 		<div class="input">
 			<label for="registerForm:email">#{msg.label_email}:</label>
-			<h:inputText id="email" value="#{registrarNovoUsuarioBean.usuarioEmFoco.email}"/>
+			<h:inputText id="email" value="#{registrarNovoUsuarioBean.usuarioEmFoco.email}" maxlength="45"/>
 		</div>
 		<div class="input">
 			<label for="registerForm:password">#{msg.label_senha}:</label>

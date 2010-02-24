@@ -11,7 +11,7 @@
 	</h1>
 	<div class="sidebar-header rounded">
 		<h:form id="loginForm">
-			<h:inputText id="login" value="#{loginBean.login}" title="#{msg.label_usuario}" styleClass="input" />
+			<h:inputText id="login" value="#{loginBean.login}" title="#{msg.label_email}" styleClass="input" maxlength="45"/>
 			<h:inputSecret id="passwd" value="#{loginBean.senha}" title="#{msg.label_senha}" styleClass="input" />
 			<h:commandButton actionListener="#{loginBean.login}" value="#{msg.label_login}" styleClass="login"/><br/>
 			<div class="loginError" style="#{messageBean.errorMessages['login'] == null ? 'display:none' : 'display:visible'}">
@@ -38,8 +38,13 @@
 			</ul>
 		</div>
 	</c:if>
-	<form action="#" id="searchForm">
-	    <input type="text" title="#{msg.label_pesquisar}" class="searchFormInput"/>
-	</form>
+	<c:if test="false">
+		<form action="#" id="searchForm">
+		    <input type="text" title="#{msg.label_pesquisar}" class="searchFormInput"/>
+		</form>
+	</c:if>
+	<div class="twitterDiv">
+		<a href="http://www.twitter.com/barragemnet"><img src="#{request.contextPath}/img/tennistwitp2.png"/></a>
+	</div>
 
 </html>

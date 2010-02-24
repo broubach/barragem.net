@@ -48,6 +48,11 @@ fieldset {
     height:56px;
     text-indent:-9999px;
 }
+.twitterDiv {
+	float:right; 
+	margin-right: 20px; 
+	margin-top: 25px;
+}
 
 /********************* SIDEBAR HEADER *********************/
 .sidebar-header {
@@ -154,7 +159,7 @@ fieldset#detalhes-jogo {
 #searchForm {
     position:absolute;
     right:20px;
-    top:50px
+    top:55px
 }
 #searchForm .searchFormInput {
     background: transparent url(../img/pesquisa.gif) right 0 no-repeat;

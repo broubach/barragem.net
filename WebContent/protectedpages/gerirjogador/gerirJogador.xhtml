@@ -59,7 +59,7 @@
 				<div class="dadosGerirJogadorListaJogadores">
 					<div class="input text">
 						<label class="adicionarJogadorLabel">#{msg.label_nome}</label>
-						<h:inputText size="60" styleClass="adicionarJogadorInput" value="#{gerirJogadorBean.jogadorNome}"/>
+						<h:inputText size="60" styleClass="adicionarJogadorInput" value="#{gerirJogadorBean.jogadorNome}" maxlength="45"/>
 						<div class="btn-novo-relative">
 							<h:commandLink actionListener="#{gerirJogadorBean.adicionaJogador}" reRender="tabelaJogadores">
 								<span>#{msg.label_adicionar_jogador}</span>

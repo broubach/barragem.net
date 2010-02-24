@@ -20,7 +20,7 @@
 		     </c:if>
 	     </p>
 	     <c:if test="#{not naoMostrarEditarPerfil and sessionScope['usuario'].dataPenultimoAcesso != null}">
-		     <p>#{msg.label_seu_ultimo_acesso_foi_em}&#160;<h:outputText value="#{sessionScope['usuario'].dataPenultimoAcesso}"><f:convertDateTime type="date" dateStyle="long"/></h:outputText></p>
+		     <p>#{msg.label_seu_ultimo_acesso_foi_em}&#160;<h:outputText value="#{sessionScope['usuario'].dataPenultimoAcesso}"><f:convertDateTime type="date" dateStyle="long" locale="pt"/></h:outputText></p>
 	     </c:if>
 	</h:form>
 	</div>
@@ -42,6 +42,10 @@
 		    </ul>
 		</div>
 	</c:if>
+
+	<div class="twitterDiv">
+		<a href="http://www.twitter.com/barragemnet"><img src="#{request.contextPath}/img/tennistwitp3.png"/></a>
+	</div>
 	<form action="#" id="searchForm">
 	    <input type="text" title="#{msg.label_pesquisar}" class="searchFormInput"/>
 	</form>
