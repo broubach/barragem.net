@@ -60,7 +60,7 @@
 	     </init-param>
 	     <init-param>
 	          <param-name>maxRequestSize</param-name>
-	          <param-value>20000000</param-value>
+	          <param-value>1048576</param-value>
 	     </init-param>
 	</filter>
 	<filter-mapping>

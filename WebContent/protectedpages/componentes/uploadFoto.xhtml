@@ -17,6 +17,10 @@
 	<script type="text/javascript" src="#{request.contextPath}/js/fileupload/form.js"></script>
 
 	<div class="dados">
+		<h:panelGroup id="mensagemErro" layout="block" styleClass="mensagem-erro-hidden">
+	  		<span>#{msg.label_upload_sizeErrorLabel}</span>
+		</h:panelGroup>
+
 		<h:panelGroup styleClass="perfilFotoContainer" layout="block">
 			<div>
 				<rich:panel>
@@ -34,8 +38,9 @@
 						clearControlLabel="#{msg.label_upload_clearControlLabel}" doneLabel="#{msg.label_upload_doneLabel}"
 						progressLabel="#{msg.label_upload_progressLabel}" sizeErrorLabel="#{msg.label_upload_sizeErrorLabel}"
 						stopControlLabel="#{msg.label_upload_stopControlLabel}" stopEntryControlLabel="#{msg.label_upload_stopEntryControlLabel}"
-						transferErrorLabel="#{msg.label_upload_transferErrorLabel}" uploadControlLabel="#{msg.label_upload_uploadControlLabel}">
+						transferErrorLabel="#{msg.label_upload_transferErrorLabel}" uploadControlLabel="#{msg.label_upload_uploadControlLabel}" onsizerejected="$j('#perfil\\:mensagemErro').show();">
 						<a4j:support event="onuploadcomplete" reRender="upload, info" />
+						<a4j:support event="onupload" onsubmit="$j('#perfil\\:mensagemErro').hide();" />
 					</rich:fileUpload>
 				</div>
 			</div>

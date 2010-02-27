@@ -579,6 +579,17 @@ td.actions {
 	border-right: 0px;
 	padding-right: 0px;
 }
+.mensagem-erro {
+	margin-bottom: 5px;
+}
+.mensagem-erro-hidden {
+	margin-bottom: 5px;
+	display: none;
+	width: 520px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
 
 /********************* DADOS BASICOS BARRAGEM *********************/
 .dados-basicos-barragem {
@@ -916,4 +927,8 @@ legend {
 .anterior_proximo a {
 	color:#333333;
 	font-size:0.8em;
+}
+.mensagem-erro, .mensagem-erro-hidden {
+    font-size:12px;
+	color: #FF0000;
 }
