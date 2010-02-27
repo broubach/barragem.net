@@ -10,7 +10,7 @@ import net.barragem.persistence.entity.Ciclo;
 import net.barragem.persistence.entity.CicloJogador;
 import net.barragem.persistence.entity.JogoBarragem;
 import net.barragem.persistence.entity.Rodada;
-import net.barragem.util.PersistenceHelper;
+import net.barragem.scaffold.PersistenceHelper;
 
 public class ExibirPainelBarragemBean extends BaseBean {
 

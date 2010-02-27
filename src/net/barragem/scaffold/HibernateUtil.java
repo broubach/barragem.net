@@ -1,4 +1,4 @@
-package net.barragem.util;
+package net.barragem.scaffold;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;

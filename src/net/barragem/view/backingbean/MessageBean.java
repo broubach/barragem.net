@@ -7,7 +7,7 @@ import java.util.Map;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
-import net.barragem.util.MessageBundleUtils;
+import net.barragem.scaffold.MessageBundleUtils;
 
 public class MessageBean {
 

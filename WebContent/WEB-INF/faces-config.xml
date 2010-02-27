@@ -214,6 +214,6 @@
 		</navigation-case>
 	</navigation-rule>
 	<lifecycle>
-		<phase-listener>net.barragem.view.listener.CacheControlPhaseListener</phase-listener>
+		<phase-listener>net.barragem.scaffold.CacheControlPhaseListener</phase-listener>
 	</lifecycle>
 </faces-config>

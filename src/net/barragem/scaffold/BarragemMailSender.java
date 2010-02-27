@@ -1,4 +1,4 @@
-package net.barragem.util;
+package net.barragem.scaffold;
 
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;

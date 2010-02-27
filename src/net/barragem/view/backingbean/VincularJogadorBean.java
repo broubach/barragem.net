@@ -6,8 +6,8 @@ import java.util.List;
 import javax.faces.event.ActionEvent;
 
 import net.barragem.persistence.entity.Jogador;
-import net.barragem.util.JogadoresComCorrespondenciaPrimeiroComparator;
-import net.barragem.util.PersistenceHelper;
+import net.barragem.scaffold.JogadoresComCorrespondenciaPrimeiroComparator;
+import net.barragem.scaffold.PersistenceHelper;
 
 public class VincularJogadorBean extends BaseBean {
 

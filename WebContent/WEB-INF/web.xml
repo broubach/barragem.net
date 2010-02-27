@@ -73,7 +73,7 @@
 
 	<filter>
 		<filter-name>ProtectedPagesFilter</filter-name>
-		<filter-class>net.barragem.view.filter.ProtectedPagesFilter</filter-class>
+		<filter-class>net.barragem.scaffold.ProtectedPagesFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>ProtectedPagesFilter</filter-name>
@@ -82,7 +82,7 @@
 
 	<filter>
 		<filter-name>LoginProtectionFilter</filter-name>
-		<filter-class>net.barragem.view.filter.LoginProtectionFilter</filter-class>
+		<filter-class>net.barragem.scaffold.LoginProtectionFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>LoginProtectionFilter</filter-name>
@@ -92,7 +92,7 @@
 	<filter>
 		<display-name>Foto Default Jogador Filter</display-name>
 		<filter-name>fotoDefaultJogadorFilter</filter-name>
-		<filter-class>net.barragem.view.filter.FotoDefaultJogadorFilter</filter-class>
+		<filter-class>net.barragem.scaffold.FotoDefaultJogadorFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>fotoDefaultJogadorFilter</filter-name>
@@ -102,7 +102,7 @@
 	<!-- Captcha config  -->
     <servlet>
         <servlet-name>BarragemCaptchaServlet</servlet-name>
-        <servlet-class>net.barragem.util.BarragemCaptchaServlet</servlet-class>
+        <servlet-class>net.barragem.scaffold.BarragemCaptchaServlet</servlet-class>
         <init-param>
             <param-name>width</param-name>
             <param-value>250</param-value>
@@ -131,7 +131,7 @@
 	<!-- Image Servlet -->
 	<servlet>
 		<servlet-name>Image Servlet</servlet-name>
-		<servlet-class>net.barragem.util.ImageServlet</servlet-class>
+		<servlet-class>net.barragem.scaffold.ImageServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>

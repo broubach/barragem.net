@@ -1,4 +1,4 @@
-package net.barragem.view.dto;
+package net.barragem.view.backingbean.componentes;
 
 import net.barragem.persistence.entity.Jogador;
 

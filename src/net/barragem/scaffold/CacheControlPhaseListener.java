@@ -1,4 +1,4 @@
-package net.barragem.view.listener;
+package net.barragem.scaffold;
 
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseEvent;

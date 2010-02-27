@@ -11,7 +11,7 @@ import net.barragem.persistence.entity.Parcial;
 import net.barragem.persistence.entity.Placar;
 import net.barragem.persistence.entity.Rodada;
 import net.barragem.persistence.entity.SimplesDuplasEnum;
-import net.barragem.util.PersistenceHelper;
+import net.barragem.scaffold.PersistenceHelper;
 
 public class RodadaJogosBarragemMestreDetalhe extends MestreDetalheImpl<Rodada, JogoBarragem> {
 

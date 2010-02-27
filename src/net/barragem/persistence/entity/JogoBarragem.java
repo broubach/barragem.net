@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
-import net.barragem.util.ValidatableSampleImpl;
+import net.barragem.scaffold.ValidatableSampleImpl;
 
 @Entity
 @Table(name = "jogobarragem")

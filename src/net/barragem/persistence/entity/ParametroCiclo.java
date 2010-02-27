@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.persistence.Embeddable;
 
-import net.barragem.util.ValidatableSampleImpl;
+import net.barragem.scaffold.ValidatableSampleImpl;
 
 import org.apache.commons.beanutils.BeanUtils;
 

@@ -7,7 +7,7 @@ import javax.faces.event.ActionEvent;
 import net.barragem.persistence.entity.Barragem;
 import net.barragem.persistence.entity.Jogador;
 import net.barragem.persistence.entity.Usuario;
-import net.barragem.util.PersistenceHelper;
+import net.barragem.scaffold.PersistenceHelper;
 
 public class ExibirPerfilBean extends BaseBean {
 

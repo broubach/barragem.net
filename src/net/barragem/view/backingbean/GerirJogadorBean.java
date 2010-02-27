@@ -8,8 +8,8 @@ import javax.faces.model.ListDataModel;
 
 import net.barragem.persistence.entity.Jogador;
 import net.barragem.persistence.entity.Usuario;
-import net.barragem.util.JogadoresComCorrespondenciaPrimeiroComparator;
-import net.barragem.util.PersistenceHelper;
+import net.barragem.scaffold.JogadoresComCorrespondenciaPrimeiroComparator;
+import net.barragem.scaffold.PersistenceHelper;
 
 import org.hibernate.exception.ConstraintViolationException;
 

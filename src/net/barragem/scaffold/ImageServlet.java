@@ -1,4 +1,4 @@
-package net.barragem.util;
+package net.barragem.scaffold;
 
 import java.io.IOException;
 import java.util.List;

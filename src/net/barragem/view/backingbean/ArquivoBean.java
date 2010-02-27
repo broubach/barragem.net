@@ -5,7 +5,7 @@ import java.io.OutputStream;
 
 import net.barragem.persistence.entity.Arquivo;
 import net.barragem.persistence.entity.Perfil;
-import net.barragem.util.PersistenceHelper;
+import net.barragem.scaffold.PersistenceHelper;
 
 public class ArquivoBean extends BaseBean {
 

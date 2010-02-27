@@ -11,9 +11,9 @@ import net.barragem.persistence.entity.Ciclo;
 import net.barragem.persistence.entity.CicloJogador;
 import net.barragem.persistence.entity.Jogador;
 import net.barragem.persistence.entity.Rodada;
-import net.barragem.util.MessageBundleUtils;
-import net.barragem.util.PersistenceHelper;
-import net.barragem.view.dto.JogadorSelecionavelDto;
+import net.barragem.scaffold.MessageBundleUtils;
+import net.barragem.scaffold.PersistenceHelper;
+import net.barragem.view.backingbean.componentes.JogadorSelecionavelDto;
 
 public class GerirCicloBean extends BaseBean {
 

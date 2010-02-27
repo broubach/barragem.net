@@ -1,4 +1,4 @@
-package net.barragem.util;
+package net.barragem.scaffold;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;

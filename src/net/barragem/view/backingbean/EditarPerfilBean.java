@@ -11,7 +11,7 @@ import javax.faces.event.ActionEvent;
 import net.barragem.persistence.entity.Arquivo;
 import net.barragem.persistence.entity.Categoria;
 import net.barragem.persistence.entity.Perfil;
-import net.barragem.util.PersistenceHelper;
+import net.barragem.scaffold.PersistenceHelper;
 
 import org.richfaces.event.UploadEvent;
 import org.richfaces.model.UploadItem;

@@ -13,7 +13,7 @@
 	</bean>
 
 	<!-- this is the Message Driven POJO (MDP) -->
-	<bean id="messageListener" class="net.barragem.jms.MailService">
+	<bean id="messageListener" class="net.barragem.scaffold.MailService">
 		<property name="mailSender" ref="mailSender"/>
 	</bean>
 

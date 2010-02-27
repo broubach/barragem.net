@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
-	<bean id="jmsTemplate" class="net.barragem.util.BarragemJmsTemplate">
+	<bean id="jmsTemplate" class="net.barragem.scaffold.BarragemJmsTemplate">
 		<property name="connectionFactory" ref="connectionFactory" />
 		<property name="defaultDestination" ref="queue" />
 		<property name="enabled" value="false" />

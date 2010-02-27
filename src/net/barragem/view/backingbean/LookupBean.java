@@ -13,8 +13,8 @@ import net.barragem.persistence.entity.LadoForehandEnum;
 import net.barragem.persistence.entity.ModalidadeDeSetsEnum;
 import net.barragem.persistence.entity.SexoEnum;
 import net.barragem.persistence.entity.TipoBackhandEnum;
-import net.barragem.util.MessageBundleUtils;
-import net.barragem.util.PersistenceHelper;
+import net.barragem.scaffold.MessageBundleUtils;
+import net.barragem.scaffold.PersistenceHelper;
 
 public class LookupBean extends BaseBean {
 

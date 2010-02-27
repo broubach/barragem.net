@@ -1,4 +1,4 @@
-package net.barragem.view.filter;
+package net.barragem.scaffold;
 
 import java.io.IOException;
 
@@ -12,7 +12,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
 import net.barragem.persistence.entity.Arquivo;
-import net.barragem.util.PersistenceHelper;
 import net.barragem.view.backingbean.ArquivoBean;
 
 public class FotoDefaultJogadorFilter implements Filter {

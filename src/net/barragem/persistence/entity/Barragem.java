@@ -12,7 +12,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import net.barragem.util.ValidatableSampleImpl;
+import net.barragem.scaffold.ValidatableSampleImpl;
 
 import org.apache.commons.beanutils.BeanUtils;
 

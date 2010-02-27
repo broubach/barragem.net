@@ -30,8 +30,8 @@ import net.barragem.persistence.entity.Barragem;
 import net.barragem.persistence.entity.Conta;
 import net.barragem.persistence.entity.Usuario;
 import net.barragem.persistence.entity.Validatable;
-import net.barragem.util.BarragemJmsTemplate;
-import net.barragem.util.PersistenceHelper;
+import net.barragem.scaffold.BarragemJmsTemplate;
+import net.barragem.scaffold.PersistenceHelper;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.jms.core.MessageCreator;

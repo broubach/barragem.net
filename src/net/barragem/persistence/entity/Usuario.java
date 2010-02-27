@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import net.barragem.util.JogadoresComCorrespondenciaPrimeiroComparator;
+import net.barragem.scaffold.JogadoresComCorrespondenciaPrimeiroComparator;
 
 @Entity
 @NamedQueries( {

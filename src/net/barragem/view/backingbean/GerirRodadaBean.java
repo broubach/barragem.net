@@ -12,7 +12,7 @@ import net.barragem.persistence.entity.Jogo;
 import net.barragem.persistence.entity.JogoBarragem;
 import net.barragem.persistence.entity.Placar;
 import net.barragem.persistence.entity.Rodada;
-import net.barragem.util.PersistenceHelper;
+import net.barragem.scaffold.PersistenceHelper;
 import net.barragem.view.backingbean.componentes.JogadorEventoComparatorVencedorPrimeiro;
 import net.barragem.view.backingbean.componentes.JogoBarragemComparator;
 

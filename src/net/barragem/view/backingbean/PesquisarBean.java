@@ -7,8 +7,8 @@ import javax.faces.event.ActionEvent;
 
 import net.barragem.persistence.entity.Barragem;
 import net.barragem.persistence.entity.Jogador;
-import net.barragem.util.JogadoresComCorrespondenciaPrimeiroComparator;
-import net.barragem.util.PersistenceHelper;
+import net.barragem.scaffold.JogadoresComCorrespondenciaPrimeiroComparator;
+import net.barragem.scaffold.PersistenceHelper;
 
 public class PesquisarBean extends BaseBean {
 

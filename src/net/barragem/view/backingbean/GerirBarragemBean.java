@@ -5,7 +5,7 @@ import java.util.List;
 import javax.faces.event.ActionEvent;
 
 import net.barragem.persistence.entity.Barragem;
-import net.barragem.util.PersistenceHelper;
+import net.barragem.scaffold.PersistenceHelper;
 
 import org.hibernate.exception.ConstraintViolationException;
 

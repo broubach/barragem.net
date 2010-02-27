@@ -1,11 +1,10 @@
-package net.barragem.jms;
+package net.barragem.scaffold;
 
 import javax.jms.JMSException;
 import javax.jms.MapMessage;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 
-import net.barragem.util.BarragemMailSender;
 
 public class MailService implements MessageListener {
 

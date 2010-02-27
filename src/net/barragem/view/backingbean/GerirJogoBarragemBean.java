@@ -13,7 +13,7 @@ import net.barragem.persistence.entity.JogoBarragem;
 import net.barragem.persistence.entity.Parcial;
 import net.barragem.persistence.entity.Rodada;
 import net.barragem.persistence.entity.SimplesDuplasEnum;
-import net.barragem.util.PersistenceHelper;
+import net.barragem.scaffold.PersistenceHelper;
 import net.barragem.view.backingbean.componentes.MestreDetalheImpl;
 import net.barragem.view.backingbean.componentes.RodadaJogosBarragemMestreDetalhe;
 

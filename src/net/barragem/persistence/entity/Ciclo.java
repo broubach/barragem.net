@@ -15,8 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
-import net.barragem.util.MessageBundleUtils;
-import net.barragem.util.PersistenceHelper;
+import net.barragem.scaffold.MessageBundleUtils;
+import net.barragem.scaffold.PersistenceHelper;
 
 @Entity
 @Table(name = "ciclo")

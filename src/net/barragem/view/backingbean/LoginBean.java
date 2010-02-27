@@ -7,7 +7,7 @@ import javax.faces.event.ActionEvent;
 
 import net.barragem.persistence.entity.Conta;
 import net.barragem.persistence.entity.Usuario;
-import net.barragem.util.PersistenceHelper;
+import net.barragem.scaffold.PersistenceHelper;
 
 public class LoginBean extends BaseBean {
 	private String login;

@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import net.barragem.util.MessageBundleUtils;
+import net.barragem.scaffold.MessageBundleUtils;
 
 @Entity
 @Table(name = "perfil")

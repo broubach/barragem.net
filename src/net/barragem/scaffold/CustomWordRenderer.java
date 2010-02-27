@@ -1,4 +1,4 @@
-package net.barragem.util;
+package net.barragem.scaffold;
 
 import java.awt.Color;
 import java.awt.Font;
