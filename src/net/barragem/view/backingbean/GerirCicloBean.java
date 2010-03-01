@@ -11,7 +11,6 @@ import net.barragem.persistence.entity.Ciclo;
 import net.barragem.persistence.entity.CicloJogador;
 import net.barragem.persistence.entity.Jogador;
 import net.barragem.persistence.entity.Rodada;
-import net.barragem.scaffold.MessageBundleUtils;
 import net.barragem.scaffold.PersistenceHelper;
 import net.barragem.view.backingbean.componentes.JogadorSelecionavelDto;
 
@@ -146,14 +145,6 @@ public class GerirCicloBean extends BaseBean {
 		cicloJogadoresRemovidos.add(cicloEmFoco.getRanking().get(getIndex()));
 		cicloEmFoco.getRanking().remove(getIndex());
 		salvaCiclo();
-	}
-
-	public String getMensagemRodadasSugeridas() {
-		int rodadasSugeridas = cicloEmFoco.getParametros().getDuracaoEmMeses() * 3;
-		return MessageBundleUtils.getInstance().get(
-				"label_rodadas_sugeridas",
-				new String[] { String.valueOf(cicloEmFoco.getParametros().getDuracaoEmMeses()),
-						String.valueOf(rodadasSugeridas) });
 	}
 
 	public void editaRodada(ActionEvent e) {

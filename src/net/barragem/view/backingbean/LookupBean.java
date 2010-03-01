@@ -21,9 +21,9 @@ public class LookupBean extends BaseBean {
 	public List<SelectItem> getListaJogadores() {
 		List<Jogador> jogadores = null;
 		GerirJogoBarragemBean jogoBarragemBean = null;
-		if ((jogoBarragemBean = (GerirJogoBarragemBean) getRequestAttribute("gerirJogoBarragemBean")) != null
+		if ((jogoBarragemBean = (GerirJogoBarragemBean) getSessionAttribute("gerirJogoBarragemBean")) != null
 				&& jogoBarragemBean.getMestreDetalhe().getDetalheEmFoco() != null) {
-			jogoBarragemBean = (GerirJogoBarragemBean) getRequestAttribute("gerirJogoBarragemBean");
+			jogoBarragemBean = (GerirJogoBarragemBean) getSessionAttribute("gerirJogoBarragemBean");
 			jogadores = jogoBarragemBean.getMestreDetalhe().getMestre().getCiclo().getJogadoresDoRanking();
 
 		} else {

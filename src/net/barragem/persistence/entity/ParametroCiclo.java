@@ -12,8 +12,6 @@ import org.apache.commons.beanutils.BeanUtils;
 @Embeddable
 public class ParametroCiclo extends BaseEntity implements Validatable, Cloneable {
 
-	private Integer duracaoEmMeses = new Integer(2);
-
 	private ModalidadeDeSetsEnum modalidadeDeSets = ModalidadeDeSetsEnum.MelhorDeTresSets;
 
 	@ValidateRequired
@@ -39,21 +37,9 @@ public class ParametroCiclo extends BaseEntity implements Validatable, Cloneable
 
 	@ValidateRequired
 	private Integer pontuacaoVitoriaPorWo = new Integer(14);
-	@ValidateRequired
-	private Integer pontuacaoVencedorPrimeiraRodada = new Integer(16);
-	@ValidateRequired
-	private Integer pontuacaoPerdedorPrimeiraRodada = new Integer(6);
 
 	@ValidateRequired
 	private Integer rodadasDeHistoricoMantidasParaCalculoDoRanking = new Integer(5);
-
-	public Integer getDuracaoEmMeses() {
-		return duracaoEmMeses;
-	}
-
-	public void setDuracaoEmMeses(Integer duracaoEmMeses) {
-		this.duracaoEmMeses = duracaoEmMeses;
-	}
 
 	public ModalidadeDeSetsEnum getModalidadeDeSets() {
 		return modalidadeDeSets;
@@ -149,22 +135,6 @@ public class ParametroCiclo extends BaseEntity implements Validatable, Cloneable
 
 	public void setPontuacaoVitoriaPorWo(Integer pontuacaoVitoriaPorWo) {
 		this.pontuacaoVitoriaPorWo = pontuacaoVitoriaPorWo;
-	}
-
-	public Integer getPontuacaoVencedorPrimeiraRodada() {
-		return pontuacaoVencedorPrimeiraRodada;
-	}
-
-	public void setPontuacaoVencedorPrimeiraRodada(Integer pontuacaoVencedorPrimeiraRodada) {
-		this.pontuacaoVencedorPrimeiraRodada = pontuacaoVencedorPrimeiraRodada;
-	}
-
-	public Integer getPontuacaoPerdedorPrimeiraRodada() {
-		return pontuacaoPerdedorPrimeiraRodada;
-	}
-
-	public void setPontuacaoPerdedorPrimeiraRodada(Integer pontuacaoPerdedorPrimeiraRodada) {
-		this.pontuacaoPerdedorPrimeiraRodada = pontuacaoPerdedorPrimeiraRodada;
 	}
 
 	public Integer getRodadasDeHistoricoMantidasParaCalculoDoRanking() {

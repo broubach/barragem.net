@@ -99,7 +99,7 @@ public class GerirRodadaBean extends BaseBean {
 		rodadaEmFoco.getCiclo().getRodadas().add(rodadaEmFoco);
 		PersistenceHelper.persiste(rodadaEmFoco.getCiclo());
 
-		GerirCicloBean cicloBean = (GerirCicloBean) getRequestAttribute("gerirCicloBean");
+		GerirCicloBean cicloBean = (GerirCicloBean) getSessionAttribute("gerirCicloBean");
 		cicloBean.editaCiclo(e);
 	}
 
@@ -112,7 +112,7 @@ public class GerirRodadaBean extends BaseBean {
 
 		setRequestAttribute("index", String.valueOf(rodadaEmFoco.getCiclo().getBarragem().getIndiceNaLista(
 				rodadaEmFoco.getCiclo())));
-		GerirCicloBean gerirCicloBean = (GerirCicloBean) getRequestAttribute("gerirCicloBean");
+		GerirCicloBean gerirCicloBean = (GerirCicloBean) getSessionAttribute("gerirCicloBean");
 		gerirCicloBean.editaCiclo(null);
 	}
 

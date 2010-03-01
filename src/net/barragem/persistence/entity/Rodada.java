@@ -93,24 +93,7 @@ public class Rodada extends BaseEntity {
 		Map<Jogador, Integer> pontuacaoJogadores = new HashMap<Jogador, Integer>();
 		for (Jogo jogo : jogos) {
 			if (jogo.getTipo().equals(SimplesDuplasEnum.Simples)) {
-				if (numero.equals(new Integer(1))) {
-					if (jogo.getPlacar().getWo()) {
-						pontuacaoJogadores.put(jogo.getJogadorVencedorSimples(), getCiclo().getParametros()
-								.getPontuacaoVencedorPrimeiraRodada());
-						jogo.getJogadorBarragemVencedorSimples().setPontuacaoObtida(
-								getCiclo().getParametros().getPontuacaoVencedorPrimeiraRodada());
-					} else {
-						pontuacaoJogadores.put(jogo.getJogadorVencedorSimples(), getCiclo().getParametros()
-								.getPontuacaoVencedorPrimeiraRodada());
-						jogo.getJogadorBarragemVencedorSimples().setPontuacaoObtida(
-								getCiclo().getParametros().getPontuacaoVencedorPrimeiraRodada());
-
-						pontuacaoJogadores.put(jogo.getJogadorPerdedorSimples(), getCiclo().getParametros()
-								.getPontuacaoPerdedorPrimeiraRodada());
-						jogo.getJogadorBarragemPerdedorSimples().setPontuacaoObtida(
-								getCiclo().getParametros().getPontuacaoPerdedorPrimeiraRodada());
-					}
-				} else if (jogo.getPlacar().getWo()) {
+				if (jogo.getPlacar().getWo()) {
 					if (jogo.getJogadorVencedorSimples() != null) {
 						pontuacaoJogadores.put(jogo.getJogadorVencedorSimples(), getCiclo().getParametros()
 								.getPontuacaoVitoriaPorWo());

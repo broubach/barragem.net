@@ -128,8 +128,17 @@ public class Ciclo extends BaseEntity {
 				return 1;
 			}
 		});
+		int posRanking = 1;
+		int acumulado = 0;
 		for (int i = 0; i < ranking.size(); i++) {
-			ranking.get(i).setRanking(i + 1);
+			ranking.get(i).setRanking(posRanking);
+			if (i + 1 < ranking.size() && ranking.get(i).getPontuacao().equals(ranking.get(i + 1).getPontuacao())) {
+				acumulado++;
+			} else {
+				posRanking += acumulado;
+				posRanking++;
+				acumulado = 0;
+			}
 		}
 	}
 
