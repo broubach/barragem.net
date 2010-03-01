@@ -51,5 +51,6 @@ public class LoginBean extends BaseBean {
 
 	public void sair(ActionEvent e) {
 		getSession().invalidate();
+		sendRedirect("/login.xhtml");
 	}
 }

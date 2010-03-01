@@ -66,6 +66,8 @@ public class EditarPerfilBean extends BaseBean {
 		}
 
 		setSessionAttribute("editarPerfilBean", editarPerfilBean);
+
+		sendRedirect("/protectedpages/editarperfil/editarPerfil.xhtml");
 	}
 
 	public void salvaPerfil(ActionEvent e) {
