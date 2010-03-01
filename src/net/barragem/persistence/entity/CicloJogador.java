@@ -19,6 +19,7 @@ public class CicloJogador extends BaseEntity {
 
 	private Integer ranking;
 	private Integer pontuacao;
+	private Boolean habilitado;
 
 	public Jogador getJogador() {
 		return jogador;
@@ -50,6 +51,14 @@ public class CicloJogador extends BaseEntity {
 
 	public void setPontuacao(Integer pontuacao) {
 		this.pontuacao = pontuacao;
+	}
+
+	public Boolean getHabilitado() {
+		return habilitado;
+	}
+
+	public void setHabilitado(Boolean habilitado) {
+		this.habilitado = habilitado;
 	}
 
 	public static void removeJogadoresQuePossuemJogos(List<CicloJogador> cicloJogadores,

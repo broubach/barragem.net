@@ -58,13 +58,13 @@
 						<h:selectOneMenu id="jogadorVencedor" value="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.jogadoresEventos[0].jogador}" converter="JogadorConverter" disabled="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.id != null}">
 							<a4j:support event="onchange" reRender="vencedorWo"/>
 							<f:selectItem itemLabel="" />
-							<f:selectItems value="#{lookupBean.listaJogadores}" />
+							<f:selectItems value="#{gerirRodadaBean.listaJogadoresHabilitados}" />
 						</h:selectOneMenu>
 						<img src="#{request.contextPath}/img/versus.png" width="9px" height="11px"/>
 						<h:selectOneMenu value="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.jogadoresEventos[1].jogador}" converter="JogadorConverter" disabled="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.id != null}">
 							<a4j:support event="onchange" reRender="vencedorWo"/>
 							<f:selectItem itemLabel="" />
-							<f:selectItems value="#{lookupBean.listaJogadores}" />
+							<f:selectItems value="#{gerirRodadaBean.listaJogadoresHabilitados}" />
 						</h:selectOneMenu>
 	
 						<label id="labelVencedorParcial1" for="add-jogo:vencedorParcial1">#{msg.label_primeiro_set}</label>

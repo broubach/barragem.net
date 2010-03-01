@@ -18,6 +18,7 @@ public class GerirCicloBean extends BaseBean {
 
 	private Barragem barragemEmFoco;
 	private Ciclo cicloEmFoco;
+	private CicloJogador cicloJogadorEmFoco;
 	private List<CicloJogador> cicloJogadoresRemovidos;
 	private List<JogadorSelecionavelDto> jogadoresSelecionaveis;
 	private String novoNome;
@@ -44,6 +45,14 @@ public class GerirCicloBean extends BaseBean {
 
 	public void setCicloEmFoco(Ciclo ciclo) {
 		this.cicloEmFoco = ciclo;
+	}
+
+	public CicloJogador getCicloJogadorEmFoco() {
+		return cicloJogadorEmFoco;
+	}
+
+	public void setCicloJogadorEmFoco(CicloJogador cicloJogadorEmFoco) {
+		this.cicloJogadorEmFoco = cicloJogadorEmFoco;
 	}
 
 	public List<JogadorSelecionavelDto> getJogadoresSelecionaveis() {
@@ -180,5 +189,14 @@ public class GerirCicloBean extends BaseBean {
 		cicloBean.carregaUltimoCiclo(barragemEmFoco);
 
 		setSessionAttribute("gerirCicloBean", cicloBean);
+	}
+
+	public void preparaCicloJogador(ActionEvent e) {
+		cicloJogadorEmFoco = cicloEmFoco.getRanking().get(getIndex());
+	}
+
+	public void salvaCicloJogador(ActionEvent e) {
+		PersistenceHelper.persiste(cicloJogadorEmFoco);
+		addMensagemAtualizacaoComSucesso();
 	}
 }

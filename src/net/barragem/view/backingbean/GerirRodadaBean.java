@@ -2,12 +2,15 @@ package net.barragem.view.backingbean;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.faces.event.ActionEvent;
+import javax.faces.model.SelectItem;
 
 import net.barragem.persistence.entity.Ciclo;
 import net.barragem.persistence.entity.CicloJogador;
+import net.barragem.persistence.entity.Jogador;
 import net.barragem.persistence.entity.Jogo;
 import net.barragem.persistence.entity.JogoBarragem;
 import net.barragem.persistence.entity.Placar;
@@ -52,6 +55,14 @@ public class GerirRodadaBean extends BaseBean {
 		PersistenceHelper.initialize("ranking", rodadaEmFoco.getCiclo());
 		List<CicloJogador> jogadores = new ArrayList<CicloJogador>(rodadaEmFoco.getCiclo().getRanking());
 		CicloJogador.removeJogadoresQuePossuemJogos(jogadores, rodadaEmFoco.getJogadoresDosJogos());
+
+		// remove jogadores que não estejam habilitados
+		for (Iterator<CicloJogador> it = jogadores.iterator(); it.hasNext();) {
+			CicloJogador cicloJogador = it.next();
+			if (!cicloJogador.getHabilitado()) {
+				it.remove();
+			}
+		}
 
 		// reduz o numero de jogadores para se adequar ao saldo da conta
 		if (getContaUsuario().getSaldo() * 2 < jogadores.size()) {
@@ -136,5 +147,18 @@ public class GerirRodadaBean extends BaseBean {
 
 		PersistenceHelper.initialize("rodadas", rodadaEmFoco.getCiclo());
 		return !rodadaEmFoco.getCiclo().getRodadas().get(rodadaEmFoco.getNumero() - 2).getFechada();
+	}
+
+	public List<SelectItem> getListaJogadoresHabilitados() {
+		List<Jogador> jogadores = rodadaEmFoco.getCiclo().getJogadoresHabilitadosDoRanking();
+
+		List<SelectItem> items = new ArrayList<SelectItem>();
+		Jogador jogador = null;
+		for (Iterator<Jogador> it = jogadores.iterator(); it.hasNext();) {
+			jogador = it.next();
+			SelectItem selectItem = new SelectItem(jogador, jogador.getNome());
+			items.add(selectItem);
+		}
+		return items;
 	}
 }

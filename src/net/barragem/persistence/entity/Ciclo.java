@@ -176,6 +176,16 @@ public class Ciclo extends BaseEntity {
 		return jogadoresDoRanking;
 	}
 
+	public List<Jogador> getJogadoresHabilitadosDoRanking() {
+		List<Jogador> jogadoresDoRanking = new ArrayList<Jogador>();
+		for (CicloJogador cicloJogador : ranking) {
+			if (cicloJogador.getHabilitado()) {
+				jogadoresDoRanking.add(cicloJogador.getJogador());
+			}
+		}
+		return jogadoresDoRanking;
+	}
+
 	public boolean existeJogoComJogador(Jogador jogador) {
 		for (Rodada rodada : getRodadas()) {
 			if (rodada.getJogadoresDosJogos().contains(jogador)) {

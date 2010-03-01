@@ -553,6 +553,10 @@ td.actions {
 	border-right: 0px;
 	min-width: 245px;
 }
+.editar-ciclo-jogador .dados-popup .campos_obrigatorios {
+	border-right: 0px;
+	min-width: 80px;
+}
 .dados-popup .submit {
     background:green;
     padding:4px 20px;
@@ -610,6 +614,11 @@ td.actions {
 }
 .dados-basicos-barragem input {
 	clear:both;
+}
+
+/********************* GERIR CICLOS ***************/
+.editar-ciclo-jogador .dados-popup label {
+	width:60px;
 }
 
 /********************* CICLOS *********************/

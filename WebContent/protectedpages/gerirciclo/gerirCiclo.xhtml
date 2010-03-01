@@ -21,6 +21,7 @@
 	            $j(function(){
 		            $j(".popup").colorbox({overlayClose:false, inline:true, href:".add-jogador", scrollbars:false});
 		            $j(".popupRenomearCiclo").colorbox({overlayClose:false, inline:true, href:".rename-ciclo", scrollbars:false}, function() {$j('#rename-ciclo\\:nome').focus();});
+		            $j(".popupEditarCicloJogador").colorbox({overlayClose:false, inline:true, href:".editar-ciclo-jogador", scrollbars:false}, function() {$j('#editar-ciclo-jogador\\:pontuacao').focus();});
 	            });
 	         </script>
 			<script type="text/javascript" src="#{request.contextPath}/js/3_3_0.GAorg.ajax4jsf.javascript.AjaxScript.js"></script>
@@ -62,6 +63,7 @@
 						</a4j:commandLink>
 						<a href="#" class="popup" title="#{msg.label_jogadores}" style="visibility:hidden"/>
 						<a href="#" class="popupRenomearCiclo" title="#{msg.label_renomear_ciclo}" style="visibility:hidden"/>
+						<a href="#" class="popupEditarCicloJogador" title="#{msg.label_editar_jogador}" style="visibility:hidden"/>
 					</div>
 		
 				    <h:dataTable id="ranking" styleClass="gradient" rowClasses=",alt" columnClasses=",,,actions" value="#{gerirCicloBean.cicloEmFoco.ranking}" var="item" binding="#{gerirCicloBean.dataTable}">
@@ -81,7 +83,7 @@
 						    <f:facet name="header">
 								#{msg.label_jogador}
 						    </f:facet>
-							#{gerirCicloBean.cicloEmFoco.ranking[gerirCicloBean.dataTable.rowIndex].jogador.nome}
+							#{gerirCicloBean.cicloEmFoco.ranking[gerirCicloBean.dataTable.rowIndex].jogador.nome} #{!gerirCicloBean.cicloEmFoco.ranking[gerirCicloBean.dataTable.rowIndex].habilitado ? msg.label_desabilitado : ''}
 					    </h:column>
 					    <h:column headerClass="actions">
 						    <f:facet name="header">
@@ -91,6 +93,7 @@
 								actionListener="#{gerirCicloBean.removeJogador}">
 								<img src="#{request.contextPath}/img/buttons/btn-deletar.png" alt="#{msg.label_excluir}" title="#{msg.label_excluir}" width="18px" height="18px"/>
 							</h:commandLink>
+							<a4j:commandLink actionListener="#{gerirCicloBean.preparaCicloJogador}" oncomplete="$j('.popupEditarCicloJogador').click();" reRender="editar-ciclo-jogador"><img src="#{request.contextPath}/img/buttons/btn-editar.png" alt="#{msg.label_editar}" title="#{msg.label_editar}" width="18px" height="18px"/></a4j:commandLink>
 					    </h:column>
 				    </h:dataTable>
 				</fieldset>
@@ -106,6 +109,7 @@
 		<div style="display:none">
 			<ui:include src="popupJogador.xhtml" />
 			<ui:include src="popupRenomearCiclo.xhtml" />
+			<ui:include src="popupEditarCicloJogador.xhtml" />
 		</div>
 	</ui:define>
 
