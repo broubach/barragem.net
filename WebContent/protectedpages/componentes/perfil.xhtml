@@ -15,6 +15,14 @@
 	</script>
 
 	<div class="dados">
+		<h:panelGroup id="mensagemErro" layout="block" styleClass="mensagem-erro" rendered="#{! empty messageBean.errorMessages}">
+	  		<span>#{msg.label_data_inicio_pratica}</span>
+	  		<script>
+				$j(function() {
+		  			$j('#perfil\\:dataInicioPratica').focus();
+				});
+	  		</script>
+		</h:panelGroup>
 		<div class="input text">
 			<label for="perfil:clubeMaisFrequentadoNome">#{msg.label_em_qual_clube_voce_joga_com_mais_frequencia}</label>
 			<h:inputText id="clubeMaisFrequentadoNome" value="#{editarPerfilBean.perfilEmFoco.clubeMaisFrequentadoNome}" maxlength="45" size="30"/>
