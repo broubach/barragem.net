@@ -88,6 +88,9 @@ fieldset#detalhes-jogo {
 	padding-right:10px;
 	min-height:90px;
 }
+fieldset#parciais {
+	padding-right:10px;
+}
 .maincontent a {
     color: #333333;
 }
@@ -567,7 +570,6 @@ td.actions {
     float: left;
 }
 .add-jogo .dados-popup {
-	width:380px;
 	padding-right: 10px;
 }
 .add-jogo .dados-popup label {

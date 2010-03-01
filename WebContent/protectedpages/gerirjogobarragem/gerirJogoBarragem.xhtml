@@ -51,7 +51,7 @@
 						<h:selectBooleanCheckbox id="wo" value="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.placar.wo}" class="wo" onclick="$j('div.vencedorWo').slideToggle('fast');$j('#add-jogo\\:vencedorParcial1,#add-jogo\\:vencedorParcial2,#add-jogo\\:vencedorParcial3,#add-jogo\\:perdedorParcial1,#add-jogo\\:perdedorParcial2,#add-jogo\\:perdedorParcial3').attr('disabled', $j('#add-jogo\\:wo').is(':checked'));"/>
 					</div>
 				</fieldset>
-				<fieldset>
+				<fieldset id="parciais">
 					<legend>#{msg.label_parciais}</legend>
 					<h:panelGrid id="gridPlacar" columns="4" columnClasses=",columnGrid,columnGrid,">
 						<label for="add-jogo:jogadorVencedor" class="#{messageBean.errorMessages['jogador'] != null ? 'error' : '' }">#{msg.label_jogadores}*</label>
