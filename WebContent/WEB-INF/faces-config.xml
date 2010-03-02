@@ -95,6 +95,7 @@
 		<navigation-case>
 			<from-outcome>login</from-outcome>
 			<to-view-id>/login.xhtml</to-view-id>
+			<redirect/>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
@@ -197,6 +198,7 @@
 		<navigation-case>
 			<from-outcome>editarPerfil</from-outcome>
 			<to-view-id>/protectedpages/editarperfil/editarPerfil.xhtml</to-view-id>
+			<redirect/>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>

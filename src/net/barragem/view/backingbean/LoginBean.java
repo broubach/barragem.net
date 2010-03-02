@@ -44,13 +44,10 @@ public class LoginBean extends BaseBean {
 			// coloca conta do usuario na sessao
 			setContaUsuario((Conta) PersistenceHelper.findByNamedQuery("findContaPorUsuarioQuery", usuarios.get(0))
 					.get(0));
-			// encaminha para pagina inicial da comunidade
-			sendRedirect("/protectedpages/index.xhtml");
 		}
 	}
 
 	public void sair(ActionEvent e) {
 		getSession().invalidate();
-		sendRedirect("/login.xhtml");
 	}
 }

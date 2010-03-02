@@ -1,6 +1,5 @@
 package net.barragem.view.backingbean;
 
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -95,20 +94,6 @@ public class BaseBean {
 
 	public FacesContext getFacesContext() {
 		return FacesContext.getCurrentInstance();
-	}
-
-	public void sendRedirect(String url) {
-		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
-				.getRequest();
-
-		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext()
-				.getResponse();
-
-		try {
-			response.sendRedirect(request.getContextPath() + url);
-		} catch (IOException e) {
-			new RuntimeException(e);
-		}
 	}
 
 	public HttpSession getSession() {

@@ -20,10 +20,11 @@ public class ProtectedPagesFilter implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
 			ServletException {
-		Usuario usuario = (Usuario) ((HttpServletRequest) request).getSession().getAttribute("usuario");
+		HttpServletRequest req = (HttpServletRequest) request;
+		HttpServletResponse resp = (HttpServletResponse) response;
+		Usuario usuario = (Usuario) req.getSession().getAttribute("usuario");
 		if (usuario == null) {
-			((HttpServletResponse) response).sendRedirect(((HttpServletRequest) request).getContextPath()
-					+ "/login.xhtml");
+			resp.sendRedirect(resp.encodeRedirectURL(req.getContextPath() + "/login.xhtml"));
 		} else {
 			chain.doFilter(request, response);
 		}

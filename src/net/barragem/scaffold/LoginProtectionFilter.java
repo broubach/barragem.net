@@ -23,10 +23,10 @@ public class LoginProtectionFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
 			ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
-		HttpServletResponse res = (HttpServletResponse) response;
+		HttpServletResponse resp = (HttpServletResponse) response;
 		Usuario usuario = (Usuario) req.getSession().getAttribute("usuario");
 		if (usuario != null) {
-			res.sendRedirect(req.getContextPath() + "/protectedpages/index.xhtml");
+			resp.sendRedirect(resp.encodeRedirectURL(req.getContextPath() + "/protectedpages/index.xhtml"));
 		} else {
 			chain.doFilter(request, response);
 		}

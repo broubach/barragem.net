@@ -18,8 +18,6 @@ import org.richfaces.model.UploadItem;
 
 public class EditarPerfilBean extends BaseBean {
 
-	private static final char FILL_LEFT_CHAR = '0';
-	private static final int MAX_HASH_SIZE = 9;
 	private Perfil perfilEmFoco = new Perfil();
 	private Arquivo fotoEmFoco;
 	private List<String> selectedItems;
@@ -66,8 +64,6 @@ public class EditarPerfilBean extends BaseBean {
 		}
 
 		setSessionAttribute("editarPerfilBean", editarPerfilBean);
-
-		sendRedirect("/protectedpages/editarperfil/editarPerfil.xhtml");
 	}
 
 	public void salvaPerfil(ActionEvent e) {

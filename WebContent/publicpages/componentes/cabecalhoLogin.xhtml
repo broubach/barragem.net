@@ -13,7 +13,7 @@
 		<h:form id="loginForm">
 			<h:inputText id="login" value="#{loginBean.login}" title="#{msg.label_email}" styleClass="input" maxlength="45"/>
 			<h:inputSecret id="passwd" value="#{loginBean.senha}" title="#{msg.label_senha}" styleClass="input" />
-			<h:commandButton actionListener="#{loginBean.login}" value="#{msg.label_login}" styleClass="login"/><br/>
+			<h:commandButton action="login" actionListener="#{loginBean.login}" value="#{msg.label_login}" styleClass="login"/><br/>
 			<div class="loginError" style="#{messageBean.errorMessages['login'] == null ? 'display:none' : 'display:visible'}">
 				#{messageBean.errorMessages['login'].summary}
 			</div>
