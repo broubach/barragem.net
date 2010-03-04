@@ -29,10 +29,11 @@ public class LoginBean extends BaseBean {
 		this.senha = senha;
 	}
 
-	public void login(ActionEvent e) {
+	public String login() {
 		List<Usuario> usuarios = PersistenceHelper.findByNamedQuery("loginQuery", encriptMd5(senha), login);
 		if (usuarios.isEmpty()) {
 			messages.addErrorMessage("login", "label_login_senha_invalidos");
+			return "";
 		} else {
 			// atualiza hora do ultimo acesso
 			usuarios.get(0).setDataPenultimoAcesso(usuarios.get(0).getDataUltimoAcesso());
@@ -44,6 +45,7 @@ public class LoginBean extends BaseBean {
 			// coloca conta do usuario na sessao
 			setContaUsuario((Conta) PersistenceHelper.findByNamedQuery("findContaPorUsuarioQuery", usuarios.get(0))
 					.get(0));
+			return "login";
 		}
 	}
 

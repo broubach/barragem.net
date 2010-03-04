@@ -49,7 +49,7 @@
 		<param-value>NONE</param-value>
 	</context-param>
 
-	<!-- Defining and mapping the RichFaces filter -->
+	<!-- Defining and mapping the RichFaces filter-->
 	<filter>
 		<display-name>RichFaces Filter</display-name>
 		<filter-name>richfaces</filter-name>
@@ -65,10 +65,17 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>richfaces</filter-name>
-		<servlet-name>Faces Servlet</servlet-name>
-		<dispatcher>REQUEST</dispatcher>
-		<dispatcher>FORWARD</dispatcher>
-		<dispatcher>INCLUDE</dispatcher>
+		<url-pattern>*.xhtml</url-pattern>
+	</filter-mapping>
+
+	<!-- Filtros específicos da aplicação -->
+	<filter>
+		<filter-name>CookieTweakFilter</filter-name>
+		<filter-class>net.barragem.scaffold.CookieTweakFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>CookieTweakFilter</filter-name>
+		<url-pattern>*.xhtml</url-pattern>
 	</filter-mapping>
 
 	<filter>
@@ -90,12 +97,11 @@
 	</filter-mapping>
 
 	<filter>
-		<display-name>Foto Default Jogador Filter</display-name>
-		<filter-name>fotoDefaultJogadorFilter</filter-name>
+		<filter-name>FotoDefaultJogadorFilter</filter-name>
 		<filter-class>net.barragem.scaffold.FotoDefaultJogadorFilter</filter-class>
 	</filter>
 	<filter-mapping>
-		<filter-name>fotoDefaultJogadorFilter</filter-name>
+		<filter-name>FotoDefaultJogadorFilter</filter-name>
 		<url-pattern>/protectedpages/*</url-pattern>
 	</filter-mapping>
 
@@ -112,22 +118,11 @@
             <param-value>40</param-value>
         </init-param>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>BarragemCaptchaServlet</servlet-name>
         <url-pattern>/captcha-barragem.do</url-pattern>
     </servlet-mapping>
     
-    <!-- Spring config -->
-   	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/sprCtxMail.xml /WEB-INF/sprCtxJmsServer.xml /WEB-INF/sprCtxJmsClient.xml</param-value>
-	</context-param>
-
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
-	
 	<!-- Image Servlet -->
 	<servlet>
 		<servlet-name>Image Servlet</servlet-name>
@@ -138,4 +133,13 @@
 		<servlet-name>Image Servlet</servlet-name>
 		<url-pattern>/protectedpages/exibirimagem/exibirImagem.do</url-pattern>
 	</servlet-mapping>
+
+    <!-- Spring config -->
+   	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/sprCtxMail.xml /WEB-INF/sprCtxJmsServer.xml /WEB-INF/sprCtxJmsClient.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
 </web-app>

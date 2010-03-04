@@ -7,11 +7,11 @@
 	xmlns:c="http://java.sun.com/jstl/core">
 
 	<h1>
-	    <a href="#{request.contextPath}/" class="brand">#{msg.label_brand}</a>
+	    <a href="#{request.contextPath}/protectedpages/index.xhtml" class="brand">#{msg.label_brand}</a>
 	</h1>
 	<div class="sidebar-header">
 	<h:form>
-	     <h:commandLink action="login" actionListener="#{loginBean.sair}" title="#{msg.label_sair}" styleClass="logout">
+	     <h:commandLink action="logout" actionListener="#{loginBean.sair}" title="#{msg.label_sair}" styleClass="logout">
 	         <img src="#{request.contextPath}/img/buttons/btn_sair.gif" alt="#{msg.label_sair}" width="58px" height="25px"/>
 	     </h:commandLink>
 	     <p>#{msg.label_ola} #{sessionScope['usuario'].nome}! 

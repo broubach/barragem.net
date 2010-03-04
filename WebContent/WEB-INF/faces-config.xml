@@ -28,7 +28,7 @@
 	<managed-bean>
 		<managed-bean-name>loginBean</managed-bean-name>
 		<managed-bean-class>net.barragem.view.backingbean.LoginBean</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
+		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>gerirBarragemBean</managed-bean-name>
@@ -90,14 +90,6 @@
 		<managed-bean-class>net.barragem.view.backingbean.VincularJogadorBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
-	<navigation-rule>
-		<from-view-id>*</from-view-id>
-		<navigation-case>
-			<from-outcome>login</from-outcome>
-			<to-view-id>/login.xhtml</to-view-id>
-			<redirect/>
-		</navigation-case>
-	</navigation-rule>
 	<navigation-rule>
 		<display-name>protectedpages/gerirbarragem/gerirBarragem.xhtml</display-name>
 		<from-view-id>/protectedpages/gerirbarragem/gerirBarragem.xhtml</from-view-id>
@@ -196,23 +188,30 @@
 	<navigation-rule>
 		<from-view-id>/protectedpages/*</from-view-id>
 		<navigation-case>
+			<from-outcome>exibirPainelBarragem</from-outcome>
+			<to-view-id>/protectedpages/exibirpainelbarragem/exibirPainelBarragem.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>logout</from-outcome>
+			<to-view-id>/login.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>exibirPerfil</from-outcome>
+			<to-view-id>/protectedpages/exibirperfil/exibirPerfil.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
 			<from-outcome>editarPerfil</from-outcome>
 			<to-view-id>/protectedpages/editarperfil/editarPerfil.xhtml</to-view-id>
 			<redirect/>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
-		<from-view-id>/protectedpages/*</from-view-id>
+		<from-view-id>*</from-view-id>
 		<navigation-case>
-			<from-outcome>exibirPerfil</from-outcome>
-			<to-view-id>/protectedpages/exibirperfil/exibirPerfil.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-		<from-view-id>/protectedpages/*</from-view-id>
-		<navigation-case>
-			<from-outcome>exibirPainelBarragem</from-outcome>
-			<to-view-id>/protectedpages/exibirpainelbarragem/exibirPainelBarragem.xhtml</to-view-id>
+			<from-outcome>login</from-outcome>
+			<to-view-id>/protectedpages/index.xhtml</to-view-id>
+			<redirect/>
 		</navigation-case>
 	</navigation-rule>
 	<lifecycle>
