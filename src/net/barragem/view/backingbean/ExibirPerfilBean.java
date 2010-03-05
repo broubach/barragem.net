@@ -9,6 +9,9 @@ import net.barragem.persistence.entity.Jogador;
 import net.barragem.persistence.entity.Usuario;
 import net.barragem.scaffold.PersistenceHelper;
 
+import org.ajax4jsf.model.KeepAlive;
+
+@KeepAlive
 public class ExibirPerfilBean extends BaseBean {
 
 	private Usuario usuarioEmFoco;
@@ -48,7 +51,7 @@ public class ExibirPerfilBean extends BaseBean {
 
 		ExibirPainelBarragemBean painelBarragemBean = new ExibirPainelBarragemBean();
 		painelBarragemBean.setCicloEmFoco(barragem.getCiclos().get(0));
-		setSessionAttribute("exibirPainelBarragemBean", painelBarragemBean);
+		setRequestAttribute("exibirPainelBarragemBean", painelBarragemBean);
 	}
 
 	public List<Barragem> getBarragens() {

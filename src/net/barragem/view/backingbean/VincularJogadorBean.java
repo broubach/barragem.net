@@ -9,6 +9,9 @@ import net.barragem.persistence.entity.Jogador;
 import net.barragem.scaffold.JogadoresComCorrespondenciaPrimeiroComparator;
 import net.barragem.scaffold.PersistenceHelper;
 
+import org.ajax4jsf.model.KeepAlive;
+
+@KeepAlive
 public class VincularJogadorBean extends BaseBean {
 
 	private Jogador jogadorEmFoco;

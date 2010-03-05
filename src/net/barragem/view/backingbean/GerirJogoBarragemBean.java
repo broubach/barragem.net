@@ -17,6 +17,9 @@ import net.barragem.scaffold.PersistenceHelper;
 import net.barragem.view.backingbean.componentes.MestreDetalheImpl;
 import net.barragem.view.backingbean.componentes.RodadaJogosBarragemMestreDetalhe;
 
+import org.ajax4jsf.model.KeepAlive;
+
+@KeepAlive
 public class GerirJogoBarragemBean extends BaseBean {
 
 	public RodadaJogosBarragemMestreDetalhe mestreDetalhe = new RodadaJogosBarragemMestreDetalhe();

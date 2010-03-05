@@ -18,12 +18,12 @@
 	<managed-bean>
 		<managed-bean-name>lookupBean</managed-bean-name>
 		<managed-bean-class>net.barragem.view.backingbean.LookupBean</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
+		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>gerirJogadorBean</managed-bean-name>
 		<managed-bean-class>net.barragem.view.backingbean.GerirJogadorBean</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
+		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>loginBean</managed-bean-name>
@@ -33,37 +33,37 @@
 	<managed-bean>
 		<managed-bean-name>gerirBarragemBean</managed-bean-name>
 		<managed-bean-class>net.barragem.view.backingbean.GerirBarragemBean</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
+		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>gerirCicloBean</managed-bean-name>
 		<managed-bean-class>net.barragem.view.backingbean.GerirCicloBean</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
+		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>gerirRodadaBean</managed-bean-name>
 		<managed-bean-class>net.barragem.view.backingbean.GerirRodadaBean</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
+		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>gerirJogoBarragemBean</managed-bean-name>
 		<managed-bean-class>net.barragem.view.backingbean.GerirJogoBarragemBean</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
+		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>messageBean</managed-bean-name>
 		<managed-bean-class>net.barragem.view.backingbean.MessageBean</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
+		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>registrarNovoUsuarioBean</managed-bean-name>
 		<managed-bean-class>net.barragem.view.backingbean.RegistrarNovoUsuarioBean</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
+		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>arquivoBean</managed-bean-name>
 		<managed-bean-class>net.barragem.view.backingbean.ArquivoBean</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
+		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>editarPerfilBean</managed-bean-name>
@@ -73,22 +73,22 @@
 	<managed-bean>
 		<managed-bean-name>exibirPainelBarragemBean</managed-bean-name>
 		<managed-bean-class>net.barragem.view.backingbean.ExibirPainelBarragemBean</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
+		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>exibirPerfilBean</managed-bean-name>
 		<managed-bean-class>net.barragem.view.backingbean.ExibirPerfilBean</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
+		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>pesquisarBean</managed-bean-name>
 		<managed-bean-class>net.barragem.view.backingbean.PesquisarBean</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
+		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>vincularJogadorBean</managed-bean-name>
 		<managed-bean-class>net.barragem.view.backingbean.VincularJogadorBean</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
+		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	<navigation-rule>
 		<display-name>protectedpages/gerirbarragem/gerirBarragem.xhtml</display-name>

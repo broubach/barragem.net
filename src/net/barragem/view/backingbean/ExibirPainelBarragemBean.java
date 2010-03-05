@@ -12,6 +12,9 @@ import net.barragem.persistence.entity.JogoBarragem;
 import net.barragem.persistence.entity.Rodada;
 import net.barragem.scaffold.PersistenceHelper;
 
+import org.ajax4jsf.model.KeepAlive;
+
+@KeepAlive
 public class ExibirPainelBarragemBean extends BaseBean {
 
 	private Ciclo cicloEmFoco;

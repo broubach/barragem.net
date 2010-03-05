@@ -7,8 +7,10 @@ import javax.faces.event.ActionEvent;
 import net.barragem.persistence.entity.Barragem;
 import net.barragem.scaffold.PersistenceHelper;
 
+import org.ajax4jsf.model.KeepAlive;
 import org.hibernate.exception.ConstraintViolationException;
 
+@KeepAlive
 public class GerirBarragemBean extends BaseBean {
 	private Barragem barragemEmFoco;
 	private List<Barragem> barragens;
@@ -65,7 +67,7 @@ public class GerirBarragemBean extends BaseBean {
 			barragemEmFoco = (Barragem) PersistenceHelper.findByPk(Barragem.class, barragens.get(getIndex()).getId(),
 					"ciclos");
 		} else {
-			GerirBarragemBean bean = (GerirBarragemBean) getSessionAttribute("gerirBarragemBean");
+			GerirBarragemBean bean = (GerirBarragemBean) getRequestAttribute("gerirBarragemBean");
 			barragemEmFoco = bean.getBarragemEmFoco();
 		}
 		if (barragemEmFoco.getCiclos().isEmpty()) {
@@ -74,7 +76,7 @@ public class GerirBarragemBean extends BaseBean {
 		GerirCicloBean cicloBean = new GerirCicloBean();
 		cicloBean.carregaUltimoCiclo(barragemEmFoco);
 
-		setSessionAttribute("gerirCicloBean", cicloBean);
+		setRequestAttribute("gerirCicloBean", cicloBean);
 	}
 
 	public void exibePainelBarragem(ActionEvent e) {
@@ -83,6 +85,6 @@ public class GerirBarragemBean extends BaseBean {
 
 		ExibirPainelBarragemBean painelBarragemBean = new ExibirPainelBarragemBean();
 		painelBarragemBean.setCicloEmFoco(barragem.getCiclos().get(0));
-		setSessionAttribute("exibirPainelBarragemBean", painelBarragemBean);
+		setRequestAttribute("exibirPainelBarragemBean", painelBarragemBean);
 	}
 }

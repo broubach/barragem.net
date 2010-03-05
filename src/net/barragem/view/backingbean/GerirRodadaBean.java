@@ -19,6 +19,9 @@ import net.barragem.scaffold.PersistenceHelper;
 import net.barragem.view.backingbean.componentes.JogadorEventoComparatorVencedorPrimeiro;
 import net.barragem.view.backingbean.componentes.JogoBarragemComparator;
 
+import org.ajax4jsf.model.KeepAlive;
+
+@KeepAlive
 public class GerirRodadaBean extends BaseBean {
 
 	private Rodada rodadaEmFoco;
@@ -35,14 +38,14 @@ public class GerirRodadaBean extends BaseBean {
 		GerirJogoBarragemBean jogoBarragemBean = new GerirJogoBarragemBean();
 		jogoBarragemBean.carregaJogo(rodadaEmFoco, getIndex());
 
-		setSessionAttribute("gerirJogoBarragemBean", jogoBarragemBean);
+		setRequestAttribute("gerirJogoBarragemBean", jogoBarragemBean);
 	}
 
 	public void adicionaJogo(ActionEvent e) {
 		GerirJogoBarragemBean jogoBarragemBean = new GerirJogoBarragemBean();
 		jogoBarragemBean.adicionaJogo(rodadaEmFoco);
 
-		setSessionAttribute("gerirJogoBarragemBean", jogoBarragemBean);
+		setRequestAttribute("gerirJogoBarragemBean", jogoBarragemBean);
 	}
 
 	public void removeJogo(ActionEvent e) {
@@ -110,7 +113,7 @@ public class GerirRodadaBean extends BaseBean {
 		rodadaEmFoco.getCiclo().getRodadas().add(rodadaEmFoco);
 		PersistenceHelper.persiste(rodadaEmFoco.getCiclo());
 
-		GerirCicloBean cicloBean = (GerirCicloBean) getSessionAttribute("gerirCicloBean");
+		GerirCicloBean cicloBean = (GerirCicloBean) getRequestAttribute("gerirCicloBean");
 		cicloBean.editaCiclo(e);
 	}
 
@@ -123,7 +126,7 @@ public class GerirRodadaBean extends BaseBean {
 
 		setRequestAttribute("index", String.valueOf(rodadaEmFoco.getCiclo().getBarragem().getIndiceNaLista(
 				rodadaEmFoco.getCiclo())));
-		GerirCicloBean gerirCicloBean = (GerirCicloBean) getSessionAttribute("gerirCicloBean");
+		GerirCicloBean gerirCicloBean = (GerirCicloBean) getRequestAttribute("gerirCicloBean");
 		gerirCicloBean.editaCiclo(null);
 	}
 
