@@ -18,10 +18,13 @@
 				<h:panelGroup id="menu-contextual" styleClass="menu-contextual" layout="block">
 			        <ul>
 			            <li>
-							<h:commandLink value="#{msg.label_editar_perfil}" action="editarPerfil" immediate="true"/>
+							<h:commandLink value="#{msg.label_dados_basicos}" action="editarDadosBasicos" immediate="true"/>
 			            </li>
 			            <li>
-							<h:commandLink value="#{msg.label_editar_foto}" disabled="true"/>
+							<h:commandLink value="#{msg.label_perfil}" action="editarPerfil" immediate="true"/>
+			            </li>
+			            <li>
+							<h:commandLink value="#{msg.label_foto}" disabled="true"/>
 			            </li>
 			        </ul>
 				</h:panelGroup>

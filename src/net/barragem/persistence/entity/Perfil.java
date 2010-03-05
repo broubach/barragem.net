@@ -33,7 +33,7 @@ public class Perfil extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
 	private Arquivo foto;
 
-	@OneToOne
+	@OneToOne(cascade = { CascadeType.ALL })
 	private Usuario usuario;
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })

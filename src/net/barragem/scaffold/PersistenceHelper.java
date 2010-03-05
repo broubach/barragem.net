@@ -166,4 +166,8 @@ public class PersistenceHelper {
 			}
 		}
 	}
+
+	public static boolean isInitialized(Object obj, String proxy) {
+		return Hibernate.isPropertyInitialized(obj, proxy);
+	}
 }

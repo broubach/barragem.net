@@ -242,6 +242,9 @@ fieldset#parciais {
 .perfilBtnUploadFotoContainer {
 	float: left;
 }
+.alterar-senha .dados-popup label {
+	width:180px;
+}
 
 /********************* EXIBIR PERFIL *********************/
 .dadosExibirPerfil {
@@ -866,7 +869,7 @@ label {
 	color:#444;
 	font-size:.8em;
 }
-.dados label, .dados .exemplo, .dados .complemento, .dadosExibirPerfil label, .dadosGerirJogador label, .dadosGerirJogadorListaJogadores label {
+.dados label, .dados .exemplo, .dados .complemento, .dadosExibirPerfil label, .dadosGerirJogador label, .dadosGerirJogadorListaJogadores label, .dados .spanBtn {
 	color:#444;
 	font-size:.8em;
 }

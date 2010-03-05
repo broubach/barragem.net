@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<ui:composition template="/protectedpages/layout/layoutPrincipal.xhtml">
+	<ui:define name="conteudo">
+		<div class="maincontent equalheights">
+
+	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/jquery.colorbox.css" />
+	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/jquery.colorbox-barragem.css" />
+	        <script type="text/javascript" src="#{request.contextPath}/js/jquery.colorbox-min.js"></script>
+			<script>
+	            $j(function(){
+		            $j(".popupSenha").colorbox({overlayClose:false, inline:true, href:".alterar-senha", scrollbars:false});
+	            });
+	         </script>
+			<script type="text/javascript" src="#{request.contextPath}/js/3_3_0.GAorg.ajax4jsf.javascript.AjaxScript.js"></script>
+			<a href="#" class="popupSenha" title="#{msg.label_alterar_senha}"/>
+
+			<h:form id="dadosBasicos">
+				<h2>#{msg.label_perfil}</h2>
+				<h:panelGroup id="menu-contextual" styleClass="menu-contextual" layout="block">
+			        <ul>
+			            <li>
+							<h:commandLink value="#{msg.label_dados_basicos}" disabled="true"/>
+			            </li>
+			            <li>
+							<h:commandLink value="#{msg.label_perfil}" action="editarPerfil" immediate="true"/>
+			            </li>
+			            <li>
+							<h:commandLink value="#{msg.label_foto}" action="editarFoto" immediate="true"/>
+			            </li>
+			        </ul>
+				</h:panelGroup>
+
+				<script>
+			        $j(function(){
+						aplicarMascaras();
+					});
+				</script>
+				<div class="dados">
+					<h:panelGroup id="mensagemErro" layout="block" styleClass="mensagem-erro" rendered="#{! empty messageBean.errorMessages}">
+	    	    		<span>#{msg.label_preencha_os_campos_obrigatorios}</span>
+					</h:panelGroup>
+					<div class="input text">
+						<label for="dadosBasicos:nome">#{msg.label_nome}*</label>
+						<h:inputText id="nome" value="#{editarPerfilBean.usuarioEmFoco.nome}" maxlength="45" size="30"/>
+					</div>
+					<div class="input text">
+						<label for="dadosBasicos:sobrenome">#{msg.label_sobrenome}*</label>
+						<h:inputText id="sobrenome" value="#{editarPerfilBean.usuarioEmFoco.sobrenome}" maxlength="45" size="30"/>
+					</div>
+					<div class="input text">
+						<label for="dadisBasicos:email">#{msg.label_email}*</label>
+						<h:inputText id="email" value="#{editarPerfilBean.usuarioEmFoco.email}" maxlength="45" size="30"/>
+					</div>
+					<div class="input text">
+						<label for="dadosBasicos:senha">#{msg.label_senha}</label>
+						<span><a href="#" onclick="$j('.popupSenha').click();">#{msg.label_clique_para_alterar_senha}</a></span>
+					</div>
+					<div class="input text">
+						<label for="dadosBasicos:sexo">#{msg.label_sexo}*</label>
+						<h:selectOneMenu id="sexo" value="#{editarPerfilBean.usuarioEmFoco.sexo}">
+							<f:selectItem itemLabel="" itemValue=""/>
+							<f:selectItems value="#{lookupBean.sexos}"/>
+						</h:selectOneMenu>
+					</div>
+					<div class="input text">
+						<label for="dadosBasicos:aniversario">#{msg.label_aniversario}*</label>
+						<h:inputText id="aniversario" value="#{editarPerfilBean.usuarioEmFoco.aniversario}" styleClass="date" size="10">
+							<f:convertDateTime pattern="dd/MM/yyyy"/>
+						</h:inputText>
+					</div>
+				</div>
+
+				<div class="dados">
+					<div class="salvarPerfil">
+						<span class="spanBtn">#{msg.label_campos_marcados_sao_obrigatorios}</span>
+						<h:commandButton value="#{msg.label_salvar}" actionListener="#{editarPerfilBean.salvaPerfil}" styleClass="submit"/>
+					</div>
+				</div>
+			</h:form>
+		</div>
+
+		<div style="display:none">
+			<ui:include src="popupAlterarSenha.xhtml" />
+		</div>
+	</ui:define>
+
+</ui:composition>
+</html>

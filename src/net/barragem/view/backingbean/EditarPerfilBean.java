@@ -11,6 +11,7 @@ import javax.faces.event.ActionEvent;
 import net.barragem.persistence.entity.Arquivo;
 import net.barragem.persistence.entity.Categoria;
 import net.barragem.persistence.entity.Perfil;
+import net.barragem.persistence.entity.Usuario;
 import net.barragem.scaffold.PersistenceHelper;
 
 import org.richfaces.event.UploadEvent;
@@ -18,9 +19,13 @@ import org.richfaces.model.UploadItem;
 
 public class EditarPerfilBean extends BaseBean {
 
-	private Perfil perfilEmFoco = new Perfil();
+	private Perfil perfilEmFoco;
+	private Usuario usuarioEmFoco;
 	private Arquivo fotoEmFoco;
 	private List<String> selectedItems;
+	private String senhaAtual;
+	private String novaSenha;
+	private String confirmacaoNovaSenha;
 
 	public Perfil getPerfilEmFoco() {
 		return perfilEmFoco;
@@ -46,12 +51,46 @@ public class EditarPerfilBean extends BaseBean {
 		this.selectedItems = selectedItems;
 	}
 
-	public void editaPerfil(ActionEvent e) {
+	public Usuario getUsuarioEmFoco() {
+		return usuarioEmFoco;
+	}
+
+	public void setUsuarioEmFoco(Usuario usuarioEmFoco) {
+		this.usuarioEmFoco = usuarioEmFoco;
+	}
+
+	public String getSenhaAtual() {
+		return senhaAtual;
+	}
+
+	public void setSenhaAtual(String senhaAtual) {
+		this.senhaAtual = senhaAtual;
+	}
+
+	public String getNovaSenha() {
+		return novaSenha;
+	}
+
+	public void setNovaSenha(String novaSenha) {
+		this.novaSenha = novaSenha;
+	}
+
+	public String getConfirmacaoNovaSenha() {
+		return confirmacaoNovaSenha;
+	}
+
+	public void setConfirmacaoNovaSenha(String confirmacaoNovaSenha) {
+		this.confirmacaoNovaSenha = confirmacaoNovaSenha;
+	}
+
+	public void preparaPerfil(ActionEvent e) {
 		EditarPerfilBean editarPerfilBean = new EditarPerfilBean();
 		editarPerfilBean.setPerfilEmFoco(getUsuarioLogado().getPerfil());
+		editarPerfilBean.setUsuarioEmFoco(getUsuarioLogado());
 		if (editarPerfilBean.getPerfilEmFoco() == null) {
 			editarPerfilBean.setPerfilEmFoco(new Perfil());
-		} else if (editarPerfilBean.getPerfilEmFoco().getFoto() != null) {
+		} else if (editarPerfilBean.getPerfilEmFoco().getHash() != null
+				&& !PersistenceHelper.isInitialized(editarPerfilBean.getPerfilEmFoco(), "foto")) {
 			PersistenceHelper.initialize("foto", editarPerfilBean.getPerfilEmFoco());
 			editarPerfilBean.setFotoEmFoco(editarPerfilBean.getPerfilEmFoco().getFoto());
 		}
@@ -67,27 +106,53 @@ public class EditarPerfilBean extends BaseBean {
 	}
 
 	public void salvaPerfil(ActionEvent e) {
-		perfilEmFoco.setUsuario(getUsuarioLogado());
-		if (selectedItems != null) {
-			List<Categoria> categorias = new ArrayList<Categoria>();
-			for (String selectedItem : selectedItems) {
-				categorias.add(PersistenceHelper.findByPk(Categoria.class, Integer.valueOf(selectedItem)));
+		if (valida(perfilEmFoco.getUsuario())) {
+			perfilEmFoco.setUsuario(usuarioEmFoco);
+			usuarioEmFoco.setPerfil(perfilEmFoco);
+			if (selectedItems != null) {
+				List<Categoria> categorias = new ArrayList<Categoria>();
+				for (String selectedItem : selectedItems) {
+					categorias.add(PersistenceHelper.findByPk(Categoria.class, Integer.valueOf(selectedItem)));
+				}
+				perfilEmFoco.setCategorias(categorias);
 			}
-			perfilEmFoco.setCategorias(categorias);
-		}
-		getUsuarioLogado().setPerfil(perfilEmFoco);
-		if (fotoEmFoco != null) {
-			if (perfilEmFoco.getId() != null) {
+			if (fotoEmFoco != null) {
 				perfilEmFoco.setHash(encriptMd5(fotoEmFoco.getDado().toString()));
+				perfilEmFoco.setFoto(fotoEmFoco);
 			}
-			perfilEmFoco.setFoto(fotoEmFoco);
-		}
-		PersistenceHelper.persiste(perfilEmFoco);
-		if (fotoEmFoco != null && perfilEmFoco.getHash() == null) {
-			perfilEmFoco.setHash(encriptMd5(fotoEmFoco.getDado().toString()));
 			PersistenceHelper.persiste(perfilEmFoco);
+			addMensagemAtualizacaoComSucesso();
 		}
-		addMensagemAtualizacaoComSucesso();
+	}
+
+	public void alteraSenha(ActionEvent e) {
+		if (validaAlteracaoSenha()) {
+			getUsuarioLogado().setSenha(encriptMd5(novaSenha));
+			senhaAtual = "";
+			novaSenha = "";
+			confirmacaoNovaSenha = "";
+			PersistenceHelper.persiste(getUsuarioLogado());
+			addMensagemAtualizacaoComSucesso();
+		}
+	}
+
+	private boolean validaAlteracaoSenha() {
+		if (senhaAtual.equals("") || novaSenha.equals("") || confirmacaoNovaSenha.equals("")) {
+			messages.addErrorMessage(null, "label_preencha_os_campos_obrigatorios");
+			return false;
+		}
+		if (!getUsuarioLogado().getSenha().equals(encriptMd5(senhaAtual))) {
+			messages.addErrorMessage(null, "label_a_senha_atual_nao_confere");
+			return false;
+		}
+		if (!novaSenha.equals(confirmacaoNovaSenha)) {
+			messages.addErrorMessage(null, "label_as_novas_senhas_digitadas_nao_conferem");
+			return false;
+		}
+		if (!validaSenha(null, novaSenha)) {
+			return false;
+		}
+		return true;
 	}
 
 	public void paintFotoUpload(OutputStream stream, Object object) throws IOException {
@@ -108,7 +173,7 @@ public class EditarPerfilBean extends BaseBean {
 			fotoEmFoco = new Arquivo();
 			fotoEmFoco.setDado(item.getData());
 			fotoEmFoco.setData(new Date());
-			fotoEmFoco.setDono(getUsuarioLogado());
+			fotoEmFoco.setDono(usuarioEmFoco);
 			fotoEmFoco.setNome(item.getFileName());
 			fotoEmFoco.setTamanho(item.getFileSize());
 			fotoEmFoco.setMime(item.getContentType());

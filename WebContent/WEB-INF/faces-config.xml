@@ -171,14 +171,6 @@
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
-		<display-name>protectedpages/editarperfil/editarPerfil.xhtml</display-name>
-		<from-view-id>/protectedpages/editarperfil/editarPerfil.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>editarFoto</from-outcome>
-			<to-view-id>/protectedpages/editarperfil/editarFoto.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
 		<from-view-id>/protectedpages/gerirjogador/gerirJogador.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>sucessoPesquisa</from-outcome>
@@ -201,9 +193,17 @@
 			<to-view-id>/protectedpages/exibirperfil/exibirPerfil.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
+			<from-outcome>editarDadosBasicos</from-outcome>
+			<to-view-id>/protectedpages/editarperfil/editarDadosBasicos.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+		<navigation-case>
 			<from-outcome>editarPerfil</from-outcome>
 			<to-view-id>/protectedpages/editarperfil/editarPerfil.xhtml</to-view-id>
-			<redirect/>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>editarFoto</from-outcome>
+			<to-view-id>/protectedpages/editarperfil/editarFoto.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>

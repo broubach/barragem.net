@@ -17,7 +17,7 @@ import org.ajax4jsf.model.KeepAlive;
 @KeepAlive
 public class RegistrarNovoUsuarioBean extends BaseBean {
 
-	private static final String REGISTRAR_NOVO_USUARIO = "registrarNovoUsuario";
+	private final String REGISTRAR_NOVO_USUARIO = "registrarNovoUsuario";
 	private Usuario usuarioEmFoco = new Usuario();
 	private Integer aniversarioDia;
 	private Integer aniversarioMes;
@@ -96,7 +96,7 @@ public class RegistrarNovoUsuarioBean extends BaseBean {
 		if (aniversarioDia == null || new Integer(0).equals(aniversarioDia)) {
 			possuiCampoVazio = true;
 		}
-		if (aniversarioMes == null || new Integer(0).equals(aniversarioMes)) {
+		if (aniversarioMes == null || new Integer(-1).equals(aniversarioMes)) {
 			possuiCampoVazio = true;
 		}
 		if (aniversarioAno == null || new Integer(0).equals(aniversarioAno)) {
@@ -110,9 +110,8 @@ public class RegistrarNovoUsuarioBean extends BaseBean {
 				messages.addErrorMessage(REGISTRAR_NOVO_USUARIO, "error_digite_um_email_valido");
 			} else if (!PersistenceHelper.findByNamedQuery("emailExistenteQuery", usuarioEmFoco.getEmail()).isEmpty()) {
 				messages.addErrorMessage(REGISTRAR_NOVO_USUARIO, "error_email_especificado_jah_existe");
-			} else if (usuarioEmFoco.getSenha().length() < 6) {
-				messages.addErrorMessage(REGISTRAR_NOVO_USUARIO, "error_a_senha_deve_conter_no_minimo_6_caracteres");
 			}
+			validaSenha(REGISTRAR_NOVO_USUARIO, usuarioEmFoco.getSenha());
 		}
 
 		if (messages.getErrorMessages().isEmpty()) {

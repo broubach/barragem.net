@@ -15,6 +15,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import net.barragem.scaffold.JogadoresComCorrespondenciaPrimeiroComparator;
+import net.barragem.scaffold.ValidatableSampleImpl;
 
 @Entity
 @NamedQueries( {
@@ -23,13 +24,18 @@ import net.barragem.scaffold.JogadoresComCorrespondenciaPrimeiroComparator;
 		@NamedQuery(name = "barragensDeUsuarioQuery", query = "select distinct c.barragem from Ciclo c join c.ranking r join r.jogador j join j.usuarioCorrespondente uc where uc.id = :id"),
 		@NamedQuery(name = "emailExistenteQuery", query = "select 1 from Usuario usuario where usuario.email = :email") })
 @Table(name = "usuario")
-public class Usuario extends BaseEntity {
+public class Usuario extends BaseEntity implements Validatable {
 
+	@ValidateRequired
 	private String nome;
+	@ValidateRequired
 	private String sobrenome;
+	@ValidateRequired
 	private String email;
 	private String senha;
+	@ValidateRequired
 	private SexoEnum sexo;
+	@ValidateRequired
 	private Date aniversario;
 	private Date dataUltimoAcesso;
 	private Date dataPenultimoAcesso;
@@ -184,6 +190,13 @@ public class Usuario extends BaseEntity {
 			}
 		}
 		Collections.sort(result, new JogadoresComCorrespondenciaPrimeiroComparator());
+		return result;
+	}
+
+	@Override
+	public List<String> validate() {
+		List<String> result = new ArrayList<String>();
+		result.addAll(new ValidatableSampleImpl(this).validate());
 		return result;
 	}
 }

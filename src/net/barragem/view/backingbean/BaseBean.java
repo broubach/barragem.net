@@ -303,4 +303,12 @@ public class BaseBean {
 	protected Conta getContaUsuario() {
 		return (Conta) getSessionAttribute("conta");
 	}
+
+	protected boolean validaSenha(String clientId, String senha) {
+		if (senha.length() < 6) {
+			messages.addErrorMessage(clientId, "error_a_senha_deve_conter_no_minimo_6_caracteres");
+			return false;
+		}
+		return true;
+	}
 }
