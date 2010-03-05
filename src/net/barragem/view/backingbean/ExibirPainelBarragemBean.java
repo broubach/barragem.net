@@ -61,6 +61,7 @@ public class ExibirPainelBarragemBean extends BaseBean {
 		} else {
 			cicloEmFoco = (Ciclo) PersistenceHelper.findByPk(Ciclo.class, cicloEmFoco.getId(), "ranking", "rodadas");
 		}
+		PersistenceHelper.initialize("ciclos", cicloEmFoco.getBarragem());
 	}
 
 	public void visualizaRodada(ActionEvent e) {
