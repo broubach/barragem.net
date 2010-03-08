@@ -20,6 +20,7 @@ import net.barragem.scaffold.ValidatableSampleImpl;
 @Entity
 @NamedQueries( {
 		@NamedQuery(name = "loginQuery", query = "select u from Usuario u left outer join u.perfil p where u.email = :email and u.senha = :senha"),
+		@NamedQuery(name = "recuperarSenhaQuery", query = "from Usuario u where u.email = :email"),
 		@NamedQuery(name = "perfilQuery", query = "select u from Usuario u left outer join u.perfil p where u.id = :id"),
 		@NamedQuery(name = "barragensDeUsuarioQuery", query = "select distinct c.barragem from Ciclo c join c.ranking r join r.jogador j join j.usuarioCorrespondente uc where uc.id = :id"),
 		@NamedQuery(name = "emailExistenteQuery", query = "select 1 from Usuario usuario where usuario.email = :email") })

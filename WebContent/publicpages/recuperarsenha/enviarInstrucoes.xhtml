@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+<ui:composition template="../layout/layoutFormularioExclusivo.xhtml">
+	<ui:define name="conteudo">
+		<div style="width: 400px; margin-left: auto; margin-right: auto;">
+			<div class="maincontent equalheights">
+		        <c:if test="#{! empty messageBean.errorMessages}">
+			        <div class="mensagem-erro">
+				        <c:forEach var="item" items="#{messageBean.errorMessages}">
+		    	    		<span>#{item.value.summary}</span>
+				        </c:forEach>
+			        </div>
+		        </c:if>
+
+				<h:form>
+				Esqueceu sua senha?<br/>
+				O barragem.net enviara para seu email instrucoes para atribuir uma nova senha a sua conta.<br/>
+				Digite seu email a baixo:<br/>
+				<h:inputText value="#{recuperarSenhaBean.email}"/>
+				<h:commandButton actionListener="#{recuperarSenhaBean.enviaInstrucoes}" value="#{msg.label_enviar}"/>
+				</h:form>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</ui:define>
+</ui:composition>
+
+</html>

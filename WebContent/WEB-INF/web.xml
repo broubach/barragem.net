@@ -109,6 +109,15 @@
 		<url-pattern>/protectedpages/*</url-pattern>
 	</filter-mapping>
 
+	<filter>
+		<filter-name>recuperarSenhaProtectionFilter</filter-name>
+		<filter-class>net.barragem.scaffold.RecuperarSenhaProtectionFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>recuperarSenhaProtectionFilter</filter-name>
+		<url-pattern>/publicpages/recuperarsenha/recuperarSenha.xhtml</url-pattern>
+	</filter-mapping>
+
 	<!-- Captcha config  -->
     <servlet>
         <servlet-name>BarragemCaptchaServlet</servlet-name>

@@ -7,6 +7,6 @@
 	<bean id="jmsTemplate" class="net.barragem.scaffold.BarragemJmsTemplate">
 		<property name="connectionFactory" ref="connectionFactory" />
 		<property name="defaultDestination" ref="queue" />
-		<property name="enabled" value="false" />
+		<property name="enabled" value="true" />
 	</bean>
 </beans>

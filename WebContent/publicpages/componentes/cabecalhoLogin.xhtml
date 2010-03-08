@@ -17,7 +17,7 @@
 			<div class="loginError" style="#{messageBean.errorMessages['login'] == null ? 'display:none' : 'display:visible'}">
 				#{messageBean.errorMessages['login'].summary}
 			</div>
-			<h:commandLink action="esqueciMinhaSenha" title="#{msg.label_esqueci_minha_senha}">#{msg.label_esqueci_minha_senha}</h:commandLink>
+			<a href="#{request.contextPath}/publicpages/recuperarsenha/enviarInstrucoes.xhtml" title="#{msg.label_esqueci_minha_senha}">#{msg.label_esqueci_minha_senha}</a>
 		</h:form>
 	</div>
 	<c:if test="false">

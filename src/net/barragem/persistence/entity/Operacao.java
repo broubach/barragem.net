@@ -1,5 +1,7 @@
 package net.barragem.persistence.entity;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -14,6 +16,7 @@ public class Operacao extends BaseEntity {
 	@OneToOne
 	private Conta conta;
 	private Integer quantidade;
+	private Date data;
 
 	public Conta getConta() {
 		return conta;
@@ -29,5 +32,13 @@ public class Operacao extends BaseEntity {
 
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
+	}
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
 	}
 }

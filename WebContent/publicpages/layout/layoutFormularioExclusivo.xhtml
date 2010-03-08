@@ -28,7 +28,7 @@
         //<![CDATA[
         
                 $j(function(){
-                    $j('#loginForm input, #searchForm input').each(function() {
+                    $j('#loginForm input').each(function() {
 	                    if($j(this).val() === '') {
 	                        $j(this).val($j(this).attr('title'));	
 	                    }
@@ -43,7 +43,6 @@
 	                        }
 	                    });
 	                });
-                    $j('#registerForm\\:nome').focus();
                 });
             
         //]]>
@@ -65,16 +64,9 @@
                	</ui:insert>
 			</div>
 			<div id="content">
-				<div class="grid_1 prefix_5">
-					<h2 class="slogan">#{msg.label_slogan}</h2>
-				</div>
-				<div class="registrese prefix_9 grid_6">
-					<h3>#{msg.label_inscrevase_gratuitamente}</h3>
-	               	<ui:insert name="caixaDireita">
-	               		<ui:include src="../componentes/loginCaixaDireita.xhtml" />
-	               	</ui:insert>
-				</div>
-				<div class="clear"></div>
+				<ui:insert name="conteudo">
+					<ui:include src="../../publicpages/componentes/conteudo.xhtml" />
+				</ui:insert>
 			</div>
 			<div id="footer">
                	<ui:insert name="rodape">

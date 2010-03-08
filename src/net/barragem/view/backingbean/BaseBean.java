@@ -232,7 +232,7 @@ public class BaseBean {
 
 		char[] toBeFilledArray = toBeFilled.toCharArray();
 		for (int i = 0; i < toBeFilledArray.length; i++) {
-			fill[9 - (toBeFilledArray.length - i)] = toBeFilledArray[i];
+			fill[size - (toBeFilledArray.length - i)] = toBeFilledArray[i];
 		}
 		return String.valueOf(fill);
 	}

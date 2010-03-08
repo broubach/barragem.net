@@ -1,5 +1,7 @@
 package net.barragem.persistence.entity;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
@@ -35,6 +37,7 @@ public class Conta extends BaseEntity {
 		OperacaoDebitoJogoBarragem operacao = new OperacaoDebitoJogoBarragem();
 		operacao.setQuantidade(quantidade);
 		operacao.setConta(this);
+		operacao.setData(new Date());
 		return operacao;
 	}
 
@@ -45,6 +48,7 @@ public class Conta extends BaseEntity {
 		operacao.setMotivoDevolucao("exclusão de jogo");
 		operacao.setQuantidade(quantidade);
 		operacao.setConta(this);
+		operacao.setData(new Date());
 		return operacao;
 	}
 }

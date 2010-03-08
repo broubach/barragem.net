@@ -1,17 +1,26 @@
 package net.barragem.scaffold;
 
-import org.springframework.mail.SimpleMailMessage;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 
 public class BarragemMailSender extends JavaMailSenderImpl {
 
 	public void send(String from, String to, String subject, String body) {
-		SimpleMailMessage mailMessage = new SimpleMailMessage();
-		mailMessage.setFrom(from);
-		mailMessage.setTo(to);
-		mailMessage.setSubject(subject);
-		mailMessage.setText(body);
+		try {
+			MimeMessage message = createMimeMessage();
 
-		send(mailMessage);
+			MimeMessageHelper helper = new MimeMessageHelper(message, true);
+			helper.setTo(to);
+			helper.setFrom(from);
+			helper.setSubject(subject);
+			helper.setText(body, true);
+
+			send(message);
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
 	}
 }

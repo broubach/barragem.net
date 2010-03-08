@@ -90,6 +90,11 @@
 		<managed-bean-class>net.barragem.view.backingbean.VincularJogadorBean</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>recuperarSenhaBean</managed-bean-name>
+		<managed-bean-class>net.barragem.view.backingbean.RecuperarSenhaBean</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
 	<navigation-rule>
 		<display-name>protectedpages/gerirbarragem/gerirBarragem.xhtml</display-name>
 		<from-view-id>/protectedpages/gerirbarragem/gerirBarragem.xhtml</from-view-id>
@@ -132,10 +137,6 @@
 		<navigation-case>
 			<from-outcome>passo1</from-outcome>
 			<to-view-id>/publicpages/novousuario/passo-1-seguranca.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>esqueciMinhaSenha</from-outcome>
-			<to-view-id>/publicpages/esqueciMinhaSenha.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>

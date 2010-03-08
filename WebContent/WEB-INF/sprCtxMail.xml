@@ -7,7 +7,7 @@
 	<bean id="mailSender" class="net.barragem.scaffold.BarragemMailSender">
 		<property name="host" value="smtp.gmail.com" />
 		<property name="username" value="no-reply@barragem.net" />
-		<property name="password" value="BaRrAgEm#9" />
+		<property name="password" value="Ba2Nc8" />
 		<property name="javaMailProperties">
 			<props>
 				<prop key="mail.smtp.auth">true</prop>
