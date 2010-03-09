@@ -11,10 +11,14 @@ import net.barragem.persistence.entity.RequisicaoRecuperarSenha;
 import net.barragem.persistence.entity.Usuario;
 import net.barragem.scaffold.PersistenceHelper;
 
+import org.ajax4jsf.model.KeepAlive;
+
+@KeepAlive
 public class RecuperarSenhaBean extends BaseBean {
 	private String email;
 	private String novaSenha;
 	private String confirmacaoNovaSenha;
+
 	private static final String emailTemplate = new StringBuilder()
 			.append("<p>Olá,</p>")
 			.append(
@@ -74,7 +78,7 @@ public class RecuperarSenhaBean extends BaseBean {
 	public void recuperaSenha(ActionEvent e) {
 		if (validaAlteracaoSenha()) {
 			RequisicaoRecuperarSenha requisicao = (RequisicaoRecuperarSenha) PersistenceHelper.findByNamedQuery(
-					"findRequisicaoValidaByHashQuery", getRequest().getParameter("hash")).get(0);
+					"findRequisicaoByHashQuery", getRequest().getAttribute("recuperarSenhaForm:hash")).get(0);
 			requisicao.getUsuario().setSenha(encriptMd5(novaSenha));
 			requisicao.setDataConclusao(new Date());
 			PersistenceHelper.persiste(requisicao);

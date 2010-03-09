@@ -25,9 +25,14 @@ public class RecuperarSenhaProtectionFilter implements Filter {
 		HttpServletResponse response = (HttpServletResponse) resp;
 		Calendar calendar = Calendar.getInstance();
 		calendar.roll(Calendar.DATE, -2);
-		if (req.getParameter("hash") == null
-				|| PersistenceHelper.findByNamedQuery("findRequisicaoValidaByHashQuery", req.getParameter("hash"),
-						calendar.getTime()).size() <= 0) {
+		String hash = req.getParameter("hash") == null ? req.getParameter("recuperarSenhaForm:hash") : req
+				.getParameter("hash");
+		if (hash != null) {
+			req.setAttribute("recuperarSenhaForm:hash", hash);
+		}
+		if (hash == null
+				|| PersistenceHelper.findByNamedQuery("findRequisicaoValidaByHashQuery", calendar.getTime(), hash)
+						.size() <= 0) {
 			response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/login.xhtml"));
 		}
 		chain.doFilter(req, resp);
