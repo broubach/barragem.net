@@ -10,19 +10,23 @@
 	    <a href="#{request.contextPath}/protectedpages/index.xhtml" class="brand">#{msg.label_brand}</a>
 	</h1>
 	<div class="sidebar-header">
-	<h:form>
-	     <h:commandLink action="logout" actionListener="#{loginBean.sair}" title="#{msg.label_sair}" styleClass="logout" immediate="true">
-	         <img src="#{request.contextPath}/img/buttons/btn_sair.gif" alt="#{msg.label_sair}" width="58px" height="25px"/>
-	     </h:commandLink>
-	     <p>#{msg.label_ola} #{sessionScope['usuario'].nome}! 
-		     <c:if test="#{not naoMostrarEditarPerfil}">
-			     <strong><h:commandLink action="editarDadosBasicos" actionListener="#{editarPerfilBean.preparaPerfil}" immediate="true">#{msg.label_editar_perfil}</h:commandLink></strong>
+		<h:form>
+		     <h:commandLink action="logout" actionListener="#{loginBean.sair}" title="#{msg.label_sair}" styleClass="logout" immediate="true">
+		         <img src="#{request.contextPath}/img/buttons/btn_sair.gif" alt="#{msg.label_sair}" width="58px" height="25px"/>
+		     </h:commandLink>
+		     <p>#{msg.label_ola} #{sessionScope['usuario'].nome}! 
+			     <c:if test="#{not naoMostrarEditarPerfil}">
+				     <strong><h:commandLink action="editarDadosBasicos" actionListener="#{editarPerfilBean.preparaPerfil}" immediate="true">#{msg.label_editar_perfil}</h:commandLink></strong>
+			     </c:if>
+		     </p>
+		     <c:if test="#{not naoMostrarEditarPerfil and sessionScope['usuario'].dataPenultimoAcesso != null}">
+			     <p>#{msg.label_seu_ultimo_acesso_foi_em}&#160;<h:outputText value="#{sessionScope['usuario'].dataPenultimoAcesso}"><f:convertDateTime type="date" dateStyle="long" locale="pt"/></h:outputText></p>
 		     </c:if>
-	     </p>
-	     <c:if test="#{not naoMostrarEditarPerfil and sessionScope['usuario'].dataPenultimoAcesso != null}">
-		     <p>#{msg.label_seu_ultimo_acesso_foi_em}&#160;<h:outputText value="#{sessionScope['usuario'].dataPenultimoAcesso}"><f:convertDateTime type="date" dateStyle="long" locale="pt"/></h:outputText></p>
-	     </c:if>
-	</h:form>
+		</h:form>
+		<div class="corner tl"></div>
+		<div class="corner tr"></div>
+		<div class="corner bl"></div>
+		<div class="corner br"></div>
 	</div>
 	<c:if test="false">
 		<div class="language">

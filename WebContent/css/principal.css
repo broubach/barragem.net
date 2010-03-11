@@ -61,10 +61,39 @@ fieldset {
     float:left;
     background: #596e94;
     padding:10px;
-    -moz-border-radius: 10px;
-	-webkit-border-radius: 10px;
     width:305px;
     height:40px;
+    position: relative;
+}
+.sidebar-header .corner {
+    background:url("../img/bordas.gif") no-repeat scroll 0 0 transparent;
+	width: 10px;
+	height: 10px;
+	position: absolute;
+}
+.sidebar-header .tl {
+	background-position: -30px 0px;
+	top: 0px;
+	left: 0px;
+	background-color: #ffffff;
+}
+.sidebar-header .tr {
+	background-position: -40px 0px;
+	top: 0px;
+	right: 0px;
+	background-color: #ffffff;
+}
+.sidebar-header .bl {
+	background-position: -30px -10px;
+	bottom: 0px;
+	left: 0px;
+	background-color: #ffffff;
+}
+.sidebar-header .br {
+	background-position: -40px -10px;
+	bottom: 0px;
+	right: 0px;
+	background-color: #ffffff;
 }
 .sidebar-header a {
 	text-decoration:none;
