@@ -100,10 +100,39 @@ li {
     float:left;
     background: #596e94;
     padding:10px;
-    -moz-border-radius: 10px;
-	-webkit-border-radius: 10px;
     width:305px;
     height:40px;
+    position: relative;
+}
+.sidebar-header .corner {
+    background:url("../img/borders-index.gif") no-repeat scroll 0 0 transparent;
+	width: 10px;
+	height: 10px;
+	position: absolute;
+}
+.sidebar-header .tl {
+	background-position: -30px 0px;
+	top: 0px;
+	left: 0px;
+	background-color: #ffffff;
+}
+.sidebar-header .tr {
+	background-position: -40px 0px;
+	top: 0px;
+	right: 0px;
+	background-color: #ffffff;
+}
+.sidebar-header .bl {
+	background-position: -30px -10px;
+	bottom: 0px;
+	left: 0px;
+	background-color: #ffffff;
+}
+.sidebar-header .br {
+	background-position: -40px -10px;
+	bottom: 0px;
+	right: 0px;
+	background-color: #ffffff;
 }
 .sidebar-header a {
 	text-decoration:none;
@@ -118,29 +147,150 @@ li {
 }
 
 /********************* FORMS *********************/
-#loginForm input {
-	border:1px solid #f9f9f9;
-	background: #fff;
-	margin-left:3px;
-    width:130px;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
+.inputRedondo1 {
+	border: 1px solid #f9f9f9;
+    float: left;
+    margin-right: 3px;
+    background-color: #ffffff;
+    position: relative;
 }
-#loginForm input[type=password] {
-	border:1px solid #f9f9f9;
-	background: #fff;
-	margin-left:3px;
-    width:117px;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
+.inputRedondo1 .corner {
+    background:url("../img/borders-index.gif") no-repeat scroll 0 0 transparent;
+    height:3px;
+    width:3px;
+    position: absolute;
 }
-#loginForm input[type=submit] {
-	background: #6c88be;
-    height:20px;
-    -moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
+.inputRedondo1 .tl {
+    background-position: -10px 0px;
+    top: -1px;
+    left: -1px;
+}
+.inputRedondo1 .tr {
+    background-position: -13px 0px;
+    top: -1px;
+    right: -1px;
+}
+.inputRedondo1 .bl {
+    background-position: -10px -3px;
+    bottom: -1px;
+    left: -1px;
+}
+.inputRedondo1 .br {
+    background-position: -13px -3px;
+    bottom: -1px;
+    right: -1px;
+}
+.inputEmail, .inputSenha {
+	border: 0px none;
+	margin: 0px;
+	background: #fff;
+}
+.inputEmail {
+    width:128px;
+}
+.inputSenha {
+    width:111px;
+}
+
+.inputRedondo2 {
+	border: 1px solid #F9F9F9;
+    float: left;
+    background-color: #6C88BE;
+    height: 19px;
     width: 40px;
-    position:absolute;
+    position: relative;
+}
+.inputRedondo2 .corner {
+    background:url("../img/borders-index.gif") no-repeat scroll 0 0 transparent;
+    height:3px;
+    width:3px;
+    position: absolute;
+}
+.inputRedondo2 .tl {
+    background-position: -20px 0px;
+    top: -1px;
+    left: -1px;
+}
+.inputRedondo2 .tr {
+    background-position: -23px 0px;
+    top: -1px;
+    right: -1px;
+}
+.inputRedondo2 .bl {
+    background-position: -20px -3px;
+    bottom: -1px;
+    left: -1px;
+}
+.inputRedondo2 .br {
+    background-position: -23px -3px;
+    bottom: -1px;
+    right: -1px;
+}
+.loginBtn {
+	border: 0px none;
+	margin: 0px;
+	padding: 0px;
+	height: 16px;
+	background-color: #6c88be;
+}
+
+.inputRedondo3 {
+	border-left: 1px solid #666666;
+	border-right: 1px solid #666666;
+	float: left;
+    background-color: #7BAF7B;
+    position: relative;
+    height:19px;
+    width: 60px;
+}
+.inputRedondo3 .corner {
+    background:url("../img/borders-index.gif") no-repeat scroll 0 0 transparent;
+    height:3px;
+    width:3px;
+    background-color: transparent;
+    position: absolute;
+}
+.inputRedondo3 .t {
+	background-color: #666666;
+    top: -1px;
+    left: 2px;
+    height: 1px;
+    width: 56px;
+    position: absolute;
+}
+.inputRedondo3 .b {
+	background-color: #666666;
+    bottom: -1px;
+    left: 2px;
+    height: 1px;
+    width: 56px;
+    position: absolute;
+}
+.inputRedondo3 .tl {
+    background-position: 0px 0px;
+    top: -1px;
+    left: -1px;
+}
+.inputRedondo3 .tr {
+    background-position: -3px 0px;
+    top: -1px;
+    right: -1px;
+}
+.inputRedondo3 .bl {
+    background-position: 0px -3px;
+    bottom: -1px;
+    left: -1px;
+}
+.inputRedondo3 .br {
+    background-position: -3px -3px;
+    bottom: -1px;
+    right: -1px;
+}
+.loginCadastrarBtn {
+	border: 0px none;
+	margin: 0px;
+	padding: 0px;
+	background-color: transparent;
 }
 #loginForm a {
     text-decoration:none;
@@ -202,13 +352,6 @@ div.loginError {
 .input {
     margin-bottom: 4px;
 	display:inline-block;
-}
-.submit input {
-    height:19px;
-    background:#7baf7b;
-    border: 1px solid #666;
-   	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
 }
 
 /********************* BOTOES *********************/
@@ -313,7 +456,7 @@ input {
 .sidebar-header a {
 	color:#fff;
 }
-#loginForm .login {
+#loginForm .loginBtn {
 	color:#fff;
 	font-weight:bold;
 }

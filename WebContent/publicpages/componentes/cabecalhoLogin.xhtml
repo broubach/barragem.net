@@ -11,14 +11,36 @@
 	</h1>
 	<div class="sidebar-header">
 		<h:form id="loginForm">
-			<h:inputText id="login" value="#{loginBean.login}" title="#{msg.label_email}" styleClass="input" maxlength="45"/>
-			<h:inputSecret id="passwd" value="#{loginBean.senha}" title="#{msg.label_senha}" styleClass="input" />
-			<h:commandButton action="#{loginBean.login}" value="#{msg.label_login}" styleClass="login"/><br/>
+			<span class="inputRedondo1">
+				<h:inputText id="login" value="#{loginBean.login}" title="#{msg.label_email}" styleClass="inputEmail" maxlength="45"/>&#160;
+				<span class="corner tl"></span>
+				<span class="corner tr"></span>
+				<span class="corner bl"></span>
+				<span class="corner br"></span>
+			</span>
+			<span class="inputRedondo1">
+				<h:inputSecret id="passwd" value="#{loginBean.senha}" title="#{msg.label_senha}" styleClass="inputSenha" />
+				<span class="corner tl"></span>
+				<span class="corner tr"></span>
+				<span class="corner bl"></span>
+				<span class="corner br"></span>
+			</span>
+			<span class="inputRedondo2">
+				<h:commandButton action="#{loginBean.login}" value="#{msg.label_login}" styleClass="loginBtn"/>
+				<span class="corner tl"></span>
+				<span class="corner tr"></span>
+				<span class="corner bl"></span>
+				<span class="corner br"></span>
+			</span>
 			<div class="loginError" style="#{messageBean.errorMessages['login'] == null ? 'display:none' : 'display:visible'}">
 				#{messageBean.errorMessages['login'].summary}
 			</div>
 			<a href="#{request.contextPath}/publicpages/recuperarsenha/enviarInstrucoes.xhtml" title="#{msg.label_esqueci_minha_senha}">#{msg.label_esqueci_minha_senha}</a>
 		</h:form>
+		<div class="corner tl"></div>
+		<div class="corner tr"></div>
+		<div class="corner bl"></div>
+		<div class="corner br"></div>
 	</div>
 	<c:if test="false">
 		<div class="language">
