@@ -240,8 +240,10 @@ li {
 	float: left;
     background-color: #7BAF7B;
     position: relative;
-    height:19px;
+    height: 19px;
     width: 60px;
+    vertical-align: middle;
+    margin-bottom: 3px;
 }
 .inputRedondo3 .corner {
     background:url("../img/borders-index.gif") no-repeat scroll 0 0 transparent;
@@ -288,7 +290,6 @@ li {
 }
 .loginCadastrarBtn {
 	border: 0px none;
-	margin: 0px;
 	padding: 0px;
 	background-color: transparent;
 }
@@ -308,7 +309,6 @@ li {
 }
 #registerForm {
     margin-top:45px;
-    margin-left:30px;
 }
 #registerForm .submit {
 	margin-left: 73px;	
@@ -322,9 +322,9 @@ li {
 div.error {
 	background:#FFEBE8 none repeat scroll 0 0; 
 	border:1px solid #DD3C10; 
-	margin-top: 2px; 
 	text-align:center; 
-	width: 255px; 
+	width: 255px;
+	clear: both;
 }
 div.loginError {
 	background:#FFEBE8 none repeat scroll 0 0; 

@@ -92,21 +92,18 @@
 				<f:selectItems value="#{lookupBean.listaAnosDesde1900Desc}"/>
 			</h:selectOneMenu>
 		</div>
-		<div class="submit">
-		
-			<span class="inputRedondo3">
-				<h:commandButton value="#{msg.label_cadastrar}" action="#{registrarNovoUsuarioBean.valida}" styleClass="loginCadastrarBtn"/>
-				<span class="t"></span>
-				<span class="b"></span>
-				<span class="corner tl"></span>
-				<span class="corner tr"></span>
-				<span class="corner bl"></span>
-				<span class="corner br"></span>
-			</span>
-		</div>
+		<span class="inputRedondo3 submit">
+			<h:commandButton value="#{msg.label_cadastrar}" action="#{registrarNovoUsuarioBean.valida}" styleClass="loginCadastrarBtn"/>
+			<span class="t"></span>
+			<span class="b"></span>
+			<span class="corner tl"></span>
+			<span class="corner tr"></span>
+			<span class="corner bl"></span>
+			<span class="corner br"></span>
+		</span>
 		<div class="error" style="#{messageBean.errorMessages['registrarNovoUsuario'] == null ? 'display:none' : 'display:visible'}">
 			<c:if test="#{messageBean.errorMessages['registrarNovoUsuario'] != null}">
-				 <script type="text/javascript">
+			    <script type="text/javascript">
 				 	$j('#loginSpan').slideToggle('fast');
 				</script>
 			</c:if>
