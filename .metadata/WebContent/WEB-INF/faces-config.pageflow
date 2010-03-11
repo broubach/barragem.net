@@ -23,7 +23,7 @@
   <links id="pf12591191172033" target="pf12591191172034" source="pf12591191172032" outcome="editarCiclo"/>
   <links id="pf12591191172035" target="pf12591191172038" source="pf12591191172034" outcome="editarRodada"/>
   <links id="pf12591191172037" target="pf12591191172034" source="pf12591191172038" outcome="editarCiclo"/>
-  <links id="pf12626987967860" target="pf12585715512344" source="pf12586750970152" outcome="passo0">
+  <links id="pf12626987967860" target="pf12585715512344" source="pf12586750970152" outcome="passo0" redirect="true">
     <bendPoints d1Width="-295" d1Height="107" d2Width="27" d2Height="-85"/>
   </links>
   <links id="pf12627776651890" target="pf12627776651901" source="pf12586750970152" outcome="passo2"/>

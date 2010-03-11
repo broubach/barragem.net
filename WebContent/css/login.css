@@ -8,7 +8,6 @@
 /********************* FORMULARIO DE SEGURANCA *********************/
 #registerFormSeguranca {
     margin-top:45px;
-    margin-left:30px;
 }
 #registerFormSeguranca .label {
 	width: 68px;
@@ -18,7 +17,7 @@
 	display: block
 }
 #registerFormSeguranca .submit {
-	margin-left: 73px;	
+	margin-left: 25px;	
 }
 #registerFormSeguranca input[type=text] {
     width:100px;
@@ -244,6 +243,7 @@ li {
     width: 60px;
     vertical-align: middle;
     margin-bottom: 3px;
+    text-align: center;
 }
 .inputRedondo3 .corner {
     background:url("../img/borders-index.gif") no-repeat scroll 0 0 transparent;

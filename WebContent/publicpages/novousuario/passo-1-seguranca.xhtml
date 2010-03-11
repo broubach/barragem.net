@@ -29,9 +29,15 @@
 				<div id="voltar">
 					<h:commandLink value="#{msg.label_voltar}" action="passo0"/>
 				</div>
-				<div class="submit">
-					<h:commandButton value="#{msg.label_enviar}" action="#{registrarNovoUsuarioBean.registraNovoUsuario}"/>
-				</div>
+				<span class="inputRedondo3 submit">
+					<h:commandButton value="#{msg.label_enviar}" action="#{registrarNovoUsuarioBean.registraNovoUsuario}" styleClass="loginCadastrarBtn"/>
+					<span class="t"></span>
+					<span class="b"></span>
+					<span class="corner tl"></span>
+					<span class="corner tr"></span>
+					<span class="corner bl"></span>
+					<span class="corner br"></span>
+				</span>
 			</div>
 			<div class="error" style="#{messageBean.errorMessages['registrarNovoUsuario'] == null ? 'display:none' : 'display:visible'}">
 				<c:if test="#{messageBean.errorMessages['registrarNovoUsuario'] != null}">
