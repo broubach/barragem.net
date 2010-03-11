@@ -9,26 +9,37 @@
 
 <ui:composition template="../layout/layoutFormularioExclusivo.xhtml">
 	<ui:define name="conteudo">
-		<div style="width: 400px; margin-left: auto; margin-right: auto;">
+		<div class="coluna-unica-exclusiva">
 			<div class="maincontent equalheights">
-		        <c:if test="#{! empty messageBean.errorMessages}">
+		        <c:if test="#{! empty messageBean.errorMessages['envio-instrucao']}">
 			        <div class="mensagem-erro">
-				        <c:forEach var="item" items="#{messageBean.errorMessages}">
-		    	    		<span>#{item.value.summary}</span>
-				        </c:forEach>
+	    	    		<span>#{msg.error_o_email_informado_nao_foi_encontrado}</span>
 			        </div>
 		        </c:if>
 
 				<h:form>
-				Esqueceu sua senha?<br/>
-				O barragem.net enviara para seu email instrucoes para atribuir uma nova senha a sua conta.<br/>
-				Digite seu email a baixo:<br/>
-				<h:inputText value="#{recuperarSenhaBean.email}"/>
-				<h:commandButton actionListener="#{recuperarSenhaBean.enviaInstrucoes}" value="#{msg.label_enviar}"/>
+				<h2>#{msg.label_esqueceu_sua_senha}</h2>
+				#{msg.label_msg_envio_instrucoes}<br/>
+				<br/>
+				<div class="dados">
+					<div class="input text">
+						<label>#{msg.label_para_receber_as_instrucoes_digite_seu_email}</label>&#160;
+						<h:inputText value="#{recuperarSenhaBean.email}" maxlength="45" size="30" styleClass="inputText"/>
+					</div>
+				</div>
+				<span class="inputRedondo3 submit">
+					<h:commandButton actionListener="#{recuperarSenhaBean.enviaInstrucoes}" value="#{msg.label_enviar}" styleClass="loginCadastrarBtn"/>
+					<span class="t"></span>
+					<span class="b"></span>
+					<span class="corner tl"></span>
+					<span class="corner tr"></span>
+					<span class="corner bl"></span>
+					<span class="corner br"></span>
+				</span>
 				</h:form>
+				<div class="clear"></div>
 			</div>
 		</div>
-		<div class="clear"></div>
 	</ui:define>
 </ui:composition>
 

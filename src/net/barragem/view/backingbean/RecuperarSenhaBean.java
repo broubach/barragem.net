@@ -71,7 +71,7 @@ public class RecuperarSenhaBean extends BaseBean {
 			sendMail("no-reply@barragem.net", email, "barragem.net - instruções para recuperação de senha",
 					MessageFormat.format(emailTemplate, hash));
 		} else {
-			messages.addErrorMessage(null, "error_o_email_informado_nao_foi_encontrado");
+			messages.addErrorMessage("envio-instrucao", "label_true");
 		}
 	}
 
