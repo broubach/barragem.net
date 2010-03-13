@@ -7,46 +7,13 @@
 }
 
 /********************* FORMULARIO DE SEGURANCA *********************/
-#registerFormSeguranca {
-	margin-top: 45px;
-}
 
-#registerFormSeguranca .label {
-	width: 68px;
-	float: left;
-	text-align: right;
-	margin-right: 5px;
-	display: block
-}
-
-#registerFormSeguranca .submit {
-	margin-left: 25px;
-}
-
-#registerFormSeguranca input[type=text] {
-	width: 100px;
-}
-
-#registerFormSeguranca .captcha {
-	background-color: #FFF;
-	width: 250px;
-	height: 40px;
-}
-
-#voltar {
-	background: transparent url(../img/buttons/btn-voltar.png) no-repeat 0 0
-		;
-	padding-left: 17px;
-}
-
-#registerFormSeguranca #voltar {
-	float: left;
-}
 .coluna-unica-exclusiva {
 	width: 500px; 
 	margin-left: auto; 
 	margin-right: auto;
 }
+
 /********************* GERAL *********************/
 a {
 	outline: none
@@ -106,23 +73,6 @@ li {
 	padding: 2px;
 }
 
-/********************* HOME *********************/
-.home body {
-	background: transparent url(../img/fundo-home.gif) no-repeat 50% 90px;
-}
-
-.bloco-home {
-	background: #fff url(../img/fundo-blocos-home.gif) no-repeat center 0;
-	padding: 10px;
-	height: 150px;
-}
-
-.home h2.slogan {
-	padding-top: 20px;
-	width: 180px;
-	position: absolute;
-}
-
 /********************* CABECALHO *********************/
 #header {
 	height: 90px;
@@ -143,9 +93,6 @@ li {
 	text-indent: -9999px;
 }
 
-.header-bloco h2 {
-	margin-bottom: 0.3em;
-}
 
 .twitterDiv {
 	float: right;
@@ -394,39 +341,6 @@ li {
 	text-decoration: underline;
 }
 
-#registerForm label {
-	width: 68px;
-	float: left;
-	text-align: right;
-	margin-right: 5px;
-	display: block
-}
-
-#registerForm {
-	margin-top: 45px;
-}
-
-#registerForm .submit {
-	margin-left: 73px;
-}
-
-#registerForm .input input[type=text],#registerForm .input input[type=password]
-	{
-	width: 180px;
-}
-
-#loginSpan {
-	height: 10px;
-}
-
-div.error {
-	background: #FFEBE8 none repeat scroll 0 0;
-	border: 1px solid #DD3C10;
-	text-align: center;
-	width: 255px;
-	clear: both;
-}
-
 div.loginError {
 	background: #FFEBE8 none repeat scroll 0 0;
 	border: 1px solid #DD3C10;
@@ -439,28 +353,12 @@ div.loginError {
 	text-decoration: underline;
 }
 
-#searchForm {
-	position: absolute;
-	right: 20px;
-	top: 50px
-}
-
-#searchForm .searchFormInput {
-	background: transparent url(../img/pesquisa.gif) right 0 no-repeat;
-	width: 169px;
-	height: 18px;
-	border: none;
-}
-
 .input {
 	margin-bottom: 4px;
 	display: inline-block;
 }
 
 /********************* BOTOES *********************/
-.registrese {
-	height: 275px
-}
 
 /********************* RODAPE *********************/
 #footer {
@@ -517,13 +415,6 @@ div.loginError {
 		no-repeat 0 0;
 }
 
-.registrese h3 {
-	line-height: normal;
-	margin: 0;
-	position: absolute;
-	top: 20px;
-	left: 570px;
-}
 
 /********************* ADD JOGO *********************/
 .anterior_proximo a:hover {
@@ -541,31 +432,8 @@ label {
 	color: #2c6695;
 }
 
-#registerForm label,#registerFormSeguranca .label {
-	font-size: .7em;
-	font-weight: bold;
-}
-
-#registerForm .input select {
-	font-size: .8em;
-}
-
 input {
 	font-size: 10px;
-}
-
-.home h2.slogan {
-	font-size: 1em;
-	color: #656565;
-}
-
-.header-bloco h2 {
-	color: #069;
-}
-
-.header-bloco p {
-	color: #444;
-	font-size: 12px;
 }
 
 .sidebar-header {
@@ -606,31 +474,6 @@ input {
 
 .rodadas a:hover,.rodadas a.atual {
 	color: #333;
-}
-
-.registrese h3 {
-	color: #2C6695;
-}
-
-div.error {
-	font-size: 0.7em;
-}
-
-#voltar a {
-	text-decoration: none;
-}
-
-#registerFormSeguranca h4 {
-	color: #2C6695;
-}
-
-#voltar a {
-	color: #333333;
-	font-size: 0.8em;
-}
-
-.maincontent a {
-	color: #333333;
 }
 
 .maincontent h2,.maincontent h3,.maincontent dd a {

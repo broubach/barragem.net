@@ -111,6 +111,20 @@
 	         </classpath>
 			<arg value="${basedir}/temp/css/isys.css"/>
 		</java>
+		<java jar="yuicompressor-2.4.2.jar" fork="true" output="${basedir}/temp/formularioExclusivo.css">
+	         <classpath>
+	           <pathelement location="${basedir}"/>
+	           <pathelement path="${java.class.path}"/>
+	         </classpath>
+			<arg value="${basedir}/temp/css/formularioExclusivo.css"/>
+		</java>
+		<java jar="yuicompressor-2.4.2.jar" fork="true" output="${basedir}/temp/formularioExclusivoGrid.css">
+	         <classpath>
+	           <pathelement location="${basedir}"/>
+	           <pathelement path="${java.class.path}"/>
+	         </classpath>
+			<arg value="${basedir}/temp/css/formularioExclusivoGrid.css"/>
+		</java>
 		
 		<!-- Move arquivos minificados -->
 		<move todir="${basedir}/temp/css/fileupload">
