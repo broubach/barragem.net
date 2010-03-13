@@ -6,8 +6,6 @@
 	padding: 0
 }
 
-/********************* FORMULARIO DE SEGURANCA *********************/
-
 .coluna-unica-exclusiva {
 	width: 500px; 
 	margin-left: auto; 
@@ -53,15 +51,18 @@ li {
 	margin-bottom: 10px;
 }
 
-.dados label,.dados .exemplo {
-	clear: both;
-	padding-right: 5px;
-	width: 250px;
+.salvar .campos_obrigatorios {
+	float: left;
+	border-right: 0px none;
 }
 
 .dados label {
 	border-right: 1px solid #888888;
+	margin-right: 5px;
+	padding-right: 5px;
+	text-align: right;
 }
+
 .dados {
 	float: left;
 }
@@ -72,7 +73,7 @@ li {
 	height: 14px;
 	padding: 2px;
 }
-
+	
 /********************* CABECALHO *********************/
 #header {
 	height: 90px;
@@ -329,6 +330,7 @@ li {
 .loginCadastrarBtn {
 	border: 0px none;
 	padding: 0px;
+	height: 17px;
 	background-color: transparent;
 }
 

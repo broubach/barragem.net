@@ -9,22 +9,30 @@
 
 <ui:composition template="../layout/layoutFormularioExclusivo.xhtml">
 	<ui:define name="conteudo">
+		<script>
+            $j(function(){
+	            $j('#enviarInstrucoesForm\\:email').focus();
+            });
+         </script>
 		<div class="coluna-unica-exclusiva">
-			<div class="maincontent equalheights">
+			<div class="maincontent">
 		        <c:if test="#{! empty messageBean.errorMessages['envio-instrucao']}">
 			        <div class="mensagem-erro">
 	    	    		<span>#{msg.error_o_email_informado_nao_foi_encontrado}</span>
 			        </div>
 		        </c:if>
+				<h:panelGroup display="block" rendered="#{messageBean.firstInfoMessage != null}">
+    	    		<span>#{messageBean.firstInfoMessage.summary}</span>
+				</h:panelGroup>
 
-				<h:form>
+				<h:form id="enviarInstrucoesForm">
 				<h2>#{msg.label_esqueceu_sua_senha}</h2>
 				#{msg.label_msg_envio_instrucoes}<br/>
 				<br/>
 				<div class="dados">
 					<div class="input text">
-						<label>#{msg.label_para_receber_as_instrucoes_digite_seu_email}</label>&#160;
-						<h:inputText value="#{recuperarSenhaBean.email}" maxlength="45" size="30" styleClass="inputText"/>
+						<label for="enviarInstrucoesForm:email">#{msg.label_para_receber_as_instrucoes_digite_seu_email}</label>
+						<h:inputText id="email" value="#{recuperarSenhaBean.email}" maxlength="45" size="30" styleClass="inputText"/>
 					</div>
 				</div>
 				<span class="inputRedondo3 submit">

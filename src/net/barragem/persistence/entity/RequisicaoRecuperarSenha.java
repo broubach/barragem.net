@@ -12,7 +12,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "requisicaorecuperarsenha")
 @NamedQueries( {
-		@NamedQuery(name = "findRequisicaoValidaByHashQuery", query = "from RequisicaoRecuperarSenha r where r.hash = :hash and r.dataConclusao = null and r.data > :hojeMenosDoisDias"),
+		@NamedQuery(name = "totalRequisicoesFechadasByUsuarioQuery", query = "select count(*) from RequisicaoRecuperarSenha r where r.usuario = :usuario and r.dataConclusao is not null "),
+		@NamedQuery(name = "findRequisicaoValidaByHashQuery", query = "from RequisicaoRecuperarSenha r where r.hash = :hash and r.dataConclusao is null and r.data > :hojeMenosDoisDias"),
 		@NamedQuery(name = "findRequisicaoByHashQuery", query = "from RequisicaoRecuperarSenha r where r.hash = :hash") })
 public class RequisicaoRecuperarSenha extends BaseEntity {
 	@ManyToOne(cascade = { CascadeType.ALL })

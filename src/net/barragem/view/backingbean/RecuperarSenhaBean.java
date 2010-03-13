@@ -52,7 +52,15 @@ public class RecuperarSenhaBean extends BaseBean {
 	public void enviaInstrucoes(ActionEvent e) {
 		List<Usuario> usuarios = PersistenceHelper.findByNamedQuery("recuperarSenhaQuery", email);
 		if (!usuarios.isEmpty()) {
-			String hash = encriptMd5(fillLeft(usuarios.get(0).getId().toString(), 8, '0'));
+			// soma a quantidade de todas as requisicoes fechadas
+			List<Integer> totais = PersistenceHelper.findByNamedQuery("totalRequisicoesFechadasByUsuarioQuery",
+					usuarios.get(0));
+			String hash;
+			if (totais.size() > 0) {
+				hash = encriptMd5(totais.get(0) + fillLeft(usuarios.get(0).getId().toString(), 6, '0'));
+			} else {
+				hash = encriptMd5("0" + fillLeft(usuarios.get(0).getId().toString(), 6, '0'));
+			}
 			Calendar calendar = Calendar.getInstance();
 			calendar.roll(Calendar.DATE, -2);
 			List<RequisicaoRecuperarSenha> requisicoes = PersistenceHelper.findByNamedQuery(
@@ -70,6 +78,9 @@ public class RecuperarSenhaBean extends BaseBean {
 
 			sendMail("no-reply@barragem.net", email, "barragem.net - instruções para recuperação de senha",
 					MessageFormat.format(emailTemplate, hash));
+
+			messages.addInfoMessage(null, "label_email_enviado_com_sucesso");
+			email = "";
 		} else {
 			messages.addErrorMessage("envio-instrucao", "label_true");
 		}
@@ -83,6 +94,8 @@ public class RecuperarSenhaBean extends BaseBean {
 			requisicao.setDataConclusao(new Date());
 			PersistenceHelper.persiste(requisicao);
 			addMensagemAtualizacaoComSucesso();
+			novaSenha = "";
+			confirmacaoNovaSenha = "";
 		}
 	}
 
