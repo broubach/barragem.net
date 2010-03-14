@@ -63,6 +63,11 @@ li {
     right:10px;
     border:none;
 }
+.twitterDiv {
+	float:right; 
+	margin-right: 20px; 
+	margin-top: 25px;
+}
 
 /********************* MENU *********************/
 .internas .menu a:hover {

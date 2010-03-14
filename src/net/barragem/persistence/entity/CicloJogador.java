@@ -19,7 +19,7 @@ public class CicloJogador extends BaseEntity {
 
 	private Integer ranking;
 	private Integer pontuacao;
-	private Boolean habilitado;
+	private Boolean habilitado = Boolean.TRUE;
 
 	public Jogador getJogador() {
 		return jogador;

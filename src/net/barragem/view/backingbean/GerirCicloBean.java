@@ -25,6 +25,8 @@ public class GerirCicloBean extends BaseBean {
 	private List<CicloJogador> cicloJogadoresRemovidos;
 	private List<JogadorSelecionavelDto> jogadoresSelecionaveis;
 	private String novoNome;
+	private boolean habilitado;
+	private int pontuacao;
 
 	public String getNovoNome() {
 		return novoNome;
@@ -64,6 +66,22 @@ public class GerirCicloBean extends BaseBean {
 
 	public void setJogadoresSelecionaveis(List<JogadorSelecionavelDto> jogadoresSelecionaveis) {
 		this.jogadoresSelecionaveis = jogadoresSelecionaveis;
+	}
+
+	public boolean isHabilitado() {
+		return habilitado;
+	}
+
+	public void setHabilitado(boolean habilitado) {
+		this.habilitado = habilitado;
+	}
+
+	public int getPontuacao() {
+		return pontuacao;
+	}
+
+	public void setPontuacao(int pontuacao) {
+		this.pontuacao = pontuacao;
 	}
 
 	public void editaCiclo(ActionEvent e) {
@@ -196,9 +214,17 @@ public class GerirCicloBean extends BaseBean {
 
 	public void preparaCicloJogador(ActionEvent e) {
 		cicloJogadorEmFoco = cicloEmFoco.getRanking().get(getIndex());
+		pontuacao = cicloJogadorEmFoco.getPontuacao();
+		habilitado = cicloJogadorEmFoco.getHabilitado();
 	}
 
 	public void salvaCicloJogador(ActionEvent e) {
+		if (cicloEmFoco.getRodadas().size() > 0 && getCicloEmFoco().getRodadas().get(0).getFechada() == false
+				|| pontuacao > 0) {
+			cicloJogadorEmFoco.setPontuacao(pontuacao);
+			cicloEmFoco.recalculaRanking();
+		}
+		cicloJogadorEmFoco.setHabilitado(habilitado);
 		PersistenceHelper.persiste(cicloJogadorEmFoco);
 		addMensagemAtualizacaoComSucesso();
 	}
