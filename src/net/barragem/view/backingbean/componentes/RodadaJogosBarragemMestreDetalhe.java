@@ -85,7 +85,7 @@ public class RodadaJogosBarragemMestreDetalhe extends MestreDetalheImpl<Rodada, 
 		adicionaDetalheNaLista();
 	}
 
-	private void removeSetsIncompletos(Placar r) {
+	public static void removeSetsIncompletos(Placar r) {
 		Parcial parcial = null;
 		for (Iterator<Parcial> it = r.getParciais().iterator(); it.hasNext();) {
 			parcial = it.next();

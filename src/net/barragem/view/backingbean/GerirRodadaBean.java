@@ -18,6 +18,7 @@ import net.barragem.persistence.entity.Rodada;
 import net.barragem.scaffold.PersistenceHelper;
 import net.barragem.view.backingbean.componentes.JogadorEventoComparatorVencedorPrimeiro;
 import net.barragem.view.backingbean.componentes.JogoBarragemComparator;
+import net.barragem.view.backingbean.componentes.RodadaJogosBarragemMestreDetalhe;
 
 import org.ajax4jsf.model.KeepAlive;
 
@@ -111,6 +112,9 @@ public class GerirRodadaBean extends BaseBean {
 
 		rodadaEmFoco.getCiclo().getRodadas().remove(rodadaEmFoco);
 		rodadaEmFoco.getCiclo().getRodadas().add(rodadaEmFoco);
+		for (JogoBarragem jogoBarragem : rodadaEmFoco.getJogos()) {
+			RodadaJogosBarragemMestreDetalhe.removeSetsIncompletos(jogoBarragem.getPlacar());
+		}
 		PersistenceHelper.persiste(rodadaEmFoco.getCiclo());
 
 		GerirCicloBean cicloBean = (GerirCicloBean) getRequestAttribute("gerirCicloBean");

@@ -10,7 +10,6 @@ import javax.faces.model.SelectItem;
 import net.barragem.persistence.entity.Jogador;
 import net.barragem.persistence.entity.JogadorEvento;
 import net.barragem.persistence.entity.JogoBarragem;
-import net.barragem.persistence.entity.Parcial;
 import net.barragem.persistence.entity.Rodada;
 import net.barragem.persistence.entity.SimplesDuplasEnum;
 import net.barragem.scaffold.PersistenceHelper;
@@ -46,12 +45,6 @@ public class GerirJogoBarragemBean extends BaseBean {
 
 	public void editaJogoAnterior(ActionEvent e) {
 		mestreDetalhe.editaJogoAnterior();
-	}
-
-	public void adicionaParcial(ActionEvent e) {
-		Parcial parcial = new Parcial();
-		parcial.setPlacar(mestreDetalhe.getDetalheEmFoco().getPlacar());
-		mestreDetalhe.getDetalheEmFoco().getPlacar().getParciais().add(parcial);
 	}
 
 	public void salvaJogo(ActionEvent e) {
