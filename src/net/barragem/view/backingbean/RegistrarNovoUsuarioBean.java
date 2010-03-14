@@ -152,6 +152,9 @@ public class RegistrarNovoUsuarioBean extends BaseBean {
 				PersistenceHelper.persiste(conta);
 				setContaUsuario(conta);
 
+				EditarPerfilBean editarPerfilBean = new EditarPerfilBean();
+				editarPerfilBean.preparaPerfil(null);
+
 				return "passo2";
 
 			} else {

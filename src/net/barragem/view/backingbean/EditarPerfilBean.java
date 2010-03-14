@@ -106,7 +106,7 @@ public class EditarPerfilBean extends BaseBean {
 	}
 
 	public void salvaPerfil(ActionEvent e) {
-		if (valida(perfilEmFoco.getUsuario())) {
+		if (perfilEmFoco.getUsuario() == null || valida(perfilEmFoco.getUsuario())) {
 			perfilEmFoco.setUsuario(usuarioEmFoco);
 			usuarioEmFoco.setPerfil(perfilEmFoco);
 			if (selectedItems != null) {
