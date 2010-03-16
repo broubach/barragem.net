@@ -1,4 +1,4 @@
-package net.barragem.scaffold;
+package net.barragem.exception;
 
 public class BusinessException extends Exception {
 	private String clientId;

@@ -19,7 +19,7 @@
   <nodes xsi:type="pageflow:PFPage" name="protectedpages/pesquisa/resultadoPesquisaJogador.xhtml" x="338" y="4018" id="pf12651238748192" referenceLink="//@navigationRule.7/@navigationCase.0/@toViewId|" inlinks="pf12651238748191" path="/protectedpages/pesquisa/resultadoPesquisaJogador.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="2482" id="pf12675383250726" referenceLink="//@navigationRule.9/@fromViewId|" outlinks="pf12675383250725" path="*"/>
   <nodes xsi:type="pageflow:PFPage" name="protectedpages/editarperfil/editarDadosBasicos.xhtml" x="338" y="3634" id="pf12677935782082" referenceLink="//@navigationRule.8/@navigationCase.3/@toViewId|" inlinks="pf12677935782071" path="/protectedpages/editarperfil/editarDadosBasicos.xhtml"/>
-  <links id="pf12586750970150" target="pf12586750970152" source="pf12585715512344" outcome="passo1"/>
+  <links id="pf12586750970150" target="pf12586750970152" source="pf12585715512344" outcome="passo1" redirect="true"/>
   <links id="pf12591191172033" target="pf12591191172034" source="pf12591191172032" outcome="editarCiclo"/>
   <links id="pf12591191172035" target="pf12591191172038" source="pf12591191172034" outcome="editarRodada"/>
   <links id="pf12591191172037" target="pf12591191172034" source="pf12591191172038" outcome="editarCiclo"/>

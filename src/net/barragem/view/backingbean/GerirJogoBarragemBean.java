@@ -7,6 +7,7 @@ import java.util.List;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 
+import net.barragem.exception.SaldoInsuficienteException;
 import net.barragem.persistence.entity.Jogador;
 import net.barragem.persistence.entity.JogadorEvento;
 import net.barragem.persistence.entity.JogoBarragem;
@@ -51,14 +52,19 @@ public class GerirJogoBarragemBean extends BaseBean {
 		if (valida(mestreDetalhe)) {
 			mestreDetalhe.preparaJogoParaAtualizacao();
 
-			PersistenceHelper.persiste(mestreDetalhe.getDetalheEmFoco());
+			try {
+				if (mestreDetalhe.getDetalheEmFoco().getId() == null) {
+					PersistenceHelper.persiste(getContaUsuario().criaOperacaoDebitoJogoBarragem(1));
+					PersistenceHelper.persiste(getContaUsuario());
+				}
 
-			PersistenceHelper.persiste(getContaUsuario().criaOperacaoDebitoJogoBarragem(1));
-			PersistenceHelper.persiste(getContaUsuario());
+				PersistenceHelper.persiste(mestreDetalhe.getDetalheEmFoco());
+				addMensagemAtualizacaoComSucesso();
+			} catch (SaldoInsuficienteException e1) {
+				messages.addErrorMessage("saldo_insuficiente_exception", "label_saldo_insuficiente");
+			}
 
 			mestreDetalhe.preparaJogoParaEdicao();
-
-			addMensagemAtualizacaoComSucesso();
 		}
 	}
 

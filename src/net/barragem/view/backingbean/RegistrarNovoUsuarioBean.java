@@ -12,9 +12,6 @@ import net.barragem.persistence.entity.Usuario;
 import net.barragem.scaffold.PersistenceHelper;
 import nl.captcha.Captcha;
 
-import org.ajax4jsf.model.KeepAlive;
-
-@KeepAlive
 public class RegistrarNovoUsuarioBean extends BaseBean {
 
 	private final String REGISTRAR_NOVO_USUARIO = "registrarNovoUsuario";

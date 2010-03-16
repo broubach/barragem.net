@@ -24,8 +24,12 @@
 	            });
 	         </script>
 			<script type="text/javascript" src="#{request.contextPath}/js/3_3_0.GAorg.ajax4jsf.javascript.AjaxScript.js"></script>
+			
+			<h:form id="gerirRodadaForm">
+				<h:panelGroup id="mensagem-erro" layout="block" styleClass="mensagem-erro" rendered="#{messageBean.errorMessages['saldo_insuficiente_exception'] != null}">
+					#{msg.label_saldo_insuficiente}
+				</h:panelGroup>
 
-			<h:form>
 				<h2>#{gerirCicloBean.barragemEmFoco.local} <span>#{gerirCicloBean.barragemEmFoco.nome}</span></h2>
 				<h:panelGroup id="dados-barragem" styleClass="dados-barragem" layout="block">
 				    <dl>
@@ -51,8 +55,8 @@
 			    <fieldset id="jogos">
 			        <legend>#{msg.label_jogos}</legend>
 	
-					<h:panelGroup styleClass="btn-novo" display="block"  rendered="#{gerirRodadaBean.rodadaEmFoco.inoperavel == false}">
-						<a4j:commandLink actionListener="#{gerirRodadaBean.adicionaJogo}" reRender="add-jogo" oncomplete="$j('.popup').click();" rendered="#{gerirRodadaBean.rodadaEmFoco.inoperavel == false}">
+					<h:panelGroup styleClass="btn-novo" display="block" rendered="#{gerirRodadaBean.rodadaEmFoco.inoperavel == false}">
+						<a4j:commandLink actionListener="#{gerirRodadaBean.adicionaJogo}" reRender="add-jogo,gerirRodadaForm" oncomplete="if (#{gerirRodadaBean.possuiSaldoParaUmJogo}) $j('.popup').click();" rendered="#{gerirRodadaBean.rodadaEmFoco.inoperavel == false}">
 							<span>#{msg.label_adicionar_jogo}</span>
 						</a4j:commandLink>
 						<a href="#" title="#{msg.label_jogo}" class="popup" style="visibility:hidden"/>

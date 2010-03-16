@@ -8,6 +8,7 @@ import java.util.List;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 
+import net.barragem.exception.SaldoInsuficienteException;
 import net.barragem.persistence.entity.Ciclo;
 import net.barragem.persistence.entity.CicloJogador;
 import net.barragem.persistence.entity.Jogador;
@@ -43,10 +44,14 @@ public class GerirRodadaBean extends BaseBean {
 	}
 
 	public void adicionaJogo(ActionEvent e) {
-		GerirJogoBarragemBean jogoBarragemBean = new GerirJogoBarragemBean();
-		jogoBarragemBean.adicionaJogo(rodadaEmFoco);
+		if (getContaUsuario().possuiSaldoSuficiente(1)) {
+			GerirJogoBarragemBean jogoBarragemBean = new GerirJogoBarragemBean();
+			jogoBarragemBean.adicionaJogo(rodadaEmFoco);
 
-		setRequestAttribute("gerirJogoBarragemBean", jogoBarragemBean);
+			setRequestAttribute("gerirJogoBarragemBean", jogoBarragemBean);
+		} else {
+			messages.addErrorMessage("saldo_insuficiente_exception", "label_saldo_insuficiente");
+		}
 	}
 
 	public void removeJogo(ActionEvent e) {
@@ -56,40 +61,43 @@ public class GerirRodadaBean extends BaseBean {
 	}
 
 	public void sorteiaJogos(ActionEvent e) {
-		PersistenceHelper.initialize("ranking", rodadaEmFoco.getCiclo());
-		List<CicloJogador> jogadores = new ArrayList<CicloJogador>(rodadaEmFoco.getCiclo().getRanking());
-		CicloJogador.removeJogadoresQuePossuemJogos(jogadores, rodadaEmFoco.getJogadoresDosJogos());
+		try {
+			PersistenceHelper.initialize("ranking", rodadaEmFoco.getCiclo());
+			List<CicloJogador> jogadores = new ArrayList<CicloJogador>(rodadaEmFoco.getCiclo().getRanking());
+			CicloJogador.removeJogadoresQuePossuemJogos(jogadores, rodadaEmFoco.getJogadoresDosJogos());
 
-		// remove jogadores que não estejam habilitados
-		for (Iterator<CicloJogador> it = jogadores.iterator(); it.hasNext();) {
-			CicloJogador cicloJogador = it.next();
-			if (!cicloJogador.getHabilitado()) {
-				it.remove();
+			// remove jogadores que não estejam habilitados
+			for (Iterator<CicloJogador> it = jogadores.iterator(); it.hasNext();) {
+				CicloJogador cicloJogador = it.next();
+				if (!cicloJogador.getHabilitado()) {
+					it.remove();
+				}
 			}
+
+			// verifica se saldo é suficiente
+			if (!getContaUsuario().possuiSaldoSuficiente(jogadores.size() / 2)) {
+				throw new SaldoInsuficienteException();
+			}
+
+			// sorteia jogos
+			List<JogoBarragem> jogosSorteados = new ArrayList<JogoBarragem>();
+			while (jogadores.size() >= 2) {
+				int posicaoJogadorSorteado = rodadaEmFoco.getCiclo().sorteiaBaseadoNoRaio(jogadores.size());
+				jogosSorteados.add(rodadaEmFoco.criaJogoBarragem(jogadores.get(0).getJogador(), jogadores.get(
+						posicaoJogadorSorteado).getJogador()));
+
+				jogadores.remove(posicaoJogadorSorteado);
+				jogadores.remove(0);
+			}
+			rodadaEmFoco.getJogos().addAll(jogosSorteados);
+
+			// cria operacao de debito e atualiza saldo da conta
+			PersistenceHelper.persiste(getContaUsuario().criaOperacaoDebitoJogoBarragem(jogosSorteados.size()));
+			PersistenceHelper.persiste(getContaUsuario());
+			salvaRodada(e);
+		} catch (SaldoInsuficienteException e1) {
+			messages.addErrorMessage("saldo_insuficiente_exception", "label_saldo_insuficiente");
 		}
-
-		// reduz o numero de jogadores para se adequar ao saldo da conta
-		if (getContaUsuario().getSaldo() * 2 < jogadores.size()) {
-			jogadores = jogadores.subList(0, getContaUsuario().getSaldo() * 2);
-		}
-
-		// sorteia jogos
-		List<JogoBarragem> jogosSorteados = new ArrayList<JogoBarragem>();
-		while (jogadores.size() >= 2) {
-			int posicaoJogadorSorteado = rodadaEmFoco.getCiclo().sorteiaBaseadoNoRaio(jogadores.size());
-			jogosSorteados.add(rodadaEmFoco.criaJogoBarragem(jogadores.get(0).getJogador(), jogadores.get(
-					posicaoJogadorSorteado).getJogador()));
-
-			jogadores.remove(posicaoJogadorSorteado);
-			jogadores.remove(0);
-		}
-		rodadaEmFoco.getJogos().addAll(jogosSorteados);
-
-		// cria operacao de debito e atualiza saldo da conta
-		PersistenceHelper.persiste(getContaUsuario().criaOperacaoDebitoJogoBarragem(jogosSorteados.size()));
-		PersistenceHelper.persiste(getContaUsuario());
-
-		salvaRodada(e);
 	}
 
 	private void salvaRodada(ActionEvent e) {
@@ -167,5 +175,13 @@ public class GerirRodadaBean extends BaseBean {
 			items.add(selectItem);
 		}
 		return items;
+	}
+
+	public boolean getPossuiSaldoParaUmJogo() {
+		if (!getContaUsuario().possuiSaldoSuficiente(1)) {
+			messages.addErrorMessage("saldo_insuficiente_exception", "label_saldo_insuficiente");
+			return false;
+		}
+		return true;
 	}
 }

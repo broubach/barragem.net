@@ -58,7 +58,7 @@
 	<managed-bean>
 		<managed-bean-name>registrarNovoUsuarioBean</managed-bean-name>
 		<managed-bean-class>net.barragem.view.backingbean.RegistrarNovoUsuarioBean</managed-bean-class>
-		<managed-bean-scope>request</managed-bean-scope>
+		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>arquivoBean</managed-bean-name>
@@ -137,6 +137,7 @@
 		<navigation-case>
 			<from-outcome>passo1</from-outcome>
 			<to-view-id>/publicpages/novousuario/passo-1-seguranca.xhtml</to-view-id>
+			<redirect/>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
