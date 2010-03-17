@@ -8,7 +8,6 @@ $j(function() {
 		      br: { radius: 10 },
 		      antiAlias: true
 	};
-	curvyCorners(settings, "fieldset");
 	curvyCorners(settings, ".passoInativo");
 	curvyCorners(settings, ".passoAtivo");
 	curvyCorners(settings, ".perfilContainer");
