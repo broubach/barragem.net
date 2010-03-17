@@ -11,12 +11,18 @@
 	<ui:define name="conteudo">
 		<div class="maincontent equalheights">
 			<h:form id="gerirJogador">
-				<h2><h:outputText value="#{msg.label_pesquisa_jogadores}"/></h2>
+				<h2><h:outputText value="#{msg.label_resultado_pesquisa}"/></h2>
 				<br/>
-				<ui:include src="../componentes/jogadores.xhtml">
-					<ui:param name="jogadores" value="#{pesquisarBean.jogadores}"/>
-					<ui:param name="podeEditarJogadores" value="false"/>
-				</ui:include>
+				<div class="voltar">
+					<h:commandLink value="#{msg.label_voltar}" action="voltar"/>
+				</div>
+				<br/>
+				<fieldset>
+					<ui:include src="../componentes/jogadores.xhtml">
+						<ui:param name="jogadores" value="#{pesquisarBean.jogadores}"/>
+						<ui:param name="podeEditarJogadores" value="false"/>
+					</ui:include>
+				</fieldset>
 		    </h:form>
 	    </div>
 	</ui:define>

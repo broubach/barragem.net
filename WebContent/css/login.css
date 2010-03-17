@@ -27,11 +27,11 @@
 	width: 250px; 
 	height: 40px;
 }
-#voltar {
+.voltar {
     background: transparent url(../img/buttons/btn-voltar.png) no-repeat 0 0;
     padding-left: 17px;
 }
-#registerFormSeguranca #voltar {
+#registerFormSeguranca .voltar {
 	float: left;
 }
 
@@ -333,7 +333,7 @@ div.loginError {
 	text-align:center;
 	float: right; 
 }
-#voltar a:hover {
+.voltar a:hover {
 	text-decoration: underline;
 }
 
@@ -487,13 +487,13 @@ input {
 div.error {
 	font-size: 0.7em; 
 }
-#voltar a {
+.voltar a {
 	text-decoration: none;
 }
 #registerFormSeguranca h4 {
 	color:#2C6695;
 }
-#voltar a {
+.voltar a {
 	color:#333333;
 	font-size:0.8em;
 }

@@ -23,7 +23,7 @@
 	        </c:if>
 			<div class="dados-popup">
 				<div class="input text">
-					<label for="vincular-jogador:pesquisa" class="#{messageBean.errorMessages['pesquisa'] != null ? 'error' : 'searchFormLabel'}">#{msg.label_pesquisa_de_jogadores}</label>
+					<label for="vincular-jogador:pesquisa" class="#{messageBean.errorMessages['pesquisa'] != null ? 'error' : 'searchFormLabel'}">#{msg.label_pesquisa_jogadores}</label>
 					<h:inputText id="pesquisa" styleClass="searchFormInput" size="60" maxlength="45" value="#{vincularJogadorBean.pesquisa}"/>
 					<a4j:commandButton actionListener="#{vincularJogadorBean.pesquisaJogador}" image="/img/pesquisaLen.gif" styleClass="searchFormButton" alt="#{msg.label_pesquisar_}" title="#{msg.label_pesquisar_}" reRender="vincular-jogador,tabelaJogadores" oncomplete="$.fn.colorbox.resize()"/>
 				</div>

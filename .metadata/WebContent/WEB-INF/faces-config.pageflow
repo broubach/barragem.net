@@ -15,8 +15,8 @@
   <nodes xsi:type="pageflow:PFPage" name="protectedpages/editarperfil/editarFoto.xhtml" x="338" y="2866" id="pf12639050985761" referenceLink="//@navigationRule.8/@navigationCase.5/@toViewId|" inlinks="pf12677989788394" path="/protectedpages/editarperfil/editarFoto.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="protectedpages/exibirpainelbarragem/exibirPainelBarragem.xhtml" x="338" y="1714" id="pf12644321560521" referenceLink="//@navigationRule.8/@navigationCase.0/@toViewId|" inlinks="pf12644321560510 pf12653776771471" path="/protectedpages/exibirpainelbarragem/exibirPainelBarragem.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="protectedpages/exibirperfil/exibirPerfil.xhtml" x="338" y="3250" id="pf12647703369621" referenceLink="//@navigationRule.8/@navigationCase.2/@toViewId|" inlinks="pf12653776771470" path="/protectedpages/exibirperfil/exibirPerfil.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="protectedpages/gerirjogador/gerirJogador.xhtml" x="122" y="4018" id="pf12651238748190" referenceLink="//@navigationRule.7/@fromViewId|" outlinks="pf12651238748191" path="/protectedpages/gerirjogador/gerirJogador.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="protectedpages/pesquisa/resultadoPesquisaJogador.xhtml" x="338" y="4018" id="pf12651238748192" referenceLink="//@navigationRule.7/@navigationCase.0/@toViewId|" inlinks="pf12651238748191" path="/protectedpages/pesquisa/resultadoPesquisaJogador.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="protectedpages/gerirjogador/gerirJogador.xhtml" x="122" y="4018" id="pf12651238748190" referenceLink="//@navigationRule.8/@navigationCase.0/@toViewId|" outlinks="pf12651238748191" inlinks="pf12687929092270" path="/protectedpages/gerirjogador/gerirJogador.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="protectedpages/pesquisa/resultadoPesquisaJogador.xhtml" x="338" y="4018" id="pf12651238748192" referenceLink="//@navigationRule.8/@fromViewId|" outlinks="pf12687929092270" inlinks="pf12651238748191" path="/protectedpages/pesquisa/resultadoPesquisaJogador.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="2482" id="pf12675383250726" referenceLink="//@navigationRule.9/@fromViewId|" outlinks="pf12675383250725" path="*"/>
   <nodes xsi:type="pageflow:PFPage" name="protectedpages/editarperfil/editarDadosBasicos.xhtml" x="338" y="3634" id="pf12677935782082" referenceLink="//@navigationRule.8/@navigationCase.3/@toViewId|" inlinks="pf12677935782071" path="/protectedpages/editarperfil/editarDadosBasicos.xhtml"/>
   <links id="pf12586750970150" target="pf12586750970152" source="pf12585715512344" outcome="passo1" redirect="true"/>
@@ -49,4 +49,5 @@
     <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
     <bendPoints d1Width="-64" d2Width="-64"/>
   </links>
+  <links id="pf12687929092270" target="pf12651238748190" source="pf12651238748192" outcome="voltar"/>
 </pageflow:Pageflow>

@@ -120,6 +120,9 @@ fieldset#detalhes-jogo {
 fieldset#parciais {
 	padding-right:10px;
 }
+#gerirJogador fieldset {
+	width: 355px;
+}
 .maincontent a {
     color: #333333;
 }
@@ -184,8 +187,15 @@ fieldset#parciais {
 #loginForm a:hover {
 	text-decoration:underline;
 }
-#voltar a:hover {
+.voltar {
+    background: transparent url(../img/buttons/btn-voltar.png) no-repeat 0 0;
+    padding-left: 17px;
+}
+.voltar a:hover {
 	text-decoration: underline;
+}
+.voltar a {
+	text-decoration: none;
 }
 
 #searchForm {
@@ -309,15 +319,25 @@ fieldset#parciais {
 	float:right;
 	padding-right:3px;
 }
-#gerirJogador .tipoPesquisa {
-	display: inline;
-	border-collapse: collapse;
+#gerirJogador .exibirPainelBarragemRanking {
+	width: 100%;
+	padding-top: 5px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+}
+#gerirJogador .tipoPesquisa input {
+	float: left;
+	clear: none;
+}
+#gerirJogador .dados label {
+	width: auto;
 }
 #gerirJogador .tipoPesquisa label {
 	width: auto;
 	border: 0px;
-	padding: 0px;
-	width: 200px;
+	padding-left: 5px;
+	clear: none;
 	white-space: nowrap;
 }
 #gerirJogador .searchFormInput, #vincular-jogador .searchFormInput {
@@ -341,23 +361,6 @@ fieldset#parciais {
 #gerirJogador .adicionarJogadorInput {
 	float: left;
 	margin-right: 5px;
-}
-.dadosGerirJogador label, .dadosGerirJogadorListaJogadores label {
-	padding-right: 5px;
-	width: 130px;
-}
-.dadosGerirJogador {
-	width: 430px;
-	margin: auto;
-}
-.dadosGerirJogadorListaJogadores {
-	width: 475px;
-	margin: auto;
-}
-.divisaoGerirJogador {
-	width: 60%; 
-	margin: auto;
-	color: #444;
 }
 .internas label, .dados .exemplo {
 	float: left;
@@ -518,7 +521,7 @@ td.actions {
 }
 
 /********************* DADOS *********************/
-.dados label, .dadosGerirJogador label, .dadosGerirJogadorListaJogadores label {
+.dados label {
 	border-right: 1px solid #888;
 }
 .dados {
@@ -898,7 +901,7 @@ label {
 	color:#444;
 	font-size:.8em;
 }
-.dados label, .dados .exemplo, .dados .complemento, .dadosExibirPerfil label, .dadosGerirJogador label, .dadosGerirJogadorListaJogadores label, .dados .spanBtn {
+.dados label, .dados .exemplo, .dados .complemento, .dadosExibirPerfil label, .dados .spanBtn {
 	color:#444;
 	font-size:.8em;
 }
@@ -973,4 +976,8 @@ legend {
 .mensagem-erro, .mensagem-erro-hidden {
     font-size:12px;
 	color: #FF0000;
+}
+.voltar a {
+	color:#333333;
+	font-size:0.8em;
 }
