@@ -1,14 +1,19 @@
 package net.barragem.scaffold;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
+import javax.servlet.http.HttpServletRequest;
 
 public class PaginavelSampleImpl<T> implements Paginavel<T> {
 
 	private int maxPagesDisplayed = 10;
 	private int pageSize = 10;
-	private List<T> pagina;
+	private List<T> pagina = new ArrayList<T>();
 	private int pageCount;
-	private int paginaAtual = 0;
+	private int paginaAtual = 1;
 
 	private List<T> sourceList;
 	private String sourceHibernateNamedQuery;
@@ -21,6 +26,7 @@ public class PaginavelSampleImpl<T> implements Paginavel<T> {
 
 	public PaginavelSampleImpl(List<T> sourceList) {
 		this.sourceList = sourceList;
+		pesquisaPaginavel(1);
 	}
 
 	@Override
@@ -88,11 +94,25 @@ public class PaginavelSampleImpl<T> implements Paginavel<T> {
 		return sourceList;
 	}
 
+	public void pagina(ActionEvent e) {
+		if (Integer.parseInt(getIndex()) <= 0 || Integer.parseInt(getIndex()) > pageCount) {
+			return;
+		}
+		pesquisaPaginavel(Integer.parseInt(getIndex()));
+	}
+
+	private String getIndex() {
+		return ((HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest())
+				.getParameter("index");
+	}
+
 	@Override
-	public void pesquisaPaginavel(int pageNumber, Object[] paramValues) {
+	public void pesquisaPaginavel(int pageNumber, Object... paramValues) {
+		pagina.clear();
+		int zeroBasedPageNumber = pageNumber - 1;
 		if (sourceList == null) {
-			pagina = (List<T>) PersistenceHelper.findByNamedQueryWithLimits(sourceHibernateNamedQuery, pageNumber
-					* pageSize, pageSize, paramValues);
+			pagina.addAll((List<T>) PersistenceHelper.findByNamedQueryWithLimits(sourceHibernateNamedQuery,
+					zeroBasedPageNumber * pageSize, pageSize, paramValues));
 			paginaAtual = pageNumber;
 			int totalRegistros = (Integer) PersistenceHelper.findByNamedQuery(sourceHibernateCountNamedQuery,
 					paramValues).get(0);
@@ -101,14 +121,22 @@ public class PaginavelSampleImpl<T> implements Paginavel<T> {
 				pageCount++;
 			}
 		} else {
-			pagina = sourceList.subList(pageNumber * pageSize,
-					(pageNumber * pageSize + pageSize) > sourceList.size() ? sourceList.size()
-							: (pageNumber * pageSize + pageSize));
+			pagina.addAll(sourceList.subList(zeroBasedPageNumber * pageSize,
+					(zeroBasedPageNumber * pageSize + pageSize) > sourceList.size() ? sourceList.size()
+							: (zeroBasedPageNumber * pageSize + pageSize)));
 			paginaAtual = pageNumber;
 			pageCount = sourceList.size() / pageSize;
 			if (pageCount * pageSize < sourceList.size()) {
 				pageCount++;
 			}
 		}
+	}
+
+	public List<Integer> getPaginas() {
+		List<Integer> result = new ArrayList<Integer>();
+		for (int i = paginaAtual / maxPagesDisplayed; i < pageCount && i < (paginaAtual + maxPagesDisplayed); i++) {
+			result.add(i + 1);
+		}
+		return result;
 	}
 }

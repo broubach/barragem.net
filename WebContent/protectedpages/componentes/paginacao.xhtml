@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+	<table>
+	<tr>
+	<td><h:commandLink actionListener="#{paginavel.pagina}"><f:param name="index" value="0"/>primeira</h:commandLink></td>
+	<td><h:commandLink actionListener="#{paginavel.pagina}"><f:param name="index" value="#{paginavel.paginaAtual - 1}"/>anterior</h:commandLink></td>
+	<c:forEach items="#{paginavel.paginas}" var="pagina">
+		<td style="font-weight: #{pagina == paginavel.paginaAtual ? 'bold' : 'normal'}"><h:commandLink actionListener="#{paginavel.pagina}"><f:param name="index" value="#{pagina}"/>#{pagina}</h:commandLink></td>
+	</c:forEach>
+	<td><h:commandLink actionListener="#{paginavel.pagina}"><f:param name="index" value="#{paginavel.paginaAtual + 1}"/>proxima</h:commandLink></td>
+	<td><h:commandLink actionListener="#{paginavel.pagina}"><f:param name="index" value="#{paginavel.pageCount}"/>ultima</h:commandLink></td>
+	</tr>
+	</table>
+
+</html>

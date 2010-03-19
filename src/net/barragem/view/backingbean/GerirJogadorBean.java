@@ -10,6 +10,7 @@ import net.barragem.persistence.entity.Jogador;
 import net.barragem.persistence.entity.Usuario;
 import net.barragem.scaffold.JogadoresComCorrespondenciaPrimeiroComparator;
 import net.barragem.scaffold.Paginavel;
+import net.barragem.scaffold.PaginavelSampleImpl;
 import net.barragem.scaffold.PersistenceHelper;
 
 import org.ajax4jsf.model.KeepAlive;
@@ -25,12 +26,21 @@ public class GerirJogadorBean extends BaseBean {
 	private String pesquisaSalva;
 	private Integer tipoPesquisa = new Integer(2);
 	private ListDataModel jogadores;
-	private Paginavel paginacaoJogadores;
+	private Paginavel<Jogador> paginacaoJogadores;
 
 	public GerirJogadorBean() {
 		usuarioEmFoco = getUsuarioLogado();
 		Collections.sort(usuarioEmFoco.getJogadores(), new JogadoresComCorrespondenciaPrimeiroComparator());
-		jogadores = new ListDataModel(usuarioEmFoco.getJogadores());
+		paginacaoJogadores = new PaginavelSampleImpl<Jogador>(usuarioEmFoco.getJogadores());
+		jogadores = new ListDataModel(paginacaoJogadores.getPagina());
+	}
+
+	public Paginavel<Jogador> getPaginacaoJogadores() {
+		return paginacaoJogadores;
+	}
+
+	public void setPaginacaoJogadores(Paginavel<Jogador> paginacaoJogadores) {
+		this.paginacaoJogadores = paginacaoJogadores;
 	}
 
 	public Usuario getUsuarioEmFoco() {
@@ -106,6 +116,8 @@ public class GerirJogadorBean extends BaseBean {
 
 			PersistenceHelper.persiste(usuarioEmFoco);
 
+			// TODO: atualiza paginacao
+
 			Collections.sort(usuarioEmFoco.getJogadores(), new JogadoresComCorrespondenciaPrimeiroComparator());
 			addMensagemAtualizacaoComSucesso();
 			jogadorNome = null;
@@ -115,6 +127,7 @@ public class GerirJogadorBean extends BaseBean {
 	}
 
 	public void removeJogador(ActionEvent e) {
+		// TODO: atualiza paginacao
 		PersistenceHelper.remove(usuarioEmFoco.getJogadores().remove(getIndex()));
 	}
 
@@ -135,7 +148,8 @@ public class GerirJogadorBean extends BaseBean {
 			messages.addInfoMessage("label_nenhum_resultado_encontrado", "label_nenhum_resultado_encontrado");
 		} else {
 			Collections.sort(resultado, new JogadoresComCorrespondenciaPrimeiroComparator());
-			jogadores = new ListDataModel(resultado);
+			paginacaoJogadores = new PaginavelSampleImpl<Jogador>(resultado);
+			jogadores = new ListDataModel(paginacaoJogadores.getPagina());
 			pesquisaSalva = pesquisa;
 		}
 		return "";
@@ -170,7 +184,8 @@ public class GerirJogadorBean extends BaseBean {
 			usuarioEmFoco.getJogadores().remove(jogador);
 			PersistenceHelper.persiste(usuarioEmFoco);
 
-			jogadores = new ListDataModel(usuarioEmFoco.getJogadores());
+			paginacaoJogadores = new PaginavelSampleImpl<Jogador>(usuarioEmFoco.getJogadores());
+			jogadores = new ListDataModel(paginacaoJogadores.getPagina());
 		} catch (ConstraintViolationException e1) {
 			messages.addErrorMessage(null,
 					"label_jogador_nao_pode_ser_removido_pois_eh_utilizado_em_algum_jogo_barragem");
@@ -179,7 +194,8 @@ public class GerirJogadorBean extends BaseBean {
 
 	public void limpaFiltro(ActionEvent e) {
 		pesquisaSalva = null;
-		jogadores = new ListDataModel(usuarioEmFoco.getJogadores());
+		paginacaoJogadores = new PaginavelSampleImpl<Jogador>(usuarioEmFoco.getJogadores());
+		jogadores = new ListDataModel(paginacaoJogadores.getPagina());
 	}
 
 	public void preparaVinculo(ActionEvent e) {

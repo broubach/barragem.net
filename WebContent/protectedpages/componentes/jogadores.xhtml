@@ -51,6 +51,10 @@
 				<h:commandLink actionListener="#{gerirJogadorBean.limpaFiltro}" rendered="#{gerirJogadorBean.pesquisaSalva != null}" styleClass="linkLimpaFiltro">#{msg.label_limpar_filtro_pesquisa}</h:commandLink>
 			</f:facet>
 	    </h:dataTable>
+	    
+	    <ui:include src="paginacao.xhtml">
+	    	<ui:param name="paginavel" value="#{gerirJogadorBean.paginacaoJogadores}"/>
+	    </ui:include>
 	</div>
 
 </html>
