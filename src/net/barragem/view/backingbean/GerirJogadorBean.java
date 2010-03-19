@@ -9,6 +9,7 @@ import javax.faces.model.ListDataModel;
 import net.barragem.persistence.entity.Jogador;
 import net.barragem.persistence.entity.Usuario;
 import net.barragem.scaffold.JogadoresComCorrespondenciaPrimeiroComparator;
+import net.barragem.scaffold.Paginavel;
 import net.barragem.scaffold.PersistenceHelper;
 
 import org.ajax4jsf.model.KeepAlive;
@@ -24,6 +25,7 @@ public class GerirJogadorBean extends BaseBean {
 	private String pesquisaSalva;
 	private Integer tipoPesquisa = new Integer(2);
 	private ListDataModel jogadores;
+	private Paginavel paginacaoJogadores;
 
 	public GerirJogadorBean() {
 		usuarioEmFoco = getUsuarioLogado();

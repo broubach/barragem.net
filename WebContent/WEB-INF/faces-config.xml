@@ -137,7 +137,6 @@
 		<navigation-case>
 			<from-outcome>passo1</from-outcome>
 			<to-view-id>/publicpages/novousuario/passo-1-seguranca.xhtml</to-view-id>
-			<redirect/>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
@@ -146,11 +145,11 @@
 		<navigation-case>
 			<from-outcome>passo0</from-outcome>
 			<to-view-id>/login.xhtml</to-view-id>
-			<redirect/>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>passo2</from-outcome>
 			<to-view-id>/protectedpages/novousuario/passo-2-perfil.xhtml</to-view-id>
+			<redirect/>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>

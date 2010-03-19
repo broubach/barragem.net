@@ -32,10 +32,10 @@
 							<h:commandLink value="#{msg.label_dados_basicos}" disabled="true"/>
 			            </li>
 			            <li>
-							<h:commandLink value="#{msg.label_perfil}" action="editarPerfil" immediate="true"/>
+							<a href="http://#{request.serverName}#{request.serverPort == '8080' ? ':8080' : ''}#{request.contextPath}/protectedpages/editarperfil/editarPerfil.xhtml">#{msg.label_perfil}</a>
 			            </li>
 			            <li>
-							<h:commandLink value="#{msg.label_foto}" action="editarFoto" immediate="true"/>
+							<a href="http://#{request.serverName}#{request.serverPort == '8080' ? ':8080' : ''}#{request.contextPath}/protectedpages/editarperfil/editarFoto.xhtml">#{msg.label_foto}</a>
 			            </li>
 			        </ul>
 				</h:panelGroup>

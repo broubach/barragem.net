@@ -71,6 +71,27 @@ public class PersistenceHelper {
 		}
 	}
 
+	public static List findByNamedQueryWithLimits(String namedQuery, int firstResult, int maxResults,
+			Object... paramValues) {
+		Session session = null;
+		try {
+			session = HibernateUtil.getSession();
+			Query query = session.getNamedQuery(namedQuery);
+			query.setFirstResult(firstResult);
+			query.setMaxResults(maxResults);
+			if (paramValues != null) {
+				for (int i = 0; i < query.getNamedParameters().length; i++) {
+					query.setParameter(query.getNamedParameters()[i], paramValues[i]);
+				}
+			}
+			return query.list();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+	}
+
 	public static void remove(Object entity) {
 		Session session = null;
 		Transaction t = null;
