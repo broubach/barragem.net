@@ -519,6 +519,39 @@ td.actions {
 	border-top:1px solid #FFFFFF;
 	background:transparent url(../img/versus.png) no-repeat 50%;
 }
+.setaPaginacao {
+    background:url("../img/buttons/btn-arrows-sprite.gif") no-repeat scroll 0 0 transparent;
+    height: 14px;
+} 
+.setaPaginacaoPrimeira {
+	background-position: 0px 0px;
+    width: 16px;
+}
+.setaPaginacaoAnterior {
+	background-position: -17px 0px;
+    width: 8px;
+}
+.setaPaginacaoProxima {
+	background-position: -26px 0px;
+    width: 8px;
+}
+.setaPaginacaoUltima {
+	background-position: -35px 0px;
+    width: 16px;
+}
+.setaPaginacaoTransparenciaSimples {
+	width: 8px;
+	height: 14px;
+}
+.setaPaginacaoTransparenciaDupla {
+	width: 16px;
+	height: 14px;
+}
+.setaPaginacaoContainer {
+	text-align: center;
+	margin-right: auto;
+	margin-left: auto;
+}
 
 /********************* DADOS *********************/
 .dados label {

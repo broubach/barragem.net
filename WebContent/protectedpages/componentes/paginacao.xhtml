@@ -7,16 +7,15 @@
 	xmlns:c="http://java.sun.com/jstl/core"
 	xmlns:a4j="http://richfaces.org/a4j">
 
-	<table>
+	<table class="setaPaginacaoContainer">
 	<tr>
-	<td><h:commandLink actionListener="#{paginavel.pagina}"><f:param name="index" value="0"/>primeira</h:commandLink></td>
-	<td><h:commandLink actionListener="#{paginavel.pagina}"><f:param name="index" value="#{paginavel.paginaAtual - 1}"/>anterior</h:commandLink></td>
-	<c:forEach items="#{paginavel.paginas}" var="pagina">
-		<td style="font-weight: #{pagina == paginavel.paginaAtual ? 'bold' : 'normal'}"><h:commandLink actionListener="#{paginavel.pagina}"><f:param name="index" value="#{pagina}"/>#{pagina}</h:commandLink></td>
-	</c:forEach>
-	<td><h:commandLink actionListener="#{paginavel.pagina}"><f:param name="index" value="#{paginavel.paginaAtual + 1}"/>proxima</h:commandLink></td>
-	<td><h:commandLink actionListener="#{paginavel.pagina}"><f:param name="index" value="#{paginavel.pageCount}"/>ultima</h:commandLink></td>
+		<td><h:commandLink actionListener="#{paginavel.pagina}" styleClass="setaPaginacao setaPaginacaoPrimeira"><f:param name="index" value="1"/><h:graphicImage value="/img/transparency.gif" styleClass="setaPaginacaoTransparenciaDupla" title="#{msg.label_primeiro}"/></h:commandLink></td>
+		<td><h:commandLink actionListener="#{paginavel.pagina}" styleClass="setaPaginacao setaPaginacaoAnterior"><f:param name="index" value="#{paginavel.paginaAtual - 1}"/><h:graphicImage value="/img/transparency.gif" styleClass="setaPaginacaoTransparenciaSimples" title="#{msg.label_anterior}"/></h:commandLink></td>
+		<c:forEach items="#{paginavel.paginas}" var="pagina">
+			<td style="font-weight: #{pagina == paginavel.paginaAtual ? 'bold' : 'normal'}"><h:commandLink actionListener="#{paginavel.pagina}"><f:param name="index" value="#{pagina}"/>#{pagina}</h:commandLink></td>
+		</c:forEach>
+		<td><h:commandLink actionListener="#{paginavel.pagina}" styleClass="setaPaginacao setaPaginacaoProxima"><f:param name="index" value="#{paginavel.paginaAtual + 1}"/><h:graphicImage value="/img/transparency.gif" styleClass="setaPaginacaoTransparenciaSimples" title="#{msg.label_proximo}"/></h:commandLink></td>
+		<td><h:commandLink actionListener="#{paginavel.pagina}" styleClass="setaPaginacao setaPaginacaoUltima"><f:param name="index" value="#{paginavel.pageCount}"/><h:graphicImage value="/img/transparency.gif" styleClass="setaPaginacaoTransparenciaDupla" title="#{msg.label_ultimo}"/></h:commandLink></td>
 	</tr>
 	</table>
-
 </html>
