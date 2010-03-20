@@ -9,11 +9,15 @@ import javax.servlet.http.HttpServletRequest;
 
 public class PaginavelSampleImpl<T> implements Paginavel<T> {
 
+	public static final int FIRST_PAGE = -1;
+	public static final int LAST_PAGE = -2;
+
 	private int maxPagesDisplayed = 10;
 	private int pageSize = 10;
 	private List<T> pagina = new ArrayList<T>();
 	private int pageCount;
 	private int paginaAtual = 1;
+	private int totalRegistros;
 
 	private List<T> sourceList;
 	private String sourceHibernateNamedQuery;
@@ -109,26 +113,40 @@ public class PaginavelSampleImpl<T> implements Paginavel<T> {
 	@Override
 	public void pesquisaPaginavel(int pageNumber, Object... paramValues) {
 		pagina.clear();
-		int zeroBasedPageNumber = pageNumber - 1;
 		if (sourceList == null) {
-			pagina.addAll((List<T>) PersistenceHelper.findByNamedQueryWithLimits(sourceHibernateNamedQuery,
-					zeroBasedPageNumber * pageSize, pageSize, paramValues));
-			paginaAtual = pageNumber;
-			int totalRegistros = (Integer) PersistenceHelper.findByNamedQuery(sourceHibernateCountNamedQuery,
-					paramValues).get(0);
+			totalRegistros = (Integer) PersistenceHelper.findByNamedQuery(sourceHibernateCountNamedQuery, paramValues)
+					.get(0);
 			pageCount = totalRegistros / pageSize;
 			if (pageCount * pageSize < totalRegistros) {
 				pageCount++;
 			}
-		} else {
-			pagina.addAll(sourceList.subList(zeroBasedPageNumber * pageSize,
-					(zeroBasedPageNumber * pageSize + pageSize) > sourceList.size() ? sourceList.size()
-							: (zeroBasedPageNumber * pageSize + pageSize)));
+			if (pageNumber == FIRST_PAGE || pageNumber <= 0) {
+				pageNumber = 1;
+			} else if (pageNumber == LAST_PAGE || pageNumber > pageCount) {
+				pageNumber = pageCount;
+			}
 			paginaAtual = pageNumber;
-			pageCount = sourceList.size() / pageSize;
-			if (pageCount * pageSize < sourceList.size()) {
+
+			int zeroBasedPageNumber = pageNumber - 1;
+			pagina.addAll((List<T>) PersistenceHelper.findByNamedQueryWithLimits(sourceHibernateNamedQuery,
+					zeroBasedPageNumber * pageSize, pageSize, paramValues));
+		} else {
+			totalRegistros = sourceList.size();
+			pageCount = totalRegistros / pageSize;
+			if (pageCount * pageSize < totalRegistros) {
 				pageCount++;
 			}
+			if (pageNumber == FIRST_PAGE || pageNumber <= 0) {
+				pageNumber = 1;
+			} else if (pageNumber == LAST_PAGE || pageNumber > pageCount) {
+				pageNumber = pageCount;
+			}
+			paginaAtual = pageNumber;
+
+			int zeroBasedPageNumber = pageNumber - 1;
+			pagina.addAll(sourceList.subList(zeroBasedPageNumber * pageSize,
+					(zeroBasedPageNumber * pageSize + pageSize) > totalRegistros ? totalRegistros
+							: (zeroBasedPageNumber * pageSize + pageSize)));
 		}
 	}
 
@@ -138,5 +156,14 @@ public class PaginavelSampleImpl<T> implements Paginavel<T> {
 			result.add(i + 1);
 		}
 		return result;
+	}
+
+	@Override
+	public int calculaPagina(int zeroBasedPosicao) {
+		int paginaCalculada = (zeroBasedPosicao + 1) / pageSize;
+		if (paginaCalculada * pageSize < (zeroBasedPosicao + 1)) {
+			paginaCalculada++;
+		}
+		return paginaCalculada;
 	}
 }

@@ -30,5 +30,7 @@ public interface Paginavel<T> {
 
 	public List<T> getSourceList();
 
-	public void pesquisaPaginavel(int pageNumber, Object[] paramValues);
+	public void pesquisaPaginavel(int pageNumber, Object... paramValues);
+
+	public int calculaPagina(int indexOf);
 }

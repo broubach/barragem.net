@@ -116,19 +116,16 @@ public class GerirJogadorBean extends BaseBean {
 
 			PersistenceHelper.persiste(usuarioEmFoco);
 
-			// TODO: atualiza paginacao
-
 			Collections.sort(usuarioEmFoco.getJogadores(), new JogadoresComCorrespondenciaPrimeiroComparator());
+
+			paginacaoJogadores.pesquisaPaginavel(paginacaoJogadores.calculaPagina(usuarioEmFoco.getJogadores().indexOf(
+					jogador)));
+
 			addMensagemAtualizacaoComSucesso();
 			jogadorNome = null;
 		} else {
 			messages.addErrorMessage(null, "label_digite_o_nome_do_novo_jogador");
 		}
-	}
-
-	public void removeJogador(ActionEvent e) {
-		// TODO: atualiza paginacao
-		PersistenceHelper.remove(usuarioEmFoco.getJogadores().remove(getIndex()));
 	}
 
 	public String pesquisaJogador() {
@@ -184,8 +181,7 @@ public class GerirJogadorBean extends BaseBean {
 			usuarioEmFoco.getJogadores().remove(jogador);
 			PersistenceHelper.persiste(usuarioEmFoco);
 
-			paginacaoJogadores = new PaginavelSampleImpl<Jogador>(usuarioEmFoco.getJogadores());
-			jogadores = new ListDataModel(paginacaoJogadores.getPagina());
+			paginacaoJogadores.pesquisaPaginavel(paginacaoJogadores.getPaginaAtual());
 		} catch (ConstraintViolationException e1) {
 			messages.addErrorMessage(null,
 					"label_jogador_nao_pode_ser_removido_pois_eh_utilizado_em_algum_jogo_barragem");
