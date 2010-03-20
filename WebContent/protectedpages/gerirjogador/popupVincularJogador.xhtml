@@ -28,7 +28,7 @@
 					<a4j:commandButton actionListener="#{vincularJogadorBean.pesquisaJogador}" image="/img/pesquisaLen.gif" styleClass="searchFormButton" alt="#{msg.label_pesquisar_}" title="#{msg.label_pesquisar_}" reRender="vincular-jogador,tabelaJogadores" oncomplete="$.fn.colorbox.resize()"/>
 				</div>
 			</div>
-			<div style="overflow: auto; width: 260px; height: 200px;">
+			<div style="overflow: auto; width: 260px; height: 325px;">
 				<ui:include src="../componentes/jogadores.xhtml">
 					<ui:param name="jogadores" value="#{vincularJogadorBean.jogadores}"/>
 					<ui:param name="paginavel" value="#{vincularJogadorBean.paginacao}"/>
