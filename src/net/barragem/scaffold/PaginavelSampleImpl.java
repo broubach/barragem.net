@@ -28,8 +28,11 @@ public class PaginavelSampleImpl<T> implements Paginavel<T> {
 		this.sourceHibernateCountNamedQuery = sourceHibernateCountNamedQuery;
 	}
 
-	public PaginavelSampleImpl(List<T> sourceList) {
+	public PaginavelSampleImpl(List<T> sourceList, int... pageSize) {
 		this.sourceList = sourceList;
+		if (pageSize != null && pageSize.length > 0) {
+			this.pageSize = pageSize[0];
+		}
 		pesquisaPaginavel(1);
 	}
 

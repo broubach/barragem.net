@@ -31,6 +31,8 @@
 			<div style="overflow: auto; width: 260px; height: 200px;">
 				<ui:include src="../componentes/jogadores.xhtml">
 					<ui:param name="jogadores" value="#{vincularJogadorBean.jogadores}"/>
+					<ui:param name="paginavel" value="#{vincularJogadorBean.paginacao}"/>
+			    	<ui:param name="toReRender" value="tabelaJogadores"/>
 					<ui:param name="podeEditarJogadores" value="false"/>
 					<ui:param name="podeVincularJogadores" value="true"/>
 				</ui:include>

@@ -7,15 +7,26 @@
 	xmlns:c="http://java.sun.com/jstl/core"
 	xmlns:a4j="http://richfaces.org/a4j">
 
-	<table class="setaPaginacaoContainer">
-	<tr>
-		<td><h:commandLink actionListener="#{paginavel.pagina}" styleClass="setaPaginacao setaPaginacaoPrimeira"><f:param name="index" value="1"/><h:graphicImage value="/img/transparency.gif" styleClass="setaPaginacaoTransparenciaDupla" title="#{msg.label_primeiro}"/></h:commandLink></td>
-		<td><h:commandLink actionListener="#{paginavel.pagina}" styleClass="setaPaginacao setaPaginacaoAnterior"><f:param name="index" value="#{paginavel.paginaAtual - 1}"/><h:graphicImage value="/img/transparency.gif" styleClass="setaPaginacaoTransparenciaSimples" title="#{msg.label_anterior}"/></h:commandLink></td>
-		<c:forEach items="#{paginavel.paginas}" var="pagina">
-			<td style="font-weight: #{pagina == paginavel.paginaAtual ? 'bold' : 'normal'}"><h:commandLink actionListener="#{paginavel.pagina}"><f:param name="index" value="#{pagina}"/>#{pagina}</h:commandLink></td>
-		</c:forEach>
-		<td><h:commandLink actionListener="#{paginavel.pagina}" styleClass="setaPaginacao setaPaginacaoProxima"><f:param name="index" value="#{paginavel.paginaAtual + 1}"/><h:graphicImage value="/img/transparency.gif" styleClass="setaPaginacaoTransparenciaSimples" title="#{msg.label_proximo}"/></h:commandLink></td>
-		<td><h:commandLink actionListener="#{paginavel.pagina}" styleClass="setaPaginacao setaPaginacaoUltima"><f:param name="index" value="#{paginavel.pageCount}"/><h:graphicImage value="/img/transparency.gif" styleClass="setaPaginacaoTransparenciaDupla" title="#{msg.label_ultimo}"/></h:commandLink></td>
-	</tr>
-	</table>
+	<c:if test="#{paginavel != null and paginavel.pageCount > 1 and toReRender==null}">
+		<h:panelGrid columns="#{paginavel.pageCount + 4}" styleClass="setaPaginacaoContainer">
+			<h:commandLink actionListener="#{paginavel.pagina}" styleClass="setaPaginacao setaPaginacaoPrimeira"><f:param name="index" value="1"/><h:graphicImage value="/img/transparency.gif" styleClass="setaPaginacaoTransparenciaDupla" title="#{msg.label_primeiro}"/></h:commandLink>
+			<h:commandLink actionListener="#{paginavel.pagina}" styleClass="setaPaginacao setaPaginacaoAnterior"><f:param name="index" value="#{paginavel.paginaAtual - 1}"/><h:graphicImage value="/img/transparency.gif" styleClass="setaPaginacaoTransparenciaSimples" title="#{msg.label_anterior}"/></h:commandLink>
+			<c:forEach items="#{paginavel.paginas}" var="pagina">
+				<h:commandLink actionListener="#{paginavel.pagina}" style="font-weight: #{pagina == paginavel.paginaAtual ? 'bold' : 'normal'}"><f:param name="index" value="#{pagina}"/>#{pagina}</h:commandLink>
+			</c:forEach>
+			<h:commandLink actionListener="#{paginavel.pagina}" styleClass="setaPaginacao setaPaginacaoProxima"><f:param name="index" value="#{paginavel.paginaAtual + 1}"/><h:graphicImage value="/img/transparency.gif" styleClass="setaPaginacaoTransparenciaSimples" title="#{msg.label_proximo}"/></h:commandLink>
+			<h:commandLink actionListener="#{paginavel.pagina}" styleClass="setaPaginacao setaPaginacaoUltima"><f:param name="index" value="#{paginavel.pageCount}"/><h:graphicImage value="/img/transparency.gif" styleClass="setaPaginacaoTransparenciaDupla" title="#{msg.label_ultimo}"/></h:commandLink>
+		</h:panelGrid>
+	</c:if>
+	<c:if test="#{paginavel != null and paginavel.pageCount > 1 and toReRender!=null}">
+		<h:panelGrid columns="#{paginavel.pageCount + 4}" styleClass="setaPaginacaoContainer" id="paginacao">
+			<a4j:commandLink actionListener="#{paginavel.pagina}" styleClass="setaPaginacao setaPaginacaoPrimeira" reRender="#{toReRender},paginacao"><f:param name="index" value="1"/><h:graphicImage value="/img/transparency.gif" styleClass="setaPaginacaoTransparenciaDupla" title="#{msg.label_primeiro}"/></a4j:commandLink>
+			<a4j:commandLink actionListener="#{paginavel.pagina}" styleClass="setaPaginacao setaPaginacaoAnterior" reRender="#{toReRender},paginacao"><f:param name="index" value="#{paginavel.paginaAtual - 1}"/><h:graphicImage value="/img/transparency.gif" styleClass="setaPaginacaoTransparenciaSimples" title="#{msg.label_anterior}"/></a4j:commandLink>
+			<c:forEach items="#{paginavel.paginas}" var="pagina">
+				<a4j:commandLink actionListener="#{paginavel.pagina}" style="font-weight: #{pagina == paginavel.paginaAtual ? 'bold' : 'normal'}" reRender="#{toReRender},paginacao"><f:param name="index" value="#{pagina}"/>#{pagina}</a4j:commandLink>
+			</c:forEach>
+			<a4j:commandLink actionListener="#{paginavel.pagina}" styleClass="setaPaginacao setaPaginacaoProxima" reRender="#{toReRender},paginacao"><f:param name="index" value="#{paginavel.paginaAtual + 1}"/><h:graphicImage value="/img/transparency.gif" styleClass="setaPaginacaoTransparenciaSimples" title="#{msg.label_proximo}"/></a4j:commandLink>
+			<a4j:commandLink actionListener="#{paginavel.pagina}" styleClass="setaPaginacao setaPaginacaoUltima" reRender="#{toReRender},paginacao"><f:param name="index" value="#{paginavel.pageCount}"/><h:graphicImage value="/img/transparency.gif" styleClass="setaPaginacaoTransparenciaDupla" title="#{msg.label_ultimo}"/></a4j:commandLink>
+		</h:panelGrid>
+	</c:if>
 </html>

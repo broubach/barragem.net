@@ -7,6 +7,8 @@ import javax.faces.event.ActionEvent;
 
 import net.barragem.persistence.entity.Jogador;
 import net.barragem.scaffold.JogadoresComCorrespondenciaPrimeiroComparator;
+import net.barragem.scaffold.Paginavel;
+import net.barragem.scaffold.PaginavelSampleImpl;
 import net.barragem.scaffold.PersistenceHelper;
 
 import org.ajax4jsf.model.KeepAlive;
@@ -17,6 +19,7 @@ public class VincularJogadorBean extends BaseBean {
 	private Jogador jogadorEmFoco;
 	private String pesquisa;
 	private List<Jogador> jogadores;
+	private Paginavel<Jogador> paginacao;
 
 	public Jogador getJogadorEmFoco() {
 		return jogadorEmFoco;
@@ -42,12 +45,23 @@ public class VincularJogadorBean extends BaseBean {
 		this.jogadores = jogadores;
 	}
 
+	public Paginavel<Jogador> getPaginacao() {
+		return paginacao;
+	}
+
+	public void setPaginacao(Paginavel<Jogador> paginacao) {
+		this.paginacao = paginacao;
+	}
+
 	public void pesquisaJogador(ActionEvent e) {
 		if (pesquisa != null && pesquisa.length() > 0) {
-			jogadores = PersistenceHelper.findByNamedQuery("pesquisaJogadorForaDaListaQuery", getUsuarioLogado(),
-					new StringBuilder().append("%").append(pesquisa).append("%").toString().toUpperCase());
-			if (jogadores.size() > 0) {
-				Collections.sort(jogadores, new JogadoresComCorrespondenciaPrimeiroComparator());
+			List<Jogador> result = PersistenceHelper.findByNamedQuery("pesquisaJogadorForaDaListaQuery",
+					getUsuarioLogado(), new StringBuilder().append("%").append(pesquisa).append("%").toString()
+							.toUpperCase());
+			if (result.size() > 0) {
+				Collections.sort(result, new JogadoresComCorrespondenciaPrimeiroComparator());
+				paginacao = new PaginavelSampleImpl<Jogador>(result, 5);
+				jogadores = paginacao.getPagina();
 				return;
 			}
 
