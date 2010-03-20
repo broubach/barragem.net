@@ -8,6 +8,8 @@ import javax.faces.event.ActionEvent;
 import net.barragem.persistence.entity.Barragem;
 import net.barragem.persistence.entity.Jogador;
 import net.barragem.scaffold.JogadoresComCorrespondenciaPrimeiroComparator;
+import net.barragem.scaffold.Paginavel;
+import net.barragem.scaffold.PaginavelSampleImpl;
 import net.barragem.scaffold.PersistenceHelper;
 
 import org.ajax4jsf.model.KeepAlive;
@@ -19,6 +21,7 @@ public class PesquisarBean extends BaseBean {
 	private List<Barragem> barragens;
 	private List<Object> geral;
 	private String pesquisa;
+	private Paginavel<Jogador> paginacao;
 
 	public List<Jogador> getJogadores() {
 		return jogadores;
@@ -56,12 +59,22 @@ public class PesquisarBean extends BaseBean {
 		return pesquisaJogador(pesquisa);
 	}
 
+	public Paginavel<Jogador> getPaginacao() {
+		return paginacao;
+	}
+
+	public void setPaginacao(Paginavel<Jogador> paginacao) {
+		this.paginacao = paginacao;
+	}
+
 	public String pesquisaJogador(String pesquisa) {
 		if (pesquisa != null && pesquisa.length() > 0) {
-			jogadores = PersistenceHelper.findByNamedQuery("pesquisaJogadorQuery", new StringBuilder().append("%")
-					.append(pesquisa).append("%").toString().toUpperCase());
-			if (jogadores.size() > 0) {
-				Collections.sort(jogadores, new JogadoresComCorrespondenciaPrimeiroComparator());
+			List<Jogador> result = PersistenceHelper.findByNamedQuery("pesquisaJogadorQuery", new StringBuilder()
+					.append("%").append(pesquisa).append("%").toString().toUpperCase());
+			if (result.size() > 0) {
+				Collections.sort(result, new JogadoresComCorrespondenciaPrimeiroComparator());
+				paginacao = new PaginavelSampleImpl<Jogador>(result);
+				jogadores = paginacao.getPagina();
 				return "sucessoPesquisa";
 			}
 
