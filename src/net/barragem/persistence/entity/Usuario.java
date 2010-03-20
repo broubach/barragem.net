@@ -1,5 +1,6 @@
 package net.barragem.persistence.entity;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -17,15 +18,18 @@ import javax.persistence.Table;
 import net.barragem.scaffold.JogadoresComCorrespondenciaPrimeiroComparator;
 import net.barragem.scaffold.ValidatableSampleImpl;
 
+import org.apache.commons.beanutils.BeanUtils;
+
 @Entity
 @NamedQueries( {
 		@NamedQuery(name = "loginQuery", query = "select u from Usuario u left outer join u.perfil p where u.email = :email and u.senha = :senha"),
 		@NamedQuery(name = "recuperarSenhaQuery", query = "from Usuario u where u.email = :email"),
 		@NamedQuery(name = "perfilQuery", query = "select u from Usuario u left outer join u.perfil p where u.id = :id"),
 		@NamedQuery(name = "barragensDeUsuarioQuery", query = "select distinct c.barragem from Ciclo c join c.ranking r join r.jogador j join j.usuarioCorrespondente uc where uc.id = :id"),
-		@NamedQuery(name = "emailExistenteQuery", query = "select 1 from Usuario usuario where usuario.email = :email") })
+		@NamedQuery(name = "emailExistenteQuery", query = "select 1 from Usuario usuario where usuario.email = :email"),
+		@NamedQuery(name = "alteracaoEmailExistenteQuery", query = "select 1 from Usuario usuario where usuario.email = :email and usuario != :usuario") })
 @Table(name = "usuario")
-public class Usuario extends BaseEntity implements Validatable {
+public class Usuario extends BaseEntity implements Validatable, Cloneable {
 
 	@ValidateRequired
 	private String nome;
@@ -199,5 +203,20 @@ public class Usuario extends BaseEntity implements Validatable {
 		List<String> result = new ArrayList<String>();
 		result.addAll(new ValidatableSampleImpl(this).validate());
 		return result;
+	}
+
+	@Override
+	public Object clone() {
+		try {
+			return BeanUtils.cloneBean(this);
+		} catch (IllegalAccessException e) {
+			throw new RuntimeException(e);
+		} catch (InstantiationException e) {
+			throw new RuntimeException(e);
+		} catch (InvocationTargetException e) {
+			throw new RuntimeException(e);
+		} catch (NoSuchMethodException e) {
+			throw new RuntimeException(e);
+		}
 	}
 }

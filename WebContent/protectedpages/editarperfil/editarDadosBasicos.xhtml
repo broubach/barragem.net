@@ -47,7 +47,12 @@
 				</script>
 				<div class="dados">
 					<h:panelGroup id="mensagemErro" layout="block" styleClass="mensagem-erro" rendered="#{! empty messageBean.errorMessages}">
-	    	    		<span>#{msg.label_preencha_os_campos_obrigatorios}</span>
+	    	    		<c:if test="#{messageBean.errorMessages['error_email_especificado_jah_existe'] == null}">
+		    	    		<span>#{msg.label_preencha_os_campos_obrigatorios}</span>
+	    	    		</c:if>
+	    	    		<c:if test="#{messageBean.errorMessages['error_email_especificado_jah_existe'] != null}">
+		    	    		<span>#{msg.error_email_especificado_jah_existe}</span>
+	    	    		</c:if>
 					</h:panelGroup>
 					<div class="input text">
 						<label for="dadosBasicos:nome">#{msg.label_nome}*</label>

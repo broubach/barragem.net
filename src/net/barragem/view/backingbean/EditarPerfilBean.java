@@ -12,6 +12,7 @@ import net.barragem.persistence.entity.Arquivo;
 import net.barragem.persistence.entity.Categoria;
 import net.barragem.persistence.entity.Perfil;
 import net.barragem.persistence.entity.Usuario;
+import net.barragem.persistence.entity.Validatable;
 import net.barragem.scaffold.PersistenceHelper;
 
 import org.richfaces.event.UploadEvent;
@@ -86,7 +87,7 @@ public class EditarPerfilBean extends BaseBean {
 	public void preparaPerfil(ActionEvent e) {
 		EditarPerfilBean editarPerfilBean = new EditarPerfilBean();
 		editarPerfilBean.setPerfilEmFoco(getUsuarioLogado().getPerfil());
-		editarPerfilBean.setUsuarioEmFoco(getUsuarioLogado());
+		editarPerfilBean.setUsuarioEmFoco((Usuario) getUsuarioLogado().clone());
 		if (editarPerfilBean.getPerfilEmFoco() == null) {
 			editarPerfilBean.setPerfilEmFoco(new Perfil());
 		} else if (editarPerfilBean.getPerfilEmFoco().getHash() != null
@@ -106,7 +107,7 @@ public class EditarPerfilBean extends BaseBean {
 	}
 
 	public void salvaPerfil(ActionEvent e) {
-		if (perfilEmFoco.getUsuario() == null || valida(perfilEmFoco.getUsuario())) {
+		if (usuarioEmFoco == null || valida(usuarioEmFoco)) {
 			perfilEmFoco.setUsuario(usuarioEmFoco);
 			usuarioEmFoco.setPerfil(perfilEmFoco);
 			if (selectedItems != null) {
@@ -123,6 +124,16 @@ public class EditarPerfilBean extends BaseBean {
 			PersistenceHelper.persiste(perfilEmFoco);
 			addMensagemAtualizacaoComSucesso();
 		}
+	}
+
+	@Override
+	protected boolean valida(Validatable validatable) {
+		Usuario usuario = (Usuario) validatable;
+		if (!PersistenceHelper.findByNamedQuery("alteracaoEmailExistenteQuery", usuario, usuario.getEmail()).isEmpty()) {
+			messages.addErrorMessage("error_email_especificado_jah_existe", "error_email_especificado_jah_existe");
+		}
+
+		return super.valida(validatable);
 	}
 
 	public void alteraSenha(ActionEvent e) {
