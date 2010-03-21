@@ -107,7 +107,7 @@ public class EditarPerfilBean extends BaseBean {
 	}
 
 	public void salvaPerfil(ActionEvent e) {
-		if (usuarioEmFoco == null || valida(usuarioEmFoco)) {
+		if (valida(usuarioEmFoco)) {
 			perfilEmFoco.setUsuario(usuarioEmFoco);
 			usuarioEmFoco.setPerfil(perfilEmFoco);
 			if (selectedItems != null) {
@@ -122,6 +122,7 @@ public class EditarPerfilBean extends BaseBean {
 				perfilEmFoco.setFoto(fotoEmFoco);
 			}
 			PersistenceHelper.persiste(perfilEmFoco);
+			setUsuarioLogado(usuarioEmFoco);
 			addMensagemAtualizacaoComSucesso();
 		}
 	}
