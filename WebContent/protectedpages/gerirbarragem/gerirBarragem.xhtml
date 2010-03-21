@@ -13,73 +13,25 @@
 	<ui:define name="conteudo">
       <div class="maincontent equalheights">
 
-	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/jquery.colorbox.css" />
-	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/jquery.colorbox-barragem.css" />
-			<script type="text/javascript" src="#{request.contextPath}/js/jquery.meio.mask.min_custom.js" charset="utf-8" ></script>
-	        <script type="text/javascript" src="#{request.contextPath}/js/jquery.colorbox-min.js"></script>
-			<script>
-	            $j(function(){
-		            $j(".popup").colorbox({overlayClose:false, inline:true, href:".add-barragens", scrollbars:false}, function(){$j('#add-barragens\\:local').focus();});
-	            });
-	         </script>
-			<script type="text/javascript" src="#{request.contextPath}/js/3_3_0.GAorg.ajax4jsf.javascript.AjaxScript.js"></script>
-
 			<h:form>
 				<h2><h:outputText value="#{msg.label_minhas_barragens}" /></h2>
-				<br/>
+				<h:panelGroup id="menu-contextual" styleClass="menu-contextual" layout="block">
+			        <ul>
+			            <li>
+							<h:commandLink value="#{msg.label_que_participo}" disabled="true"/>
+			            </li>
+			            <li>
+							<h:commandLink value="#{msg.label_que_administro}" action="barragensQueAdministro" immediate="true"/>
+			            </li>
+			        </ul>
+				</h:panelGroup>
 
-				<h3><h:outputText value="#{msg.label_barragens_que_participo}" /></h3>
-				<ui:include src="../componentes/barragens.xhtml">
+		        <ui:include src="../componentes/barragens.xhtml">
 					<ui:param name="barragens" value="#{gerirBarragemBean.barragens}"/>
-				</ui:include>
-	            <div class="clear"></div>
-	            <br/>
-
-				<div class="btn-novo">
-					<a4j:commandLink actionListener="#{gerirBarragemBean.novaBarragem}" reRender="add-barragens" oncomplete="$j('.popup').click();">
-						<span>#{msg.label_adicionar_barragem}</span>
-					</a4j:commandLink>
-					<a href="#" title="#{msg.label_barragem}" class="popup" style="visibility:hidden"/>
-				</div>
-				<h3><h:outputText value="#{msg.label_barragens_que_administro}" /></h3>
-				<h:dataTable id="painelBarragens" styleClass="gradient" rowClasses=",alt" columnClasses=",,,actions" value="#{gerirBarragemBean.barragens}" var="item" binding="#{gerirBarragemBean.dataTable}">
-					<h:column>
-						<f:facet name="header">
-							<h:outputText value="#{msg.label_local}" />
-						</f:facet>
-						<h:commandLink action="exibirPainelBarragem" actionListener="#{gerirBarragemBean.exibePainelBarragem}"><h:outputText value="#{item.local}" /></h:commandLink>
-					</h:column>
-				
-					<h:column>
-						<f:facet name="header">
-							<h:outputText value="#{msg.label_barragem}" />
-						</f:facet>
-						<h:commandLink action="exibirPainelBarragem" actionListener="#{gerirBarragemBean.exibePainelBarragem}"><h:outputText value="#{item.nome}" /></h:commandLink>
-					</h:column>
-				
-					<h:column>
-						<f:facet name="header">
-							<h:outputText value="#{msg.label_administrador}" />
-						</f:facet>
-						<h:commandLink action="exibirPainelBarragem" actionListener="#{gerirBarragemBean.exibePainelBarragem}"><h:outputText value="#{item.administrador.nome}" /></h:commandLink>
-					</h:column>
-				
-					<h:column headerClass="actions">
-						<f:facet name="header">
-							<h:outputText value="#{msg.label_acoes}" />
-						</f:facet>
-						<h:commandLink onclick="return confirm('#{msg.label_confirma_exclusao}');" actionListener="#{gerirBarragemBean.removeBarragem}"><img src="#{request.contextPath}/img/buttons/btn-deletar.png" alt="#{msg.label_excluir}" title="#{msg.label_excluir}" width="18px" height="18px"/></h:commandLink>&#160;
-						<a4j:commandLink actionListener="#{gerirBarragemBean.detalhaBarragem}" reRender="add-barragens" oncomplete="$j('.popup').click()"><img src="#{request.contextPath}/img/buttons/btn-editar.png" alt="#{msg.label_editar}" title="#{msg.label_editar}" width="18px" height="18px"/></a4j:commandLink>&#160;
-						<h:commandLink action="exibirPainelBarragem" actionListener="#{gerirBarragemBean.exibePainelBarragem}"><img src="#{request.contextPath}/img/buttons/btn-view.png" alt="#{msg.label_visualizar}" title="#{msg.label_visualizar}" width="16px" height="16px"/></h:commandLink>&#160;
-						<h:commandLink actionListener="#{gerirBarragemBean.editaCiclo}" action="editarCiclo"><img src="#{request.contextPath}/img/buttons/btn-editar-ciclo.png" alt="#{msg.label_editar_ciclos}" title="#{msg.label_editar_ciclos}" width="18px" height="18px"/></h:commandLink>
-					</h:column>
-				</h:dataTable>
-	            <div class="clear"></div>
+			    </ui:include>
+		        <div class="clear"></div>
 			</h:form>
 
-			<div style="display:none">
-				<ui:include src="popupBarragem.xhtml" />
-			</div>
       </div>
 	</ui:define>
 </ui:composition>
