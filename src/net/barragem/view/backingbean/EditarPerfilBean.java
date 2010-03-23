@@ -86,14 +86,18 @@ public class EditarPerfilBean extends BaseBean {
 
 	public void preparaPerfil(ActionEvent e) {
 		EditarPerfilBean editarPerfilBean = new EditarPerfilBean();
-		editarPerfilBean.setPerfilEmFoco(getUsuarioLogado().getPerfil());
 		editarPerfilBean.setUsuarioEmFoco((Usuario) getUsuarioLogado().clone());
-		if (editarPerfilBean.getPerfilEmFoco() == null) {
+		if (editarPerfilBean.getUsuarioEmFoco().getPerfil() != null) {
+			editarPerfilBean.setPerfilEmFoco((Perfil) editarPerfilBean.getUsuarioEmFoco().getPerfil().clone());
+			if (editarPerfilBean.getPerfilEmFoco().getHash() != null) {
+				if (!PersistenceHelper.isInitialized(getUsuarioLogado().getPerfil(), "foto")) {
+					PersistenceHelper.initialize("foto", getUsuarioLogado().getPerfil());
+				}
+				editarPerfilBean.getPerfilEmFoco().setFoto(getUsuarioLogado().getPerfil().getFoto());
+				editarPerfilBean.setFotoEmFoco(editarPerfilBean.getPerfilEmFoco().getFoto());
+			}
+		} else {
 			editarPerfilBean.setPerfilEmFoco(new Perfil());
-		} else if (editarPerfilBean.getPerfilEmFoco().getHash() != null
-				&& !PersistenceHelper.isInitialized(editarPerfilBean.getPerfilEmFoco(), "foto")) {
-			PersistenceHelper.initialize("foto", editarPerfilBean.getPerfilEmFoco());
-			editarPerfilBean.setFotoEmFoco(editarPerfilBean.getPerfilEmFoco().getFoto());
 		}
 		if (editarPerfilBean.getPerfilEmFoco().getCategorias() != null
 				&& !editarPerfilBean.getPerfilEmFoco().getCategorias().isEmpty()) {
@@ -106,25 +110,44 @@ public class EditarPerfilBean extends BaseBean {
 		setSessionAttribute("editarPerfilBean", editarPerfilBean);
 	}
 
-	public void salvaPerfil(ActionEvent e) {
+	public void salvaDadosBasicos(ActionEvent e) {
 		if (valida(usuarioEmFoco)) {
-			perfilEmFoco.setUsuario(usuarioEmFoco);
-			usuarioEmFoco.setPerfil(perfilEmFoco);
-			if (selectedItems != null) {
-				List<Categoria> categorias = new ArrayList<Categoria>();
-				for (String selectedItem : selectedItems) {
-					categorias.add(PersistenceHelper.findByPk(Categoria.class, Integer.valueOf(selectedItem)));
-				}
-				perfilEmFoco.setCategorias(categorias);
+			if (usuarioEmFoco.getPerfil() != null) {
+				usuarioEmFoco.getPerfil().setUsuario(usuarioEmFoco);
 			}
-			if (fotoEmFoco != null) {
-				perfilEmFoco.setHash(encriptMd5(fotoEmFoco.getDado().toString()));
-				perfilEmFoco.setFoto(fotoEmFoco);
-			}
-			PersistenceHelper.persiste(perfilEmFoco);
+			usuarioEmFoco.getJogadores().remove(usuarioEmFoco.getJogador());
+			usuarioEmFoco.getJogadores().add(usuarioEmFoco.getJogador());
+			usuarioEmFoco.getJogador().setNome(usuarioEmFoco.getNomeCompletoCapital());
+			PersistenceHelper.persiste(usuarioEmFoco);
 			setUsuarioLogado(usuarioEmFoco);
 			addMensagemAtualizacaoComSucesso();
+			preparaPerfil(e);
 		}
+	}
+
+	public void salvaPerfil(ActionEvent e) {
+		if (selectedItems != null) {
+			List<Categoria> categorias = new ArrayList<Categoria>();
+			for (String selectedItem : selectedItems) {
+				categorias.add(PersistenceHelper.findByPk(Categoria.class, Integer.valueOf(selectedItem)));
+			}
+			perfilEmFoco.setCategorias(categorias);
+		}
+		perfilEmFoco.setUsuario(getUsuarioLogado());
+		perfilEmFoco.getUsuario().setPerfil(perfilEmFoco);
+		PersistenceHelper.persiste(perfilEmFoco);
+		addMensagemAtualizacaoComSucesso();
+		preparaPerfil(e);
+	}
+
+	public void salvaFoto(ActionEvent e) {
+		perfilEmFoco.setHash(encriptMd5(fotoEmFoco.getDado().toString()));
+		perfilEmFoco.setFoto(fotoEmFoco);
+		perfilEmFoco.setUsuario(getUsuarioLogado());
+		perfilEmFoco.getUsuario().setPerfil(perfilEmFoco);
+		PersistenceHelper.persiste(perfilEmFoco);
+		addMensagemAtualizacaoComSucesso();
+		preparaPerfil(e);
 	}
 
 	@Override

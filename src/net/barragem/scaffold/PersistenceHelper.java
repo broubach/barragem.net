@@ -10,6 +10,7 @@ import net.barragem.persistence.entity.BaseEntity;
 import org.apache.commons.beanutils.BeanUtils;
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
+import org.hibernate.LazyInitializationException;
 import org.hibernate.LockMode;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -189,6 +190,19 @@ public class PersistenceHelper {
 	}
 
 	public static boolean isInitialized(Object obj, String proxy) {
-		return Hibernate.isPropertyInitialized(obj, proxy);
+		try {
+			if (BeanUtils.getProperty(obj, proxy).equals("com.sun.jdi.InvocationException occurred invoking method.")) {
+				return false;
+			}
+			return true;
+		} catch (LazyInitializationException e) {
+			return false;
+		} catch (IllegalAccessException e) {
+			throw new RuntimeException(e);
+		} catch (InvocationTargetException e) {
+			throw new RuntimeException(e);
+		} catch (NoSuchMethodException e) {
+			throw new RuntimeException(e);
+		}
 	}
 }

@@ -1,5 +1,7 @@
 package net.barragem.persistence.entity;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -16,9 +18,11 @@ import javax.persistence.Table;
 
 import net.barragem.scaffold.MessageBundleUtils;
 
+import org.apache.commons.beanutils.BeanUtils;
+
 @Entity
 @Table(name = "perfil")
-public class Perfil extends BaseEntity {
+public class Perfil extends BaseEntity implements Cloneable {
 
 	private String clubeMaisFrequentadoNome;
 	private String clubeMaisFrequentadoCidade;
@@ -200,5 +204,22 @@ public class Perfil extends BaseEntity {
 			return stb.toString().substring(0, stb.toString().length() - 2);
 		}
 		return "";
+	}
+
+	@Override
+	public Object clone() {
+		try {
+			Perfil perfil = (Perfil) BeanUtils.cloneBean(this);
+			perfil.setCategorias(new ArrayList<Categoria>(getCategorias()));
+			return perfil;
+		} catch (IllegalAccessException e) {
+			throw new RuntimeException(e);
+		} catch (InstantiationException e) {
+			throw new RuntimeException(e);
+		} catch (InvocationTargetException e) {
+			throw new RuntimeException(e);
+		} catch (NoSuchMethodException e) {
+			throw new RuntimeException(e);
+		}
 	}
 }
