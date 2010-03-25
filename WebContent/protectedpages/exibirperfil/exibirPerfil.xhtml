@@ -56,9 +56,7 @@
 					<div class="dadosExibirPerfilLinhas">
 						<label class="dadosExibirPerfilColunaEsquerda">#{msg.label_ha_quanto_tempo_joga}</label>
 						<c:if test="#{exibirPerfilBean.usuarioEmFoco.perfil != null and exibirPerfilBean.usuarioEmFoco.perfil.dataInicioPratica != null}">
-							<label class="dadosExibirPerfilColunaDireita"><h:outputText id="dataInicioPratica" value="#{exibirPerfilBean.usuarioEmFoco.perfil.dataInicioPratica}">
-								<f:convertDateTime pattern="MM/yyyy"/>
-							</h:outputText></label>
+							<label class="dadosExibirPerfilColunaDireita">#{exibirPerfilBean.usuarioEmFoco.perfil.jogoHa} #{msg[exibirPerfilBean.usuarioEmFoco.perfil.jogoHaUnidadeKey]}</label>
 						</c:if>
 						<c:if test="#{exibirPerfilBean.usuarioEmFoco.perfil == null or exibirPerfilBean.usuarioEmFoco.perfil.dataInicioPratica == null}">
 							<label class="dadosExibirPerfilColunaDireitaAusente">#{msg.label_nao_informado}</label>

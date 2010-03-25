@@ -24,7 +24,7 @@ public class GerirJogadorBean extends BaseBean {
 	private String jogadorNome;
 	private String pesquisa;
 	private String pesquisaSalva;
-	private Integer tipoPesquisa = new Integer(2);
+	private Integer tipoPesquisa = new Integer(1);
 	private ListDataModel jogadores;
 	private Paginavel<Jogador> paginacaoJogadores;
 
