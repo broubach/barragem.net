@@ -27,13 +27,6 @@
 		<replace dir="${basedir}/temp/staticpages" token="/barragem/" value="/" includes="isys.html" defaultexcludes="false"/>
 
 		<!-- Minifica todos os CSSs - todos os css dentro da pasta css -->
-		<java jar="yuicompressor-2.4.2.jar" fork="true" output="${basedir}/temp/fileupload.css">
-	         <classpath>
-	           <pathelement location="${basedir}"/>
-	           <pathelement path="${java.class.path}"/>
-	         </classpath>
-			<arg value="${basedir}/temp/css/fileupload/fileupload.css"/>
-		</java>
 		<java jar="yuicompressor-2.4.2.jar" fork="true" output="${basedir}/temp/ie-fix.css">
 	         <classpath>
 	           <pathelement location="${basedir}"/>
@@ -127,11 +120,6 @@
 		</java>
 		
 		<!-- Move arquivos minificados -->
-		<move todir="${basedir}/temp/css/fileupload">
-			<fileset dir="${basedir}/temp">
-				<include name="fileupload.css"/>
-			</fileset>
-		</move>
 		<move todir="${basedir}/temp/css">
 			<fileset dir="${basedir}/temp">
 				<include name="*.css"/>
