@@ -141,11 +141,18 @@ public class EditarPerfilBean extends BaseBean {
 	}
 
 	public void salvaFoto(ActionEvent e) {
+		Arquivo fotoASerRemovida = null;
+		if (fotoEmFoco.getId() == null && perfilEmFoco.getFoto() != null && perfilEmFoco.getFoto().getId() != null) {
+			fotoASerRemovida = perfilEmFoco.getFoto();
+		}
 		perfilEmFoco.setHash(encriptMd5(fotoEmFoco.getDado().toString()));
 		perfilEmFoco.setFoto(fotoEmFoco);
 		perfilEmFoco.setUsuario(getUsuarioLogado());
 		perfilEmFoco.getUsuario().setPerfil(perfilEmFoco);
 		PersistenceHelper.persiste(perfilEmFoco);
+		if (fotoASerRemovida != null) {
+			PersistenceHelper.remove(fotoASerRemovida);
+		}
 		addMensagemAtualizacaoComSucesso();
 		preparaPerfil(e);
 	}
