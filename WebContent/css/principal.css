@@ -272,15 +272,6 @@ fieldset#parciais {
 }
 
 /********************* PERFIL *************/
-.perfilFotoContainer {
-	width: 260px; 
-	margin-left: auto; 
-	margin-right: auto; 
-	display: table;
-}
-.perfilBtnUploadFotoContainer {
-	float: left;
-}
 .alterar-senha .dados-popup label {
 	width:180px;
 }
@@ -751,7 +742,7 @@ td.actions {
 .rich-fileupload-toolbar-decor {
 	margin-left: 5px;
 }
-.dr-pnl {
+.rich-panel-body {
 	float: left;
 }
 .foto-perfil {
@@ -761,6 +752,21 @@ td.actions {
 .foto-perfil-small {
 	width: 37px; 
 	height: 49px;
+}
+.perfilFotoContainer {
+	width: 260px; 
+	margin-left: auto; 
+	margin-right: auto; 
+	display: table;
+}
+.perfilFotoUploadFotoContainer {
+	float: left; 
+	background-color: #ffffff; 
+	padding: 10px; 
+	border: 1px solid #C4C0B9;
+}
+.perfilBtnUploadFotoContainer {
+	float: left;
 }
 
 /********************* RODADAS *********************/

@@ -220,6 +220,12 @@ li {
 	margin-left: auto; 
 	margin-right: auto;
 }
+.perfilFotoUploadFotoContainer {
+	float: left; 
+	background-color: #ffffff; 
+	padding: 10px; 
+	border: 1px solid #C4C0B9;
+}
 .perfilFotoContainer {
 	width: 260px; 
 	margin-left: auto; 
@@ -235,7 +241,7 @@ li {
 .rich-fileupload-toolbar-decor {
 	margin-left: 5px;
 }
-.dr-pnl {
+.rich-panel-body {
 	float: left;
 }
 .foto-perfil {

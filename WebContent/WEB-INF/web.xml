@@ -41,18 +41,6 @@
 	</servlet-mapping>
 
 	<!-- RichFaces config  -->
-	<!-- Defines how the RichFaces style files are loaded to application. -->
-	<context-param>
-		<param-name>org.richfaces.LoadStyleStrategy</param-name>
-		<param-value>NONE</param-value>
-	</context-param>
-	
-	<!-- Defines how the RichFaces script files are loaded to application. -->
-	<context-param>
-		<param-name>org.richfaces.LoadScriptStrategy</param-name>
-		<param-value>NONE</param-value>
-	</context-param>
-
 	<!-- Defining and mapping the RichFaces filter-->
 	<filter>
 		<display-name>RichFaces Filter</display-name>
@@ -70,6 +58,9 @@
 	<filter-mapping>
 		<filter-name>richfaces</filter-name>
 		<url-pattern>*.xhtml</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
 	</filter-mapping>
 
 	<!-- Filtros específicos da aplicação -->
