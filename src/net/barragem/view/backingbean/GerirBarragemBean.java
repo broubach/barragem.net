@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.faces.event.ActionEvent;
 
+import net.barragem.business.bo.BarragemBo;
 import net.barragem.persistence.entity.Barragem;
 import net.barragem.scaffold.PersistenceHelper;
 
@@ -45,7 +46,7 @@ public class GerirBarragemBean extends BaseBean {
 	public void salvaBarragem(ActionEvent e) {
 		if (valida(barragemEmFoco)) {
 			try {
-				PersistenceHelper.persiste(barragemEmFoco);
+				BarragemBo.getInstance().salva(barragemEmFoco);
 				lista();
 				addMensagemAtualizacaoComSucesso();
 			} catch (ConstraintViolationException e1) {
