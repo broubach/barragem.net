@@ -1,11 +1,10 @@
 package net.barragem.view.backingbean;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.faces.event.ActionEvent;
 
-import net.barragem.persistence.entity.Conta;
+import net.barragem.business.bo.LoginBo;
 import net.barragem.persistence.entity.Usuario;
 import net.barragem.scaffold.PersistenceHelper;
 
@@ -35,16 +34,7 @@ public class LoginBean extends BaseBean {
 			messages.addErrorMessage("login", "label_login_senha_invalidos");
 			return "";
 		} else {
-			// atualiza hora do ultimo acesso
-			usuarios.get(0).setDataPenultimoAcesso(usuarios.get(0).getDataUltimoAcesso());
-			usuarios.get(0).setDataUltimoAcesso(new Date());
-			PersistenceHelper.persiste(usuarios.get(0));
-			PersistenceHelper.initialize("jogadores", usuarios.get(0));
-			// coloca usuario na sessao
-			setUsuarioLogado(usuarios.get(0));
-			// coloca conta do usuario na sessao
-			setContaUsuario((Conta) PersistenceHelper.findByNamedQuery("findContaPorUsuarioQuery", usuarios.get(0))
-					.get(0));
+			getBo(LoginBo.class).login(usuarios.get(0));
 			return "login";
 		}
 	}

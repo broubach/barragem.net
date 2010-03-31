@@ -36,7 +36,7 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-public class BaseBean {
+public abstract class BaseBean {
 
 	public static final String FOTO_DEFAULT_JOGADOR_KEY = "foto-jogador";
 	public static final Integer FOTO_DEFAULT_JOGADOR_ID = new Integer(2);
@@ -310,5 +310,24 @@ public class BaseBean {
 			return false;
 		}
 		return true;
+	}
+
+	protected <T> T getBo(Class<T> bo) {
+		try {
+			return bo.getConstructor(HttpServletRequest.class, HttpServletResponse.class).newInstance(getRequest(),
+					getResponse());
+		} catch (IllegalArgumentException e) {
+			throw new RuntimeException(e);
+		} catch (SecurityException e) {
+			throw new RuntimeException(e);
+		} catch (InstantiationException e) {
+			throw new RuntimeException(e);
+		} catch (IllegalAccessException e) {
+			throw new RuntimeException(e);
+		} catch (InvocationTargetException e) {
+			throw new RuntimeException(e);
+		} catch (NoSuchMethodException e) {
+			throw new RuntimeException(e);
+		}
 	}
 }

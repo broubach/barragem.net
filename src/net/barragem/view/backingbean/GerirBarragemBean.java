@@ -46,7 +46,7 @@ public class GerirBarragemBean extends BaseBean {
 	public void salvaBarragem(ActionEvent e) {
 		if (valida(barragemEmFoco)) {
 			try {
-				BarragemBo.getInstance().salva(barragemEmFoco);
+				getBo(BarragemBo.class).salva(barragemEmFoco);
 				lista();
 				addMensagemAtualizacaoComSucesso();
 			} catch (ConstraintViolationException e1) {

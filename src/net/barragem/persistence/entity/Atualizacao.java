@@ -3,9 +3,15 @@ package net.barragem.persistence.entity;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
+@NamedQueries( {
+		@NamedQuery(name = "atualizacaoUsuarioPaginaInicialQuery", query = "from Atualizacao a where objetoClassName like '%.Usuario' and objetoId = :objetoId order by a.data desc"),
+		@NamedQuery(name = "atualizacaoBarragemPaginaInicialQuery", query = "from Atualizacao a where objetoClassName like '%.Barragem' and objetoId in (:objetoId) order by a.data desc"),
+		@NamedQuery(name = "atualizacaoJogoBarragemPaginaInicialQuery", query = "from Atualizacao a where objetoClassName like '%.Jogo' and objetoId in (:objetoId) order by a.data desc") })
 @Table(name = "atualizacao")
 public class Atualizacao extends BaseEntity {
 

@@ -18,6 +18,12 @@ import org.hibernate.Transaction;
 
 public class PersistenceHelper {
 
+	private static boolean isTest = false;
+
+	public static void setTest(boolean isTest) {
+		PersistenceHelper.isTest = isTest;
+	}
+
 	public static void persiste(BaseEntity entidade) {
 		Session session = null;
 		Transaction t = null;
@@ -36,7 +42,7 @@ public class PersistenceHelper {
 			t.rollback();
 			throw pe;
 		} finally {
-			if (session != null) {
+			if (session != null && !isTest) {
 				session.close();
 			}
 		}
@@ -48,7 +54,7 @@ public class PersistenceHelper {
 			session = HibernateUtil.getSession();
 			return session.createQuery(query).list();
 		} finally {
-			if (session != null) {
+			if (session != null && !isTest) {
 				session.close();
 			}
 		}
@@ -66,7 +72,7 @@ public class PersistenceHelper {
 			}
 			return query.list();
 		} finally {
-			if (session != null) {
+			if (session != null && !isTest) {
 				session.close();
 			}
 		}
@@ -87,7 +93,7 @@ public class PersistenceHelper {
 			}
 			return query.list();
 		} finally {
-			if (session != null) {
+			if (session != null && !isTest) {
 				session.close();
 			}
 		}
@@ -105,7 +111,7 @@ public class PersistenceHelper {
 			t.rollback();
 			throw pe;
 		} finally {
-			if (session != null) {
+			if (session != null && !isTest) {
 				session.close();
 			}
 		}
@@ -132,7 +138,7 @@ public class PersistenceHelper {
 		} catch (NoSuchMethodException e) {
 			throw new RuntimeException(e);
 		} finally {
-			if (session != null) {
+			if (session != null && !isTest) {
 				session.close();
 			}
 		}
@@ -168,7 +174,7 @@ public class PersistenceHelper {
 		} catch (NoSuchMethodException e) {
 			throw new RuntimeException(e);
 		} finally {
-			if (session != null) {
+			if (session != null && !isTest) {
 				session.close();
 			}
 		}
@@ -183,7 +189,7 @@ public class PersistenceHelper {
 		} catch (HibernateException e) {
 			throw new RuntimeException(e);
 		} finally {
-			if (session != null) {
+			if (session != null && !isTest) {
 				session.close();
 			}
 		}
@@ -203,6 +209,30 @@ public class PersistenceHelper {
 			throw new RuntimeException(e);
 		} catch (NoSuchMethodException e) {
 			throw new RuntimeException(e);
+		}
+	}
+
+	public static Transaction beginTransaction() {
+		try {
+			return HibernateUtil.getSession().beginTransaction();
+
+		} catch (HibernateException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public static void rollbackTransaction(Transaction tx) {
+		Session session = null;
+		try {
+			session = HibernateUtil.getSession();
+			tx.rollback();
+
+		} catch (HibernateException e) {
+			throw new RuntimeException(e);
+		} finally {
+			if (session != null && !isTest) {
+				session.close();
+			}
 		}
 	}
 }

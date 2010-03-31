@@ -2,21 +2,18 @@ package net.barragem.business.bo;
 
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import net.barragem.persistence.entity.AcaoEnum;
 import net.barragem.persistence.entity.Atualizacao;
 import net.barragem.persistence.entity.Barragem;
 import net.barragem.scaffold.PersistenceHelper;
-import net.barragem.view.backingbean.BaseBean;
 
-public class BarragemBo extends BaseBean {
+public class BarragemBo extends BaseBo {
 
-	private static BarragemBo instance;
-
-	public static BarragemBo getInstance() {
-		if (instance == null) {
-			instance = new BarragemBo();
-		}
-		return instance;
+	public BarragemBo(HttpServletRequest request, HttpServletResponse response) {
+		super(request, response);
 	}
 
 	public void salva(Barragem barragem) {
