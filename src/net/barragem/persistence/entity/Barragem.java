@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -17,7 +18,9 @@ import net.barragem.scaffold.ValidatableSampleImpl;
 import org.apache.commons.beanutils.BeanUtils;
 
 @Entity
-@NamedQuery(name = "barragemPorUsuarioQuery", query = "from Barragem barragem where barragem.administrador = :usuario")
+@NamedQueries( {
+		@NamedQuery(name = "barragensQueAdministroQuery", query = "from Barragem barragem where barragem.administrador = :usuario"),
+		@NamedQuery(name = "barragensQueParticipoQuery", query = "select distinct barragem from Barragem barragem join barragem.ciclos ciclo join ciclo.ranking ranking where ranking.jogador.usuarioCorrespondente = :usuario") })
 @Table(name = "barragem")
 public class Barragem extends BaseEntity implements Validatable, Cloneable {
 
@@ -81,6 +84,9 @@ public class Barragem extends BaseEntity implements Validatable, Cloneable {
 	}
 
 	public Ciclo criaCicloERodada(Integer nomeAlternativoBaseadoEmMes) {
+		if (getCiclos() == null) {
+			setCiclos(new ArrayList<Ciclo>());
+		}
 		Ciclo ciclo = new Ciclo();
 		ciclo.setNomeAlternativoBaseadoEmMes(nomeAlternativoBaseadoEmMes);
 		ciclo.setParametros(getParametrosIniciais());

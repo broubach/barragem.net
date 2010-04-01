@@ -14,20 +14,25 @@ import org.hibernate.exception.ConstraintViolationException;
 @KeepAlive
 public class GerirBarragemBean extends BaseBean {
 	private Barragem barragemEmFoco;
-	private List<Barragem> barragens;
+	private List<Barragem> barragensQueAdministro;
+	private List<Barragem> barragensQueParticipo;
 
 	public GerirBarragemBean() {
 		lista();
 	}
 
-	public List<Barragem> getBarragens() {
-		return barragens;
+	public List<Barragem> getBarragensQueAdministro() {
+		return barragensQueAdministro;
+	}
+
+	public List<Barragem> getBarragensQueParticipo() {
+		return barragensQueParticipo;
 	}
 
 	public void removeBarragem(ActionEvent e) {
-		Barragem barragemARemover = barragens.get(getIndex());
+		Barragem barragemARemover = barragensQueAdministro.get(getIndex());
 		PersistenceHelper.remove(barragemARemover);
-		barragens.remove(barragemARemover);
+		barragensQueAdministro.remove(barragemARemover);
 	}
 
 	public Barragem getBarragemEmFoco() {
@@ -56,23 +61,21 @@ public class GerirBarragemBean extends BaseBean {
 	}
 
 	private void lista() {
-		barragens = PersistenceHelper.findByNamedQuery("barragemPorUsuarioQuery", getUsuarioLogado());
+		barragensQueAdministro = PersistenceHelper.findByNamedQuery("barragensQueAdministroQuery", getUsuarioLogado());
+		barragensQueParticipo = PersistenceHelper.findByNamedQuery("barragensQueParticipoQuery", getUsuarioLogado());
 	}
 
 	public void detalhaBarragem(ActionEvent e) {
-		barragemEmFoco = (Barragem) barragens.get(getIndex()).clone();
+		barragemEmFoco = (Barragem) barragensQueAdministro.get(getIndex()).clone();
 	}
 
 	public void editaCiclo(ActionEvent e) {
 		if (getIndex() != -1) {
-			barragemEmFoco = (Barragem) PersistenceHelper.findByPk(Barragem.class, barragens.get(getIndex()).getId(),
-					"ciclos");
+			barragemEmFoco = (Barragem) PersistenceHelper.findByPk(Barragem.class, barragensQueAdministro.get(
+					getIndex()).getId(), "ciclos");
 		} else {
 			GerirBarragemBean bean = (GerirBarragemBean) getRequestAttribute("gerirBarragemBean");
 			barragemEmFoco = bean.getBarragemEmFoco();
-		}
-		if (barragemEmFoco.getCiclos().isEmpty()) {
-			PersistenceHelper.persiste(barragemEmFoco.criaCicloERodada());
 		}
 		GerirCicloBean cicloBean = new GerirCicloBean();
 		cicloBean.carregaUltimoCiclo(barragemEmFoco);
@@ -81,8 +84,8 @@ public class GerirBarragemBean extends BaseBean {
 	}
 
 	public void exibePainelBarragem(ActionEvent e) {
-		Barragem barragem = (Barragem) PersistenceHelper.findByPk(Barragem.class, barragens.get(getIndex()).getId(),
-				"ciclos");
+		Barragem barragem = (Barragem) PersistenceHelper.findByPk(Barragem.class, barragensQueAdministro
+				.get(getIndex()).getId(), "ciclos");
 
 		ExibirPainelBarragemBean painelBarragemBean = new ExibirPainelBarragemBean();
 		painelBarragemBean.setCicloEmFoco(barragem.getCiclos().get(0));

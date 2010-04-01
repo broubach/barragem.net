@@ -1,8 +1,9 @@
 package net.barragem.persistence.entity;
 
 public enum AcaoEnum {
-	CriarBarragem("label_atualizacao_barragem_criou"), AtualizarBarragem("label_atualizacao_barragem_atualizou"), SortearJogosBarragem(
-			"label_atualizacao_jogobarragem_"), CriarJogoBarragem(""), AtualizarJogoBarragem("");
+	CriarBarragem("label_acao_barragem_criou"), SortearJogosBarragem("label_acao_barragem_sorteou"), CriarJogoBarragem(
+			"label_acao_jogo_barragem_criou"), AtualizarJogoBarragem("label_acao_jogo_barragem_atualizou"), AdicionarUsuario(
+			"label_acao_lista_adicionou");
 
 	private String acaoKey;
 

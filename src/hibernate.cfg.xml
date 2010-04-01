@@ -45,6 +45,7 @@
 		<mapping class="net.barragem.persistence.entity.Placar" />
 		<mapping class="net.barragem.persistence.entity.Rodada" />
 		<mapping class="net.barragem.persistence.entity.Parcial" />
+		<mapping class="net.barragem.persistence.entity.Predicado" />
 		<mapping class="net.barragem.persistence.entity.Usuario" />
 		<mapping class="net.barragem.persistence.entity.Perfil" />
 		<mapping class="net.barragem.persistence.entity.Operacao" />

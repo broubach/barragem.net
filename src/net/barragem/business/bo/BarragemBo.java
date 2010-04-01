@@ -20,11 +20,12 @@ public class BarragemBo extends BaseBo {
 		AcaoEnum acaoEnum = null;
 		if (barragem.getId() == null) {
 			acaoEnum = AcaoEnum.CriarBarragem;
-		} else {
-			acaoEnum = AcaoEnum.AtualizarBarragem;
 		}
 		PersistenceHelper.persiste(barragem);
-		PersistenceHelper.persiste(new Atualizacao(getUsuarioLogado().getClass().getName(), getUsuarioLogado().getId(),
-				acaoEnum, barragem.getClass().getName(), barragem.getId(), new Date()));
+		PersistenceHelper.persiste(barragem.criaCicloERodada());
+		if (acaoEnum != null) {
+			PersistenceHelper.persiste(new Atualizacao(getUsuarioLogado().getClass().getName(), getUsuarioLogado()
+					.getId(), acaoEnum, barragem.getClass().getName(), barragem.getId(), new Date()));
+		}
 	}
 }

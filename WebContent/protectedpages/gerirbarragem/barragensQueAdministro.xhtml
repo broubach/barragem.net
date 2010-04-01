@@ -43,7 +43,7 @@
 			<a href="#" title="#{msg.label_barragem}" class="popup" style="visibility:hidden"/>
 		</div>
 
-		<h:dataTable id="painelBarragens" styleClass="gradient" rowClasses=",alt" columnClasses=",,,actions" value="#{gerirBarragemBean.barragens}" var="item" binding="#{gerirBarragemBean.dataTable}">
+		<h:dataTable id="painelBarragens" styleClass="gradient" rowClasses=",alt" columnClasses=",,,actions" value="#{gerirBarragemBean.barragensQueAdministro}" var="item" binding="#{gerirBarragemBean.dataTable}">
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="#{msg.label_local}" />
