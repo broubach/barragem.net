@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.faces.event.ActionEvent;
 
+import net.barragem.persistence.entity.Atualizacao;
 import net.barragem.persistence.entity.Barragem;
 import net.barragem.persistence.entity.Jogador;
 import net.barragem.persistence.entity.Usuario;
@@ -35,6 +36,7 @@ public class ExibirPerfilBean extends BaseBean {
 		novoJogador.setUsuarioDono(getUsuarioLogado());
 		getUsuarioLogado().getJogadores().add(novoJogador);
 		PersistenceHelper.persiste(getUsuarioLogado());
+		PersistenceHelper.persiste(Atualizacao.criaAdicionarUsuario(getUsuarioLogado(), usuarioEmFoco));
 		addMensagemAtualizacaoComSucesso();
 		// TODO: redigir conteudo de email
 	}

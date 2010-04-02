@@ -25,7 +25,7 @@
 	         </script>
 			
 			<h:form id="gerirRodadaForm">
-				<h:panelGroup id="mensagem-erro" layout="block" styleClass="mensagem-erro" rendered="#{messageBean.errorMessages['saldo_insuficiente_exception'] != null}">
+				<h:panelGroup id="mensagem-erro" layout="block" style="display: none" styleClass="mensagem-erro">
 					#{msg.label_saldo_insuficiente}
 				</h:panelGroup>
 
@@ -55,7 +55,7 @@
 			        <legend>#{msg.label_jogos}</legend>
 	
 					<h:panelGroup styleClass="btn-novo" display="block" rendered="#{gerirRodadaBean.rodadaEmFoco.inoperavel == false}">
-						<a4j:commandLink actionListener="#{gerirRodadaBean.adicionaJogo}" reRender="add-jogo,gerirRodadaForm" oncomplete="if (#{gerirRodadaBean.possuiSaldoParaUmJogo}) $j('.popup').click();" rendered="#{gerirRodadaBean.rodadaEmFoco.inoperavel == false}">
+						<a4j:commandLink actionListener="#{gerirRodadaBean.adicionaJogo}" reRender="add-jogo" oncomplete="if (#{gerirRodadaBean.possuiSaldoParaUmJogo}) {$j('.popup').click();} else {$j('.mensagem-erro').show();}" rendered="#{gerirRodadaBean.rodadaEmFoco.inoperavel == false}">
 							<span>#{msg.label_adicionar_jogo}</span>
 						</a4j:commandLink>
 						<a href="#" title="#{msg.label_jogo}" class="popup" style="visibility:hidden"/>

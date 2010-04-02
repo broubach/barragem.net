@@ -26,16 +26,7 @@ public class LoginBo extends BaseBo {
 		// coloca conta do usuario na sessao
 		setContaUsuario((Conta) PersistenceHelper.findByNamedQuery("findContaPorUsuarioQuery", usuario).get(0));
 
-		// busca por adicoes de jogador
-		PersistenceHelper.findByNamedQueryWithLimits("atualizacaoUsuarioPaginaInicialQuery", 0, 5, getUsuarioLogado()
-				.getId());
-
-		// busca por barragens
-		PersistenceHelper.findByNamedQueryWithLimits("atualizacaoBarragemPaginaInicialQuery", 0, 5, getUsuarioLogado()
-				.getId());
-
-		// busca por jogos
-		PersistenceHelper.findByNamedQueryWithLimits("atualizacaoJogoBarragemPaginaInicialQuery", 0, 5,
-				getUsuarioLogado().getId());
+		// busca por atualizacoes
+		PersistenceHelper.findByNamedQueryWithLimits("atualizacaoPaginaInicialQuery", 0, 5, getUsuarioLogado().getId());
 	}
 }
