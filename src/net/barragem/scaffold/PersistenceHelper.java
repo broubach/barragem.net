@@ -8,6 +8,7 @@ import javax.persistence.PersistenceException;
 import net.barragem.persistence.entity.BaseEntity;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.LazyInitializationException;
@@ -15,6 +16,7 @@ import org.hibernate.LockMode;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 public class PersistenceHelper {
 
@@ -37,7 +39,9 @@ public class PersistenceHelper {
 			}
 
 			session.merge(entidade);
-			t.commit();
+			if (!isTest) {
+				t.commit();
+			}
 		} catch (PersistenceException pe) {
 			t.rollback();
 			throw pe;
@@ -106,7 +110,9 @@ public class PersistenceHelper {
 			session = HibernateUtil.getSession();
 			t = session.beginTransaction();
 			session.delete(entity);
-			t.commit();
+			if (!isTest) {
+				t.commit();
+			}
 		} catch (PersistenceException pe) {
 			t.rollback();
 			throw pe;
@@ -234,5 +240,43 @@ public class PersistenceHelper {
 				session.close();
 			}
 		}
+	}
+
+	public static <T> T findFirst(Class<T> clazz) {
+		Session session = null;
+		try {
+			session = HibernateUtil.getSession();
+			Criteria criteria = session.createCriteria(clazz);
+			criteria.setFirstResult(0);
+			criteria.setMaxResults(1);
+			return (T) criteria.uniqueResult();
+
+		} catch (HibernateException e) {
+			throw new RuntimeException(e);
+		} finally {
+			if (session != null && !isTest) {
+				session.close();
+			}
+		}
+	}
+
+	public static <T extends BaseEntity> T findFirst(Class<T> clazz, T notToBe) {
+		Session session = null;
+		try {
+			session = HibernateUtil.getSession();
+			Criteria criteria = session.createCriteria(clazz);
+			criteria.setFirstResult(0);
+			criteria.setMaxResults(1);
+			criteria.add(Restrictions.not(Restrictions.eq("id", notToBe.getId())));
+			return (T) criteria.uniqueResult();
+
+		} catch (HibernateException e) {
+			throw new RuntimeException(e);
+		} finally {
+			if (session != null && !isTest) {
+				session.close();
+			}
+		}
+
 	}
 }

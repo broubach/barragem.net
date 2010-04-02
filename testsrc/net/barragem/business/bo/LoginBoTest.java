@@ -1,14 +1,11 @@
 package net.barragem.business.bo;
 
-import java.util.Date;
 import java.util.List;
 
-import net.barragem.persistence.entity.AcaoEnum;
 import net.barragem.persistence.entity.Atualizacao;
 import net.barragem.persistence.entity.Barragem;
-import net.barragem.persistence.entity.Predicado;
+import net.barragem.persistence.entity.Jogador;
 import net.barragem.persistence.entity.Rodada;
-import net.barragem.persistence.entity.TipoPredicadoValueEnum;
 import net.barragem.persistence.entity.Usuario;
 import net.barragem.scaffold.PersistenceHelper;
 
@@ -21,55 +18,51 @@ import org.junit.Test;
 public class LoginBoTest {
 	private Transaction tx = null;
 
+	private Usuario usuario1 = null;
+	private Usuario usuario2 = null;
+	private Jogador jogador1 = null;
+	private Jogador jogador2 = null;
+	private Barragem barragem = null;
+	private Rodada rodada = null;
+
 	@Before
 	public void before() {
 		tx = PersistenceHelper.beginTransaction();
 		PersistenceHelper.setTest(true);
-		criaAtualizacoesDeBarragem();
-		criaAtualizacoesDeUsuario();
-		criaAtualizacoesDeJogoBarragem();
+		usuario1 = PersistenceHelper.findFirst(Usuario.class);
+		usuario2 = PersistenceHelper.findFirst(Usuario.class, usuario1);
+		jogador1 = PersistenceHelper.findFirst(Jogador.class);
+		jogador2 = PersistenceHelper.findFirst(Jogador.class, jogador1);
+		barragem = PersistenceHelper.findFirst(Barragem.class);
+		rodada = barragem.getCiclos().get(0).getRodadas().get(0);
+		criaAtualizacoesDeBarragem(usuario1, barragem, rodada);
+		criaAtualizacoesDeJogoBarragem(usuario1, usuario2, barragem);
+		criaAtualizacoesDeUsuario(usuario1, usuario2);
 	}
 
-	private void criaAtualizacoesDeBarragem() {
+	private void criaAtualizacoesDeBarragem(Usuario usuario1, Barragem barragem, Rodada rodada) {
 		// Justino criou a barragem Amigos do Tennis
-		PersistenceHelper.persiste(new Atualizacao(Usuario.class.getName(), 115, AcaoEnum.CriarBarragem, Barragem.class
-				.getName(), 1, new Date()));
-
-		// Justino sorteou os jogos rodada n.5 da barragem Amigos do Tennis
-		PersistenceHelper.persiste(new Atualizacao(Usuario.class.getName(), 115, AcaoEnum.SortearJogosBarragem,
-				Rodada.class.getName(), 1, new Date(), new Predicado("label_predicado_da_barragem", true,
-						Barragem.class.getName(), TipoPredicadoValueEnum.Clazz, 1)));
+		PersistenceHelper.persiste(Atualizacao.criaCriarBarragem(usuario1, barragem));
+		// Justino sorteou os jogos da rodada n.5 da barragem Amigos do Tennis
+		PersistenceHelper.persiste(Atualizacao.criaSortearJogosBarragem(usuario1, rodada, barragem));
 	}
 
-	private void criaAtualizacoesDeJogoBarragem() {
+	private void criaAtualizacoesDeJogoBarragem(Usuario usuario1, Usuario usuario2, Barragem barragem) {
 		// Justino atualizou o jogo da barragem Primeira Classe (Amigos do Tennis) entre Bernardo e Marcelo
-		PersistenceHelper.persiste(new Atualizacao(Usuario.class.getName(), 115, AcaoEnum.AtualizarJogoBarragem,
-				Barragem.class.getName(), 1, new Date(), new Predicado("label_predicado_entre", true, Usuario.class
-						.getName(), TipoPredicadoValueEnum.Clazz, 1), new Predicado("label_predicado_e", true,
-						Usuario.class.getName(), TipoPredicadoValueEnum.Clazz, 1)));
+		PersistenceHelper.persiste(Atualizacao.criaAtualizarJogoBarragem(usuario1, barragem, jogador1, jogador2));
 		// Justino criou um novo jogo na barragem Primeira Classe (Amigos do Tennis) entre Bernardo e Marcelo
-		PersistenceHelper.persiste(new Atualizacao(Usuario.class.getName(), 115, AcaoEnum.CriarJogoBarragem,
-				Barragem.class.getName(), 1, new Date(), new Predicado("label_predicado_entre", true, Usuario.class
-						.getName(), TipoPredicadoValueEnum.Clazz, 1), new Predicado("label_predicado_e", true,
-						Usuario.class.getName(), TipoPredicadoValueEnum.Clazz, 1)));
+		PersistenceHelper.persiste(Atualizacao.criaCriarJogoBarragem(usuario1, barragem, jogador1, jogador2));
 	}
 
-	private void criaAtualizacoesDeUsuario() {
+	private void criaAtualizacoesDeUsuario(Usuario usuario1, Usuario usuario2) {
 		// Justino adicionou Bernardo Roubach à sua lista 
-		PersistenceHelper.persiste(new Atualizacao(Usuario.class.getName(), 115, AcaoEnum.AdicionarUsuario,
-				Barragem.class.getName(), 1, new Date(), new Predicado("label_predicado_sua_lista", true)));
+		PersistenceHelper.persiste(Atualizacao.criaAdicionarUsuario(usuario1, usuario2));
 	}
 
 	@Test
 	public void testLogin() {
-		List<Atualizacao> result = PersistenceHelper.findByNamedQueryWithLimits("atualizacaoUsuarioPaginaInicialQuery",
-				0, 5, 113);
-		Assert.assertTrue(result.size() >= 2);
-
-		result = PersistenceHelper.findByNamedQueryWithLimits("atualizacaoBarragemPaginaInicialQuery", 0, 5, 113);
-		Assert.assertTrue(result.size() >= 2);
-
-		result = PersistenceHelper.findByNamedQueryWithLimits("atualizacaoJogoBarragemPaginaInicialQuery", 0, 5, 113);
+		List<Atualizacao> result = PersistenceHelper.findByNamedQueryWithLimits("atualizacaoPaginaInicialQuery", 0, 5,
+				usuario2.getId());
 		Assert.assertTrue(result.size() >= 1);
 	}
 

@@ -13,10 +13,16 @@ import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 @Entity
-@NamedQueries( {
-		@NamedQuery(name = "atualizacaoUsuarioPaginaInicialQuery", query = "from Atualizacao a where objetoClassName like '%.Usuario' and objetoId = :objetoId order by a.data desc"),
-		@NamedQuery(name = "atualizacaoBarragemPaginaInicialQuery", query = "from Atualizacao a where objetoClassName like '%.Barragem' and objetoId in (:objetoId) order by a.data desc"),
-		@NamedQuery(name = "atualizacaoJogoBarragemPaginaInicialQuery", query = "from Atualizacao a where objetoClassName like '%.Jogo' and objetoId in (:objetoId) order by a.data desc") })
+@NamedQueries( { @NamedQuery(name = "atualizacaoPaginaInicialQuery", query = "select distinct a from Atualizacao a left outer join a.predicados p, "
+		+ "Barragem b "
+		+ "right outer join b.ciclos c "
+		+ "right outer join c.ranking r "
+		+ "right outer join r.jogador j "
+		+ "where (a.objetoClassName like '%.Usuario' and a.objetoId = j.usuarioCorrespondente.id and a.objetoId = :usuarioId) or "
+		+ "(a.objetoClassName like '%.Barragem' and a.objetoId = b.id and j.usuarioCorrespondente.id = :usuarioId) or "
+		+ "(a.objetoClassName like '%.Rodada' and a.objetoId = r.id and j.usuarioCorrespondente.id = :usuarioId) or "
+		+ "(p.tipoPredicadoValue = '1' and p.predicadoValue like '%.Barragem' and p.predicadoValueId = b.id and j.usuarioCorrespondente.id = :usuarioId) or"
+		+ "(p.tipoPredicadoValue = '1' and p.predicadoValue like '%.Jogador' and p.predicadoValueId = j.id and j.usuarioCorrespondente.id = :usuarioId) order by a.data desc") })
 @Table(name = "atualizacao")
 /***
  * Ex. de frases de atualização:
@@ -130,5 +136,37 @@ public class Atualizacao extends BaseEntity {
 
 	public void setPredicados(Set<Predicado> predicados) {
 		this.predicados = predicados;
+	}
+
+	public static Atualizacao criaCriarBarragem(Usuario sujeito, Barragem objeto) {
+		return new Atualizacao(Usuario.class.getName(), sujeito.getId(), AcaoEnum.CriarBarragem, Barragem.class
+				.getName(), objeto.getId(), new Date());
+	}
+
+	public static Atualizacao criaSortearJogosBarragem(Usuario sujeito, Rodada objeto, Barragem predicado) {
+		return new Atualizacao(Usuario.class.getName(), sujeito.getId(), AcaoEnum.SortearJogosBarragem, Rodada.class
+				.getName(), objeto.getId(), new Date(), new Predicado("label_predicado_da_barragem", true,
+				Barragem.class.getName(), TipoPredicadoValueEnum.Clazz, predicado.getId()));
+	}
+
+	public static Atualizacao criaAtualizarJogoBarragem(Usuario sujeito, Barragem objeto, Jogador predicado1,
+			Jogador predicado2) {
+		return new Atualizacao(Usuario.class.getName(), sujeito.getId(), AcaoEnum.AtualizarJogoBarragem, Barragem.class
+				.getName(), objeto.getId(), new Date(), new Predicado("label_predicado_entre", true, Jogador.class
+				.getName(), TipoPredicadoValueEnum.Clazz, predicado1.getId()), new Predicado("label_predicado_e", true,
+				Jogador.class.getName(), TipoPredicadoValueEnum.Clazz, predicado2.getId()));
+	}
+
+	public static Atualizacao criaCriarJogoBarragem(Usuario sujeito, Barragem objeto, Jogador predicado1,
+			Jogador predicado2) {
+		return new Atualizacao(Usuario.class.getName(), sujeito.getId(), AcaoEnum.CriarJogoBarragem, Barragem.class
+				.getName(), objeto.getId(), new Date(), new Predicado("label_predicado_entre", true, Jogador.class
+				.getName(), TipoPredicadoValueEnum.Clazz, predicado1.getId()), new Predicado("label_predicado_e", true,
+				Jogador.class.getName(), TipoPredicadoValueEnum.Clazz, predicado2.getId()));
+	}
+
+	public static Atualizacao criaAdicionarUsuario(Usuario sujeito, Usuario objeto) {
+		return new Atualizacao(Usuario.class.getName(), sujeito.getId(), AcaoEnum.AdicionarUsuario, Usuario.class
+				.getName(), objeto.getId(), new Date(), new Predicado("label_predicado_sua_lista", true));
 	}
 }

@@ -8,6 +8,7 @@ import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 
 import net.barragem.exception.SaldoInsuficienteException;
+import net.barragem.persistence.entity.Atualizacao;
 import net.barragem.persistence.entity.Jogador;
 import net.barragem.persistence.entity.JogadorEvento;
 import net.barragem.persistence.entity.JogoBarragem;
@@ -56,6 +57,15 @@ public class GerirJogoBarragemBean extends BaseBean {
 				if (mestreDetalhe.getDetalheEmFoco().getId() == null) {
 					PersistenceHelper.persiste(getContaUsuario().criaOperacaoDebitoJogoBarragem(1));
 					PersistenceHelper.persiste(getContaUsuario());
+					PersistenceHelper.persiste(Atualizacao.criaCriarJogoBarragem(getUsuarioLogado(), mestreDetalhe
+							.getDetalheEmFoco().getRodada().getCiclo().getBarragem(), mestreDetalhe.getDetalheEmFoco()
+							.getJogadoresEventos().get(0).getJogador(), mestreDetalhe.getDetalheEmFoco()
+							.getJogadoresEventos().get(1).getJogador()));
+				} else {
+					PersistenceHelper.persiste(Atualizacao.criaAtualizarJogoBarragem(getUsuarioLogado(), mestreDetalhe
+							.getDetalheEmFoco().getRodada().getCiclo().getBarragem(), mestreDetalhe.getDetalheEmFoco()
+							.getJogadoresEventos().get(0).getJogador(), mestreDetalhe.getDetalheEmFoco()
+							.getJogadoresEventos().get(1).getJogador()));
 				}
 
 				PersistenceHelper.persiste(mestreDetalhe.getDetalheEmFoco());

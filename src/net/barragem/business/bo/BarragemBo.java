@@ -1,7 +1,5 @@
 package net.barragem.business.bo;
 
-import java.util.Date;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,8 +22,7 @@ public class BarragemBo extends BaseBo {
 		PersistenceHelper.persiste(barragem);
 		PersistenceHelper.persiste(barragem.criaCicloERodada());
 		if (acaoEnum != null) {
-			PersistenceHelper.persiste(new Atualizacao(getUsuarioLogado().getClass().getName(), getUsuarioLogado()
-					.getId(), acaoEnum, barragem.getClass().getName(), barragem.getId(), new Date()));
+			PersistenceHelper.persiste(Atualizacao.criaCriarBarragem(getUsuarioLogado(), barragem));
 		}
 	}
 }
