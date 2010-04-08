@@ -13,6 +13,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import net.barragem.scaffold.ReflectionHelper;
 import net.barragem.scaffold.ValidatableSampleImpl;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -22,12 +23,14 @@ import org.apache.commons.beanutils.BeanUtils;
 		@NamedQuery(name = "barragensQueAdministroQuery", query = "from Barragem barragem where barragem.administrador = :usuario"),
 		@NamedQuery(name = "barragensQueParticipoQuery", query = "select distinct barragem from Barragem barragem join barragem.ciclos ciclo join ciclo.ranking ranking where ranking.jogador.usuarioCorrespondente = :usuario") })
 @Table(name = "barragem")
-public class Barragem extends BaseEntity implements Validatable, Cloneable {
+public class Barragem extends BaseEntity implements Validatable, Cloneable, Atualizavel {
 
 	@ValidateRequired
+	@TextoAtualizacao
 	private String nome;
 
 	@ValidateRequired
+	@TextoAtualizacao(parentesis = true)
 	private String local;
 
 	private ParametroCiclo parametrosIniciais = new ParametroCiclo();
@@ -127,5 +130,10 @@ public class Barragem extends BaseEntity implements Validatable, Cloneable {
 		} catch (NoSuchMethodException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	@Override
+	public String getTextoAtualizacao() {
+		return ReflectionHelper.getTextoAtualizacao(this);
 	}
 }

@@ -16,6 +16,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import net.barragem.scaffold.JogadoresComCorrespondenciaPrimeiroComparator;
+import net.barragem.scaffold.ReflectionHelper;
 import net.barragem.scaffold.ValidatableSampleImpl;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -29,12 +30,14 @@ import org.apache.commons.beanutils.BeanUtils;
 		@NamedQuery(name = "emailExistenteQuery", query = "select 1 from Usuario usuario where usuario.email = :email"),
 		@NamedQuery(name = "alteracaoEmailExistenteQuery", query = "select 1 from Usuario usuario where usuario.email = :email and usuario != :usuario") })
 @Table(name = "usuario")
-public class Usuario extends BaseEntity implements Validatable, Cloneable {
+public class Usuario extends BaseEntity implements Validatable, Cloneable, Atualizavel {
 
 	@ValidateRequired
-	private String nome;
-	@ValidateRequired
+	@TextoAtualizacao
 	private String sobrenome;
+	@ValidateRequired
+	@TextoAtualizacao
+	private String nome;
 	@ValidateRequired
 	private String email;
 	private String senha;
@@ -218,5 +221,10 @@ public class Usuario extends BaseEntity implements Validatable, Cloneable {
 		} catch (NoSuchMethodException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	@Override
+	public String getTextoAtualizacao() {
+		return ReflectionHelper.getTextoAtualizacao(this);
 	}
 }

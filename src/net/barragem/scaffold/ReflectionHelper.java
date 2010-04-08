@@ -5,6 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.barragem.persistence.entity.TextoAtualizacao;
 import net.barragem.persistence.entity.Validatable;
 import net.barragem.persistence.entity.ValidateRequired;
 
@@ -41,5 +42,32 @@ public class ReflectionHelper {
 
 	private static String getSetterMethod(String field) {
 		return "set" + field.substring(0, 1).toUpperCase() + field.substring(1);
+	}
+
+	public static String getTextoAtualizacao(Object entity) {
+		try {
+			StringBuilder result = new StringBuilder();
+			Class clazz = entity.getClass();
+			while (!clazz.getSimpleName().equals(Object.class.getSimpleName())) {
+				for (Field field : clazz.getDeclaredFields()) {
+					field.getAnnotations();
+					if (field.isAnnotationPresent(TextoAtualizacao.class)) {
+						if (field.getAnnotation(TextoAtualizacao.class).parentesis()) {
+							result.append("(").append(get(entity, field.getName())).append(")");
+						} else {
+							result.insert(0, get(entity, field.getName()) + " ");
+						}
+					}
+				}
+				clazz = clazz.getSuperclass();
+			}
+			return result.toString().trim();
+		} catch (IllegalAccessException e) {
+			throw new RuntimeException(e);
+		} catch (InvocationTargetException e) {
+			throw new RuntimeException(e);
+		} catch (NoSuchMethodException e) {
+			throw new RuntimeException(e);
+		}
 	}
 }

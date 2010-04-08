@@ -13,7 +13,12 @@
 		<div class="maincontent equalheights">
 			<h2>#{msg.label_bem_vindo}</h2>
 			<br/>
-			<p>Que tal comecar pesquisando por <a href="#{request.contextPath}/protectedpages/gerirjogador/gerirJogador.xhtml">jogadores</a> ou pelas <a href="#{request.contextPath}/protectedpages/gerirbarragem/gerirBarragem.xhtml">barragens</a> ativas?</p>
+			<c:if test="#{empty sessionScope['atualizacoes']}">
+				<p>Que tal comecar pesquisando por <a href="#{request.contextPath}/protectedpages/gerirjogador/gerirJogador.xhtml">jogadores</a> ou pelas <a href="#{request.contextPath}/protectedpages/gerirbarragem/gerirBarragem.xhtml">barragens</a> ativas?</p>
+			</c:if>
+			<c:if test="#{!empty sessionScope['atualizacoes']}">
+		        <ui:include src="componentes/atualizacoes.xhtml"/>
+	        </c:if>
 		</div>
 	</ui:define>
 </ui:composition>

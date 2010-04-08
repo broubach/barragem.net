@@ -7,6 +7,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import net.barragem.scaffold.ReflectionHelper;
+
 @Entity
 @NamedQueries( {
 		@NamedQuery(name = "totalJogadoresDeUsuarioQuery", query = "select count(*) from Jogador where usuarioDono = :usuario"),
@@ -15,7 +17,8 @@ import javax.persistence.Table;
 		@NamedQuery(name = "pesquisaJogadorForaDaListaQuery", query = "select u.jogador from Usuario u left outer join u.perfil p where (upper(u.nome) like :p or upper(u.sobrenome) like :p or upper(p.clubeMaisFrequentadoNome) like :p or upper(p.clubeMaisFrequentadoCidade) like :p or upper(p.professorNome) like :p or upper(p.raquete) like :p) and u <> :u and u not in (select uc from Jogador j join j.usuarioCorrespondente uc where j.usuarioDono = :u)"),
 		@NamedQuery(name = "pesquisaJogadorDeUsuarioQuery", query = "select j from Usuario u join u.jogadores j left outer join j.usuarioCorrespondente uc left outer join uc.perfil p where (upper(uc.nome) like :p1 or upper(uc.sobrenome) like :p1 or upper(p.clubeMaisFrequentadoNome) like :p1 or upper(p.clubeMaisFrequentadoCidade) like :p1 or upper(p.professorNome) like :p1 or upper(p.raquete) like :p1 or upper(j.nome) like :p1) and u = :p2") })
 @Table(name = "jogador")
-public class Jogador extends BaseEntity {
+public class Jogador extends BaseEntity implements Atualizavel {
+	@TextoAtualizacao
 	private String nome;
 
 	@OneToOne
@@ -77,5 +80,10 @@ public class Jogador extends BaseEntity {
 		} else if (!nome.equals(other.nome))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String getTextoAtualizacao() {
+		return ReflectionHelper.getTextoAtualizacao(this);
 	}
 }

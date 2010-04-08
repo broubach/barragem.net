@@ -1,8 +1,8 @@
 package net.barragem.persistence.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -11,9 +11,10 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
-@NamedQueries( { @NamedQuery(name = "atualizacaoPaginaInicialQuery", query = "select distinct a from Atualizacao a left outer join a.predicados p, "
+@NamedQueries( { @NamedQuery(name = "atualizacaoPaginaInicialQuery", query = "select distinct a from Atualizacao a left outer join fetch a.predicados p, "
 		+ "Barragem b "
 		+ "right outer join b.ciclos c "
 		+ "right outer join c.ranking r "
@@ -56,8 +57,13 @@ public class Atualizacao extends BaseEntity {
 	private Date data;
 
 	@OneToMany(mappedBy = "atualizacao", cascade = { CascadeType.ALL })
-	@OrderBy(value = "id")
-	private Set<Predicado> predicados;
+	@OrderBy(value = "predicado desc")
+	private List<Predicado> predicados;
+
+	@Transient
+	private BaseEntity loadedSujeito;
+	@Transient
+	private BaseEntity loadedObjeto;
 
 	public Atualizacao() {
 	}
@@ -75,7 +81,7 @@ public class Atualizacao extends BaseEntity {
 	public Atualizacao(String sujeitoClassName, Integer sujeitoId, AcaoEnum acao, String objetoClassName,
 			Integer objetoId, Date data, Predicado... predicados) {
 		this(sujeitoClassName, sujeitoId, acao, objetoClassName, objetoId, data);
-		this.predicados = new HashSet<Predicado>();
+		this.predicados = new ArrayList<Predicado>();
 		for (Predicado predicado : predicados) {
 			predicado.setAtualizacao(this);
 			this.predicados.add(predicado);
@@ -130,12 +136,28 @@ public class Atualizacao extends BaseEntity {
 		this.data = data;
 	}
 
-	public Set<Predicado> getPredicados() {
+	public List<Predicado> getPredicados() {
 		return predicados;
 	}
 
-	public void setPredicados(Set<Predicado> predicados) {
+	public void setPredicados(List<Predicado> predicados) {
 		this.predicados = predicados;
+	}
+
+	public BaseEntity getLoadedSujeito() {
+		return loadedSujeito;
+	}
+
+	public void setLoadedSujeito(BaseEntity loadedSujeito) {
+		this.loadedSujeito = loadedSujeito;
+	}
+
+	public BaseEntity getLoadedObjeto() {
+		return loadedObjeto;
+	}
+
+	public void setLoadedObjeto(BaseEntity loadedObjeto) {
+		this.loadedObjeto = loadedObjeto;
 	}
 
 	public static Atualizacao criaCriarBarragem(Usuario sujeito, Barragem objeto) {

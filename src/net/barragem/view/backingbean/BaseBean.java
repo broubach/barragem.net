@@ -25,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import net.barragem.persistence.entity.Arquivo;
+import net.barragem.persistence.entity.Atualizacao;
 import net.barragem.persistence.entity.Barragem;
 import net.barragem.persistence.entity.Conta;
 import net.barragem.persistence.entity.Usuario;
@@ -329,5 +330,13 @@ public abstract class BaseBean {
 		} catch (NoSuchMethodException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	protected void setAtualizacoes(List<Atualizacao> atualizacoes) {
+		setSessionAttribute("atualizacoes", atualizacoes);
+	}
+
+	protected List<Atualizacao> getAtualizacoes() {
+		return (List<Atualizacao>) getSessionAttribute("atualizacoes");
 	}
 }

@@ -3,6 +3,7 @@ package net.barragem.persistence.entity;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "predicado")
@@ -15,6 +16,9 @@ public class Predicado extends BaseEntity {
 	private String predicadoValue;
 	private TipoPredicadoValueEnum tipoPredicadoValue;
 	private Integer predicadoValueId;
+
+	@Transient
+	private BaseEntity loadedPredicado;
 
 	public Predicado() {
 	}
@@ -78,5 +82,13 @@ public class Predicado extends BaseEntity {
 
 	public void setPredicadoValueId(Integer predicadoValueId) {
 		this.predicadoValueId = predicadoValueId;
+	}
+
+	public BaseEntity getLoadedPredicado() {
+		return loadedPredicado;
+	}
+
+	public void setLoadedPredicado(BaseEntity loadedPredicado) {
+		this.loadedPredicado = loadedPredicado;
 	}
 }

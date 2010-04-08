@@ -11,9 +11,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import net.barragem.scaffold.ReflectionHelper;
+
 @Entity
 @Table(name = "rodada")
-public class Rodada extends BaseEntity {
+public class Rodada extends BaseEntity implements Atualizavel {
+	@TextoAtualizacao
 	private Integer numero;
 	private Boolean fechada = Boolean.FALSE;
 
@@ -239,5 +242,10 @@ public class Rodada extends BaseEntity {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public String getTextoAtualizacao() {
+		return ReflectionHelper.getTextoAtualizacao(this);
 	}
 }

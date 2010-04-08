@@ -1,0 +1,49 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+	<h:form>
+	<div class="atualizacoes">
+		<h3>#{msg.label_ultimas_atualizacoes}</h3>
+		<ul>
+		<c:forEach items="#{sessionScope['atualizacoes']}" var="atualizacao" varStatus="status">
+			<li>
+				<h:outputText value="#{atualizacao.data}">
+					<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/> 
+				</h:outputText> -&#160;
+				<h:commandLink action="#{loginBean.detalhaAtualizacao}">
+					<f:param name="index" value="#{status.index}"/><f:param name="tipo" value="sujeito"/>#{atualizacao.loadedSujeito.textoAtualizacao}
+				</h:commandLink>
+				#{msg[atualizacao.acao.acaoKey]}&#160;
+				<h:commandLink action="#{loginBean.detalhaAtualizacao}">
+					<f:param name="index" value="#{status.index}"/><f:param name="tipo" value="objeto"/>#{atualizacao.loadedObjeto.textoAtualizacao}
+				</h:commandLink>
+				<c:forEach items="#{atualizacao.predicados}" var="item" varStatus="statusPredicado">
+					<c:if test="#{item.isPredicadoAKey}">
+						#{msg[item.predicado]}&#160;
+					</c:if>
+					<c:if test="#{!item.isPredicadoAKey}">
+						#{item.predicado}&#160;
+					</c:if>
+					<c:if test="#{item.tipoPredicadoValue == 'Key'}">
+						#{msg[item.predicadoValue]}&#160;
+					</c:if>
+					<c:if test="#{item.tipoPredicadoValue == 'Clazz'}">
+						<h:commandLink action="#{loginBean.detalhaAtualizacao}" rendered="#{item.predicadoValue != 'net.barragem.persistence.entity.Jogador' or item.loadedPredicado.usuarioCorrespondente != null}">
+							<f:param name="index" value="#{status.index}"/><f:param name="tipo" value="predicado#{statusPredicado.index}"/>#{item.loadedPredicado.textoAtualizacao}
+						</h:commandLink>
+						<h:outputText value="#{item.loadedPredicado.textoAtualizacao}" rendered="#{item.predicadoValue == 'net.barragem.persistence.entity.Jogador' and item.loadedPredicado.usuarioCorrespondente == null}"/>
+					</c:if>
+					<c:if test="#{item.tipoPredicadoValue == 'None'}">
+						#{item.predicadoValue}&#160;
+					</c:if>
+				</c:forEach>
+			</li>
+		</c:forEach>
+		</ul>
+	</div>
+	</h:form>
+</html>
