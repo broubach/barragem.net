@@ -2,11 +2,13 @@ package net.barragem.persistence.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
 @Table(name = "predicado")
+@NamedQuery(name = "predicadoPaginaInicialQuery", query = "select p.atualizacao.id, p from Predicado p where p.atualizacao in (:list)")
 public class Predicado extends BaseEntity {
 
 	@ManyToOne

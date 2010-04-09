@@ -198,6 +198,7 @@ public class GerirJogadorBean extends BaseBean {
 		Jogador jogador = (Jogador) getJogadores().getRowData();
 		VincularJogadorBean vincularJogadorBean = new VincularJogadorBean();
 		vincularJogadorBean.setJogadorEmFoco(jogador);
+		vincularJogadorBean.setPesquisa(jogador.getNome());
 		setRequestAttribute("vincularJogadorBean", vincularJogadorBean);
 	}
 }

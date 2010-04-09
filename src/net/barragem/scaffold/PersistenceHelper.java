@@ -1,6 +1,7 @@
 package net.barragem.scaffold;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.PersistenceException;
@@ -71,7 +72,11 @@ public class PersistenceHelper {
 			Query query = session.getNamedQuery(namedQuery);
 			if (paramValues != null) {
 				for (int i = 0; i < query.getNamedParameters().length; i++) {
-					query.setParameter(query.getNamedParameters()[i], paramValues[i]);
+					if (paramValues[i] instanceof Collection) {
+						query.setParameterList(query.getNamedParameters()[i], (Collection) paramValues[i]);
+					} else {
+						query.setParameter(query.getNamedParameters()[i], paramValues[i]);
+					}
 				}
 			}
 			return query.list();

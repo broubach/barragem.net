@@ -1,7 +1,12 @@
 package net.barragem.business.bo;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,6 +39,25 @@ public class LoginBo extends BaseBo {
 		// carrega atualizacoes
 		List<Atualizacao> atualizacoes = PersistenceHelper.findByNamedQueryWithLimits("atualizacaoPaginaInicialQuery",
 				0, 10, getUsuarioLogado().getId());
+		if (!atualizacoes.isEmpty()) {
+			Map<Integer, Atualizacao> mapAtualizacoes = new HashMap<Integer, Atualizacao>();
+			for (Atualizacao atualizacao : atualizacoes) {
+				mapAtualizacoes.put(atualizacao.getId(), atualizacao);
+				atualizacao.setPredicados(new ArrayList<Predicado>());
+			}
+			List<Object[]> predicados = PersistenceHelper.findByNamedQuery("predicadoPaginaInicialQuery", atualizacoes);
+			for (Object[] o : predicados) {
+				mapAtualizacoes.get(o[0]).getPredicados().add((Predicado) o[1]);
+			}
+			for (Atualizacao atualizacao : atualizacoes) {
+				Collections.sort(atualizacao.getPredicados(), new Comparator<Predicado>() {
+					@Override
+					public int compare(Predicado o1, Predicado o2) {
+						return o1.getPredicado().compareTo(o2.getPredicado()) * -1;
+					}
+				});
+			}
+		}
 		carregaAtualizacoes(atualizacoes);
 		setAtualizacoes(atualizacoes);
 	}

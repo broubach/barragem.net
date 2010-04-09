@@ -19,12 +19,6 @@ public class RecuperarSenhaBean extends BaseBean {
 	private String novaSenha;
 	private String confirmacaoNovaSenha;
 
-	private static final String emailTemplate = new StringBuilder()
-			.append("<p>Olá,</p>")
-			.append(
-					"<p>Visite <a href=\"https://www.barragem.net/publicpages/recuperarsenha/recuperarSenha.xhtml?hash={0}\">esta página</a> para recuperar a sua senha. Esta página será válida por 2 dias.</p>")
-			.append("<p>Atenciosamente,<br />Equipe barragem.net</p>").toString();
-
 	public String getEmail() {
 		return email;
 	}
@@ -76,8 +70,8 @@ public class RecuperarSenhaBean extends BaseBean {
 			requisicao.setData(new Date());
 			PersistenceHelper.persiste(requisicao);
 
-			sendMail("no-reply@barragem.net", email, "barragem.net - instruções para recuperação de senha",
-					MessageFormat.format(emailTemplate, hash));
+			sendMail("no-reply@barragem.net", "barragem.net", email, "instruções para recuperação de senha",
+					MessageFormat.format(emailTemplateRecuperarSenha, hash));
 
 			messages.addInfoMessage(null, "label_email_enviado_com_sucesso");
 			email = "";

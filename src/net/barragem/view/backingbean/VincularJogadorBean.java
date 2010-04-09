@@ -1,10 +1,12 @@
 package net.barragem.view.backingbean;
 
+import java.text.MessageFormat;
 import java.util.Collections;
 import java.util.List;
 
 import javax.faces.event.ActionEvent;
 
+import net.barragem.persistence.entity.Atualizacao;
 import net.barragem.persistence.entity.Jogador;
 import net.barragem.scaffold.JogadoresComCorrespondenciaPrimeiroComparator;
 import net.barragem.scaffold.Paginavel;
@@ -56,8 +58,8 @@ public class VincularJogadorBean extends BaseBean {
 	public void pesquisaJogador(ActionEvent e) {
 		if (pesquisa != null && pesquisa.length() > 0) {
 			List<Jogador> result = PersistenceHelper.findByNamedQuery("pesquisaJogadorForaDaListaQuery",
-					getUsuarioLogado(), new StringBuilder().append("%").append(pesquisa).append("%").toString()
-							.toUpperCase());
+					getUsuarioLogado(), new StringBuilder().append("%").append(pesquisa.replace(" ", "%")).append("%")
+							.toString().toUpperCase());
 			if (result.size() > 0) {
 				Collections.sort(result, new JogadoresComCorrespondenciaPrimeiroComparator());
 				paginacao = new PaginavelSampleImpl<Jogador>(result, 5);
@@ -76,6 +78,13 @@ public class VincularJogadorBean extends BaseBean {
 
 		jogadorEmFoco.setNome(jogador.getNome());
 		jogadorEmFoco.setUsuarioCorrespondente(jogador.getUsuarioCorrespondente());
+		PersistenceHelper.persiste(Atualizacao.criaAdicionarUsuario(getUsuarioLogado(), jogadorEmFoco
+				.getUsuarioCorrespondente()));
+		sendMail("no-reply@barragem.net", getUsuarioLogado().getNomeCompletoCapital(), jogadorEmFoco
+				.getUsuarioCorrespondente().getEmail(),
+				"barragem.net - você foi adicionado(a) à lista de jogadores do(a) " + getUsuarioLogado().getNome(),
+				MessageFormat.format(emailTemplateAdicaoJogador, jogadorEmFoco.getUsuarioCorrespondente()
+						.getNomeCompletoCapital()));
 
 		PersistenceHelper.persiste(jogadorEmFoco);
 	}

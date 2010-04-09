@@ -167,7 +167,7 @@ public class Usuario extends BaseEntity implements Validatable, Cloneable, Atual
 		for (String s : words) {
 			strBuilder.append(capitalize(s)).append(" ");
 		}
-		return strBuilder.toString();
+		return strBuilder.toString().trim();
 	}
 
 	public static String capitalize(String s) {

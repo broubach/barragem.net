@@ -6,24 +6,26 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
+import javax.persistence.EntityResult;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
+import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@NamedQueries( { @NamedQuery(name = "atualizacaoPaginaInicialQuery", query = "select distinct a from Atualizacao a left outer join fetch a.predicados p, "
-		+ "Barragem b "
-		+ "right outer join b.ciclos c "
-		+ "right outer join c.ranking r "
-		+ "right outer join r.jogador j "
-		+ "where (a.objetoClassName like '%.Usuario' and a.objetoId = j.usuarioCorrespondente.id and a.objetoId = :usuarioId) or "
-		+ "(a.objetoClassName like '%.Barragem' and a.objetoId = b.id and j.usuarioCorrespondente.id = :usuarioId) or "
-		+ "(a.objetoClassName like '%.Rodada' and a.objetoId = r.id and j.usuarioCorrespondente.id = :usuarioId) or "
-		+ "(p.tipoPredicadoValue = '1' and p.predicadoValue like '%.Barragem' and p.predicadoValueId = b.id and j.usuarioCorrespondente.id = :usuarioId) or"
-		+ "(p.tipoPredicadoValue = '1' and p.predicadoValue like '%.Jogador' and p.predicadoValueId = j.id and j.usuarioCorrespondente.id = :usuarioId) order by a.data desc") })
+@SqlResultSetMapping(name = "atualizacaoPaginaInicialResult", entities = @EntityResult(entityClass = Atualizacao.class))
+@NamedNativeQuery(name = "atualizacaoPaginaInicialQuery", query = "select distinct a.id, a.sujeitoClassName, a.sujeitoId, a.acao, a.objetoClassName, a.objetoId, a.data from Atualizacao a left outer join Predicado p on p.atualizacao_id = a.id, "
+		+ "Jogador j left outer join CicloJogador cj on j.id = cj.jogador_id "
+		+ "left outer join Ciclo c on c.id = cj.ciclo_id "
+		+ "left outer join Rodada r on r.ciclo_id = c.id "
+		+ "left outer join Barragem b on b.id = c.barragem_id "
+		+ "where (a.objetoClassName like '%.Usuario' and a.objetoId = j.usuarioCorrespondente_id and a.objetoId = :usuarioId) or "
+		+ "(a.objetoClassName like '%.Barragem' and a.objetoId = b.id and j.usuarioCorrespondente_id = :usuarioId) or "
+		+ "(a.objetoClassName like '%.Rodada' and a.objetoId = r.id and j.usuarioCorrespondente_id = :usuarioId) or "
+		+ "(p.tipoPredicadoValue = '1' and p.predicadoValue like '%.Barragem' and p.predicadoValueId = b.id and j.usuarioCorrespondente_id = :usuarioId) or "
+		+ "(p.tipoPredicadoValue = '1' and p.predicadoValue like '%.Jogador' and p.predicadoValueId = j.id and j.usuarioCorrespondente_id = :usuarioId) order by a.data desc", resultSetMapping = "atualizacaoPaginaInicialResult")
 @Table(name = "atualizacao")
 /***
  * Ex. de frases de atualização:

@@ -1,5 +1,6 @@
 package net.barragem.business.bo;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -61,6 +62,15 @@ public class RodadaBo extends BaseBo {
 
 		PersistenceHelper.persiste(Atualizacao.criaSortearJogosBarragem(getUsuarioLogado(), rodada, rodada.getCiclo()
 				.getBarragem()));
+		for (CicloJogador cicloJogador : jogadores) {
+			if (cicloJogador.getJogador().getUsuarioCorrespondente() != null) {
+				sendMail("no-reply@barragem.net", getUsuarioLogado().getNomeCompletoCapital(), cicloJogador
+						.getJogador().getUsuarioCorrespondente().getEmail(), new StringBuilder().append(
+						"barragem.net - sorteio da barragem ").append(rodada.getCiclo().getBarragem().getNome())
+						.append(" realizado").toString(), MessageFormat.format(emailTemplateSorteioBarragem, rodada
+						.getCiclo().getBarragem().getNome()));
+			}
+		}
 	}
 
 }

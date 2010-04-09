@@ -5,7 +5,6 @@ import javax.jms.MapMessage;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 
-
 public class MailService implements MessageListener {
 
 	private BarragemMailSender mailSender;
@@ -23,8 +22,8 @@ public class MailService implements MessageListener {
 		try {
 			if (message instanceof MapMessage) {
 				MapMessage mapMessage = (MapMessage) message;
-				mailSender.send(mapMessage.getString("from"), mapMessage.getString("to"), mapMessage
-						.getString("subject"), mapMessage.getString("body"));
+				mailSender.send(mapMessage.getString("from"), mapMessage.getString("fromName"), mapMessage
+						.getString("to"), mapMessage.getString("subject"), mapMessage.getString("body"));
 			}
 		} catch (JMSException ex) {
 			throw new RuntimeException(ex);

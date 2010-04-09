@@ -1,5 +1,6 @@
 package net.barragem.view.backingbean;
 
+import java.text.MessageFormat;
 import java.util.List;
 
 import javax.faces.event.ActionEvent;
@@ -38,7 +39,10 @@ public class ExibirPerfilBean extends BaseBean {
 		PersistenceHelper.persiste(getUsuarioLogado());
 		PersistenceHelper.persiste(Atualizacao.criaAdicionarUsuario(getUsuarioLogado(), usuarioEmFoco));
 		addMensagemAtualizacaoComSucesso();
-		// TODO: redigir conteudo de email
+
+		sendMail("no-reply@barragem.net", getUsuarioLogado().getNomeCompletoCapital(), usuarioEmFoco.getEmail(),
+				"barragem.net - você foi adicionado(a) à lista de jogadores do(a) " + getUsuarioLogado().getNome(),
+				MessageFormat.format(emailTemplateAdicaoJogador, usuarioEmFoco.getNomeCompletoCapital()));
 	}
 
 	public void exibePerfil(ActionEvent e) {

@@ -41,6 +41,26 @@ public abstract class BaseBean {
 
 	public static final String FOTO_DEFAULT_JOGADOR_KEY = "foto-jogador";
 	public static final Integer FOTO_DEFAULT_JOGADOR_ID = new Integer(2);
+	protected static final String emailTemplateAdicaoJogador = new StringBuilder().append("<p>Olá,</p>").append(
+			"<p>Agora você faz parte da lista de jogadores de {0}.</p>").append(
+			"<p>Se você conhece {0}, você também pode adicioná-lo(a) à sua lista de jogadores.</p>").append(
+			"<p>Atenciosamente,<br />Equipe <a href='https://www.barragem.net/login.xhtml'>barragem.net</a></p>")
+			.toString();
+	protected static final String emailTemplateRecuperarSenha = new StringBuilder()
+			.append("<p>Olá,</p>")
+			.append(
+					"<p>Visite <a href=\"https://www.barragem.net/publicpages/recuperarsenha/recuperarSenha.xhtml?hash={0}\">esta página</a> para recuperar a sua senha. Esta página será válida por 2 dias.</p>")
+			.append(
+					"<p>Atenciosamente,<br />Equipe <a href='https://www.barragem.net/login.xhtml'>barragem.net</a></p>")
+			.toString();
+	protected static final String emailTemplateSorteioBarragem = new StringBuilder()
+			.append("<p>Olá,</p>")
+			.append("<p>O sorteio da barragem {0} foi realizado.</p>")
+			.append(
+					"<p>Acesse <a href='https://www.barragem.net/login.xhtml'>www.barragem.net</a> e confira quem será o seu próximo(a) adversário(a).</p>")
+			.append(
+					"<p>Atenciosamente,<br />Equipe <a href='https://www.barragem.net/login.xhtml'>barragem.net</a></p>")
+			.toString();
 
 	private HtmlDataTable dataTable;
 
@@ -238,7 +258,8 @@ public abstract class BaseBean {
 		return String.valueOf(fill);
 	}
 
-	protected void sendMail(final String from, final String to, final String subject, final String body) {
+	protected void sendMail(final String from, final String fromName, final String to, final String subject,
+			final String body) {
 		BarragemJmsTemplate template = (BarragemJmsTemplate) WebApplicationContextUtils.getWebApplicationContext(
 				getRequest().getSession().getServletContext()).getBean("jmsTemplate");
 		if (template.getEnabled()) {
@@ -246,6 +267,7 @@ public abstract class BaseBean {
 				public Message createMessage(Session session) throws JMSException {
 					MapMessage message = session.createMapMessage();
 					message.setString("from", from);
+					message.setString("fromName", fromName);
 					message.setString("to", to);
 					message.setString("subject", subject);
 					message.setString("body", body);
