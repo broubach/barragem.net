@@ -16,11 +16,11 @@ import javax.persistence.Transient;
 
 @Entity
 @SqlResultSetMapping(name = "atualizacaoPaginaInicialResult", entities = @EntityResult(entityClass = Atualizacao.class))
-@NamedNativeQuery(name = "atualizacaoPaginaInicialQuery", query = "select distinct a.id, a.sujeitoClassName, a.sujeitoId, a.acao, a.objetoClassName, a.objetoId, a.data from Atualizacao a left outer join Predicado p on p.atualizacao_id = a.id, "
-		+ "Jogador j left outer join CicloJogador cj on j.id = cj.jogador_id "
-		+ "left outer join Ciclo c on c.id = cj.ciclo_id "
-		+ "left outer join Rodada r on r.ciclo_id = c.id "
-		+ "left outer join Barragem b on b.id = c.barragem_id "
+@NamedNativeQuery(name = "atualizacaoPaginaInicialQuery", query = "select distinct a.id, a.sujeitoClassName, a.sujeitoId, a.acao, a.objetoClassName, a.objetoId, a.data from atualizacao a left outer join predicado p on p.atualizacao_id = a.id, "
+		+ "jogador j left outer join ciclojogador cj on j.id = cj.jogador_id "
+		+ "left outer join ciclo c on c.id = cj.ciclo_id "
+		+ "left outer join rodada r on r.ciclo_id = c.id "
+		+ "left outer join barragem b on b.id = c.barragem_id "
 		+ "where (a.objetoClassName like '%.Usuario' and a.objetoId = j.usuarioCorrespondente_id and a.objetoId = :usuarioId) or "
 		+ "(a.objetoClassName like '%.Barragem' and a.objetoId = b.id and j.usuarioCorrespondente_id = :usuarioId) or "
 		+ "(a.objetoClassName like '%.Rodada' and a.objetoId = r.id and j.usuarioCorrespondente_id = :usuarioId) or "
