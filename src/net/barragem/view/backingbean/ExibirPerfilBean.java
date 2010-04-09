@@ -42,7 +42,7 @@ public class ExibirPerfilBean extends BaseBean {
 
 		sendMail("no-reply@barragem.net", getUsuarioLogado().getNomeCompletoCapital(), usuarioEmFoco.getEmail(),
 				"barragem.net - você foi adicionado(a) à lista de jogadores do(a) " + getUsuarioLogado().getNome(),
-				MessageFormat.format(emailTemplateAdicaoJogador, usuarioEmFoco.getNomeCompletoCapital()));
+				MessageFormat.format(emailTemplateAdicaoJogador, getUsuarioLogado().getNomeCompletoCapital()));
 	}
 
 	public void exibePerfil(ActionEvent e) {

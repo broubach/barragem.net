@@ -83,8 +83,7 @@ public class VincularJogadorBean extends BaseBean {
 		sendMail("no-reply@barragem.net", getUsuarioLogado().getNomeCompletoCapital(), jogadorEmFoco
 				.getUsuarioCorrespondente().getEmail(),
 				"barragem.net - você foi adicionado(a) à lista de jogadores do(a) " + getUsuarioLogado().getNome(),
-				MessageFormat.format(emailTemplateAdicaoJogador, jogadorEmFoco.getUsuarioCorrespondente()
-						.getNomeCompletoCapital()));
+				MessageFormat.format(emailTemplateAdicaoJogador, getUsuarioLogado().getNomeCompletoCapital()));
 
 		PersistenceHelper.persiste(jogadorEmFoco);
 	}
