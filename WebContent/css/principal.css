@@ -551,6 +551,42 @@ td.actions {
 	margin-right: auto;
 	margin-left: auto;
 }
+#gerirBarragem fieldset {
+	width:365px;
+}
+#gerirBarragem .exibirPainelBarragemRanking {
+	padding: 5px 0 0;
+	width: 100%;
+}
+#gerirBarragem .tipoPesquisa input {
+	float: left;
+	clear: none;
+}
+#gerirBarragem .dados label {
+	width: auto;
+}
+#gerirBarragem .tipoPesquisa label {
+	width: auto;
+	border: 0px;
+	padding-left: 5px;
+	clear: none;
+	white-space: nowrap;
+}
+#gerirBarragem .searchFormInput {
+    background-color: #DDE4EF;
+    height:17px;
+    padding: 1px;
+    vertical-align: bottom;
+}
+#gerirBarragem .searchFormButton {
+	border: none;
+	background-color: inherit;
+	padding: 0px;
+	margin: 0px;
+    height: auto;
+	width: auto;
+    vertical-align: bottom;
+}
 
 /********************* DADOS *********************/
 .dados label {

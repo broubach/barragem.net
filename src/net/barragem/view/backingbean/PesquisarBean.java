@@ -21,7 +21,8 @@ public class PesquisarBean extends BaseBean {
 	private List<Barragem> barragens;
 	private List<Object> geral;
 	private String pesquisa;
-	private Paginavel<Jogador> paginacao;
+	private Paginavel<Jogador> paginacaoJogador;
+	private Paginavel<Barragem> paginacaoBarragem;
 
 	public List<Jogador> getJogadores() {
 		return jogadores;
@@ -59,12 +60,20 @@ public class PesquisarBean extends BaseBean {
 		return pesquisaJogador(pesquisa);
 	}
 
-	public Paginavel<Jogador> getPaginacao() {
-		return paginacao;
+	public Paginavel<Jogador> getPaginacaoJogador() {
+		return paginacaoJogador;
 	}
 
-	public void setPaginacao(Paginavel<Jogador> paginacao) {
-		this.paginacao = paginacao;
+	public void setPaginacaoJogador(Paginavel<Jogador> paginacao) {
+		this.paginacaoJogador = paginacao;
+	}
+
+	public Paginavel<Barragem> getPaginacaoBarragem() {
+		return paginacaoBarragem;
+	}
+
+	public void setPaginacaoBarragem(Paginavel<Barragem> paginacaoBarragem) {
+		this.paginacaoBarragem = paginacaoBarragem;
 	}
 
 	public String pesquisaJogador(String pesquisa) {
@@ -73,8 +82,8 @@ public class PesquisarBean extends BaseBean {
 					.append("%").append(pesquisa).append("%").toString().toUpperCase());
 			if (result.size() > 0) {
 				Collections.sort(result, new JogadoresComCorrespondenciaPrimeiroComparator());
-				paginacao = new PaginavelSampleImpl<Jogador>(result);
-				jogadores = paginacao.getPagina();
+				paginacaoJogador = new PaginavelSampleImpl<Jogador>(result);
+				jogadores = paginacaoJogador.getPagina();
 				return "sucessoPesquisa";
 			}
 
@@ -85,9 +94,21 @@ public class PesquisarBean extends BaseBean {
 		return "";
 	}
 
-	public void pesquisaBarragem(ActionEvent e) {
-		// TODO
+	public String pesquisaBarragem(String pesquisa) {
+		if (pesquisa != null && pesquisa.length() > 0) {
+			List<Barragem> result = PersistenceHelper.findByNamedQuery("pesquisaBarragemQuery", new StringBuilder()
+					.append("%").append(pesquisa).append("%").toString().toUpperCase());
+			if (result.size() > 0) {
+				paginacaoBarragem = new PaginavelSampleImpl<Barragem>(result);
+				barragens = paginacaoBarragem.getPagina();
+				return "sucessoPesquisa";
+			}
 
+			messages.addInfoMessage("label_nenhum_resultado_encontrado", "label_nenhum_resultado_encontrado");
+		} else {
+			messages.addErrorMessage(null, "label_insira_um_texto_para_pesquisa");
+		}
+		return "";
 	}
 
 	public void pesquisaGeral(ActionEvent e) {

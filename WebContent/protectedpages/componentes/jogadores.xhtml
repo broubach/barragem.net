@@ -46,7 +46,7 @@
 				</a4j:commandLink>
 			</h:column>
 			<f:facet name="footer">
-				<h:commandLink actionListener="#{gerirJogadorBean.limpaFiltro}" rendered="#{false or gerirJogadorBean.pesquisaSalva != null}" styleClass="linkLimpaFiltro">#{msg.label_limpar_filtro_pesquisa}</h:commandLink>
+				<h:commandLink actionListener="#{gerirJogadorBean.limpaFiltro}" rendered="#{gerirJogadorBean.pesquisaSalva != null}" styleClass="linkLimpaFiltro">#{msg.label_limpar_filtro_pesquisa}</h:commandLink>
 			</f:facet>
 	    </h:dataTable>
 	    <ui:include src="paginacao.xhtml">

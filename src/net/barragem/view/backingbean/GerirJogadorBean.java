@@ -137,6 +137,7 @@ public class GerirJogadorBean extends BaseBean {
 		if (tipoPesquisa.equals(new Integer(1))) {
 			PesquisarBean pesquisarBean = new PesquisarBean();
 			setRequestAttribute("pesquisarBean", pesquisarBean);
+			pesquisaSalva = null;
 			return pesquisarBean.pesquisaJogador(pesquisa);
 		}
 		if (pesquisa == null || pesquisa.length() == 0) {

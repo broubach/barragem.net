@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+<ui:composition template="/protectedpages/layout/layoutPrincipal.xhtml">
+	<ui:define name="conteudo">
+		<div class="maincontent equalheights">
+			<h:form id="gerirBarragem">
+				<h2><h:outputText value="#{msg.label_resultado_pesquisa}"/></h2>
+				<br/>
+				<div class="voltar">
+					<h:commandLink value="#{msg.label_voltar}" action="voltar"/>
+				</div>
+				<br/>
+				<fieldset>
+					<ui:include src="../componentes/barragens.xhtml" >
+						<ui:param name="barragens" value="#{pesquisarBean.barragens}"/>
+						<ui:param name="paginavel" value="#{pesquisarBean.paginacaoBarragem}"/>
+					</ui:include>
+				</fieldset>
+		    </h:form>
+	    </div>
+	</ui:define>
+</ui:composition>
+
+</html>

@@ -185,6 +185,10 @@
 			<from-outcome>barragensQueAdministro</from-outcome>
 			<to-view-id>/protectedpages/gerirbarragem/barragensQueAdministro.xhtml</to-view-id>
 		</navigation-case>
+		<navigation-case>
+			<from-outcome>sucessoPesquisa</from-outcome>
+			<to-view-id>/protectedpages/pesquisa/resultadoPesquisaBarragem.xhtml</to-view-id>
+		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
 		<from-view-id>/protectedpages/gerirbarragem/barragensQueAdministro.xhtml</from-view-id>
@@ -198,6 +202,13 @@
 		<navigation-case>
 			<from-outcome>voltar</from-outcome>
 			<to-view-id>/protectedpages/gerirjogador/gerirJogador.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/protectedpages/pesquisa/resultadoPesquisaBarragem.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>voltar</from-outcome>
+			<to-view-id>/protectedpages/gerirbarragem/gerirBarragem.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
