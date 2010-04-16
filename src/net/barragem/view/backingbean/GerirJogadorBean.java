@@ -1,5 +1,6 @@
 package net.barragem.view.backingbean;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -31,7 +32,9 @@ public class GerirJogadorBean extends BaseBean {
 	public GerirJogadorBean() {
 		usuarioEmFoco = getUsuarioLogado();
 		Collections.sort(usuarioEmFoco.getJogadores(), new JogadoresComCorrespondenciaPrimeiroComparator());
-		paginacaoJogadores = new PaginavelSampleImpl<Jogador>(usuarioEmFoco.getJogadores());
+		List<Jogador> jogadoresSemUsuarioLogado = new ArrayList<Jogador>(usuarioEmFoco.getJogadores());
+		jogadoresSemUsuarioLogado.remove(usuarioEmFoco.getJogador());
+		paginacaoJogadores = new PaginavelSampleImpl<Jogador>(jogadoresSemUsuarioLogado);
 		jogadores = new ListDataModel(paginacaoJogadores.getPagina());
 	}
 
@@ -118,8 +121,10 @@ public class GerirJogadorBean extends BaseBean {
 
 			Collections.sort(usuarioEmFoco.getJogadores(), new JogadoresComCorrespondenciaPrimeiroComparator());
 
-			paginacaoJogadores.pesquisaPaginavel(paginacaoJogadores.calculaPagina(usuarioEmFoco.getJogadores().indexOf(
-					jogador)));
+			List<Jogador> jogadoresSemUsuarioLogado = new ArrayList<Jogador>(usuarioEmFoco.getJogadores());
+			jogadoresSemUsuarioLogado.remove(usuarioEmFoco.getJogador());
+			paginacaoJogadores = new PaginavelSampleImpl<Jogador>(jogadoresSemUsuarioLogado, jogador);
+			jogadores = new ListDataModel(paginacaoJogadores.getPagina());
 
 			addMensagemAtualizacaoComSucesso();
 			jogadorNome = null;
@@ -181,6 +186,7 @@ public class GerirJogadorBean extends BaseBean {
 			usuarioEmFoco.getJogadores().remove(jogador);
 			PersistenceHelper.persiste(usuarioEmFoco);
 
+			paginacaoJogadores.getSourceList().remove(jogador);
 			paginacaoJogadores.pesquisaPaginavel(paginacaoJogadores.getPaginaAtual());
 		} catch (ConstraintViolationException e1) {
 			messages.addErrorMessage(null,
@@ -190,7 +196,10 @@ public class GerirJogadorBean extends BaseBean {
 
 	public void limpaFiltro(ActionEvent e) {
 		pesquisaSalva = null;
-		paginacaoJogadores = new PaginavelSampleImpl<Jogador>(usuarioEmFoco.getJogadores());
+
+		List<Jogador> jogadoresSemUsuarioLogado = new ArrayList<Jogador>(usuarioEmFoco.getJogadores());
+		jogadoresSemUsuarioLogado.remove(usuarioEmFoco.getJogador());
+		paginacaoJogadores = new PaginavelSampleImpl<Jogador>(jogadoresSemUsuarioLogado);
 		jogadores = new ListDataModel(paginacaoJogadores.getPagina());
 	}
 

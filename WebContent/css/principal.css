@@ -33,7 +33,7 @@ fieldset {
 
 /********************* INDEX *********************/
 .atualizacoes li {
-	list-style: inside;
+	list-style: inside disc;
 }
 
 /********************* CABECALHO *********************/
@@ -366,6 +366,9 @@ fieldset#parciais {
 }
 .input {
     margin-bottom: 4px;
+}
+.texto_informativo {
+	float: left;
 }
 
 /********************* BOTOES *********************/
@@ -945,7 +948,7 @@ label {
 	color:#444;
 	font-size:.8em;
 }
-.dados label, .dados .exemplo, .dados .complemento, .dadosExibirPerfil label, .dados .spanBtn {
+.dados label, .dados .exemplo, .dados .complemento, .dadosExibirPerfil label, .dados .spanBtn, .texto_informativo {
 	color:#444;
 	font-size:.8em;
 }

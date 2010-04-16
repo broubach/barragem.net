@@ -5,7 +5,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:c="http://java.sun.com/jstl/core"
-	xmlns:a4j="http://richfaces.org/a4j">
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
 <ui:composition template="/protectedpages/layout/layoutPrincipal.xhtml">
 	<ui:define name="conteudo">
@@ -54,7 +55,7 @@
 				</fieldset>
 				<br/>
 				<fieldset>
-					<legend>Lista de Jogadores</legend>
+					<legend>#{msg.label_lista_jogadores}</legend>
 					<a href="#" class="popupRenomearJogador" title="#{msg.label_editar_jogador}" style="visibility:hidden"/>
 					<a href="#" class="popupVincularJogador" title="#{msg.label_vincular_jogador}" style="visibility:hidden"/>
 					<div class="dados">
@@ -74,6 +75,12 @@
 						<ui:param name="podeEditarJogadores" value="true"/>
 						<ui:param name="paginavel" value="#{gerirJogadorBean.paginacaoJogadores}"/>
 					</ui:include>
+					<h:panelGroup display="block" rendered="#{not empty gerirJogadorBean.paginacaoJogadores.sourceList}" styleClass="texto_informativo">
+						#{msg.label_total_jogadores}: #{fn:length(gerirJogadorBean.paginacaoJogadores.sourceList)}
+					</h:panelGroup>
+					<h:panelGroup display="block" rendered="#{empty gerirJogadorBean.paginacaoJogadores.sourceList}" styleClass="texto_informativo">
+						#{msg.label_aviso_lista_jogador_vazia} :)
+					</h:panelGroup>
 				</fieldset>
 		    </h:form>
 			<div class="clear"></div>

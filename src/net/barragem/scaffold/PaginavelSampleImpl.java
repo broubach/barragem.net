@@ -28,12 +28,26 @@ public class PaginavelSampleImpl<T> implements Paginavel<T> {
 		this.sourceHibernateCountNamedQuery = sourceHibernateCountNamedQuery;
 	}
 
-	public PaginavelSampleImpl(List<T> sourceList, int... pageSize) {
+	public PaginavelSampleImpl(List<T> sourceList) {
+		this(sourceList, null, 10);
+	}
+
+	public PaginavelSampleImpl(List<T> sourceList, T focus) {
+		this(sourceList, focus, 10);
+	}
+
+	public PaginavelSampleImpl(List<T> sourceList, int pageSize) {
+		this(sourceList, null, pageSize);
+	}
+
+	public PaginavelSampleImpl(List<T> sourceList, T focus, int pageSize) {
 		this.sourceList = sourceList;
-		if (pageSize != null && pageSize.length > 0) {
-			this.pageSize = pageSize[0];
+		this.pageSize = pageSize;
+		int pageNumber = 1;
+		if (focus != null) {
+			pageNumber = calculaPagina(sourceList.indexOf(focus)) + 1;
 		}
-		pesquisaPaginavel(1);
+		pesquisaPaginavel(pageNumber);
 	}
 
 	@Override
@@ -136,7 +150,7 @@ public class PaginavelSampleImpl<T> implements Paginavel<T> {
 		} else {
 			totalRegistros = sourceList.size();
 			pageCount = totalRegistros / pageSize;
-			if (pageCount * pageSize < totalRegistros) {
+			if (pageCount * pageSize < totalRegistros || pageCount == 0) {
 				pageCount++;
 			}
 			if (pageNumber == FIRST_PAGE || pageNumber <= 0) {
