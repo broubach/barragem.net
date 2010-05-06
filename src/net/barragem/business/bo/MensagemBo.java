@@ -1,5 +1,6 @@
 package net.barragem.business.bo;
 
+import java.text.MessageFormat;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +23,8 @@ public class MensagemBo extends BaseBo {
 		resposta.setRemetente(getUsuarioLogado());
 		PersistenceHelper.persiste(mensagem);
 
-		sendMail(resposta.getRemetente().getEmail(), resposta.getRemetente().getNomeCompletoCapital(), resposta
-				.getDestinatario().getEmail(), "barragem.net - nova mensagem", emailNovaMensagem);
+		sendMail("no-reply@barragem.net", resposta.getRemetente().getNomeCompletoCapital(), resposta.getDestinatario()
+				.getEmail(), "barragem.net - nova mensagem", MessageFormat.format(emailNovaMensagem, resposta
+				.getRemetente().getNomeCompletoCapital()));
 	}
 }
