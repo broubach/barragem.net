@@ -13,15 +13,6 @@
 	<ui:define name="conteudo">
 		<div class="maincontent">
 			<script type="text/javascript" src="#{request.contextPath}/js/jquery.NobleCount.min.js"></script>
-			<script>
-				$j(function(){
-					$j('#mensagem\\:resposta').NobleCount('#contador',{
-						on_negative: 'go_red',
-						on_positive: 'go_green',
-						max_chars: 255
-					});
-				});
-			</script>
 
 			<h:form id="mensagem">
 				<h2>#{msg.label_mensagens}</h2>
@@ -44,17 +35,19 @@
 							</div>
 							<div class="container-texto">
 								<p class="texto">#{item.mensagem}</p>
-								<span class="container-acoes"><a href="#"><img src="#{request.contextPath}/img/buttons/btn-lixeira.png" alt="#{msg.label_responder}" title="#{msg.label_responder}" width="16px" height="16px"/> #{msg.label_excluir}</a>&#160; 
-									<a id="xx" href="#"><img src="#{request.contextPath}/img/buttons/btn-reply.png" alt="#{msg.label_responder}" title="#{msg.label_responder}" width="16px" height="16px"/>#{msg.label_responder}</a>
+								<span class="container-acoes"><h:commandLink onclick="return confirm('#{msg.label_confirma_exclusao}');" actionListener="#{receberMensagemBean.exclui}"><f:param name="index" value="#{status.index}"/><img src="#{request.contextPath}/img/buttons/btn-lixeira.png" alt="#{msg.label_responder}" title="#{msg.label_responder}" width="16px" height="16px"/> #{msg.label_excluir}</h:commandLink>&#160; 
+									<a id="r#{status.index}" href="#"><img src="#{request.contextPath}/img/buttons/btn-reply.png" alt="#{msg.label_responder}" title="#{msg.label_responder}" width="16px" height="16px"/>#{msg.label_responder}</a>
 								</span>
 							</div>
-							<div class="container-resposta">
-								<h:inputTextarea id="resposta" value="#{receberMensagemBean.mensagemResposta}" styleClass="resposta"/>
-								<span class="caracteres-restantes"><span id='contador'></span>&#160;#{msg.label_caracteres_restantes}</span>
+							<div class="container-resposta r#{status.index}">
+								<h:inputTextarea id="resposta#{status.index}" value="#{receberMensagemBean.respostas[status.index]}" styleClass="resposta"/>
+								<span class="caracteres-restantes"><span id='contador#{status.index}'></span>&#160;#{msg.label_caracteres_restantes}</span>
 								<span class="botao-enviar">
 									<ui:include src="../componentes/botao-padrao.xhtml">
 										<ui:param name="label" value="#{msg.label_enviar}"/>
-										<ui:param name="metodo" value="#{receberMensagemBean.responde}"/>
+										<ui:param name="bean" value="#{receberMensagemBean}"/>
+										<ui:param name="metodo" value="responde"/>
+										<ui:param name="index" value="#{status.index}"/>
 									</ui:include>
 								</span>
 							</div>
@@ -64,17 +57,21 @@
 							<div class="corner br"></div>
 							<div class="clear"></div>
 						</div>
+						<script>
+							$j('#r#{status.index}').click(function () {
+								$j(".r#{status.index}").toggle();
+							});
+							$j('#mensagem\\:resposta#{status.index}').NobleCount('#contador#{status.index}',{
+								on_negative: 'go_red',
+								on_positive: 'go_green',
+								max_chars: 255
+							});
+						</script>
 					</c:forEach>
 				</div>
 			</h:form>
 		</div>
-		
-		<script>
-$j("#xx").click(function () {
-	$j(".container-resposta").toggle();
-});
-</script>
-		
+				
 	</ui:define>
 
 </ui:composition>

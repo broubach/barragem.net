@@ -5,7 +5,10 @@
 	xmlns:c="http://java.sun.com/jstl/core">
 
 	<div class="botao-padrao-redondo">
-		<h:commandButton actionListener="#{metodo}" value="#{label}" styleClass="inner-button"/>
+		<h:commandLink action="#{bean.executaMetodo}" value="#{label}" styleClass="inner-button">
+			<f:param name="index" value="#{index}"/>
+			<f:param name="metodo" value="#{metodo}"/>
+		</h:commandLink>
 		<div class="corner tl"></div>
 		<div class="corner tr"></div>
 		<div class="corner bl"></div>

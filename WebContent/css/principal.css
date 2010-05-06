@@ -392,6 +392,7 @@ fieldset#parciais {
 	width: 350px;
 	float: right;
 	margin: 0px;
+	min-height: 30px;
 }
 .container-texto .container-acoes {
 	float: right;
@@ -1247,6 +1248,8 @@ td.actions {
 	padding: 0px;
 	background-color: #95C396;
 	border: 0px;
+	text-align: center;
+	text-decoration: none;
 }
 
 /********************* TYPOGRAPHY *********************/

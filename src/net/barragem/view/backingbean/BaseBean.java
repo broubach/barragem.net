@@ -32,6 +32,7 @@ import net.barragem.persistence.entity.Usuario;
 import net.barragem.persistence.entity.Validatable;
 import net.barragem.scaffold.BarragemJmsTemplate;
 import net.barragem.scaffold.PersistenceHelper;
+import net.barragem.scaffold.ReflectionHelper;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.jms.core.MessageCreator;
@@ -45,6 +46,14 @@ public abstract class BaseBean {
 			"<p>Agora você faz parte da lista de jogadores de {0}.</p>").append(
 			"<p>Se você conhece {0}, você também pode adicioná-lo(a) à sua lista de jogadores.</p>").append(
 			"<p>Atenciosamente,<br />Equipe <a href='https://www.barragem.net/login.xhtml'>barragem.net</a></p>")
+			.toString();
+	protected static final String emailNovaMensagem = new StringBuilder()
+			.append("<p>Olá,</p>")
+			.append("<p>{0} acaba de te enviar uma mensagem.</p>")
+			.append(
+					"<p>Acesse <a href='https://www.barragem.net/login.xhtml'>barragem.net</a> para verificar a nova mensagem.</p>")
+			.append(
+					"<p>Atenciosamente,<br />Equipe <a href='https://www.barragem.net/login.xhtml'>barragem.net</a></p>")
 			.toString();
 	protected static final String emailTemplateRecuperarSenha = new StringBuilder()
 			.append("<p>Olá,</p>")
@@ -360,5 +369,10 @@ public abstract class BaseBean {
 
 	protected List<Atualizacao> getAtualizacoes() {
 		return (List<Atualizacao>) getSessionAttribute("atualizacoes");
+	}
+
+	public String executaMetodo() {
+		String metodo = (String) getRequest().getParameter("metodo");
+		return (String) ReflectionHelper.execute(this, metodo);
 	}
 }
