@@ -19,6 +19,9 @@
 			            <li>
 							<h:commandLink value="#{msg.label_adicionar_a_minha_lista_de_jogadores}" actionListener="#{exibirPerfilBean.adicionaUsuario}" disabled="#{exibirPerfilBean.usuarioJahAdicionado}"/>
 			            </li>
+			            <li>
+							<h:commandLink value="#{msg.label_enviar_mensagem}" rendered="#{exibirPerfilBean.usuarioJahAdicionado}" action="enviarMensagem"/>
+			            </li>
 			        </ul>
 				</h:panelGroup>
 

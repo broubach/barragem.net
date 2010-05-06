@@ -41,6 +41,7 @@
 		<mapping class="net.barragem.persistence.entity.JogadorJogoBarragem" />
 		<mapping class="net.barragem.persistence.entity.Jogo" />
 		<mapping class="net.barragem.persistence.entity.JogoBarragem" />
+		<mapping class="net.barragem.persistence.entity.Mensagem" />
 		<mapping class="net.barragem.persistence.entity.ParametroCiclo" />
 		<mapping class="net.barragem.persistence.entity.Placar" />
 		<mapping class="net.barragem.persistence.entity.Rodada" />

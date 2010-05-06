@@ -95,6 +95,11 @@
 		<managed-bean-class>net.barragem.view.backingbean.RecuperarSenhaBean</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>receberMensagemBean</managed-bean-name>
+		<managed-bean-class>net.barragem.view.backingbean.ReceberMensagemBean</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
 	<navigation-rule>
 		<display-name>protectedpages/gerirbarragem/barragensQueAdministro.xhtml</display-name>
 		<from-view-id>/protectedpages/gerirbarragem/barragensQueAdministro.xhtml</from-view-id>

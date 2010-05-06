@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<ui:composition template="/protectedpages/layout/layoutPrincipal.xhtml">
+	<ui:define name="conteudo">
+		<div class="maincontent">
+			<script type="text/javascript" src="#{request.contextPath}/js/jquery.NobleCount.min.js"></script>
+			<script>
+				$j(function(){
+					$j('#mensagem\\:resposta').NobleCount('#contador',{
+						on_negative: 'go_red',
+						on_positive: 'go_green',
+						max_chars: 255
+					});
+				});
+			</script>
+
+			<h:form id="mensagem">
+				<h2>#{msg.label_mensagens}</h2>
+
+				<div class="container-mensagens">
+					<c:forEach items="#{receberMensagemBean.mensagens}" var="item" varStatus="status">
+						<div class="container-mensagem">
+							<div class="container-remetente">
+								<span class="foto">
+								    <ui:include src="../componentes/foto-perfil-small.xhtml">
+								    	<ui:param name="usuario" value="#{item.remetente}"/>
+								    </ui:include>
+								</span>
+								<span class="remetente-data-hora">
+									#{item.remetente.nomeCompletoCapital}<br/>
+								    <h:outputText value="#{item.data}">
+								    	<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+								    </h:outputText>
+								</span>
+							</div>
+							<div class="container-texto">
+								<p class="texto">#{item.mensagem}</p>
+								<span class="container-acoes"><a href="#"><img src="#{request.contextPath}/img/buttons/btn-lixeira.png" alt="#{msg.label_responder}" title="#{msg.label_responder}" width="16px" height="16px"/> #{msg.label_excluir}</a>&#160; 
+									<a id="xx" href="#"><img src="#{request.contextPath}/img/buttons/btn-reply.png" alt="#{msg.label_responder}" title="#{msg.label_responder}" width="16px" height="16px"/>#{msg.label_responder}</a>
+								</span>
+							</div>
+							<div class="container-resposta">
+								<h:inputTextarea id="resposta" value="#{receberMensagemBean.mensagemResposta}" styleClass="resposta"/>
+								<span class="caracteres-restantes"><span id='contador'></span>&#160;#{msg.label_caracteres_restantes}</span>
+								<span class="botao-enviar">
+									<ui:include src="../componentes/botao-padrao.xhtml">
+										<ui:param name="label" value="#{msg.label_enviar}"/>
+										<ui:param name="metodo" value="#{receberMensagemBean.responde}"/>
+									</ui:include>
+								</span>
+							</div>
+							<div class="corner tl"></div>
+							<div class="corner tr"></div>
+							<div class="corner bl"></div>
+							<div class="corner br"></div>
+							<div class="clear"></div>
+						</div>
+					</c:forEach>
+				</div>
+			</h:form>
+		</div>
+		
+		<script>
+$j("#xx").click(function () {
+	$j(".container-resposta").toggle();
+});
+</script>
+		
+	</ui:define>
+
+</ui:composition>
+</html>

@@ -48,7 +48,7 @@
 	<div class="twitterDiv">
 		<a href="http://www.twitter.com/barragemnet"><img src="#{request.contextPath}/img/tennistwitp3.png"/></a>
 	</div>
-	<form action="#" id="searchForm">
-	    <input type="text" title="#{msg.label_pesquisar}" class="searchFormInput"/>
-	</form>
+	<h:form id="searchForm">
+		<h:inputText title="#{msg.label_pesquisar}" styleClass="searchFormInput" /><h:commandButton actionListener="#{pesquisarBean.pesquisaGeral}" image="/img/pesquisaLen.gif" styleClass="searchFormButton" alt="#{msg.label_pesquisar_}" title="#{msg.label_pesquisar_}"/>
+	</h:form>
 </html>

@@ -1,0 +1,8 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<h:graphicImage value="/protectedpages/exibirimagem/exibirImagem.do?hash=#{usuario.perfil.hash}" styleClass="foto-perfil-small" 
+		rendered="#{usuario != null and usuario.perfil != null and usuario.perfil.hash != null}"/>
+	<h:graphicImage value="/protectedpages/exibirimagem/exibirImagem.do?hash=default" styleClass="foto-perfil-small" 
+		rendered="#{usuario != null and (usuario.perfil == null or usuario.perfil.hash == null)}"/>
+</html>
