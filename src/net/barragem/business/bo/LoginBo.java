@@ -25,7 +25,17 @@ public class LoginBo extends BaseBo {
 		super(request, response);
 	}
 
-	public void login(Usuario usuario) {
+	public boolean autentica(String login, String senha) {
+		List<Usuario> usuarios = PersistenceHelper.findByNamedQuery("loginQuery", encriptMd5(senha), login);
+		if (usuarios.isEmpty()) {
+			return false;
+		} else {
+			autoriza(usuarios.get(0));
+			return true;
+		}
+	}
+
+	private void autoriza(Usuario usuario) {
 		// atualiza hora do ultimo acesso
 		usuario.setDataPenultimoAcesso(usuario.getDataUltimoAcesso());
 		usuario.setDataUltimoAcesso(new Date());

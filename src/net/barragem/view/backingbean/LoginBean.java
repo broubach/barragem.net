@@ -1,7 +1,5 @@
 package net.barragem.view.backingbean;
 
-import java.util.List;
-
 import javax.faces.event.ActionEvent;
 
 import net.barragem.business.bo.LoginBo;
@@ -35,14 +33,11 @@ public class LoginBean extends BaseBean {
 	}
 
 	public String login() {
-		List<Usuario> usuarios = PersistenceHelper.findByNamedQuery("loginQuery", encriptMd5(senha), login);
-		if (usuarios.isEmpty()) {
-			messages.addErrorMessage("login", "label_login_senha_invalidos");
-			return "";
-		} else {
-			getBo(LoginBo.class).login(usuarios.get(0));
+		if (getBo(LoginBo.class).autentica(login, senha)) {
 			return "login";
 		}
+		messages.addErrorMessage("login", "label_login_senha_invalidos");
+		return "";
 	}
 
 	public void sair(ActionEvent e) {

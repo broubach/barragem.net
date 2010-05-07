@@ -78,6 +78,15 @@
 	</filter-mapping>
 
 	<filter>
+		<filter-name>LoginFilter</filter-name>
+		<filter-class>net.barragem.scaffold.LoginFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>LoginFilter</filter-name>
+		<url-pattern>/protectedpages/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
 		<filter-name>ProtectedPagesFilter</filter-name>
 		<filter-class>net.barragem.scaffold.ProtectedPagesFilter</filter-class>
 	</filter>
