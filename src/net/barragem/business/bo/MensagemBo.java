@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.barragem.persistence.entity.Mensagem;
+import net.barragem.persistence.entity.Usuario;
 import net.barragem.scaffold.PersistenceHelper;
 
 public class MensagemBo extends BaseBo {
@@ -16,15 +17,19 @@ public class MensagemBo extends BaseBo {
 	}
 
 	public void responde(Mensagem mensagem, String textoResposta) {
-		Mensagem resposta = new Mensagem();
-		resposta.setData(new Date());
-		resposta.setDestinatario(mensagem.getRemetente());
-		resposta.setMensagem(textoResposta);
-		resposta.setRemetente(getUsuarioLogado());
+		envia(mensagem.getRemetente(), textoResposta);
+	}
+
+	public void envia(Usuario destinatario, String texto) {
+		Mensagem mensagem = new Mensagem();
+		mensagem.setData(new Date());
+		mensagem.setDestinatario(destinatario);
+		mensagem.setMensagem(texto);
+		mensagem.setRemetente(getUsuarioLogado());
 		PersistenceHelper.persiste(mensagem);
 
-		sendMail("no-reply@barragem.net", resposta.getRemetente().getNomeCompletoCapital(), resposta.getDestinatario()
-				.getEmail(), "barragem.net - nova mensagem", MessageFormat.format(emailNovaMensagem, resposta
+		sendMail("no-reply@barragem.net", mensagem.getRemetente().getNomeCompletoCapital(), mensagem.getDestinatario()
+				.getEmail(), "barragem.net - nova mensagem", MessageFormat.format(emailNovaMensagem, mensagem
 				.getRemetente().getNomeCompletoCapital()));
 	}
 }

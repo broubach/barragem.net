@@ -60,6 +60,13 @@ public class Usuario extends BaseEntity implements Validatable, Cloneable, Atual
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "administrador")
 	private List<Barragem> barragens;
 
+	public Usuario(int id) {
+		setId(id);
+	}
+
+	public Usuario() {
+	}
+
 	public String getNome() {
 		return nome;
 	}

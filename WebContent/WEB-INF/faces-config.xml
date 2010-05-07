@@ -100,6 +100,11 @@
 		<managed-bean-class>net.barragem.view.backingbean.ReceberMensagemBean</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>exibirMensagensBean</managed-bean-name>
+		<managed-bean-class>net.barragem.view.backingbean.ExibirMensagensBean</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
 	<navigation-rule>
 		<display-name>protectedpages/gerirbarragem/barragensQueAdministro.xhtml</display-name>
 		<from-view-id>/protectedpages/gerirbarragem/barragensQueAdministro.xhtml</from-view-id>
@@ -230,6 +235,10 @@
 		<navigation-case>
 			<from-outcome>exibirPerfil</from-outcome>
 			<to-view-id>/protectedpages/exibirperfil/exibirPerfil.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>exibirMensagens</from-outcome>
+			<to-view-id>/protectedpages/exibirmensagens/exibirMensagens.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>editarDadosBasicos</from-outcome>

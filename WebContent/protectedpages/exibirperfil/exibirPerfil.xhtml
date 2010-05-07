@@ -16,12 +16,16 @@
 				<h3>#{msg.label_perfil}</h3> <h2>#{exibirPerfilBean.usuarioEmFoco.nomeCompletoCapital}</h2>
 				<h:panelGroup id="menu-contextual" styleClass="menu-contextual" layout="block">
 			        <ul>
-			            <li>
-							<h:commandLink value="#{msg.label_adicionar_a_minha_lista_de_jogadores}" actionListener="#{exibirPerfilBean.adicionaUsuario}" disabled="#{exibirPerfilBean.usuarioJahAdicionado}"/>
-			            </li>
-			            <li>
-							<h:commandLink value="#{msg.label_enviar_mensagem}" rendered="#{exibirPerfilBean.usuarioJahAdicionado}" action="enviarMensagem"/>
-			            </li>
+			        	<c:if test="#{not exibirPerfilBean.usuarioJahAdicionado}">
+				            <li>
+								<h:commandLink value="#{msg.label_adicionar_a_minha_lista_de_jogadores}" actionListener="#{exibirPerfilBean.adicionaUsuario}"/>
+				            </li>
+			            </c:if>
+			        	<c:if test="#{exibirPerfilBean.usuarioJahAdicionado}">
+				            <li>
+								<h:commandLink value="#{msg.label_mensagens}" actionListener="#{exibirMensagensBean.exibeMensagens}" action="exibirMensagens"><f:param name="id" value="#{exibirPerfilBean.usuarioEmFoco.id}"/></h:commandLink>
+				            </li>
+			            </c:if>
 			        </ul>
 				</h:panelGroup>
 
