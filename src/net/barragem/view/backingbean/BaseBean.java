@@ -375,4 +375,8 @@ public abstract class BaseBean {
 		String metodo = (String) getRequest().getParameter("metodo");
 		return (String) ReflectionHelper.execute(this, metodo);
 	}
+
+	protected void setTotalNovasMensagens(Integer totalNovasMensagens) {
+		setSessionAttribute("totalNovasMensagens", totalNovasMensagens);
+	}
 }

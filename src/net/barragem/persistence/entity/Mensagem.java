@@ -4,11 +4,14 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@NamedQuery(name = "mensagemQuery", query = "from Mensagem m where m.destinatario = :usuario")
+@NamedQueries( {
+		@NamedQuery(name = "mensagemQuery", query = "from Mensagem m where m.destinatario = :usuario"),
+		@NamedQuery(name = "novasMensagens", query = "select count(*) from Mensagem m where m.destinatario = :usuario and m.data > :dataUltimoAcesso") })
 @Table(name = "mensagem")
 public class Mensagem extends BaseEntity {
 

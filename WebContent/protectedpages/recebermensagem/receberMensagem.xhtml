@@ -14,7 +14,7 @@
 		<div class="maincontent">
 			<script type="text/javascript" src="#{request.contextPath}/js/jquery.NobleCount.min.js"></script>
 
-			<h:form id="mensagem">
+			<h:form id="receberMensagem">
 				<h2>#{msg.label_mensagens}</h2>
 
 				<div class="container-mensagens">
@@ -61,7 +61,7 @@
 							$j('#r#{status.index}').click(function () {
 								$j(".r#{status.index}").toggle();
 							});
-							$j('#mensagem\\:resposta#{status.index}').NobleCount('#contador#{status.index}',{
+							$j('#receberMensagem\\:resposta#{status.index}').NobleCount('#contador#{status.index}',{
 								on_negative: 'go_red',
 								on_positive: 'go_green',
 								max_chars: 255

@@ -70,6 +70,11 @@ public class LoginBo extends BaseBo {
 		}
 		carregaAtualizacoes(atualizacoes);
 		setAtualizacoes(atualizacoes);
+
+		// busca total de mensagens não lidas
+		List<Long> totalMensagens = PersistenceHelper.findByNamedQuery("novasMensagens", getUsuarioLogado(),
+				getUsuarioLogado().getDataPenultimoAcesso());
+		setTotalNovasMensagens(totalMensagens.get(0).intValue());
 	}
 
 	public void carregaAtualizacoes(List<Atualizacao> atualizacoes) {

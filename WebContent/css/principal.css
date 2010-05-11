@@ -50,6 +50,11 @@ fieldset {
 .atualizacoes li {
 	list-style: inside disc;
 }
+.new_mail {
+	left:155px;
+	position:absolute;
+	top:10px;
+}
 
 /********************* CABECALHO *********************/
 #header {
@@ -401,7 +406,7 @@ fieldset#parciais {
 }
 
 /******** Resposta ********/
-.container-resposta {
+#receberMensagem .container-resposta {
 	display: none;
 }
 .container-resposta .resposta {

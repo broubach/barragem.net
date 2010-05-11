@@ -44,6 +44,7 @@ public class ExibirMensagensBean extends BaseBean {
 
 	public String envia() {
 		getBo(MensagemBo.class).envia(usuarioEmFoco, mensagem);
+		mensagens = PersistenceHelper.findByNamedQuery("mensagemQuery", usuarioEmFoco);
 		addMensagemAtualizacaoComSucesso();
 		return "";
 	}
@@ -51,7 +52,7 @@ public class ExibirMensagensBean extends BaseBean {
 	public void exclui(ActionEvent e) {
 		PersistenceHelper.remove(mensagens.get(getIndex()));
 		addMensagemAtualizacaoComSucesso();
-		mensagens = PersistenceHelper.findByNamedQuery("mensagemQuery", getUsuarioLogado());
+		mensagens = PersistenceHelper.findByNamedQuery("mensagemQuery", usuarioEmFoco);
 	}
 
 	public void exibeMensagens(ActionEvent e) {

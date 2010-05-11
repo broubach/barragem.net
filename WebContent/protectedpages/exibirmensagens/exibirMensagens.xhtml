@@ -11,11 +11,11 @@
 
 <ui:composition template="/protectedpages/layout/layoutPrincipal.xhtml">
 	<ui:define name="conteudo">
-		<div class="maincontent equalheights">
+		<div class="maincontent">
 			<script type="text/javascript" src="#{request.contextPath}/js/jquery.NobleCount.min.js"></script>
 
-			<h:form id="mensagem">
-				<h3>#{msg.label_mensagens}</h3> <h2>#{exibirPerfilBean.usuarioEmFoco.nomeCompletoCapital}</h2>
+			<h:form id="exibirMensagens">
+				<h3>#{msg.label_mensagens}</h3> <h2>#{exibirMensagensBean.usuarioEmFoco.nomeCompletoCapital}</h2>
 				<h:panelGroup id="menu-contextual" styleClass="menu-contextual" layout="block">
 			        <ul>
 			            <li>
@@ -47,7 +47,7 @@
 						<div class="clear"></div>
 					</div>
 					<script>
-						$j('#mensagem\\:novaMensagem').NobleCount('#contador',{
+						$j('#exibirMensagens\\:novaMensagem').NobleCount('#contador',{
 							on_negative: 'go_red',
 							on_positive: 'go_green',
 							max_chars: 255
@@ -71,7 +71,7 @@
 							</div>
 							<div class="container-texto">
 								<p class="texto">#{item.mensagem}</p>
-								<span class="container-acoes"><h:commandLink onclick="return confirm('#{msg.label_confirma_exclusao}');" rendered="#{enviarMensagemBean.mensagens[status.index].remetente == enviarMensagemBean.usuarioEmFoco}" actionListener="#{receberMensagemBean.exclui}"><f:param name="index" value="#{status.index}"/><img src="#{request.contextPath}/img/buttons/btn-lixeira.png" alt="#{msg.label_responder}" title="#{msg.label_responder}" width="16px" height="16px"/> #{msg.label_excluir}</h:commandLink></span>
+								<span class="container-acoes"><h:commandLink onclick="return confirm('#{msg.label_confirma_exclusao}');" rendered="#{exibirMensagensBean.mensagens[status.index].remetente.id == sessionScope['usuario'].id}" actionListener="#{exibirMensagensBean.exclui}"><f:param name="index" value="#{status.index}"/><img src="#{request.contextPath}/img/buttons/btn-lixeira.png" alt="#{msg.label_responder}" title="#{msg.label_responder}" width="16px" height="16px"/> #{msg.label_excluir}</h:commandLink></span>
 							</div>
 							<div class="corner tl"></div>
 							<div class="corner tr"></div>
