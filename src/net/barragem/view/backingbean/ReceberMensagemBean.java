@@ -7,6 +7,8 @@ import javax.faces.event.ActionEvent;
 
 import net.barragem.business.bo.MensagemBo;
 import net.barragem.persistence.entity.Mensagem;
+import net.barragem.scaffold.Paginavel;
+import net.barragem.scaffold.PaginavelSampleImpl;
 import net.barragem.scaffold.PersistenceHelper;
 
 import org.ajax4jsf.model.KeepAlive;
@@ -14,23 +16,16 @@ import org.ajax4jsf.model.KeepAlive;
 @KeepAlive
 public class ReceberMensagemBean extends BaseBean {
 
-	private List<Mensagem> mensagens;
 	private List<String> respostas;
+	private Paginavel<Mensagem> paginacaoMensagens;
 
 	public ReceberMensagemBean() {
-		mensagens = PersistenceHelper.findByNamedQuery("mensagemQuery", getUsuarioLogado());
+		paginacaoMensagens = new PaginavelSampleImpl<Mensagem>(PersistenceHelper.findByNamedQuery("mensagemQuery",
+				getUsuarioLogado()), 6);
 		respostas = new ArrayList<String>();
-		for (int i = 0; i < mensagens.size(); i++) {
+		for (int i = 0; i < paginacaoMensagens.getPagina().size(); i++) {
 			respostas.add("");
 		}
-	}
-
-	public List<Mensagem> getMensagens() {
-		return mensagens;
-	}
-
-	public void setMensagens(List<Mensagem> mensagens) {
-		this.mensagens = mensagens;
 	}
 
 	public List<String> getRespostas() {
@@ -41,15 +36,25 @@ public class ReceberMensagemBean extends BaseBean {
 		this.respostas = respostas;
 	}
 
+	public Paginavel<Mensagem> getPaginacaoMensagens() {
+		return paginacaoMensagens;
+	}
+
+	public void setPaginacaoMensagens(Paginavel<Mensagem> paginacaoMensagens) {
+		this.paginacaoMensagens = paginacaoMensagens;
+	}
+
 	public String responde() {
-		getBo(MensagemBo.class).responde(mensagens.get(getIndex()), respostas.get(getIndex()));
+		getBo(MensagemBo.class).responde(paginacaoMensagens.getPagina().get(getIndex()), respostas.get(getIndex()));
 		addMensagemAtualizacaoComSucesso();
 		return "";
 	}
 
 	public void exclui(ActionEvent e) {
-		PersistenceHelper.remove(mensagens.get(getIndex()));
+		Mensagem focus = paginacaoMensagens.getPosteriorImediatoOuAnteriorImediato(getIndex());
+		PersistenceHelper.remove(paginacaoMensagens.getPagina().get(getIndex()));
 		addMensagemAtualizacaoComSucesso();
-		mensagens = PersistenceHelper.findByNamedQuery("mensagemQuery", getUsuarioLogado());
+		paginacaoMensagens = new PaginavelSampleImpl<Mensagem>(PersistenceHelper.findByNamedQuery("mensagemQuery",
+				getUsuarioLogado()), focus, 6);
 	}
 }

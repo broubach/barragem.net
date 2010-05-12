@@ -18,7 +18,7 @@
 				<h2>#{msg.label_mensagens}</h2>
 
 				<div class="container-mensagens">
-					<c:forEach items="#{receberMensagemBean.mensagens}" var="item" varStatus="status">
+					<c:forEach items="#{receberMensagemBean.paginacaoMensagens.pagina}" var="item" varStatus="status">
 						<div class="container-mensagem">
 							<div class="container-remetente">
 								<span class="foto">
@@ -69,6 +69,9 @@
 						</script>
 					</c:forEach>
 				</div>
+			    <ui:include src="../componentes/paginacao.xhtml">
+			    	<ui:param name="paginavel" value="#{receberMensagemBean.paginacaoMensagens}"/>
+			    </ui:include>
 			</h:form>
 		</div>
 				

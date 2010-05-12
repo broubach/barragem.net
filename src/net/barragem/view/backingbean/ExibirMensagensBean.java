@@ -45,6 +45,7 @@ public class ExibirMensagensBean extends BaseBean {
 	public String envia() {
 		getBo(MensagemBo.class).envia(usuarioEmFoco, mensagem);
 		mensagens = PersistenceHelper.findByNamedQuery("mensagemQuery", usuarioEmFoco);
+		mensagem = "";
 		addMensagemAtualizacaoComSucesso();
 		return "";
 	}

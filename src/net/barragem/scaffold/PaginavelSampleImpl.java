@@ -183,4 +183,20 @@ public class PaginavelSampleImpl<T> implements Paginavel<T> {
 		}
 		return paginaCalculada;
 	}
+
+	@Override
+	public T getPosteriorImediatoOuAnteriorImediato(int zeroBasedPageIndex) {
+		if (sourceList != null) {
+			int index = pageSize * (pageCount - 1) + zeroBasedPageIndex;
+			if (index + 1 < sourceList.size()) {
+				index++;
+			} else if (index - 1 >= 0) {
+				index--;
+			} else if (sourceList.size() == 1) {
+				return null;
+			}
+			return sourceList.get(index);
+		}
+		return null;
+	}
 }
