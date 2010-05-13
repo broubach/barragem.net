@@ -13,7 +13,7 @@
 	<ui:define name="conteudo">
 		<div class="maincontent equalheights">
 			<h:form id="perfil">
-				<h3>#{msg.label_perfil}</h3> <h2>#{exibirPerfilBean.usuarioEmFoco.nomeCompletoCapital}</h2>
+				<h2>#{exibirPerfilBean.usuarioEmFoco.nomeCompletoCapital}</h2>
 				<h:panelGroup id="menu-contextual" styleClass="menu-contextual" layout="block">
 			        <ul>
 			        	<c:if test="#{not exibirPerfilBean.usuarioJahAdicionado}">
@@ -22,6 +22,9 @@
 				            </li>
 			            </c:if>
 			        	<c:if test="#{exibirPerfilBean.usuarioJahAdicionado}">
+				            <li>
+								<h:commandLink value="#{msg.label_perfil}" disabled="true"></h:commandLink>
+				            </li>
 				            <li>
 								<h:commandLink value="#{msg.label_mensagens}" actionListener="#{exibirMensagensBean.exibeMensagens}" action="exibirMensagens"><f:param name="id" value="#{exibirPerfilBean.usuarioEmFoco.id}"/></h:commandLink>
 				            </li>

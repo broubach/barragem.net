@@ -185,9 +185,9 @@ public class PaginavelSampleImpl<T> implements Paginavel<T> {
 	}
 
 	@Override
-	public T getPosteriorImediatoOuAnteriorImediato(int zeroBasedPageIndex) {
+	public T getPosteriorImediatoOuAnteriorImediato(int zeroBasedIndexInPage) {
 		if (sourceList != null) {
-			int index = pageSize * (pageCount - 1) + zeroBasedPageIndex;
+			int index = pageSize * (pageCount - 1) + zeroBasedIndexInPage;
 			if (index + 1 < sourceList.size()) {
 				index++;
 			} else if (index - 1 >= 0) {

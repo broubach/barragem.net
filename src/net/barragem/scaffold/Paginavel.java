@@ -34,5 +34,5 @@ public interface Paginavel<T> {
 
 	public int calculaPagina(int indexOf);
 
-	public T getPosteriorImediatoOuAnteriorImediato(int index);
+	public T getPosteriorImediatoOuAnteriorImediato(int indexInPage);
 }

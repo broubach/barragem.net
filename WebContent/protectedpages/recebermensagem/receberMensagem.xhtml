@@ -16,6 +16,7 @@
 
 			<h:form id="receberMensagem">
 				<h2>#{msg.label_mensagens}</h2>
+				<span class="texto_informativo">#{msg.label_total_mensagens}: #{receberMensagemBean.totalMensagens}</span>
 
 				<div class="container-mensagens">
 					<c:forEach items="#{receberMensagemBean.paginacaoMensagens.pagina}" var="item" varStatus="status">
@@ -59,7 +60,12 @@
 						</div>
 						<script>
 							$j('#r#{status.index}').click(function () {
-								$j(".r#{status.index}").toggle();
+								$j(".r#{status.index}").show();
+								<c:forEach items="#{receberMensagemBean.paginacaoMensagens.pagina}" var="item" varStatus="statusJs">
+									<c:if test="#{statusJs.index != status.index}">
+										$j(".r#{statusJs.index}").hide();
+									</c:if>
+								</c:forEach>
 							});
 							$j('#receberMensagem\\:resposta#{status.index}').NobleCount('#contador#{status.index}',{
 								on_negative: 'go_red',

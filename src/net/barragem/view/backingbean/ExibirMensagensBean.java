@@ -1,12 +1,12 @@
 package net.barragem.view.backingbean;
 
-import java.util.List;
-
 import javax.faces.event.ActionEvent;
 
 import net.barragem.business.bo.MensagemBo;
 import net.barragem.persistence.entity.Mensagem;
 import net.barragem.persistence.entity.Usuario;
+import net.barragem.scaffold.Paginavel;
+import net.barragem.scaffold.PaginavelSampleImpl;
 import net.barragem.scaffold.PersistenceHelper;
 
 import org.ajax4jsf.model.KeepAlive;
@@ -15,8 +15,9 @@ import org.ajax4jsf.model.KeepAlive;
 public class ExibirMensagensBean extends BaseBean {
 
 	private Usuario usuarioEmFoco;
-	private List<Mensagem> mensagens;
 	private String mensagem;
+	private Paginavel<Mensagem> paginacaoMensagens;
+	private Integer totalMensagens;
 
 	public Usuario getUsuarioEmFoco() {
 		return usuarioEmFoco;
@@ -24,14 +25,6 @@ public class ExibirMensagensBean extends BaseBean {
 
 	public void setUsuarioEmFoco(Usuario usuarioEmFoco) {
 		this.usuarioEmFoco = usuarioEmFoco;
-	}
-
-	public List<Mensagem> getMensagens() {
-		return mensagens;
-	}
-
-	public void setMensagens(List<Mensagem> mensagens) {
-		this.mensagens = mensagens;
 	}
 
 	public String getMensagem() {
@@ -42,22 +35,44 @@ public class ExibirMensagensBean extends BaseBean {
 		this.mensagem = mensagem;
 	}
 
+	public Paginavel<Mensagem> getPaginacaoMensagens() {
+		return paginacaoMensagens;
+	}
+
+	public void setPaginacaoMensagens(Paginavel<Mensagem> paginacaoMensagens) {
+		this.paginacaoMensagens = paginacaoMensagens;
+	}
+
+	public Integer getTotalMensagens() {
+		return totalMensagens;
+	}
+
+	public void setTotalMensagens(Integer totalMensagens) {
+		this.totalMensagens = totalMensagens;
+	}
+
 	public String envia() {
 		getBo(MensagemBo.class).envia(usuarioEmFoco, mensagem);
-		mensagens = PersistenceHelper.findByNamedQuery("mensagemQuery", usuarioEmFoco);
+		paginacaoMensagens = new PaginavelSampleImpl<Mensagem>(PersistenceHelper.findByNamedQuery("mensagemQuery",
+				usuarioEmFoco), 5);
 		mensagem = "";
 		addMensagemAtualizacaoComSucesso();
 		return "";
 	}
 
 	public void exclui(ActionEvent e) {
-		PersistenceHelper.remove(mensagens.get(getIndex()));
+		Mensagem focus = paginacaoMensagens.getPosteriorImediatoOuAnteriorImediato(getIndex());
+		PersistenceHelper.remove(paginacaoMensagens.getPagina().get(getIndex()));
+		paginacaoMensagens = new PaginavelSampleImpl<Mensagem>(PersistenceHelper.findByNamedQuery("mensagemQuery",
+				usuarioEmFoco), focus, 5);
 		addMensagemAtualizacaoComSucesso();
-		mensagens = PersistenceHelper.findByNamedQuery("mensagemQuery", usuarioEmFoco);
 	}
 
 	public void exibeMensagens(ActionEvent e) {
 		usuarioEmFoco = PersistenceHelper.findByPk(Usuario.class, getId());
-		mensagens = PersistenceHelper.findByNamedQuery("mensagemQuery", usuarioEmFoco);
+		paginacaoMensagens = new PaginavelSampleImpl<Mensagem>(PersistenceHelper.findByNamedQuery("mensagemQuery",
+				usuarioEmFoco), 5);
+		totalMensagens = ((Long) PersistenceHelper.findByNamedQuery("totalMensagensQuery", usuarioEmFoco).get(0))
+				.intValue();
 	}
 }

@@ -534,7 +534,7 @@ fieldset#parciais {
 	margin-bottom: 4px;
 }
 
-.texto_informativo {
+#gerirJogador .texto_informativo {
 	float: left;
 }
 

@@ -18,6 +18,7 @@ public class ReceberMensagemBean extends BaseBean {
 
 	private List<String> respostas;
 	private Paginavel<Mensagem> paginacaoMensagens;
+	private Integer totalMensagens;
 
 	public ReceberMensagemBean() {
 		paginacaoMensagens = new PaginavelSampleImpl<Mensagem>(PersistenceHelper.findByNamedQuery("mensagemQuery",
@@ -26,6 +27,8 @@ public class ReceberMensagemBean extends BaseBean {
 		for (int i = 0; i < paginacaoMensagens.getPagina().size(); i++) {
 			respostas.add("");
 		}
+		totalMensagens = ((Long) PersistenceHelper.findByNamedQuery("totalMensagensQuery", getUsuarioLogado()).get(0))
+				.intValue();
 	}
 
 	public List<String> getRespostas() {
@@ -42,6 +45,14 @@ public class ReceberMensagemBean extends BaseBean {
 
 	public void setPaginacaoMensagens(Paginavel<Mensagem> paginacaoMensagens) {
 		this.paginacaoMensagens = paginacaoMensagens;
+	}
+
+	public Integer getTotalMensagens() {
+		return totalMensagens;
+	}
+
+	public void setTotalMensagens(Integer totalMensagens) {
+		this.totalMensagens = totalMensagens;
 	}
 
 	public String responde() {
