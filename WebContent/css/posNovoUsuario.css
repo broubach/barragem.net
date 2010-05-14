@@ -303,6 +303,49 @@ li {
 .anterior_proximo a:hover {
 	text-decoration: underline;
 }
+/********************* PADROES *********************/
+.mensagem_sucesso {
+	background-color: #CCFFCC;
+	border: 1px solid #008000;
+	position: relative;
+	color: #008000;
+	padding: 5px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 5px;
+	width: 300px;
+}
+.mensagem_sucesso .corner {
+	background: url("../img/bordas.gif") no-repeat scroll 0 0 transparent;
+	width: 3px;
+	height: 3px;
+	position: absolute;
+	background-color: #EEF1F3;
+}
+.mensagem_sucesso .tl {
+	background-position: -80px -16px;
+	top: -1px;
+	left: -1px;
+}
+.mensagem_sucesso .tr {
+	background-position: -83px -16px;
+	top: -1px;
+	right: -1px;
+}
+.mensagem_sucesso .bl {
+	background-position: -80px -19px;
+	bottom: -1px;
+	left: -1px;
+}
+.mensagem_sucesso .br {
+	background-position: -83px -19px;
+	bottom: -1px;
+	right: -1px;
+}
+.mensagem_sucesso .icone {
+	vertical-align: middle;
+}
+
 /********************* TYPOGRAPHY *********************/
 body {
 	font-family: Tahoma, Arial, Helvetica, sans serif;

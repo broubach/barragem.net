@@ -22,9 +22,10 @@
 		        </div>
 	        </c:if>
 			<div class="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.id != null ? 'anterior_proximo' : 'hidden'}">
-				<a4j:commandLink actionListener="#{gerirJogoBarragemBean.editaJogoAnterior}" styleClass="anterior" value="#{msg.label_anterior}" rendered="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.id != null}" reRender="add-jogo" oncomplete="aplicarMascaras();"/>&#160;
-				<a4j:commandLink actionListener="#{gerirJogoBarragemBean.editaProximoJogo}" styleClass="proximo" value="#{msg.label_proximo}" rendered="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.id != null}" reRender="add-jogo" oncomplete="aplicarMascaras();"/>
+				<a4j:commandLink actionListener="#{gerirJogoBarragemBean.editaJogoAnterior}" styleClass="anterior" value="#{msg.label_anterior}" rendered="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.id != null}" reRender="add-jogo" oncomplete="$j.fn.colorbox.resize();aplicarMascaras();"/>&#160;
+				<a4j:commandLink actionListener="#{gerirJogoBarragemBean.editaProximoJogo}" styleClass="proximo" value="#{msg.label_proximo}" rendered="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.id != null}" reRender="add-jogo" oncomplete="$j.fn.colorbox.resize();aplicarMascaras();"/>
 			</div>
+			    <ui:include src="../componentes/mensagem-sucesso.xhtml"/>
 			<div class="dados-popup">
 				<fieldset id="detalhes-jogo">
 					<legend>#{msg.label_detalhes_jogo}</legend>
@@ -83,7 +84,7 @@
 				</fieldset>
 				<div class="salvar">
 					<label class="campos_obrigatorios">#{msg.label_campos_marcados_sao_obrigatorios}</label>
-					<a4j:commandButton actionListener="#{gerirJogoBarragemBean.salvaJogo}" id="botaoSalvar" styleClass="submit" reRender="menu-contextual,add-jogo,jogos,mensagemSucesso" oncomplete="$.fn.colorbox.resize();aplicarMascaras();"
+					<a4j:commandButton actionListener="#{gerirJogoBarragemBean.salvaJogo}" id="botaoSalvar" styleClass="submit" reRender="add-jogo" oncomplete="$j.fn.colorbox.resize();aplicarMascaras();"
 						value="#{msg.label_salvar}" />
 				</div>
 			</div>

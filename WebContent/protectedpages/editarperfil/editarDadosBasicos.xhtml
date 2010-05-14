@@ -18,7 +18,7 @@
 	        <script type="text/javascript" src="#{request.contextPath}/js/jquery.colorbox-min.js"></script>
 			<script>
 	            $j(function(){
-		            $j(".popupSenha").colorbox({overlayClose:false, inline:true, href:".alterar-senha", scrollbars:false});
+		            $j(".popupSenha").colorbox({overlayClose:false, inline:true, href:".alterar-senha", scrolling:false});
 	            });
 	         </script>
 			<a href="#" class="popupSenha" title="#{msg.label_alterar_senha}"/>
@@ -44,6 +44,7 @@
 						aplicarMascaras();
 					});
 				</script>
+			    <ui:include src="../componentes/mensagem-sucesso.xhtml"/>
 				<div class="dados">
 					<h:panelGroup id="mensagemErro" layout="block" styleClass="mensagem-erro" rendered="#{! empty messageBean.errorMessages}">
 	    	    		<c:if test="#{messageBean.errorMessages['error_email_especificado_jah_existe'] == null}">

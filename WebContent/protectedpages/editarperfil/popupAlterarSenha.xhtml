@@ -15,6 +15,7 @@
 			        </c:forEach>
 		        </div>
 	        </c:if>
+		    <ui:include src="../componentes/mensagem-sucesso.xhtml"/>
 			<div class="dados-popup">
 				<div class="input text">
 					<label for="alterar-senha:senhaAtual" class="#{messageBean.errorMessages['nome'] != null ? 'error' : ''}">#{msg.label_senha_atual}*</label>
@@ -31,7 +32,7 @@
 				<div class="salvar">
 					<label class="campos_obrigatorios">#{msg.label_campos_marcados_sao_obrigatorios}</label>
 					<a4j:commandButton actionListener="#{editarPerfilBean.alteraSenha}"
-						value="#{msg.label_salvar}" reRender="alterar-senha,mensagemSucesso" styleClass="submit" oncomplete="$.fn.colorbox.resize()"/>
+						value="#{msg.label_salvar}" reRender="alterar-senha" styleClass="submit" oncomplete="$j.fn.colorbox.resize()"/>
 				</div>
 			</div>
 		</h:form>

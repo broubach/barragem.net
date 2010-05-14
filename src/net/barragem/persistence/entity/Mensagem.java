@@ -11,7 +11,6 @@ import javax.persistence.Table;
 @Entity
 @NamedQueries( {
 		@NamedQuery(name = "mensagemQuery", query = "from Mensagem m where m.destinatario = :usuario order by m.data desc"),
-		@NamedQuery(name = "totalMensagensQuery", query = "select count(*) from Mensagem m where m.destinatario = :usuario"),
 		@NamedQuery(name = "novasMensagens", query = "select count(*) from Mensagem m where m.destinatario = :usuario and m.data > :dataUltimoAcesso") })
 @Table(name = "mensagem")
 public class Mensagem extends BaseEntity {

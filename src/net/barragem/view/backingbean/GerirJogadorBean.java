@@ -31,9 +31,9 @@ public class GerirJogadorBean extends BaseBean {
 
 	public GerirJogadorBean() {
 		usuarioEmFoco = getUsuarioLogado();
-		Collections.sort(usuarioEmFoco.getJogadores(), new JogadoresComCorrespondenciaPrimeiroComparator());
 		List<Jogador> jogadoresSemUsuarioLogado = new ArrayList<Jogador>(usuarioEmFoco.getJogadores());
 		jogadoresSemUsuarioLogado.remove(usuarioEmFoco.getJogador());
+		Collections.sort(jogadoresSemUsuarioLogado, new JogadoresComCorrespondenciaPrimeiroComparator());
 		paginacaoJogadores = new PaginavelSampleImpl<Jogador>(jogadoresSemUsuarioLogado);
 		jogadores = new ListDataModel(paginacaoJogadores.getPagina());
 	}
@@ -119,10 +119,9 @@ public class GerirJogadorBean extends BaseBean {
 
 			PersistenceHelper.persiste(usuarioEmFoco);
 
-			Collections.sort(usuarioEmFoco.getJogadores(), new JogadoresComCorrespondenciaPrimeiroComparator());
-
 			List<Jogador> jogadoresSemUsuarioLogado = new ArrayList<Jogador>(usuarioEmFoco.getJogadores());
 			jogadoresSemUsuarioLogado.remove(usuarioEmFoco.getJogador());
+			Collections.sort(jogadoresSemUsuarioLogado, new JogadoresComCorrespondenciaPrimeiroComparator());
 			paginacaoJogadores = new PaginavelSampleImpl<Jogador>(jogadoresSemUsuarioLogado, jogador);
 			jogadores = new ListDataModel(paginacaoJogadores.getPagina());
 
@@ -189,6 +188,7 @@ public class GerirJogadorBean extends BaseBean {
 
 			paginacaoJogadores.getSourceList().remove(jogador);
 			paginacaoJogadores.pesquisaPaginavel(paginacaoJogadores.getPaginaAtual());
+			addMensagemAtualizacaoComSucesso();
 		} catch (ConstraintViolationException e1) {
 			messages.addErrorMessage(null,
 					"label_jogador_nao_pode_ser_removido_pois_eh_utilizado_em_algum_jogo_barragem");

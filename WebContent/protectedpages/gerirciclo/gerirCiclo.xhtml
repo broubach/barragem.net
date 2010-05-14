@@ -20,9 +20,9 @@
 	        <script type="text/javascript" src="#{request.contextPath}/js/jquery.colorbox-min.js"></script>
 			<script>
 	            $j(function(){
-		            $j(".popup").colorbox({overlayClose:false, inline:true, href:".add-jogador", scrollbars:false});
-		            $j(".popupRenomearCiclo").colorbox({overlayClose:false, inline:true, href:".rename-ciclo", scrollbars:false}, function() {$j('#rename-ciclo\\:nome').focus();});
-		            $j(".popupEditarCicloJogador").colorbox({overlayClose:false, inline:true, href:".editar-ciclo-jogador", scrollbars:false}, function() {$j('#editar-ciclo-jogador\\:pontuacao').focus();});
+		            $j(".popup").colorbox({overlayClose:false, inline:true, href:".add-jogador", scrolling:false});
+		            $j(".popupRenomearCiclo").colorbox({overlayClose:false, inline:true, href:".rename-ciclo", scrolling:false}, function() {$j('#rename-ciclo\\:nome').focus();});
+		            $j(".popupEditarCicloJogador").colorbox({overlayClose:false, inline:true, href:".editar-ciclo-jogador", scrolling:false}, function() {$j('#editar-ciclo-jogador\\:pontuacao').focus();});
 	            });
 	         </script>
 
@@ -54,6 +54,7 @@
 				        </c:forEach>
 			        </div>
 		        </c:if>
+			    <ui:include src="../componentes/mensagem-sucesso.xhtml"/>
 				<fieldset id="ranking">
 				    <legend>#{msg.label_ranking}</legend>
 		

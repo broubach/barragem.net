@@ -15,7 +15,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
-import net.barragem.scaffold.MessageBundleUtils;
 import net.barragem.scaffold.PersistenceHelper;
 
 @Entity
@@ -27,7 +26,7 @@ public class Ciclo extends BaseEntity {
 	private ParametroCiclo parametros;
 	private Date dataInicio;
 	private String nome;
-	private Integer nomeAlternativoBaseadoEmMes;
+	private Integer nomeAlternativoBaseadoEmAno;
 
 	@OneToMany(mappedBy = "ciclo", cascade = { CascadeType.ALL })
 	@OrderBy(value = "ranking")
@@ -70,7 +69,7 @@ public class Ciclo extends BaseEntity {
 
 	public String getNome() {
 		if (nome == null) {
-			return MessageBundleUtils.getInstance().get("label_mes_" + nomeAlternativoBaseadoEmMes);
+			return String.valueOf(nomeAlternativoBaseadoEmAno);
 		}
 		return nome;
 	}
@@ -79,12 +78,12 @@ public class Ciclo extends BaseEntity {
 		this.nome = nome;
 	}
 
-	public void setNomeAlternativoBaseadoEmMes(Integer i) {
-		this.nomeAlternativoBaseadoEmMes = i;
+	public void setNomeAlternativoBaseadoEmAno(Integer i) {
+		this.nomeAlternativoBaseadoEmAno = i;
 	}
 
-	public Integer getNomeAlternativoBaseadoEmMes() {
-		return nomeAlternativoBaseadoEmMes;
+	public Integer getNomeAlternativoBaseadoEmAno() {
+		return nomeAlternativoBaseadoEmAno;
 	}
 
 	public List<Rodada> getRodadas() {

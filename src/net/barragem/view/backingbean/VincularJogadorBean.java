@@ -86,5 +86,7 @@ public class VincularJogadorBean extends BaseBean {
 				MessageFormat.format(emailTemplateAdicaoJogador, getUsuarioLogado().getNomeCompletoCapital()));
 
 		PersistenceHelper.persiste(jogadorEmFoco);
+
+		addMensagemAtualizacaoComSucesso();
 	}
 }

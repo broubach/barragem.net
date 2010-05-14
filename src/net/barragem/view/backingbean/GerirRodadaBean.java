@@ -58,11 +58,13 @@ public class GerirRodadaBean extends BaseBean {
 		PersistenceHelper.remove(rodadaEmFoco.getJogos().remove(getIndex()));
 		PersistenceHelper.persiste(getContaUsuario().criaOperacaoDevolucao(1));
 		PersistenceHelper.persiste(getContaUsuario());
+		addMensagemAtualizacaoComSucesso();
 	}
 
 	public void sorteiaJogos(ActionEvent e) {
 		try {
 			getBo(RodadaBo.class).sorteiaJogos(rodadaEmFoco);
+			addMensagemAtualizacaoComSucesso();
 		} catch (SaldoInsuficienteException e1) {
 			messages.addErrorMessage("saldo_insuficiente_exception", "label_saldo_insuficiente");
 		}
@@ -90,6 +92,8 @@ public class GerirRodadaBean extends BaseBean {
 
 		GerirCicloBean cicloBean = (GerirCicloBean) getRequestAttribute("gerirCicloBean");
 		cicloBean.editaCiclo(e);
+
+		addMensagemAtualizacaoComSucesso();
 	}
 
 	public void criaNovaRodada(ActionEvent e) {
@@ -103,6 +107,8 @@ public class GerirRodadaBean extends BaseBean {
 				rodadaEmFoco.getCiclo())));
 		GerirCicloBean gerirCicloBean = (GerirCicloBean) getRequestAttribute("gerirCicloBean");
 		gerirCicloBean.editaCiclo(null);
+
+		addMensagemAtualizacaoComSucesso();
 	}
 
 	public void carregaRodada(Ciclo ciclo, int index) {

@@ -20,8 +20,8 @@ public class BarragemBo extends BaseBo {
 			acaoEnum = AcaoEnum.CriarBarragem;
 		}
 		PersistenceHelper.persiste(barragem);
-		PersistenceHelper.persiste(barragem.criaCicloERodada());
 		if (acaoEnum != null) {
+			PersistenceHelper.persiste(barragem.criaCicloERodada());
 			PersistenceHelper.persiste(Atualizacao.criaCriarBarragem(getUsuarioLogado(), barragem));
 		}
 	}

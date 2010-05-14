@@ -18,6 +18,7 @@
 				<h2>#{msg.label_mensagens}</h2>
 				<span class="texto_informativo">#{msg.label_total_mensagens}: #{receberMensagemBean.totalMensagens}</span>
 
+			    <ui:include src="../componentes/mensagem-sucesso.xhtml"/>
 				<div class="container-mensagens">
 					<c:forEach items="#{receberMensagemBean.paginacaoMensagens.pagina}" var="item" varStatus="status">
 						<div class="container-mensagem">

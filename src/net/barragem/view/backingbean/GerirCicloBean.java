@@ -132,6 +132,7 @@ public class GerirCicloBean extends BaseBean {
 
 		if (salvaCiclo) {
 			salvaCiclo();
+			addMensagemAtualizacaoComSucesso();
 		}
 	}
 
@@ -175,6 +176,7 @@ public class GerirCicloBean extends BaseBean {
 		cicloJogadoresRemovidos.add(cicloEmFoco.getRanking().get(getIndex()));
 		cicloEmFoco.getRanking().remove(getIndex());
 		salvaCiclo();
+		addMensagemAtualizacaoComSucesso();
 	}
 
 	public void editaRodada(ActionEvent e) {
@@ -200,16 +202,14 @@ public class GerirCicloBean extends BaseBean {
 
 	public void criaNovoCiclo(ActionEvent e) {
 		Integer proximoNome = barragemEmFoco.getCiclos().get(barragemEmFoco.getCiclos().size() - 1)
-				.getNomeAlternativoBaseadoEmMes() + 1;
-		if (proximoNome > 11) {
-			proximoNome = 0;
-		}
+				.getNomeAlternativoBaseadoEmAno() + 1;
 		PersistenceHelper.persiste(barragemEmFoco.criaCicloERodada(proximoNome));
 
 		GerirCicloBean cicloBean = new GerirCicloBean();
 		cicloBean.carregaUltimoCiclo(barragemEmFoco);
 
 		setRequestAttribute("gerirCicloBean", cicloBean);
+		addMensagemAtualizacaoComSucesso();
 	}
 
 	public void preparaCicloJogador(ActionEvent e) {

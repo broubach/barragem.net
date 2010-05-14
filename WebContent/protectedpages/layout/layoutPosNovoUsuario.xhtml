@@ -19,7 +19,7 @@
 	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/fileupload/fileupload.css" />
 	    </c:if>
         <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/posNovoUsuarioGrid.css" />
-        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/posNovoUsuario.css" />
+        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/posNovoUsuario.css?v1.2.8" />
        	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
         <script type="text/javascript">
         //<![CDATA[
@@ -84,14 +84,6 @@
                 </div>
             </div>
         </div>
-
-		<h:panelGrid columns="1" id="mensagemSucesso">
-			<h:panelGrid columns="1" rendered="#{messageBean.firstInfoMessage != null}">
-				<script>
-					alert('#{messageBean.firstInfoMessage.summary}');
-				</script>
-			</h:panelGrid>
-		</h:panelGrid>
 
 		<script type="text/javascript">
 			var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");

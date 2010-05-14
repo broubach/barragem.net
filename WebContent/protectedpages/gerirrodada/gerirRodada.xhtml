@@ -20,7 +20,7 @@
 			<script type="text/javascript" src="#{request.contextPath}/js/jquery.maskedinput-1.2.2.min.js"></script>
 			<script>
 	            $j(function(){
-		            $j(".popup").colorbox({overlayClose:false, inline:true, href:".add-jogo", scrollbars:false}, function(){aplicarMascaras();$j('#add-jogo\\:data').focus();});
+		            $j(".popup").colorbox({overlayClose:false, inline:true, href:".add-jogo", scrolling:false}, function(){aplicarMascaras();$j('#add-jogo\\:data').focus();});
 	            });
 	         </script>
 			
@@ -51,6 +51,7 @@
 			            </li>
 			        </ul>
 				</h:panelGroup>
+			    <ui:include src="../componentes/mensagem-sucesso.xhtml"/>
 			    <fieldset id="jogos">
 			        <legend>#{msg.label_jogos}</legend>
 	

@@ -1,0 +1,13 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:c="http://java.sun.com/jstl/core">
+
+	<c:if test="#{messageBean.firstInfoMessage != null}">
+		<div class="mensagem_sucesso">
+			<span class="icone"><img src="#{request.contextPath}/img/buttons/btn-sucesso.png"/></span> #{messageBean.firstInfoMessage.summary}
+			<div class="corner tl"></div>
+			<div class="corner tr"></div>
+			<div class="corner bl"></div>
+			<div class="corner br"></div>
+		</div>
+	</c:if>
+</html>

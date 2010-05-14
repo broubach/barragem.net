@@ -23,6 +23,7 @@
 			        </c:if>
 		        </div>
 	        </c:if>
+		    <ui:include src="../componentes/mensagem-sucesso.xhtml"/>
 			<div class="dados-basicos-barragem">
 				<div class="input text">
 					<label for="add-barragens:local" class="#{messageBean.errorMessages['local'] != null ? 'error' : ''}">#{msg.label_local}*</label>
@@ -93,7 +94,7 @@
 				<div class="salvar">
 					<label class="campos_obrigatorios">#{msg.label_campos_marcados_sao_obrigatorios}</label>
 					<a4j:commandButton actionListener="#{gerirBarragemBean.salvaBarragem}"
-						value="#{msg.label_salvar}" reRender="add-barragens,painelBarragens,mensagemSucesso" styleClass="submit" oncomplete="$.fn.colorbox.resize()"/>
+						value="#{msg.label_salvar}" reRender="add-barragens,painelBarragens" styleClass="submit" oncomplete="$j.fn.colorbox.resize()"/>
 				</div>
 			</div>
 		</h:form>

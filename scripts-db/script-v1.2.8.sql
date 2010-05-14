@@ -10,3 +10,7 @@ CREATE TABLE barragem_net.mensagem (
   CONSTRAINT FK_mensagem_usuario1 FOREIGN KEY (destinatario_id) REFERENCES usuario (id),
   CONSTRAINT FK_mensagem_usuario2 FOREIGN KEY (remetente_id) REFERENCES usuario (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE barragem_net.ciclo CHANGE nomeAlternativoBaseadoEmMes nomeAlternativoBaseadoEmAno INT(10) UNSIGNED;
+
+update barragem_net.ciclo set nomeAlternativoBaseadoEmAno = 2010;
