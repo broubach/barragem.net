@@ -45,7 +45,7 @@ public class PaginavelSampleImpl<T> implements Paginavel<T> {
 		this.pageSize = pageSize;
 		int pageNumber = 1;
 		if (focus != null) {
-			pageNumber = calculaPagina(sourceList.indexOf(focus)) + 1;
+			pageNumber = calculaPagina(sourceList.indexOf(focus));
 		}
 		pesquisaPaginavel(pageNumber);
 	}
@@ -177,17 +177,13 @@ public class PaginavelSampleImpl<T> implements Paginavel<T> {
 
 	@Override
 	public int calculaPagina(int zeroBasedPosicao) {
-		int paginaCalculada = (zeroBasedPosicao + 1) / pageSize;
-		if (paginaCalculada * pageSize < (zeroBasedPosicao + 1)) {
-			paginaCalculada++;
-		}
-		return paginaCalculada;
+		return ((zeroBasedPosicao + 1) / pageSize) + 1;
 	}
 
 	@Override
 	public T getPosteriorImediatoOuAnteriorImediato(int zeroBasedIndexInPage) {
 		if (sourceList != null) {
-			int index = pageSize * (pageCount - 1) + zeroBasedIndexInPage;
+			int index = pageSize * (paginaAtual - 1) + zeroBasedIndexInPage;
 			if (index + 1 < sourceList.size()) {
 				index++;
 			} else if (index - 1 >= 0) {

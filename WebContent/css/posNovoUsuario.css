@@ -308,7 +308,6 @@ li {
 	background-color: #CCFFCC;
 	border: 1px solid #008000;
 	position: relative;
-	color: #008000;
 	padding: 5px;
 	margin-left: auto;
 	margin-right: auto;
@@ -392,6 +391,10 @@ input {
 .dados label, .dados .exemplo, .dados .complemento, .dadosExibirPerfil label, .dadosGerirJogador label, .dadosGerirJogadorListaJogadores label {
 	color:#444;
 	font-size:.8em;
+}
+.mensagem_sucesso {
+	color: #008000;
+	font-size: .8em;
 }
 .mensagem-erro, .mensagem-erro-hidden {
     font-size:12px;
