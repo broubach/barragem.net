@@ -51,13 +51,21 @@
 						<div class="corner br"></div>
 						<div class="clear"></div>
 					</div>
-					<script>
+			        <script type="text/javascript">
+			        //<![CDATA[
 						$j('#exibirMensagens\\:novaMensagem').NobleCount('#contador',{
 							on_negative: 'go_red',
 							on_positive: 'go_green',
-							max_chars: 255
+							max_chars: 255,
+							block_negative: true,
+							on_update: function(t_obj, char_area, c_settings, char_rem) {
+									if (char_rem < 0) {
+										t_obj[0].value = t_obj[0].value.substring(0, 255);
+									}
+					        }
 						});
-					</script>
+			        //]]>
+			        </script>
 
 					<c:forEach items="#{exibirMensagensBean.paginacaoMensagens.pagina}" var="item" varStatus="status">
 						<div class="container-mensagem">

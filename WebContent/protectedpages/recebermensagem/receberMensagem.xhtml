@@ -63,7 +63,8 @@
 							<div class="corner br"></div>
 							<div class="clear"></div>
 						</div>
-						<script>
+				        <script type="text/javascript">
+				        //<![CDATA[
 							$j('#r#{status.index}').click(function () {
 								$j(".r#{status.index}").show();
 								<c:forEach items="#{receberMensagemBean.paginacaoMensagens.pagina}" var="item" varStatus="statusJs">
@@ -75,9 +76,16 @@
 							$j('#receberMensagem\\:resposta#{status.index}').NobleCount('#contador#{status.index}',{
 								on_negative: 'go_red',
 								on_positive: 'go_green',
-								max_chars: 255
+								max_chars: 255,
+								block_negative: true,
+								on_update: function(t_obj, char_area, c_settings, char_rem) {
+										if (char_rem < 0) {
+											t_obj[0].value = t_obj[0].value.substring(0, 255);
+										}
+						        }
 							});
-						</script>
+				        //]]>
+				        </script>
 					</c:forEach>
 				</div>
 			    <ui:include src="../componentes/paginacao.xhtml">

@@ -49,9 +49,9 @@ public abstract class BaseBean {
 			.toString();
 	protected static final String emailNovaMensagem = new StringBuilder()
 			.append("<p>Olá,</p>")
-			.append("<p>{0} acaba de te enviar uma mensagem.</p>")
+			.append("<p>Você recebeu uma mensagem de {0}.</p>")
 			.append(
-					"<p>Acesse <a href='https://www.barragem.net/login.xhtml'>barragem.net</a> para verificar a nova mensagem.</p>")
+					"<p>Para ler o seu conteúdo, acesse <a href='https://www.barragem.net/login.xhtml'>barragem.net</a>.</p>")
 			.append(
 					"<p>Atenciosamente,<br />Equipe <a href='https://www.barragem.net/login.xhtml'>barragem.net</a></p>")
 			.toString();
