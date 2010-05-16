@@ -206,6 +206,10 @@ fieldset#parciais {
 	background: #0D286F;
 }
 
+.new {
+	vertical-align: bottom;
+}
+
 /********************* MENU CONTEXTUAL *********************/
 .menu-contextual {
 	margin-bottom: 10px;

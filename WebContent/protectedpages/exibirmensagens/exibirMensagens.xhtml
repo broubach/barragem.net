@@ -68,7 +68,7 @@
 								    </ui:include>
 								</span>
 								<span class="remetente-data-hora">
-									#{item.remetente.nomeCompletoCapital}<br/>
+									<h:commandLink action="exibirPerfil" actionListener="#{exibirPerfilBean.exibePerfil}">#{item.remetente.nomeCompletoCapital}<f:param name="id" value="#{item.remetente.id}"/></h:commandLink><br/>
 								    <h:outputText value="#{item.data}">
 								    	<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
 								    </h:outputText>

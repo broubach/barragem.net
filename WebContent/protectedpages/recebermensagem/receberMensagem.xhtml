@@ -16,7 +16,11 @@
 
 			<h:form id="receberMensagem">
 				<h2>#{msg.label_mensagens}</h2>
-				<span class="texto_informativo">#{msg.label_total_mensagens}: #{receberMensagemBean.totalMensagens}</span>
+				<span class="texto_informativo">#{msg.label_total_mensagens}: #{receberMensagemBean.totalMensagens}</span><br/>
+
+				<c:if test="#{empty receberMensagemBean.paginacaoMensagens.sourceList}">
+					<span class="texto_informativo">#{msg.label_lista_mensagens_vazia_1} <a href="#{request.contextPath}/protectedpages/gerirjogador/gerirJogador.xhtml">#{fn:toLowerCase(msg.label_jogador)}</a> #{msg.label_lista_mensagens_vazia_2}</span>
+				</c:if>
 
 			    <ui:include src="../componentes/mensagem-sucesso.xhtml"/>
 				<div class="container-mensagens">
@@ -29,7 +33,7 @@
 								    </ui:include>
 								</span>
 								<span class="remetente-data-hora">
-									#{item.remetente.nomeCompletoCapital}<br/>
+									<h:commandLink action="exibirPerfil" actionListener="#{exibirPerfilBean.exibePerfil}">#{item.remetente.nomeCompletoCapital}<f:param name="id" value="#{item.remetente.id}"/></h:commandLink><br/>
 								    <h:outputText value="#{item.data}">
 								    	<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
 								    </h:outputText>
