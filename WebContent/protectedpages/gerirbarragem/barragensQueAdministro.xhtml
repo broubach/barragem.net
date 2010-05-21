@@ -54,9 +54,9 @@
 		
 			<h:column>
 				<f:facet name="header">
-					<h:outputText value="#{msg.label_barragem}" />
+					<h:outputText value="#{msg.label_categoria}" />
 				</f:facet>
-				<h:commandLink action="exibirPainelBarragem" actionListener="#{gerirBarragemBean.exibePainelBarragem}"><h:outputText value="#{item.nome}" /></h:commandLink>
+				<h:commandLink action="exibirPainelBarragem" actionListener="#{gerirBarragemBean.exibePainelBarragem}"><h:outputText value="#{msg[item.categoria.nome]}" /></h:commandLink>
 			</h:column>
 		
 			<h:column>

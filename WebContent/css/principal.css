@@ -95,7 +95,7 @@ fieldset {
 }
 
 .sidebar-header .corner {
-	background: url("../img/bordas.gif") no-repeat scroll 0 0 transparent;
+	background: url("../img/bordas.gif?v1.2.9") no-repeat scroll 0 0 transparent;
 	width: 10px;
 	height: 10px;
 	position: absolute;
@@ -354,7 +354,7 @@ fieldset#parciais {
 	position: relative;
 }
 .container-mensagem .corner {
-	background: url("../img/bordas.gif") no-repeat scroll 0 0;
+	background: url("../img/bordas.gif?v1.2.9") no-repeat scroll 0 0;
 	background-color: #EEF1F3;
 	width: 3px;
 	height: 3px;
@@ -1202,7 +1202,7 @@ td.actions {
 	margin: 3px;
 }
 .botao-padrao-redondo .corner {
-	background: url("../img/bordas.gif") no-repeat scroll 0 0 transparent;
+	background: url("../img/bordas.gif?v1.2.9") no-repeat scroll 0 0 transparent;
 	width: 3px;
 	height: 3px;
 	position: absolute;
@@ -1279,7 +1279,7 @@ td.actions {
 	padding: 5px;
 }
 .mensagem_sucesso .corner {
-	background: url("../img/bordas.gif") no-repeat scroll 0 0 transparent;
+	background: url("../img/bordas.gif?v1.2.9") no-repeat scroll 0 0 transparent;
 	width: 3px;
 	height: 3px;
 	position: absolute;

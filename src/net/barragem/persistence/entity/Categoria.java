@@ -3,6 +3,8 @@ package net.barragem.persistence.entity;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import net.barragem.scaffold.MessageBundleUtils;
+
 @Entity
 @Table(name = "categoria")
 public class Categoria extends BaseEntity {
@@ -47,4 +49,13 @@ public class Categoria extends BaseEntity {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		if (nome != null) {
+			return MessageBundleUtils.getInstance().get(nome);
+		}
+		return super.toString();
+	}
+
 }

@@ -114,7 +114,7 @@ li {
 }
 
 .sidebar-header .corner {
-	background: url("../img/bordas.gif") no-repeat scroll 0 0 transparent;
+	background: url("../img/bordas.gif?v1.2.9") no-repeat scroll 0 0 transparent;
 	width: 10px;
 	height: 10px;
 	position: absolute;
@@ -171,7 +171,7 @@ li {
 }
 
 .inputRedondo1 .corner {
-	background: url("../img/bordas.gif") no-repeat scroll 0 0 transparent;
+	background: url("../img/bordas.gif?v1.2.9") no-repeat scroll 0 0 transparent;
 	height: 3px;
 	width: 3px;
 	position: absolute;
@@ -225,7 +225,7 @@ li {
 }
 
 .inputRedondo2 .corner {
-	background: url("../img/bordas.gif") no-repeat scroll 0 0 transparent;
+	background: url("../img/bordas.gif?v1.2.9") no-repeat scroll 0 0 transparent;
 	height: 3px;
 	width: 3px;
 	position: absolute;
@@ -278,7 +278,7 @@ li {
 }
 
 .inputRedondo3 .corner {
-	background: url("../img/bordas.gif") no-repeat scroll 0 0 transparent;
+	background: url("../img/bordas.gif?v1.2.9") no-repeat scroll 0 0 transparent;
 	height: 3px;
 	width: 3px;
 	background-color: transparent;

@@ -15,6 +15,10 @@
 		<converter-id>JogadorEventoConverter</converter-id>
 		<converter-class>net.barragem.view.converter.JogadorEventoConverter</converter-class>
 	</converter>
+	<converter>
+		<converter-id>CategoriaConverter</converter-id>
+		<converter-class>net.barragem.view.converter.CategoriaConverter</converter-class>
+	</converter>
 	<managed-bean>
 		<managed-bean-name>lookupBean</managed-bean-name>
 		<managed-bean-class>net.barragem.view.backingbean.LookupBean</managed-bean-class>

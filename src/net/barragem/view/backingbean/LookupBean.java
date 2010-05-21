@@ -40,7 +40,7 @@ public class LookupBean extends BaseBean {
 		return items;
 	}
 
-	public List<SelectItem> getListaCategorias() {
+	public List<SelectItem> getListaCbCategorias() {
 		List<Categoria> categorias = PersistenceHelper.findAll(Categoria.class);
 
 		List<SelectItem> items = new ArrayList<SelectItem>();
@@ -49,6 +49,19 @@ public class LookupBean extends BaseBean {
 			categoria = it.next();
 			SelectItem selectItem = new SelectItem(categoria.getId(), MessageBundleUtils.getInstance().get(
 					categoria.getNome()));
+			items.add(selectItem);
+		}
+		return items;
+	}
+
+	public List<SelectItem> getListaCategorias() {
+		List<Categoria> categorias = PersistenceHelper.findAll(Categoria.class);
+
+		List<SelectItem> items = new ArrayList<SelectItem>();
+		Categoria categoria = null;
+		for (Iterator<Categoria> it = categorias.iterator(); it.hasNext();) {
+			categoria = it.next();
+			SelectItem selectItem = new SelectItem(categoria, MessageBundleUtils.getInstance().get(categoria.getNome()));
 			items.add(selectItem);
 		}
 		return items;

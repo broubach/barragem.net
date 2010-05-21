@@ -30,8 +30,11 @@
 					<h:inputText id="local" value="#{gerirBarragemBean.barragemEmFoco.local}" size="35" maxlength="45"/>
 				</div>
 				<div class="input text">
-					<label for="add-barragens:nome" class="#{messageBean.errorMessages['nome'] != null ? 'error' : ''}">#{msg.label_nome}*</label>
-					<h:inputText id="nome" value="#{gerirBarragemBean.barragemEmFoco.nome}" size="35" maxlength="45"/>
+					<label for="add-barragens:categoria" class="#{messageBean.errorMessages['categoria'] != null ? 'error' : ''}">#{msg.label_categoria}*</label>
+					<h:selectOneMenu id="categoria" value="#{gerirBarragemBean.barragemEmFoco.categoria}" converter="CategoriaConverter">
+						<f:selectItem itemLabel="" itemValue=""/>
+						<f:selectItems value="#{lookupBean.listaCategorias}"/>
+					</h:selectOneMenu>
 				</div>
 				<div class="input text">
 					<label for="add-barragens:administrador">#{msg.label_administrador}</label>

@@ -19,7 +19,8 @@
 				});
 			</script>
 			<h:form>
-			<h2>#{exibirPainelBarragemBean.cicloEmFoco.barragem.nome}</h2>
+			<h2>#{exibirPainelBarragemBean.cicloEmFoco.barragem.local}</h2>
+			<h3>#{msg[exibirPainelBarragemBean.cicloEmFoco.barragem.categoria.nome]}</h3>
 		    <div class="menu-contextual">
 		        <ul>
 					<c:forEach items="#{exibirPainelBarragemBean.cicloEmFoco.barragem.ciclos}" var="item" varStatus="status">
