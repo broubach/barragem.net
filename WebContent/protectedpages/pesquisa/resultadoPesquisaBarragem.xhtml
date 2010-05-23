@@ -5,7 +5,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:c="http://java.sun.com/jstl/core"
-	xmlns:a4j="http://richfaces.org/a4j">
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
 <ui:composition template="/protectedpages/layout/layoutPrincipal.xhtml">
 	<ui:define name="conteudo">
@@ -18,6 +19,9 @@
 				</div>
 				<br/>
 				<fieldset>
+					<h:panelGroup display="block" styleClass="texto_informativo">
+						#{msg.label_total_encontrado}: #{fn:length(pesquisarBean.barragens)}
+					</h:panelGroup>
 					<ui:include src="../componentes/barragens.xhtml" >
 						<ui:param name="barragens" value="#{pesquisarBean.barragens}"/>
 						<ui:param name="paginavel" value="#{pesquisarBean.paginacaoBarragem}"/>
