@@ -20,7 +20,7 @@
 				<br/>
 				<fieldset>
 					<h:panelGroup display="block" styleClass="texto_informativo">
-						#{msg.label_total_encontrado}: #{fn:length(pesquisarBean.jogadores)}
+						#{msg.label_total_encontrado}: #{fn:length(pesquisarBean.paginacaoJogador.sourceList)}
 					</h:panelGroup>
 					<ui:include src="../componentes/jogadores.xhtml">
 						<ui:param name="jogadores" value="#{pesquisarBean.jogadores}"/>
