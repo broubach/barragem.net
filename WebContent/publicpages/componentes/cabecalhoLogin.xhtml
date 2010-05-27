@@ -65,7 +65,9 @@
 		</form>
 	</c:if>
 	<div class="twitterDiv">
-		<a href="http://www.twitter.com/barragemnet"><img src="#{request.contextPath}/img/tennistwitp2.png"/></a>
+		<div id="figura"><a href="http://www.twitter.com/barragemnet"><img src="#{request.contextPath}/img/tennistwitp2.png"/></a></div>
+	 	<div id="descricao"></div>
 	</div>
-
+	<script type="text/javascript" src="#{request.contextPath}/js/twitter.js"></script>
+	<script type="text/javascript" src="http://twitter.com/statuses/user_timeline/barragemnet.json?callback=twitterCallback&amp;count=1"></script>
 </html>

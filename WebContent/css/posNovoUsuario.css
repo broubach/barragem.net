@@ -64,9 +64,25 @@ li {
     border:none;
 }
 .twitterDiv {
-	float:right; 
+	float: right; 
 	margin-right: 20px; 
-	margin-top: 25px;
+	margin-top: 18px;
+	position: relative;
+	width: 250px;
+	height: 64px;
+}
+.twitterDiv #figura {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+}
+.twitterDiv #descricao {
+	border: 1px solid #FEBF50;
+	background-color: #FAFAFA;
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	padding: 1px;
 }
 
 /********************* MENU *********************/
@@ -399,4 +415,8 @@ input {
 .mensagem-erro, .mensagem-erro-hidden {
     font-size:12px;
 	color: #FF0000;
+}
+.twitterDiv #descricao {
+	color: #069;
+	font-size:0.7em;
 }

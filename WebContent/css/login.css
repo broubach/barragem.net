@@ -87,9 +87,25 @@ li {
 	margin-bottom:0.3em;
 }
 .twitterDiv {
-	float:right; 
+	float: right; 
 	margin-right: 20px; 
-	margin-top: 25px;
+	margin-top: 18px;
+	position: relative;
+	width: 250px;
+	height: 64px;
+}
+.twitterDiv #figura {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+}
+.twitterDiv #descricao {
+	border: 1px solid #FEBF50;
+	background-color: #FAFAFA;
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	padding: 1px;
 }
 
 /********************* SIDEBAR HEADER *********************/
@@ -496,4 +512,8 @@ div.error {
 .voltar a {
 	color:#333333;
 	font-size:0.8em;
+}
+.twitterDiv #descricao {
+	color: #069;
+	font-size:0.7em;
 }
