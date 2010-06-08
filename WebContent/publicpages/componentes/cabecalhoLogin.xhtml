@@ -66,8 +66,6 @@
 	</c:if>
 	<div class="twitterDiv">
 		<div id="figura"><a href="http://www.twitter.com/barragemnet"><img src="#{request.contextPath}/img/tennistwitp2.png"/></a></div>
-	 	<div id="descricao"></div>
+		<div id="descricao"><span id="descricao_pequena">#{applicationScope['last-twitt'].textoResumido}</span><span id="descricao_grande">#{applicationScope['last-twitt'].texto}</span><span id="botao_reticencias"><a href="#" id="twitter_toggle">...</a></span> <span id="tempo_atras">#{applicationScope['last-twitt'].dataDescr}</span></div>
 	</div>
-	<script type="text/javascript" src="#{request.contextPath}/js/twitter.js"></script>
-	<script type="text/javascript" src="#{request.contextPath}/twitter.jsp"></script>
 </html>

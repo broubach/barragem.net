@@ -19,7 +19,7 @@
 	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/fileupload/fileupload.css" />
 	    </c:if>
         <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/posNovoUsuarioGrid.css" />
-        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/posNovoUsuario.css?v1.2.10" />
+        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/posNovoUsuario.css?v1.2.11" />
        	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
         <script type="text/javascript">
         //<![CDATA[
@@ -45,6 +45,17 @@
 			                $j(this).val($j(this).attr('title')).removeClass('focused');	
 			            }
 			        });
+				});
+				$j('#twitter_toggle').click(function() {
+					if ($j('#descricao #descricao_grande').css('display') == 'none') {
+						$j('#descricao #descricao_pequena').toggle();
+						$j('#descricao #descricao_grande').fadeIn(200);
+					} else {
+						$j('#descricao #descricao_grande').fadeOut(200, function() {
+							$j('#descricao #descricao_pequena').toggle();
+						});
+					}
+					return false;
 				});
         	});
         //]]>

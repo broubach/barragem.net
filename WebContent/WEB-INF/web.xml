@@ -67,7 +67,7 @@
         <dispatcher>INCLUDE</dispatcher>
 	</filter-mapping>
 
-	<!-- Filtros específicos da aplicação -->
+	<!-- Elementos específicos da aplicação -->
 	<filter>
 		<filter-name>CookieTweakFilter</filter-name>
 		<filter-class>net.barragem.scaffold.CookieTweakFilter</filter-class>
@@ -130,6 +130,10 @@
 		<filter-name>PosNovoUsuarioFilter</filter-name>
 		<url-pattern>/protectedpages/novousuario/passo-2-perfil.xhtml</url-pattern>
 	</filter-mapping>
+	
+	<listener>
+		<listener-class>net.barragem.scaffold.BarragemServletContextListener</listener-class>
+	</listener>
 
 	<!-- Captcha config  -->
     <servlet>

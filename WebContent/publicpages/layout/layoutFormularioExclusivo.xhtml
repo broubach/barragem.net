@@ -15,7 +15,7 @@
 		<meta name="description" content="#{msg.label_site_description}"/>
 		<link href="/favicon.ico" type="image/x-icon" rel="icon" />
 		<link href="/favicon.ico" type="image/x-icon" rel="shortcut icon" />
-		<link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/formularioExclusivo.css?v1.2.10"/>
+		<link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/formularioExclusivo.css?v1.2.11"/>
 		<link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/formularioExclusivoGrid.css"/>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
         <script type="text/javascript">
@@ -43,6 +43,17 @@
 	                        }
 	                    });
 	                });
+					$j('#twitter_toggle').click(function() {
+						if ($j('#descricao #descricao_grande').css('display') == 'none') {
+							$j('#descricao #descricao_pequena').toggle();
+							$j('#descricao #descricao_grande').fadeIn(200);
+						} else {
+							$j('#descricao #descricao_grande').fadeOut(200, function() {
+								$j('#descricao #descricao_pequena').toggle();
+							});
+						}
+						return false;
+					});
                 });
             
         //]]>

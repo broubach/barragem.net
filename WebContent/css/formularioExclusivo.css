@@ -102,6 +102,7 @@ li {
 	position: relative;
 	width: 250px;
 	height: 65px;
+	white-space: nowrap;
 }
 .twitterDiv #figura {
 	position: absolute;
@@ -115,6 +116,10 @@ li {
 	bottom: 0px;
 	right: 0px;
 	padding: 1px;
+	height: 15px;
+}
+.twitterDiv #descricao_grande {
+	display: none;
 }
 
 /********************* SIDEBAR HEADER *********************/

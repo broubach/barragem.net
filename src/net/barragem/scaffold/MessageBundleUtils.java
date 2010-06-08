@@ -6,7 +6,7 @@ import java.util.ResourceBundle;
 
 public class MessageBundleUtils {
 
-	static private MessageBundleUtils instance;
+	private static MessageBundleUtils instance;
 	private final ResourceBundle rb;
 
 	private MessageBundleUtils(ClassLoader classLoader) {
