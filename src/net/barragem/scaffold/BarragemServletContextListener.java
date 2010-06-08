@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
@@ -27,36 +28,14 @@ import org.quartz.impl.StdSchedulerFactory;
 public class BarragemServletContextListener implements ServletContextListener {
 
 	@Override
-	public void contextInitialized(ServletContextEvent e) {
+	public void contextInitialized(final ServletContextEvent e) {
 		try {
 			Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
 			e.getServletContext().setAttribute("quartz-scheduler", scheduler);
 
 			scheduler.start();
 
-			JobDetail job = new JobDetail("job1", "group1", new Job() {
-				@Override
-				public void execute(JobExecutionContext arg0) throws JobExecutionException {
-					try {
-						String response = obtemUltimoTwitt();
-
-						String twitt = extraiTwitt(response);
-						Date twittDate = extraiTwittDate(response);
-
-						AtualizacaoTwitter atualizacaoTwitter = (AtualizacaoTwitter) PersistenceHelper
-								.findByNamedQuery("lastTwitterUpdateQuery");
-						atualizacaoTwitter.setTexto(twitt);
-						atualizacaoTwitter.setData(twittDate);
-						atualizacaoTwitter.setDataGravacao(new Date());
-						PersistenceHelper.persiste(atualizacaoTwitter);
-					} catch (MalformedURLException e) {
-						throw new RuntimeException(e);
-					} catch (IOException e) {
-						throw new RuntimeException(e);
-					}
-				}
-
-			}.getClass());
+			JobDetail job = new JobDetail("job1", "group1", new AtualizaTwitterJob(e.getServletContext()).getClass());
 
 			// disparar Job todos os dias a 00h
 			Trigger trigger = new CronTrigger("trigger1", "group1", "0 0 0 ? * *");
@@ -71,6 +50,47 @@ public class BarragemServletContextListener implements ServletContextListener {
 			throw new RuntimeException(ex);
 		} catch (SchedulerException ex) {
 			throw new RuntimeException(ex);
+		}
+	}
+
+	@Override
+	public void contextDestroyed(ServletContextEvent e) {
+		try {
+			Scheduler scheduler = (Scheduler) e.getServletContext().getAttribute("quartz-scheduler");
+
+			scheduler.shutdown();
+		} catch (SchedulerException ex) {
+			throw new RuntimeException(ex);
+		}
+	}
+}
+
+class AtualizaTwitterJob implements Job {
+	private final ServletContext ctx;
+
+	public AtualizaTwitterJob(ServletContext e) {
+		this.ctx = e;
+	}
+
+	@Override
+	public void execute(JobExecutionContext arg0) throws JobExecutionException {
+		try {
+			String response = obtemUltimoTwitt();
+
+			String twitt = extraiTwitt(response);
+			Date twittDate = extraiTwittDate(response);
+
+			AtualizacaoTwitter atualizacaoTwitter = (AtualizacaoTwitter) PersistenceHelper
+					.findByNamedQuery("lastTwitterUpdateQuery");
+			atualizacaoTwitter.setTexto(twitt);
+			atualizacaoTwitter.setData(twittDate);
+			atualizacaoTwitter.setDataGravacao(new Date());
+			PersistenceHelper.persiste(atualizacaoTwitter);
+			ctx.setAttribute("last-twitt", atualizacaoTwitter);
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
 		}
 	}
 
@@ -111,17 +131,6 @@ public class BarragemServletContextListener implements ServletContextListener {
 			return sdf.parse(data);
 		} catch (ParseException e) {
 			throw new RuntimeException(e);
-		}
-	}
-
-	@Override
-	public void contextDestroyed(ServletContextEvent e) {
-		try {
-			Scheduler scheduler = (Scheduler) e.getServletContext().getAttribute("quartz-scheduler");
-
-			scheduler.shutdown();
-		} catch (SchedulerException ex) {
-			throw new RuntimeException(ex);
 		}
 	}
 }
