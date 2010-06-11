@@ -18,14 +18,9 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
 public class AtualizaTwitterJob implements Job {
-	private ServletContext ctx;
-
-	public AtualizaTwitterJob(ServletContext e) {
-		this.ctx = e;
-	}
 
 	@Override
-	public void execute(JobExecutionContext arg0) throws JobExecutionException {
+	public void execute(JobExecutionContext ctx) throws JobExecutionException {
 		try {
 			String response = obtemUltimoTwitt();
 
@@ -38,7 +33,8 @@ public class AtualizaTwitterJob implements Job {
 			atualizacaoTwitter.setData(twittDate);
 			atualizacaoTwitter.setDataGravacao(new Date());
 			PersistenceHelper.persiste(atualizacaoTwitter);
-			ctx.setAttribute("last-twitt", atualizacaoTwitter);
+			((ServletContext) ctx.getMergedJobDataMap().get("servletContext")).setAttribute("last-twitt",
+					atualizacaoTwitter);
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		} catch (IOException e) {

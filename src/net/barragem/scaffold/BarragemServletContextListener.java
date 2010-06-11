@@ -22,12 +22,13 @@ public class BarragemServletContextListener implements ServletContextListener {
 			Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
 			e.getServletContext().setAttribute("quartz-scheduler", scheduler);
 
-			JobDetail job = new JobDetail("job1", "group1", new AtualizaTwitterJob(e.getServletContext()).getClass());
+			JobDetail job = new JobDetail("job1", "group1", AtualizaTwitterJob.class);
+			job.getJobDataMap().put("servletContext", e.getServletContext());
 
-			// disparar Job todos os dias a 00h
 			Trigger trigger = new CronTrigger("trigger1", "group1", "0 0 0 ? * *");
 
 			scheduler.scheduleJob(job, trigger);
+			scheduler.start();
 
 			AtualizacaoTwitter atualizacaoTwitter = (AtualizacaoTwitter) PersistenceHelper.findByNamedQuery(
 					"lastTwitterUpdateQuery").get(0);
