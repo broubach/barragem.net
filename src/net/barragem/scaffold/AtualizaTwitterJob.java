@@ -27,8 +27,8 @@ public class AtualizaTwitterJob implements Job {
 			String twitt = extraiTwitt(response);
 			Date twittDate = extraiTwittDate(response);
 
-			AtualizacaoTwitter atualizacaoTwitter = (AtualizacaoTwitter) PersistenceHelper
-					.findByNamedQuery("lastTwitterUpdateQuery");
+			AtualizacaoTwitter atualizacaoTwitter = (AtualizacaoTwitter) PersistenceHelper.findByNamedQuery(
+					"lastTwitterUpdateQuery").get(0);
 			atualizacaoTwitter.setTexto(twitt);
 			atualizacaoTwitter.setData(twittDate);
 			atualizacaoTwitter.setDataGravacao(new Date());

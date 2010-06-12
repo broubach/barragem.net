@@ -11,7 +11,6 @@ import org.quartz.CronTrigger;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
-import org.quartz.Trigger;
 import org.quartz.impl.StdSchedulerFactory;
 
 public class BarragemServletContextListener implements ServletContextListener {
@@ -25,7 +24,7 @@ public class BarragemServletContextListener implements ServletContextListener {
 			JobDetail job = new JobDetail("job1", "group1", AtualizaTwitterJob.class);
 			job.getJobDataMap().put("servletContext", e.getServletContext());
 
-			Trigger trigger = new CronTrigger("trigger1", "group1", "0 0 0 ? * *");
+			CronTrigger trigger = new CronTrigger("trigger1", "group1", "job1", "group1", "0 0 0/12 * * ?");
 
 			scheduler.scheduleJob(job, trigger);
 			scheduler.start();
