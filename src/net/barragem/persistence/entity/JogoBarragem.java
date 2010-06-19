@@ -1,6 +1,5 @@
 package net.barragem.persistence.entity;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,12 +9,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import net.barragem.scaffold.MessageBundleUtils;
 import net.barragem.scaffold.ValidatableSampleImpl;
 
 @Entity
 @Table(name = "jogobarragem")
 @PrimaryKeyJoinColumn(name = "id")
-public class JogoBarragem extends Jogo implements Cloneable, Validatable {
+public class JogoBarragem extends Jogo implements Validatable {
 
 	@ManyToOne
 	private Rodada rodada;
@@ -94,24 +94,10 @@ public class JogoBarragem extends Jogo implements Cloneable, Validatable {
 		return new ValidatableSampleImpl(this).validate();
 	}
 
-	public Object clone() {
-		JogoBarragem cloned = new JogoBarragem();
-		cloned.setId(getId());
-		cloned.setRodada(getRodada());
-		cloned.setPlacar((Placar) getPlacar().clone());
-		cloned.setTipo(getTipo());
-		cloned.setData(getData());
-
-		List<JogadorEvento> clonedJogadoresEventos = new ArrayList<JogadorEvento>();
-		JogadorEvento clonedJogadorEvento = null;
-		for (JogadorEvento jogadorEvento : getJogadoresEventos()) {
-			clonedJogadorEvento = (JogadorEvento) ((JogadorJogoBarragem) jogadorEvento).clone();
-			clonedJogadorEvento.setEvento(cloned);
-			clonedJogadoresEventos.add(clonedJogadorEvento);
-		}
-		cloned.setJogadoresEventos(clonedJogadoresEventos);
-
-		return cloned;
+	@Override
+	public void cloneTo(Object e) {
+		super.cloneTo(e);
+		((JogoBarragem) e).setRodada(getRodada());
 	}
 
 	@Override
@@ -137,5 +123,10 @@ public class JogoBarragem extends Jogo implements Cloneable, Validatable {
 		} else if (!getId().equals(other.getId()))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String getTipoStr() {
+		return MessageBundleUtils.getInstance().get("label_jogo_barragem");
 	}
 }

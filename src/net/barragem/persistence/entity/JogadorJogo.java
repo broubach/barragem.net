@@ -21,4 +21,11 @@ public class JogadorJogo extends JogadorEvento {
 	public void setVencedor(Boolean vencedor) {
 		this.vencedor = vencedor;
 	}
+
+	@Override
+	public void cloneTo(Object newObject) {
+		super.cloneTo(newObject);
+		((JogadorJogoBarragem) newObject).setVencedor(vencedor);
+	}
+
 }

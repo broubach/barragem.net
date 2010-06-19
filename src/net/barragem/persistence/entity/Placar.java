@@ -5,12 +5,14 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.Hibernate;
 
 @Entity
+@NamedQuery(name = "placarFetchParcialQuery", query = "select p from Placar p join fetch p.parciais where p.id in(:idsPlacar)")
 @Table(name = "placar")
 public class Placar extends BaseEntity implements Cloneable {
 
@@ -77,5 +79,15 @@ public class Placar extends BaseEntity implements Cloneable {
 		}
 		cloned.setParciais(clonedParciais);
 		return cloned;
+	}
+
+	public void completaSetsSeNecessario(Integer numeroDeSets) {
+		for (int i = 0; i < numeroDeSets; i++) {
+			if (i >= parciais.size()) {
+				Parcial parcial = new Parcial();
+				parcial.setPlacar(this);
+				parciais.add(parcial);
+			}
+		}
 	}
 }

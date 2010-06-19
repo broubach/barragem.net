@@ -10,6 +10,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import net.barragem.scaffold.MessageBundleUtils;
+
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @PrimaryKeyJoinColumn(name = "id")
@@ -18,7 +20,7 @@ public class Jogo extends Evento {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private Placar placar;
-	private SimplesDuplasEnum tipo;
+	private SimplesDuplasEnum tipo = SimplesDuplasEnum.Simples;
 
 	public Placar getPlacar() {
 		return placar;
@@ -55,21 +57,62 @@ public class Jogo extends Evento {
 		}
 	}
 
-	public JogadorJogoBarragem getJogadorBarragemVencedorSimples() {
+	public JogadorJogo getJogadorJogoVencedorSimples() {
 		for (JogadorEvento jogadorEvento : getJogadoresEventos()) {
 			if (((JogadorJogo) jogadorEvento).getVencedor()) {
-				return (JogadorJogoBarragem) jogadorEvento;
+				return (JogadorJogo) jogadorEvento;
 			}
 		}
 		return null;
 	}
 
-	public JogadorJogoBarragem getJogadorBarragemPerdedorSimples() {
+	public JogadorJogo getJogadorJogoPerdedorSimples() {
 		for (JogadorEvento jogadorEvento : getJogadoresEventos()) {
 			if (!((JogadorJogo) jogadorEvento).getVencedor()) {
-				return (JogadorJogoBarragem) jogadorEvento;
+				return (JogadorJogo) jogadorEvento;
 			}
 		}
 		return null;
+	}
+
+	public JogadorJogoBarragem getJogadorBarragemVencedorSimples() {
+		return (JogadorJogoBarragem) getJogadorJogoVencedorSimples();
+	}
+
+	public JogadorJogoBarragem getJogadorBarragemPerdedorSimples() {
+		return (JogadorJogoBarragem) getJogadorJogoPerdedorSimples();
+	}
+
+	@Override
+	public void cloneTo(Object e) {
+		super.cloneTo(e);
+		((Jogo) e).setPlacar(placar);
+		((Jogo) e).setTipo(tipo);
+	}
+
+	@Override
+	public String getTipoStr() {
+		return MessageBundleUtils.getInstance().get("label_jogo_avulso");
+	}
+
+	@Override
+	public String getJogadoresStr() {
+		StringBuilder vencedores = new StringBuilder();
+		StringBuilder perdedores = new StringBuilder();
+
+		for (JogadorEvento jogadorEvento : getJogadoresEventos()) {
+			if (((JogadorJogo) jogadorEvento).getVencedor() == null || ((JogadorJogo) jogadorEvento).getVencedor()) {
+				vencedores.append(jogadorEvento.getJogador().getNome().trim()).append(", ");
+			} else {
+				perdedores.append(jogadorEvento.getJogador().getNome().trim()).append(", ");
+			}
+		}
+
+		vencedores.delete(vencedores.length() - 2, vencedores.length());
+		if (perdedores.length() >= 2) {
+			perdedores.delete(perdedores.length() - 2, perdedores.length());
+			return vencedores.append(" X ").append(perdedores).toString();
+		}
+		return vencedores.toString();
 	}
 }

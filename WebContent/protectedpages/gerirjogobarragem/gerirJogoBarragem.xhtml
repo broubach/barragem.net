@@ -25,14 +25,14 @@
 				<a4j:commandLink actionListener="#{gerirJogoBarragemBean.editaJogoAnterior}" styleClass="anterior" value="#{msg.label_anterior}" rendered="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.id != null}" reRender="add-jogo" oncomplete="$j.fn.colorbox.resize();aplicarMascaras();"/>&#160;
 				<a4j:commandLink actionListener="#{gerirJogoBarragemBean.editaProximoJogo}" styleClass="proximo" value="#{msg.label_proximo}" rendered="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.id != null}" reRender="add-jogo" oncomplete="$j.fn.colorbox.resize();aplicarMascaras();"/>
 			</div>
-			    <ui:include src="../componentes/mensagem-sucesso.xhtml"/>
+			<ui:include src="../componentes/mensagem-sucesso.xhtml"/>
 			<div class="dados-popup">
 				<fieldset id="detalhes-jogo">
 					<legend>#{msg.label_detalhes_jogo}</legend>
 					<div class="input text">
 						<label for="add-jogo:data" class="#{messageBean.errorMessages['data'] != null ? 'error' : '' }" >#{msg.label_data}*</label>
 						<h:inputText id="data" value="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.data}" styleClass="dateTime">
-							<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT-3"/>
 						</h:inputText>
 					</div>
 					<div class="input">
@@ -50,38 +50,15 @@
 						<h:selectBooleanCheckbox id="wo" value="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.placar.wo}" class="wo" onclick="$j('div.vencedorWo').slideToggle('fast');$j('#add-jogo\\:vencedorParcial1,#add-jogo\\:vencedorParcial2,#add-jogo\\:vencedorParcial3,#add-jogo\\:perdedorParcial1,#add-jogo\\:perdedorParcial2,#add-jogo\\:perdedorParcial3').attr('disabled', $j('#add-jogo\\:wo').is(':checked'));"/>
 					</div>
 				</fieldset>
-				<fieldset id="parciais">
-					<legend>#{msg.label_parciais}</legend>
-					<h:panelGrid id="gridPlacar" columns="4" columnClasses=",columnGrid,columnGrid,">
-						<label for="add-jogo:jogadorVencedor" class="#{messageBean.errorMessages['jogador'] != null ? 'error' : '' }">#{msg.label_jogadores}*</label>
-						<h:selectOneMenu id="jogadorVencedor" value="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.jogadoresEventos[0].jogador}" converter="JogadorConverter" disabled="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.id != null}">
-							<a4j:support event="onchange" reRender="vencedorWo"/>
-							<f:selectItem itemLabel="" />
-							<f:selectItems value="#{gerirRodadaBean.listaJogadoresHabilitados}" />
-						</h:selectOneMenu>
-						<img src="#{request.contextPath}/img/versus.png" width="9px" height="11px"/>
-						<h:selectOneMenu value="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.jogadoresEventos[1].jogador}" converter="JogadorConverter" disabled="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.id != null}">
-							<a4j:support event="onchange" reRender="vencedorWo"/>
-							<f:selectItem itemLabel="" />
-							<f:selectItems value="#{gerirRodadaBean.listaJogadoresHabilitados}" />
-						</h:selectOneMenu>
-	
-						<label id="labelVencedorParcial1" for="add-jogo:vencedorParcial1">#{msg.label_primeiro_set}</label>
-						<h:inputText value="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.placar.parciais[0].parcialVencedor}" size="2" styleClass="parcial" disabled="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.placar.wo}" id="vencedorParcial1" onkeyup="if (event.keyCode != 16 &amp;&amp; event.charCode != 16 &amp;&amp; event.keyCode != 9 &amp;&amp; event.charCode != 9 &amp;&amp; $j('#add-jogo\\:vencedorParcial1').val().replace('_','').length > 0) $j('#add-jogo\\:perdedorParcial1').focus();"/>
-						#{msg.label_branco}
-						<h:inputText value="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.placar.parciais[0].parcialPerdedor}" size="2" styleClass="parcial" disabled="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.placar.wo}" id="perdedorParcial1" onkeyup="if (event.keyCode != 16 &amp;&amp; event.charCode != 16 &amp;&amp; event.keyCode != 9 &amp;&amp; event.charCode != 9 &amp;&amp; $j('#add-jogo\\:perdedorParcial1').val().replace('_','').length) $j('#add-jogo\\:vencedorParcial2').focus();"/>
-	
-						<label for="add-jogo:vencedorParcial2">#{msg.label_segundo_set}</label>
-						<h:inputText value="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.placar.parciais[1].parcialVencedor}" size="2" styleClass="parcial" disabled="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.placar.wo}" id="vencedorParcial2" onkeyup="if (event.keyCode != 16 &amp;&amp; event.charCode != 16 &amp;&amp; event.keyCode != 9 &amp;&amp; event.charCode != 9 &amp;&amp; $j('#add-jogo\\:vencedorParcial2').val().replace('_','').length) $j('#add-jogo\\:perdedorParcial2').focus();"/>
-						#{msg.label_branco}
-						<h:inputText value="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.placar.parciais[1].parcialPerdedor}" size="2" styleClass="parcial" disabled="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.placar.wo}" id="perdedorParcial2" onkeyup="if (event.keyCode != 16 &amp;&amp; event.charCode != 16 &amp;&amp; event.keyCode != 9 &amp;&amp; event.charCode != 9 &amp;&amp; $j('#add-jogo\\:perdedorParcial2').val().replace('_','').length) $j('#add-jogo\\:vencedorParcial3').focus();"/>
-	
-						<label for="add-jogo:vencedorParcial3">#{msg.label_terceiro_set}</label>
-						<h:inputText value="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.placar.parciais[2].parcialVencedor}" size="2" styleClass="parcial" disabled="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.placar.wo}" id="vencedorParcial3" onkeyup="if (event.keyCode != 16 &amp;&amp; event.charCode != 16 &amp;&amp; event.keyCode != 9 &amp;&amp; event.charCode != 9 &amp;&amp; $j('#add-jogo\\:vencedorParcial3').val().replace('_','').length) $j('#add-jogo\\:perdedorParcial3').focus();"/>
-						#{msg.label_branco}
-						<h:inputText value="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.placar.parciais[2].parcialPerdedor}" size="2" styleClass="parcial" disabled="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.placar.wo}" id="perdedorParcial3" onkeyup="if (event.keyCode != 16 &amp;&amp; event.charCode != 16 &amp;&amp; event.keyCode != 9 &amp;&amp; event.charCode != 9 &amp;&amp; $j('#add-jogo\\:perdedorParcial3').val().replace('_','').length) $j('#add-jogo\\:vencedorParcial1').focus();"/>
-					</h:panelGrid>
-				</fieldset>
+				
+			    <ui:include src="../componentes/parciais.xhtml">
+			    	<ui:param name="formId" value="add-jogo"/>
+			    	<ui:param name="jogo" value="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco}"/>
+			    	<ui:param name="listaJogadores" value="#{gerirRodadaBean.listaJogadoresHabilitados}"/>
+			    	<ui:param name="isJogoBarragem" value="true"/>
+			    	<ui:param name="isRodadaBarragemFechada" value="#{gerirJogoBarragemBean.mestreDetalhe.mestre.fechada}"/>
+			    </ui:include>
+
 				<div class="salvar">
 					<label class="campos_obrigatorios">#{msg.label_campos_marcados_sao_obrigatorios}</label>
 					<a4j:commandButton actionListener="#{gerirJogoBarragemBean.salvaJogo}" id="botaoSalvar" styleClass="submit" reRender="add-jogo" oncomplete="$j.fn.colorbox.resize();aplicarMascaras();"

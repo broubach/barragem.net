@@ -35,6 +35,7 @@
 		<mapping class="net.barragem.persistence.entity.Categoria" />
 		<mapping class="net.barragem.persistence.entity.Ciclo" />
 		<mapping class="net.barragem.persistence.entity.CicloJogador" />
+		<mapping class="net.barragem.persistence.entity.Conta" />
 		<mapping class="net.barragem.persistence.entity.Evento" />
 		<mapping class="net.barragem.persistence.entity.Jogador" />
 		<mapping class="net.barragem.persistence.entity.JogadorEvento" />
@@ -43,18 +44,19 @@
 		<mapping class="net.barragem.persistence.entity.Jogo" />
 		<mapping class="net.barragem.persistence.entity.JogoBarragem" />
 		<mapping class="net.barragem.persistence.entity.Mensagem" />
-		<mapping class="net.barragem.persistence.entity.ParametroCiclo" />
-		<mapping class="net.barragem.persistence.entity.Placar" />
-		<mapping class="net.barragem.persistence.entity.Rodada" />
-		<mapping class="net.barragem.persistence.entity.Parcial" />
-		<mapping class="net.barragem.persistence.entity.Predicado" />
-		<mapping class="net.barragem.persistence.entity.Usuario" />
-		<mapping class="net.barragem.persistence.entity.Perfil" />
 		<mapping class="net.barragem.persistence.entity.Operacao" />
-		<mapping class="net.barragem.persistence.entity.OperacaoDebitoJogoBarragem" />
 		<mapping class="net.barragem.persistence.entity.OperacaoCarga" />
+		<mapping class="net.barragem.persistence.entity.OperacaoDebitoJogoBarragem" />
 		<mapping class="net.barragem.persistence.entity.OperacaoDevolucao" />
-		<mapping class="net.barragem.persistence.entity.Conta" />
+		<mapping class="net.barragem.persistence.entity.ParametroCiclo" />
+		<mapping class="net.barragem.persistence.entity.Parcial" />
+		<mapping class="net.barragem.persistence.entity.Perfil" />
+		<mapping class="net.barragem.persistence.entity.Placar" />
+		<mapping class="net.barragem.persistence.entity.Predicado" />
 		<mapping class="net.barragem.persistence.entity.RequisicaoRecuperarSenha" />
+		<mapping class="net.barragem.persistence.entity.Rodada" />
+		<mapping class="net.barragem.persistence.entity.Treino" />
+		<mapping class="net.barragem.persistence.entity.Usuario" />
+
 	</session-factory>
 </hibernate-configuration>

@@ -104,7 +104,7 @@
 								#{msg.label_data}
 						    </f:facet>
 							<h:outputText value="#{item.data}" >
-								<f:convertDateTime pattern="dd MMM HH:mm"/>
+								<f:convertDateTime pattern="dd MMM HH:mm" timeZone="GMT-3"/>
 							</h:outputText>
 					    </h:column>
 					    <h:column headerClass="actions" rendered="#{gerirRodadaBean.rodadaEmFoco.inoperavel == false}">

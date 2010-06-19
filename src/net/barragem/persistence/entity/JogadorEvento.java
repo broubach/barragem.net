@@ -9,7 +9,7 @@ import javax.persistence.Table;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "jogadorevento")
-public class JogadorEvento extends BaseEntity {
+public class JogadorEvento extends BaseEntity implements Cloneable {
 	@ManyToOne
 	private Evento evento;
 
@@ -17,6 +17,13 @@ public class JogadorEvento extends BaseEntity {
 	private Jogador jogador;
 
 	private String comentario;
+
+	public JogadorEvento() {
+	}
+
+	public JogadorEvento(Evento evento) {
+		this.evento = evento;
+	}
 
 	public Evento getEvento() {
 		return evento;
@@ -72,4 +79,24 @@ public class JogadorEvento extends BaseEntity {
 			return false;
 		return true;
 	}
+
+	public Object clone() {
+		try {
+			Object newObject = getClass().newInstance();
+			cloneTo(newObject);
+			return newObject;
+		} catch (InstantiationException e) {
+			throw new RuntimeException(e);
+		} catch (IllegalAccessException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public void cloneTo(Object newObject) {
+		((JogadorEvento) newObject).setId(getId());
+		((JogadorEvento) newObject).setEvento(evento);
+		((JogadorEvento) newObject).setJogador(jogador);
+		((JogadorEvento) newObject).setComentario(comentario);
+	}
+
 }

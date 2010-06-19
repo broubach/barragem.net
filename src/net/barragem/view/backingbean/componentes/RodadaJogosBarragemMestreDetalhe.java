@@ -50,13 +50,8 @@ public class RodadaJogosBarragemMestreDetalhe extends MestreDetalheImpl<Rodada, 
 	}
 
 	private void completaSetsSeNecessario() {
-		for (int i = 0; i < getMestre().getCiclo().getParametros().getModalidadeDeSets().getNumeroDeSets(); i++) {
-			if (i >= getDetalheEmFoco().getPlacar().getParciais().size()) {
-				Parcial parcial = new Parcial();
-				parcial.setPlacar(getDetalheEmFoco().getPlacar());
-				getDetalheEmFoco().getPlacar().getParciais().add(parcial);
-			}
-		}
+		getDetalheEmFoco().getPlacar().completaSetsSeNecessario(
+				getMestre().getCiclo().getParametros().getModalidadeDeSets().getNumeroDeSets());
 	}
 
 	public void editaProximoJogo() {

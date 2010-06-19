@@ -10,4 +10,5 @@ function aplicarMascaras() {
 	$j('.dateTime').mask("99/99/9999 99:99"); 
 	$j('.MMyyyy').mask("99/9999"); 
 	$j('.parcial').mask("9");
+	$j('.time').mask("99:99"); 
 }

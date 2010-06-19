@@ -1209,6 +1209,19 @@ td.actions {
 	margin-left: 75px
 }
 
+/********************* GERIR EVENTO *********************/
+.tipoEvento {
+	width: 220px;
+}
+.tipoEvento input {
+	clear: left;
+	float: left;
+	margin-right: 2px;
+}
+.tipoEvento label {
+	float: none;
+}
+
 /********************* FIXME *********************/
 .editar-ciclo .btn-novo {
 	width: 160px;
@@ -1420,17 +1433,8 @@ label {
 	font-weight: bold;
 }
 
-.dados-popup label {
+.dados label,.dados .exemplo,.dados .complemento,.dadosExibirPerfil label,.dados .spanBtn,.texto_informativo,.container-mensagens,.mensagem_sucesso,.dados-popup label {
 	color: #444;
-	font-size: .8em;
-}
-
-.dados label,.dados .exemplo,.dados .complemento,.dadosExibirPerfil label,.dados .spanBtn,.texto_informativo,.container-mensagens {
-	color: #444;
-	font-size: .8em;
-}
-.mensagem_sucesso {
-	color: #008000;
 	font-size: .8em;
 }
 

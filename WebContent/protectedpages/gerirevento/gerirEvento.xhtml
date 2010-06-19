@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+<ui:composition template="/protectedpages/layout/layoutPrincipal.xhtml">
+	<ui:param name="pageStyle" value="barragens"/>
+
+	<ui:define name="conteudo">
+      <div class="maincontent equalheights">
+
+        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/jquery.colorbox.css" />
+        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/jquery.colorbox-barragem.css" />
+        <script type="text/javascript" src="#{request.contextPath}/js/jquery.colorbox-min.js"></script>
+		<script type="text/javascript" src="#{request.contextPath}/js/jquery.maskedinput-1.2.2.min.js"></script>
+		<script>
+            $j(function(){
+	            $j(".popup").colorbox({overlayClose:false, inline:true, href:".add-evento", scrolling:false}, function(){aplicarMascaras();$j('#add-evento\\:data').focus();});
+            });
+         </script>
+
+      	<h:form>
+  		  <h2><h:outputText value="#{msg.label_meus_jogos}" /></h2>
+
+	    <ui:include src="../componentes/mensagem-sucesso.xhtml"/>
+		<div class="btn-novo">
+			<a4j:commandLink reRender="add-evento" oncomplete="$j('.popup').click();" actionListener="#{gerirEventoBean.novoEvento}">
+				<span>#{msg.label_adicionar_jogo}</span>
+			</a4j:commandLink>
+			<a href="#" title="#{msg.label_jogo}" class="popup" style="visibility:hidden"/>
+		</div>
+
+		<h:dataTable id="painelEventos" styleClass="gradient" rowClasses=",alt" columnClasses=",,,actions" value="#{gerirEventoBean.paginacaoEventos.pagina}" var="item" binding="#{gerirEventoBean.dataTable}">
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg.label_data}" />
+				</f:facet>
+				<a4j:commandLink actionListener="#{gerirEventoBean.detalhaEvento}" reRender="add-evento" oncomplete="$j('.popup').click()"><h:outputText value="#{item.data}" ><f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT-3"/></h:outputText></a4j:commandLink>
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg.label_tipo}" />
+				</f:facet>
+				<a4j:commandLink actionListener="#{gerirEventoBean.detalhaEvento}" reRender="add-evento" oncomplete="$j('.popup').click()"><h:outputText value="#{item.tipoStr}" /></a4j:commandLink>
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg.label_jogadores}" />
+				</f:facet>
+				<a4j:commandLink actionListener="#{gerirEventoBean.detalhaEvento}" reRender="add-evento" oncomplete="$j('.popup').click()"><h:outputText value="#{item.jogadoresStr}" /></a4j:commandLink>
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg.label_placar}" />
+				</f:facet>
+				<a4j:commandLink actionListener="#{gerirEventoBean.detalhaEvento}" reRender="add-evento" oncomplete="$j('.popup').click()"><h:outputText value="#{item.placar}" rendered="#{item.tipoStr != msg['label_treino']}"/></a4j:commandLink>
+			</h:column>
+		
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg.label_comentario}" />
+				</f:facet>
+				<a4j:commandLink actionListener="#{gerirEventoBean.detalhaEvento}" reRender="add-evento" oncomplete="$j('.popup').click()"><h:outputText value="#{item.comentarioUsuarioLogado}" /></a4j:commandLink>
+			</h:column>
+
+			<h:column headerClass="actions">
+				<f:facet name="header">
+					<h:outputText value="#{msg.label_acoes}" />
+				</f:facet>
+				<h:commandLink rendered="false" onclick="return confirm('#{msg.label_confirma_exclusao}');" actionListener="#{gerirEventoBean.removeEvento}"><img src="#{request.contextPath}/img/buttons/btn-deletar.png" alt="#{msg.label_excluir}" title="#{msg.label_excluir}" width="18px" height="18px"/></h:commandLink>&#160;
+				<a4j:commandLink actionListener="#{gerirEventoBean.detalhaEvento}" reRender="add-evento" oncomplete="$j('.popup').click()"><img src="#{request.contextPath}/img/buttons/btn-editar.png" alt="#{msg.label_editar}" title="#{msg.label_editar}" width="18px" height="18px"/></a4j:commandLink>&#160;
+			</h:column>
+			</h:dataTable>
+           <div class="clear"></div>
+        </h:form>
+
+		<div style="display:none">
+			<ui:include src="popupEvento.xhtml" />
+		</div>
+      </div>
+
+	</ui:define>
+</ui:composition>
+
+</html>

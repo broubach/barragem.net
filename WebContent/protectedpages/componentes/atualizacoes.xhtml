@@ -12,7 +12,7 @@
 		<c:forEach items="#{sessionScope['atualizacoes']}" var="atualizacao" varStatus="status">
 			<li>
 				<h:outputText value="#{atualizacao.data}">
-					<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/> 
+					<f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT-3"/> 
 				</h:outputText> -&#160;
 				<h:commandLink action="#{loginBean.detalhaAtualizacao}">
 					<f:param name="index" value="#{status.index}"/><f:param name="tipo" value="sujeito"/>#{atualizacao.loadedSujeito.textoAtualizacao}

@@ -35,7 +35,7 @@
 								<span class="remetente-data-hora">
 									<h:commandLink action="exibirPerfil" actionListener="#{exibirPerfilBean.exibePerfil}">#{item.remetente.nomeCompletoCapital}<f:param name="id" value="#{item.remetente.id}"/></h:commandLink><br/>
 								    <h:outputText value="#{item.data}">
-								    	<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+								    	<f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT-3"/>
 								    </h:outputText>
 								</span>
 							</div>

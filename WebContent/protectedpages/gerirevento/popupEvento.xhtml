@@ -1,0 +1,108 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+	<div class="add-evento">
+		<h:form id="add-evento">
+			<script>
+	            $j(function(){
+	            	$j('input:text').setMask();
+	            });
+	         </script>
+	        <h:panelGroup rendered="#{! empty messageBean.errorMessages}" styleClass="mensagem-erro">
+		        <c:forEach var="item" items="#{messageBean.errorMessages}">
+    	    		<span>#{item.value.summary}</span>
+		        </c:forEach>
+	        </h:panelGroup>
+		    <ui:include src="../componentes/mensagem-sucesso.xhtml"/>
+			<div class="dados-basicos-barragem">
+				<div class="input text">
+					<label for="add-evento:tipo">#{msg.label_tipo}*</label>
+					<h:selectOneRadio id="tipo" value="#{gerirEventoBean.tipo}" styleClass="tipoEvento" disabled="#{gerirEventoBean.eventoEmFoco.id != null}">
+						<f:selectItem itemLabel="#{msg.label_jogo_avulso}" itemValue="1"/>
+						<f:selectItem itemLabel="#{msg.label_treino}" itemValue="2" />
+						<a4j:support event="onchange" reRender="dados-popup" actionListener="#{gerirEventoBean.alteraTipo}"/>
+					</h:selectOneRadio>
+				</div>
+			</div>
+
+			<h:panelGroup id="dados-popup" layout="block" styleClass="dados-popup">
+				<fieldset id="detalhes-jogo">
+					<legend>#{msg.label_detalhes_jogo}</legend>
+					<div class="input text">
+						<label for="add-evento:data">#{msg.label_data}*</label>
+						<h:inputText id="data" value="#{gerirEventoBean.eventoEmFoco.data}" styleClass="date" disabled="#{gerirEventoBean.tipo == 3 and gerirEventoBean.eventoEmFoco.rodada.fechada}">
+							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3"/>
+						</h:inputText>
+					</div>
+					<div class="input text">
+						<label for="add-evento:hora">#{msg.label_hora}*</label>
+						<h:inputText id="hora" value="#{gerirEventoBean.eventoEmFoco.hora}" styleClass="time" disabled="#{gerirEventoBean.tipo == 3 and gerirEventoBean.eventoEmFoco.rodada.fechada}">
+							<f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
+						</h:inputText>
+					</div>
+					<c:if test="#{gerirEventoBean.tipo != 2}">
+						<h:panelGroup layout="block" styleClass="input text">
+							<div class="vencedorWo" style="#{gerirEventoBean.eventoEmFoco.placar.wo == true ? 'display:block' : '' }">
+								<label for="add-evento:vencedor" class="blank">#{msg.label_selecione_o_vencedor}:</label>
+								<h:selectOneMenu id="vencedorWo" value="#{gerirEventoBean.jogadorVencedorWo}" converter="JogadorConverter" rendered="#{gerirEventoBean.eventoEmFoco != null}">
+									<f:selectItems value="#{gerirEventoBean.listaJogadoresSelecionados}" />
+								</h:selectOneMenu>
+							</div>
+							<label for="add-evento:wo">#{msg.label_wo}</label>
+							<h:selectBooleanCheckbox id="wo" value="#{gerirEventoBean.eventoEmFoco.placar.wo}" class="wo" onclick="$j('div.vencedorWo').slideToggle('fast');$j('#add-evento\\:vencedorParcial1,#add-evento\\:vencedorParcial2,#add-evento\\:vencedorParcial3,#add-evento\\:perdedorParcial1,#add-evento\\:perdedorParcial2,#add-evento\\:perdedorParcial3').attr('disabled', $j('#add-evento\\:wo').is(':checked'));"/>
+						</h:panelGroup>
+					</c:if>
+				</fieldset>
+				
+				<c:if test="#{gerirEventoBean.tipo != 2 and gerirEventoBean.eventoEmFoco != null}">
+				    <ui:include src="../componentes/parciais.xhtml">
+				    	<ui:param name="formId" value="add-evento"/>
+				    	<ui:param name="jogo" value="#{gerirEventoBean.eventoEmFoco}"/>
+				    	<ui:param name="listaJogadores" value="#{gerirEventoBean.listaJogadoresHabilitados}"/>
+				    	<ui:param name="isJogoBarragem" value="#{gerirEventoBean.tipo == 3}"/>
+				    	<ui:param name="isRodadaBarragemFechada" value="#{gerirEventoBean.tipo == 3 and gerirEventoBean.eventoEmFoco.rodada.fechada}"/>
+				    </ui:include>
+			    </c:if>
+
+				<c:if test="#{gerirEventoBean.tipo == 2}">
+					<fieldset id="detalhes-jogo">
+						<legend>#{msg.label_participantes}</legend>
+						<div class="btn-novo">
+							<a4j:commandLink actionListener="#{gerirEventoBean.adicionaJogador}" reRender="jogadores">
+								<span>#{msg.label_adicionar_jogador}</span>
+							</a4j:commandLink>
+						</div>
+						<h:panelGrid columns="1" id="jogadores" rendered="#{gerirEventoBean.eventoEmFoco != null}">
+							<c:forEach var="item" items="#{gerirEventoBean.eventoEmFoco.jogadoresEventos}" varStatus="status">
+								<h:outputText value="#{gerirEventoBean.eventoEmFoco.jogadoresEventos[status.index].jogador.nome}" rendered="#{gerirEventoBean.eventoEmFoco.jogadoresEventos[status.index].jogador.id == sessionScope['usuario'].jogador.id || status.index le (fn:length(gerirEventoBean.eventoEmFoco.jogadoresEventos)-1)}"/>
+								<h:selectOneMenu value="#{gerirEventoBean.eventoEmFoco.jogadoresEventos[status.index].jogador}" converter="JogadorConverter" rendered="#{gerirEventoBean.eventoEmFoco.jogadoresEventos[status.index].jogador.id != sessionScope['usuario'].jogador.id and status.index ge (fn:length(gerirEventoBean.eventoEmFoco.jogadoresEventos)-1)}">
+									<f:selectItem itemLabel="" />
+									<f:selectItems value="#{gerirEventoBean.listaJogadoresHabilitados}" />
+								</h:selectOneMenu>
+							</c:forEach>
+						</h:panelGrid>
+					</fieldset>
+				</c:if>
+
+				<fieldset id="comentario">
+					<legend>#{msg.label_comentario}</legend>
+					<div class="input text">
+						<h:inputTextarea id="comentario" value="#{gerirEventoBean.comentario}" styleClass="resposta"/>
+					</div>
+				</fieldset>
+
+				<div class="salvar">
+					<label class="campos_obrigatorios">#{msg.label_campos_marcados_sao_obrigatorios}</label>
+					<a4j:commandButton actionListener="#{gerirEventoBean.salvaEvento}" id="botaoSalvar" styleClass="submit" reRender="add-evento" oncomplete="$j.fn.colorbox.resize();aplicarMascaras();"
+						value="#{msg.label_salvar}" />
+				</div>
+			</h:panelGroup>
+		</h:form>
+	</div>
+</html>

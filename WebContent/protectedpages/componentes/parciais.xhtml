@@ -1,0 +1,44 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+	<fieldset id="parciais">
+		<legend>#{msg.label_parciais}</legend>
+		<h:panelGrid id="gridPlacar" columns="4" columnClasses=",columnGrid,columnGrid,">
+			<label for="#{formId}:jogadorVencedor" class="#{messageBean.errorMessages['jogador'] != null ? 'error' : '' }">#{msg.label_jogadores}*</label>
+			<h:selectOneMenu id="jogadorVencedor" value="#{jogo.jogadoresEventos[0].jogador}" converter="JogadorConverter" rendered="#{jogo.id == null and not isJogoBarragem and jogo.jogadoresEventos[0].jogador.id != sessionScope['usuario'].jogador.id || jogo.id == null and isJogoBarragem}">
+				<a4j:support event="onchange" reRender="vencedorWo"/>
+				<f:selectItem itemLabel="" />
+				<f:selectItems value="#{listaJogadores}" />
+			</h:selectOneMenu>
+			<h:outputText value="#{jogo.jogadoresEventos[0].jogador.nome}" rendered="#{jogo.id != null || (jogo.id == null and not isJogoBarragem and jogo.jogadoresEventos[0].jogador.id == sessionScope['usuario'].jogador.id)}"/>
+			<img src="#{request.contextPath}/img/versus.png" width="9px" height="11px"/>
+			<h:selectOneMenu value="#{jogo.jogadoresEventos[1].jogador}" converter="JogadorConverter" rendered="#{jogo.id == null and not isJogoBarragem and jogo.jogadoresEventos[1].jogador.id != sessionScope['usuario'].jogador.id || jogo.id == null and isJogoBarragem}">
+				<a4j:support event="onchange" reRender="vencedorWo"/>
+				<f:selectItem itemLabel="" />
+				<f:selectItems value="#{listaJogadores}" />
+			</h:selectOneMenu>
+			<h:outputText value="#{jogo.jogadoresEventos[1].jogador.nome}" rendered="#{jogo.id != null || (jogo.id == null and not isJogoBarragem and jogo.jogadoresEventos[1].jogador.id == sessionScope['usuario'].jogador.id)}"/>
+
+			<label id="labelVencedorParcial1" for="#{formId}:vencedorParcial1">#{msg.label_primeiro_set}</label>
+			<h:inputText value="#{jogo.placar.parciais[0].parcialVencedor}" size="2" styleClass="parcial" disabled="#{jogo.placar.wo || isRodadaBarragemFechada}" id="vencedorParcial1" onkeyup="if (event.keyCode != 16 &amp;&amp; event.charCode != 16 &amp;&amp; event.keyCode != 9 &amp;&amp; event.charCode != 9 &amp;&amp; $j('##{formId}\\\\:vencedorParcial1').val().replace('_','').length > 0) $j('##{formId}\\\\:perdedorParcial1').focus();"/>
+			#{msg.label_branco}
+			<h:inputText value="#{jogo.placar.parciais[0].parcialPerdedor}" size="2" styleClass="parcial" disabled="#{jogo.placar.wo || isRodadaBarragemFechada}" id="perdedorParcial1" onkeyup="if (event.keyCode != 16 &amp;&amp; event.charCode != 16 &amp;&amp; event.keyCode != 9 &amp;&amp; event.charCode != 9 &amp;&amp; $j('##{formId}\\\\:perdedorParcial1').val().replace('_','').length) $j('##{formId}\\\\:vencedorParcial2').focus();"/>
+
+			<label for="#{formId}:vencedorParcial2">#{msg.label_segundo_set}</label>
+			<h:inputText value="#{jogo.placar.parciais[1].parcialVencedor}" size="2" styleClass="parcial" disabled="#{jogo.placar.wo || isRodadaBarragemFechada}" id="vencedorParcial2" onkeyup="if (event.keyCode != 16 &amp;&amp; event.charCode != 16 &amp;&amp; event.keyCode != 9 &amp;&amp; event.charCode != 9 &amp;&amp; $j('##{formId}\\\\:vencedorParcial2').val().replace('_','').length) $j('##{formId}\\\\:perdedorParcial2').focus();"/>
+			#{msg.label_branco}
+			<h:inputText value="#{jogo.placar.parciais[1].parcialPerdedor}" size="2" styleClass="parcial" disabled="#{jogo.placar.wo || isRodadaBarragemFechada}" id="perdedorParcial2" onkeyup="if (event.keyCode != 16 &amp;&amp; event.charCode != 16 &amp;&amp; event.keyCode != 9 &amp;&amp; event.charCode != 9 &amp;&amp; $j('##{formId}\\\\:perdedorParcial2').val().replace('_','').length) $j('##{formId}\\\\:vencedorParcial3').focus();"/>
+
+			<label for="#{formId}:vencedorParcial3">#{msg.label_terceiro_set}</label>
+			<h:inputText value="#{jogo.placar.parciais[2].parcialVencedor}" size="2" styleClass="parcial" disabled="#{jogo.placar.wo || isRodadaBarragemFechada}" id="vencedorParcial3" onkeyup="if (event.keyCode != 16 &amp;&amp; event.charCode != 16 &amp;&amp; event.keyCode != 9 &amp;&amp; event.charCode != 9 &amp;&amp; $j('##{formId}\\\\:vencedorParcial3').val().replace('_','').length) $j('##{formId}\\\\:perdedorParcial3').focus();"/>
+			#{msg.label_branco}
+			<h:inputText value="#{jogo.placar.parciais[2].parcialPerdedor}" size="2" styleClass="parcial" disabled="#{jogo.placar.wo || isRodadaBarragemFechada}" id="perdedorParcial3" onkeyup="if (event.keyCode != 16 &amp;&amp; event.charCode != 16 &amp;&amp; event.keyCode != 9 &amp;&amp; event.charCode != 9 &amp;&amp; $j('##{formId}\\\\:perdedorParcial3').val().replace('_','').length) $j('##{formId}\\\\:vencedorParcial1').focus();"/>
+		</h:panelGrid>
+	</fieldset>
+
+</html>

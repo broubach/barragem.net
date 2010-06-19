@@ -7,7 +7,7 @@ import javax.persistence.Table;
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
 @Table(name = "jogadorjogobarragem")
-public class JogadorJogoBarragem extends JogadorJogo implements Cloneable {
+public class JogadorJogoBarragem extends JogadorJogo {
 
 	private Integer pontuacaoObtida;
 
@@ -19,14 +19,8 @@ public class JogadorJogoBarragem extends JogadorJogo implements Cloneable {
 		this.pontuacaoObtida = pontuacaoObtida;
 	}
 
-	public Object clone() {
-		JogadorJogoBarragem cloned = new JogadorJogoBarragem();
-		cloned.setComentario(getComentario());
-		cloned.setEvento(getEvento());
-		cloned.setId(getId());
-		cloned.setJogador(getJogador());
-		cloned.setPontuacaoObtida(getPontuacaoObtida());
-		cloned.setVencedor(getVencedor());
-		return cloned;
+	public void cloneTo(Object newObject) {
+		super.cloneTo(newObject);
+		((JogadorJogoBarragem) newObject).setPontuacaoObtida(pontuacaoObtida);
 	}
 }
