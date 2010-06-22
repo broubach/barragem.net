@@ -1,7 +1,7 @@
 package net.barragem.view.backingbean.componentes;
 
 import java.util.Collections;
-import java.util.Iterator;
+import java.util.List;
 
 import net.barragem.persistence.entity.Jogador;
 import net.barragem.persistence.entity.JogadorJogo;
@@ -80,20 +80,11 @@ public class RodadaJogosBarragemMestreDetalhe extends MestreDetalheImpl<Rodada, 
 		adicionaDetalheNaLista();
 	}
 
-	public static void removeSetsIncompletos(Placar r) {
-		Parcial parcial = null;
-		for (Iterator<Parcial> it = r.getParciais().iterator(); it.hasNext();) {
-			parcial = it.next();
-			if (parcial.getParcialVencedor() == null
-					|| parcial.getParcialPerdedor() == null
-					|| r.getWo()
-					|| (parcial.getParcialVencedor().equals(new Integer(0)) && parcial.getParcialPerdedor().equals(
-							new Integer(0)))) {
-				if (parcial.getId() != null) {
-					parcial.setPlacar(null);
-					PersistenceHelper.remove(parcial);
-				}
-				it.remove();
+	public static void removeSetsIncompletos(Placar placar) {
+		List<Parcial> parciaisRemovidas = placar.removeSetsIncompletos();
+		for (Parcial parcial : parciaisRemovidas) {
+			if (parcial.getId() != null) {
+				PersistenceHelper.remove(parcial);
 			}
 		}
 	}

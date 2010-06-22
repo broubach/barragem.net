@@ -1,6 +1,7 @@
 package net.barragem.persistence.entity;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -89,5 +90,23 @@ public class Placar extends BaseEntity implements Cloneable {
 				parciais.add(parcial);
 			}
 		}
+	}
+
+	public List<Parcial> removeSetsIncompletos() {
+		Parcial parcial = null;
+		List<Parcial> parciaisRemovidas = new ArrayList<Parcial>();
+		for (Iterator<Parcial> it = getParciais().iterator(); it.hasNext();) {
+			parcial = it.next();
+			if (parcial.getParcialVencedor() == null
+					|| parcial.getParcialPerdedor() == null
+					|| getWo()
+					|| (parcial.getParcialVencedor().equals(new Integer(0)) && parcial.getParcialPerdedor().equals(
+							new Integer(0)))) {
+				parciaisRemovidas.add(parcial);
+				parcial.setPlacar(null);
+				it.remove();
+			}
+		}
+		return parciaisRemovidas;
 	}
 }

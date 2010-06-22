@@ -88,7 +88,18 @@ public class GerirEventoBean extends BaseBean {
 
 	public void salvaEvento(ActionEvent e) {
 		eventoEmFoco.getJogadorEventoUsuarioLogado().setComentario(comentario);
+		if (eventoEmFoco instanceof Jogo) {
+			List<Parcial> parciaisRemovidas = ((Jogo) eventoEmFoco).getPlacar().removeSetsIncompletos();
+			for (Parcial parcial : parciaisRemovidas) {
+				if (parcial.getId() != null) {
+					PersistenceHelper.remove(parcial);
+				}
+			}
+		}
 		PersistenceHelper.persiste(eventoEmFoco);
+		if (eventoEmFoco instanceof Jogo) {
+			((Jogo) eventoEmFoco).getPlacar().completaSetsSeNecessario(3);
+		}
 		paginacaoEventos = new PaginavelSampleImpl<Evento>(obtemMeusEventos());
 		addMensagemAtualizacaoComSucesso();
 	}
@@ -119,12 +130,16 @@ public class GerirEventoBean extends BaseBean {
 	public void detalhaEvento(ActionEvent e) {
 		eventoEmFoco = (Evento) paginacaoEventos.getPagina().get(getIndex()).clone();
 		if (eventoEmFoco instanceof JogoBarragem) {
+			((Jogo) eventoEmFoco).getPlacar().completaSetsSeNecessario(3);
 			tipo = JOGO_BARRAGEM;
 		} else if (eventoEmFoco instanceof Treino) {
 			tipo = TREINO;
 		} else if (eventoEmFoco instanceof Jogo) {
+			((Jogo) eventoEmFoco).getPlacar().completaSetsSeNecessario(3);
 			tipo = JOGO_AVULSO;
 		}
+		eventoEmFoco.setUsuarioLogado(getUsuarioLogado());
+		comentario = eventoEmFoco.getComentarioUsuarioLogado();
 	}
 
 	public void novoEvento(ActionEvent e) {
@@ -189,23 +204,10 @@ public class GerirEventoBean extends BaseBean {
 		Jogador jogador = null;
 		for (Iterator<Jogador> it = jogadores.iterator(); it.hasNext();) {
 			jogador = it.next();
-			if (!jogador.equals(getUsuarioLogado().getJogador()) && !isJogadorJahSelecionado(jogador)) {
-				SelectItem selectItem = new SelectItem(jogador, jogador.getNome());
-				items.add(selectItem);
-			}
+			SelectItem selectItem = new SelectItem(jogador, jogador.getNome());
+			items.add(selectItem);
 		}
 		return items;
-	}
-
-	private boolean isJogadorJahSelecionado(Jogador jogador) {
-		boolean jogadorJahSelecionado = false;
-		for (JogadorEvento jogadorEvento : eventoEmFoco.getJogadoresEventos()) {
-			if (jogadorEvento.getJogador() != null && jogadorEvento.getJogador().equals(jogador)) {
-				jogadorJahSelecionado = true;
-				break;
-			}
-		}
-		return jogadorJahSelecionado;
 	}
 
 	public void adicionaJogador(ActionEvent e) {
