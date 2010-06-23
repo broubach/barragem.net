@@ -9,11 +9,6 @@
 
 	<div class="add-evento">
 		<h:form id="add-evento">
-			<script>
-	            $j(function(){
-	            	$j('input:text').setMask();
-	            });
-	         </script>
 	        <h:panelGroup rendered="#{! empty messageBean.errorMessages}" styleClass="mensagem-erro">
 		        <c:forEach var="item" items="#{messageBean.errorMessages}">
     	    		<span>#{item.value.summary}</span>
@@ -21,14 +16,20 @@
 	        </h:panelGroup>
 		    <ui:include src="../componentes/mensagem-sucesso.xhtml"/>
 			<div class="dados-basicos-barragem">
-				<div class="input text">
+				<h:panelGroup id="tipo-jogo" layout="block" styleClass="input text" rendered="#{gerirEventoBean.eventoEmFoco.id != null}">
+					<label>#{msg.label_tipo}</label><br/>
+					<h:outputLabel styleClass="negrito" value="#{msg.label_jogo_avulso}" rendered="#{gerirEventoBean.tipo == 1}"/>
+					<h:outputLabel styleClass="negrito" value="#{msg.label_treino}" rendered="#{gerirEventoBean.tipo == 2}"/>
+					<h:outputLabel styleClass="negrito" value="#{msg.label_jogo_barragem}" rendered="#{gerirEventoBean.tipo == 3}"/>
+				</h:panelGroup>
+				<h:panelGroup layout="block" styleClass="input text" rendered="#{gerirEventoBean.eventoEmFoco.id == null}">
 					<label for="add-evento:tipo">#{msg.label_tipo}*</label>
-					<h:selectOneRadio id="tipo" value="#{gerirEventoBean.tipo}" styleClass="tipoEvento" disabled="#{gerirEventoBean.eventoEmFoco.id != null}">
+					<h:selectOneRadio id="tipo" value="#{gerirEventoBean.tipo}" styleClass="tipo-evento" disabled="#{gerirEventoBean.eventoEmFoco.id != null}">
 						<f:selectItem itemLabel="#{msg.label_jogo_avulso}" itemValue="1"/>
 						<f:selectItem itemLabel="#{msg.label_treino}" itemValue="2" />
 						<a4j:support event="onchange" reRender="dados-popup" actionListener="#{gerirEventoBean.alteraTipo}"/>
 					</h:selectOneRadio>
-				</div>
+				</h:panelGroup>
 			</div>
 
 			<h:panelGroup id="dados-popup" layout="block" styleClass="dados-popup">

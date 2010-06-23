@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@NamedQuery(name = "meusEventosQuery", query = "select e from Evento e join e.jogadoresEventos je where je.jogador = :jogador order by e.data desc")
+@NamedQuery(name = "meusEventosQuery", query = "select distinct e from Evento e join e.jogadoresEventos je where je.jogador = :jogador order by e.data desc")
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "evento")
 public abstract class Evento extends BaseEntity implements Cloneable {

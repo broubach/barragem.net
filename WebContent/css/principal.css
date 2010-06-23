@@ -1210,16 +1210,22 @@ td.actions {
 }
 
 /********************* GERIR EVENTO *********************/
-.tipoEvento {
+.tipo-evento {
 	width: 220px;
 }
-.tipoEvento input {
+.tipo-evento input {
 	clear: left;
 	float: left;
 	margin-right: 2px;
 }
-.tipoEvento label {
+.tipo-evento label {
 	float: none;
+}
+.negrito {
+	font-weight: bold;
+}
+#add-evento\:tipo-jogo .negrito {
+	width: auto;
 }
 
 /********************* FIXME *********************/

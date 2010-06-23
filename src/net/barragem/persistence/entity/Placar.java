@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import org.hibernate.Hibernate;
 
 @Entity
-@NamedQuery(name = "placarFetchParcialQuery", query = "select p from Placar p join fetch p.parciais where p.id in(:idsPlacar)")
+@NamedQuery(name = "placarFetchParcialQuery", query = "select distinct p from Placar p left outer join fetch p.parciais where p.id in(:idsPlacar)")
 @Table(name = "placar")
 public class Placar extends BaseEntity implements Cloneable {
 

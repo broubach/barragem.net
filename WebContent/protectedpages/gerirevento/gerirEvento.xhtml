@@ -79,6 +79,10 @@
 				<a4j:commandLink actionListener="#{gerirEventoBean.detalhaEvento}" reRender="add-evento" oncomplete="$j('.popup').click()"><img src="#{request.contextPath}/img/buttons/btn-editar.png" alt="#{msg.label_editar}" title="#{msg.label_editar}" width="18px" height="18px"/></a4j:commandLink>&#160;
 			</h:column>
 			</h:dataTable>
+		    <ui:include src="../componentes/paginacao.xhtml">
+		    	<ui:param name="paginavel" value="#{gerirEventoBean.paginacaoEventos}"/>
+		    	<ui:param name="toReRender" value="painelEventos"/>
+		    </ui:include>
            <div class="clear"></div>
         </h:form>
 
