@@ -1,17 +1,11 @@
 package net.barragem.view.backingbean.componentes;
 
 import java.util.Collections;
-import java.util.List;
 
 import net.barragem.persistence.entity.Jogador;
-import net.barragem.persistence.entity.JogadorJogo;
 import net.barragem.persistence.entity.Jogo;
 import net.barragem.persistence.entity.JogoBarragem;
-import net.barragem.persistence.entity.Parcial;
-import net.barragem.persistence.entity.Placar;
 import net.barragem.persistence.entity.Rodada;
-import net.barragem.persistence.entity.SimplesDuplasEnum;
-import net.barragem.scaffold.PersistenceHelper;
 
 public class RodadaJogosBarragemMestreDetalhe extends MestreDetalheImpl<Rodada, JogoBarragem> {
 
@@ -39,7 +33,8 @@ public class RodadaJogosBarragemMestreDetalhe extends MestreDetalheImpl<Rodada, 
 		setDetalhes(getMestre().getJogos());
 
 		ordena();
-		completaSetsSeNecessario();
+		getDetalheEmFoco().getPlacar().completaSetsSeNecessario(
+				getMestre().getCiclo().getParametros().getModalidadeDeSets().getNumeroDeSets());
 	}
 
 	private void ordena() {
@@ -47,11 +42,6 @@ public class RodadaJogosBarragemMestreDetalhe extends MestreDetalheImpl<Rodada, 
 			Collections.sort(jogo.getJogadoresEventos(), new JogadorEventoComparatorVencedorPrimeiro());
 		}
 		Collections.sort(getDetalhes(), new JogoBarragemComparator());
-	}
-
-	private void completaSetsSeNecessario() {
-		getDetalheEmFoco().getPlacar().completaSetsSeNecessario(
-				getMestre().getCiclo().getParametros().getModalidadeDeSets().getNumeroDeSets());
 	}
 
 	public void editaProximoJogo() {
@@ -68,36 +58,7 @@ public class RodadaJogosBarragemMestreDetalhe extends MestreDetalheImpl<Rodada, 
 		}
 	}
 
-	public void preparaJogoParaAtualizacao() {
-		Jogador vencedor = getDetalheEmFoco().obtemVencedor(getJogadorVencedorWo());
-		if (vencedor != null) {
-			getDetalheEmFoco().marcaVencedor(vencedor);
-			inverteParciaisVencedorasEPerdadorasSeNecessario();
-		} else {
-			getDetalheEmFoco().desmarcaVencedor();
-		}
-		removeSetsIncompletos(getDetalheEmFoco().getPlacar());
-		adicionaDetalheNaLista();
-	}
-
-	public static void removeSetsIncompletos(Placar placar) {
-		List<Parcial> parciaisRemovidas = placar.removeSetsIncompletos();
-		for (Parcial parcial : parciaisRemovidas) {
-			if (parcial.getId() != null) {
-				PersistenceHelper.remove(parcial);
-			}
-		}
-	}
-
-	private void inverteParciaisVencedorasEPerdadorasSeNecessario() {
-		if (getDetalheEmFoco().getTipo().equals(SimplesDuplasEnum.Simples) && !getDetalheEmFoco().getPlacar().getWo()) {
-			if (((JogadorJogo) getDetalheEmFoco().getJogadoresEventos().get(1)).getVencedor()) {
-				getDetalheEmFoco().inverteParciaisVencedorasEPerdedoras();
-			}
-		}
-	}
-
-	private void adicionaDetalheNaLista() {
+	public void adicionaDetalheNaLista() {
 		if (getDetalhes().contains(getDetalheEmFoco())) {
 			getDetalhes().remove(getDetalheEmFoco());
 		}

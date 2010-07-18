@@ -7,14 +7,13 @@ import java.util.List;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 
+import net.barragem.business.bo.EventoBo;
 import net.barragem.exception.SaldoInsuficienteException;
-import net.barragem.persistence.entity.Atualizacao;
 import net.barragem.persistence.entity.Jogador;
 import net.barragem.persistence.entity.JogadorEvento;
 import net.barragem.persistence.entity.JogoBarragem;
 import net.barragem.persistence.entity.Rodada;
 import net.barragem.persistence.entity.SimplesDuplasEnum;
-import net.barragem.scaffold.PersistenceHelper;
 import net.barragem.view.backingbean.componentes.MestreDetalheImpl;
 import net.barragem.view.backingbean.componentes.RodadaJogosBarragemMestreDetalhe;
 
@@ -51,25 +50,14 @@ public class GerirJogoBarragemBean extends BaseBean {
 
 	public void salvaJogo(ActionEvent e) {
 		if (valida(mestreDetalhe)) {
-			mestreDetalhe.preparaJogoParaAtualizacao();
-
 			try {
-				if (mestreDetalhe.getDetalheEmFoco().getId() == null) {
-					PersistenceHelper.persiste(getContaUsuario().criaOperacaoDebitoJogoBarragem(1));
-					PersistenceHelper.persiste(getContaUsuario());
-					PersistenceHelper.persiste(Atualizacao.criaCriarJogoBarragem(getUsuarioLogado(), mestreDetalhe
-							.getDetalheEmFoco().getRodada().getCiclo().getBarragem(), mestreDetalhe.getDetalheEmFoco()
-							.getJogadoresEventos().get(0).getJogador(), mestreDetalhe.getDetalheEmFoco()
-							.getJogadoresEventos().get(1).getJogador()));
-				} else {
-					PersistenceHelper.persiste(Atualizacao.criaAtualizarJogoBarragem(getUsuarioLogado(), mestreDetalhe
-							.getDetalheEmFoco().getRodada().getCiclo().getBarragem(), mestreDetalhe.getDetalheEmFoco()
-							.getJogadoresEventos().get(0).getJogador(), mestreDetalhe.getDetalheEmFoco()
-							.getJogadoresEventos().get(1).getJogador()));
-				}
-
-				PersistenceHelper.persiste(mestreDetalhe.getDetalheEmFoco());
+				getBo(EventoBo.class).salvaEvento(mestreDetalhe.getDetalheEmFoco(),
+						mestreDetalhe.getJogadorVencedorWo());
+				mestreDetalhe.getDetalheEmFoco().getPlacar().completaSetsSeNecessario(3);
 				addMensagemAtualizacaoComSucesso();
+
+				mestreDetalhe.adicionaDetalheNaLista();
+
 			} catch (SaldoInsuficienteException e1) {
 				messages.addErrorMessage("saldo_insuficiente_exception", "label_saldo_insuficiente");
 			}

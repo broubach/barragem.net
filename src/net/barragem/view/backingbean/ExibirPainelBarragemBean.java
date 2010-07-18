@@ -8,7 +8,7 @@ import javax.faces.event.ActionEvent;
 
 import net.barragem.persistence.entity.Ciclo;
 import net.barragem.persistence.entity.CicloJogador;
-import net.barragem.persistence.entity.JogoBarragem;
+import net.barragem.persistence.entity.Jogo;
 import net.barragem.persistence.entity.Rodada;
 import net.barragem.scaffold.PersistenceHelper;
 
@@ -83,7 +83,7 @@ public class ExibirPainelBarragemBean extends BaseBean {
 		for (int i = startIndex; i <= endIndex; i++) {
 			if (i < result.size()) {
 				PersistenceHelper.initialize("jogos", result.get(i));
-				for (JogoBarragem jogoBarragem : result.get(i).getJogos()) {
+				for (Jogo jogoBarragem : result.get(i).getJogos()) {
 					PersistenceHelper.initialize("parciais", jogoBarragem.getPlacar());
 				}
 			}

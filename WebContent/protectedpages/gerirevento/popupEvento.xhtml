@@ -27,7 +27,7 @@
 					<h:selectOneRadio id="tipo" value="#{gerirEventoBean.tipo}" styleClass="tipo-evento" disabled="#{gerirEventoBean.eventoEmFoco.id != null}">
 						<f:selectItem itemLabel="#{msg.label_jogo_avulso}" itemValue="1"/>
 						<f:selectItem itemLabel="#{msg.label_treino}" itemValue="2" />
-						<a4j:support event="onchange" reRender="dados-popup" actionListener="#{gerirEventoBean.alteraTipo}"/>
+						<a4j:support event="onchange" reRender="dados-popup" actionListener="#{gerirEventoBean.alteraTipo}" oncomplete="$j.fn.colorbox.resize();aplicarMascaras();"/>
 					</h:selectOneRadio>
 				</h:panelGroup>
 			</div>
@@ -100,7 +100,7 @@
 
 				<div class="salvar">
 					<label class="campos_obrigatorios">#{msg.label_campos_marcados_sao_obrigatorios}</label>
-					<a4j:commandButton actionListener="#{gerirEventoBean.salvaEvento}" id="botaoSalvar" styleClass="submit" reRender="add-evento" oncomplete="$j.fn.colorbox.resize();aplicarMascaras();"
+					<a4j:commandButton actionListener="#{gerirEventoBean.salvaEvento}" id="botaoSalvar" styleClass="submit" reRender="add-evento,gridPlacar" oncomplete="$j.fn.colorbox.resize();aplicarMascaras();"
 						value="#{msg.label_salvar}" />
 				</div>
 			</h:panelGroup>

@@ -5,3 +5,5 @@ CREATE TABLE  `barragem_net`.`treino` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 alter table barragem_net.evento add column hora datetime default NULL;
+
+ALTER TABLE `barragem_net`.`jogadorevento` MODIFY COLUMN `comentario` VARCHAR(255) DEFAULT NULL;

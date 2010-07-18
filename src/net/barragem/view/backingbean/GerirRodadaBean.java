@@ -8,18 +8,17 @@ import java.util.List;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 
+import net.barragem.business.bo.EventoBo;
 import net.barragem.business.bo.RodadaBo;
 import net.barragem.exception.SaldoInsuficienteException;
 import net.barragem.persistence.entity.Ciclo;
 import net.barragem.persistence.entity.Jogador;
 import net.barragem.persistence.entity.Jogo;
-import net.barragem.persistence.entity.JogoBarragem;
 import net.barragem.persistence.entity.Placar;
 import net.barragem.persistence.entity.Rodada;
 import net.barragem.scaffold.PersistenceHelper;
 import net.barragem.view.backingbean.componentes.JogadorEventoComparatorVencedorPrimeiro;
 import net.barragem.view.backingbean.componentes.JogoBarragemComparator;
-import net.barragem.view.backingbean.componentes.RodadaJogosBarragemMestreDetalhe;
 
 import org.ajax4jsf.model.KeepAlive;
 
@@ -55,9 +54,7 @@ public class GerirRodadaBean extends BaseBean {
 	}
 
 	public void removeJogo(ActionEvent e) {
-		PersistenceHelper.remove(rodadaEmFoco.getJogos().remove(getIndex()));
-		PersistenceHelper.persiste(getContaUsuario().criaOperacaoDevolucao(1));
-		PersistenceHelper.persiste(getContaUsuario());
+		getBo(EventoBo.class).removeEvento(rodadaEmFoco, getIndex());
 		addMensagemAtualizacaoComSucesso();
 	}
 
@@ -85,8 +82,8 @@ public class GerirRodadaBean extends BaseBean {
 
 		rodadaEmFoco.getCiclo().getRodadas().remove(rodadaEmFoco);
 		rodadaEmFoco.getCiclo().getRodadas().add(rodadaEmFoco);
-		for (JogoBarragem jogoBarragem : rodadaEmFoco.getJogos()) {
-			RodadaJogosBarragemMestreDetalhe.removeSetsIncompletos(jogoBarragem.getPlacar());
+		for (Jogo jogoBarragem : rodadaEmFoco.getJogos()) {
+			getBo(EventoBo.class).removeSetsIncompletos(jogoBarragem.getPlacar());
 		}
 		PersistenceHelper.persiste(rodadaEmFoco.getCiclo());
 

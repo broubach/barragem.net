@@ -5,7 +5,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:c="http://java.sun.com/jstl/core"
-	xmlns:a4j="http://richfaces.org/a4j">
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
 <ui:composition template="/protectedpages/layout/layoutPrincipal.xhtml">
 	<ui:param name="pageStyle" value="barragens"/>
@@ -31,7 +32,7 @@
 			<a4j:commandLink reRender="add-evento" oncomplete="$j('.popup').click();" actionListener="#{gerirEventoBean.novoEvento}">
 				<span>#{msg.label_adicionar_jogo}</span>
 			</a4j:commandLink>
-			<a href="#" title="#{msg.label_jogo}" class="popup" style="visibility:hidden"/>
+			<a href="#" title="#{msg.label_evento}" class="popup" style="visibility:hidden"/>
 		</div>
 
 		<h:dataTable id="painelEventos" styleClass="gradient" rowClasses=",alt" columnClasses=",,,actions" value="#{gerirEventoBean.paginacaoEventos.pagina}" var="item" binding="#{gerirEventoBean.dataTable}">
@@ -68,7 +69,7 @@
 				<f:facet name="header">
 					<h:outputText value="#{msg.label_comentario}" />
 				</f:facet>
-				<a4j:commandLink actionListener="#{gerirEventoBean.detalhaEvento}" reRender="add-evento" oncomplete="$j('.popup').click()"><h:outputText value="#{item.comentarioUsuarioLogado}" /></a4j:commandLink>
+				<a4j:commandLink actionListener="#{gerirEventoBean.detalhaEvento}" reRender="add-evento" title="#{item.comentarioUsuarioLogado}" oncomplete="$j('.popup').click()"><h:outputText value="#{fn:substring(item.comentarioUsuarioLogado, 0, fn:length(item.comentarioUsuarioLogado) le 20 ? fn:length(item.comentarioUsuarioLogado) : 20)}" /><h:outputText value="..." rendered="#{fn:length(item.comentarioUsuarioLogado) > 0}"/></a4j:commandLink>
 			</h:column>
 
 			<h:column headerClass="actions">

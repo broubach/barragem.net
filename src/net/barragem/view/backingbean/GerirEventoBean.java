@@ -9,6 +9,8 @@ import java.util.Map;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 
+import net.barragem.business.bo.EventoBo;
+import net.barragem.exception.SaldoInsuficienteException;
 import net.barragem.persistence.entity.Evento;
 import net.barragem.persistence.entity.Jogador;
 import net.barragem.persistence.entity.JogadorEvento;
@@ -80,23 +82,18 @@ public class GerirEventoBean extends BaseBean {
 	}
 
 	public void removeEvento(ActionEvent e) {
-		Evento focus = paginacaoEventos.getPosteriorImediatoOuAnteriorImediato(getIndex());
-		PersistenceHelper.remove(paginacaoEventos.getPagina().get(getIndex()));
+		Evento focus = getBo(EventoBo.class).removeEvento(paginacaoEventos, getIndex());
 		addMensagemAtualizacaoComSucesso();
 		paginacaoEventos = new PaginavelSampleImpl<Evento>(obtemMeusEventos(), focus);
 	}
 
 	public void salvaEvento(ActionEvent e) {
 		eventoEmFoco.getJogadorEventoUsuarioLogado().setComentario(comentario);
-		if (eventoEmFoco instanceof Jogo) {
-			List<Parcial> parciaisRemovidas = ((Jogo) eventoEmFoco).getPlacar().removeSetsIncompletos();
-			for (Parcial parcial : parciaisRemovidas) {
-				if (parcial.getId() != null) {
-					PersistenceHelper.remove(parcial);
-				}
-			}
+		try {
+			getBo(EventoBo.class).salvaEvento(eventoEmFoco, jogadorVencedorWo);
+		} catch (SaldoInsuficienteException e1) {
+			messages.addErrorMessage("saldo_insuficiente_exception", "label_saldo_insuficiente");
 		}
-		PersistenceHelper.persiste(eventoEmFoco);
 		if (eventoEmFoco instanceof Jogo) {
 			((Jogo) eventoEmFoco).getPlacar().completaSetsSeNecessario(3);
 		}
