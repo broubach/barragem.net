@@ -52,7 +52,7 @@ public class GerirJogoBarragemBean extends BaseBean {
 		if (valida(mestreDetalhe)) {
 			try {
 				getBo(EventoBo.class).salvaEvento(mestreDetalhe.getDetalheEmFoco(),
-						mestreDetalhe.getJogadorVencedorWo());
+						mestreDetalhe.getJogadorVencedorWo(), null);
 				mestreDetalhe.getDetalheEmFoco().getPlacar().completaSetsSeNecessario(3);
 				addMensagemAtualizacaoComSucesso();
 

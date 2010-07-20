@@ -36,6 +36,7 @@ public class GerirEventoBean extends BaseBean {
 	private Paginavel<Evento> paginacaoEventos;
 	private Jogador jogadorVencedorWo;
 	private String comentario;
+	private List<JogadorEvento> jogadoresEventosExcluidos;
 
 	public Evento getEventoEmFoco() {
 		return eventoEmFoco;
@@ -90,7 +91,7 @@ public class GerirEventoBean extends BaseBean {
 	public void salvaEvento(ActionEvent e) {
 		eventoEmFoco.getJogadorEventoUsuarioLogado().setComentario(comentario);
 		try {
-			getBo(EventoBo.class).salvaEvento(eventoEmFoco, jogadorVencedorWo);
+			getBo(EventoBo.class).salvaEvento(eventoEmFoco, jogadorVencedorWo, jogadoresEventosExcluidos);
 		} catch (SaldoInsuficienteException e1) {
 			messages.addErrorMessage("saldo_insuficiente_exception", "label_saldo_insuficiente");
 		}
@@ -137,6 +138,7 @@ public class GerirEventoBean extends BaseBean {
 		}
 		eventoEmFoco.setUsuarioLogado(getUsuarioLogado());
 		comentario = eventoEmFoco.getComentarioUsuarioLogado();
+		jogadoresEventosExcluidos = new ArrayList<JogadorEvento>();
 	}
 
 	public void novoEvento(ActionEvent e) {
@@ -211,5 +213,12 @@ public class GerirEventoBean extends BaseBean {
 		JogadorEvento jogadorEvento = new JogadorEvento();
 		jogadorEvento.setEvento(eventoEmFoco);
 		eventoEmFoco.getJogadoresEventos().add(jogadorEvento);
+	}
+
+	public void removeJogador(ActionEvent e) {
+		JogadorEvento jogadorEventoExcluido = eventoEmFoco.getJogadoresEventos().remove(getIndex());
+		if (jogadorEventoExcluido.getId() != null) {
+			jogadoresEventosExcluidos.add(jogadorEventoExcluido);
+		}
 	}
 }

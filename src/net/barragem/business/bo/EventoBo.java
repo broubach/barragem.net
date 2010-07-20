@@ -9,6 +9,7 @@ import net.barragem.exception.SaldoInsuficienteException;
 import net.barragem.persistence.entity.Atualizacao;
 import net.barragem.persistence.entity.Evento;
 import net.barragem.persistence.entity.Jogador;
+import net.barragem.persistence.entity.JogadorEvento;
 import net.barragem.persistence.entity.Jogo;
 import net.barragem.persistence.entity.JogoBarragem;
 import net.barragem.persistence.entity.Parcial;
@@ -23,7 +24,13 @@ public class EventoBo extends BaseBo {
 		super(request, response);
 	}
 
-	public void salvaEvento(Evento evento, Jogador jogadorVencedorWo) throws SaldoInsuficienteException {
+	public void salvaEvento(Evento evento, Jogador jogadorVencedorWo, List<JogadorEvento> jogadoresEventosExcluidos)
+			throws SaldoInsuficienteException {
+		if (jogadoresEventosExcluidos != null && !jogadoresEventosExcluidos.isEmpty()) {
+			for (JogadorEvento jogadorEvento : jogadoresEventosExcluidos) {
+				PersistenceHelper.remove(jogadorEvento);
+			}
+		}
 		if (evento instanceof Jogo) {
 			((Jogo) evento).calculaVencedorEInverteParciaisSeNecessario(jogadorVencedorWo);
 			removeSetsIncompletos(((Jogo) evento).getPlacar());

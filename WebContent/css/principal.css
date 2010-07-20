@@ -1227,6 +1227,11 @@ td.actions {
 #add-evento\:tipo-jogo .negrito {
 	width: auto;
 }
+.jogadoresTreino a {
+	margin: 0px;
+	padding: 0px;
+	vertical-align: bottom;
+}
 
 /********************* FIXME *********************/
 .editar-ciclo .btn-novo {

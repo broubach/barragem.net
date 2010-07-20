@@ -82,6 +82,7 @@ public abstract class Evento extends BaseEntity implements Cloneable {
 	public void cloneTo(Object newObject) {
 		((Evento) newObject).setId(getId());
 		((Evento) newObject).setData(data);
+		((Evento) newObject).setHora(hora);
 
 		List<JogadorEvento> clonedJogadoresEventos = new ArrayList<JogadorEvento>();
 		JogadorEvento clonedJogadorEvento = null;
