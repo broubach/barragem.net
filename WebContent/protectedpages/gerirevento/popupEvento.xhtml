@@ -9,6 +9,8 @@
 
 	<div class="add-evento">
 		<h:form id="add-evento">
+			<script type="text/javascript" src="#{request.contextPath}/js/jquery.NobleCount.min.js"></script>
+
 	        <h:panelGroup rendered="#{! empty messageBean.errorMessages}" styleClass="mensagem-erro">
 		        <c:forEach var="item" items="#{messageBean.errorMessages}">
     	    		<span>#{item.value.summary}</span>
@@ -97,7 +99,8 @@
 				<fieldset id="comentario">
 					<legend>#{msg.label_comentario}</legend>
 					<div class="input text">
-						<h:inputTextarea id="comentario" value="#{gerirEventoBean.comentario}" styleClass="resposta"/>
+						<h:inputTextarea id="comentario" value="#{gerirEventoBean.comentario}" styleClass="comentario"/><br/>
+						<span class="caracteres-restantes"><span id='contador'></span>&#160;#{msg.label_caracteres_restantes}</span>
 					</div>
 				</fieldset>
 
@@ -107,6 +110,21 @@
 						value="#{msg.label_salvar}" />
 				</div>
 			</h:panelGroup>
+
+	        <script type="text/javascript">
+				$j('#add-evento\\:comentario').NobleCount('#contador',{
+					on_negative: 'go_red',
+					on_positive: 'go_green',
+					max_chars: 255,
+					block_negative: true,
+					on_update: function(t_obj, char_area, c_settings, char_rem) {
+							if (char_rem &lt; 0) {
+								t_obj[0].value = t_obj[0].value.substring(0, 255);
+							}
+			        }
+				});
+	        </script>
+
 		</h:form>
 	</div>
 </html>

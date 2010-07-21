@@ -1232,6 +1232,13 @@ td.actions {
 	padding: 0px;
 	vertical-align: bottom;
 }
+.add-evento label {
+	width: 60px;
+}
+.add-evento .comentario {
+    width: 320px;
+    height: 80px;
+}
 
 /********************* FIXME *********************/
 .editar-ciclo .btn-novo {

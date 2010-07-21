@@ -16,7 +16,7 @@
 		    	    		<span>#{item.value.summary}</span><br/>
 	    	    		</c:if>
 			        </c:forEach>
-					<c:if test="#{messageBean.errorMessages['data'] != null || messageBean.errorMessages['jogador'] != null}">
+					<c:if test="#{messageBean.errorMessages['data'] != null || messageBean.errorMessages['hora'] != null|| messageBean.errorMessages['jogador'] != null}">
 	    	    		<span>#{msg.label_preencha_os_campos_obrigatorios}</span>
     	    		</c:if>
 		        </div>
@@ -31,8 +31,14 @@
 					<legend>#{msg.label_detalhes_jogo}</legend>
 					<div class="input text">
 						<label for="add-jogo:data" class="#{messageBean.errorMessages['data'] != null ? 'error' : '' }" >#{msg.label_data}*</label>
-						<h:inputText id="data" value="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.data}" styleClass="dateTime">
-							<f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT-3"/>
+						<h:inputText id="data" value="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.data}" styleClass="date">
+							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3"/>
+						</h:inputText>
+					</div>
+					<div class="input text">
+						<label for="add-jogo:hora" class="#{messageBean.errorMessages['hora'] != null ? 'error' : '' }" >#{msg.label_hora}*</label>
+						<h:inputText id="hora" value="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.hora}" styleClass="time">
+							<f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
 						</h:inputText>
 					</div>
 					<div class="input">
