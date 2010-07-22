@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@NamedQuery(name = "meusEventosQuery", query = "select distinct e from Evento e join e.jogadoresEventos je where je.jogador = :jogador order by e.data desc")
+@NamedQuery(name = "meusEventosQuery", query = "select distinct e from Evento e join e.jogadoresEventos je where je.jogador.usuarioCorrespondente = :usuario order by e.data desc")
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "evento")
 public abstract class Evento extends BaseEntity implements Cloneable {
@@ -107,7 +107,8 @@ public abstract class Evento extends BaseEntity implements Cloneable {
 			throw new IllegalStateException();
 		}
 		for (JogadorEvento jogadorEvento : jogadoresEventos) {
-			if (jogadorEvento.getJogador().equals(usuarioLogado.getJogador())) {
+			if (jogadorEvento.getJogador().getUsuarioCorrespondente() != null
+					&& usuarioLogado.getId().equals(jogadorEvento.getJogador().getUsuarioCorrespondente().getId())) {
 				return jogadorEvento;
 			}
 		}

@@ -51,14 +51,14 @@
 					</div>
 					<c:if test="#{gerirEventoBean.tipo != 2}">
 						<h:panelGroup layout="block" styleClass="input text">
+							<label for="add-evento:wo">#{msg.label_wo}</label>
+							<h:selectBooleanCheckbox id="wo" value="#{gerirEventoBean.eventoEmFoco.placar.wo}" class="wo" onclick="$j('div.vencedorWo').slideToggle('fast');$j('#add-evento\\:vencedorParcial1,#add-evento\\:vencedorParcial2,#add-evento\\:vencedorParcial3,#add-evento\\:perdedorParcial1,#add-evento\\:perdedorParcial2,#add-evento\\:perdedorParcial3').attr('disabled', $j('#add-evento\\:wo').is(':checked'));$j.fn.colorbox.resize();" disabled="#{gerirEventoBean.tipo == 3 and gerirEventoBean.eventoEmFoco.rodada.fechada}"/>
 							<div class="vencedorWo" style="#{gerirEventoBean.eventoEmFoco.placar.wo == true ? 'display:block' : '' }">
 								<label for="add-evento:vencedor" class="blank">#{msg.label_selecione_o_vencedor}:</label>
-								<h:selectOneMenu id="vencedorWo" value="#{gerirEventoBean.jogadorVencedorWo}" converter="JogadorConverter" rendered="#{gerirEventoBean.eventoEmFoco != null}">
+								<h:selectOneMenu id="vencedorWo" value="#{gerirEventoBean.jogadorVencedorWo}" converter="JogadorConverter" rendered="#{gerirEventoBean.eventoEmFoco != null}" disabled="#{gerirEventoBean.tipo == 3 and gerirEventoBean.eventoEmFoco.rodada.fechada}">
 									<f:selectItems value="#{gerirEventoBean.listaJogadoresSelecionados}" />
 								</h:selectOneMenu>
 							</div>
-							<label for="add-evento:wo">#{msg.label_wo}</label>
-							<h:selectBooleanCheckbox id="wo" value="#{gerirEventoBean.eventoEmFoco.placar.wo}" class="wo" onclick="$j('div.vencedorWo').slideToggle('fast');$j('#add-evento\\:vencedorParcial1,#add-evento\\:vencedorParcial2,#add-evento\\:vencedorParcial3,#add-evento\\:perdedorParcial1,#add-evento\\:perdedorParcial2,#add-evento\\:perdedorParcial3').attr('disabled', $j('#add-evento\\:wo').is(':checked'));"/>
 						</h:panelGroup>
 					</c:if>
 				</fieldset>
@@ -108,23 +108,23 @@
 					<label class="campos_obrigatorios">#{msg.label_campos_marcados_sao_obrigatorios}</label>
 					<a4j:commandButton actionListener="#{gerirEventoBean.salvaEvento}" id="botaoSalvar" styleClass="submit" reRender="add-evento,gridPlacar" oncomplete="$j.fn.colorbox.resize();aplicarMascaras();"
 						value="#{msg.label_salvar}" />
+					<br/><br/>
 				</div>
+
+		        <script type="text/javascript">
+					$j('#add-evento\\:comentario').NobleCount('#contador',{
+						on_negative: 'go_red',
+						on_positive: 'go_green',
+						max_chars: 255,
+						block_negative: true,
+						on_update: function(t_obj, char_area, c_settings, char_rem) {
+								if (char_rem &lt; 0) {
+									t_obj[0].value = t_obj[0].value.substring(0, 255);
+								}
+				        }
+					});
+		        </script>
 			</h:panelGroup>
-
-	        <script type="text/javascript">
-				$j('#add-evento\\:comentario').NobleCount('#contador',{
-					on_negative: 'go_red',
-					on_positive: 'go_green',
-					max_chars: 255,
-					block_negative: true,
-					on_update: function(t_obj, char_area, c_settings, char_rem) {
-							if (char_rem &lt; 0) {
-								t_obj[0].value = t_obj[0].value.substring(0, 255);
-							}
-			        }
-				});
-	        </script>
-
 		</h:form>
 	</div>
 </html>

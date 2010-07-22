@@ -46,14 +46,14 @@
 						<span>#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.tipo}</span>
 					</div>
 					<div class="input text">
+						<label for="add-jogo:wo">#{msg.label_wo}</label>
+						<h:selectBooleanCheckbox id="wo" value="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.placar.wo}" class="wo" onclick="$j('div.vencedorWo').slideToggle('fast');$j('#add-jogo\\:vencedorParcial1,#add-jogo\\:vencedorParcial2,#add-jogo\\:vencedorParcial3,#add-jogo\\:perdedorParcial1,#add-jogo\\:perdedorParcial2,#add-jogo\\:perdedorParcial3').attr('disabled', $j('#add-jogo\\:wo').is(':checked'));$j.fn.colorbox.resize();"/>
 						<div class="vencedorWo" style="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.placar.wo == true ? 'display:block' : '' }">
 							<label for="add-jogo:vencedor" class="blank" style="#{messageBean.errorMessages['wo'] != null ? 'color:#FF0000' : ''}">#{msg.label_selecione_o_vencedor}:</label>
 							<h:selectOneMenu id="vencedorWo" value="#{gerirJogoBarragemBean.mestreDetalhe.jogadorVencedorWo}" converter="JogadorConverter">
 								<f:selectItems value="#{gerirJogoBarragemBean.listaJogadoresSelecionados}" />
 							</h:selectOneMenu>
 						</div>
-						<label for="add-jogo:wo">#{msg.label_wo}</label>
-						<h:selectBooleanCheckbox id="wo" value="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.placar.wo}" class="wo" onclick="$j('div.vencedorWo').slideToggle('fast');$j('#add-jogo\\:vencedorParcial1,#add-jogo\\:vencedorParcial2,#add-jogo\\:vencedorParcial3,#add-jogo\\:perdedorParcial1,#add-jogo\\:perdedorParcial2,#add-jogo\\:perdedorParcial3').attr('disabled', $j('#add-jogo\\:wo').is(':checked'));"/>
 					</div>
 				</fieldset>
 				
@@ -69,6 +69,7 @@
 					<label class="campos_obrigatorios">#{msg.label_campos_marcados_sao_obrigatorios}</label>
 					<a4j:commandButton actionListener="#{gerirJogoBarragemBean.salvaJogo}" id="botaoSalvar" styleClass="submit" reRender="add-jogo" oncomplete="$j.fn.colorbox.resize();aplicarMascaras();"
 						value="#{msg.label_salvar}" />
+					<br/><br/>
 				</div>
 			</div>
 		</h:form>

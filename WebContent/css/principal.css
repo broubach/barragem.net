@@ -949,7 +949,7 @@ td.actions {
 	width: 60px;
 }
 
-.add-jogo .dados-popup .blank {
+.add-jogo .dados-popup .blank, .add-evento .dados-popup .blank {
 	width: auto;
 	border-right: 0px;
 	padding-right: 0px;
@@ -1171,7 +1171,9 @@ td.actions {
 
 .vencedorWo {
 	display: none;
-	float: right;
+	margin-left: 10px;
+	float: left;
+	clear: left;
 }
 
 .anterior_proximo {
@@ -1236,9 +1238,13 @@ td.actions {
 	width: 60px;
 }
 .add-evento .comentario {
-    width: 320px;
+    width: 100%;
     height: 80px;
 }
+.tipo-evento td {
+    vertical-align: top;
+}
+
 
 /********************* FIXME *********************/
 .editar-ciclo .btn-novo {

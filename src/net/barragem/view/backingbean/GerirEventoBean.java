@@ -103,8 +103,7 @@ public class GerirEventoBean extends BaseBean {
 	}
 
 	private List<Evento> obtemMeusEventos() {
-		List<Evento> meusEventos = PersistenceHelper.findByNamedQuery("meusEventosQuery", getUsuarioLogado()
-				.getJogador());
+		List<Evento> meusEventos = PersistenceHelper.findByNamedQuery("meusEventosQuery", getUsuarioLogado());
 		List<Integer> idsPlacar = new ArrayList<Integer>();
 		for (Evento evento : meusEventos) {
 			evento.setUsuarioLogado(getUsuarioLogado());
@@ -112,14 +111,16 @@ public class GerirEventoBean extends BaseBean {
 				idsPlacar.add(((Jogo) evento).getPlacar().getId());
 			}
 		}
-		List<Placar> placares = PersistenceHelper.findByNamedQuery("placarFetchParcialQuery", idsPlacar);
-		Map<Integer, Placar> placaresPorId = new HashMap<Integer, Placar>();
-		for (Placar placar : placares) {
-			placaresPorId.put(placar.getId(), placar);
-		}
-		for (Evento evento : meusEventos) {
-			if (evento instanceof Jogo) {
-				((Jogo) evento).setPlacar(placaresPorId.get(((Jogo) evento).getPlacar().getId()));
+		if (!idsPlacar.isEmpty()) {
+			List<Placar> placares = PersistenceHelper.findByNamedQuery("placarFetchParcialQuery", idsPlacar);
+			Map<Integer, Placar> placaresPorId = new HashMap<Integer, Placar>();
+			for (Placar placar : placares) {
+				placaresPorId.put(placar.getId(), placar);
+			}
+			for (Evento evento : meusEventos) {
+				if (evento instanceof Jogo) {
+					((Jogo) evento).setPlacar(placaresPorId.get(((Jogo) evento).getPlacar().getId()));
+				}
 			}
 		}
 		return meusEventos;
@@ -149,6 +150,7 @@ public class GerirEventoBean extends BaseBean {
 		((Jogo) eventoEmFoco).getPlacar().setParciais(new ArrayList<Parcial>());
 		((Jogo) eventoEmFoco).getPlacar().completaSetsSeNecessario(3);
 		inicializaJogadoresEvento(JogadorJogo.class);
+		comentario = null;
 	}
 
 	public void alteraTipo(ActionEvent e) {
