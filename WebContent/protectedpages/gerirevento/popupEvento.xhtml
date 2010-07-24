@@ -106,7 +106,7 @@
 
 				<div class="salvar">
 					<label class="campos_obrigatorios">#{msg.label_campos_marcados_sao_obrigatorios}</label>
-					<a4j:commandButton actionListener="#{gerirEventoBean.salvaEvento}" id="botaoSalvar" styleClass="submit" reRender="add-evento,gridPlacar" oncomplete="$j.fn.colorbox.resize();aplicarMascaras();"
+					<a4j:commandButton actionListener="#{gerirEventoBean.salvaEvento}" id="botaoSalvar" styleClass="submit" reRender="add-evento,painelEventos" oncomplete="$j.fn.colorbox.resize();aplicarMascaras();"
 						value="#{msg.label_salvar}" />
 					<br/><br/>
 				</div>
