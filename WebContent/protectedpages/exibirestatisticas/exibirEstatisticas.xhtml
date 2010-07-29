@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<ui:composition template="/protectedpages/layout/layoutPrincipal.xhtml">
+	<ui:define name="conteudo">
+		<div class="maincontent">
+			<script type="text/javascript" src="#{request.contextPath}/js/jquery.NobleCount.min.js"></script>
+
+			<h:form id="exibirMensagens">
+				<h2>#{exibirMensagensBean.usuarioEmFoco.nomeCompletoCapital}</h2>
+				<h:panelGroup id="menu-contextual" styleClass="menu-contextual" layout="block">
+			        <ul>
+			            <li>
+							<h:commandLink value="#{msg.label_perfil}" actionListener="#{exibirPerfilBean.exibePerfil}" action="exibirPerfil"><f:param name="id" value="#{exibirMensagensBean.usuarioEmFoco.id}"/></h:commandLink>
+			            </li>
+			            <li>
+							<h:commandLink value="#{msg.label_mensagens}" actionListener="#{exibirMensagensBean.exibeMensagens}" action="exibirMensagens"><f:param name="id" value="#{exibirPerfilBean.usuarioEmFoco.id}"/></h:commandLink>
+			            </li>
+			            <li>
+							<h:commandLink value="#{msg.label_estatisticas}" disabled="true"></h:commandLink>
+			            </li>
+			        </ul>
+				</h:panelGroup>
+
+	            <div class="clear"></div>
+	            <br/>
+	            
+	            
+
+			</h:form>
+		</div>
+	</ui:define>
+
+</ui:composition>
+</html>
