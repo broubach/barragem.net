@@ -102,21 +102,27 @@ public class Jogo extends Evento {
 	public String getJogadoresStr() {
 		StringBuilder vencedores = new StringBuilder();
 		StringBuilder perdedores = new StringBuilder();
-
 		for (JogadorEvento jogadorEvento : getJogadoresEventos()) {
-			if (((JogadorJogo) jogadorEvento).getVencedor() == null || ((JogadorJogo) jogadorEvento).getVencedor()) {
+			if (((JogadorJogo) jogadorEvento).getVencedor() != null && ((JogadorJogo) jogadorEvento).getVencedor()) {
 				vencedores.append(jogadorEvento.getJogador().getNome().trim()).append(", ");
 			} else {
 				perdedores.append(jogadorEvento.getJogador().getNome().trim()).append(", ");
 			}
 		}
-
-		vencedores.delete(vencedores.length() - 2, vencedores.length());
-		if (perdedores.length() >= 2) {
-			perdedores.delete(perdedores.length() - 2, perdedores.length());
-			return vencedores.append(" X ").append(perdedores).toString();
+		// TODO: se for duplas, nao serah possivel agrupar jogadores do mesmo time
+		if (vencedores.length() <= 0) {
+			vencedores = new StringBuilder();
+			perdedores = new StringBuilder();
+			for (int i = 0; i < getJogadoresEventos().size() / 2; i++) {
+				vencedores.append(getJogadoresEventos().get(i).getJogador().getNome().trim()).append(", ");
+			}
+			for (int i = getJogadoresEventos().size() / 2; i < getJogadoresEventos().size(); i++) {
+				perdedores.append(getJogadoresEventos().get(i).getJogador().getNome().trim()).append(", ");
+			}
 		}
-		return vencedores.toString();
+		vencedores.delete(vencedores.length() - ", ".length(), vencedores.length());
+		perdedores.delete(perdedores.length() - ", ".length(), perdedores.length());
+		return vencedores.append(" X ").append(perdedores).toString();
 	}
 
 	public void calculaVencedorEInverteParciaisSeNecessario(Jogador jogadorVencedorWo) {
@@ -184,10 +190,10 @@ public class Jogo extends Evento {
 	}
 
 	public void desmarcaVencedor() {
-		JogadorJogoBarragem jogadorJogoBarragem = null;
+		JogadorJogo jogadorJogo = null;
 		for (int i = 0; i < getJogadoresEventos().size(); i++) {
-			jogadorJogoBarragem = (JogadorJogoBarragem) getJogadoresEventos().get(i);
-			jogadorJogoBarragem.setVencedor(false);
+			jogadorJogo = (JogadorJogo) getJogadoresEventos().get(i);
+			jogadorJogo.setVencedor(false);
 		}
 	}
 }

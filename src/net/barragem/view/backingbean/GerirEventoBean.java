@@ -1,6 +1,7 @@
 package net.barragem.view.backingbean;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -23,6 +24,7 @@ import net.barragem.persistence.entity.Treino;
 import net.barragem.scaffold.Paginavel;
 import net.barragem.scaffold.PaginavelSampleImpl;
 import net.barragem.scaffold.PersistenceHelper;
+import net.barragem.view.backingbean.componentes.JogadorEventoComparatorVencedorPrimeiro;
 
 import org.ajax4jsf.model.KeepAlive;
 
@@ -120,6 +122,7 @@ public class GerirEventoBean extends BaseBean {
 			for (Evento evento : meusEventos) {
 				if (evento instanceof Jogo) {
 					((Jogo) evento).setPlacar(placaresPorId.get(((Jogo) evento).getPlacar().getId()));
+					Collections.sort(evento.getJogadoresEventos(), new JogadorEventoComparatorVencedorPrimeiro());
 				}
 			}
 		}

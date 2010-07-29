@@ -18,20 +18,20 @@
 	        </h:panelGroup>
 		    <ui:include src="../componentes/mensagem-sucesso.xhtml"/>
 			<div class="dados-basicos-barragem">
-				<h:panelGroup id="tipo-jogo" layout="block" styleClass="input text" rendered="#{gerirEventoBean.eventoEmFoco.id != null}">
+				<c:if test="#{gerirEventoBean.eventoEmFoco.id != null}">
 					<label>#{msg.label_tipo}</label><br/>
 					<h:outputLabel styleClass="negrito" value="#{msg.label_jogo_avulso}" rendered="#{gerirEventoBean.tipo == 1}"/>
 					<h:outputLabel styleClass="negrito" value="#{msg.label_treino}" rendered="#{gerirEventoBean.tipo == 2}"/>
 					<h:outputLabel styleClass="negrito" value="#{msg.label_jogo_barragem}" rendered="#{gerirEventoBean.tipo == 3}"/>
-				</h:panelGroup>
-				<h:panelGroup layout="block" styleClass="input text" rendered="#{gerirEventoBean.eventoEmFoco.id == null}">
+				</c:if>
+				<c:if test="#{gerirEventoBean.eventoEmFoco.id == null}">
 					<label for="add-evento:tipo">#{msg.label_tipo}*</label>
 					<h:selectOneRadio id="tipo" value="#{gerirEventoBean.tipo}" styleClass="tipo-evento" disabled="#{gerirEventoBean.eventoEmFoco.id != null}">
 						<f:selectItem itemLabel="#{msg.label_jogo_avulso}" itemValue="1"/>
 						<f:selectItem itemLabel="#{msg.label_treino}" itemValue="2" />
 						<a4j:support event="onchange" reRender="dados-popup" actionListener="#{gerirEventoBean.alteraTipo}" oncomplete="$j.fn.colorbox.resize();aplicarMascaras();"/>
 					</h:selectOneRadio>
-				</h:panelGroup>
+				</c:if>
 			</div>
 
 			<h:panelGroup id="dados-popup" layout="block" styleClass="dados-popup">
@@ -39,13 +39,10 @@
 					<legend>#{msg.label_detalhes_jogo}</legend>
 					<div class="input text">
 						<label for="add-evento:data">#{msg.label_data}*</label>
-						<h:inputText id="data" value="#{gerirEventoBean.eventoEmFoco.data}" styleClass="date" disabled="#{gerirEventoBean.tipo == 3 and gerirEventoBean.eventoEmFoco.rodada.fechada}">
+						<h:inputText id="data" value="#{gerirEventoBean.eventoEmFoco.data}" styleClass="date" disabled="#{gerirEventoBean.tipo == 3 and gerirEventoBean.eventoEmFoco.rodada.fechada}" size="11">
 							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3"/>
 						</h:inputText>
-					</div>
-					<div class="input text">
-						<label for="add-evento:hora">#{msg.label_hora}*</label>
-						<h:inputText id="hora" value="#{gerirEventoBean.eventoEmFoco.hora}" styleClass="time" disabled="#{gerirEventoBean.tipo == 3 and gerirEventoBean.eventoEmFoco.rodada.fechada}">
+						<h:inputText id="hora" value="#{gerirEventoBean.eventoEmFoco.hora}" styleClass="time" disabled="#{gerirEventoBean.tipo == 3 and gerirEventoBean.eventoEmFoco.rodada.fechada}" size="5">
 							<f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
 						</h:inputText>
 					</div>
@@ -108,7 +105,7 @@
 					<label class="campos_obrigatorios">#{msg.label_campos_marcados_sao_obrigatorios}</label>
 					<a4j:commandButton actionListener="#{gerirEventoBean.salvaEvento}" id="botaoSalvar" styleClass="submit" reRender="add-evento,painelEventos" oncomplete="$j.fn.colorbox.resize();aplicarMascaras();"
 						value="#{msg.label_salvar}" />
-					<br/><br/>
+					<br/>
 				</div>
 
 		        <script type="text/javascript">
