@@ -1,0 +1,10 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:c="http://java.sun.com/jstl/core"
+	  xmlns:h="http://java.sun.com/jsf/html">
+
+	<h:panelGroup styleClass="mensagem-erro" display="block" rendered="#{! empty messageBean.errorMessages}">
+		<c:forEach var="item" items="#{messageBean.errorMessages}">
+			<span>#{item.value.summary}</span>
+		</c:forEach>
+	</h:panelGroup>
+</html>

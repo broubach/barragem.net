@@ -11,11 +11,7 @@
 		<h:form id="add-evento">
 			<script type="text/javascript" src="#{request.contextPath}/js/jquery.NobleCount.min.js"></script>
 
-	        <h:panelGroup rendered="#{! empty messageBean.errorMessages}" styleClass="mensagem-erro">
-		        <c:forEach var="item" items="#{messageBean.errorMessages}">
-    	    		<span>#{item.value.summary}</span>
-		        </c:forEach>
-	        </h:panelGroup>
+			<ui:include src="../componentes/mensagem-erro.xhtml"/>
 		    <ui:include src="../componentes/mensagem-sucesso.xhtml"/>
 			<div class="dados-basicos-barragem">
 				<c:if test="#{gerirEventoBean.eventoEmFoco.id != null}">
@@ -38,11 +34,11 @@
 				<fieldset id="detalhes-jogo">
 					<legend>#{msg.label_detalhes_jogo}</legend>
 					<div class="input text">
-						<label for="add-evento:data">#{msg.label_data}*</label>
-						<h:inputText id="data" value="#{gerirEventoBean.eventoEmFoco.data}" styleClass="date" disabled="#{gerirEventoBean.tipo == 3 and gerirEventoBean.eventoEmFoco.rodada.fechada}" size="11">
+						<label for="add-evento:data">#{msg.label_data}</label>
+						<h:inputText id="data" value="#{gerirEventoBean.eventoEmFoco.data}" styleClass="date" size="11">
 							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3"/>
 						</h:inputText>
-						<h:inputText id="hora" value="#{gerirEventoBean.eventoEmFoco.hora}" styleClass="time" disabled="#{gerirEventoBean.tipo == 3 and gerirEventoBean.eventoEmFoco.rodada.fechada}" size="5">
+						<h:inputText id="hora" value="#{gerirEventoBean.eventoEmFoco.hora}" styleClass="time" size="5">
 							<f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
 						</h:inputText>
 					</div>

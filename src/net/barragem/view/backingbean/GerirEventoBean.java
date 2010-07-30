@@ -25,6 +25,7 @@ import net.barragem.scaffold.Paginavel;
 import net.barragem.scaffold.PaginavelSampleImpl;
 import net.barragem.scaffold.PersistenceHelper;
 import net.barragem.view.backingbean.componentes.JogadorEventoComparatorVencedorPrimeiro;
+import net.barragem.view.backingbean.componentes.JogadorEventoUsuarioLogadoComparator;
 
 import org.ajax4jsf.model.KeepAlive;
 
@@ -91,17 +92,31 @@ public class GerirEventoBean extends BaseBean {
 	}
 
 	public void salvaEvento(ActionEvent e) {
-		eventoEmFoco.getJogadorEventoUsuarioLogado().setComentario(comentario);
-		try {
-			getBo(EventoBo.class).salvaEvento(eventoEmFoco, jogadorVencedorWo, jogadoresEventosExcluidos);
-		} catch (SaldoInsuficienteException e1) {
-			messages.addErrorMessage("saldo_insuficiente_exception", "label_saldo_insuficiente");
+		if (valida(eventoEmFoco)) {
+			eventoEmFoco.getJogadorEventoUsuarioLogado().setComentario(comentario);
+			try {
+				getBo(EventoBo.class).salvaEvento(eventoEmFoco, jogadorVencedorWo, jogadoresEventosExcluidos);
+			} catch (SaldoInsuficienteException e1) {
+				messages.addErrorMessage("saldo_insuficiente_exception", "label_saldo_insuficiente");
+			}
+			if (eventoEmFoco instanceof Jogo) {
+				((Jogo) eventoEmFoco).getPlacar().completaSetsSeNecessario(3);
+			}
+			paginacaoEventos = new PaginavelSampleImpl<Evento>(obtemMeusEventos());
+			addMensagemAtualizacaoComSucesso();
 		}
-		if (eventoEmFoco instanceof Jogo) {
-			((Jogo) eventoEmFoco).getPlacar().completaSetsSeNecessario(3);
+	}
+
+	private boolean valida(Evento evento) {
+		for (JogadorEvento jogadorEvento : evento.getJogadoresEventos()) {
+			if (jogadorEvento.getJogador() == null) {
+				messages.addErrorMessage(null, "error_selecione_os_jogadores_do_evento");
+			}
 		}
-		paginacaoEventos = new PaginavelSampleImpl<Evento>(obtemMeusEventos());
-		addMensagemAtualizacaoComSucesso();
+		if (!messages.getErrorMessages().isEmpty()) {
+			return false;
+		}
+		return true;
 	}
 
 	private List<Evento> obtemMeusEventos() {
@@ -123,6 +138,9 @@ public class GerirEventoBean extends BaseBean {
 				if (evento instanceof Jogo) {
 					((Jogo) evento).setPlacar(placaresPorId.get(((Jogo) evento).getPlacar().getId()));
 					Collections.sort(evento.getJogadoresEventos(), new JogadorEventoComparatorVencedorPrimeiro());
+				} else if (evento instanceof Treino) {
+					Collections.sort(evento.getJogadoresEventos(), new JogadorEventoUsuarioLogadoComparator(
+							getUsuarioLogado()));
 				}
 			}
 		}

@@ -1248,6 +1248,12 @@ td.actions {
 .add-evento .dados-basicos-barragem label {
 	white-space: nowrap;
 }
+#detalhes-jogo .btn-novo {
+	float: none;
+}
+#add-evento {
+	width: 400px;
+}
 
 /********************* FIXME *********************/
 .editar-ciclo .btn-novo {

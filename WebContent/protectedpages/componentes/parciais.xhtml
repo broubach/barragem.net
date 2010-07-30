@@ -10,14 +10,14 @@
 		<legend>#{msg.label_parciais}</legend>
 		<h:panelGrid id="gridPlacar" columns="4" columnClasses=",columnGrid,columnGrid,">
 			<label for="#{formId}:jogadorVencedor" class="#{messageBean.errorMessages['jogador'] != null ? 'error' : '' }">#{msg.label_jogadores}*</label>
-			<h:selectOneMenu id="jogadorVencedor" value="#{jogo.jogadoresEventos[0].jogador}" converter="JogadorConverter" rendered="#{jogo.id == null and not isJogoBarragem and jogo.jogadoresEventos[0].jogador.id != sessionScope['usuario'].jogador.id || jogo.id == null and isJogoBarragem}">
+			<h:selectOneMenu id="jogadorVencedor" value="#{jogo.jogadoresEventos[0].jogador}" converter="JogadorConverter" rendered="#{jogo.id == null and not isJogoBarragem and jogo.jogadoresEventos[0].jogador.id != sessionScope['usuario'].jogador.id || jogo.id == null and isJogoBarragem}" onchange="$j.fn.colorbox.resize();">
 				<a4j:support event="onchange" reRender="vencedorWo"/>
 				<f:selectItem itemLabel="" />
 				<f:selectItems value="#{listaJogadores}" />
 			</h:selectOneMenu>
 			<h:outputText value="#{jogo.jogadoresEventos[0].jogador.nome}" rendered="#{jogo.id != null || (jogo.id == null and not isJogoBarragem and jogo.jogadoresEventos[0].jogador.id == sessionScope['usuario'].jogador.id)}"/>
 			<img src="#{request.contextPath}/img/versus.png" width="9px" height="11px"/>
-			<h:selectOneMenu value="#{jogo.jogadoresEventos[1].jogador}" converter="JogadorConverter" rendered="#{jogo.id == null and not isJogoBarragem and jogo.jogadoresEventos[1].jogador.id != sessionScope['usuario'].jogador.id || jogo.id == null and isJogoBarragem}">
+			<h:selectOneMenu value="#{jogo.jogadoresEventos[1].jogador}" converter="JogadorConverter" rendered="#{jogo.id == null and not isJogoBarragem and jogo.jogadoresEventos[1].jogador.id != sessionScope['usuario'].jogador.id || jogo.id == null and isJogoBarragem}" onchange="$j.fn.colorbox.resize();">
 				<a4j:support event="onchange" reRender="vencedorWo"/>
 				<f:selectItem itemLabel="" />
 				<f:selectItems value="#{listaJogadores}" />
