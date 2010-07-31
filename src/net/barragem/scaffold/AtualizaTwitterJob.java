@@ -25,7 +25,7 @@ public class AtualizaTwitterJob implements Job {
 			String response = obtemUltimoTwitt();
 
 			String twitt = extraiTwitt(response);
-			Date twittDate = extraiTwittDate(response);
+			Date twittDate = extraiTwittDate(response, 0);
 
 			AtualizacaoTwitter atualizacaoTwitter = (AtualizacaoTwitter) PersistenceHelper.findByNamedQuery(
 					"lastTwitterUpdateQuery").get(0);
@@ -69,14 +69,27 @@ public class AtualizaTwitterJob implements Job {
 		return twitt;
 	}
 
-	private Date extraiTwittDate(String response) {
+	private Date extraiTwittDate(String response, int beginIndex) {
 		try {
-			int beginIndex = response.indexOf("\"created_at\":\"") + "\"created_at\":\"".length();
+			if (beginIndex == 0) {
+				beginIndex = response.indexOf("\"created_at\":\"") + "\"created_at\":\"".length();
+			} else {
+				beginIndex = response.indexOf("\"created_at\":\"", beginIndex) >= 0 ? response.indexOf(
+						"\"created_at\":\"", beginIndex)
+						+ "\"created_at\":\"".length() : -1;
+			}
+			if (beginIndex < 0) {
+				return null;
+			}
 			int endIndex = response.indexOf("\"", beginIndex + 1);
 			String data = response.substring(beginIndex, endIndex);
 			SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss ZZZZZ yyyy", new java.util.Locale("eng",
 					"US"));
-			return sdf.parse(data);
+			Date result = extraiTwittDate(response, endIndex);
+			if (result == null) {
+				return sdf.parse(data);
+			}
+			return result;
 		} catch (ParseException e) {
 			throw new RuntimeException(e);
 		}
