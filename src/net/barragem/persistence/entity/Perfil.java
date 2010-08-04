@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -21,6 +22,7 @@ import net.barragem.scaffold.MessageBundleUtils;
 import org.apache.commons.beanutils.BeanUtils;
 
 @Entity
+@NamedQuery(name = "perfilFetchFotoQuery", query = "from Perfil perfil join fetch perfil.foto where perfil.id in (:lista)")
 @Table(name = "perfil")
 public class Perfil extends BaseEntity implements Cloneable {
 

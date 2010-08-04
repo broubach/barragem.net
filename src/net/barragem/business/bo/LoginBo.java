@@ -17,6 +17,8 @@ import net.barragem.persistence.entity.Conta;
 import net.barragem.persistence.entity.Predicado;
 import net.barragem.persistence.entity.TipoPredicadoValueEnum;
 import net.barragem.persistence.entity.Usuario;
+import net.barragem.scaffold.Paginavel;
+import net.barragem.scaffold.PaginavelSampleImpl;
 import net.barragem.scaffold.PersistenceHelper;
 
 public class LoginBo extends BaseBo {
@@ -69,7 +71,8 @@ public class LoginBo extends BaseBo {
 			}
 		}
 		carregaAtualizacoes(atualizacoes);
-		setAtualizacoes(atualizacoes);
+		Paginavel<Atualizacao> paginacaoAtualizacoes = new PaginavelSampleImpl<Atualizacao>(atualizacoes, 6);
+		setAtualizacoes(paginacaoAtualizacoes);
 
 		// busca total de mensagens não lidas
 		List<Long> totalMensagens = PersistenceHelper.findByNamedQuery("novasMensagens", getUsuarioLogado(),
@@ -79,9 +82,13 @@ public class LoginBo extends BaseBo {
 
 	public void carregaAtualizacoes(List<Atualizacao> atualizacoes) {
 		try {
+			List<Usuario> sujeitos = new ArrayList<Usuario>();
 			for (Atualizacao atualizacao : atualizacoes) {
 				atualizacao.setLoadedSujeito((BaseEntity) PersistenceHelper.findByPk(Class.forName(atualizacao
 						.getSujeitoClassName()), atualizacao.getSujeitoId()));
+				if (atualizacao.getSujeitoClassName().equals("net.barragem.persistence.entity.Usuario")) {
+					sujeitos.add((Usuario) atualizacao.getLoadedSujeito());
+				}
 				if (atualizacao.getObjetoId() != null) {
 					atualizacao.setLoadedObjeto((BaseEntity) PersistenceHelper.findByPk(Class.forName(atualizacao
 							.getObjetoClassName()), atualizacao.getObjetoId()));
@@ -94,6 +101,7 @@ public class LoginBo extends BaseBo {
 					}
 				}
 			}
+			getBo(UsuarioBo.class).carregaFotos(sujeitos);
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException(e);
 		}

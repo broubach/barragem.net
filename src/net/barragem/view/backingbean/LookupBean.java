@@ -78,10 +78,17 @@ public class LookupBean extends BaseBean {
 		return items;
 	}
 
+	public List<SelectItem> getGeneros() {
+		List<SelectItem> items = new ArrayList<SelectItem>();
+		items.add(new SelectItem(SexoEnum.Homem, MessageBundleUtils.getInstance().get("label_homem")));
+		items.add(new SelectItem(SexoEnum.Mulher, MessageBundleUtils.getInstance().get("label_mulher")));
+		return items;
+	}
+
 	public List<SelectItem> getSexos() {
 		List<SelectItem> items = new ArrayList<SelectItem>();
-		items.add(new SelectItem(SexoEnum.Masculino, MessageBundleUtils.getInstance().get("label_masculino")));
-		items.add(new SelectItem(SexoEnum.Feminino, MessageBundleUtils.getInstance().get("label_feminino")));
+		items.add(new SelectItem(SexoEnum.Homem, MessageBundleUtils.getInstance().get("label_masculino")));
+		items.add(new SelectItem(SexoEnum.Mulher, MessageBundleUtils.getInstance().get("label_feminino")));
 		return items;
 	}
 

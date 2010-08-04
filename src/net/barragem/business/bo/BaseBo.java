@@ -130,9 +130,4 @@ public abstract class BaseBo extends BaseBean {
 	protected boolean validaSenha(String clientId, String senha) {
 		throw new NotImplementedException();
 	}
-
-	@Override
-	protected <T> T getBo(Class<T> bo) {
-		throw new NotImplementedException();
-	}
 }

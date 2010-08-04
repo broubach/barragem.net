@@ -136,6 +136,7 @@ public class Usuario extends BaseEntity implements Validatable, Cloneable, Atual
 	}
 
 	public void setPerfil(Perfil perfil) {
+		perfil.setUsuario(this);
 		this.perfil = perfil;
 	}
 

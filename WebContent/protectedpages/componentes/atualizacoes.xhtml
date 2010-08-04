@@ -5,45 +5,65 @@
 	xmlns:c="http://java.sun.com/jstl/core"
 	xmlns:a4j="http://richfaces.org/a4j">
 
-	<h:form>
-	<div class="atualizacoes">
-		<h3>#{msg.label_ultimas_atualizacoes}</h3>
-		<ul>
-		<c:forEach items="#{sessionScope['atualizacoes']}" var="atualizacao" varStatus="status">
-			<li>
-				<h:outputText value="#{atualizacao.data}">
-					<f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT-3"/> 
-				</h:outputText> -&#160;
-				<h:commandLink action="#{loginBean.detalhaAtualizacao}">
-					<f:param name="index" value="#{status.index}"/><f:param name="tipo" value="sujeito"/>#{atualizacao.loadedSujeito.textoAtualizacao}
-				</h:commandLink>
-				#{msg[atualizacao.acao.acaoKey]}&#160;
-				<h:commandLink action="#{loginBean.detalhaAtualizacao}">
-					<f:param name="index" value="#{status.index}"/><f:param name="tipo" value="objeto"/>#{atualizacao.loadedObjeto.textoAtualizacao}
-				</h:commandLink>
-				<c:forEach items="#{atualizacao.predicados}" var="item" varStatus="statusPredicado">
-					<c:if test="#{item.isPredicadoAKey}">
-						#{msg[item.predicado]}&#160;
-					</c:if>
-					<c:if test="#{!item.isPredicadoAKey}">
-						#{item.predicado}&#160;
-					</c:if>
-					<c:if test="#{item.tipoPredicadoValue == 'Key'}">
-						#{msg[item.predicadoValue]}&#160;
-					</c:if>
-					<c:if test="#{item.tipoPredicadoValue == 'Clazz'}">
-						<h:commandLink action="#{loginBean.detalhaAtualizacao}" rendered="#{item.predicadoValue != 'net.barragem.persistence.entity.Jogador' or item.loadedPredicado.usuarioCorrespondente != null}">
-							<f:param name="index" value="#{status.index}"/><f:param name="tipo" value="predicado#{statusPredicado.index}"/>#{item.loadedPredicado.textoAtualizacao}
-						</h:commandLink>
-						<h:outputText value="#{item.loadedPredicado.textoAtualizacao}" rendered="#{item.predicadoValue == 'net.barragem.persistence.entity.Jogador' and item.loadedPredicado.usuarioCorrespondente == null}"/>
-					</c:if>
-					<c:if test="#{item.tipoPredicadoValue == 'None'}">
-						#{item.predicadoValue}&#160;
-					</c:if>
-				</c:forEach>
-			</li>
+	<h:form id="form_atualizacoes">
+	<h3 class="label_atualizacoes">#{msg.label_ultimas_atualizacoes}</h3>
+	<div id="atualizacoes">
+		<c:forEach items="#{sessionScope['atualizacoes'].pagina}" var="atualizacao" varStatus="status">
+			<div id="atualizacao">
+				<div class="foto-perfil-small">
+					<h:commandLink action="#{loginBean.detalhaAtualizacao}">
+						<c:if test="#{atualizacao.loadedSujeito.class.name == 'net.barragem.persistence.entity.Usuario'}">
+						    <ui:include src="../componentes/foto-perfil-small.xhtml">
+						    	<ui:param name="usuario" value="#{atualizacao.loadedSujeito}"/>
+						    </ui:include>
+						</c:if>
+					</h:commandLink>
+				</div>
+				<div class="sujeito">
+					<h:commandLink action="#{loginBean.detalhaAtualizacao}">
+						<f:param name="index" value="#{status.index}"/><f:param name="tipo" value="sujeito"/>#{atualizacao.loadedSujeito.textoAtualizacao}
+					</h:commandLink>
+				</div>
+				<div class="data">
+					&#160;-&#160;<h:outputText value="#{atualizacao.data}">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT-3"/> 
+					</h:outputText>
+				</div><br/>
+				<div class="acao">
+					#{msg[atualizacao.acao.acaoKey]}
+				</div>
+				<div class="objeto">
+					&#160;<h:commandLink action="#{loginBean.detalhaAtualizacao}">
+						<f:param name="index" value="#{status.index}"/><f:param name="tipo" value="objeto"/>#{atualizacao.loadedObjeto.textoAtualizacao}
+					</h:commandLink>&#160;
+				</div>
+				<div class="predicados">
+					<c:forEach items="#{atualizacao.predicados}" var="item" varStatus="statusPredicado">
+						<c:if test="#{item.isPredicadoAKey}">
+							#{msg[item.predicado]}&#160;
+						</c:if>
+						<c:if test="#{!item.isPredicadoAKey}">
+							#{item.predicado}&#160;
+						</c:if>
+						<c:if test="#{item.tipoPredicadoValue == 'Key'}">
+							#{msg[item.predicadoValue]}&#160;
+						</c:if>
+						<c:if test="#{item.tipoPredicadoValue == 'Clazz'}">
+							<h:commandLink action="#{loginBean.detalhaAtualizacao}" rendered="#{item.predicadoValue != 'net.barragem.persistence.entity.Jogador' or item.loadedPredicado.usuarioCorrespondente != null}">
+								<f:param name="index" value="#{status.index}"/><f:param name="tipo" value="predicado#{statusPredicado.index}"/>#{item.loadedPredicado.textoAtualizacao}
+							</h:commandLink>
+							<h:outputText value="#{item.loadedPredicado.textoAtualizacao}" rendered="#{item.predicadoValue == 'net.barragem.persistence.entity.Jogador' and item.loadedPredicado.usuarioCorrespondente == null}"/>
+						</c:if>
+						<c:if test="#{item.tipoPredicadoValue == 'None'}">
+							#{item.predicadoValue}&#160;
+						</c:if>
+					</c:forEach>
+				</div>
+			</div>
 		</c:forEach>
-		</ul>
 	</div>
+    <ui:include src="../componentes/paginacao.xhtml">
+    	<ui:param name="paginavel" value="#{sessionScope['atualizacoes']}"/>
+    </ui:include>
 	</h:form>
 </html>

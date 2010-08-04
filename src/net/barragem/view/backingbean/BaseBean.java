@@ -31,6 +31,7 @@ import net.barragem.persistence.entity.Conta;
 import net.barragem.persistence.entity.Usuario;
 import net.barragem.persistence.entity.Validatable;
 import net.barragem.scaffold.BarragemJmsTemplate;
+import net.barragem.scaffold.Paginavel;
 import net.barragem.scaffold.PersistenceHelper;
 import net.barragem.scaffold.ReflectionHelper;
 
@@ -363,8 +364,8 @@ public abstract class BaseBean {
 		}
 	}
 
-	protected void setAtualizacoes(List<Atualizacao> atualizacoes) {
-		setSessionAttribute("atualizacoes", atualizacoes);
+	protected void setAtualizacoes(Paginavel<Atualizacao> paginacaoAtualizacoes) {
+		setSessionAttribute("atualizacoes", paginacaoAtualizacoes);
 	}
 
 	protected List<Atualizacao> getAtualizacoes() {

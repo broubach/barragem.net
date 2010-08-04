@@ -47,8 +47,53 @@ fieldset {
 }
 
 /********************* INDEX *********************/
-.atualizacoes li {
-	list-style: inside disc;
+#atualizacoes {
+	position: relative;
+	float: left;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+#atualizacao {
+	border-bottom:1px solid #95A3BA;
+	clear:both;
+	float:left;
+	padding:15px 0px;
+	position:relative;
+	width: 545px;
+}
+#atualizacoes .foto-perfil-small {
+	position: relative;
+	float: left;
+	clear: left;
+}
+#atualizacoes .sujeito {
+	position: relative;
+	float: left;
+	clear: none;
+	margin-left: 15px;
+}
+#atualizacoes .data {
+	position: relative;
+	float: left;
+	clear: right;
+}
+#atualizacoes .acao {
+	position: relative;
+	clear: none;
+	float: left;
+	margin-left: 25px;
+	margin-top: 10px;
+}
+#atualizacoes .objeto {
+	position: relative;
+	clear: none;
+	float: left;
+	margin-top: 10px;
+}
+#atualizacoes .predicados {
+	position: relative;
+	float: left;
+	margin-top: 10px;
 }
 .new_mail {
 	left:155px;
@@ -1567,13 +1612,16 @@ legend {
 	font-size: 0.8em;
 }
 
-.atualizacoes h3 {
+#form_atualizacoes .label_atualizacoes {
 	color: #009900;
 }
-.atualizacoes {
+#form_atualizacoes .label_atualizacoes, #atualizacoes {
 	font-size: 0.8em;
 }
 .twitterDiv #descricao {
 	color: #069;
 	font-size:0.7em;
+}
+#atualizacoes .sujeito {
+	font-weight: bold;
 }
