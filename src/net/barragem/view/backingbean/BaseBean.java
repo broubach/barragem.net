@@ -368,8 +368,8 @@ public abstract class BaseBean {
 		setSessionAttribute("atualizacoes", paginacaoAtualizacoes);
 	}
 
-	protected List<Atualizacao> getAtualizacoes() {
-		return (List<Atualizacao>) getSessionAttribute("atualizacoes");
+	protected Paginavel<Atualizacao> getAtualizacoes() {
+		return (Paginavel<Atualizacao>) getSessionAttribute("atualizacoes");
 	}
 
 	public String executaMetodo() {

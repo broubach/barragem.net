@@ -45,7 +45,7 @@ public class LoginBean extends BaseBean {
 	}
 
 	public String detalhaAtualizacao() {
-		Atualizacao atualizacao = getAtualizacoes().get(getIndex());
+		Atualizacao atualizacao = getAtualizacoes().getPagina().get(getIndex());
 		Object detalhe = null;
 		if (getRequest().getParameter("tipo").equals("sujeito")) {
 			detalhe = atualizacao.getLoadedSujeito();
