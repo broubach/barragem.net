@@ -23,12 +23,15 @@
 		            $j(".popup").colorbox({overlayClose:false, inline:true, href:".add-jogador", scrolling:false});
 		            $j(".popupRenomearCiclo").colorbox({overlayClose:false, inline:true, href:".rename-ciclo", scrolling:false}, function() {$j('#rename-ciclo\\:nome').focus();});
 		            $j(".popupEditarCicloJogador").colorbox({overlayClose:false, inline:true, href:".editar-ciclo-jogador", scrolling:false}, function() {$j('#editar-ciclo-jogador\\:pontuacao').focus();});
+		            $j(".popupBarragem").colorbox({overlayClose:false, inline:true, href:".add-barragens", scrolling:false}, function() {$j('#editar-ciclo-jogador\\:pontuacao').focus();});
 	            });
 	         </script>
 
 			<h:form id="cicloForm">
-				<h2>#{gerirCicloBean.barragemEmFoco.local} <span>#{msg[gerirCicloBean.barragemEmFoco.categoria.nome]}</span></h2>
-
+				<h:panelGroup id="titulo" layout="block">
+					<h2>#{gerirCicloBean.barragemEmFoco.local} <span>#{msg[gerirCicloBean.barragemEmFoco.categoria.nome]}</span>&#160;<a4j:commandLink actionListener="#{gerirBarragemBean.detalhaBarragem}" reRender="add-barragens" oncomplete="$j('.popupBarragem').click()"><img src="#{request.contextPath}/img/buttons/btn-editar.png" alt="#{msg.label_editar}" title="#{msg.label_editar}" width="18px" height="18px"/></a4j:commandLink></h2>
+				</h:panelGroup>
+				
 				<h:panelGroup id="dados-barragem" styleClass="dados-barragem" layout="block">
 				    <dl>
 				        <dt>#{msg.label_ciclo}</dt>
@@ -65,6 +68,7 @@
 						<a href="#" class="popup" title="#{msg.label_jogadores}" style="visibility:hidden"/>
 						<a href="#" class="popupRenomearCiclo" title="#{msg.label_renomear_ciclo}" style="visibility:hidden"/>
 						<a href="#" class="popupEditarCicloJogador" title="#{msg.label_editar_jogador}" style="visibility:hidden"/>
+						<a href="#" class="popupBarragem" title="#{msg.label_editar_barragem}" style="visibility:hidden"/>
 					</div>
 		
 				    <h:dataTable id="ranking" styleClass="gradient" rowClasses=",alt" columnClasses=",,,actions" value="#{gerirCicloBean.cicloEmFoco.ranking}" var="item" binding="#{gerirCicloBean.dataTable}">
@@ -111,6 +115,9 @@
 			<ui:include src="popupJogador.xhtml" />
 			<ui:include src="popupRenomearCiclo.xhtml" />
 			<ui:include src="popupEditarCicloJogador.xhtml" />
+			<ui:include src="../gerirbarragem/popupBarragem.xhtml">
+				<ui:param name="novaBarragem" value="false"/>
+			</ui:include>
 		</div>
 	</ui:define>
 

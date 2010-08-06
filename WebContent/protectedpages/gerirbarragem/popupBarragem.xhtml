@@ -96,8 +96,23 @@
 				</div>
 				<div class="salvar">
 					<label class="campos_obrigatorios">#{msg.label_campos_marcados_sao_obrigatorios}</label>
-					<a4j:commandButton actionListener="#{gerirBarragemBean.salvaBarragem}"
-						value="#{msg.label_salvar}" reRender="add-barragens,painelBarragens" styleClass="submit" oncomplete="$j.fn.colorbox.resize()"/>
+					<a4j:commandButton actionListener="#{gerirBarragemBean.salvaBarragem}" rendered="#{!novaBarragem}"
+						value="#{msg.label_salvar}" reRender="add-barragens,titulo" styleClass="submit" oncomplete="$j.fn.colorbox.resize()"/>
+					<a4j:commandButton actionListener="#{gerirBarragemBean.salvaBarragem}" rendered="#{novaBarragem}"
+						value="#{msg.label_salvar}" reRender="add-barragens" styleClass="submit"/>
+					<div style="display:none">
+						<h:commandButton id="editaCicloEscondido" action="editarCiclo"/>
+					</div>
+						
+					<script type="text/javascript">
+						$j(document).ready(function() {
+							if (#{novaBarragem and gerirBarragemBean.barragemEmFoco.id != null}) {
+								$j('#add-barragens\\:editaCicloEscondido').click();
+							} else if (#{not empty messageBean.errorMessages}) {
+								$j.fn.colorbox.resize();
+							}
+						});		
+					</script>
 				</div>
 			</div>
 		</h:form>

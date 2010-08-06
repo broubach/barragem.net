@@ -95,6 +95,7 @@ public class GerirBarragemBean extends BaseBean {
 				getBo(BarragemBo.class).salva(barragemEmFoco);
 				lista();
 				addMensagemAtualizacaoComSucesso();
+				editaCiclo(e);
 			} catch (ConstraintViolationException e1) {
 				messages.addErrorMessage("label_barragem_jah_existente", "label_barragem_jah_existente");
 			}
@@ -108,7 +109,8 @@ public class GerirBarragemBean extends BaseBean {
 	}
 
 	public void detalhaBarragem(ActionEvent e) {
-		barragemEmFoco = (Barragem) barragensQueAdministro.get(getIndex()).clone();
+		GerirCicloBean gerirCiclo = (GerirCicloBean) getRequestAttribute("gerirCicloBean");
+		barragemEmFoco = (Barragem) gerirCiclo.getBarragemEmFoco().clone();
 	}
 
 	public void editaCiclo(ActionEvent e) {

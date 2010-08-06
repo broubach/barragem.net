@@ -29,15 +29,11 @@
 						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT-3"/> 
 					</h:outputText>
 				</div><br/>
-				<div class="acao">
-					#{msg[atualizacao.acao.acaoKey]}
-				</div>
-				<div class="objeto">
-					&#160;<h:commandLink action="#{loginBean.detalhaAtualizacao}">
+				<p class="acao">
+					#{msg[atualizacao.acao.acaoKey]}&#160;
+					<h:commandLink action="#{loginBean.detalhaAtualizacao}">
 						<f:param name="index" value="#{status.index}"/><f:param name="tipo" value="objeto"/>#{atualizacao.loadedObjeto.textoAtualizacao}
-					</h:commandLink>&#160;
-				</div>
-				<div class="predicados">
+					</h:commandLink>
 					<c:forEach items="#{atualizacao.predicados}" var="item" varStatus="statusPredicado">
 						<c:if test="#{item.isPredicadoAKey}">
 							#{msg[item.predicado]}&#160;
@@ -58,7 +54,7 @@
 							#{item.predicadoValue}&#160;
 						</c:if>
 					</c:forEach>
-				</div>
+				</p>
 			</div>
 		</c:forEach>
 	</div>

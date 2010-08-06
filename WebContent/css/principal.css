@@ -83,17 +83,7 @@ fieldset {
 	float: left;
 	margin-left: 25px;
 	margin-top: 10px;
-}
-#atualizacoes .objeto {
-	position: relative;
-	clear: none;
-	float: left;
-	margin-top: 10px;
-}
-#atualizacoes .predicados {
-	position: relative;
-	float: left;
-	margin-top: 10px;
+	width: 85%;
 }
 .new_mail {
 	left:155px;
