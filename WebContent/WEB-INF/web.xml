@@ -172,7 +172,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Ranking Mashup Servlet</servlet-name>
-		<url-pattern>/publicpages/mashup/ranking.do</url-pattern>
+		<url-pattern>/publicpages/mashup/ranking.json</url-pattern>
 	</servlet-mapping>
 
     <!-- Spring config -->
