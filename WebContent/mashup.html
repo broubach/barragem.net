@@ -1,0 +1,34 @@
+<head>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		$.getJSON("http://localhost:8080/barragem/publicpages/mashup/ranking.do", { barragemId: "1" }, function(barragem) {
+			var html = "<style>";
+			html += ".mashup_rodape { font-family: arial,verdana,helvetica,sans-serif; font-color: #333333; font-size: 10px; float: right; }";
+			html += ".mashup_titulo { font-family: arial,verdana,helvetica,sans-serif; font-color: #333333; font-size: 1em; font-weight: bold;}";
+			html += ".mashup_ranking { font-family: arial,verdana,helvetica,sans-serif; font-color: #333333; font-size: 0.9em}";
+			html += ".mashup_ranking { border-collapse: collapse; }";
+			html += ".mashup_ranking thead { font-weight: bold; font-size: 0.9em; color: #ffffff; background: #268ACA; }";
+			html += ".mashup_ranking td { border-bottom: 1px solid #E3EAEE; padding: 4px; }";
+			html += ".mashup_ranking th { padding-left: 5px; padding-right: 40px; padding-top: 5px; padding-bottom: 5px; }";
+			html += ".mashup_ranking td, .mashup_ranking th { text-align: left; }";
+			html += "</style>";
+			html += "<label class='mashup_titulo'>" + barragem.local + ", " + barragem.categoria + " - " + barragem.ciclo + "</label>";
+			html += "<table class='mashup_ranking'><thead class='titulo'><tr><th>Nome</th><th>Ranking</th><th>Pontua&ccedil;&atilde;o</th></tr></thead><tbody>";
+			$.each(barragem.ranking, function(i, item) {
+				html += "<tr>";
+				html += "<td>" + item.nome + "</td>";
+				html += "<td>" + item.ranking + "</td>";
+				html += "<td>" + item.pontuacao + "</td>";
+				html += "</tr>";
+			});
+			html += "</tbody></table>";
+			html += "<label class='mashup_rodape'>powered by</label> <img src='http://localhost:8080/barragem/img/logo-barragem-mashup.png'/>"
+			$(".result").html(html);
+		});
+	</script>
+
+	<div class="result">
+	</div>
+</body>

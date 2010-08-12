@@ -164,6 +164,17 @@
 		<url-pattern>/protectedpages/exibirimagem/exibirImagem.do</url-pattern>
 	</servlet-mapping>
 
+	<!-- Ranking Mashup Servlet -->
+	<servlet>
+		<servlet-name>Ranking Mashup Servlet</servlet-name>
+		<servlet-class>net.barragem.scaffold.RankingMashupServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Ranking Mashup Servlet</servlet-name>
+		<url-pattern>/publicpages/mashup/ranking.do</url-pattern>
+	</servlet-mapping>
+
     <!-- Spring config -->
    	<context-param>
 		<param-name>contextConfigLocation</param-name>

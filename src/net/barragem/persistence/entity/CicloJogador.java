@@ -5,10 +5,12 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "ciclojogador")
+@NamedQuery(name = "rankingPorBarragemIdQuery", query = "select r.jogador.nome, r.ranking, r.pontuacao from Barragem b join b.ciclos c join c.ranking r where b.id = :id and c.id = (select max(ciclo.id) from Ciclo ciclo join ciclo.barragem barragem where barragem.id = :id) order by r.ranking")
 public class CicloJogador extends BaseEntity {
 
 	@ManyToOne

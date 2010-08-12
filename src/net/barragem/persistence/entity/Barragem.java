@@ -23,7 +23,8 @@ import org.apache.commons.beanutils.BeanUtils;
 		@NamedQuery(name = "barragensQueAdministroQuery", query = "from Barragem barragem where barragem.administrador = :usuario"),
 		@NamedQuery(name = "barragensQueParticipoQuery", query = "select distinct barragem from Barragem barragem join barragem.ciclos ciclo join ciclo.ranking ranking where ranking.jogador.usuarioCorrespondente = :usuario"),
 		@NamedQuery(name = "pesquisaBarragemDeUsuarioQuery", query = "select distinct b from Barragem b join b.ciclos c join c.ranking r where (upper(b.categoria.nome) like :p1 or upper(b.local) like :p1) and r.jogador.usuarioCorrespondente = :p2"),
-		@NamedQuery(name = "pesquisaBarragemQuery", query = "from Barragem b where upper(b.categoria.nome) like :p or upper(b.local) like :p") })
+		@NamedQuery(name = "pesquisaBarragemQuery", query = "from Barragem b where upper(b.categoria.nome) like :p or upper(b.local) like :p"),
+		@NamedQuery(name = "cicloNomeEBarragemQuery", query = "select c.nome, c.nomeAlternativoBaseadoEmAno, b.local, b.categoria.nome from Barragem b join b.ciclos c where b.id = :id and c.id = (select max(ciclo.id) from Ciclo ciclo join ciclo.barragem barragem where barragem.id = :id)") })
 @Table(name = "barragem")
 public class Barragem extends BaseEntity implements Validatable, Cloneable, Atualizavel {
 

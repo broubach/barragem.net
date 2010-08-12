@@ -212,7 +212,9 @@ public class Perfil extends BaseEntity implements Cloneable {
 	public Object clone() {
 		try {
 			Perfil perfil = (Perfil) BeanUtils.cloneBean(this);
-			perfil.setCategorias(new ArrayList<Categoria>(getCategorias()));
+			if (perfil.getCategorias() != null) {
+				perfil.setCategorias(new ArrayList<Categoria>(getCategorias()));
+			}
 			return perfil;
 		} catch (IllegalAccessException e) {
 			throw new RuntimeException(e);
