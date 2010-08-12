@@ -40,9 +40,13 @@ public class RankingMashupServlet extends HttpServlet {
 				rankingJson.put(cicloJogadorJson);
 			}
 			barragemJson.put("ranking", rankingJson);
-
 			resp.setCharacterEncoding("UTF-8");
+			if (req.getParameter("callback") != null) {
+				resp.getWriter().print(req.getParameter("callback"));
+			}
+			resp.getWriter().print("(");
 			resp.getWriter().print(barragemJson);
+			resp.getWriter().print(");");
 
 		} catch (NullPointerException e) {
 			e.printStackTrace();
