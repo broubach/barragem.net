@@ -18,7 +18,13 @@ public class RankingMashupServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			String barragemIdStr = req.getParameter("barragemId");
-			Integer barragemId = Integer.parseInt(barragemIdStr);
+			Integer barragemId = null;
+			try {
+				barragemId = Integer.parseInt(barragemIdStr);
+			} catch (NumberFormatException e) {
+				resp.getWriter().print("barragemId must be passed as a valid number");
+				return;
+			}
 
 			List<Object[]> result = PersistenceHelper.findByNamedQuery("cicloNomeEBarragemQuery", barragemId);
 			Object[] cicloNomeEBarragem = result.get(0);

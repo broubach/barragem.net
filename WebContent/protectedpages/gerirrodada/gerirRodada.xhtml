@@ -21,15 +21,18 @@
 			<script>
 	            $j(function(){
 		            $j(".popup").colorbox({overlayClose:false, inline:true, href:".add-jogo", scrolling:false}, function(){aplicarMascaras();$j('#add-jogo\\:data').focus();});
+		            $j(".popupBarragem").colorbox({overlayClose:false, inline:true, href:".add-barragens", scrolling:false}, function() {$j('#add-barragens\\:local').focus();});
 	            });
 	         </script>
 			
 			<h:form id="gerirRodadaForm">
-				<h:panelGroup id="mensagem-erro" layout="block" style="display: none" styleClass="mensagem-erro">
+				<h:panelGroup id="mensagem-erro" layout="block" styleClass="mensagem-erro" style="#{empty messageBean.errorMessages ? 'display:none' : 'display:visible'}">
 					#{msg.label_saldo_insuficiente}
 				</h:panelGroup>
 
-				<h2>#{gerirCicloBean.barragemEmFoco.local} <span>#{msg[gerirCicloBean.barragemEmFoco.categoria.nome]}</span></h2>
+				<h:panelGroup id="titulo" layout="block">
+					<h2>#{gerirCicloBean.barragemEmFoco.local} <span>#{msg[gerirCicloBean.barragemEmFoco.categoria.nome]}</span>&#160;<a4j:commandLink actionListener="#{gerirBarragemBean.detalhaBarragem}" reRender="add-barragens" oncomplete="$j('.popupBarragem').click()"><img src="#{request.contextPath}/img/buttons/btn-editar.png" alt="#{msg.label_editar}" title="#{msg.label_editar}" width="18px" height="18px"/></a4j:commandLink></h2>
+				</h:panelGroup>
 				<h:panelGroup id="dados-barragem" styleClass="dados-barragem" layout="block">
 				    <dl>
 				        <dt>#{msg.label_ciclo}</dt>
@@ -44,7 +47,7 @@
 							<h:commandLink actionListener="#{gerirRodadaBean.sorteiaJogos}" value="#{msg.label_sortear_jogos}" disabled="#{gerirRodadaBean.rodadaEmFoco.inoperavel == true}"/>
 			            </li>
 			            <li>
-							<h:commandLink actionListener="#{gerirRodadaBean.recalculaRankingEFechaRodada}" value="#{msg.label_fechar_rodada}" disabled="#{gerirRodadaBean.rodadaEmFoco.inoperavel == true or not gerirRodadaBean.rodadaEmFoco.todosOsJogosCompletos or gerirRodadaBean.rodadaAnteriorEmAberto or empty gerirRodadaBean.rodadaEmFoco.jogos}"/>
+							<h:commandLink actionListener="#{gerirRodadaBean.recalculaRankingEFechaRodada}" value="#{msg.label_fechar_rodada}" onclick="return confirm('#{msg.label_apos_fechada_rodada_nao_pode_ser_editada}');" disabled="#{gerirRodadaBean.rodadaEmFoco.inoperavel == true or not gerirRodadaBean.rodadaEmFoco.todosOsJogosCompletos or gerirRodadaBean.rodadaAnteriorEmAberto or empty gerirRodadaBean.rodadaEmFoco.jogos}"/>
 			            </li>
 			            <li>
 							<h:commandLink actionListener="#{gerirRodadaBean.criaNovaRodada}" value="#{msg.label_criar_rodada}" onclick="return confirm('#{msg.label_deseja_realmente_criar_uma_nova_rodada}');"/>
@@ -59,7 +62,8 @@
 						<a4j:commandLink actionListener="#{gerirRodadaBean.adicionaJogo}" reRender="add-jogo" oncomplete="if (#{gerirRodadaBean.possuiSaldoParaUmJogo}) {$j('.popup').click();} else {$j('.mensagem-erro').show();}" rendered="#{gerirRodadaBean.rodadaEmFoco.inoperavel == false}">
 							<span>#{msg.label_adicionar_jogo}</span>
 						</a4j:commandLink>
-						<a href="#" title="#{msg.label_jogo}" class="popup" style="visibility:hidden"/>
+						<a href="#" class="popup" title="#{msg.label_jogo}" style="visibility:hidden"/>
+						<a href="#" class="popupBarragem" title="#{msg.label_editar_barragem}" style="visibility:hidden"/>
 					</h:panelGroup>
 	
 				    <h:dataTable id="jogos" styleClass="gradient" rowClasses=",alt" columnClasses=",,versus,,,nowrap,nowrap,nowrap" value="#{gerirRodadaBean.rodadaEmFoco.jogos}" var="item" binding="#{gerirRodadaBean.dataTable}">
@@ -127,6 +131,9 @@
             <div class="clear"></div>
 			<div style="display:none">
 				<ui:include src="../gerirjogobarragem/gerirJogoBarragem.xhtml" />
+				<ui:include src="../gerirbarragem/popupBarragem.xhtml">
+					<ui:param name="novaBarragem" value="false"/>
+				</ui:include>
 			</div>
 		</div>
 	</ui:define>

@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.faces.event.ActionEvent;
 
+import net.barragem.business.bo.JogadorBo;
 import net.barragem.persistence.entity.Arquivo;
 import net.barragem.persistence.entity.Categoria;
 import net.barragem.persistence.entity.Perfil;
@@ -117,7 +118,7 @@ public class EditarPerfilBean extends BaseBean {
 			}
 			usuarioEmFoco.getJogadores().remove(usuarioEmFoco.getJogador());
 			usuarioEmFoco.getJogadores().add(usuarioEmFoco.getJogador());
-			usuarioEmFoco.getJogador().setNome(usuarioEmFoco.getNomeCompletoCapital());
+			getBo(JogadorBo.class).atualizaNomesDeTodosJogadores(usuarioEmFoco, usuarioEmFoco.getNomeCompletoCapital());
 			PersistenceHelper.persiste(usuarioEmFoco);
 			setUsuarioLogado(usuarioEmFoco);
 			addMensagemAtualizacaoComSucesso();

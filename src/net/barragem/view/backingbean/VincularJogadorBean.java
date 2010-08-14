@@ -1,12 +1,11 @@
 package net.barragem.view.backingbean;
 
-import java.text.MessageFormat;
 import java.util.Collections;
 import java.util.List;
 
 import javax.faces.event.ActionEvent;
 
-import net.barragem.persistence.entity.Atualizacao;
+import net.barragem.business.bo.JogadorBo;
 import net.barragem.persistence.entity.Jogador;
 import net.barragem.scaffold.JogadoresComCorrespondenciaPrimeiroComparator;
 import net.barragem.scaffold.Paginavel;
@@ -74,18 +73,7 @@ public class VincularJogadorBean extends BaseBean {
 	}
 
 	public void vinculaJogador(ActionEvent e) {
-		Jogador jogador = PersistenceHelper.findByPk(Jogador.class, getId());
-
-		jogadorEmFoco.setNome(jogador.getNome());
-		jogadorEmFoco.setUsuarioCorrespondente(jogador.getUsuarioCorrespondente());
-		PersistenceHelper.persiste(Atualizacao.criaAdicionarUsuario(getUsuarioLogado(), jogadorEmFoco
-				.getUsuarioCorrespondente()));
-		sendMail("no-reply@barragem.net", getUsuarioLogado().getNomeCompletoCapital(), jogadorEmFoco
-				.getUsuarioCorrespondente().getEmail(),
-				"barragem.net - você foi adicionado(a) à lista de jogadores do(a) " + getUsuarioLogado().getNome(),
-				MessageFormat.format(emailTemplateAdicaoJogador, getUsuarioLogado().getNomeCompletoCapital()));
-
-		PersistenceHelper.persiste(jogadorEmFoco);
+		getBo(JogadorBo.class).vinculaJogador(jogadorEmFoco);
 
 		addMensagemAtualizacaoComSucesso();
 	}

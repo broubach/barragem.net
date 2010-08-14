@@ -71,7 +71,7 @@ public class EventoBo extends BaseBo {
 	}
 
 	public void removeEvento(Rodada rodada, int index) {
-		removeEvento(rodada.getJogos().remove(getIndex()));
+		removeEvento(rodada.getJogos().remove(index));
 		PersistenceHelper.persiste(rodada);
 	}
 

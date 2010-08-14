@@ -284,4 +284,32 @@ public class PersistenceHelper {
 		}
 
 	}
+
+	public static void execute(String namedQuery, Object... paramValues) {
+		Session session = null;
+		Transaction t = null;
+		try {
+			session = HibernateUtil.getSession();
+			t = session.beginTransaction();
+			Query query = session.getNamedQuery("atualizaNomesJogadoresQuery");
+			if (paramValues != null) {
+				for (int i = 0; i < query.getNamedParameters().length; i++) {
+					query.setParameter(query.getNamedParameters()[i], paramValues[i]);
+				}
+			}
+			query.executeUpdate();
+			if (!isTest) {
+				t.commit();
+			}
+
+		} catch (HibernateException e) {
+			t.rollback();
+			throw new RuntimeException(e);
+		} finally {
+			if (session != null && !isTest) {
+				session.close();
+			}
+		}
+
+	}
 }

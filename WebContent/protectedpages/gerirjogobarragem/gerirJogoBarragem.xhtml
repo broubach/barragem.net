@@ -67,7 +67,7 @@
 
 				<div class="salvar">
 					<label class="campos_obrigatorios">#{msg.label_campos_marcados_sao_obrigatorios}</label>
-					<a4j:commandButton actionListener="#{gerirJogoBarragemBean.salvaJogo}" id="botaoSalvar" styleClass="submit" reRender="add-jogo,jogos" oncomplete="$j.fn.colorbox.resize();aplicarMascaras();"
+					<a4j:commandButton actionListener="#{gerirJogoBarragemBean.salvaJogo}" id="botaoSalvar" styleClass="submit" reRender="add-jogo,jogos,menu-contextual" oncomplete="$j.fn.colorbox.resize();aplicarMascaras();"
 						value="#{msg.label_salvar}" />
 					<br/><br/>
 				</div>
