@@ -167,7 +167,7 @@ public class Usuario extends BaseEntity implements Validatable, Cloneable, Atual
 	}
 
 	public String getNomeCompletoUpper() {
-		return new StringBuilder().append(nome).append(" ").append(sobrenome).toString().toUpperCase();
+		return new StringBuilder().append(nome.trim()).append(" ").append(sobrenome.trim()).toString().toUpperCase();
 	}
 
 	public String getNomeCompletoCapital() {

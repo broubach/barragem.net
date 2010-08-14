@@ -116,8 +116,11 @@ public class EditarPerfilBean extends BaseBean {
 			if (usuarioEmFoco.getPerfil() != null) {
 				usuarioEmFoco.getPerfil().setUsuario(usuarioEmFoco);
 			}
+			usuarioEmFoco.setNome(usuarioEmFoco.getNome().trim());
+			usuarioEmFoco.setSobrenome(usuarioEmFoco.getSobrenome().trim());
 			usuarioEmFoco.getJogadores().remove(usuarioEmFoco.getJogador());
 			usuarioEmFoco.getJogadores().add(usuarioEmFoco.getJogador());
+			usuarioEmFoco.getJogador().setNome(usuarioEmFoco.getNomeCompletoCapital());
 			getBo(JogadorBo.class).atualizaNomesDeTodosJogadores(usuarioEmFoco, usuarioEmFoco.getNomeCompletoCapital());
 			PersistenceHelper.persiste(usuarioEmFoco);
 			setUsuarioLogado(usuarioEmFoco);

@@ -127,6 +127,8 @@ public class RegistrarNovoUsuarioBean extends BaseBean {
 				calendar.set(Calendar.MONTH, aniversarioMes);
 				calendar.set(Calendar.YEAR, aniversarioAno);
 
+				usuarioEmFoco.setNome(usuarioEmFoco.getNome().trim());
+				usuarioEmFoco.setSobrenome(usuarioEmFoco.getSobrenome().trim());
 				usuarioEmFoco.setAniversario(calendar.getTime());
 				usuarioEmFoco.setSenha(encriptMd5(usuarioEmFoco.getSenha()));
 				usuarioEmFoco.setDataUltimoAcesso(new Date());
