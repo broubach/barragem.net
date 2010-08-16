@@ -34,7 +34,7 @@
 		<div class="input text">
 			<label for="perfil:dataInicioPratica">#{msg.label_quando_comecou_a_jogar_tenis}</label>
 			<h:inputText id="dataInicioPratica" value="#{editarPerfilBean.perfilEmFoco.dataInicioPratica}" styleClass="MMyyyy" size="10">
-				<f:convertDateTime pattern="MM/yyyy" timeZone="GMT-3"/>
+				<f:convertDateTime pattern="MM/yyyy" timeZone="GMT-3" locale="pt"/>
 			</h:inputText>
 			<span class="exemplo">#{msg.label_data_inicio_pratica_exemplo}</span>
 		</div>

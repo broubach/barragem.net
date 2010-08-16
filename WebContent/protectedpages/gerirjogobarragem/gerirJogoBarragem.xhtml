@@ -32,13 +32,13 @@
 					<div class="input text">
 						<label for="add-jogo:data" class="#{messageBean.errorMessages['data'] != null ? 'error' : '' }" >#{msg.label_data}*</label>
 						<h:inputText id="data" value="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.data}" styleClass="date">
-							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3"/>
+							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" locale="pt"/>
 						</h:inputText>
 					</div>
 					<div class="input text">
 						<label for="add-jogo:hora" class="#{messageBean.errorMessages['hora'] != null ? 'error' : '' }" >#{msg.label_hora}*</label>
 						<h:inputText id="hora" value="#{gerirJogoBarragemBean.mestreDetalhe.detalheEmFoco.hora}" styleClass="time">
-							<f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
+							<f:convertDateTime pattern="HH:mm" timeZone="GMT-3" locale="pt"/>
 						</h:inputText>
 					</div>
 					<div class="input">

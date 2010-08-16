@@ -108,10 +108,10 @@
 								#{msg.label_data}
 						    </f:facet>
 							<h:outputText value="#{item.data}" >
-								<f:convertDateTime pattern="dd MMM" timeZone="GMT-3"/>
+								<f:convertDateTime pattern="dd MMM" timeZone="GMT-3" locale="pt"/>
 							</h:outputText>&#160;
 							<h:outputText value="#{item.hora}" >
-								<f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
+								<f:convertDateTime pattern="HH:mm" timeZone="GMT-3" locale="pt"/>
 							</h:outputText>
 					    </h:column>
 					    <h:column headerClass="actions" rendered="#{gerirRodadaBean.rodadaEmFoco.inoperavel == false}">

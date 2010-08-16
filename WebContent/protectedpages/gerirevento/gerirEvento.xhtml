@@ -40,8 +40,8 @@
 				<f:facet name="header">
 					<h:outputText value="#{msg.label_data}" />
 				</f:facet>
-				<a4j:commandLink actionListener="#{gerirEventoBean.detalhaEvento}" reRender="add-evento" oncomplete="$j('.popup').click()"><h:outputText value="#{item.data}" ><f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3"/></h:outputText></a4j:commandLink>&#160;
-				<a4j:commandLink actionListener="#{gerirEventoBean.detalhaEvento}" reRender="add-evento" oncomplete="$j('.popup').click()"><h:outputText value="#{item.hora}" ><f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/></h:outputText></a4j:commandLink>
+				<a4j:commandLink actionListener="#{gerirEventoBean.detalhaEvento}" reRender="add-evento" oncomplete="$j('.popup').click()"><h:outputText value="#{item.data}" ><f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" locale="pt"/></h:outputText></a4j:commandLink>&#160;
+				<a4j:commandLink actionListener="#{gerirEventoBean.detalhaEvento}" reRender="add-evento" oncomplete="$j('.popup').click()"><h:outputText value="#{item.hora}" ><f:convertDateTime pattern="HH:mm" timeZone="GMT-3" locale="pt"/></h:outputText></a4j:commandLink>
 			</h:column>
 
 			<h:column>

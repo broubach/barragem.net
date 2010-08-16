@@ -80,7 +80,7 @@
 					<div class="input text">
 						<label for="dadosBasicos:aniversario">#{msg.label_aniversario}*</label>
 						<h:inputText id="aniversario" value="#{editarPerfilBean.usuarioEmFoco.aniversario}" styleClass="date" size="10">
-							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3"/>
+							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" locale="pt"/>
 						</h:inputText>
 					</div>
 				</div>
