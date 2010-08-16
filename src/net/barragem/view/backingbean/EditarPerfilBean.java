@@ -220,7 +220,11 @@ public class EditarPerfilBean extends BaseBean {
 			fotoEmFoco.setDado(item.getData());
 			fotoEmFoco.setData(new Date());
 			fotoEmFoco.setDono(usuarioEmFoco);
-			fotoEmFoco.setNome(item.getFileName());
+			if (item.getFileName().length() > 45) {
+				fotoEmFoco.setNome(item.getFileName().substring(item.getFileName().length() - 45));
+			} else {
+				fotoEmFoco.setNome(item.getFileName());
+			}
 			fotoEmFoco.setTamanho(item.getFileSize());
 			fotoEmFoco.setMime(item.getContentType());
 		}

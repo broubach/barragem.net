@@ -14,10 +14,10 @@
 			<h2>#{msg.label_bem_vindo}</h2> <c:if test="#{sessionScope['totalNovasMensagens'] != null and sessionScope['totalNovasMensagens'] > 0}"><span class="new_mail"><a href="#{request.contextPath}/protectedpages/recebermensagem/receberMensagem.xhtml"><img src="#{request.contextPath}/img/buttons/btn-newmail.png" height="16px" width="16px"/> #{msg.label_voce_possui} #{sessionScope['totalNovasMensagens']} #{msg.label_novas_mensagens}</a></span></c:if>
 		    <ui:include src="componentes/mensagem-sucesso.xhtml"/>
 			<br/>
-			<c:if test="#{empty sessionScope['atualizacoes']}">
+			<c:if test="#{empty sessionScope['atualizacoes'].pagina}">
 				<p>Que tal comecar pesquisando por <a href="#{request.contextPath}/protectedpages/gerirjogador/gerirJogador.xhtml">jogadores</a> ou pelas <a href="#{request.contextPath}/protectedpages/gerirbarragem/gerirBarragem.xhtml">barragens</a> ativas?</p>
 			</c:if>
-			<c:if test="#{!empty sessionScope['atualizacoes']}">
+			<c:if test="#{!empty sessionScope['atualizacoes'].pagina}">
 		        <ui:include src="componentes/atualizacoes.xhtml"/>
 	        </c:if>
 		</div>

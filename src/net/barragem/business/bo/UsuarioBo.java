@@ -26,13 +26,15 @@ public class UsuarioBo extends BaseBo {
 			}
 		}
 
-		List<Perfil> loadedPerfis = PersistenceHelper.findByNamedQuery("perfilFetchFotoQuery", usuarioPorIdPerfil
-				.keySet());
+		if (!usuarioPorIdPerfil.isEmpty()) {
+			List<Perfil> loadedPerfis = PersistenceHelper.findByNamedQuery("perfilFetchFotoQuery", usuarioPorIdPerfil
+					.keySet());
 
-		Usuario usuario = null;
-		for (Perfil loadedPerfil : loadedPerfis) {
-			usuario = usuarioPorIdPerfil.get(loadedPerfil.getId());
-			usuario.setPerfil(loadedPerfil);
+			Usuario usuario = null;
+			for (Perfil loadedPerfil : loadedPerfis) {
+				usuario = usuarioPorIdPerfil.get(loadedPerfil.getId());
+				usuario.setPerfil(loadedPerfil);
+			}
 		}
 	}
 }
