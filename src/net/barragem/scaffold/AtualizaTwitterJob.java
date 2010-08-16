@@ -65,7 +65,8 @@ public class AtualizaTwitterJob implements Job {
 
 	private String extraiTwitt(String response) {
 		int beginIndex = response.indexOf("\"text\":\"");
-		String twitt = response.substring(beginIndex + "\"text\":\"".length(), response.length() - 5);
+		String twitt = response.substring(beginIndex + "\"text\":\"".length(), response.indexOf("\"", beginIndex
+				+ "\"text\":\"".length()));
 		return twitt;
 	}
 
