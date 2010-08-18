@@ -2,7 +2,7 @@
 	  xmlns:c="http://java.sun.com/jstl/core"
 	  xmlns:h="http://java.sun.com/jsf/html">
 
-	<h:panelGroup styleClass="mensagem-erro" display="block" rendered="#{! empty messageBean.errorMessages}">
+	<h:panelGroup styleClass="mensagem-erro" layout="block" rendered="#{! empty messageBean.errorMessages}">
 		<c:forEach var="item" items="#{messageBean.errorMessages}">
 			<c:if test="#{item.value.summary != '1'}">
 				<span>#{item.value.summary}</span>

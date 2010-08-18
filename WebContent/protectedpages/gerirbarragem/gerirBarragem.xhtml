@@ -27,7 +27,7 @@
 			        </ul>
 				</h:panelGroup>
 
-		        <h:panelGroup styleClass="mensagem-erro" display="block" rendered="#{! empty messageBean.errorMessages}">
+		        <h:panelGroup styleClass="mensagem-erro" layout="block" rendered="#{! empty messageBean.errorMessages}">
 			        <c:forEach var="item" items="#{messageBean.errorMessages}">
 	    	    		<span>#{item.value.summary}</span>
 			        </c:forEach>
@@ -59,10 +59,10 @@
 						<ui:param name="barragens" value="#{gerirBarragemBean.barragensQueParticipo}"/>
 						<ui:param name="paginavel" value="#{gerirBarragemBean.paginacaoBarragens}"/>
 				    </ui:include>
-					<h:panelGroup display="block" rendered="#{not empty gerirBarragemBean.paginacaoBarragens.sourceList}" styleClass="texto_informativo">
+					<h:panelGroup layout="block" rendered="#{not empty gerirBarragemBean.paginacaoBarragens.sourceList}" styleClass="texto_informativo">
 						#{msg.label_total_barragens}: #{fn:length(gerirBarragemBean.paginacaoBarragens.sourceList)}
 					</h:panelGroup>
-					<h:panelGroup display="block" rendered="#{empty gerirBarragemBean.paginacaoBarragens.sourceList}" styleClass="texto_informativo">
+					<h:panelGroup layout="block" rendered="#{empty gerirBarragemBean.paginacaoBarragens.sourceList}" styleClass="texto_informativo">
 						#{msg.label_aviso_lista_barragem_vazia} :)
 					</h:panelGroup>
 			    </fieldset>

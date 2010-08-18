@@ -58,7 +58,7 @@
 			    <fieldset id="jogos">
 			        <legend>#{msg.label_jogos}</legend>
 	
-					<h:panelGroup styleClass="btn-novo" display="block" rendered="#{gerirRodadaBean.rodadaEmFoco.inoperavel == false}">
+					<h:panelGroup styleClass="btn-novo" layout="block" rendered="#{gerirRodadaBean.rodadaEmFoco.inoperavel == false}">
 						<a4j:commandLink actionListener="#{gerirRodadaBean.adicionaJogo}" reRender="add-jogo" oncomplete="if (#{gerirRodadaBean.possuiSaldoParaUmJogo}) {$j('.popup').click();} else {$j('.mensagem-erro').show();}" rendered="#{gerirRodadaBean.rodadaEmFoco.inoperavel == false}">
 							<span>#{msg.label_adicionar_jogo}</span>
 						</a4j:commandLink>

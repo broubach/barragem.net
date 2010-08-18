@@ -620,6 +620,10 @@ fieldset#parciais {
 	height: 25px;
 	float: left;
 }
+#gerirJogador\:tabelaJogadores .btn-novo-relative {
+	float: right;
+	margin-right: 4px;
+}
 
 .btn-novo a,.btn-novo-relative a {
 	text-decoration: none;
