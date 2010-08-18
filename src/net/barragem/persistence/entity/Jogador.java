@@ -6,6 +6,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import net.barragem.scaffold.ReflectionHelper;
 
@@ -15,7 +16,7 @@ import net.barragem.scaffold.ReflectionHelper;
 		@NamedQuery(name = "jogadoresPorUsuarioDonoQuery", query = "from Jogador where usuarioDono.id=:idUsuarioDono"),
 		@NamedQuery(name = "pesquisaJogadorQuery", query = "select u.jogador from Usuario u left outer join u.perfil p where upper(u.nome) like :p or upper(u.sobrenome) like :p or upper(p.clubeMaisFrequentadoNome) like :p or upper(p.clubeMaisFrequentadoCidade) like :p or upper(p.professorNome) like :p or upper(p.raquete) like :p"),
 		@NamedQuery(name = "pesquisaJogadorForaDaListaQuery", query = "select u.jogador from Usuario u left outer join u.perfil p where (upper(u.jogador.nome) like :p or upper(u.nome) like :p or upper(u.sobrenome) like :p or upper(p.clubeMaisFrequentadoNome) like :p or upper(p.clubeMaisFrequentadoCidade) like :p or upper(p.professorNome) like :p or upper(p.raquete) like :p) and u <> :u and u not in (select uc from Jogador j join j.usuarioCorrespondente uc where j.usuarioDono = :u)"),
-		@NamedQuery(name = "pesquisaJogadorDeUsuarioQuery", query = "select j from Usuario u join u.jogadores j left outer join j.usuarioCorrespondente uc left outer join uc.perfil p where (upper(uc.nome) like :p1 or upper(uc.sobrenome) like :p1 or upper(p.clubeMaisFrequentadoNome) like :p1 or upper(p.clubeMaisFrequentadoCidade) like :p1 or upper(p.professorNome) like :p1 or upper(p.raquete) like :p1 or upper(j.nome) like :p1) and u = :p2"),
+		@NamedQuery(name = "pesquisaJogadorDeUsuarioQuery", query = "select j from Usuario u join u.jogadores j left outer join j.usuarioCorrespondente uc left outer join uc.perfil p where (upper(uc.nome) like :p1 or upper(uc.sobrenome) like :p1 or upper(p.clubeMaisFrequentadoNome) like :p1 or upper(p.clubeMaisFrequentadoCidade) like :p1 or upper(p.professorNome) like :p1 or upper(p.raquete) like :p1 or upper(j.nome) like :p1) and u = :p2 and u.jogador <> j"),
 		@NamedQuery(name = "atualizaNomesJogadoresQuery", query = "UPDATE Jogador j SET j.nome = :nome WHERE j.usuarioCorrespondente.id = :id") })
 @Table(name = "jogador")
 public class Jogador extends BaseEntity implements Atualizavel {
@@ -27,6 +28,9 @@ public class Jogador extends BaseEntity implements Atualizavel {
 
 	@ManyToOne
 	private Usuario usuarioDono;
+
+	@Transient
+	private Boolean jahAdicionado;
 
 	public String getNome() {
 		return nome;
@@ -52,12 +56,28 @@ public class Jogador extends BaseEntity implements Atualizavel {
 		this.usuarioDono = usuarioDono;
 	}
 
+	public Boolean getJahAdicionado() {
+		return jahAdicionado;
+	}
+
+	public void setJahAdicionado(Boolean jahAdicionado) {
+		this.jahAdicionado = jahAdicionado;
+	}
+
+	@Override
+	public String getTextoAtualizacao() {
+		return ReflectionHelper.getTextoAtualizacao(this);
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.trim().toUpperCase().hashCode());
+		result = prime
+				* result
+				+ ((usuarioCorrespondente == null || usuarioCorrespondente.getId() == null) ? 0 : usuarioCorrespondente
+						.getId().hashCode());
 		return result;
 	}
 
@@ -70,21 +90,19 @@ public class Jogador extends BaseEntity implements Atualizavel {
 		if (getClass() != obj.getClass())
 			return false;
 		Jogador other = (Jogador) obj;
-		if (getId() == null) {
-			if (other.getId() != null)
-				return false;
-		} else if (!getId().equals(other.getId()))
-			return false;
 		if (nome == null) {
 			if (other.nome != null)
 				return false;
-		} else if (!nome.equals(other.nome))
+		} else if (!nome.equalsIgnoreCase(other.nome))
+			return false;
+		if (usuarioCorrespondente != null && usuarioCorrespondente.getId() == null) {
+			if (other.usuarioCorrespondente != null && other.usuarioCorrespondente.getId() != null)
+				return false;
+		} else if (usuarioCorrespondente != null
+				&& other.usuarioCorrespondente != null
+				&& !usuarioCorrespondente.getId().equals(
+						other.usuarioCorrespondente != null ? other.usuarioCorrespondente.getId() : null))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String getTextoAtualizacao() {
-		return ReflectionHelper.getTextoAtualizacao(this);
 	}
 }

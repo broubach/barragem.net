@@ -1,14 +1,16 @@
 package net.barragem.view.backingbean;
 
-import java.text.MessageFormat;
 import java.util.List;
 
 import javax.faces.event.ActionEvent;
 
-import net.barragem.persistence.entity.Atualizacao;
+import net.barragem.business.bo.JogadorBo;
+import net.barragem.business.bo.UsuarioBo;
 import net.barragem.persistence.entity.Barragem;
 import net.barragem.persistence.entity.Jogador;
 import net.barragem.persistence.entity.Usuario;
+import net.barragem.scaffold.Paginavel;
+import net.barragem.scaffold.PaginavelSampleImpl;
 import net.barragem.scaffold.PersistenceHelper;
 
 import org.ajax4jsf.model.KeepAlive;
@@ -17,6 +19,7 @@ import org.ajax4jsf.model.KeepAlive;
 public class ExibirPerfilBean extends BaseBean {
 
 	private Usuario usuarioEmFoco;
+	private Paginavel<Jogador> paginacaoJogador;
 
 	public Usuario getUsuarioEmFoco() {
 		return usuarioEmFoco;
@@ -26,23 +29,25 @@ public class ExibirPerfilBean extends BaseBean {
 		this.usuarioEmFoco = usuarioEmFoco;
 	}
 
+	public Paginavel<Jogador> getPaginacaoJogador() {
+		return paginacaoJogador;
+	}
+
+	public void setPaginacaoJogador(Paginavel<Jogador> paginacaoJogador) {
+		this.paginacaoJogador = paginacaoJogador;
+	}
+
 	public boolean getUsuarioJahAdicionado() {
 		return getUsuarioLogado().hasJogador(usuarioEmFoco);
 	}
 
 	public void adicionaUsuario(ActionEvent e) {
-		Jogador novoJogador = new Jogador();
-		novoJogador.setNome(usuarioEmFoco.getNomeCompletoCapital());
-		novoJogador.setUsuarioCorrespondente(usuarioEmFoco);
-		novoJogador.setUsuarioDono(getUsuarioLogado());
-		getUsuarioLogado().getJogadores().add(novoJogador);
-		PersistenceHelper.persiste(getUsuarioLogado());
-		PersistenceHelper.persiste(Atualizacao.criaAdicionarUsuario(getUsuarioLogado(), usuarioEmFoco));
-		addMensagemAtualizacaoComSucesso();
-
-		sendMail("no-reply@barragem.net", getUsuarioLogado().getNomeCompletoCapital(), usuarioEmFoco.getEmail(),
-				"barragem.net - você foi adicionado(a) à lista de jogadores do(a) " + getUsuarioLogado().getNome(),
-				MessageFormat.format(emailTemplateAdicaoJogador, getUsuarioLogado().getNomeCompletoCapital()));
+		if (!getUsuarioLogado().jahPossuiJogador(usuarioEmFoco.getNomeCompletoCapital())) {
+			getBo(JogadorBo.class).adicionaUsuario(usuarioEmFoco);
+			addMensagemAtualizacaoComSucesso();
+		} else {
+			messages.addErrorMessage(null, "label_jogador_com_mesmo_nome_jah_existente");
+		}
 	}
 
 	public void exibePerfil(ActionEvent e) {
@@ -54,6 +59,9 @@ public class ExibirPerfilBean extends BaseBean {
 		usuarioEmFoco = usuario;
 		PersistenceHelper.initialize("jogadores", usuarioEmFoco);
 		PersistenceHelper.initialize("barragens", usuarioEmFoco);
+		getBo(UsuarioBo.class).carregaFotosJogadores(usuarioEmFoco.getJogadores());
+		paginacaoJogador = new PaginavelSampleImpl<Jogador>(usuarioEmFoco.getJogadoresSemOUsuarioCorrespondente(),
+				null, 6);
 	}
 
 	public void exibePainelBarragem(ActionEvent e) {

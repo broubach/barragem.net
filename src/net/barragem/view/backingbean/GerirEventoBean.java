@@ -86,9 +86,9 @@ public class GerirEventoBean extends BaseBean {
 	}
 
 	public void removeEvento(ActionEvent e) {
-		Evento focus = getBo(EventoBo.class).removeEvento(paginacaoEventos, getIndex());
+		getBo(EventoBo.class).removeEvento(paginacaoEventos, getIndex());
 		addMensagemAtualizacaoComSucesso();
-		paginacaoEventos = new PaginavelSampleImpl<Evento>(obtemMeusEventos(), focus);
+		paginacaoEventos = new PaginavelSampleImpl<Evento>(obtemMeusEventos(), paginacaoEventos.getPaginaAtual(), null);
 	}
 
 	public void salvaEvento(ActionEvent e) {

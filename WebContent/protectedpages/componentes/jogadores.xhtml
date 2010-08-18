@@ -7,53 +7,64 @@
 	xmlns:rich="http://richfaces.org/rich"
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
-	<div class="exibirPainelBarragemRanking">
-	    <h:dataTable id="tabelaJogadores" styleClass="exibirPainelBarragemRankingTable" rowClasses="exibirPainelBarragemRankingBodyBackground,exibirPainelBarragemRankingBodyBackgroundAlt" columnClasses="exibirPainelBarragemRankingBody,exibirPainelBarragem-ranking-nowrap,exibirPainelBarragemRankingBody" value="#{jogadores}" var="item" headerClass="exibirPainelBarragemRankingTableHead">
-			<f:facet name="header">
-				#{msg.label_jogadores}
-			</f:facet>
-		    <h:column>
-		        <h:graphicImage value="/protectedpages/exibirimagem/exibirImagem.do?hash=#{item.usuarioCorrespondente.perfil.hash}" styleClass="foto-perfil-small" 
-		        	rendered="#{item.usuarioCorrespondente != null and item.usuarioCorrespondente.perfil != null and item.usuarioCorrespondente.perfil.hash != null}"/>
-		        <h:graphicImage value="/protectedpages/exibirimagem/exibirImagem.do?hash=default" styleClass="foto-perfil-small" 
-		        	rendered="#{item.usuarioCorrespondente != null and (item.usuarioCorrespondente.perfil == null or item.usuarioCorrespondente.perfil.hash == null)}"/>
-		    </h:column>
-		    <h:column>
-				<h:commandLink action="exibirPerfil" actionListener="#{exibirPerfilBean.exibePerfil}" rendered="#{item.usuarioCorrespondente != null and !podeVincularJogadores}" onclick="">#{item.nome}<f:param name="id" value="#{item.usuarioCorrespondente.id}"/></h:commandLink>
-				<h:commandLink actionListener="#{vincularJogadorBean.vinculaJogador}" rendered="#{item.usuarioCorrespondente != null and podeVincularJogadores}" onclick="return confirm('#{msg.label_confirma_vincular1} #{vincularJogadorBean.jogadorEmFoco.nome}#{msg.label_confirma_vincular2} #{item.nome}?');">
-					#{item.nome}
-					<f:param name="id" value="#{item.id}"/>
-				</h:commandLink>
-				<div class="float-left"><h:outputText value="#{item.nome}" rendered="#{item.usuarioCorrespondente == null}" /></div>
-				<div class="float-right"> 
-					<a4j:commandLink actionListener="#{gerirJogadorBean.preparaEdicao}" reRender="editar-jogador" oncomplete="$j('.popupRenomearJogador').click();"
-						rendered="#{item.usuarioCorrespondente == null and podeEditarJogadores}">
-						<img src="#{request.contextPath}/img/buttons/btn-editar.png" alt="#{msg.label_editar}" title="#{msg.label_editar}" width="18px" height="18px"/>
-					</a4j:commandLink>
-				</div>
-		    </h:column>
-			<h:column rendered="#{podeEditarJogadores}">
-				<h:panelGroup display="block" rendered="#{item.usuarioCorrespondente == null or sessionScope['usuario'].id != item.usuarioCorrespondente.id}" styleClass="botao-jogadores">
-					<h:commandLink onclick="return confirm('#{msg.label_confirma_exclusao}');" actionListener="#{gerirJogadorBean.remove}" rendered="#{item.usuarioCorrespondente == null or sessionScope['usuario'].id != item.usuarioCorrespondente.id}"><img src="#{request.contextPath}/img/buttons/btn-deletar.png" alt="#{msg.label_excluir}" title="#{msg.label_excluir}" width="18px" height="18px"/></h:commandLink>&#160;
-				</h:panelGroup>
-				<h:panelGroup display="block" rendered="#{item.usuarioCorrespondente != null}" styleClass="botao-jogadores">
-					<h:commandLink action="exibirPerfil" actionListener="#{exibirPerfilBean.exibePerfil}" rendered="#{item.usuarioCorrespondente != null}"><f:param name="id" value="#{item.usuarioCorrespondente.id}"/><img src="#{request.contextPath}/img/buttons/btn-view.png" alt="#{msg.label_visualizar}" title="#{msg.label_visualizar}" width="16px" height="16px"/></h:commandLink>
-				</h:panelGroup>
-				<h:panelGroup display="block" rendered="#{item.usuarioCorrespondente == null}" styleClass="botao-jogadores">
-					<a4j:commandLink actionListener="#{gerirJogadorBean.preparaVinculo}" reRender="vincular-jogador" oncomplete="$j('.popupVincularJogador').click();" rendered="#{item.usuarioCorrespondente == null}"><img src="#{request.contextPath}/img/buttons/btn-link.png" alt="#{msg.label_vincular_jogador_a_usuario_existente}" title="#{msg.label_vincular_jogador_a_usuario_existente}"/></a4j:commandLink>
-				</h:panelGroup>
-				<h:panelGroup display="block" rendered="#{item.usuarioCorrespondente != null}" styleClass="botao-jogadores">
-					<h:commandLink action="exibirMensagens" actionListener="#{exibirMensagensBean.exibeMensagens}" rendered="#{item.usuarioCorrespondente != null}"><f:param name="id" value="#{item.usuarioCorrespondente.id}"/><img src="#{request.contextPath}/img/buttons/btn-enviar.png" alt="#{msg.label_mensagens}" title="#{msg.label_mensagens}" width="16px" height="16px"/></h:commandLink>
-				</h:panelGroup>
-			</h:column>
-			<f:facet name="footer">
-				<h:commandLink actionListener="#{gerirJogadorBean.limpaFiltro}" rendered="#{gerirJogadorBean.pesquisaSalva != null}" styleClass="linkLimpaFiltro">#{msg.label_limpar_filtro_pesquisa}</h:commandLink>
-			</f:facet>
-	    </h:dataTable>
+	<h:panelGroup id="tabelaJogadores" styleClass="exibirPainelBarragemRanking" display="block">
+		<table class="exibirPainelBarragemRankingTable">
+		<thead><tr><th class="exibirPainelBarragemRankingTableHead" colspan="3" scope="colgroup">#{msg.label_jogadores}</th></tr></thead>
+		<tbody>
+		<c:forEach items="#{jogadores}" var="item" varStatus="status">
+			<tr class="#{status.index % 2 ==0 ? 'exibirPainelBarragemRankingBodyBackground' : 'exibirPainelBarragemRankingBodyBackgroundAlt'}">
+				<td class="exibirPainelBarragemRankingBody">
+			        <h:graphicImage value="/protectedpages/exibirimagem/exibirImagem.do?hash=#{item.usuarioCorrespondente.perfil.hash}" styleClass="foto-perfil-small" 
+			        	rendered="#{item.usuarioCorrespondente != null and item.usuarioCorrespondente.perfil != null and item.usuarioCorrespondente.perfil.hash != null}"/>
+			        <h:graphicImage value="/protectedpages/exibirimagem/exibirImagem.do?hash=default" styleClass="foto-perfil-small" 
+			        	rendered="#{item.usuarioCorrespondente != null and (item.usuarioCorrespondente.perfil == null or item.usuarioCorrespondente.perfil.hash == null)}"/>
+				</td>
+				<td class="exibirPainelBarragem-ranking-nowrap">
+					<h:commandLink action="exibirPerfil" actionListener="#{exibirPerfilBean.exibePerfil}" rendered="#{item.usuarioCorrespondente != null and !podeVincularJogadores}" onclick="">#{item.nome}<f:param name="id" value="#{item.usuarioCorrespondente.id}"/></h:commandLink>
+					<h:commandLink actionListener="#{vincularJogadorBean.vinculaJogador}" rendered="#{item.usuarioCorrespondente != null and podeVincularJogadores}" onclick="return confirm('#{msg.label_confirma_vincular1} #{vincularJogadorBean.jogadorEmFoco.nome}#{msg.label_confirma_vincular2} #{item.nome}?');">
+						#{item.nome}
+						<f:param name="id" value="#{item.id}"/>
+					</h:commandLink>
+					<div class="float-left"><h:outputText value="#{item.nome}" rendered="#{item.usuarioCorrespondente == null}" /></div>
+					<div class="float-right"> 
+						<a4j:commandLink actionListener="#{gerirJogadorBean.preparaEdicao}" reRender="editar-jogador" oncomplete="$j('.popupRenomearJogador').click();"
+							rendered="#{item.usuarioCorrespondente == null and podeEditarJogadores}">
+							<img src="#{request.contextPath}/img/buttons/btn-editar.png" alt="#{msg.label_editar}" title="#{msg.label_editar}" width="18px" height="18px"/>
+							<f:param name="index" value="#{status.index}"/>
+						</a4j:commandLink>
+						<h:commandLink actionListener="#{pesquisarBean.adicionaJogador}" rendered="#{podeAdicionarJogadores and !item.jahAdicionado}">
+							adiciona jogador
+							<f:param name="index" value="#{status.index}"/>
+						</h:commandLink>
+					</div>
+				</td>
+				<td class="exibirPainelBarragemRankingBody">
+					<c:if test="#{podeEditarJogadores}">
+						<h:panelGroup display="block" rendered="#{item.usuarioCorrespondente == null or sessionScope['usuario'].id != item.usuarioCorrespondente.id}" styleClass="botao-jogadores">
+							<h:commandLink onclick="return confirm('#{msg.label_confirma_exclusao}');" actionListener="#{gerirJogadorBean.remove}" rendered="#{item.usuarioCorrespondente == null or sessionScope['usuario'].id != item.usuarioCorrespondente.id}"><img src="#{request.contextPath}/img/buttons/btn-deletar.png" alt="#{msg.label_excluir}" title="#{msg.label_excluir}" width="18px" height="18px"/><f:param name="index" value="#{status.index}"/></h:commandLink>&#160;
+						</h:panelGroup>
+						<h:panelGroup display="block" rendered="#{item.usuarioCorrespondente != null}" styleClass="botao-jogadores">
+							<h:commandLink action="exibirPerfil" actionListener="#{exibirPerfilBean.exibePerfil}" rendered="#{item.usuarioCorrespondente != null}"><f:param name="id" value="#{item.usuarioCorrespondente.id}"/><img src="#{request.contextPath}/img/buttons/btn-view.png" alt="#{msg.label_visualizar}" title="#{msg.label_visualizar}" width="16px" height="16px"/></h:commandLink>
+						</h:panelGroup>
+						<h:panelGroup display="block" rendered="#{item.usuarioCorrespondente == null}" styleClass="botao-jogadores">
+							<a4j:commandLink actionListener="#{gerirJogadorBean.preparaVinculo}" reRender="vincular-jogador" oncomplete="$j('.popupVincularJogador').click();" rendered="#{item.usuarioCorrespondente == null}"><img src="#{request.contextPath}/img/buttons/btn-link.png" alt="#{msg.label_vincular_jogador_a_usuario_existente}" title="#{msg.label_vincular_jogador_a_usuario_existente}"/><f:param name="index" value="#{status.index}"/></a4j:commandLink>
+						</h:panelGroup>
+						<h:panelGroup display="block" rendered="#{item.usuarioCorrespondente != null}" styleClass="botao-jogadores">
+							<h:commandLink action="exibirMensagens" actionListener="#{exibirMensagensBean.exibeMensagens}" rendered="#{item.usuarioCorrespondente != null}"><f:param name="id" value="#{item.usuarioCorrespondente.id}"/><img src="#{request.contextPath}/img/buttons/btn-enviar.png" alt="#{msg.label_mensagens}" title="#{msg.label_mensagens}" width="16px" height="16px"/></h:commandLink>
+						</h:panelGroup>
+					</c:if>
+				</td>
+			</tr>
+		</c:forEach>
+		</tbody>
+		<tfoot>
+			<tr><td colspan="3"><h:commandLink actionListener="#{gerirJogadorBean.limpaFiltro}" rendered="#{gerirJogadorBean.pesquisaSalva != null}" styleClass="linkLimpaFiltro">#{msg.label_limpar_filtro_pesquisa}</h:commandLink></td></tr>
+		</tfoot>
+		</table>
 	    <ui:include src="paginacao.xhtml">
 	    	<ui:param name="paginavel" value="#{paginavel}"/>
-	    	<ui:param name="toReRender" value="#{toReRender}"/>
+	    	<ui:param name="toReRender" value="tabelaJogadores"/>
 	    </ui:include>
-	</div>
+	</h:panelGroup>
 
 </html>

@@ -4,7 +4,14 @@
 
 	<h:panelGroup styleClass="mensagem-erro" display="block" rendered="#{! empty messageBean.errorMessages}">
 		<c:forEach var="item" items="#{messageBean.errorMessages}">
-			<span>#{item.value.summary}</span>
+			<c:if test="#{item.value.summary != '1'}">
+				<span>#{item.value.summary}</span>
+			</c:if>
+		</c:forEach>
+		<c:forEach var="item" items="#{messageBean.errorMessages}">
+			<c:if test="#{item.value.summary == '1'}">
+   	    		<span>#{msg.label_preencha_os_campos_obrigatorios}</span>
+			</c:if>
 		</c:forEach>
 	</h:panelGroup>
 </html>

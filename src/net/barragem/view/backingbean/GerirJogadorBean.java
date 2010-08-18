@@ -5,11 +5,12 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.faces.event.ActionEvent;
-import javax.faces.model.ListDataModel;
 
+import net.barragem.business.bo.JogadorBo;
+import net.barragem.business.bo.UsuarioBo;
 import net.barragem.persistence.entity.Jogador;
 import net.barragem.persistence.entity.Usuario;
-import net.barragem.scaffold.JogadoresComCorrespondenciaPrimeiroComparator;
+import net.barragem.scaffold.JogadoresMaisRelevantesPrimeiroComparator;
 import net.barragem.scaffold.Paginavel;
 import net.barragem.scaffold.PaginavelSampleImpl;
 import net.barragem.scaffold.PersistenceHelper;
@@ -21,21 +22,31 @@ import org.hibernate.exception.ConstraintViolationException;
 public class GerirJogadorBean extends BaseBean {
 	private Usuario usuarioEmFoco;
 	private Jogador jogadorEmFoco;
+	private String nome;
 	private String novoNome;
-	private String jogadorNome;
 	private String pesquisa;
 	private String pesquisaSalva;
 	private Integer tipoPesquisa = new Integer(1);
-	private ListDataModel jogadores;
 	private Paginavel<Jogador> paginacaoJogadores;
 
 	public GerirJogadorBean() {
+		prepara(null);
+	}
+
+	public void volta(ActionEvent e) {
+		prepara(null);
+	}
+
+	public void prepara(Jogador foco) {
 		usuarioEmFoco = getUsuarioLogado();
+
 		List<Jogador> jogadoresSemUsuarioLogado = new ArrayList<Jogador>(usuarioEmFoco.getJogadores());
 		jogadoresSemUsuarioLogado.remove(usuarioEmFoco.getJogador());
-		Collections.sort(jogadoresSemUsuarioLogado, new JogadoresComCorrespondenciaPrimeiroComparator());
-		paginacaoJogadores = new PaginavelSampleImpl<Jogador>(jogadoresSemUsuarioLogado);
-		jogadores = new ListDataModel(paginacaoJogadores.getPagina());
+		getBo(UsuarioBo.class).carregaFotosJogadores(jogadoresSemUsuarioLogado);
+		Collections.sort(jogadoresSemUsuarioLogado, new JogadoresMaisRelevantesPrimeiroComparator());
+
+		paginacaoJogadores = new PaginavelSampleImpl<Jogador>(jogadoresSemUsuarioLogado, foco,
+				paginacaoJogadores != null ? paginacaoJogadores.getPaginaAtual() : null, null);
 	}
 
 	public Paginavel<Jogador> getPaginacaoJogadores() {
@@ -55,19 +66,19 @@ public class GerirJogadorBean extends BaseBean {
 	}
 
 	public String getJogadorNome() {
-		return jogadorNome;
-	}
-
-	public void setJogadorNome(String jogadorNome) {
-		this.jogadorNome = jogadorNome;
-	}
-
-	public String getNovoNome() {
 		return novoNome;
 	}
 
+	public void setJogadorNome(String jogadorNome) {
+		this.novoNome = jogadorNome;
+	}
+
+	public String getNovoNome() {
+		return nome;
+	}
+
 	public void setNovoNome(String novoNome) {
-		this.novoNome = novoNome;
+		this.nome = novoNome;
 	}
 
 	public Jogador getJogadorEmFoco() {
@@ -102,33 +113,14 @@ public class GerirJogadorBean extends BaseBean {
 		this.tipoPesquisa = tipoPesquisa;
 	}
 
-	public void setJogadores(ListDataModel jogadores) {
-		this.jogadores = jogadores;
-	}
-
-	public ListDataModel getJogadores() {
-		return jogadores;
-	}
-
 	public void adicionaJogador(ActionEvent e) {
-		if (jogadorNome != null && jogadorNome.length() > 0) {
-			Jogador jogador = new Jogador();
-			jogador.setNome(jogadorNome);
-			jogador.setUsuarioDono(usuarioEmFoco);
-			usuarioEmFoco.getJogadores().add(jogador);
+		if (validaNovo()) {
+			Jogador novoJogador = getBo(JogadorBo.class).adicionaJogador(novoNome);
 
-			PersistenceHelper.persiste(usuarioEmFoco);
-
-			List<Jogador> jogadoresSemUsuarioLogado = new ArrayList<Jogador>(usuarioEmFoco.getJogadores());
-			jogadoresSemUsuarioLogado.remove(usuarioEmFoco.getJogador());
-			Collections.sort(jogadoresSemUsuarioLogado, new JogadoresComCorrespondenciaPrimeiroComparator());
-			paginacaoJogadores = new PaginavelSampleImpl<Jogador>(jogadoresSemUsuarioLogado, jogador);
-			jogadores = new ListDataModel(paginacaoJogadores.getPagina());
+			prepara(novoJogador);
 
 			addMensagemAtualizacaoComSucesso();
-			jogadorNome = null;
-		} else {
-			messages.addErrorMessage(null, "label_digite_o_nome_do_novo_jogador");
+			novoNome = null;
 		}
 	}
 
@@ -149,45 +141,55 @@ public class GerirJogadorBean extends BaseBean {
 		if (resultado.isEmpty()) {
 			messages.addInfoMessage("label_nenhum_resultado_encontrado", "label_nenhum_resultado_encontrado");
 		} else {
-			Collections.sort(resultado, new JogadoresComCorrespondenciaPrimeiroComparator());
+			getBo(UsuarioBo.class).carregaFotosJogadores(resultado);
+			Collections.sort(resultado, new JogadoresMaisRelevantesPrimeiroComparator());
 			paginacaoJogadores = new PaginavelSampleImpl<Jogador>(resultado);
-			jogadores = new ListDataModel(paginacaoJogadores.getPagina());
 			pesquisaSalva = pesquisa;
 		}
 		return "";
 	}
 
 	public void preparaEdicao(ActionEvent e) {
-		jogadorEmFoco = (Jogador) getJogadores().getRowData();
-		novoNome = jogadorEmFoco.getNome();
+		jogadorEmFoco = (Jogador) paginacaoJogadores.getPagina().get(getIndex());
+		nome = jogadorEmFoco.getNome();
 	}
 
 	public void salvaJogador(ActionEvent e) {
-		if (valida()) {
-			jogadorEmFoco.setNome(novoNome);
+		if (validaEdicao()) {
+			jogadorEmFoco.setNome(nome);
 			PersistenceHelper.persiste(usuarioEmFoco);
 			addMensagemAtualizacaoComSucesso();
 		}
 	}
 
-	private boolean valida() {
+	private boolean validaNovo() {
 		if (novoNome == null || novoNome.isEmpty()) {
-			messages.addErrorMessage("nome", "label_true");
-			return false;
+			messages.addErrorMessage(null, "label_digite_o_nome_do_novo_jogador");
+		} else if (getUsuarioLogado().jahPossuiJogador(novoNome)) {
+			messages.addErrorMessage(null, "label_jogador_com_mesmo_nome_jah_existente");
 		}
-		return true;
+		return messages.getErrorMessages().isEmpty();
+	}
+
+	private boolean validaEdicao() {
+		if (nome == null || nome.isEmpty()) {
+			messages.addErrorMessage("nome", "label_true");
+		} else if (getUsuarioLogado().jahPossuiJogador(nome)) {
+			messages.addErrorMessage(null, "label_jogador_com_mesmo_nome_jah_existente");
+		}
+		return messages.getErrorMessages().isEmpty();
 	}
 
 	public void remove(ActionEvent e) {
 		try {
-			Jogador jogador = (Jogador) getJogadores().getRowData();
+			Jogador jogador = (Jogador) paginacaoJogadores.getPagina().get(getIndex());
 			PersistenceHelper.remove(jogador);
 
 			usuarioEmFoco.getJogadores().remove(jogador);
 			PersistenceHelper.persiste(usuarioEmFoco);
 
-			paginacaoJogadores.getSourceList().remove(jogador);
-			paginacaoJogadores.pesquisaPaginavel(paginacaoJogadores.getPaginaAtual());
+			prepara(null);
+
 			addMensagemAtualizacaoComSucesso();
 		} catch (ConstraintViolationException e1) {
 			messages.addErrorMessage(null,
@@ -198,14 +200,11 @@ public class GerirJogadorBean extends BaseBean {
 	public void limpaFiltro(ActionEvent e) {
 		pesquisaSalva = null;
 
-		List<Jogador> jogadoresSemUsuarioLogado = new ArrayList<Jogador>(usuarioEmFoco.getJogadores());
-		jogadoresSemUsuarioLogado.remove(usuarioEmFoco.getJogador());
-		paginacaoJogadores = new PaginavelSampleImpl<Jogador>(jogadoresSemUsuarioLogado);
-		jogadores = new ListDataModel(paginacaoJogadores.getPagina());
+		prepara(null);
 	}
 
 	public void preparaVinculo(ActionEvent e) {
-		Jogador jogador = (Jogador) getJogadores().getRowData();
+		Jogador jogador = (Jogador) paginacaoJogadores.getPagina().get(getIndex());
 		VincularJogadorBean vincularJogadorBean = new VincularJogadorBean();
 		vincularJogadorBean.setJogadorEmFoco(jogador);
 		vincularJogadorBean.setPesquisa(jogador.getNome());

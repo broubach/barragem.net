@@ -64,7 +64,7 @@
 							<label class="adicionarJogadorLabel">#{msg.label_nome}</label>
 							<h:inputText size="30" styleClass="adicionarJogadorInput" value="#{gerirJogadorBean.jogadorNome}" maxlength="45"/>
 							<div class="btn-novo-relative">
-								<h:commandLink actionListener="#{gerirJogadorBean.adicionaJogador}" reRender="tabelaJogadores">
+								<h:commandLink actionListener="#{gerirJogadorBean.adicionaJogador}">
 									<span>#{msg.label_adicionar_jogador}</span>
 								</h:commandLink>
 							</div>
@@ -72,9 +72,9 @@
 					</div>
 					<br/>
 					<ui:include src="../componentes/jogadores.xhtml">
-						<ui:param name="jogadores" value="#{gerirJogadorBean.jogadores}"/>
-						<ui:param name="podeEditarJogadores" value="true"/>
+						<ui:param name="jogadores" value="#{gerirJogadorBean.paginacaoJogadores.pagina}"/>
 						<ui:param name="paginavel" value="#{gerirJogadorBean.paginacaoJogadores}"/>
+						<ui:param name="podeEditarJogadores" value="true"/>
 					</ui:include>
 					<h:panelGroup display="block" rendered="#{not empty gerirJogadorBean.paginacaoJogadores.sourceList}" styleClass="texto_informativo">
 						#{msg.label_total_jogadores}: #{fn:length(gerirJogadorBean.paginacaoJogadores.sourceList)}

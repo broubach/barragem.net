@@ -4,8 +4,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -15,7 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import net.barragem.scaffold.JogadoresComCorrespondenciaPrimeiroComparator;
+import net.barragem.scaffold.JogadoresMaisRelevantesPrimeiroComparator;
 import net.barragem.scaffold.ReflectionHelper;
 import net.barragem.scaffold.ValidatableSampleImpl;
 
@@ -207,7 +209,7 @@ public class Usuario extends BaseEntity implements Validatable, Cloneable, Atual
 				it.remove();
 			}
 		}
-		Collections.sort(result, new JogadoresComCorrespondenciaPrimeiroComparator());
+		Collections.sort(result, new JogadoresMaisRelevantesPrimeiroComparator());
 		return result;
 	}
 
@@ -237,4 +239,13 @@ public class Usuario extends BaseEntity implements Validatable, Cloneable, Atual
 	public String getTextoAtualizacao() {
 		return ReflectionHelper.getTextoAtualizacao(this);
 	}
+
+	public boolean jahPossuiJogador(String nome) {
+		Set<String> jogadoresExistentes = new HashSet<String>();
+		for (Jogador jogador : jogadores) {
+			jogadoresExistentes.add(jogador.getNome().toUpperCase());
+		}
+		return !jogadoresExistentes.add(nome.toUpperCase());
+	}
+
 }

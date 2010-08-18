@@ -1,6 +1,7 @@
 package net.barragem.business.bo;
 
 import java.text.MessageFormat;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,4 +36,39 @@ public class JogadorBo extends BaseBo {
 		PersistenceHelper.execute("atualizaNomesJogadoresQuery", usuarioCorrespondente.getId(), nomeCompletoCapital);
 	}
 
+	public void marcaJogadoresNaoAdicionadosAUsuarioLogado(List<Jogador> jogadores) {
+		for (Jogador jogador : jogadores) {
+			if (getUsuarioLogado().getJogadores().contains(jogador)) {
+				jogador.setJahAdicionado(true);
+			}
+		}
+	}
+
+	public Jogador adicionaUsuario(Usuario usuarioAAdicionar) {
+		return adiciona(usuarioAAdicionar.getNomeCompletoCapital(), usuarioAAdicionar);
+	}
+
+	public Jogador adicionaJogador(String jogadorNome) {
+		return adiciona(jogadorNome, null);
+	}
+
+	private Jogador adiciona(String jogadorNome, Usuario usuarioAAdicionar) {
+		Jogador novoJogador = new Jogador();
+		novoJogador.setNome(jogadorNome);
+		novoJogador.setUsuarioCorrespondente(usuarioAAdicionar);
+		novoJogador.setUsuarioDono(getUsuarioLogado());
+		getUsuarioLogado().getJogadores().add(novoJogador);
+		PersistenceHelper.persiste(novoJogador);
+		PersistenceHelper.persiste(getUsuarioLogado());
+
+		if (usuarioAAdicionar != null) {
+			PersistenceHelper.persiste(Atualizacao.criaAdicionarUsuario(getUsuarioLogado(), usuarioAAdicionar));
+
+			sendMail("no-reply@barragem.net", getUsuarioLogado().getNomeCompletoCapital(),
+					usuarioAAdicionar.getEmail(), "barragem.net - você foi adicionado(a) à lista de jogadores do(a) "
+							+ getUsuarioLogado().getNome(), MessageFormat.format(emailTemplateAdicaoJogador,
+							getUsuarioLogado().getNomeCompletoCapital()));
+		}
+		return novoJogador;
+	}
 }

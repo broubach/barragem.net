@@ -14,8 +14,9 @@
 			<h:form id="gerirJogador">
 				<h2><h:outputText value="#{msg.label_resultado_pesquisa}"/></h2>
 				<br/>
+			    <ui:include src="../componentes/mensagem-sucesso.xhtml"/>
 				<div class="voltar">
-					<h:commandLink value="#{msg.label_voltar}" action="voltar"/>
+					<h:commandLink value="#{msg.label_voltar}" action="voltar" actionListener="#{gerirJogadorBean.volta}"/>
 				</div>
 				<br/>
 				<fieldset>
@@ -26,6 +27,7 @@
 						<ui:param name="jogadores" value="#{pesquisarBean.jogadores}"/>
 						<ui:param name="paginavel" value="#{pesquisarBean.paginacaoJogador}"/>
 						<ui:param name="podeEditarJogadores" value="false"/>
+						<ui:param name="podeAdicionarJogadores" value="true"/>
 					</ui:include>
 				</fieldset>
 		    </h:form>

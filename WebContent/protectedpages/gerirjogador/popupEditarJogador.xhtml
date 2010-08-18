@@ -7,11 +7,7 @@
 
 	<div class="editar-jogador">
 		<h:form id="editar-jogador">
-	        <c:if test="#{! empty messageBean.errorMessages}">
-		        <div class="mensagem-erro">
-    	    		<span>#{msg.label_preencha_os_campos_obrigatorios}</span>
-		        </div>
-	        </c:if>
+		    <ui:include src="../componentes/mensagem-erro.xhtml"/>
 		    <ui:include src="../componentes/mensagem-sucesso.xhtml"/>
 			<div class="dados-popup">
 				<div class="input text">

@@ -6,8 +6,9 @@ import java.util.List;
 import javax.faces.event.ActionEvent;
 
 import net.barragem.business.bo.JogadorBo;
+import net.barragem.business.bo.UsuarioBo;
 import net.barragem.persistence.entity.Jogador;
-import net.barragem.scaffold.JogadoresComCorrespondenciaPrimeiroComparator;
+import net.barragem.scaffold.JogadoresMaisRelevantesPrimeiroComparator;
 import net.barragem.scaffold.Paginavel;
 import net.barragem.scaffold.PaginavelSampleImpl;
 import net.barragem.scaffold.PersistenceHelper;
@@ -60,8 +61,9 @@ public class VincularJogadorBean extends BaseBean {
 					getUsuarioLogado(), new StringBuilder().append("%").append(pesquisa.replace(" ", "%")).append("%")
 							.toString().toUpperCase());
 			if (result.size() > 0) {
-				Collections.sort(result, new JogadoresComCorrespondenciaPrimeiroComparator());
-				paginacao = new PaginavelSampleImpl<Jogador>(result, 5);
+				getBo(UsuarioBo.class).carregaFotosJogadores(result);
+				Collections.sort(result, new JogadoresMaisRelevantesPrimeiroComparator());
+				paginacao = new PaginavelSampleImpl<Jogador>(result, null, 5);
 				jogadores = paginacao.getPagina();
 				return;
 			}

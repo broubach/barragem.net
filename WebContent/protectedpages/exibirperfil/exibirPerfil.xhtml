@@ -32,6 +32,7 @@
 			        </ul>
 				</h:panelGroup>
 
+			    <ui:include src="../componentes/mensagem-erro.xhtml"/>
 	            <div class="clear"></div>
 	            <br/>
 				
@@ -137,16 +138,17 @@
 	            <br/>
 	            <br/>
 
-				<h3>#{msg.label_barragens_que_participa}</h3>
+				<h3>#{msg.label_barragens_que_participa} (#{fn:length(exibirPerfilBean.barragens)})</h3>
 				<ui:include src="../componentes/barragens.xhtml" >
 					<ui:param name="barragens" value="#{exibirPerfilBean.barragens}"/>
 				</ui:include>
 	            <div class="clear"></div>
 				<br/>
 				
-				<h3>#{msg.label_lista_de_jogadores}</h3>
+				<h3>#{msg.label_lista_de_jogadores} (#{fn:length(exibirPerfilBean.paginacaoJogador.sourceList)})</h3>
 				<ui:include src="../componentes/jogadores.xhtml">
-					<ui:param name="jogadores" value="#{exibirPerfilBean.usuarioEmFoco.jogadoresSemOUsuarioCorrespondente}"/>
+					<ui:param name="jogadores" value="#{exibirPerfilBean.paginacaoJogador.pagina}"/>
+					<ui:param name="paginavel" value="#{exibirPerfilBean.paginacaoJogador}"/>
 					<ui:param name="podeEditarJogadores" value="false"/>
 				</ui:include>
 	            <div class="clear"></div>

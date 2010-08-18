@@ -12,12 +12,12 @@ public class PaginavelSampleImpl<T> implements Paginavel<T> {
 	public static final int FIRST_PAGE = -1;
 	public static final int LAST_PAGE = -2;
 
-	private int maxPagesDisplayed = 10;
-	private int pageSize = 10;
+	private Integer maxPagesDisplayed = 10;
+	private Integer pageSize = 10;
 	private List<T> pagina = new ArrayList<T>();
-	private int pageCount;
-	private int paginaAtual = 1;
-	private int totalRegistros;
+	private Integer pageCount;
+	private Integer paginaAtual = 1;
+	private Integer totalRegistros;
 
 	private List<T> sourceList;
 	private String sourceHibernateNamedQuery;
@@ -29,23 +29,26 @@ public class PaginavelSampleImpl<T> implements Paginavel<T> {
 	}
 
 	public PaginavelSampleImpl(List<T> sourceList) {
-		this(sourceList, null, 10);
+		this(sourceList, null, 1, 10);
 	}
 
 	public PaginavelSampleImpl(List<T> sourceList, T focus) {
-		this(sourceList, focus, 10);
+		this(sourceList, focus, 1, 10);
 	}
 
-	public PaginavelSampleImpl(List<T> sourceList, int pageSize) {
-		this(sourceList, null, pageSize);
+	public PaginavelSampleImpl(List<T> sourceList, Integer paginaAtual, Integer pageSize) {
+		this(sourceList, null, paginaAtual, pageSize);
 	}
 
-	public PaginavelSampleImpl(List<T> sourceList, T focus, int pageSize) {
+	public PaginavelSampleImpl(List<T> sourceList, T focus, Integer paginaAtual, Integer pageSize) {
 		this.sourceList = sourceList;
-		this.pageSize = pageSize;
+		this.pageSize = pageSize != null ? pageSize : 10;
 		int pageNumber = 1;
 		if (focus != null) {
 			pageNumber = calculaPagina(sourceList.indexOf(focus));
+		} else if (paginaAtual != null && paginaAtual > 1) {
+			pageNumber = paginaAtual <= calculaPagina(sourceList.size() - 1) ? paginaAtual : calculaPagina(sourceList
+					.size() - 1);
 		}
 		pesquisaPaginavel(pageNumber);
 	}
@@ -177,22 +180,6 @@ public class PaginavelSampleImpl<T> implements Paginavel<T> {
 
 	@Override
 	public int calculaPagina(int zeroBasedPosicao) {
-		return ((zeroBasedPosicao + 1) / pageSize) + 1;
-	}
-
-	@Override
-	public T getPosteriorImediatoOuAnteriorImediato(int zeroBasedIndexInPage) {
-		if (sourceList != null) {
-			int index = pageSize * (paginaAtual - 1) + zeroBasedIndexInPage;
-			if (index + 1 < sourceList.size()) {
-				index++;
-			} else if (index - 1 >= 0) {
-				index--;
-			} else if (sourceList.size() == 1) {
-				return null;
-			}
-			return sourceList.get(index);
-		}
-		return null;
+		return (zeroBasedPosicao / pageSize) + 1;
 	}
 }

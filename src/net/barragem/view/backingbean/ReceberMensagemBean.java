@@ -22,7 +22,7 @@ public class ReceberMensagemBean extends BaseBean {
 
 	public ReceberMensagemBean() {
 		paginacaoMensagens = new PaginavelSampleImpl<Mensagem>(PersistenceHelper.findByNamedQuery("mensagemQuery",
-				getUsuarioLogado()), 6);
+				getUsuarioLogado()), null, 6);
 		respostas = new ArrayList<String>();
 		for (int i = 0; i < paginacaoMensagens.getPagina().size(); i++) {
 			respostas.add("");
@@ -61,11 +61,10 @@ public class ReceberMensagemBean extends BaseBean {
 	}
 
 	public void exclui(ActionEvent e) {
-		Mensagem focus = paginacaoMensagens.getPosteriorImediatoOuAnteriorImediato(getIndex());
 		PersistenceHelper.remove(paginacaoMensagens.getPagina().get(getIndex()));
 		addMensagemAtualizacaoComSucesso();
 		paginacaoMensagens = new PaginavelSampleImpl<Mensagem>(PersistenceHelper.findByNamedQuery("mensagemQuery",
-				getUsuarioLogado()), focus, 6);
+				getUsuarioLogado()), paginacaoMensagens.getPaginaAtual(), 6);
 		totalMensagens = paginacaoMensagens.getSourceList().size();
 	}
 }

@@ -62,12 +62,9 @@ public class EventoBo extends BaseBo {
 		}
 	}
 
-	public Evento removeEvento(Paginavel<Evento> paginacaoEventos, int index) {
-		Evento focus = paginacaoEventos.getPosteriorImediatoOuAnteriorImediato(getIndex());
+	public void removeEvento(Paginavel<Evento> paginacaoEventos, int index) {
 		Evento eventoRemovido = paginacaoEventos.getPagina().remove(index);
 		removeEvento(eventoRemovido);
-
-		return focus;
 	}
 
 	public void removeEvento(Rodada rodada, int index) {

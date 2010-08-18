@@ -16,11 +16,11 @@ public class MensagemBo extends BaseBo {
 		super(request, response);
 	}
 
-	public void responde(Mensagem mensagem, String textoResposta) {
-		envia(mensagem.getRemetente(), textoResposta);
+	public Mensagem responde(Mensagem mensagem, String textoResposta) {
+		return envia(mensagem.getRemetente(), textoResposta);
 	}
 
-	public void envia(Usuario destinatario, String texto) {
+	public Mensagem envia(Usuario destinatario, String texto) {
 		Mensagem mensagem = new Mensagem();
 		mensagem.setData(new Date());
 		mensagem.setDestinatario(destinatario);
@@ -31,5 +31,6 @@ public class MensagemBo extends BaseBo {
 		sendMail("no-reply@barragem.net", mensagem.getRemetente().getNomeCompletoCapital(), mensagem.getDestinatario()
 				.getEmail(), "barragem.net - nova mensagem", MessageFormat.format(emailNovaMensagem, mensagem
 				.getRemetente().getNomeCompletoCapital()));
+		return mensagem;
 	}
 }

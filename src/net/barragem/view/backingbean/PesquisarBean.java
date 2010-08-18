@@ -5,9 +5,11 @@ import java.util.List;
 
 import javax.faces.event.ActionEvent;
 
+import net.barragem.business.bo.JogadorBo;
+import net.barragem.business.bo.UsuarioBo;
 import net.barragem.persistence.entity.Barragem;
 import net.barragem.persistence.entity.Jogador;
-import net.barragem.scaffold.JogadoresComCorrespondenciaPrimeiroComparator;
+import net.barragem.scaffold.JogadoresMaisRelevantesPrimeiroComparator;
 import net.barragem.scaffold.Paginavel;
 import net.barragem.scaffold.PaginavelSampleImpl;
 import net.barragem.scaffold.PersistenceHelper;
@@ -81,7 +83,9 @@ public class PesquisarBean extends BaseBean {
 			List<Jogador> result = PersistenceHelper.findByNamedQuery("pesquisaJogadorQuery", new StringBuilder()
 					.append("%").append(pesquisa).append("%").toString().toUpperCase());
 			if (result.size() > 0) {
-				Collections.sort(result, new JogadoresComCorrespondenciaPrimeiroComparator());
+				getBo(UsuarioBo.class).carregaFotosJogadores(result);
+				getBo(JogadorBo.class).marcaJogadoresNaoAdicionadosAUsuarioLogado(result);
+				Collections.sort(result, new JogadoresMaisRelevantesPrimeiroComparator());
 				paginacaoJogador = new PaginavelSampleImpl<Jogador>(result);
 				jogadores = paginacaoJogador.getPagina();
 				return "sucessoPesquisa";
@@ -113,5 +117,11 @@ public class PesquisarBean extends BaseBean {
 
 	public void pesquisaGeral(ActionEvent e) {
 		// TODO
+	}
+
+	public void adicionaJogador(ActionEvent e) {
+		getBo(JogadorBo.class).adicionaUsuario(paginacaoJogador.getPagina().get(getIndex()).getUsuarioCorrespondente());
+		getBo(JogadorBo.class).marcaJogadoresNaoAdicionadosAUsuarioLogado(paginacaoJogador.getSourceList());
+		addMensagemAtualizacaoComSucesso();
 	}
 }

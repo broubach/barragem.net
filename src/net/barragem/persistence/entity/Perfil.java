@@ -22,7 +22,7 @@ import net.barragem.scaffold.MessageBundleUtils;
 import org.apache.commons.beanutils.BeanUtils;
 
 @Entity
-@NamedQuery(name = "perfilFetchFotoQuery", query = "from Perfil perfil join fetch perfil.foto where perfil.id in (:lista)")
+@NamedQuery(name = "perfilFetchFotoQuery", query = "select perfil, foto.id, foto.tamanho from Perfil perfil join perfil.foto foto where perfil.id in (:lista)")
 @Table(name = "perfil")
 public class Perfil extends BaseEntity implements Cloneable {
 

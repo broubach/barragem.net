@@ -71,7 +71,7 @@ public class LoginBo extends BaseBo {
 			}
 		}
 		carregaAtualizacoes(atualizacoes);
-		Paginavel<Atualizacao> paginacaoAtualizacoes = new PaginavelSampleImpl<Atualizacao>(atualizacoes, 6);
+		Paginavel<Atualizacao> paginacaoAtualizacoes = new PaginavelSampleImpl<Atualizacao>(atualizacoes, null, 6);
 		setAtualizacoes(paginacaoAtualizacoes);
 
 		// busca total de mensagens não lidas
@@ -101,7 +101,7 @@ public class LoginBo extends BaseBo {
 					}
 				}
 			}
-			getBo(UsuarioBo.class).carregaFotos(sujeitos);
+			getBo(UsuarioBo.class).carregaFotosUsuarios(sujeitos);
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException(e);
 		}

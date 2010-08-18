@@ -33,6 +33,4 @@ public interface Paginavel<T> {
 	public void pesquisaPaginavel(int pageNumber, Object... paramValues);
 
 	public int calculaPagina(int indexOf);
-
-	public T getPosteriorImediatoOuAnteriorImediato(int indexInPage);
 }
