@@ -3,12 +3,16 @@ package net.barragem.view.backingbean;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 
 import net.barragem.persistence.entity.Evento;
+import net.barragem.persistence.entity.Jogador;
+import net.barragem.persistence.entity.JogadorEvento;
 import net.barragem.persistence.entity.Jogo;
 import net.barragem.persistence.entity.Usuario;
 import net.barragem.scaffold.MessageBundleUtils;
@@ -29,17 +33,22 @@ public class ExibirEstatisticasBean extends BaseBean {
 
 	private Usuario usuarioEmFoco;
 	private Paginavel<Evento> paginacaoEventos = null;
-	private Date filtroData;
+	private String filtroData;
 	private String filtroTipo;
-	private String filtroParticipantes;
+	private Jogador filtroParticipantes;
 	private String filtroPlacar;
 	private String filtroVitoria;
-	private Boolean filtroCanhotos;
+	private String filtroCanhotos;
+	private List<Evento> listaSalva = null;
 
 	public ExibirEstatisticasBean() {
 		usuarioEmFoco = PersistenceHelper.findByPk(Usuario.class, getId());
-		paginacaoEventos = new PaginavelSampleImpl<Evento>(PersistenceHelper.findByNamedQuery("meusEventosQuery",
-				usuarioEmFoco));
+		listaSalva = PersistenceHelper.findByNamedQuery("meusEventosQuery", usuarioEmFoco);
+		paginacaoEventos = new PaginavelSampleImpl<Evento>(listaSalva);
+		prepara();
+	}
+
+	private void prepara() {
 		for (Evento evento : paginacaoEventos.getSourceList()) {
 			if (evento instanceof Jogo) {
 				PersistenceHelper.initialize("parciais", ((Jogo) evento).getPlacar());
@@ -66,11 +75,11 @@ public class ExibirEstatisticasBean extends BaseBean {
 		this.paginacaoEventos = paginacaoEventos;
 	}
 
-	public Date getFiltroData() {
+	public String getFiltroData() {
 		return filtroData;
 	}
 
-	public void setFiltroData(Date filtroData) {
+	public void setFiltroData(String filtroData) {
 		this.filtroData = filtroData;
 	}
 
@@ -82,11 +91,11 @@ public class ExibirEstatisticasBean extends BaseBean {
 		this.filtroTipo = filtroTipo;
 	}
 
-	public String getFiltroParticipantes() {
+	public Jogador getFiltroParticipantes() {
 		return filtroParticipantes;
 	}
 
-	public void setFiltroParticipantes(String filtroParticipantes) {
+	public void setFiltroParticipantes(Jogador filtroParticipantes) {
 		this.filtroParticipantes = filtroParticipantes;
 	}
 
@@ -106,11 +115,11 @@ public class ExibirEstatisticasBean extends BaseBean {
 		this.filtroVitoria = filtroVitoria;
 	}
 
-	public Boolean getFiltroCanhotos() {
+	public String getFiltroCanhotos() {
 		return filtroCanhotos;
 	}
 
-	public void setFiltroCanhotos(Boolean filtroCanhotos) {
+	public void setFiltroCanhotos(String filtroCanhotos) {
 		this.filtroCanhotos = filtroCanhotos;
 	}
 
@@ -122,22 +131,41 @@ public class ExibirEstatisticasBean extends BaseBean {
 		List<SelectItem> result = new ArrayList<SelectItem>();
 		SimpleDateFormat dateFormat = new SimpleDateFormat(MessageBundleUtils.getInstance()
 				.get("format_day_month_year"));
-		for (Evento evento : paginacaoEventos.getSourceList()) {
-			SelectItem item = new SelectItem(evento.getData(), dateFormat.format(evento.getData()));
+		for (Evento evento : listaSalva) {
+			SelectItem item = new SelectItem(dateFormat.format(evento.getData()), dateFormat.format(evento.getData()));
 			result.add(item);
 		}
 		return result;
 	}
 
 	public List<SelectItem> getListaParticipantes() {
+		Set<Jogador> participantes = new HashSet<Jogador>();
+		for (Evento evento : listaSalva) {
+			for (JogadorEvento jogadorEvento : evento.getJogadoresEventos()) {
+				participantes.add(jogadorEvento.getJogador());
+			}
+		}
+		participantes.remove(usuarioEmFoco.getJogador());
 		List<SelectItem> result = new ArrayList<SelectItem>();
-
+		for (Jogador jogador : participantes) {
+			SelectItem item = new SelectItem(jogador, jogador.getNome());
+			result.add(item);
+		}
 		return result;
 	}
 
 	public List<SelectItem> getListaPlacares() {
+		Set<String> contagemDeParciais = new HashSet<String>();
+		for (Evento evento : listaSalva) {
+			if (evento instanceof Jogo && ((Jogo) evento).possuiVencedores()) {
+				contagemDeParciais.add(((Jogo) evento).getPlacar().getContagemDeParciais());
+			}
+		}
 		List<SelectItem> result = new ArrayList<SelectItem>();
-
+		for (String contagemParcial : contagemDeParciais) {
+			SelectItem item = new SelectItem(contagemParcial, contagemParcial);
+			result.add(item);
+		}
 		return result;
 	}
 
@@ -161,5 +189,45 @@ public class ExibirEstatisticasBean extends BaseBean {
 			}
 		}
 		return derrotas;
+	}
+
+	public void filtra(ValueChangeEvent arg0) {
+		List<Evento> eventosFiltrados = new ArrayList<Evento>();
+		SimpleDateFormat sdf = new SimpleDateFormat(MessageBundleUtils.getInstance().get("format_day_month_year"));
+		for (Evento evento : listaSalva) {
+			if (filtroData != null && !filtroData.equals("")) {
+				if (filtroData.equals(sdf.format(evento.getData()))) {
+					eventosFiltrados.add(evento);
+				}
+			}
+			if (filtroTipo != null && !filtroTipo.equals("")) {
+				if (evento.getTipoStr().equals(filtroTipo)) {
+					eventosFiltrados.add(evento);
+				}
+			}
+			if (filtroParticipantes != null) {
+				if (evento.getJogadoresStr().contains(filtroParticipantes.getNome())) {
+					eventosFiltrados.add(evento);
+				}
+			}
+			if (filtroPlacar != null && !filtroPlacar.equals("")) {
+				if (evento instanceof Jogo && ((Jogo) evento).getPlacar().getContagemDeParciais().equals(filtroPlacar)) {
+					eventosFiltrados.add(evento);
+				}
+
+			}
+			if (filtroVitoria != null && !filtroVitoria.equals("")) {
+				if (evento.getResultadoStr().equals(filtroVitoria)) {
+					eventosFiltrados.add(evento);
+				}
+			}
+			if (filtroCanhotos != null && !filtroCanhotos.equals("")) {
+				if (evento.getParticipantesCanhotos().equals(filtroCanhotos)) {
+					eventosFiltrados.add(evento);
+				}
+			}
+		}
+
+		paginacaoEventos = new PaginavelSampleImpl<Evento>(eventosFiltrados);
 	}
 }

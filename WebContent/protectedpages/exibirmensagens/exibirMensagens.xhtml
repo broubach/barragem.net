@@ -24,9 +24,11 @@
 			            <li>
 							<h:commandLink value="#{msg.label_mensagens}" disabled="true" styleClass="btn_mensagens_bckgnd"></h:commandLink>
 			            </li>
-			            <li>
-							<h:commandLink value="#{msg.label_estatisticas}" action="exibirEstatisticas" styleClass="btn_estatisticas_bckgnd"><f:param name="id" value="#{exibirMensagensBean.usuarioEmFoco.id}"/></h:commandLink>
-			            </li>
+			            <c:if test="false">
+				            <li>
+								<h:commandLink value="#{msg.label_estatisticas}" action="exibirEstatisticas" styleClass="btn_estatisticas_bckgnd"><f:param name="id" value="#{exibirMensagensBean.usuarioEmFoco.id}"/></h:commandLink>
+				            </li>
+			            </c:if>
 			        </ul>
 				</h:panelGroup>
 				<span class="texto_informativo">#{msg.label_total_mensagens}: #{exibirMensagensBean.totalMensagens}</span>

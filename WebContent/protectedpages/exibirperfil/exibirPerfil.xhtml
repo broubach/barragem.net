@@ -29,9 +29,11 @@
 								<h:commandLink value="#{msg.label_mensagens}" actionListener="#{exibirMensagensBean.exibeMensagens}" action="exibirMensagens" styleClass="btn_mensagens_bckgnd"><f:param name="id" value="#{exibirPerfilBean.usuarioEmFoco.id}"/></h:commandLink>
 				            </li>
 			            </c:if>
-			            <li>
-							<h:commandLink value="#{msg.label_estatisticas}" action="exibirEstatisticas" styleClass="btn_estatisticas_bckgnd"><f:param name="id" value="#{exibirPerfilBean.usuarioEmFoco.id}"/></h:commandLink>
-			            </li>
+			            <c:if test="false">
+				            <li>
+								<h:commandLink value="#{msg.label_estatisticas}" action="exibirEstatisticas" styleClass="btn_estatisticas_bckgnd"><f:param name="id" value="#{exibirPerfilBean.usuarioEmFoco.id}"/></h:commandLink>
+				            </li>
+			            </c:if>
 			        </ul>
 				</h:panelGroup>
 

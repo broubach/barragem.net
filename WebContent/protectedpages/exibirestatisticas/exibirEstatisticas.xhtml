@@ -29,9 +29,11 @@
 								<h:commandLink value="#{msg.label_mensagens}" actionListener="#{exibirMensagensBean.exibeMensagens}" action="exibirMensagens" styleClass="btn_mensagens_bckgnd"><f:param name="id" value="#{exibirEstatisticasBean.usuarioEmFoco.id}"/></h:commandLink>
 				            </li>
 			            </c:if>
-			            <li>
-							<h:commandLink value="#{msg.label_estatisticas}" disabled="true" styleClass="btn_estatisticas_bckgnd"></h:commandLink>
-			            </li>
+			            <c:if test="false">
+				            <li>
+								<h:commandLink value="#{msg.label_estatisticas}" disabled="true" styleClass="btn_estatisticas_bckgnd"></h:commandLink>
+				            </li>
+			            </c:if>
 			        </ul>
 				</h:panelGroup>
 
@@ -40,7 +42,7 @@
 	            <div class="clear"></div>
 	            <br/>
 
-	            <img class="float-right" src="#{request.contextPath}/protectedpages/exibirestatisticas/exibirEstatisticas.do?vitorias=#{exibirEstatisticasBean.vitorias}&#38;derrotas=#{exibirEstatisticasBean.derrotas}" border="0"/>
+	            <img class="float-right grafico" src="#{request.contextPath}/protectedpages/exibirestatisticas/exibirEstatisticas.do?vitorias=#{exibirEstatisticasBean.vitorias}&#38;derrotas=#{exibirEstatisticasBean.derrotas}" border="0"/>
 	            
 				<table class="exibirPainelBarragemRankingTable">
 				<thead>
@@ -50,17 +52,17 @@
 						<th class="exibirPainelBarragemRankingTableHead">#{msg.label_participantes}</th>
 						<th class="exibirPainelBarragemRankingTableHead">#{msg.label_placar}</th>
 						<th class="exibirPainelBarragemRankingTableHead">#{msg.label_resultado}</th>
-						<th class="exibirPainelBarragemRankingTableHead">#{msg.label_participantes_destros}</th>
+						<th class="exibirPainelBarragemRankingTableHead">#{msg.label_participantes_canhotos}</th>
 					</tr>
 					<tr>
 						<th class="exibirPainelBarragemRankingTableHead">
-							<h:selectOneMenu value="#{exibirEstatisticasBean.filtroData}">
+							<h:selectOneMenu value="#{exibirEstatisticasBean.filtroData}" onchange="submit()" valueChangeListener="#{exibirEstatisticasBean.filtra}">
 								<f:selectItem itemLabel="" itemValue=""/>
 								<f:selectItems value="#{exibirEstatisticasBean.listaDatas}"/>
 							</h:selectOneMenu>
 						</th>
 						<th class="exibirPainelBarragemRankingTableHead">
-							<h:selectOneMenu value="#{exibirEstatisticasBean.filtroTipo}">
+							<h:selectOneMenu value="#{exibirEstatisticasBean.filtroTipo}" onchange="submit()" valueChangeListener="#{exibirEstatisticasBean.filtra}">
 								<f:selectItem itemLabel="" itemValue=""/>
 								<f:selectItem itemLabel="#{msg.label_jogo_avulso}" itemValue="ja"/>
 								<f:selectItem itemLabel="#{msg.label_jogo_barragem}" itemValue="jb"/>
@@ -68,19 +70,19 @@
 							</h:selectOneMenu>
 						</th>
 						<th class="exibirPainelBarragemRankingTableHead">
-							<h:selectOneMenu value="#{exibirEstatisticasBean.filtroParticipantes}">
+							<h:selectOneMenu value="#{exibirEstatisticasBean.filtroParticipantes}" converter="JogadorConverter" styleClass="participantes" onchange="submit()" valueChangeListener="#{exibirEstatisticasBean.filtra}">
 								<f:selectItem itemLabel="" itemValue=""/>
 								<f:selectItems value="#{exibirEstatisticasBean.listaParticipantes}"/>
 							</h:selectOneMenu>
 						</th>
 						<th class="exibirPainelBarragemRankingTableHead">
-							<h:selectOneMenu value="#{exibirEstatisticasBean.filtroPlacar}">
+							<h:selectOneMenu value="#{exibirEstatisticasBean.filtroPlacar}" onchange="submit()" valueChangeListener="#{exibirEstatisticasBean.filtra}">
 								<f:selectItem itemLabel="" itemValue=""/>
 								<f:selectItems value="#{exibirEstatisticasBean.listaPlacares}"/>
 							</h:selectOneMenu>
 						</th>
 						<th class="exibirPainelBarragemRankingTableHead">
-							<h:selectOneMenu value="#{exibirEstatisticasBean.filtroVitoria}">
+							<h:selectOneMenu value="#{exibirEstatisticasBean.filtroVitoria}" onchange="submit()" valueChangeListener="#{exibirEstatisticasBean.filtra}">
 								<f:selectItem itemLabel="" itemValue=""/>
 								<f:selectItem itemLabel="#{msg.label_vitoria}" itemValue="v"/>
 								<f:selectItem itemLabel="#{msg.label_derrota}" itemValue="d"/>
@@ -88,7 +90,7 @@
 							</h:selectOneMenu>
 						</th>
 						<th class="exibirPainelBarragemRankingTableHead">
-							<h:selectOneMenu value="#{exibirEstatisticasBean.filtroCanhotos}">
+							<h:selectOneMenu value="#{exibirEstatisticasBean.filtroCanhotos}" onchange="submit()" valueChangeListener="#{exibirEstatisticasBean.filtra}">
 								<f:selectItem itemLabel="" itemValue=""/>
 								<f:selectItem itemLabel="#{msg.label_sim}" itemValue="true"/>
 								<f:selectItem itemLabel="#{msg.label_nao}" itemValue="false"/>

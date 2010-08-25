@@ -615,6 +615,14 @@ fieldset#parciais {
 	width: 100%;
 }
 
+/****************** ESTATISTICAS ******************/
+.participantes {
+	max-width: 120px;
+}
+.grafico {
+	margin-bottom: 5px;
+}
+
 /********************* BOTOES *********************/
 .menu-contextual .btn_perfil_bckgnd, .menu-contextual .btn_mensagens_bckgnd, .menu-contextual .btn_estatisticas_bckgnd, .menu-contextual .btn_adicionar_bckgnd {
 	padding-left: 20px;

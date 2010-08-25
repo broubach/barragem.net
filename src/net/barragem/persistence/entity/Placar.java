@@ -109,4 +109,32 @@ public class Placar extends BaseEntity implements Cloneable {
 		}
 		return parciaisRemovidas;
 	}
+
+	public Integer getParciaisVencedor() {
+		int countParciais = 0;
+		for (Parcial parcial : parciais) {
+			if (parcial.getParcialVencedor() != null && parcial.getParcialPerdedor() != null
+					&& (parcial.getParcialVencedor() > parcial.getParcialPerdedor())) {
+				countParciais++;
+			}
+		}
+		return countParciais;
+	}
+
+	public Integer getParciaisPerdedor() {
+		int countParciais = 0;
+		for (Parcial parcial : parciais) {
+			if (parcial.getParcialVencedor() != null && parcial.getParcialPerdedor() != null
+					&& (parcial.getParcialPerdedor() > parcial.getParcialVencedor())) {
+				countParciais++;
+			}
+		}
+		return countParciais;
+	}
+
+	public String getContagemDeParciais() {
+		StringBuilder contagemDeParciais = new StringBuilder();
+		contagemDeParciais.append(getParciaisVencedor()).append("x").append(getParciaisPerdedor());
+		return contagemDeParciais.toString();
+	}
 }
