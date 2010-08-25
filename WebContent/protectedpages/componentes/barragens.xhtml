@@ -13,13 +13,13 @@
 				<f:facet name="header">
 					#{msg.label_local}
 				</f:facet>
-				<h:commandLink action="exibirPainelBarragem" actionListener="#{exibirPerfilBean.exibePainelBarragem}">#{item.local}<f:param name="id" value="#{item.id}"/></h:commandLink>
+				<h:commandLink action="exibirPainelBarragem">#{item.local}<f:param name="id" value="#{item.id}"/></h:commandLink>
 		    </h:column>
 		    <h:column>
 				<f:facet name="header">
 					#{msg.label_categoria}
 				</f:facet>
-				<h:commandLink action="exibirPainelBarragem" actionListener="#{exibirPerfilBean.exibePainelBarragem}">#{msg[item.categoria.nome]}<f:param name="id" value="#{item.id}"/></h:commandLink>
+				<h:commandLink action="exibirPainelBarragem">#{msg[item.categoria.nome]}<f:param name="id" value="#{item.id}"/></h:commandLink>
 		    </h:column>
 			<f:facet name="footer">
 				<h:commandLink actionListener="#{gerirBarragemBean.limpaFiltro}" rendered="#{gerirBarragemBean.pesquisaSalva != null}" styleClass="linkLimpaFiltro">#{msg.label_limpar_filtro_pesquisa}</h:commandLink>

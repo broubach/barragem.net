@@ -34,7 +34,7 @@
 		    </div>
 
 			<div class="exibirPainelBarragemRanking">
-			    <h:dataTable styleClass="exibirPainelBarragemRankingTable" rowClasses="exibirPainelBarragemRankingBodyBackground,exibirPainelBarragemRankingBodyBackgroundAlt" columnClasses="exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBody" value="#{exibirPainelBarragemBean.rankingFetch}" var="item" headerClass="exibirPainelBarragemRankingTableHead">
+			    <h:dataTable styleClass="exibirPainelBarragemRankingTable" rowClasses="exibirPainelBarragemRankingBodyBackground,exibirPainelBarragemRankingBodyBackgroundAlt" columnClasses="exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBody" value="#{exibirPainelBarragemBean.ranking}" var="item" headerClass="exibirPainelBarragemRankingTableHead">
 					<f:facet name="header">
 						#{msg.label_ranking}
 					</f:facet>
@@ -60,7 +60,7 @@
 			</div>
 
 			<div class="exibirPainelBarragemRodada">
-				<c:forEach items="#{exibirPainelBarragemBean.rodadasFetch}" var="rodadaAtual" begin="#{exibirPainelBarragemBean.startIndex}" end="#{exibirPainelBarragemBean.endIndex}">
+				<c:forEach items="#{exibirPainelBarragemBean.rodadas}" var="rodadaAtual" begin="#{exibirPainelBarragemBean.startIndex}" end="#{exibirPainelBarragemBean.endIndex}">
 				    <h:dataTable styleClass="exibirPainelBarragemRodadaTable" rowClasses="exibirPainelBarragemRankingBodyBackground,exibirPainelBarragemRankingBodyBackgroundAlt" columnClasses="exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBody,exibirPainelBarragemRodadaBodyVersus,exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBody,exibirPainelBarragem-ranking-nowrap,exibirPainelBarragem-ranking-nowrap" value="#{rodadaAtual.jogos}" var="item" headerClass="exibirPainelBarragemRankingTableHead">
 						<f:facet name="header">
 							#{msg.label_rodada} #{rodadaAtual.numero}
@@ -96,7 +96,7 @@
 				</c:forEach>
 
 				<div class="dados">
-					#{msg.label_esta_barragem_possui} #{fn:length(exibirPainelBarragemBean.rodadasFetch)} #{msg.label__rodadas}.<br/>
+					#{msg.label_esta_barragem_possui} #{fn:length(exibirPainelBarragemBean.rodadas)} #{msg.label__rodadas}.<br/>
 					#{msg.label_confira_outra_rodada}:&#160;<h:inputText value="#{exibirPainelBarragemBean.numeroRodada}" alt="small-integer" maxlength="3" size="3"/>&#160;<h:commandButton actionListener="#{exibirPainelBarragemBean.visualizaRodada}" value="#{msg.label_visualizar}" styleClass="submit" /><br/>
 				</div>
 			</div>

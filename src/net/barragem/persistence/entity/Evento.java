@@ -14,11 +14,17 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import net.barragem.scaffold.MessageBundleUtils;
+
 @Entity
 @NamedQuery(name = "meusEventosQuery", query = "select distinct e from Evento e join e.jogadoresEventos je where je.jogador.usuarioCorrespondente = :usuario order by e.data desc")
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "evento")
 public abstract class Evento extends BaseEntity implements Cloneable {
+
+	public static String TIPO_JOGO_BARRAGEM = "jb";
+	public static String TIPO_JOGO_AVULSO = "ja";
+	public static String TIPO_TREINO = "t";
 
 	@ValidateRequired
 	private Date data;
@@ -98,6 +104,8 @@ public abstract class Evento extends BaseEntity implements Cloneable {
 
 	public abstract String getJogadoresStr();
 
+	public abstract String getResultadoStr();
+
 	public String getComentarioUsuarioLogado() {
 		return getJogadorEventoUsuarioLogado().getComentario();
 	}
@@ -113,5 +121,27 @@ public abstract class Evento extends BaseEntity implements Cloneable {
 			}
 		}
 		return null;
+	}
+
+	public abstract boolean isUsuarioLogadoVencedor();
+
+	public abstract boolean isUsuarioLogadoPerdedor();
+
+	public String getParticipantesCanhotos() {
+		if (getUsuarioLogado() == null) {
+			throw new IllegalStateException();
+		}
+		Usuario usuario = null;
+		for (JogadorEvento jogadorEvento : getJogadoresEventos()) {
+			if (!jogadorEvento.getJogador().equals(getUsuarioLogado().getJogador())
+					&& jogadorEvento.getJogador().getUsuarioCorrespondente() != null) {
+				usuario = jogadorEvento.getJogador().getUsuarioCorrespondente();
+				if (usuario.getPerfil() != null && usuario.getPerfil().getLadoForehand() != null
+						&& usuario.getPerfil().getLadoForehand().equals(LadoForehandEnum.Esquerdo)) {
+					return MessageBundleUtils.getInstance().get("label_sim");
+				}
+			}
+		}
+		return MessageBundleUtils.getInstance().get("label_nao");
 	}
 }

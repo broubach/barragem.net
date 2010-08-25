@@ -18,21 +18,25 @@
 			        <ul>
 			        	<c:if test="#{not exibirPerfilBean.usuarioJahAdicionado}">
 				            <li>
-								<h:commandLink value="#{msg.label_adicionar_a_minha_lista_de_jogadores}" actionListener="#{exibirPerfilBean.adicionaUsuario}"/>
+								<h:commandLink value="#{msg.label_adicionar_a_minha_lista_de_jogadores}" actionListener="#{exibirPerfilBean.adicionaUsuario}" styleClass="btn_adicionar_bckgnd"/>
 				            </li>
 			            </c:if>
+			            <li>
+							<h:commandLink value="#{msg.label_perfil}" disabled="true" styleClass="btn_perfil_bckgnd"></h:commandLink>
+			            </li>
 			        	<c:if test="#{exibirPerfilBean.usuarioJahAdicionado}">
 				            <li>
-								<h:commandLink value="#{msg.label_perfil}" disabled="true"></h:commandLink>
-				            </li>
-				            <li>
-								<h:commandLink value="#{msg.label_mensagens}" actionListener="#{exibirMensagensBean.exibeMensagens}" action="exibirMensagens"><f:param name="id" value="#{exibirPerfilBean.usuarioEmFoco.id}"/></h:commandLink>
+								<h:commandLink value="#{msg.label_mensagens}" actionListener="#{exibirMensagensBean.exibeMensagens}" action="exibirMensagens" styleClass="btn_mensagens_bckgnd"><f:param name="id" value="#{exibirPerfilBean.usuarioEmFoco.id}"/></h:commandLink>
 				            </li>
 			            </c:if>
+			            <li>
+							<h:commandLink value="#{msg.label_estatisticas}" action="exibirEstatisticas" styleClass="btn_estatisticas_bckgnd"><f:param name="id" value="#{exibirPerfilBean.usuarioEmFoco.id}"/></h:commandLink>
+			            </li>
 			        </ul>
 				</h:panelGroup>
 
 			    <ui:include src="../componentes/mensagem-erro.xhtml"/>
+			    <ui:include src="../componentes/mensagem-sucesso.xhtml"/>
 	            <div class="clear"></div>
 	            <br/>
 				

@@ -30,4 +30,19 @@ public class Treino extends Evento {
 
 		return jogadores.toString();
 	}
+
+	@Override
+	public String getResultadoStr() {
+		return "";
+	}
+
+	@Override
+	public boolean isUsuarioLogadoVencedor() {
+		return false;
+	}
+
+	@Override
+	public boolean isUsuarioLogadoPerdedor() {
+		return false;
+	}
 }

@@ -278,16 +278,20 @@ fieldset#parciais {
 
 .menu-contextual span {
 	border: 1px solid #6a9bcd;
+	background-repeat: no-repeat;
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
 	padding: 3px;
+	background-position: 2px center;
 }
 
 .menu-contextual a {
-	background: #B1C3FE;
+	background-color: #B1C3FE;
+	background-repeat: no-repeat;
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
 	padding: 3px;
+	background-position: 2px center;
 }
 
 /********************* FORMS *********************/
@@ -612,6 +616,25 @@ fieldset#parciais {
 }
 
 /********************* BOTOES *********************/
+.menu-contextual .btn_perfil_bckgnd, .menu-contextual .btn_mensagens_bckgnd, .menu-contextual .btn_estatisticas_bckgnd, .menu-contextual .btn_adicionar_bckgnd {
+	padding-left: 20px;
+}
+.menu-contextual .btn_perfil_bckgnd, .menu-contextual .btn_mensagens_bckgnd, .menu-contextual .btn_estatisticas_bckgnd, .menu-contextual .btn_adicionar_bckgnd {
+	padding-left: 20px;
+}
+.btn_perfil_bckgnd {
+	background-image: url("../img/buttons/btn-perfil.png");
+}
+.btn_mensagens_bckgnd {
+	background-image: url("../img/buttons/btn-enviar.png");
+}
+.btn_estatisticas_bckgnd {
+	background-image: url("../img/buttons/btn-estatisticas.png");
+}
+.btn_adicionar_bckgnd {
+	background-image: url("../img/buttons/btn-add.png");
+}
+
 .btn-novo-relative {
 	position: relative;
 	background: #95c396;
@@ -620,7 +643,7 @@ fieldset#parciais {
 	height: 25px;
 	float: left;
 }
-#gerirJogador\:tabelaJogadores .btn-novo-relative {
+#gerirJogador .btn-novo-relative {
 	float: right;
 	margin-right: 4px;
 }

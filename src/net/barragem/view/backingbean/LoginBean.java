@@ -5,12 +5,10 @@ import javax.faces.event.ActionEvent;
 import net.barragem.business.bo.LoginBo;
 import net.barragem.persistence.entity.Atualizacao;
 import net.barragem.persistence.entity.Barragem;
-import net.barragem.persistence.entity.Ciclo;
 import net.barragem.persistence.entity.Jogador;
 import net.barragem.persistence.entity.Predicado;
 import net.barragem.persistence.entity.Rodada;
 import net.barragem.persistence.entity.Usuario;
-import net.barragem.scaffold.PersistenceHelper;
 
 public class LoginBean extends BaseBean {
 	private String login;
@@ -68,27 +66,11 @@ public class LoginBean extends BaseBean {
 			return "exibirPerfil";
 
 		} else if (detalhe instanceof Barragem || detalhe instanceof Rodada) {
-			ExibirPainelBarragemBean painelBarragemBean = new ExibirPainelBarragemBean();
-			Ciclo cicloEmFoco = null;
 			if (detalhe instanceof Barragem) {
-				PersistenceHelper.initialize("ciclos", detalhe);
-				cicloEmFoco = ((Barragem) detalhe).getCiclos().get(0);
-				for (Ciclo ciclo : ((Barragem) detalhe).getCiclos()) {
-					PersistenceHelper.initialize("rodadas", ciclo);
-				}
+				setRequestAttribute("id", ((Barragem) detalhe).getId());
 			} else if (detalhe instanceof Rodada) {
-				PersistenceHelper.initialize("ciclos", ((Rodada) detalhe).getCiclo().getBarragem());
-				for (Ciclo ciclo : ((Rodada) detalhe).getCiclo().getBarragem().getCiclos()) {
-					PersistenceHelper.initialize("rodadas", ciclo);
-				}
-				painelBarragemBean.setNumeroRodada(((Rodada) detalhe).getNumero());
-				int index = ((Rodada) detalhe).getCiclo().getBarragem().getCiclos().indexOf(
-						((Rodada) detalhe).getCiclo());
-				cicloEmFoco = ((Rodada) detalhe).getCiclo().getBarragem().getCiclos().get(index);
+				setRequestAttribute("id", ((Rodada) detalhe).getCiclo().getBarragem().getId());
 			}
-			painelBarragemBean.setCicloEmFoco(cicloEmFoco);
-			painelBarragemBean.visualizaRodada(null);
-			setRequestAttribute("exibirPainelBarragemBean", painelBarragemBean);
 
 			return "exibirPainelBarragem";
 		}

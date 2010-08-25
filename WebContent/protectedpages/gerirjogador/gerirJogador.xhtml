@@ -24,13 +24,7 @@
 			<h:form id="gerirJogador">
 				<h2><h:outputText value="#{msg.label_jogadores}"/></h2>
 				<br/>
-		        <c:if test="#{! empty messageBean.errorMessages}">
-			        <div class="mensagem-erro">
-				        <c:forEach var="item" items="#{messageBean.errorMessages}">
-		    	    		<span>#{item.value.summary}</span>
-				        </c:forEach>
-			        </div>
-		        </c:if>
+			    <ui:include src="../componentes/mensagem-erro.xhtml"/>
 			    <ui:include src="../componentes/mensagem-sucesso.xhtml"/>
 				<fieldset>
 					<legend>#{msg.label_pesquisa_jogadores}</legend>

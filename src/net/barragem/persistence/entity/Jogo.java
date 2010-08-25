@@ -109,7 +109,8 @@ public class Jogo extends Evento {
 				perdedores.append(jogadorEvento.getJogador().getNome().trim()).append(", ");
 			}
 		}
-		// TODO: se for duplas, nao serah possivel agrupar jogadores do mesmo time
+		// TODO: se for duplas, nao serah possivel agrupar jogadores do mesmo
+		// time
 		if (vencedores.length() <= 0) {
 			vencedores = new StringBuilder();
 			perdedores = new StringBuilder();
@@ -125,8 +126,18 @@ public class Jogo extends Evento {
 		return vencedores.append(" X ").append(perdedores).toString();
 	}
 
+	@Override
+	public String getResultadoStr() {
+		if (getUsuarioLogado() == null) {
+			throw new IllegalStateException();
+		}
+		return isUsuarioLogadoVencedor() ? MessageBundleUtils.getInstance().get("label_vitoria")
+				: isUsuarioLogadoPerdedor() ? MessageBundleUtils.getInstance().get("label_derrota")
+						: MessageBundleUtils.getInstance().get("label_indefinido");
+	}
+
 	public void calculaVencedorEInverteParciaisSeNecessario(Jogador jogadorVencedorWo) {
-		Jogador vencedor = obtemVencedor(jogadorVencedorWo);
+		Jogador vencedor = calculaVencedor(jogadorVencedorWo);
 		if (vencedor != null) {
 			marcaVencedor(vencedor);
 			inverteParciaisVencedorasEPerdadorasSeNecessario();
@@ -144,7 +155,7 @@ public class Jogo extends Evento {
 		}
 	}
 
-	public Jogador obtemVencedor(Jogador jogadorVencedorWo) {
+	public Jogador calculaVencedor(Jogador jogadorVencedorWo) {
 		if (getPlacar().getWo() && jogadorVencedorWo == null) {
 			return null;
 		} else if (getPlacar().getWo() && jogadorVencedorWo != null) {
@@ -196,4 +207,29 @@ public class Jogo extends Evento {
 			jogadorJogo.setVencedor(false);
 		}
 	}
+
+	public boolean possuiVencedores() {
+		for (JogadorEvento jogadorEvento : getJogadoresEventos()) {
+			if (((JogadorJogo) jogadorEvento).getVencedor()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean isUsuarioLogadoVencedor() {
+		JogadorEvento jogadorEvento = getJogadorEventoUsuarioLogado();
+		return ((JogadorJogo) jogadorEvento).getVencedor();
+	}
+
+	@Override
+	public boolean isUsuarioLogadoPerdedor() {
+		JogadorEvento jogadorEvento = getJogadorEventoUsuarioLogado();
+		if (!((JogadorJogo) jogadorEvento).getVencedor() && ((Jogo) this).possuiVencedores()) {
+			return true;
+		}
+		return false;
+	}
+
 }

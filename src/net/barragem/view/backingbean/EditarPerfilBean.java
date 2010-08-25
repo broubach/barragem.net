@@ -146,7 +146,8 @@ public class EditarPerfilBean extends BaseBean {
 
 	public void salvaFoto(ActionEvent e) {
 		Arquivo fotoASerRemovida = null;
-		if (fotoEmFoco.getId() == null && perfilEmFoco.getFoto() != null && perfilEmFoco.getFoto().getId() != null) {
+		if (fotoEmFoco.getId() == null && perfilEmFoco.getFoto() != null && perfilEmFoco.getFoto().getId() != null
+				&& !perfilEmFoco.getFoto().getId().equals(ArquivoBean.FOTO_DEFAULT_JOGADOR_ID)) {
 			fotoASerRemovida = perfilEmFoco.getFoto();
 		}
 		perfilEmFoco.setHash(encriptMd5(fotoEmFoco.getDado().toString()));

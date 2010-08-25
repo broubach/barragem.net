@@ -64,14 +64,6 @@ public class ExibirPerfilBean extends BaseBean {
 				null, 6);
 	}
 
-	public void exibePainelBarragem(ActionEvent e) {
-		Barragem barragem = (Barragem) PersistenceHelper.findByPk(Barragem.class, getId(), "ciclos");
-
-		ExibirPainelBarragemBean painelBarragemBean = new ExibirPainelBarragemBean();
-		painelBarragemBean.setCicloEmFoco(barragem.getCiclos().get(0));
-		setRequestAttribute("exibirPainelBarragemBean", painelBarragemBean);
-	}
-
 	public List<Barragem> getBarragens() {
 		return getBarragens(usuarioEmFoco.getId());
 	}

@@ -19,10 +19,13 @@
 				<h:panelGroup id="menu-contextual" styleClass="menu-contextual" layout="block">
 			        <ul>
 			            <li>
-							<h:commandLink value="#{msg.label_perfil}" actionListener="#{exibirPerfilBean.exibePerfil}" action="exibirPerfil"><f:param name="id" value="#{exibirMensagensBean.usuarioEmFoco.id}"/></h:commandLink>
+							<h:commandLink value="#{msg.label_perfil}" actionListener="#{exibirPerfilBean.exibePerfil}" action="exibirPerfil" styleClass="btn_perfil_bckgnd"><f:param name="id" value="#{exibirMensagensBean.usuarioEmFoco.id}"/></h:commandLink>
 			            </li>
 			            <li>
-							<h:commandLink value="#{msg.label_mensagens}" disabled="true"></h:commandLink>
+							<h:commandLink value="#{msg.label_mensagens}" disabled="true" styleClass="btn_mensagens_bckgnd"></h:commandLink>
+			            </li>
+			            <li>
+							<h:commandLink value="#{msg.label_estatisticas}" action="exibirEstatisticas" styleClass="btn_estatisticas_bckgnd"><f:param name="id" value="#{exibirMensagensBean.usuarioEmFoco.id}"/></h:commandLink>
 			            </li>
 			        </ul>
 				</h:panelGroup>

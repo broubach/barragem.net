@@ -175,6 +175,17 @@
 		<url-pattern>/publicpages/mashup/ranking.json</url-pattern>
 	</servlet-mapping>
 
+	<!-- Estatisticas Servlet -->
+	<servlet>
+		<servlet-name>Estatisticas Servlet</servlet-name>
+		<servlet-class>net.barragem.scaffold.EstatisticasServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Estatisticas Servlet</servlet-name>
+		<url-pattern>/protectedpages/exibirestatisticas/exibirEstatisticas.do</url-pattern>
+	</servlet-mapping>
+
     <!-- Spring config -->
    	<context-param>
 		<param-name>contextConfigLocation</param-name>
