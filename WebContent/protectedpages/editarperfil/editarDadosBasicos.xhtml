@@ -28,13 +28,22 @@
 				<h:panelGroup id="menu-contextual" styleClass="menu-contextual" layout="block">
 			        <ul>
 			            <li>
-							<h:commandLink value="#{msg.label_dados_basicos}" disabled="true"/>
+							<h:commandLink disabled="true">
+								#{msg.label_dados_basicos}
+								<ui:include src="../componentes/bordas-redondas.xhtml"/>
+							</h:commandLink>&#160;
 			            </li>
 			            <li>
-							<a href="http://#{request.serverName}#{request.serverPort == '8080' ? ':8080' : ''}#{request.contextPath}/protectedpages/editarperfil/editarPerfil.xhtml">#{msg.label_perfil}</a>
+							<a href="http://#{request.serverName}#{request.serverPort == '8080' ? ':8080' : ''}#{request.contextPath}/protectedpages/editarperfil/editarPerfil.xhtml">
+								#{msg.label_perfil}
+								<ui:include src="../componentes/bordas-redondas.xhtml"/>
+							</a>&#160;
 			            </li>
 			            <li>
-							<a href="http://#{request.serverName}#{request.serverPort == '8080' ? ':8080' : ''}#{request.contextPath}/protectedpages/editarperfil/editarFoto.xhtml">#{msg.label_foto}</a>
+							<a href="http://#{request.serverName}#{request.serverPort == '8080' ? ':8080' : ''}#{request.contextPath}/protectedpages/editarperfil/editarFoto.xhtml">
+								#{msg.label_foto}
+								<ui:include src="../componentes/bordas-redondas.xhtml"/>
+							</a>&#160;
 			            </li>
 			        </ul>
 				</h:panelGroup>

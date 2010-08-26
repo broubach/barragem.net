@@ -271,7 +271,7 @@ fieldset#parciais {
 
 .menu-contextual li {
 	display: inline;
-	margin-right: 5px;
+	margin-right: 3px;
 }
 
 .menu-contextual span, .menu-contextual a {
@@ -286,7 +286,7 @@ fieldset#parciais {
 }
 
 .corner {
-	background: url("../img/bordas.gif") no-repeat scroll 0 0 transparent;
+	background: url("../img/bordas.gif?v1.2.21") no-repeat scroll 0 0 transparent;
 	position: absolute;
 }
 
