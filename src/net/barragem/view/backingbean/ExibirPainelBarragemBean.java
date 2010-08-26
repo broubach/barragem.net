@@ -112,7 +112,7 @@ public class ExibirPainelBarragemBean extends BaseBean {
 		PersistenceHelper.initialize("ciclos", cicloEmFoco.getBarragem());
 	}
 
-	public void visualizaRodada(ActionEvent e) {
+	public String visualizaRodada() {
 		if (numeroRodada != null && numeroRodada > 0 && numeroRodada <= cicloEmFoco.getRodadas().size()) {
 			startIndex = cicloEmFoco.getRodadas().size() - numeroRodada;
 			endIndex = startIndex + 1;
@@ -123,5 +123,7 @@ public class ExibirPainelBarragemBean extends BaseBean {
 		}
 		inicializaRodadas();
 		refreshView();
+
+		return null;
 	}
 }

@@ -25,9 +25,11 @@
 		        <ul>
 					<c:forEach items="#{exibirPainelBarragemBean.cicloEmFoco.barragem.ciclos}" var="item" varStatus="status">
 						<li>
-							<h:commandLink actionListener="#{exibirPainelBarragemBean.visualizaCiclo}" value="#{item.nome}" disabled="#{exibirPainelBarragemBean.cicloEmFoco.id == item.id ? 'true' : 'false'}">
+							<h:commandLink actionListener="#{exibirPainelBarragemBean.visualizaCiclo}" disabled="#{exibirPainelBarragemBean.cicloEmFoco.id == item.id ? 'true' : 'false'}">
+								#{item.nome}
 								<f:param name="index" value="#{status.index}" />
-							</h:commandLink>
+							    <ui:include src="../componentes/bordas-redondas.xhtml"/>
+							</h:commandLink>&#160;
 						</li>
 					</c:forEach>
 		        </ul>
@@ -97,7 +99,13 @@
 
 				<div class="dados">
 					#{msg.label_esta_barragem_possui} #{fn:length(exibirPainelBarragemBean.rodadas)} #{msg.label__rodadas}.<br/>
-					#{msg.label_confira_outra_rodada}:&#160;<h:inputText value="#{exibirPainelBarragemBean.numeroRodada}" alt="small-integer" maxlength="3" size="3"/>&#160;<h:commandButton actionListener="#{exibirPainelBarragemBean.visualizaRodada}" value="#{msg.label_visualizar}" styleClass="submit" /><br/>
+					#{msg.label_confira_outra_rodada}:&#160;<h:inputText value="#{exibirPainelBarragemBean.numeroRodada}" alt="small-integer" maxlength="3" size="3"/>&#160;
+					<ui:include src="../componentes/botao-padrao.xhtml">
+						<ui:param name="label" value="#{msg.label_visualizar}"/>
+						<ui:param name="bean" value="#{exibirPainelBarragemBean}"/>
+						<ui:param name="metodo" value="visualizaRodada"/>
+					</ui:include>
+					<br/>
 				</div>
 			</div>
             <div class="clear"></div>

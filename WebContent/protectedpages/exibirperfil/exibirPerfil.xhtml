@@ -18,20 +18,34 @@
 			        <ul>
 			        	<c:if test="#{not exibirPerfilBean.usuarioJahAdicionado}">
 				            <li>
-								<h:commandLink value="#{msg.label_adicionar_a_minha_lista_de_jogadores}" actionListener="#{exibirPerfilBean.adicionaUsuario}" styleClass="btn_adicionar_bckgnd"/>
+								<h:commandLink actionListener="#{exibirPerfilBean.adicionaUsuario}" styleClass="btn_adicionar_bckgnd">
+									#{msg.label_adicionar_a_minha_lista_de_jogadores}
+								    <ui:include src="../componentes/bordas-redondas.xhtml"/>
+								</h:commandLink>&#160;
 				            </li>
 			            </c:if>
 			            <li>
-							<h:commandLink value="#{msg.label_perfil}" disabled="true" styleClass="btn_perfil_bckgnd"></h:commandLink>
+							<h:commandLink disabled="true" styleClass="btn_perfil_bckgnd">
+								#{msg.label_perfil}
+							    <ui:include src="../componentes/bordas-redondas.xhtml"/>
+							</h:commandLink>&#160;
 			            </li>
 			        	<c:if test="#{exibirPerfilBean.usuarioJahAdicionado}">
 				            <li>
-								<h:commandLink value="#{msg.label_mensagens}" actionListener="#{exibirMensagensBean.exibeMensagens}" action="exibirMensagens" styleClass="btn_mensagens_bckgnd"><f:param name="id" value="#{exibirPerfilBean.usuarioEmFoco.id}"/></h:commandLink>
+								<h:commandLink actionListener="#{exibirMensagensBean.exibeMensagens}" action="exibirMensagens" styleClass="btn_mensagens_bckgnd">
+									#{msg.label_mensagens}
+									<f:param name="id" value="#{exibirPerfilBean.usuarioEmFoco.id}"/>
+								    <ui:include src="../componentes/bordas-redondas.xhtml"/>
+								</h:commandLink>&#160;
 				            </li>
 			            </c:if>
 			            <c:if test="false">
 				            <li>
-								<h:commandLink value="#{msg.label_estatisticas}" action="exibirEstatisticas" styleClass="btn_estatisticas_bckgnd"><f:param name="id" value="#{exibirPerfilBean.usuarioEmFoco.id}"/></h:commandLink>
+								<h:commandLink action="exibirEstatisticas" styleClass="btn_estatisticas_bckgnd">
+									#{msg.label_estatisticas}
+									<f:param name="id" value="#{exibirPerfilBean.usuarioEmFoco.id}"/>
+								    <ui:include src="../componentes/bordas-redondas.xhtml"/>
+								</h:commandLink>&#160;
 				            </li>
 			            </c:if>
 			        </ul>

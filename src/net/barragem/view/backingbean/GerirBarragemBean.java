@@ -127,6 +127,10 @@ public class GerirBarragemBean extends BaseBean {
 		setRequestAttribute("gerirCicloBean", cicloBean);
 	}
 
+	public void exibePainelBarragem(ActionEvent e) {
+		setRequestAttribute("id", barragensQueAdministro.get(getIndex()).getId().toString());
+	}
+
 	public String pesquisaBarragem() {
 		if (tipoPesquisa.equals(new Integer(1))) {
 			PesquisarBean pesquisarBean = new PesquisarBean();

@@ -18,20 +18,34 @@
 			        <ul>
 			        	<c:if test="#{not exibirPerfilBean.usuarioJahAdicionado}">
 				            <li>
-								<h:commandLink value="#{msg.label_adicionar_a_minha_lista_de_jogadores}" actionListener="#{exibirPerfilBean.adicionaUsuario}" styleClass="btn_adicionar_bckgnd"/>
+								<h:commandLink actionListener="#{exibirPerfilBean.adicionaUsuario}" styleClass="btn_adicionar_bckgnd">
+									#{msg.label_adicionar_a_minha_lista_de_jogadores}
+								    <ui:include src="../componentes/bordas-redondas.xhtml"/>
+								</h:commandLink>&#160;
 				            </li>
 			            </c:if>
 			            <li>
-							<h:commandLink value="#{msg.label_perfil}" actionListener="#{exibirPerfilBean.exibePerfil}" action="exibirPerfil" styleClass="btn_perfil_bckgnd"><f:param name="id" value="#{exibirEstatisticasBean.usuarioEmFoco.id}"/></h:commandLink>
+							<h:commandLink actionListener="#{exibirPerfilBean.exibePerfil}" action="exibirPerfil" styleClass="btn_perfil_bckgnd">
+								#{msg.label_perfil}
+								<f:param name="id" value="#{exibirEstatisticasBean.usuarioEmFoco.id}"/>
+								<ui:include src="../componentes/bordas-redondas.xhtml"/>
+							</h:commandLink>&#160;
 			            </li>
 			        	<c:if test="#{exibirEstatisticasBean.usuarioJahAdicionado}">
 				            <li>
-								<h:commandLink value="#{msg.label_mensagens}" actionListener="#{exibirMensagensBean.exibeMensagens}" action="exibirMensagens" styleClass="btn_mensagens_bckgnd"><f:param name="id" value="#{exibirEstatisticasBean.usuarioEmFoco.id}"/></h:commandLink>
+								<h:commandLink actionListener="#{exibirMensagensBean.exibeMensagens}" action="exibirMensagens" styleClass="btn_mensagens_bckgnd">
+									#{msg.label_mensagens}
+									<f:param name="id" value="#{exibirEstatisticasBean.usuarioEmFoco.id}"/>
+									<ui:include src="../componentes/bordas-redondas.xhtml"/>
+								</h:commandLink>&#160;
 				            </li>
 			            </c:if>
 			            <c:if test="false">
 				            <li>
-								<h:commandLink value="#{msg.label_estatisticas}" disabled="true" styleClass="btn_estatisticas_bckgnd"></h:commandLink>
+								<h:commandLink disabled="true" styleClass="btn_estatisticas_bckgnd">
+									#{msg.label_estatisticas}
+									<ui:include src="../componentes/bordas-redondas.xhtml"/>
+								</h:commandLink>&#160;
 				            </li>
 			            </c:if>
 			        </ul>

@@ -151,10 +151,8 @@ fieldset {
 }
 
 .sidebar-header .corner {
-	background: url("../img/bordas.gif?v1.2.9") no-repeat scroll 0 0 transparent;
 	width: 10px;
 	height: 10px;
-	position: absolute;
 }
 
 .sidebar-header .tl {
@@ -273,26 +271,122 @@ fieldset#parciais {
 
 .menu-contextual li {
 	display: inline;
-	margin-right: 3px;
+	margin-right: 5px;
 }
 
-.menu-contextual span {
-	border: 1px solid #6a9bcd;
-	background-repeat: no-repeat;
-	-moz-border-radius: 4px;
-	-webkit-border-radius: 4px;
+.menu-contextual span, .menu-contextual a {
 	padding: 3px;
+	position: relative;
+	background-repeat: no-repeat;
 	background-position: 2px center;
 }
 
 .menu-contextual a {
 	background-color: #B1C3FE;
-	background-repeat: no-repeat;
-	-moz-border-radius: 4px;
-	-webkit-border-radius: 4px;
-	padding: 3px;
-	background-position: 2px center;
 }
+
+.corner {
+	background: url("../img/bordas.gif") no-repeat scroll 0 0 transparent;
+	position: absolute;
+}
+
+.menu-contextual .corner {
+	width: 4px;
+	height: 4px;
+}
+
+.menu-contextual .tl {
+	top: -1px;
+	left: -1px;
+}
+
+.menu-contextual .tr {
+	top: -1px;
+	right: -1px;
+}
+
+.menu-contextual .bl {
+	bottom: -1px;
+	left: -1px;
+}
+
+.menu-contextual .br {
+	bottom: -1px;
+	right: -1px;
+}
+
+.menu-contextual a .tl {
+	background-position: -78px -25px;
+}
+
+.menu-contextual a .tr {
+	background-position: -82px -25px;
+}
+
+.menu-contextual a .bl {
+	background-position: -78px -29px;
+}
+
+.menu-contextual a .br {
+	background-position: -82px -29px;
+}
+
+.menu-contextual span .tl {
+	background-position: -78px -35px;
+}
+
+.menu-contextual span .tr {
+	background-position: -82px -35px;
+}
+
+.menu-contextual span .bl {
+	background-position: -78px -39px;
+}
+
+.menu-contextual span .br {
+	background-position: -82px -39px;
+}
+
+.menu-contextual .border {
+	position: absolute;
+}
+
+.menu-contextual span .border {
+	background-color: #6a9bcd;
+}
+
+.menu-contextual a .border {
+	background-color: #B1C3FE;
+}
+
+.menu-contextual .top {
+	height: 1px;
+	top: -1px;
+	left: 3px;
+	right: 3px;
+}
+
+.menu-contextual .left {
+	width: 1px;
+	top: 3px;
+	left: -1px;
+	bottom: 3px;
+}
+
+.menu-contextual .bottom {
+	height: 1px;
+	bottom: -1px;
+	left: 3px;
+	right: 3px;
+}
+
+.menu-contextual .right {
+	width: 1px;
+	top: 3px;
+	right: -1px;
+	bottom: 3px;
+}
+
 
 /********************* FORMS *********************/
 #loginForm a:hover {
@@ -414,11 +508,9 @@ fieldset#parciais {
 	position: relative;
 }
 .container-mensagem .corner {
-	background: url("../img/bordas.gif?v1.2.9") no-repeat scroll 0 0;
 	background-color: #EEF1F3;
 	width: 3px;
 	height: 3px;
-	position: absolute;
 }
 .container-mensagem .tl {
 	background-position: -80px -7px;
@@ -1339,10 +1431,8 @@ td.actions {
 	margin: 3px;
 }
 .botao-padrao-redondo .corner {
-	background: url("../img/bordas.gif?v1.2.9") no-repeat scroll 0 0 transparent;
 	width: 3px;
 	height: 3px;
-	position: absolute;
 }
 .botao-padrao-redondo .tl {
 	background-position: -80px 0px;
@@ -1416,10 +1506,8 @@ td.actions {
 	padding: 5px;
 }
 .mensagem_sucesso .corner {
-	background: url("../img/bordas.gif?v1.2.9") no-repeat scroll 0 0 transparent;
 	width: 3px;
 	height: 3px;
-	position: absolute;
 	background-color: #EEF1F3;
 }
 .mensagem_sucesso .tl {
@@ -1536,9 +1624,9 @@ label {
 	font-weight: bold;
 }
 
-.dados label,.dados .exemplo,.dados .complemento,.dadosExibirPerfil label,.dados .spanBtn,.texto_informativo,.container-mensagens,.mensagem_sucesso,.dados-popup label {
+.dados label,.dados .exemplo,.dados .complemento,.dadosExibirPerfil label,.dados .spanBtn,.texto_informativo,.container-mensagens,.mensagem_sucesso,.dados-popup label, .botao-padrao-redondo {
 	color: #444;
-	font-size: .8em;
+	font-size: 12px;
 }
 
 .gradient th {

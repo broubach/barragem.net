@@ -19,14 +19,25 @@
 				<h:panelGroup id="menu-contextual" styleClass="menu-contextual" layout="block">
 			        <ul>
 			            <li>
-							<h:commandLink value="#{msg.label_perfil}" actionListener="#{exibirPerfilBean.exibePerfil}" action="exibirPerfil" styleClass="btn_perfil_bckgnd"><f:param name="id" value="#{exibirMensagensBean.usuarioEmFoco.id}"/></h:commandLink>
+							<h:commandLink actionListener="#{exibirPerfilBean.exibePerfil}" action="exibirPerfil" styleClass="btn_perfil_bckgnd">
+								#{msg.label_perfil}
+								<f:param name="id" value="#{exibirMensagensBean.usuarioEmFoco.id}"/>
+							    <ui:include src="../componentes/bordas-redondas.xhtml"/>
+							</h:commandLink>&#160;
 			            </li>
 			            <li>
-							<h:commandLink value="#{msg.label_mensagens}" disabled="true" styleClass="btn_mensagens_bckgnd"></h:commandLink>
+							<h:commandLink disabled="true" styleClass="btn_mensagens_bckgnd">
+								#{msg.label_mensagens}
+							    <ui:include src="../componentes/bordas-redondas.xhtml"/>
+							</h:commandLink>&#160;
 			            </li>
 			            <c:if test="false">
 				            <li>
-								<h:commandLink value="#{msg.label_estatisticas}" action="exibirEstatisticas" styleClass="btn_estatisticas_bckgnd"><f:param name="id" value="#{exibirMensagensBean.usuarioEmFoco.id}"/></h:commandLink>
+								<h:commandLink action="exibirEstatisticas" styleClass="btn_estatisticas_bckgnd">
+									#{msg.label_estatisticas}
+									<f:param name="id" value="#{exibirMensagensBean.usuarioEmFoco.id}"/>
+								    <ui:include src="../componentes/bordas-redondas.xhtml"/>
+								</h:commandLink>&#160;
 				            </li>
 			            </c:if>
 			        </ul>

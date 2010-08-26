@@ -32,6 +32,7 @@ $j(function() {
 		      antiAlias: true
 	};
   	curvyCorners(settings, ".btn-novo");
+  	curvyCorners(settings, ".btn-novo-relative");
 
 	settings = {
 		      tl: { radius: 20 },

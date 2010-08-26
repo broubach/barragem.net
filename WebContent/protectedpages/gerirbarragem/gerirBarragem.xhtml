@@ -19,10 +19,16 @@
 				<h:panelGroup id="menu-contextual" styleClass="menu-contextual" layout="block">
 			        <ul>
 			            <li>
-							<h:commandLink value="#{msg.label_que_participo}" disabled="true"/>
+							<h:commandLink disabled="true">
+								#{msg.label_que_participo}
+							    <ui:include src="../componentes/bordas-redondas.xhtml"/>
+							</h:commandLink>&#160;
 			            </li>
 			            <li>
-							<h:commandLink value="#{msg.label_que_administro}" action="barragensQueAdministro" immediate="true"/>
+							<h:commandLink action="barragensQueAdministro" immediate="true">
+							    #{msg.label_que_administro}
+							    <ui:include src="../componentes/bordas-redondas.xhtml"/>
+							</h:commandLink>&#160;
 			            </li>
 			        </ul>
 				</h:panelGroup>
