@@ -14,7 +14,7 @@
 		<copy todir="${basedir}/temp/WEB-INF/classes" includeemptydirs="false">
 			<fileset dir="../bin">
 				<include name="**/*" />
-				<exclude name="**/test/**/*.class" />
+				<exclude name="**/*Test*.class" />
 			</fileset>
 		</copy>
 
