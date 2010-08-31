@@ -36,6 +36,9 @@ public abstract class Evento extends BaseEntity implements Cloneable {
 	private List<JogadorEvento> jogadoresEventos;
 
 	@Transient
+	private List<JogadorEvento> jogadoresEventosOrdenados;
+
+	@Transient
 	private Usuario usuarioLogado;
 
 	public Date getData() {
@@ -71,6 +74,14 @@ public abstract class Evento extends BaseEntity implements Cloneable {
 
 	public void setHora(Date hora) {
 		this.hora = hora;
+	}
+
+	public List<JogadorEvento> getJogadoresEventosOrdenados() {
+		return jogadoresEventosOrdenados;
+	}
+
+	public void setJogadoresEventosOrdenados(List<JogadorEvento> jogadoresEventosOrdenados) {
+		this.jogadoresEventosOrdenados = jogadoresEventosOrdenados;
 	}
 
 	public Object clone() {

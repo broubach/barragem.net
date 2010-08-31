@@ -6,10 +6,11 @@ import java.util.List;
 
 import javax.faces.event.ActionEvent;
 
-import net.barragem.persistence.entity.Barragem;
 import net.barragem.persistence.entity.Ciclo;
 import net.barragem.persistence.entity.CicloJogador;
+import net.barragem.persistence.entity.JogadorEvento;
 import net.barragem.persistence.entity.Jogo;
+import net.barragem.persistence.entity.JogoBarragem;
 import net.barragem.persistence.entity.Rodada;
 import net.barragem.scaffold.PersistenceHelper;
 import net.barragem.view.backingbean.componentes.EventoMaisRecenteComparator;
@@ -27,17 +28,19 @@ public class ExibirPainelBarragemBean extends BaseBean {
 
 	private List<Rodada> rodadas;
 	private List<CicloJogador> ranking;
+	private List<Ciclo> ciclos;
 
 	public ExibirPainelBarragemBean() {
-		Barragem barragem = (Barragem) PersistenceHelper.findByPk(Barragem.class, getId(), "ciclos");
-		cicloEmFoco = barragem.getCiclos().get(0);
+		ciclos = PersistenceHelper.findByNamedQuery("ciclosDeBarragemQuery", getId());
+
+		cicloEmFoco = (Ciclo) PersistenceHelper.findByNamedQuery("ultimoCicloPorBarragemQuery", getId()).get(0);
 
 		PersistenceHelper.initialize("rodadas", cicloEmFoco);
-		PersistenceHelper.initialize("ranking", cicloEmFoco);
 		rodadas = new ArrayList<Rodada>(cicloEmFoco.getRodadas());
 		Collections.reverse(rodadas);
 		inicializaRodadas();
 
+		PersistenceHelper.initialize("ranking", cicloEmFoco);
 		ranking = cicloEmFoco.getRanking();
 	}
 
@@ -47,9 +50,13 @@ public class ExibirPainelBarragemBean extends BaseBean {
 				PersistenceHelper.initialize("jogos", rodadas.get(i));
 				for (Jogo jogoBarragem : rodadas.get(i).getJogos()) {
 					PersistenceHelper.initialize("parciais", jogoBarragem.getPlacar());
-					Collections.sort(jogoBarragem.getJogadoresEventos(), new JogadorEventoComparatorVencedorPrimeiro());
+					jogoBarragem.setJogadoresEventosOrdenados(new ArrayList<JogadorEvento>(jogoBarragem
+							.getJogadoresEventos()));
+					Collections.sort(jogoBarragem.getJogadoresEventosOrdenados(),
+							new JogadorEventoComparatorVencedorPrimeiro());
 				}
-				Collections.sort(rodadas.get(i).getJogos(), new EventoMaisRecenteComparator());
+				rodadas.get(i).setJogosOrdenados(new ArrayList<JogoBarragem>(rodadas.get(i).getJogos()));
+				Collections.sort(rodadas.get(i).getJogosOrdenados(), new EventoMaisRecenteComparator());
 			}
 		}
 	}
@@ -100,6 +107,14 @@ public class ExibirPainelBarragemBean extends BaseBean {
 
 	public void setRanking(List<CicloJogador> ranking) {
 		this.ranking = ranking;
+	}
+
+	public List<Ciclo> getCiclos() {
+		return ciclos;
+	}
+
+	public void setCiclos(List<Ciclo> ciclos) {
+		this.ciclos = ciclos;
 	}
 
 	public void visualizaCiclo(ActionEvent e) {

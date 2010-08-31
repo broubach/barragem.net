@@ -41,12 +41,17 @@
 			    <div class="menu-contextual">
 			        <ul>
 			            <li>
-							<h:commandLink actionListener="#{gerirCicloBean.criaNovoCiclo}" value="#{msg.label_criar_ciclo}" onclick="return confirm('#{msg.label_deseja_realmente_criar_um_novo_ciclo}')"/>
+							<h:commandLink actionListener="#{gerirCicloBean.criaNovoCiclo}" onclick="return confirm('#{msg.label_deseja_realmente_criar_um_novo_ciclo}')">
+								#{msg.label_criar_ciclo}
+							    <ui:include src="../componentes/bordas-redondas.xhtml"/>
+							</h:commandLink>&#160;
 			            </li>
 			            <li>
-							<a4j:commandLink actionListener="#{gerirCicloBean.preparaRenomea}" reRender="rename-ciclo" oncomplete="$j('.popupRenomearCiclo').click();" value="#{msg.label_renomear_ciclo}">
+							<a4j:commandLink actionListener="#{gerirCicloBean.preparaRenomea}" reRender="rename-ciclo" oncomplete="$j('.popupRenomearCiclo').click();">
+								#{msg.label_renomear_ciclo}
 								<f:param name="index" value="#{status.index}" />
-							</a4j:commandLink>
+							    <ui:include src="../componentes/bordas-redondas.xhtml"/>
+							</a4j:commandLink>&#160;
 			            </li>
 			        </ul>
 			    </div>

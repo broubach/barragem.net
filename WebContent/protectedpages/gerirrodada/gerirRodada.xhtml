@@ -44,13 +44,22 @@
 				<h:panelGroup id="menu-contextual" styleClass="menu-contextual" layout="block">
 			        <ul>
 			            <li>
-							<h:commandLink actionListener="#{gerirRodadaBean.sorteiaJogos}" value="#{msg.label_sortear_jogos}" disabled="#{gerirRodadaBean.rodadaEmFoco.inoperavel == true}"/>
+							<h:commandLink actionListener="#{gerirRodadaBean.sorteiaJogos}" disabled="#{gerirRodadaBean.rodadaEmFoco.inoperavel == true}">
+								#{msg.label_sortear_jogos}
+							    <ui:include src="../componentes/bordas-redondas.xhtml"/>
+							</h:commandLink>&#160;
 			            </li>
 			            <li>
-							<h:commandLink actionListener="#{gerirRodadaBean.recalculaRankingEFechaRodada}" value="#{msg.label_fechar_rodada}" onclick="return confirm('#{msg.label_apos_fechada_rodada_nao_pode_ser_editada}');" disabled="#{gerirRodadaBean.rodadaEmFoco.inoperavel == true or not gerirRodadaBean.rodadaEmFoco.todosOsJogosCompletos or gerirRodadaBean.rodadaAnteriorEmAberto or empty gerirRodadaBean.rodadaEmFoco.jogos}"/>
+							<h:commandLink actionListener="#{gerirRodadaBean.recalculaRankingEFechaRodada}" onclick="return confirm('#{msg.label_apos_fechada_rodada_nao_pode_ser_editada}');" disabled="#{gerirRodadaBean.rodadaEmFoco.inoperavel == true or not gerirRodadaBean.rodadaEmFoco.todosOsJogosCompletos or gerirRodadaBean.rodadaAnteriorEmAberto or empty gerirRodadaBean.rodadaEmFoco.jogos}">
+								#{msg.label_fechar_rodada}
+							    <ui:include src="../componentes/bordas-redondas.xhtml"/>
+							</h:commandLink>&#160;
 			            </li>
 			            <li>
-							<h:commandLink actionListener="#{gerirRodadaBean.criaNovaRodada}" value="#{msg.label_criar_rodada}" onclick="return confirm('#{msg.label_deseja_realmente_criar_uma_nova_rodada}');"/>
+							<h:commandLink actionListener="#{gerirRodadaBean.criaNovaRodada}" onclick="return confirm('#{msg.label_deseja_realmente_criar_uma_nova_rodada}');">
+								#{msg.label_criar_rodada}
+							    <ui:include src="../componentes/bordas-redondas.xhtml"/>
+							</h:commandLink>&#160;
 			            </li>
 			        </ul>
 				</h:panelGroup>

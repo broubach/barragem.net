@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import net.barragem.scaffold.ReflectionHelper;
 
@@ -25,6 +26,9 @@ public class Rodada extends BaseEntity implements Atualizavel {
 
 	@OneToMany(mappedBy = "rodada", cascade = { CascadeType.ALL })
 	private List<JogoBarragem> jogos;
+
+	@Transient
+	private List<JogoBarragem> jogosOrdenados;
 
 	public Integer getNumero() {
 		return numero;
@@ -59,6 +63,14 @@ public class Rodada extends BaseEntity implements Atualizavel {
 
 	public void setFechada(Boolean fechada) {
 		this.fechada = fechada;
+	}
+
+	public List<JogoBarragem> getJogosOrdenados() {
+		return jogosOrdenados;
+	}
+
+	public void setJogosOrdenados(List<JogoBarragem> jogosOrdenados) {
+		this.jogosOrdenados = jogosOrdenados;
 	}
 
 	public JogoBarragem criaJogoBarragem(Jogador jogador1, Jogador jogador2) {

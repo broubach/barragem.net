@@ -23,7 +23,7 @@
 			<h3>#{msg[exibirPainelBarragemBean.cicloEmFoco.barragem.categoria.nome]}</h3>
 		    <div class="menu-contextual">
 		        <ul>
-					<c:forEach items="#{exibirPainelBarragemBean.cicloEmFoco.barragem.ciclos}" var="item" varStatus="status">
+					<c:forEach items="#{exibirPainelBarragemBean.ciclos}" var="item" varStatus="status">
 						<li>
 							<h:commandLink actionListener="#{exibirPainelBarragemBean.visualizaCiclo}" disabled="#{exibirPainelBarragemBean.cicloEmFoco.id == item.id ? 'true' : 'false'}">
 								#{item.nome}
@@ -63,24 +63,24 @@
 
 			<div class="exibirPainelBarragemRodada">
 				<c:forEach items="#{exibirPainelBarragemBean.rodadas}" var="rodadaAtual" begin="#{exibirPainelBarragemBean.startIndex}" end="#{exibirPainelBarragemBean.endIndex}">
-				    <h:dataTable styleClass="exibirPainelBarragemRodadaTable" rowClasses="exibirPainelBarragemRankingBodyBackground,exibirPainelBarragemRankingBodyBackgroundAlt" columnClasses="exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBody,exibirPainelBarragemRodadaBodyVersus,exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBody,exibirPainelBarragem-ranking-nowrap,exibirPainelBarragem-ranking-nowrap" value="#{rodadaAtual.jogos}" var="item" headerClass="exibirPainelBarragemRankingTableHead">
+				    <h:dataTable styleClass="exibirPainelBarragemRodadaTable" rowClasses="exibirPainelBarragemRankingBodyBackground,exibirPainelBarragemRankingBodyBackgroundAlt" columnClasses="exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBody,exibirPainelBarragemRodadaBodyVersus,exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBody,exibirPainelBarragem-ranking-nowrap,exibirPainelBarragem-ranking-nowrap" value="#{rodadaAtual.jogosOrdenados}" var="item" headerClass="exibirPainelBarragemRankingTableHead">
 						<f:facet name="header">
 							#{msg.label_rodada} #{rodadaAtual.numero}
 						</f:facet>
 					    <h:column>
-							#{item.jogadoresEventos[0].jogador.nome}
+							#{item.jogadoresEventosOrdenados[0].jogador.nome}
 					    </h:column>
 					    <h:column>
-							#{item.jogadoresEventos[0].pontuacaoObtida}
+							#{item.jogadoresEventosOrdenados[0].pontuacaoObtida}
 					    </h:column>
 					    <h:column>
 							&#160;&#160;
 					    </h:column>
 					    <h:column>
-							#{item.jogadoresEventos[1].jogador.nome}
+							#{item.jogadoresEventosOrdenados[1].jogador.nome}
 					    </h:column>
 					    <h:column>
-							#{item.jogadoresEventos[1].pontuacaoObtida}
+							#{item.jogadoresEventosOrdenados[1].pontuacaoObtida}
 					    </h:column>
 					    <h:column>
 							#{item.placar}

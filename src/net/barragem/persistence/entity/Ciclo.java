@@ -11,6 +11,8 @@ import java.util.Map;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
@@ -19,6 +21,9 @@ import net.barragem.scaffold.PersistenceHelper;
 
 @Entity
 @Table(name = "ciclo")
+@NamedQueries( {
+		@NamedQuery(name = "ultimoCicloPorBarragemQuery", query = "select c from Barragem b join b.ciclos c where b.id = :idBarragem and c.id = (select max(ciclo.id) from Ciclo ciclo where ciclo.barragem.id = b.id)"),
+		@NamedQuery(name = "ciclosDeBarragemQuery", query = "select c from Barragem b join b.ciclos c where b.id = :idBarragem"), })
 public class Ciclo extends BaseEntity {
 
 	@ManyToOne
