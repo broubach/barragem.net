@@ -12,6 +12,7 @@
 <ui:composition template="/protectedpages/layout/layoutPrincipal.xhtml">
 	<ui:define name="conteudo">
 		<div class="maincontent">
+			<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 			<script type="text/javascript" src="#{request.contextPath}/js/jquery.NobleCount.min.js"></script>
 
 			<h:form id="exibirMensagens">
@@ -22,13 +23,13 @@
 							<h:commandLink actionListener="#{exibirPerfilBean.exibePerfil}" action="exibirPerfil" styleClass="btn_perfil_bckgnd">
 								#{msg.label_perfil}
 								<f:param name="id" value="#{exibirMensagensBean.usuarioEmFoco.id}"/>
-							    <ui:include src="../componentes/bordas-redondas.xhtml"/>
+							    <ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 							</h:commandLink>&#160;
 			            </li>
 			            <li>
 							<h:commandLink disabled="true" styleClass="btn_mensagens_bckgnd">
 								#{msg.label_mensagens}
-							    <ui:include src="../componentes/bordas-redondas.xhtml"/>
+							    <ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 							</h:commandLink>&#160;
 			            </li>
 			            <c:if test="false">
@@ -36,7 +37,7 @@
 								<h:commandLink action="exibirEstatisticas" styleClass="btn_estatisticas_bckgnd">
 									#{msg.label_estatisticas}
 									<f:param name="id" value="#{exibirMensagensBean.usuarioEmFoco.id}"/>
-								    <ui:include src="../componentes/bordas-redondas.xhtml"/>
+								    <ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 								</h:commandLink>&#160;
 				            </li>
 			            </c:if>
@@ -61,10 +62,7 @@
 								</ui:include>
 							</span>
 						</div>
-						<div class="corner tl"></div>
-						<div class="corner tr"></div>
-						<div class="corner bl"></div>
-						<div class="corner br"></div>
+						<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 						<div class="clear"></div>
 					</div>
 			        <script type="text/javascript">
@@ -102,10 +100,7 @@
 								<p class="texto">#{item.mensagem}</p>
 								<span class="container-acoes"><h:commandLink onclick="return confirm('#{msg.label_confirma_exclusao}');" rendered="#{exibirMensagensBean.paginacaoMensagens.pagina[status.index].remetente.id == sessionScope['usuario'].id}" actionListener="#{exibirMensagensBean.exclui}"><f:param name="index" value="#{status.index}"/><img src="#{request.contextPath}/img/buttons/btn-lixeira.png" alt="#{msg.label_responder}" title="#{msg.label_responder}" width="16px" height="16px"/> #{msg.label_excluir}</h:commandLink></span>
 							</div>
-							<div class="corner tl"></div>
-							<div class="corner tr"></div>
-							<div class="corner bl"></div>
-							<div class="corner br"></div>
+							<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 							<div class="clear"></div>
 						</div>
 					</c:forEach>

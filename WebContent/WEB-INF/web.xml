@@ -186,6 +186,17 @@
 		<url-pattern>/protectedpages/exibirestatisticas/exibirEstatisticas.do</url-pattern>
 	</servlet-mapping>
 
+	<!-- Scale Images Servlet>
+	<servlet>
+		<servlet-name>Scale Images Servlet</servlet-name>
+		<servlet-class>net.barragem.scaffold.ScaleImagesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Scale Images Servlet</servlet-name>
+		<url-pattern>/protectedpages/scaleImages.do</url-pattern>
+	</servlet-mapping -->
+
     <!-- Spring config -->
    	<context-param>
 		<param-name>contextConfigLocation</param-name>

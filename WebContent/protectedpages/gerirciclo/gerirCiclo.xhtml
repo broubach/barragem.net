@@ -13,6 +13,7 @@
 	<ui:param name="pageStyle" value="editar-ciclo"/>
 	<ui:define name="conteudo">
 		<div class="maincontent equalheights">
+			<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 
 	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/jquery.colorbox.css" />
 	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/jquery.colorbox-barragem.css" />
@@ -43,14 +44,14 @@
 			            <li>
 							<h:commandLink actionListener="#{gerirCicloBean.criaNovoCiclo}" onclick="return confirm('#{msg.label_deseja_realmente_criar_um_novo_ciclo}')">
 								#{msg.label_criar_ciclo}
-							    <ui:include src="../componentes/bordas-redondas.xhtml"/>
+							    <ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 							</h:commandLink>&#160;
 			            </li>
 			            <li>
 							<a4j:commandLink actionListener="#{gerirCicloBean.preparaRenomea}" reRender="rename-ciclo" oncomplete="$j('.popupRenomearCiclo').click();">
 								#{msg.label_renomear_ciclo}
 								<f:param name="index" value="#{status.index}" />
-							    <ui:include src="../componentes/bordas-redondas.xhtml"/>
+							    <ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 							</a4j:commandLink>&#160;
 			            </li>
 			        </ul>
@@ -68,13 +69,14 @@
 		
 					<div class="btn-novo">
 						<a4j:commandLink actionListener="#{gerirCicloBean.criaJogadoresSelecionaveis}" reRender="add-jogador" oncomplete="$j('.popup').click();">
-							<span>#{msg.label_adicionar_jogador}</span>
-						</a4j:commandLink>
-						<a href="#" class="popup" title="#{msg.label_jogadores}" style="visibility:hidden"/>
-						<a href="#" class="popupRenomearCiclo" title="#{msg.label_renomear_ciclo}" style="visibility:hidden"/>
-						<a href="#" class="popupEditarCicloJogador" title="#{msg.label_editar_jogador}" style="visibility:hidden"/>
-						<a href="#" class="popupBarragem" title="#{msg.label_editar_barragem}" style="visibility:hidden"/>
+							#{msg.label_adicionar_jogador}
+							<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
+						</a4j:commandLink>&#160;
 					</div>
+					<a href="#" class="popup" title="#{msg.label_jogadores}" style="visibility:hidden"/>
+					<a href="#" class="popupRenomearCiclo" title="#{msg.label_renomear_ciclo}" style="visibility:hidden"/>
+					<a href="#" class="popupEditarCicloJogador" title="#{msg.label_editar_jogador}" style="visibility:hidden"/>
+					<a href="#" class="popupBarragem" title="#{msg.label_editar_barragem}" style="visibility:hidden"/>
 		
 				    <h:dataTable id="ranking" styleClass="gradient" rowClasses=",alt" columnClasses=",,,actions" value="#{gerirCicloBean.cicloEmFoco.ranking}" var="item" binding="#{gerirCicloBean.dataTable}">
 					    <h:column>
@@ -111,9 +113,8 @@
 				<ui:include src="../componentes/rodadas.xhtml" />
 			
 				<ui:include src="../componentes/ciclos.xhtml" />
-
-				<div class="clear"></div>
 			</h:form>
+			<div class="clear"></div>
 		</div>
 
 		<div style="display:none">

@@ -31,12 +31,7 @@
 				</div>
 				<span class="inputRedondo3 submit">
 					<h:commandButton value="#{msg.label_enviar}" action="#{registrarNovoUsuarioBean.registraNovoUsuario}" styleClass="loginCadastrarBtn"/>
-					<span class="t"></span>
-					<span class="b"></span>
-					<span class="corner tl"></span>
-					<span class="corner tr"></span>
-					<span class="corner bl"></span>
-					<span class="corner br"></span>
+					<ui:include src="../componentes/bordas-redondas-span.xhtml"/>
 				</span>
 			</div>
 			<div class="error" style="#{messageBean.errorMessages['registrarNovoUsuario'] == null ? 'display:none' : 'display:visible'}">

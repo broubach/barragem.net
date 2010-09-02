@@ -30,10 +30,11 @@
 	    <ui:include src="../componentes/mensagem-sucesso.xhtml"/>
 		<div class="btn-novo">
 			<a4j:commandLink reRender="add-evento" oncomplete="$j('.popup').click();" actionListener="#{gerirEventoBean.novoEvento}">
-				<span>#{msg.label_adicionar_jogo}</span>
-			</a4j:commandLink>
-			<a href="#" title="#{msg.label_evento}" class="popup" style="visibility:hidden"/>
+				#{msg.label_adicionar_jogo}
+				<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
+			</a4j:commandLink>&#160;
 		</div>
+		<a href="#" title="#{msg.label_evento}" class="popup" style="visibility:hidden"/>
 
 		<h:dataTable id="painelEventos" styleClass="gradient" rowClasses=",alt" columnClasses=",,,actions" value="#{gerirEventoBean.paginacaoEventos.pagina}" var="item" binding="#{gerirEventoBean.dataTable}">
 			<h:column>
@@ -90,6 +91,7 @@
 		<div style="display:none">
 			<ui:include src="popupEvento.xhtml" />
 		</div>
+		<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
       </div>
 
 	</ui:define>

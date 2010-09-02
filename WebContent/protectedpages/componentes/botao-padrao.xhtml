@@ -1,19 +1,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 	<div class="botao-padrao-redondo">
 		<h:commandLink action="#{bean.executaMetodo}" value="#{label}" styleClass="inner-button">
 			<f:param name="index" value="#{index}"/>
 			<f:param name="metodo" value="#{metodo}"/>
 		</h:commandLink>
-		<div class="corner tl"></div>
-		<div class="corner tr"></div>
-		<div class="corner bl"></div>
-		<div class="corner br"></div>
-		<div class="top"></div>
-		<div class="left"></div>
-		<div class="right"></div>
-		<div class="bottom"></div>
+		<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 	</div>
 </html>

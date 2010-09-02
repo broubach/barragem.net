@@ -16,11 +16,11 @@ img {
 }
 
 html {
-	background: #bfbfbf url(../img/fundo-home-borda.gif) repeat-y 50%
+	background: #bfbfbf url('../img/fundo-home-borda.gif') repeat-y 50%
 }
 
 body {
-	background: transparent url(../img/fundo-internas.gif) no-repeat 50%
+	background: transparent url('../img/fundo-internas.gif') no-repeat 50%
 		90px;
 }
 
@@ -104,7 +104,7 @@ fieldset {
 
 #header a.brand {
 	margin: 10px;
-	background: transparent url(../img/logo-barragem.gif);
+	background: transparent url('../img/logo-barragem.gif');
 	display: block;
 	width: 318px;
 	height: 56px;
@@ -201,7 +201,7 @@ fieldset {
 /********************* FIELDSETS *********************/
 fieldset#ranking,fieldset#jogos {
 	float: left;
-	width: 440px;
+	width: 460px;
 }
 
 fieldset#detalhes-jogo {
@@ -221,43 +221,171 @@ fieldset#parciais {
 	color: #333333;
 }
 
-/********************* SIDEBAR *********************/
+/********************* SIDEBAR e MAINCONTENT *********************/
 .sidebar {
-	background: #EEF1F3;
-	-moz-border-radius: 20px;
-	-webkit-border-radius: 20px;
-	min-height: 450px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	padding-left: 2px;
-	padding-right: 2px;
+	text-align: center;
+	padding: 10px 2px;
 }
 
-.sidebar li {
-	list-style: none;
+.maincontent {
+	padding: 10px 5px;
 }
 
 .sidebar a {
 	text-decoration: none;
 }
 
-.sidebar {
-	text-align: center;
+.sidebar, .maincontent {
+	background: #EEF1F3;
+	min-height: 600px;
+	position: relative;
+	margin-bottom: 5px;
+}
+
+.sidebar .corner, .maincontent .corner {
+	width: 14px;
+	height: 14px;
+}
+
+.sidebar .tl, .maincontent .tl {
+	top: -5px;
+	left: -5px;
+	background-position: 0px -17px;
+}
+
+.sidebar .tr, .maincontent .tr {
+	top: -5px;
+	right: -5px;
+	background-position: -14px -17px;
+}
+
+.sidebar .bl, .maincontent .bl {
+	bottom: -5px;
+	left: -5px;
+	background-position: 0px -31px;
+}
+
+.sidebar .br, .maincontent .br {
+	bottom: -5px;
+	right: -5px;
+	background-position: -14px -31px;
+}
+
+.sidebar .top, .maincontent .top {
+	height: 5px;
+	top: -5px;
+	left: 9px;
+	right: 9px;
+}
+
+.sidebar .left, .maincontent .left {
+	width: 5px;
+	top: 9px;
+	left: -5px;
+	bottom: 9px;
+}
+
+.sidebar .bottom, .maincontent .bottom {
+	height: 5px;
+	bottom: -5px;
+	left: 9px;
+	right: 9px;
+}
+
+.sidebar .right, .maincontent .right {
+	width: 5px;
+	top: 9px;
+	right: -5px;
+	bottom: 9px;
+}
+
+.sidebar .border, .maincontent .border {
+	background-color: #EEF1F3;
 }
 
 /********************* MENU *********************/
-.internas .menu a {
-	background: #596E94;
-	padding-bottom: 2px;
-	margin-bottom: 2px;
-	margin-left: 4px;
-	margin-right: 4px;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
+.menu .corner {
+	width: 3px;
+	height: 3px;
 }
 
-.internas .menu a:hover {
+.menu .top {
+	display: none;
+}
+
+.menu .bottom {
+	display: none;
+}
+
+.menu .tl {
+	top: 0px;
+	left: 0px;
+}
+
+.menu .tr {
+	top: 0px;
+	right: 0px;
+}
+
+.menu .bl {
+	bottom: 0px;
+	left: 0px;
+}
+
+.menu .br {
+	bottom: 0px;
+	right: 0px;
+}
+
+.menu a .tl {
+	background-position: -0px -8px;
+}
+
+.menu a .tr {
+	background-position: -3px -8px;
+}
+
+.menu a .bl {
+	background-position: -0px -11px;
+}
+
+.menu a .br {
+	background-position: -3px -11px;
+}
+
+.menu a:hover .tl {
+	background-position: -7px -8px;
+}
+
+.menu a:hover .tr {
+	background-position: -10px -8px;
+}
+
+.menu a:hover .bl {
+	background-position: -7px -11px;
+}
+
+.menu a:hover .br {
+	background-position: -10px -11px;
+}
+
+.menu a {
+	background: #596E94;
+	position: relative;
+	padding-left: 12px;
+	display: block;
+	margin-left:4px;
+	margin-right:4px;
+	height: 20px;
+}
+
+.menu a:hover {
 	background: #0D286F;
+}
+
+.menu li {
+	text-align: left;
+	height: 22px;
 }
 
 .new {
@@ -275,7 +403,9 @@ fieldset#parciais {
 }
 
 .menu-contextual span, .menu-contextual a {
-	padding: 3px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-left: 3px;
 	position: relative;
 	background-repeat: no-repeat;
 	background-position: 2px center;
@@ -286,7 +416,11 @@ fieldset#parciais {
 }
 
 .corner {
-	background: url("../img/bordas.gif?v1.2.21") no-repeat scroll 0 0 transparent;
+	background: url('../img/bordas.gif?v1.2.22') no-repeat scroll 0 0 transparent;
+	position: absolute;
+}
+
+.border {
 	position: absolute;
 }
 
@@ -347,10 +481,6 @@ fieldset#parciais {
 	background-position: -82px -39px;
 }
 
-.menu-contextual .border {
-	position: absolute;
-}
-
 .menu-contextual span .border {
 	background-color: #6a9bcd;
 }
@@ -394,8 +524,7 @@ fieldset#parciais {
 }
 
 .voltar {
-	background: transparent url(../img/buttons/btn-voltar.png) no-repeat 0 0
-		;
+	background: transparent url('../img/buttons/btn-voltar.png') no-repeat 0 0;
 	padding-left: 17px;
 }
 
@@ -429,7 +558,7 @@ fieldset#parciais {
 
 /********************* RODAPE *********************/
 #footer {
-	background: #fff url(../img/fundo-rodape.gif) repeat-x;
+	background: #fff url('../img/fundo-rodape.gif') repeat-x;
 	padding-top: .5em;
 	margin: .5em 0;
 	text-align: right;
@@ -454,14 +583,6 @@ fieldset#parciais {
 
 #content {
 	margin-top: 20px;
-}
-
-.maincontent {
-	min-height: 600px;
-	background: #EEF1F3;
-	-moz-border-radius: 20px;
-	-webkit-border-radius: 20px;
-	padding: 10px;
 }
 
 .maincontent h2,.maincontent h3 {
@@ -498,8 +619,6 @@ fieldset#parciais {
 }
 
 /********************* ENVIAR MENSAGEM *************/
-.container-mensagens {
-}
 .container-mensagem {
 	background-color: #ffffff;
 	border: 1px solid #95A3BA;
@@ -532,10 +651,14 @@ fieldset#parciais {
 	bottom: -1px;
 	right: -1px;
 }
+.container-mensagem .top, .container-mensagem .bottom, .container-mensagem .left, .container-mensagem .right {
+	display: none;
+}
+.container-mensagem .botao-padrao-redondo .top, .container-mensagem .botao-padrao-redondo .bottom, .container-mensagem .botao-padrao-redondo .left, .container-mensagem .botao-padrao-redondo .right {
+	display: block;
+}
 
 /******** Remetente ********/
-.container-remetente {
-}
 .container-remetente .foto {
 	height: 49px;
 	width: 37px;
@@ -547,8 +670,6 @@ fieldset#parciais {
 }
 
 /******** Texto ********/
-.container-texto {
-}
 .container-texto .texto {
 	width: 350px;
 	float: right;
@@ -723,51 +844,108 @@ fieldset#parciais {
 	padding-left: 20px;
 }
 .btn_perfil_bckgnd {
-	background-image: url("../img/buttons/btn-perfil.png");
+	background-image: url('../img/buttons/btn-perfil.png');
 }
 .btn_mensagens_bckgnd {
-	background-image: url("../img/buttons/btn-enviar.png");
+	background-image: url('../img/buttons/btn-enviar.png');
 }
 .btn_estatisticas_bckgnd {
-	background-image: url("../img/buttons/btn-estatisticas.png");
+	background-image: url('../img/buttons/btn-estatisticas.png');
 }
 .btn_adicionar_bckgnd {
-	background-image: url("../img/buttons/btn-add.png");
-}
-
-.btn-novo-relative {
-	position: relative;
-	background: #95c396;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	height: 25px;
-	float: left;
-}
-#gerirJogador .btn-novo-relative {
-	float: right;
-	margin-right: 4px;
-}
-
-.btn-novo a,.btn-novo-relative a {
-	text-decoration: none;
-	display: block;
-	padding: 4px 8px;
-	white-space: nowrap;
-}
-
-.btn-novo a span,.btn-novo-relative a span {
-	padding-left: 20px;
-	background: transparent url(../img/buttons/btn-novo.gif) no-repeat left
-		0;
+	background-image: url('../img/buttons/btn-add.png');
 }
 
 .btn-novo {
-	background: #95c396;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	height: 25px;
 	float: right;
-	margin-bottom: 3px;
+	margin-bottom: 10px;
+}
+
+.btn-novo a {
+	padding-left: 25px;
+	padding-right: 4px;
+	padding-bottom: 4px;
+	padding-top: 4px;
+	position: relative;
+	background-color: #95C396;
+	background-image: url('../img/buttons/btn-novo.gif');
+	background-repeat: no-repeat;
+	background-position: 5px center;
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+.btn-novo .corner {
+	width: 4px;
+	height: 4px;
+}
+
+.btn-novo .tl {
+	top: -1px;
+	left: -1px;
+}
+
+.btn-novo .tr {
+	top: -1px;
+	right: -1px;
+}
+
+.btn-novo .bl {
+	bottom: -1px;
+	left: -1px;
+}
+
+.btn-novo .br {
+	bottom: -1px;
+	right: -1px;
+}
+
+.btn-novo .top {
+	height: 1px;
+	top: -1px;
+	left: 3px;
+	right: 3px;
+}
+
+.btn-novo .left {
+	width: 1px;
+	top: 3px;
+	left: -1px;
+	bottom: 3px;
+}
+
+.btn-novo .bottom {
+	height: 1px;
+	bottom: -1px;
+	left: 3px;
+	right: 3px;
+}
+
+.btn-novo .right {
+	width: 1px;
+	top: 3px;
+	right: -1px;
+	bottom: 3px;
+}
+
+.btn-novo a .border {
+	background-color: #95C396;
+}
+
+.btn-novo a .tl {
+	background-position: -14px -7px;
+}
+
+.btn-novo a .tr {
+	background-position: -18px -7px;
+}
+
+.btn-novo a .bl {
+	background-position: -14px -11px;
+}
+
+.btn-novo a .br {
+	background-position: -18px -11px;
 }
 
 .gradient {
@@ -825,7 +1003,7 @@ td.actions {
 }
 
 .versus {
-	background: transparent url(../img/versus.png) no-repeat 50%;
+	background: transparent url('../img/versus.png') no-repeat 50%;
 }
 
 .columnGrid img,.columnGrid select {
@@ -912,11 +1090,11 @@ td.actions {
 	padding: 2px;
 	border-bottom: 1px solid #FFFFFF;
 	border-top: 1px solid #FFFFFF;
-	background: transparent url(../img/versus.png) no-repeat 50%;
+	background: transparent url('../img/versus.png') no-repeat 50%;
 }
 
 .setaPaginacao {
-	background: url("../img/buttons/btn-arrows-sprite.gif") no-repeat scroll
+	background: url('../img/buttons/btn-arrows-sprite.gif') no-repeat scroll
 		0 0 transparent;
 	height: 14px;
 }
@@ -1160,17 +1338,12 @@ td.actions {
 
 /********************* CICLOS *********************/
 .ciclos a {
-	background: transparent url(../img/marcador-ciclo.gif) no-repeat 0 4px;
+	background: transparent url('../img/marcador-ciclo.gif') no-repeat 0 4px;
 	padding-left: 12px;
 }
 
 .ciclos .atual {
 	border-bottom: 1px solid orange;
-}
-
-.editar-ciclo .btn-novo {
-	right: 120px;
-	top: 60px;
 }
 
 .ciclos {
@@ -1180,33 +1353,11 @@ td.actions {
 	width: 80px;
 }
 
-.editar-ciclo .btn-novo {
-	position: relative;
-	top: 0;
-	right: 0;
-	margin-bottom: 10px;
-	float: right;
-}
-
 /********************* BLOCO *********************/
 .bloco {
-	background: transparent url(../img/border-sidebar.gif) no-repeat bottom;
+	background: transparent url('../img/border-sidebar.gif') no-repeat bottom;
 	padding-bottom: 10px;
 	margin: 10px 0;
-}
-
-/********************* MENU *********************/
-.menu li {
-	list-style: none;
-	text-align: left;
-}
-
-.menu a {
-	background: transparent url(../img/marcador-menu.gif) 4px 10px no-repeat
-		;
-	display: block;
-	padding-left: 12px;
-	text-decoration: none;
 }
 
 /********************* TABLES *********************/
@@ -1262,7 +1413,7 @@ td.actions {
 
 /********************* RODADAS *********************/
 .rodadas a:hover,.rodadas a.atual {
-	background: transparent url(../img/fundo-link-rodadas-atual.gif)
+	background: transparent url('../img/fundo-link-rodadas-atual.gif')
 		no-repeat 0 0;
 }
 
@@ -1272,7 +1423,7 @@ td.actions {
 }
 
 .rodadas a {
-	background: transparent url(../img/fundo-link-rodadas.gif) no-repeat 0 0
+	background: transparent url('../img/fundo-link-rodadas.gif') no-repeat 0 0
 		;
 	display: block;
 	float: left;
@@ -1283,7 +1434,7 @@ td.actions {
 }
 
 .rodadas a.fechada {
-	background: transparent url(../img/fundo-link-rodadas-desabilitado.gif)
+	background: transparent url('../img/fundo-link-rodadas-desabilitado.gif')
 		no-repeat 0 0;
 }
 
@@ -1292,14 +1443,6 @@ td.actions {
 	float: right;
 	margin-bottom: 10px;
 	width: 80px;
-}
-
-.rodada .btn-novo {
-	position: relative;
-	top: 0;
-	right: 0;
-	margin-bottom: 10px;
-	float: right;
 }
 
 /********************* ADD JOGO *********************/
@@ -1350,13 +1493,13 @@ td.actions {
 }
 
 .anterior_proximo .anterior {
-	background: transparent url(../img/buttons/btn-anterior.gif) no-repeat 0
+	background: transparent url('../img/buttons/btn-anterior.gif') no-repeat 0
 		0;
 	padding-left: 17px;
 }
 
 .anterior_proximo .proximo {
-	background: transparent url(../img/buttons/btn-proximo.gif) no-repeat
+	background: transparent url('../img/buttons/btn-proximo.gif') no-repeat
 		100% 0;
 	padding-right: 17px;
 }
@@ -1410,16 +1553,8 @@ td.actions {
 .add-evento .dados-basicos-barragem label {
 	white-space: nowrap;
 }
-#detalhes-jogo .btn-novo {
-	float: none;
-}
 #add-evento {
 	width: 400px;
-}
-
-/********************* FIXME *********************/
-.editar-ciclo .btn-novo {
-	width: 160px;
 }
 
 /********************* PADROES *********************/
@@ -1533,6 +1668,9 @@ td.actions {
 .mensagem_sucesso .icone {
 	vertical-align: middle;
 }
+.mensagem_sucesso .top, .mensagem_sucesso .left, .mensagem_sucesso .bottom, .mensagem_sucesso .right {
+	display: none;
+}
 /********************* TYPOGRAPHY *********************/
 body {
 	font-family: Tahoma, Arial, Helvetica, sans serif;
@@ -1547,10 +1685,6 @@ body {
 }
 
 .maincontent h2,.maincontent h3,.maincontent dd a {
-	color: #4f6aad;
-}
-
-.menu a {
 	color: #4f6aad;
 }
 
@@ -1576,8 +1710,8 @@ input {
 	color: #fff;
 }
 
-.internas .menu a {
-	color: #fff;
+.menu a {
+	color: #ffffff;
 }
 
 #footer {
@@ -1609,7 +1743,7 @@ label {
 	color: #2c6695;
 }
 
-.btn-novo a,.btn-novo-relative a {
+.btn-novo a {
 	color: #fff;
 	font-weight: bold;
 	font-size: 13px;

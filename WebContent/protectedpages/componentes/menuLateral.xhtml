@@ -31,22 +31,40 @@
         <div class="menu bloco">
             <ul>
                 <li>
-                    <a href="#{request.contextPath}/protectedpages/index.xhtml">#{msg.label_home}</a>
+                    <a href="#{request.contextPath}/protectedpages/index.xhtml">
+                    	#{msg.label_home}
+						<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
+                    </a>&#160;
                 </li>
                 <li>
-                    <a href="#{request.contextPath}/protectedpages/gerirjogador/gerirJogador.xhtml">#{msg.label_jogadores}</a>
+                    <a href="#{request.contextPath}/protectedpages/gerirjogador/gerirJogador.xhtml">
+                    	#{msg.label_jogadores}
+						<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
+                    </a>&#160;
                 </li>
                 <li>
-                    <a href="#{request.contextPath}/protectedpages/gerirbarragem/gerirBarragem.xhtml">#{msg.label_barragens}</a>
+                    <a href="#{request.contextPath}/protectedpages/gerirbarragem/gerirBarragem.xhtml">
+                    	#{msg.label_barragens}
+						<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
+                    </a>&#160;
                 </li>
                 <li>
-                    <a href="#{request.contextPath}/protectedpages/recebermensagem/receberMensagem.xhtml">#{msg.label_mensagens} <img src="#{request.contextPath}/img/new.png" class="new"/></a>
+                    <a href="#{request.contextPath}/protectedpages/recebermensagem/receberMensagem.xhtml">
+	                    #{msg.label_mensagens}
+    	                <img src="#{request.contextPath}/img/new.png" class="new" width="16px" height="16px"/>
+						<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
+                    </a>&#160;
                 </li>
                 <li>
-                    <a href="#{request.contextPath}/protectedpages/gerirevento/gerirEvento.xhtml">#{msg.label_meus_jogos} <img src="#{request.contextPath}/img/new.png" class="new"/></a>
+                    <a href="#{request.contextPath}/protectedpages/gerirevento/gerirEvento.xhtml">
+                    	#{msg.label_meus_jogos} 
+                    	<img src="#{request.contextPath}/img/new.png" class="new" width="16px" height="16px"/>
+						<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
+                    </a>&#160;
                 </li>
             </ul>
         </div>
+		<ui:include src="../../publicpages/componentes/bordas-redondas-span.xhtml"/>
         <div class="clear"></div>
     </div>
 

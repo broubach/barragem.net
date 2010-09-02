@@ -11,14 +11,17 @@
 	<ui:param name="naoMostrarEditarPerfil" value="true"/>
 	<ui:define name="conteudo">
 		<div class="maincontent equalheights">
+			<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 
 			<div class="tituloPerfil">
 				<div class="passoAtivo">
 					<h2>#{msg.label_passo1}</h2>
 					#{msg.label_editar_perfil}
+					<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 				</div>
 				<div class="passoInativo">
 					<h4>#{msg.label_passo2}</h4>
+					<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 				</div>
 			</div>
 			<br/>
@@ -34,7 +37,6 @@
 					<h:commandButton action="passo3" value="#{msg.label_salvar_e_continuar}" actionListener="#{editarPerfilBean.salvaPerfil}" styleClass="submit"/>
 				</div>
 			</h:form>
-
 		</div>
 	</ui:define>
 </ui:composition>

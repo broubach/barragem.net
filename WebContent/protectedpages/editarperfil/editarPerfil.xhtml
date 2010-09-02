@@ -12,6 +12,7 @@
 <ui:composition template="/protectedpages/layout/layoutPrincipal.xhtml">
 	<ui:define name="conteudo">
 		<div class="maincontent equalheights">
+			<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 			<h:form id="perfil">
 				<h2>#{msg.label_perfil}</h2>
 				<h:panelGroup id="menu-contextual" styleClass="menu-contextual" layout="block">
@@ -19,19 +20,19 @@
 			            <li>
 							<h:commandLink action="editarDadosBasicos" immediate="true">
 								#{msg.label_dados_basicos}
-								<ui:include src="../componentes/bordas-redondas.xhtml"/>
+								<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 							</h:commandLink>&#160;
 			            </li>
 			            <li>
 							<h:commandLink disabled="true">
 								#{msg.label_perfil}
-								<ui:include src="../componentes/bordas-redondas.xhtml"/>
+								<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 							</h:commandLink>&#160;
 			            </li>
 			            <li>
 							<h:commandLink action="editarFoto" immediate="true">
 								#{msg.label_foto}
-								<ui:include src="../componentes/bordas-redondas.xhtml"/>
+								<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 							</h:commandLink>&#160;
 			            </li>
 			        </ul>

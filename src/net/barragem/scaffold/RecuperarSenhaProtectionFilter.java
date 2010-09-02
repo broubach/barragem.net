@@ -24,7 +24,7 @@ public class RecuperarSenhaProtectionFilter implements Filter {
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) resp;
 		Calendar calendar = Calendar.getInstance();
-		calendar.roll(Calendar.DATE, -2);
+		calendar.add(Calendar.DATE, -2);
 		String hash = req.getParameter("hash") == null ? req.getParameter("recuperarSenhaForm:hash") : req
 				.getParameter("hash");
 		if (hash != null) {

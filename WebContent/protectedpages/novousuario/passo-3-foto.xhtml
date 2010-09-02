@@ -17,10 +17,12 @@
 			<div class="tituloPerfil">
 				<div class="passoInativo">
 					<h4>#{msg.label_passo1}</h4>
+					<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 				</div>
 				<div class="passoAtivo">
 					<h2>#{msg.label_passo2}</h2>
 					#{msg.label_atualizar_foto}
+					<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 				</div>
 			</div>
 			<br/>
@@ -39,6 +41,7 @@
 					<h:commandButton action="fim" actionListener="#{editarPerfilBean.salvaFoto}" value="#{msg.label_salvar_e_continuar}" styleClass="submit"/>
 				</div>
 			</h:form>
+			<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 		</div>
 	</ui:define>
 </ui:composition>

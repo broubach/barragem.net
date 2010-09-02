@@ -13,6 +13,7 @@
 	<ui:param name="pageStyle" value="rodada"/>
 	<ui:define name="conteudo">
 		<div class="maincontent equalheights">
+			<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 
 	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/jquery.colorbox.css" />
 	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/jquery.colorbox-barragem.css" />
@@ -46,19 +47,19 @@
 			            <li>
 							<h:commandLink actionListener="#{gerirRodadaBean.sorteiaJogos}" disabled="#{gerirRodadaBean.rodadaEmFoco.inoperavel == true}">
 								#{msg.label_sortear_jogos}
-							    <ui:include src="../componentes/bordas-redondas.xhtml"/>
+							    <ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 							</h:commandLink>&#160;
 			            </li>
 			            <li>
 							<h:commandLink actionListener="#{gerirRodadaBean.recalculaRankingEFechaRodada}" onclick="return confirm('#{msg.label_apos_fechada_rodada_nao_pode_ser_editada}');" disabled="#{gerirRodadaBean.rodadaEmFoco.inoperavel == true or not gerirRodadaBean.rodadaEmFoco.todosOsJogosCompletos or gerirRodadaBean.rodadaAnteriorEmAberto or empty gerirRodadaBean.rodadaEmFoco.jogos}">
 								#{msg.label_fechar_rodada}
-							    <ui:include src="../componentes/bordas-redondas.xhtml"/>
+							    <ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 							</h:commandLink>&#160;
 			            </li>
 			            <li>
 							<h:commandLink actionListener="#{gerirRodadaBean.criaNovaRodada}" onclick="return confirm('#{msg.label_deseja_realmente_criar_uma_nova_rodada}');">
 								#{msg.label_criar_rodada}
-							    <ui:include src="../componentes/bordas-redondas.xhtml"/>
+							    <ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 							</h:commandLink>&#160;
 			            </li>
 			        </ul>
@@ -69,11 +70,12 @@
 	
 					<h:panelGroup styleClass="btn-novo" layout="block" rendered="#{gerirRodadaBean.rodadaEmFoco.inoperavel == false}">
 						<a4j:commandLink actionListener="#{gerirRodadaBean.adicionaJogo}" reRender="add-jogo" oncomplete="if (#{gerirRodadaBean.possuiSaldoParaUmJogo}) {$j('.popup').click();} else {$j('.mensagem-erro').show();}" rendered="#{gerirRodadaBean.rodadaEmFoco.inoperavel == false}">
-							<span>#{msg.label_adicionar_jogo}</span>
-						</a4j:commandLink>
-						<a href="#" class="popup" title="#{msg.label_jogo}" style="visibility:hidden"/>
-						<a href="#" class="popupBarragem" title="#{msg.label_editar_barragem}" style="visibility:hidden"/>
+							#{msg.label_adicionar_jogo}
+							<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
+						</a4j:commandLink>&#160;
 					</h:panelGroup>
+					<a href="#" class="popup" title="#{msg.label_jogo}" style="visibility:hidden"/>
+					<a href="#" class="popupBarragem" title="#{msg.label_editar_barragem}" style="visibility:hidden"/>
 	
 				    <h:dataTable id="jogos" styleClass="gradient" rowClasses=",alt" columnClasses=",,versus,,,nowrap,nowrap,nowrap" value="#{gerirRodadaBean.rodadaEmFoco.jogos}" var="item" binding="#{gerirRodadaBean.dataTable}">
 					    <h:column>

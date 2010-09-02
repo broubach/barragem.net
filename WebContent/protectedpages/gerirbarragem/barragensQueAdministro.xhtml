@@ -12,6 +12,7 @@
 
 	<ui:define name="conteudo">
       <div class="maincontent equalheights">
+		<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 
         <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/jquery.colorbox.css" />
         <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/jquery.colorbox-barragem.css" />
@@ -24,32 +25,32 @@
          </script>
 
       	<h:form>
-  		  <h2><h:outputText value="#{msg.label_minhas_barragens}" /></h2>
+		  <h2><h:outputText value="#{msg.label_minhas_barragens}" /></h2>
+			<a href="#" title="#{msg.label_barragem}" class="popup" style="visibility:hidden"/>
+			<div class="btn-novo">
+				<a4j:commandLink actionListener="#{gerirBarragemBean.novaBarragem}" reRender="add-barragens" oncomplete="$j('.popup').click();">
+					#{msg.label_adicionar_barragem}
+					<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
+				</a4j:commandLink>&#160;
+			</div>
   		  <h:panelGroup id="menu-contextual" styleClass="menu-contextual" layout="block">
 	          <ul>
 	              <li>
 				  	<h:commandLink id="queParticipo" action="barragensQueParticipo" immediate="true">
 				  		#{msg.label_que_participo}
-					    <ui:include src="../componentes/bordas-redondas.xhtml"/>
+					    <ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 				  	</h:commandLink>&#160;
 	              </li>
 	              <li>
 					<h:commandLink id="queAdministro" disabled="true">
 						#{msg.label_que_administro}
-					    <ui:include src="../componentes/bordas-redondas.xhtml"/>
+					    <ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 					</h:commandLink>&#160;
 	              </li>
 	          </ul>
 		  </h:panelGroup>
 
 	    <ui:include src="../componentes/mensagem-sucesso.xhtml"/>
-		<div class="btn-novo">
-			<a4j:commandLink actionListener="#{gerirBarragemBean.novaBarragem}" reRender="add-barragens" oncomplete="$j('.popup').click();">
-				<span>#{msg.label_adicionar_barragem}</span>
-			</a4j:commandLink>
-			<a href="#" title="#{msg.label_barragem}" class="popup" style="visibility:hidden"/>
-		</div>
-
 		<h:dataTable id="painelBarragens" styleClass="gradient" rowClasses=",alt" columnClasses=",,,actions" value="#{gerirBarragemBean.barragensQueAdministro}" var="item" binding="#{gerirBarragemBean.dataTable}">
 			<h:column>
 				<f:facet name="header">

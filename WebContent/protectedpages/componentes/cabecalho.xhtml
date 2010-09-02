@@ -21,10 +21,7 @@
 			     <p>#{msg.label_seu_ultimo_acesso_foi_em}&#160;<h:outputText value="#{sessionScope['usuario'].dataPenultimoAcesso}"><f:convertDateTime type="date" dateStyle="long" locale="pt" timeZone="GMT-3"/></h:outputText></p>
 		     </c:if>
 		</h:form>
-		<div class="corner tl"></div>
-		<div class="corner tr"></div>
-		<div class="corner bl"></div>
-		<div class="corner br"></div>
+		<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 	</div>
 	<c:if test="false">
 		<div class="language">

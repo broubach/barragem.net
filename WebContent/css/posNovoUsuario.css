@@ -9,9 +9,9 @@
 a {outline:none}
 img {border:none;}
 html {
-	background:#bfbfbf url(../img/fundo-home-borda.gif) repeat-y 50%
+	background:#bfbfbf url('../img/fundo-home-borda.gif') repeat-y 50%
 }
-body {background: transparent url(../img/fundo-internas.gif) no-repeat 50% 90px;}
+body {background: transparent url('../img/fundo-internas.gif') no-repeat 50% 90px;}
 input {
 	height:14px;
 	padding:2px;
@@ -32,7 +32,7 @@ li {
 }
 #header a.brand {
     margin:10px;
-    background: transparent url(../img/logo-barragem.gif);    
+    background: transparent url('../img/logo-barragem.gif');    
     display:block;
     width:318px;
     height:56px;
@@ -41,22 +41,58 @@ li {
 
 /********************* SIDEBAR HEADER *********************/
 .sidebar-header {
-    margin-left:20px;
-    margin-top:20px;
-    float:left;
-    background: #596e94;
-    padding:10px;
-    -moz-border-radius: 10px;
-	-webkit-border-radius: 10px;
-    width:305px;
-    height:40px;
+	margin-left: 20px;
+	margin-top: 20px;
+	float: left;
+	background: #596e94;
+	padding: 10px;
+	width: 305px;
+	height: 40px;
+	position: relative;
 }
+
+.sidebar-header .corner {
+	width: 10px;
+	height: 10px;
+	position: absolute;
+}
+
+.sidebar-header .tl {
+	background-position: -30px 0px;
+	top: 0px;
+	left: 0px;
+	background-color: #ffffff;
+}
+
+.sidebar-header .tr {
+	background-position: -40px 0px;
+	top: 0px;
+	right: 0px;
+	background-color: #ffffff;
+}
+
+.sidebar-header .bl {
+	background-position: -30px -10px;
+	bottom: 0px;
+	left: 0px;
+	background-color: #ffffff;
+}
+
+.sidebar-header .br {
+	background-position: -40px -10px;
+	bottom: 0px;
+	right: 0px;
+	background-color: #ffffff;
+}
+
 .sidebar-header a {
-	text-decoration:none;
+	text-decoration: none;
 }
+
 .sidebar-header a:hover {
-	text-decoration:underline;
+	text-decoration: underline;
 }
+
 .sidebar-header .logout {
     float:right;
     top:4px;
@@ -109,7 +145,7 @@ li {
     top:50px
 }
 #searchForm .searchFormInput {
-    background: transparent url(../img/pesquisa.gif) right 0 no-repeat;
+    background: transparent url('../img/pesquisa.gif') right 0 no-repeat;
     width:169px;
     height:18px;
     border: none;
@@ -143,7 +179,7 @@ li {
 
 /********************* RODAPE *********************/
 #footer {
-	background: #fff url(../img/fundo-rodape.gif) repeat-x;
+	background: #fff url('../img/fundo-rodape.gif') repeat-x;
 	padding-top:.5em;
     margin:.5em 0;
     text-align:right;
@@ -165,13 +201,86 @@ li {
 #content {
     margin-top:20px;
 }
-.maincontent {
-	min-height:450px;
-	background: #EEF1F3;
-	-moz-border-radius: 20px;
-	-webkit-border-radius: 20px;
-    padding:10px;
+
+.corner {
+	background: url('../img/bordas.gif?v1.2.22') no-repeat scroll 0 0 transparent;
+	position: absolute;
 }
+
+.border {
+	position: absolute;
+}
+
+.maincontent {
+	padding: 10px 5px;
+	background: #EEF1F3;
+	position: relative;
+	margin-bottom: 5px;
+	margin-left: 10px;
+	min-height: 450px;
+}
+
+.maincontent .corner {
+	width: 14px;
+	height: 14px;
+}
+
+.maincontent .tl {
+	top: -5px;
+	left: -5px;
+	background-position: 0px -17px;
+}
+
+.maincontent .tr {
+	top: -5px;
+	right: -5px;
+	background-position: -14px -17px;
+}
+
+.maincontent .bl {
+	bottom: -5px;
+	left: -5px;
+	background-position: 0px -31px;
+}
+
+.maincontent .br {
+	bottom: -5px;
+	right: -5px;
+	background-position: -14px -31px;
+}
+
+.maincontent .top {
+	height: 5px;
+	top: -5px;
+	left: 9px;
+	right: 9px;
+}
+
+.maincontent .left {
+	width: 5px;
+	top: 9px;
+	left: -5px;
+	bottom: 9px;
+}
+
+.maincontent .bottom {
+	height: 5px;
+	bottom: -5px;
+	left: 9px;
+	right: 9px;
+}
+
+.maincontent .right {
+	width: 5px;
+	top: 9px;
+	right: -5px;
+	bottom: 9px;
+}
+
+.maincontent .border {
+	background-color: #EEF1F3;
+}
+
 .maincontent h2, .maincontent h3 {
 	margin-bottom:10px;
 }
@@ -201,27 +310,149 @@ li {
 	margin-left:auto;
 	margin-right:auto;
 	text-align:center;
-	width:290px;
+	width: 310px;
 }
+.tituloPerfil .passoAtivo {
+	color: #ffffff; 
+	width: 100px; 
+	background-color: #596E94; 
+	padding: 15px; 
+	float: left;
+	margin-left: 20px;
+	position: relative;
+}
+
+.passoAtivo .corner {
+	width: 10px;
+	height: 10px;
+}
+
+.passoAtivo .tl {
+	top: -4px;
+	left: -4px;
+	background-position: -51px -25px;
+}
+
+.passoAtivo .tr {
+	top: -4px;
+	right: -4px;
+	background-position: -61px -25px;
+}
+
+.passoAtivo .bl {
+	bottom: -4px;
+	left: -4px;
+	background-position: -51px -35px;
+}
+
+.passoAtivo .br {
+	bottom: -4px;
+	right: -4px;
+	background-position: -61px -35px;
+}
+
+.passoAtivo .top {
+	height: 4px;
+	top: -4px;
+	left: 6px;
+	right: 6px;
+}
+
+.passoAtivo .left {
+	width: 4px;
+	top: 6px;
+	left: -4px;
+	bottom: 6px;
+}
+
+.passoAtivo .bottom {
+	height: 4px;
+	bottom: -4px;
+	left: 6px;
+	right: 6px;
+}
+
+.passoAtivo .right {
+	width: 4px;
+	top: 6px;
+	right: -4px;
+	bottom: 6px;
+}
+
+.passoAtivo .border {
+	background-color: #596E94;
+}
+
 .tituloPerfil .passoInativo {
 	width: 100px; 
 	background-color: #ffffff; 
 	padding: 15px; 
 	float: left; 
-	margin-left: 10px;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
+	margin-left: 20px;
+	position: relative;
 }
-.tituloPerfil .passoAtivo {
-	color: #ffffff; 
-	width: 100px; 
-	background-color:#596E94; 
-	padding: 15px; 
-	float: left;
-	margin-left: 10px;
-	-moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
+
+.passoInativo .corner {
+	width: 10px;
+	height: 10px;
 }
+
+.passoInativo .tl {
+	top: -4px;
+	left: -4px;
+	background-position: -30px -25px;
+}
+
+.passoInativo .tr {
+	top: -4px;
+	right: -4px;
+	background-position: -40px -25px;
+}
+
+.passoInativo .bl {
+	bottom: -4px;
+	left: -4px;
+	background-position: -30px -35px;
+}
+
+.passoInativo .br {
+	bottom: -4px;
+	right: -4px;
+	background-position: -40px -35px;
+}
+
+.passoInativo .top {
+	height: 4px;
+	top: -4px;
+	left: 6px;
+	right: 6px;
+}
+
+.passoInativo .left {
+	width: 4px;
+	top: 6px;
+	left: -4px;
+	bottom: 6px;
+}
+
+.passoInativo .bottom {
+	height: 4px;
+	bottom: -4px;
+	left: 6px;
+	right: 6px;
+}
+
+.passoInativo .right {
+	width: 4px;
+	top: 6px;
+	right: -4px;
+	bottom: 6px;
+}
+
+.passoInativo .border {
+	background-color: #fff;
+}
+
 .tituloPerfil .passoAtivo h2 {
 	color: #ffffff;
 }
@@ -317,7 +548,7 @@ li {
 
 /********************* RODADAS *********************/
 .rodadas a:hover, .rodadas a.atual {
-	background: transparent url(../img/fundo-link-rodadas-atual.gif) no-repeat 0 0;
+	background: transparent url('../img/fundo-link-rodadas-atual.gif') no-repeat 0 0;
 }
 
 /********************* ADD JOGO *********************/
@@ -336,10 +567,8 @@ li {
 	width: 300px;
 }
 .mensagem_sucesso .corner {
-	background: url("../img/bordas.gif?v1.2.9") no-repeat scroll 0 0 transparent;
 	width: 3px;
 	height: 3px;
-	position: absolute;
 	background-color: #EEF1F3;
 }
 .mensagem_sucesso .tl {
@@ -364,6 +593,9 @@ li {
 }
 .mensagem_sucesso .icone {
 	vertical-align: middle;
+}
+.mensagem_sucesso .top, .mensagem_sucesso .left, .mensagem_sucesso .bottom, .mensagem_sucesso .right {
+	display: none;
 }
 
 /********************* TYPOGRAPHY *********************/

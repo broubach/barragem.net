@@ -166,12 +166,10 @@ public class PersistenceHelper {
 			for (Object entity : entities) {
 				proxy = ReflectionHelper.get(entity, proxyName);
 				if (proxy instanceof BaseEntity) {
-					if (!Hibernate.isPropertyInitialized(entity, proxyName)) {
-						List result = find("select o from " + entity.getClass().getName() + " o join fetch o."
-								+ proxyName + " where o.id=" + ((BaseEntity) entity).getId());
-						if (!result.isEmpty()) {
-							ReflectionHelper.set(entity, proxyName, ReflectionHelper.get(result.get(0), proxyName));
-						}
+					List result = find("select o from " + entity.getClass().getName() + " o join fetch o." + proxyName
+							+ " where o.id=" + ((BaseEntity) entity).getId());
+					if (!result.isEmpty()) {
+						ReflectionHelper.set(entity, proxyName, ReflectionHelper.get(result.get(0), proxyName));
 					}
 				} else {
 					if (!Hibernate.isInitialized(proxy)) {

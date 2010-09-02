@@ -22,7 +22,7 @@
 				</c:if>
 				<c:if test="#{gerirEventoBean.eventoEmFoco.id == null}">
 					<label for="add-evento:tipo">#{msg.label_tipo}*</label>
-					<h:selectOneRadio id="tipo" value="#{gerirEventoBean.tipo}" styleClass="tipo-evento" disabled="#{gerirEventoBean.eventoEmFoco.id != null}">
+					<h:selectOneRadio id="tipo" value="#{gerirEventoBean.tipo}" styleClass="tipo-evento" disabled="#{gerirEventoBean.eventoEmFoco.id != null}" onclick="this.blur();">
 						<f:selectItem itemLabel="#{msg.label_jogo_avulso}" itemValue="1"/>
 						<f:selectItem itemLabel="#{msg.label_treino}" itemValue="2" />
 						<a4j:support event="onchange" reRender="dados-popup" actionListener="#{gerirEventoBean.alteraTipo}" oncomplete="$j.fn.colorbox.resize();aplicarMascaras();"/>
@@ -71,8 +71,9 @@
 						<legend>#{msg.label_participantes}</legend>
 						<div class="btn-novo">
 							<a4j:commandLink actionListener="#{gerirEventoBean.adicionaJogador}" reRender="jogadores" oncomplete="$j.fn.colorbox.resize();aplicarMascaras();">
-								<span>#{msg.label_adicionar_jogador}</span>
-							</a4j:commandLink>
+								#{msg.label_adicionar_jogador}
+								<ui:include src="../../publicpages/componentes/bordas-redondas-span.xhtml"/>
+							</a4j:commandLink>&#160;
 						</div>
 						<h:panelGrid columns="1" id="jogadores" rendered="#{gerirEventoBean.eventoEmFoco != null}">
 							<c:forEach var="item" items="#{gerirEventoBean.eventoEmFoco.jogadoresEventos}" varStatus="status">

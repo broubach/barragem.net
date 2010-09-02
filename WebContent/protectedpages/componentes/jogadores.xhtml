@@ -42,17 +42,18 @@
 							<h:commandLink action="exibirPerfil" actionListener="#{exibirPerfilBean.exibePerfil}" rendered="#{item.usuarioCorrespondente != null}"><f:param name="id" value="#{item.usuarioCorrespondente.id}"/><img src="#{request.contextPath}/img/buttons/btn-view.png" alt="#{msg.label_visualizar}" title="#{msg.label_visualizar}" width="16px" height="16px"/></h:commandLink>
 						</h:panelGroup>
 						<h:panelGroup layout="block" rendered="#{item.usuarioCorrespondente == null}" styleClass="botao-jogadores">
-							<a4j:commandLink actionListener="#{gerirJogadorBean.preparaVinculo}" reRender="vincular-jogador" oncomplete="$j('.popupVincularJogador').click();" rendered="#{item.usuarioCorrespondente == null}"><img src="#{request.contextPath}/img/buttons/btn-link.png" alt="#{msg.label_vincular_jogador_a_usuario_existente}" title="#{msg.label_vincular_jogador_a_usuario_existente}"/><f:param name="index" value="#{status.index}"/></a4j:commandLink>
+							<a4j:commandLink actionListener="#{gerirJogadorBean.preparaVinculo}" reRender="vincular-jogador" oncomplete="$j('.popupVincularJogador').click();" rendered="#{item.usuarioCorrespondente == null}"><img src="#{request.contextPath}/img/buttons/btn-link.png" alt="#{msg.label_vincular_jogador_a_usuario_existente}" title="#{msg.label_vincular_jogador_a_usuario_existente}" width="18px" height="18px"/><f:param name="index" value="#{status.index}"/></a4j:commandLink>
 						</h:panelGroup>
 						<h:panelGroup layout="block" rendered="#{item.usuarioCorrespondente != null}" styleClass="botao-jogadores">
 							<h:commandLink action="exibirMensagens" actionListener="#{exibirMensagensBean.exibeMensagens}" rendered="#{item.usuarioCorrespondente != null}"><f:param name="id" value="#{item.usuarioCorrespondente.id}"/><img src="#{request.contextPath}/img/buttons/btn-enviar.png" alt="#{msg.label_mensagens}" title="#{msg.label_mensagens}" width="16px" height="16px"/></h:commandLink>
 						</h:panelGroup>
 					</c:if>
-					<h:panelGroup styleClass="btn-novo-relative" layout="block" rendered="#{podeAdicionarJogadores and !item.jahAdicionado}">
+					<h:panelGroup styleClass="btn-novo" layout="block" rendered="#{podeAdicionarJogadores and !item.jahAdicionado}">
 						<h:commandLink actionListener="#{pesquisarBean.adicionaJogador}">
-							<span>#{msg.label_adicionar}</span>
+							#{msg.label_adicionar}
 							<f:param name="index" value="#{status.index}"/>
-						</h:commandLink>
+							<ui:include src="../../publicpages/componentes/bordas-redondas-span.xhtml"/>
+						</h:commandLink>&#160;
 					</h:panelGroup>
 				</td>
 			</tr>

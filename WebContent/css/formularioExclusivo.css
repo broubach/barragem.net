@@ -22,11 +22,11 @@ img {
 }
 
 html {
-	background: #bfbfbf url(../img/fundo-home-borda.gif) repeat-y 50%
+	background: #bfbfbf url('../img/fundo-home-borda.gif') repeat-y 50%
 }
 
 body {
-	background: transparent url(../img/fundo-internas.gif) no-repeat 50%
+	background: transparent url('../img/fundo-internas.gif') no-repeat 50%
 		90px;
 }
 
@@ -40,11 +40,81 @@ li {
 	list-style: none;
 }
 
+.corner {
+	background: url('../img/bordas.gif?v1.2.22') no-repeat scroll 0 0 transparent;
+	position: absolute;
+}
+
+.border {
+	position: absolute;
+}
+
 .maincontent {
+	padding: 10px 5px;
 	background: #EEF1F3;
-	-moz-border-radius: 20px;
-	-webkit-border-radius: 20px;
-	padding: 10px;
+	position: relative;
+	margin-bottom: 5px;
+}
+
+.maincontent .corner {
+	width: 14px;
+	height: 14px;
+}
+
+.maincontent .tl {
+	top: -5px;
+	left: -5px;
+	background-position: 0px -17px;
+}
+
+.maincontent .tr {
+	top: -5px;
+	right: -5px;
+	background-position: -14px -17px;
+}
+
+.maincontent .bl {
+	bottom: -5px;
+	left: -5px;
+	background-position: 0px -31px;
+}
+
+.maincontent .br {
+	bottom: -5px;
+	right: -5px;
+	background-position: -14px -31px;
+}
+
+.maincontent .top {
+	height: 5px;
+	top: -5px;
+	left: 9px;
+	right: 9px;
+}
+
+.maincontent .left {
+	width: 5px;
+	top: 9px;
+	left: -5px;
+	bottom: 9px;
+}
+
+.maincontent .bottom {
+	height: 5px;
+	bottom: -5px;
+	left: 9px;
+	right: 9px;
+}
+
+.maincontent .right {
+	width: 5px;
+	top: 9px;
+	right: -5px;
+	bottom: 9px;
+}
+
+.maincontent .border {
+	background-color: #EEF1F3;
 }
 
 .maincontent h2,.maincontent h3 {
@@ -87,7 +157,7 @@ li {
 
 #header a.brand {
 	margin: 10px;
-	background: transparent url(../img/logo-barragem.gif);
+	background: transparent url('../img/logo-barragem.gif');
 	display: block;
 	width: 318px;
 	height: 56px;
@@ -135,10 +205,8 @@ li {
 }
 
 .sidebar-header .corner {
-	background: url("../img/bordas.gif?v1.2.9") no-repeat scroll 0 0 transparent;
 	width: 10px;
 	height: 10px;
-	position: absolute;
 }
 
 .sidebar-header .tl {
@@ -192,10 +260,8 @@ li {
 }
 
 .inputRedondo1 .corner {
-	background: url("../img/bordas.gif?v1.2.9") no-repeat scroll 0 0 transparent;
 	height: 3px;
 	width: 3px;
-	position: absolute;
 }
 
 .inputRedondo1 .tl {
@@ -246,10 +312,8 @@ li {
 }
 
 .inputRedondo2 .corner {
-	background: url("../img/bordas.gif?v1.2.9") no-repeat scroll 0 0 transparent;
 	height: 3px;
 	width: 3px;
-	position: absolute;
 }
 
 .inputRedondo2 .tl {
@@ -299,14 +363,12 @@ li {
 }
 
 .inputRedondo3 .corner {
-	background: url("../img/bordas.gif?v1.2.9") no-repeat scroll 0 0 transparent;
 	height: 3px;
 	width: 3px;
 	background-color: transparent;
-	position: absolute;
 }
 
-.inputRedondo3 .t {
+.inputRedondo3 .top {
 	background-color: #666666;
 	top: -1px;
 	left: 2px;
@@ -315,13 +377,17 @@ li {
 	position: absolute;
 }
 
-.inputRedondo3 .b {
+.inputRedondo3 .bottom {
 	background-color: #666666;
 	bottom: -1px;
 	left: 2px;
 	height: 1px;
 	width: 56px;
 	position: absolute;
+}
+
+.inputRedondo3 .left, .inputRedondo3 .right {
+	display: none;
 }
 
 .inputRedondo3 .tl {
@@ -385,7 +451,7 @@ div.loginError {
 
 /********************* RODAPE *********************/
 #footer {
-	background: #fff url(../img/fundo-rodape.gif) repeat-x;
+	background: #fff url('../img/fundo-rodape.gif') repeat-x;
 	padding-top: .5em;
 	margin: .5em 0;
 	text-align: right;
@@ -434,7 +500,7 @@ div.loginError {
 
 /********************* RODADAS *********************/
 .rodadas a:hover,.rodadas a.atual {
-	background: transparent url(../img/fundo-link-rodadas-atual.gif)
+	background: transparent url('../img/fundo-link-rodadas-atual.gif')
 		no-repeat 0 0;
 }
 

@@ -12,6 +12,7 @@
 <ui:composition template="/protectedpages/layout/layoutPrincipal.xhtml">
 	<ui:define name="conteudo">
 		<div class="maincontent equalheights">
+			<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 			<h:form id="perfil">
 				<h2>#{exibirPerfilBean.usuarioEmFoco.nomeCompletoCapital}</h2>
 				<h:panelGroup id="menu-contextual" styleClass="menu-contextual" layout="block">
@@ -20,14 +21,14 @@
 				            <li>
 								<h:commandLink actionListener="#{exibirPerfilBean.adicionaUsuario}" styleClass="btn_adicionar_bckgnd">
 									#{msg.label_adicionar_a_minha_lista_de_jogadores}
-								    <ui:include src="../componentes/bordas-redondas.xhtml"/>
+								    <ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 								</h:commandLink>&#160;
 				            </li>
 			            </c:if>
 			            <li>
 							<h:commandLink disabled="true" styleClass="btn_perfil_bckgnd">
 								#{msg.label_perfil}
-							    <ui:include src="../componentes/bordas-redondas.xhtml"/>
+							    <ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 							</h:commandLink>&#160;
 			            </li>
 			        	<c:if test="#{exibirPerfilBean.usuarioJahAdicionado}">
@@ -35,7 +36,7 @@
 								<h:commandLink actionListener="#{exibirMensagensBean.exibeMensagens}" action="exibirMensagens" styleClass="btn_mensagens_bckgnd">
 									#{msg.label_mensagens}
 									<f:param name="id" value="#{exibirPerfilBean.usuarioEmFoco.id}"/>
-								    <ui:include src="../componentes/bordas-redondas.xhtml"/>
+								    <ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 								</h:commandLink>&#160;
 				            </li>
 			            </c:if>
@@ -44,7 +45,7 @@
 								<h:commandLink action="exibirEstatisticas" styleClass="btn_estatisticas_bckgnd">
 									#{msg.label_estatisticas}
 									<f:param name="id" value="#{exibirPerfilBean.usuarioEmFoco.id}"/>
-								    <ui:include src="../componentes/bordas-redondas.xhtml"/>
+								    <ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 								</h:commandLink>&#160;
 				            </li>
 			            </c:if>

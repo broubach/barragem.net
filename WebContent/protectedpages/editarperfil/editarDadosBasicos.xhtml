@@ -12,6 +12,7 @@
 <ui:composition template="/protectedpages/layout/layoutPrincipal.xhtml">
 	<ui:define name="conteudo">
 		<div class="maincontent equalheights">
+			<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 
 	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/jquery.colorbox.css" />
 	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/jquery.colorbox-barragem.css" />
@@ -30,19 +31,19 @@
 			            <li>
 							<h:commandLink disabled="true">
 								#{msg.label_dados_basicos}
-								<ui:include src="../componentes/bordas-redondas.xhtml"/>
+								<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 							</h:commandLink>&#160;
 			            </li>
 			            <li>
 							<a href="http://#{request.serverName}#{request.serverPort == '8080' ? ':8080' : ''}#{request.contextPath}/protectedpages/editarperfil/editarPerfil.xhtml">
 								#{msg.label_perfil}
-								<ui:include src="../componentes/bordas-redondas.xhtml"/>
+								<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 							</a>&#160;
 			            </li>
 			            <li>
 							<a href="http://#{request.serverName}#{request.serverPort == '8080' ? ':8080' : ''}#{request.contextPath}/protectedpages/editarperfil/editarFoto.xhtml">
 								#{msg.label_foto}
-								<ui:include src="../componentes/bordas-redondas.xhtml"/>
+								<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 							</a>&#160;
 			            </li>
 			        </ul>

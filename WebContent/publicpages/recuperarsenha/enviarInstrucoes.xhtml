@@ -22,7 +22,7 @@
 			        </div>
 		        </c:if>
 				<h:panelGroup layout="block" rendered="#{messageBean.firstInfoMessage != null}">
-    	    		<span>#{messageBean.firstInfoMessage.summary}</span>
+    	    		<div>#{messageBean.firstInfoMessage.summary}</div>
 				</h:panelGroup>
 
 				<h:form id="enviarInstrucoesForm">
@@ -37,15 +37,11 @@
 				</div>
 				<span class="inputRedondo3 submit">
 					<h:commandButton actionListener="#{recuperarSenhaBean.enviaInstrucoes}" value="#{msg.label_enviar}" styleClass="loginCadastrarBtn"/>
-					<span class="t"></span>
-					<span class="b"></span>
-					<span class="corner tl"></span>
-					<span class="corner tr"></span>
-					<span class="corner bl"></span>
-					<span class="corner br"></span>
+					<ui:include src="../componentes/bordas-redondas-span.xhtml"/>
 				</span>
 				</h:form>
 				<div class="clear"></div>
+				<ui:include src="../componentes/bordas-redondas-div.xhtml"/>
 			</div>
 		</div>
 	</ui:define>

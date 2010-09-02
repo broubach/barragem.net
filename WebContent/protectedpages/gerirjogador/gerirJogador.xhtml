@@ -57,10 +57,11 @@
 						<div class="input text">
 							<label class="adicionarJogadorLabel">#{msg.label_nome}</label>
 							<h:inputText size="30" styleClass="adicionarJogadorInput" value="#{gerirJogadorBean.jogadorNome}" maxlength="45"/>
-							<div class="btn-novo-relative">
+							<div class="btn-novo">
 								<h:commandLink actionListener="#{gerirJogadorBean.adicionaJogador}">
-									<span>#{msg.label_adicionar_jogador}</span>
-								</h:commandLink>
+									#{msg.label_adicionar_jogador}
+									<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
+								</h:commandLink>&#160;
 							</div>
 						</div>
 					</div>
@@ -79,6 +80,7 @@
 				</fieldset>
 		    </h:form>
 			<div class="clear"></div>
+			<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 	    </div>
 
 		<div style="display:none">
