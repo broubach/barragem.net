@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TimeZone;
 
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
@@ -133,9 +134,13 @@ public class ExibirEventosBean extends BaseBean implements Preparavel {
 		List<SelectItem> result = new ArrayList<SelectItem>();
 		SimpleDateFormat dateFormat = new SimpleDateFormat(MessageBundleUtils.getInstance()
 				.get("format_day_month_year"));
+		dateFormat.setTimeZone(TimeZone.getTimeZone("GMT-3"));
 		for (Evento evento : listaSalva) {
-			SelectItem item = new SelectItem(dateFormat.format(evento.getData()), dateFormat.format(evento.getData()));
-			result.add(item);
+			if (evento.getData() != null) {
+				SelectItem item = new SelectItem(dateFormat.format(evento.getData()), dateFormat.format(evento
+						.getData()));
+				result.add(item);
+			}
 		}
 		return result;
 	}
@@ -200,8 +205,9 @@ public class ExibirEventosBean extends BaseBean implements Preparavel {
 
 		Predicate lastPredicate = TruePredicate.getInstance();
 		if (filtroData != null && !filtroData.equals("")) {
-			lastPredicate = AndPredicate.getInstance(lastPredicate, new FiltroDataPredicate(new SimpleDateFormat(
-					MessageBundleUtils.getInstance().get("format_day_month_year")), filtroData));
+			SimpleDateFormat sdf = new SimpleDateFormat(MessageBundleUtils.getInstance().get("format_day_month_year"));
+			sdf.setTimeZone(TimeZone.getTimeZone("GMT-3"));
+			lastPredicate = AndPredicate.getInstance(lastPredicate, new FiltroDataPredicate(sdf, filtroData));
 		}
 		if (filtroTipo != null && !filtroTipo.equals("")) {
 			lastPredicate = AndPredicate.getInstance(lastPredicate, new FiltroTipoPredicate(filtroTipo));
@@ -328,7 +334,7 @@ class FiltroDataPredicate implements Predicate {
 
 	@Override
 	public boolean evaluate(Object evento) {
-		if (filtroData.equals(sdf.format(((Evento) evento).getData()))) {
+		if (((Evento) evento).getData() != null && filtroData.equals(sdf.format(((Evento) evento).getData()))) {
 			return true;
 		}
 		return false;

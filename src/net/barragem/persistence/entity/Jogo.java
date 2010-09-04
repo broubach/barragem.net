@@ -62,7 +62,7 @@ public class Jogo extends Evento {
 
 	public JogadorJogo getJogadorJogoVencedorSimples() {
 		for (JogadorEvento jogadorEvento : getJogadoresEventos()) {
-			if (((JogadorJogo) jogadorEvento).getVencedor()) {
+			if (((JogadorJogo) jogadorEvento).getVencedor() != null && ((JogadorJogo) jogadorEvento).getVencedor()) {
 				return (JogadorJogo) jogadorEvento;
 			}
 		}
@@ -71,7 +71,7 @@ public class Jogo extends Evento {
 
 	public JogadorJogo getJogadorJogoPerdedorSimples() {
 		for (JogadorEvento jogadorEvento : getJogadoresEventos()) {
-			if (!((JogadorJogo) jogadorEvento).getVencedor()) {
+			if (((JogadorJogo) jogadorEvento).getVencedor() != null && !((JogadorJogo) jogadorEvento).getVencedor()) {
 				return (JogadorJogo) jogadorEvento;
 			}
 		}
@@ -148,7 +148,8 @@ public class Jogo extends Evento {
 
 	private void inverteParciaisVencedorasEPerdadorasSeNecessario() {
 		if (tipo.equals(SimplesDuplasEnum.Simples) && !placar.getWo()) {
-			if (((JogadorJogo) getJogadoresEventos().get(1)).getVencedor()) {
+			if (((JogadorJogo) getJogadoresEventos().get(1)).getVencedor() != null
+					&& ((JogadorJogo) getJogadoresEventos().get(1)).getVencedor()) {
 				Collections.reverse(getJogadoresEventos());
 				inverteParciaisVencedorasEPerdedoras();
 			}
@@ -210,7 +211,7 @@ public class Jogo extends Evento {
 
 	public boolean possuiVencedores() {
 		for (JogadorEvento jogadorEvento : getJogadoresEventos()) {
-			if (((JogadorJogo) jogadorEvento).getVencedor()) {
+			if (((JogadorJogo) jogadorEvento).getVencedor() != null && ((JogadorJogo) jogadorEvento).getVencedor()) {
 				return true;
 			}
 		}
@@ -220,13 +221,17 @@ public class Jogo extends Evento {
 	@Override
 	public boolean isUsuarioLogadoVencedor() {
 		JogadorEvento jogadorEvento = getJogadorEventoUsuarioLogado();
-		return ((JogadorJogo) jogadorEvento).getVencedor();
+		if (((JogadorJogo) jogadorEvento).getVencedor() != null) {
+			return ((JogadorJogo) jogadorEvento).getVencedor();
+		}
+		return false;
 	}
 
 	@Override
 	public boolean isUsuarioLogadoPerdedor() {
 		JogadorEvento jogadorEvento = getJogadorEventoUsuarioLogado();
-		if (!((JogadorJogo) jogadorEvento).getVencedor() && ((Jogo) this).possuiVencedores()) {
+		if (((JogadorJogo) jogadorEvento).getVencedor() != null && !((JogadorJogo) jogadorEvento).getVencedor()
+				&& ((Jogo) this).possuiVencedores()) {
 			return true;
 		}
 		return false;
