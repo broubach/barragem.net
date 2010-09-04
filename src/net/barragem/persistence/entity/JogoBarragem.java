@@ -71,7 +71,11 @@ public class JogoBarragem extends Jogo implements Validatable {
 	}
 
 	@Override
-	public String getTipoStr() {
+	public String getTipoLabel() {
 		return MessageBundleUtils.getInstance().get("label_jogo_barragem");
+	}
+
+	public String getTipoValue() {
+		return "jb";
 	}
 }

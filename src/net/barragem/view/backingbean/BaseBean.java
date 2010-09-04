@@ -15,6 +15,8 @@ import javax.faces.component.UIComponent;
 import javax.faces.component.UIViewRoot;
 import javax.faces.component.html.HtmlDataTable;
 import javax.faces.context.FacesContext;
+import javax.faces.event.FacesEvent;
+import javax.faces.event.PhaseId;
 import javax.jms.JMSException;
 import javax.jms.MapMessage;
 import javax.jms.Message;
@@ -379,5 +381,15 @@ public abstract class BaseBean {
 
 	protected void setTotalNovasMensagens(Integer totalNovasMensagens) {
 		setSessionAttribute("totalNovasMensagens", totalNovasMensagens);
+	}
+
+	protected boolean updateModelValues(FacesEvent evt) {
+		PhaseId phaseId = evt.getPhaseId();
+		if (phaseId.equals(PhaseId.ANY_PHASE)) {
+			evt.setPhaseId(PhaseId.UPDATE_MODEL_VALUES);
+			evt.queue();
+			return true;
+		}
+		return false;
 	}
 }

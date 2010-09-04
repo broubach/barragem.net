@@ -133,8 +133,11 @@ public class Placar extends BaseEntity implements Cloneable {
 	}
 
 	public String getContagemDeParciais() {
-		StringBuilder contagemDeParciais = new StringBuilder();
-		contagemDeParciais.append(getParciaisVencedor()).append("x").append(getParciaisPerdedor());
-		return contagemDeParciais.toString();
+		if (wo != null && !wo) {
+			StringBuilder contagemDeParciais = new StringBuilder();
+			contagemDeParciais.append(getParciaisVencedor()).append("x").append(getParciaisPerdedor());
+			return contagemDeParciais.toString();
+		}
+		return "WO";
 	}
 }

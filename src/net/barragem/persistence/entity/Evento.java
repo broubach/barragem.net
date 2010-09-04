@@ -22,9 +22,17 @@ import net.barragem.scaffold.MessageBundleUtils;
 @Table(name = "evento")
 public abstract class Evento extends BaseEntity implements Cloneable {
 
-	public static String TIPO_JOGO_BARRAGEM = "jb";
-	public static String TIPO_JOGO_AVULSO = "ja";
-	public static String TIPO_TREINO = "t";
+	public static final String TIPO_JOGO_BARRAGEM = "jb";
+	public static final String TIPO_JOGO_AVULSO = "ja";
+	public static final String TIPO_TREINO = "t";
+
+	public static final String RESULTADO_VITORIA = "v";
+	public static final String RESULTADO_DERROTA = "d";
+	public static final String RESULTADO_INDEFINIDO = "i";
+
+	public static final String CANHOTO_SIM = "s";
+	public static final String CANHOTO_NAO = "n";
+	public static final String CANHOTO_INDEFINIDO = "i";
 
 	@ValidateRequired
 	private Date data;
@@ -111,11 +119,13 @@ public abstract class Evento extends BaseEntity implements Cloneable {
 		((Evento) newObject).setJogadoresEventos(clonedJogadoresEventos);
 	}
 
-	public abstract String getTipoStr();
+	public abstract String getTipoLabel();
 
-	public abstract String getJogadoresStr();
+	public abstract String getJogadoresLabel();
 
-	public abstract String getResultadoStr();
+	public abstract String getResultadoLabel();
+
+	public abstract String getResultadoValue();
 
 	public String getComentarioUsuarioLogado() {
 		return getJogadorEventoUsuarioLogado().getComentario();
@@ -138,7 +148,7 @@ public abstract class Evento extends BaseEntity implements Cloneable {
 
 	public abstract boolean isUsuarioLogadoPerdedor();
 
-	public String getParticipantesCanhotos() {
+	public String getParticipantesCanhotosLabel() {
 		if (getUsuarioLogado() == null) {
 			throw new IllegalStateException();
 		}
@@ -150,9 +160,35 @@ public abstract class Evento extends BaseEntity implements Cloneable {
 				if (usuario.getPerfil() != null && usuario.getPerfil().getLadoForehand() != null
 						&& usuario.getPerfil().getLadoForehand().equals(LadoForehandEnum.Esquerdo)) {
 					return MessageBundleUtils.getInstance().get("label_sim");
+				} else if (usuario.getPerfil() != null && usuario.getPerfil().getLadoForehand() != null
+						&& usuario.getPerfil().getLadoForehand().equals(LadoForehandEnum.Direito)) {
+					return MessageBundleUtils.getInstance().get("label_nao");
 				}
 			}
 		}
-		return MessageBundleUtils.getInstance().get("label_nao");
+		return MessageBundleUtils.getInstance().get("label_indefinido");
 	}
+
+	public String getParticipantesCanhotosValue() {
+		if (getUsuarioLogado() == null) {
+			throw new IllegalStateException();
+		}
+		Usuario usuario = null;
+		for (JogadorEvento jogadorEvento : getJogadoresEventos()) {
+			if (!jogadorEvento.getJogador().equals(getUsuarioLogado().getJogador())
+					&& jogadorEvento.getJogador().getUsuarioCorrespondente() != null) {
+				usuario = jogadorEvento.getJogador().getUsuarioCorrespondente();
+				if (usuario.getPerfil() != null && usuario.getPerfil().getLadoForehand() != null
+						&& usuario.getPerfil().getLadoForehand().equals(LadoForehandEnum.Esquerdo)) {
+					return CANHOTO_SIM;
+				} else if (usuario.getPerfil() != null && usuario.getPerfil().getLadoForehand() != null
+						&& usuario.getPerfil().getLadoForehand().equals(LadoForehandEnum.Direito)) {
+					return CANHOTO_NAO;
+				}
+			}
+		}
+		return CANHOTO_INDEFINIDO;
+	}
+
+	public abstract String getTipoValue();
 }

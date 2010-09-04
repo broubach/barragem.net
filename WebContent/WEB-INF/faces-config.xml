@@ -115,8 +115,8 @@
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
-		<managed-bean-name>exibirEstatisticasBean</managed-bean-name>
-		<managed-bean-class>net.barragem.view.backingbean.ExibirEstatisticasBean</managed-bean-class>
+		<managed-bean-name>exibirEventosBean</managed-bean-name>
+		<managed-bean-class>net.barragem.view.backingbean.ExibirEventosBean</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	<navigation-rule>
@@ -255,8 +255,8 @@
 			<to-view-id>/protectedpages/exibirmensagens/exibirMensagens.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-outcome>exibirEstatisticas</from-outcome>
-			<to-view-id>/protectedpages/exibirestatisticas/exibirEstatisticas.xhtml</to-view-id>
+			<from-outcome>exibirEventos</from-outcome>
+			<to-view-id>/protectedpages/exibireventos/exibirEventos.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>editarDadosBasicos</from-outcome>

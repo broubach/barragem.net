@@ -40,15 +40,13 @@
 								</h:commandLink>&#160;
 				            </li>
 			            </c:if>
-			            <c:if test="false">
-				            <li>
-								<h:commandLink action="exibirEstatisticas" styleClass="btn_estatisticas_bckgnd">
-									#{msg.label_estatisticas}
-									<f:param name="id" value="#{exibirPerfilBean.usuarioEmFoco.id}"/>
-								    <ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
-								</h:commandLink>&#160;
-				            </li>
-			            </c:if>
+			            <li>
+							<h:commandLink action="exibirEventos" actionListener="#{exibirEventosBean.prepara}" styleClass="btn_eventos_bckgnd">
+								#{msg.label_jogos_}
+								<f:param name="id" value="#{exibirPerfilBean.usuarioEmFoco.id}"/>
+							    <ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
+							</h:commandLink>&#160;
+			            </li>
 			        </ul>
 				</h:panelGroup>
 

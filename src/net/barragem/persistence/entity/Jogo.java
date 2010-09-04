@@ -94,12 +94,12 @@ public class Jogo extends Evento {
 	}
 
 	@Override
-	public String getTipoStr() {
+	public String getTipoLabel() {
 		return MessageBundleUtils.getInstance().get("label_jogo_avulso");
 	}
 
 	@Override
-	public String getJogadoresStr() {
+	public String getJogadoresLabel() {
 		StringBuilder vencedores = new StringBuilder();
 		StringBuilder perdedores = new StringBuilder();
 		for (JogadorEvento jogadorEvento : getJogadoresEventos()) {
@@ -127,7 +127,7 @@ public class Jogo extends Evento {
 	}
 
 	@Override
-	public String getResultadoStr() {
+	public String getResultadoLabel() {
 		if (getUsuarioLogado() == null) {
 			throw new IllegalStateException();
 		}
@@ -230,6 +230,20 @@ public class Jogo extends Evento {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public String getTipoValue() {
+		return "ja";
+	}
+
+	@Override
+	public String getResultadoValue() {
+		if (getUsuarioLogado() == null) {
+			throw new IllegalStateException();
+		}
+		return isUsuarioLogadoVencedor() ? RESULTADO_VITORIA : isUsuarioLogadoPerdedor() ? RESULTADO_DERROTA
+				: RESULTADO_INDEFINIDO;
 	}
 
 }

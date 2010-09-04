@@ -3,6 +3,7 @@ package net.barragem.business.bo;
 import javax.faces.component.UIComponent;
 import javax.faces.component.html.HtmlDataTable;
 import javax.faces.context.FacesContext;
+import javax.faces.event.FacesEvent;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -130,4 +131,10 @@ public abstract class BaseBo extends BaseBean {
 	protected boolean validaSenha(String clientId, String senha) {
 		throw new NotImplementedException();
 	}
+
+	@Override
+	protected boolean updateModelValues(FacesEvent evt) {
+		throw new NotImplementedException();
+	}
+
 }

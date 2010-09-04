@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 
@@ -23,13 +24,13 @@ import net.barragem.view.backingbean.componentes.EventoMaisRecenteComparator;
 import net.barragem.view.backingbean.componentes.JogadorEventoComparatorVencedorPrimeiro;
 
 import org.ajax4jsf.model.KeepAlive;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.Predicate;
+import org.apache.commons.collections.functors.AndPredicate;
+import org.apache.commons.collections.functors.TruePredicate;
 
 @KeepAlive
-public class ExibirEstatisticasBean extends BaseBean {
-
-	public static final String FILTRO_VITORIA_V = "v";
-	public static final String FILTRO_VITORIA_D = "d";
-	public static final String FILTRO_VITORIA_I = "i";
+public class ExibirEventosBean extends BaseBean implements Preparavel {
 
 	private Usuario usuarioEmFoco;
 	private Paginavel<Evento> paginacaoEventos = null;
@@ -41,14 +42,15 @@ public class ExibirEstatisticasBean extends BaseBean {
 	private String filtroCanhotos;
 	private List<Evento> listaSalva = null;
 
-	public ExibirEstatisticasBean() {
-		usuarioEmFoco = PersistenceHelper.findByPk(Usuario.class, getId());
-		listaSalva = PersistenceHelper.findByNamedQuery("meusEventosQuery", usuarioEmFoco);
-		paginacaoEventos = new PaginavelSampleImpl<Evento>(listaSalva);
+	public ExibirEventosBean() {
 		prepara();
 	}
 
 	private void prepara() {
+		usuarioEmFoco = PersistenceHelper.findByPk(Usuario.class, getId());
+		listaSalva = PersistenceHelper.findByNamedQuery("meusEventosQuery", usuarioEmFoco);
+		paginacaoEventos = new PaginavelSampleImpl<Evento>(listaSalva, null, 6);
+
 		for (Evento evento : paginacaoEventos.getSourceList()) {
 			if (evento instanceof Jogo) {
 				PersistenceHelper.initialize("parciais", ((Jogo) evento).getPlacar());
@@ -191,43 +193,145 @@ public class ExibirEstatisticasBean extends BaseBean {
 		return derrotas;
 	}
 
-	public void filtra(ValueChangeEvent arg0) {
-		List<Evento> eventosFiltrados = new ArrayList<Evento>();
-		SimpleDateFormat sdf = new SimpleDateFormat(MessageBundleUtils.getInstance().get("format_day_month_year"));
-		for (Evento evento : listaSalva) {
-			if (filtroData != null && !filtroData.equals("")) {
-				if (filtroData.equals(sdf.format(evento.getData()))) {
-					eventosFiltrados.add(evento);
-				}
-			}
-			if (filtroTipo != null && !filtroTipo.equals("")) {
-				if (evento.getTipoStr().equals(filtroTipo)) {
-					eventosFiltrados.add(evento);
-				}
-			}
-			if (filtroParticipantes != null) {
-				if (evento.getJogadoresStr().contains(filtroParticipantes.getNome())) {
-					eventosFiltrados.add(evento);
-				}
-			}
-			if (filtroPlacar != null && !filtroPlacar.equals("")) {
-				if (evento instanceof Jogo && ((Jogo) evento).getPlacar().getContagemDeParciais().equals(filtroPlacar)) {
-					eventosFiltrados.add(evento);
-				}
-
-			}
-			if (filtroVitoria != null && !filtroVitoria.equals("")) {
-				if (evento.getResultadoStr().equals(filtroVitoria)) {
-					eventosFiltrados.add(evento);
-				}
-			}
-			if (filtroCanhotos != null && !filtroCanhotos.equals("")) {
-				if (evento.getParticipantesCanhotos().equals(filtroCanhotos)) {
-					eventosFiltrados.add(evento);
-				}
-			}
+	public void filtra(ValueChangeEvent evt) {
+		if (updateModelValues(evt)) {
+			return;
 		}
 
-		paginacaoEventos = new PaginavelSampleImpl<Evento>(eventosFiltrados);
+		Predicate lastPredicate = TruePredicate.getInstance();
+		if (filtroData != null && !filtroData.equals("")) {
+			lastPredicate = AndPredicate.getInstance(lastPredicate, new FiltroDataPredicate(new SimpleDateFormat(
+					MessageBundleUtils.getInstance().get("format_day_month_year")), filtroData));
+		}
+		if (filtroTipo != null && !filtroTipo.equals("")) {
+			lastPredicate = AndPredicate.getInstance(lastPredicate, new FiltroTipoPredicate(filtroTipo));
+		}
+		if (filtroParticipantes != null) {
+			lastPredicate = AndPredicate.getInstance(lastPredicate, new FiltroParticipantesPredicate(
+					filtroParticipantes));
+		}
+		if (filtroPlacar != null && !filtroPlacar.equals("")) {
+			lastPredicate = AndPredicate.getInstance(lastPredicate, new FiltroPlacarPredicate(filtroPlacar));
+		}
+		if (filtroVitoria != null && !filtroVitoria.equals("")) {
+			lastPredicate = AndPredicate.getInstance(lastPredicate, new FiltroVitoriaPredicate(filtroVitoria));
+		}
+		if (filtroCanhotos != null && !filtroCanhotos.equals("")) {
+			lastPredicate = AndPredicate.getInstance(lastPredicate, new FiltroCanhotosPredicate(filtroCanhotos));
+		}
+
+		List<Evento> listaFiltrada = new ArrayList<Evento>(listaSalva);
+		CollectionUtils.filter(listaFiltrada, lastPredicate);
+
+		paginacaoEventos = new PaginavelSampleImpl<Evento>(listaFiltrada, null, 6);
 	}
+
+	@Override
+	public void prepara(ActionEvent e) {
+		prepara();
+	}
+}
+
+class FiltroCanhotosPredicate implements Predicate {
+	private String filtroCanhotos;
+
+	public FiltroCanhotosPredicate(String filtroCanhotos) {
+		this.filtroCanhotos = filtroCanhotos;
+	}
+
+	@Override
+	public boolean evaluate(Object evento) {
+		if (((Evento) evento).getParticipantesCanhotosValue().equals(filtroCanhotos)) {
+			return true;
+		}
+		return false;
+	}
+
+}
+
+class FiltroVitoriaPredicate implements Predicate {
+	private String filtroVitoria;
+
+	public FiltroVitoriaPredicate(String filtroVitoria) {
+		this.filtroVitoria = filtroVitoria;
+	}
+
+	@Override
+	public boolean evaluate(Object evento) {
+		if (((Evento) evento).getResultadoValue().equals(filtroVitoria)) {
+			return true;
+		}
+		return false;
+	}
+
+}
+
+class FiltroPlacarPredicate implements Predicate {
+	private String filtroPlacar;
+
+	public FiltroPlacarPredicate(String filtroPlacar) {
+		this.filtroPlacar = filtroPlacar;
+	}
+
+	@Override
+	public boolean evaluate(Object evento) {
+		if (evento instanceof Jogo && ((Jogo) evento).getPlacar().getContagemDeParciais().equals(filtroPlacar)) {
+			return true;
+		}
+		return false;
+	}
+
+}
+
+class FiltroParticipantesPredicate implements Predicate {
+	private Jogador filtroParticipantes;
+
+	public FiltroParticipantesPredicate(Jogador filtroParticipantes) {
+		this.filtroParticipantes = filtroParticipantes;
+	}
+
+	@Override
+	public boolean evaluate(Object evento) {
+		if (((Evento) evento).getJogadoresLabel().contains(filtroParticipantes.getNome())) {
+			return true;
+		}
+		return false;
+	}
+
+}
+
+class FiltroTipoPredicate implements Predicate {
+	private String filtroTipo;
+
+	public FiltroTipoPredicate(String filtroTipo) {
+		this.filtroTipo = filtroTipo;
+	}
+
+	@Override
+	public boolean evaluate(Object evento) {
+		if (((Evento) evento).getTipoValue().equals(filtroTipo)) {
+			return true;
+		}
+		return false;
+	}
+
+}
+
+class FiltroDataPredicate implements Predicate {
+	private String filtroData;
+	private SimpleDateFormat sdf;
+
+	public FiltroDataPredicate(SimpleDateFormat sdf, String filtroData) {
+		this.sdf = sdf;
+		this.filtroData = filtroData;
+	}
+
+	@Override
+	public boolean evaluate(Object evento) {
+		if (filtroData.equals(sdf.format(((Evento) evento).getData()))) {
+			return true;
+		}
+		return false;
+	}
+
 }

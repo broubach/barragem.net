@@ -49,21 +49,21 @@
 				<f:facet name="header">
 					<h:outputText value="#{msg.label_tipo}" />
 				</f:facet>
-				<a4j:commandLink actionListener="#{gerirEventoBean.detalhaEvento}" reRender="add-evento" oncomplete="$j('.popup').click()"><h:outputText value="#{item.tipoStr}" /></a4j:commandLink>
+				<a4j:commandLink actionListener="#{gerirEventoBean.detalhaEvento}" reRender="add-evento" oncomplete="$j('.popup').click()"><h:outputText value="#{item.tipoLabel}" /></a4j:commandLink>
 			</h:column>
 
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="#{msg.label_jogadores}" />
 				</f:facet>
-				<a4j:commandLink actionListener="#{gerirEventoBean.detalhaEvento}" reRender="add-evento" oncomplete="$j('.popup').click()"><h:outputText value="#{item.jogadoresStr}" /></a4j:commandLink>
+				<a4j:commandLink actionListener="#{gerirEventoBean.detalhaEvento}" reRender="add-evento" oncomplete="$j('.popup').click()"><h:outputText value="#{item.jogadoresLabel}" /></a4j:commandLink>
 			</h:column>
 
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="#{msg.label_placar}" />
 				</f:facet>
-				<a4j:commandLink actionListener="#{gerirEventoBean.detalhaEvento}" reRender="add-evento" oncomplete="$j('.popup').click()"><h:outputText value="#{item.placar}" rendered="#{item.tipoStr != msg['label_treino']}"/></a4j:commandLink>
+				<a4j:commandLink actionListener="#{gerirEventoBean.detalhaEvento}" reRender="add-evento" oncomplete="$j('.popup').click()"><h:outputText value="#{item.placar}" rendered="#{item.tipoLabel != msg['label_treino']}"/></a4j:commandLink>
 			</h:column>
 		
 			<h:column>

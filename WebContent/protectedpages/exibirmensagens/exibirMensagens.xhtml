@@ -11,7 +11,7 @@
 
 <ui:composition template="/protectedpages/layout/layoutPrincipal.xhtml">
 	<ui:define name="conteudo">
-		<div class="maincontent">
+		<div class="maincontent equalheights">
 			<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 			<script type="text/javascript" src="#{request.contextPath}/js/jquery.NobleCount.min.js"></script>
 
@@ -32,15 +32,13 @@
 							    <ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 							</h:commandLink>&#160;
 			            </li>
-			            <c:if test="false">
-				            <li>
-								<h:commandLink action="exibirEstatisticas" styleClass="btn_estatisticas_bckgnd">
-									#{msg.label_estatisticas}
-									<f:param name="id" value="#{exibirMensagensBean.usuarioEmFoco.id}"/>
-								    <ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
-								</h:commandLink>&#160;
-				            </li>
-			            </c:if>
+			            <li>
+							<h:commandLink action="exibirEventos" actionListener="#{exibirEventosBean.prepara}" styleClass="btn_eventos_bckgnd">
+								#{msg.label_jogos_}
+								<f:param name="id" value="#{exibirMensagensBean.usuarioEmFoco.id}"/>
+							    <ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
+							</h:commandLink>&#160;
+			            </li>
 			        </ul>
 				</h:panelGroup>
 				<span class="texto_informativo">#{msg.label_total_mensagens}: #{exibirMensagensBean.totalMensagens}</span>

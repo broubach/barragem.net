@@ -15,12 +15,12 @@ import net.barragem.scaffold.MessageBundleUtils;
 public class Treino extends Evento {
 
 	@Override
-	public String getTipoStr() {
+	public String getTipoLabel() {
 		return MessageBundleUtils.getInstance().get("label_treino");
 	}
 
 	@Override
-	public String getJogadoresStr() {
+	public String getJogadoresLabel() {
 		StringBuilder jogadores = new StringBuilder();
 
 		for (JogadorEvento jogadorEvento : getJogadoresEventos()) {
@@ -32,7 +32,7 @@ public class Treino extends Evento {
 	}
 
 	@Override
-	public String getResultadoStr() {
+	public String getResultadoLabel() {
 		return "";
 	}
 
@@ -44,5 +44,15 @@ public class Treino extends Evento {
 	@Override
 	public boolean isUsuarioLogadoPerdedor() {
 		return false;
+	}
+
+	@Override
+	public String getTipoValue() {
+		return "t";
+	}
+
+	@Override
+	public String getResultadoValue() {
+		return RESULTADO_INDEFINIDO;
 	}
 }
