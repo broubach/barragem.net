@@ -19,8 +19,9 @@
 	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/fileupload/fileupload.css" />
 	    </c:if>
         <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/posNovoUsuarioGrid.css" />
-        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/posNovoUsuario.css?v1.2.22" />
+        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/posNovoUsuario.css?v1.2.24" />
        	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+        <script type="text/javascript" src="#{request.contextPath}/js/jquery.equalheights.js"></script>
         <script type="text/javascript">
         //<![CDATA[
         	var $j = jQuery.noConflict();
@@ -30,6 +31,7 @@
         <script type="text/javascript">
         //<![CDATA[
         	$j(function () {
+            	$j('.equalheights').equalHeights();
 			    $j('#searchForm input').each(function() {
 			        if($j(this).val() === '') {
 			            $j(this).val($j(this).attr('title'));	

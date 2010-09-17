@@ -1065,11 +1065,6 @@ td.actions {
 	float: right;
 }
 
-.foto-perfil-small {
-	width: 37px;
-	height: 49px;
-}
-
 .exibirPainelBarragemRodada {
 	width: 58%;
 	float: right;
@@ -1189,18 +1184,13 @@ td.actions {
 }
 
 .dados .salvarPerfil {
-	padding-top: 10px;
-	display: inline-block;
+	padding-top: 20px;
+	text-align: center;
 }
 
 .dados .spanBtn {
-	clear: both;
-	padding-right: 5px;
 	width: 250px;
-	display: block;
 	float: left;
-	margin-right: 5px;
-	text-align: right;
 }
 
 .dados label,.dados .exemplo {
@@ -1390,25 +1380,30 @@ td.actions {
 
 .foto-perfil-small {
 	width: 37px;
-	height: 49px;
-}
-
-.perfilFotoContainer {
-	width: 260px;
-	margin-left: auto;
-	margin-right: auto;
-	display: table;
+	height: 52px;
 }
 
 .perfilFotoUploadFotoContainer {
-	float: left;
 	background-color: #ffffff;
 	padding: 10px;
 	border: 1px solid #C4C0B9;
+	max-width: 500px;
+	overflow: auto;
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .perfilBtnUploadFotoContainer {
-	float: left;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: center;
+}
+
+.instrucao_upload {
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
 }
 
 /********************* RODADAS *********************/
@@ -1758,7 +1753,7 @@ label {
 	font-weight: bold;
 }
 
-.dados label,.dados .exemplo,.dados .complemento,.dadosExibirPerfil label,.dados .spanBtn,.texto_informativo,.container-mensagens,.mensagem_sucesso,.dados-popup label, .botao-padrao-redondo {
+.dados label,.dados .exemplo,.dados .complemento,.dadosExibirPerfil label,.dados .spanBtn,.texto_informativo,.container-mensagens,.mensagem_sucesso,.dados-popup label, .botao-padrao-redondo, .instrucao_upload {
 	color: #444;
 	font-size: 12px;
 }

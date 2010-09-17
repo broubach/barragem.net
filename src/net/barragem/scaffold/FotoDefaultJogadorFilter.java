@@ -28,6 +28,10 @@ public class FotoDefaultJogadorFilter implements Filter {
 			ctx.setAttribute(ArquivoBean.FOTO_DEFAULT_JOGADOR_KEY, PersistenceHelper.findByPk(Arquivo.class,
 					ArquivoBean.FOTO_DEFAULT_JOGADOR_ID));
 		}
+		if (ctx.getAttribute(ArquivoBean.FOTO_PEQUENA_DEFAULT_JOGADOR_KEY) == null) {
+			ctx.setAttribute(ArquivoBean.FOTO_PEQUENA_DEFAULT_JOGADOR_KEY, PersistenceHelper.findByPk(Arquivo.class,
+					ArquivoBean.FOTO_PEQUENA_DEFAULT_JOGADOR_ID));
+		}
 		chain.doFilter(req, res);
 	}
 

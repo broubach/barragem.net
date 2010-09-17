@@ -1,5 +1,11 @@
 package net.barragem.view.backingbean;
 
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -17,6 +23,7 @@ import javax.faces.component.html.HtmlDataTable;
 import javax.faces.context.FacesContext;
 import javax.faces.event.FacesEvent;
 import javax.faces.event.PhaseId;
+import javax.imageio.ImageIO;
 import javax.jms.JMSException;
 import javax.jms.MapMessage;
 import javax.jms.Message;
@@ -44,7 +51,16 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 public abstract class BaseBean {
 
 	public static final String FOTO_DEFAULT_JOGADOR_KEY = "foto-jogador";
+	public static final String FOTO_PEQUENA_DEFAULT_JOGADOR_KEY = "foto-pequena-jogador";
+
 	public static final Integer FOTO_DEFAULT_JOGADOR_ID = new Integer(2);
+	public static final Integer FOTO_PEQUENA_DEFAULT_JOGADOR_ID = new Integer(64);
+
+	public static final int FOTO_PEQUENA_HEIGHT = 52;
+	public static final int FOTO_PEQUENA_WIDTH = 37;
+	public static final int FOTO_DEFAULT_HEIGHT = 162;
+	public static final int FOTO_DEFAULT_WIDTH = 123;
+
 	protected static final String emailTemplateAdicaoJogador = new StringBuilder().append("<p>Olá,</p>").append(
 			"<p>Agora você faz parte da lista de jogadores de {0}.</p>").append(
 			"<p>Se você conhece {0}, você também pode adicioná-lo(a) à sua lista de jogadores.</p>").append(
@@ -297,6 +313,10 @@ public abstract class BaseBean {
 		return (Arquivo) getServletContext().getAttribute(FOTO_DEFAULT_JOGADOR_KEY);
 	}
 
+	public Arquivo getFotoPequenaJogador() {
+		return (Arquivo) getServletContext().getAttribute(FOTO_PEQUENA_DEFAULT_JOGADOR_KEY);
+	}
+
 	protected Object evaluateElExpression(String elExpression) {
 		FacesContext context = FacesContext.getCurrentInstance();
 		Application app = context.getApplication();
@@ -391,5 +411,47 @@ public abstract class BaseBean {
 			return true;
 		}
 		return false;
+	}
+
+	public static byte[] scaleImage(byte[] original, int width, int height) throws IOException {
+		BufferedImage bsrc = ImageIO.read(new ByteArrayInputStream(original));
+		BufferedImage bdest = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+
+		AffineTransform at = AffineTransform.getScaleInstance((double) width / bsrc.getWidth(), (double) height
+				/ bsrc.getHeight());
+		Graphics2D g = bdest.createGraphics();
+		g.drawRenderedImage(bsrc, at);
+
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		ImageIO.write(bdest, "PNG", out);
+		return out.toByteArray();
+	}
+
+	public byte[] cropAndScaleImage(byte[] original, int x1, int y1, int x2, int y2, int width, int height)
+			throws IOException {
+		BufferedImage bsrc = ImageIO.read(new ByteArrayInputStream(original));
+		BufferedImage bdest = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+
+		Graphics2D g = bdest.createGraphics();
+		AffineTransform at = null;
+		if (x2 - x1 > 0 && y2 - y1 > 0) {
+			at = AffineTransform.getScaleInstance((double) width / (x2 - x1), (double) height / (y2 - y1));
+			g.drawRenderedImage(bsrc.getSubimage(x1, y1, x2 - x1, y2 - y1), at);
+		} else {
+			at = AffineTransform.getScaleInstance((double) width / bsrc.getWidth(), (double) height / bsrc.getHeight());
+			g.drawRenderedImage(bsrc, at);
+		}
+
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		ImageIO.write(bdest, "PNG", out);
+
+		return out.toByteArray();
+	}
+
+	public String getRequestParameter(String parametro) {
+		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
+				.getRequest();
+
+		return request.getParameter(parametro);
 	}
 }

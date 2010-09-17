@@ -39,6 +39,9 @@ public class Perfil extends BaseEntity implements Cloneable {
 	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
 	private Arquivo foto;
 
+	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+	private Arquivo fotoPequena;
+
 	@OneToOne(cascade = { CascadeType.ALL })
 	private Usuario usuario;
 
@@ -147,6 +150,14 @@ public class Perfil extends BaseEntity implements Cloneable {
 
 	public void setHash(String hashFoto) {
 		this.hash = hashFoto;
+	}
+
+	public Arquivo getFotoPequena() {
+		return fotoPequena;
+	}
+
+	public void setFotoPequena(Arquivo fotoPequena) {
+		this.fotoPequena = fotoPequena;
 	}
 
 	public String getJogoHa() {

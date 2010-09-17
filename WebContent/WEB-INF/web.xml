@@ -56,7 +56,7 @@
 	     </init-param>
 	     <init-param>
 	          <param-name>maxRequestSize</param-name>
-	          <param-value>1048576</param-value>
+	          <param-value>3145728</param-value>
 	     </init-param>
 	</filter>
 	<filter-mapping>
@@ -186,7 +186,7 @@
 		<url-pattern>/protectedpages/exibireventos/exibirEstatisticas.do</url-pattern>
 	</servlet-mapping>
 
-	<!-- Scale Images Servlet>
+	<!-- Scale Images Servlet -->
 	<servlet>
 		<servlet-name>Scale Images Servlet</servlet-name>
 		<servlet-class>net.barragem.scaffold.ScaleImagesServlet</servlet-class>
@@ -195,7 +195,7 @@
 	<servlet-mapping>
 		<servlet-name>Scale Images Servlet</servlet-name>
 		<url-pattern>/protectedpages/scaleImages.do</url-pattern>
-	</servlet-mapping -->
+	</servlet-mapping>
 
     <!-- Spring config -->
    	<context-param>

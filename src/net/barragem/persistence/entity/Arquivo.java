@@ -13,7 +13,9 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@NamedQueries( { @NamedQuery(name = "fotoIdQueryByHash", query = "select foto.id from Perfil perfil join perfil.foto foto where perfil.hash = :hash") })
+@NamedQueries( {
+		@NamedQuery(name = "fotoIdQueryByHash", query = "select foto.id from Perfil perfil join perfil.foto foto where perfil.hash = :hash"),
+		@NamedQuery(name = "fotoPequenaIdQueryByHash", query = "select fotoPequena.id from Perfil perfil join perfil.fotoPequena fotoPequena where perfil.hash = :hash") })
 @Table(name = "arquivo")
 public class Arquivo extends BaseEntity {
 

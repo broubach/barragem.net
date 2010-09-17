@@ -14,10 +14,9 @@
 		<c:forEach items="#{jogadores}" var="item" varStatus="status">
 			<tr class="#{status.index % 2 ==0 ? 'exibirPainelBarragemRankingBodyBackground' : 'exibirPainelBarragemRankingBodyBackgroundAlt'}">
 				<td class="exibirPainelBarragemRankingBody">
-			        <h:graphicImage value="/protectedpages/exibirimagem/exibirImagem.do?hash=#{item.usuarioCorrespondente.perfil.hash}" styleClass="foto-perfil-small" 
-			        	rendered="#{item.usuarioCorrespondente != null and item.usuarioCorrespondente.perfil != null and item.usuarioCorrespondente.perfil.hash != null}"/>
-			        <h:graphicImage value="/protectedpages/exibirimagem/exibirImagem.do?hash=default" styleClass="foto-perfil-small" 
-			        	rendered="#{item.usuarioCorrespondente != null and (item.usuarioCorrespondente.perfil == null or item.usuarioCorrespondente.perfil.hash == null)}"/>
+				    <ui:include src="../componentes/foto-perfil-small.xhtml">
+				    	<ui:param name="usuario" value="#{item.usuarioCorrespondente}"/>
+				    </ui:include>
 				</td>
 				<td class="exibirPainelBarragem-ranking-nowrap">
 					<h:commandLink action="exibirPerfil" actionListener="#{exibirPerfilBean.exibePerfil}" rendered="#{item.usuarioCorrespondente != null and !podeVincularJogadores}" onclick="">#{item.nome}<f:param name="id" value="#{item.usuarioCorrespondente.id}"/></h:commandLink>

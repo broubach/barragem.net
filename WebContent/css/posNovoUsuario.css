@@ -456,37 +456,6 @@ li {
 .tituloPerfil .passoAtivo h2 {
 	color: #ffffff;
 }
-.perfilContainer {
-	padding: 2px; 
-	width: 580px; 
-	background-color: #ffffff; 
-	-moz-border-radius: 10px; 
-    -webkit-border-radius: 10px;
-	margin-left: auto; 
-	margin-right: auto;
-}
-.perfilBtnContainer {
-	padding: 2px; 
-	width: 500px;
-	text-align: center; 
-	margin-left: auto; 
-	margin-right: auto;
-}
-.perfilFotoUploadFotoContainer {
-	float: left; 
-	background-color: #ffffff; 
-	padding: 10px; 
-	border: 1px solid #C4C0B9;
-}
-.perfilFotoContainer {
-	width: 260px; 
-	margin-left: auto; 
-	margin-right: auto; 
-	display: table;
-}
-.perfilBtnUploadFotoContainer {
-	float: left;
-}
 .rich-fileupload-list-decor {
 	border: 0px;
 }
@@ -521,6 +490,39 @@ li {
 	white-space: nowrap;
 	border: none;
 	clear: none;
+}
+.perfilFotoUploadFotoContainer {
+	background-color: #ffffff;
+	padding: 10px;
+	border: 1px solid #C4C0B9;
+	max-width: 500px;
+	overflow: auto;
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+}
+.perfilBtnUploadFotoContainer {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: center;
+}
+
+.perfilBtnContainer {
+	padding: 2px; 
+	padding-top: 20px;
+	width: 500px;
+	text-align: center; 
+	margin-left: auto; 
+	margin-right: auto;
+}
+.perfilContainer {
+	padding: 2px; 
+	width: 580px; 
+	background-color: #ffffff; 
+	-moz-border-radius: 10px; 
+    -webkit-border-radius: 10px;
+	margin-left: auto; 
+	margin-right: auto;
 }
 
 /********************* DADOS *********************/
@@ -641,7 +643,7 @@ input {
     color:#fff;
     font-weight:bold;
 }
-.dados label, .dados .exemplo, .dados .complemento, .dadosExibirPerfil label, .dadosGerirJogador label, .dadosGerirJogadorListaJogadores label, .mensagem_sucesso {
+.dados label, .dados .exemplo, .dados .complemento, .dadosExibirPerfil label, .dadosGerirJogador label, .dadosGerirJogadorListaJogadores label, .mensagem_sucesso, .instrucao_upload {
 	color:#444;
 	font-size:.8em;
 }

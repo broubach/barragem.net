@@ -9,6 +9,7 @@ import java.util.List;
 import javax.faces.event.ActionEvent;
 
 import net.barragem.business.bo.JogadorBo;
+import net.barragem.business.bo.PerfilBo;
 import net.barragem.persistence.entity.Arquivo;
 import net.barragem.persistence.entity.Categoria;
 import net.barragem.persistence.entity.Perfil;
@@ -145,19 +146,7 @@ public class EditarPerfilBean extends BaseBean {
 	}
 
 	public void salvaFoto(ActionEvent e) {
-		Arquivo fotoASerRemovida = null;
-		if (fotoEmFoco.getId() == null && perfilEmFoco.getFoto() != null && perfilEmFoco.getFoto().getId() != null
-				&& !perfilEmFoco.getFoto().getId().equals(ArquivoBean.FOTO_DEFAULT_JOGADOR_ID)) {
-			fotoASerRemovida = perfilEmFoco.getFoto();
-		}
-		perfilEmFoco.setHash(encriptMd5(fotoEmFoco.getDado().toString()));
-		perfilEmFoco.setFoto(fotoEmFoco);
-		perfilEmFoco.setUsuario(getUsuarioLogado());
-		perfilEmFoco.getUsuario().setPerfil(perfilEmFoco);
-		PersistenceHelper.persiste(perfilEmFoco);
-		if (fotoASerRemovida != null) {
-			PersistenceHelper.remove(fotoASerRemovida);
-		}
+		getBo(PerfilBo.class).salvaFoto(usuarioEmFoco, perfilEmFoco, fotoEmFoco);
 		addMensagemAtualizacaoComSucesso();
 		preparaPerfil(e);
 	}
