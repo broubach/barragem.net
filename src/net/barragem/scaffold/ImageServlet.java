@@ -1,7 +1,11 @@
 package net.barragem.scaffold;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,6 +24,11 @@ public class ImageServlet extends HttpServlet {
 				BaseBean.FOTO_PEQUENA_DEFAULT_JOGADOR_KEY);
 		String hash = req.getParameter("hash");
 		boolean isFotoPequena = req.getParameter("fotoPequena") != null;
+		Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT-3"));
+		calendar.add(Calendar.YEAR, 1);
+		resp.setHeader("Expires", new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.ENGLISH).format(calendar
+				.getTime()));
+		resp.setHeader("ETag", hash + isFotoPequena);
 		if (hash.equals("default")) {
 			if (isFotoPequena) {
 				resp.setContentType(fotoPequenaDefault.getMime());
