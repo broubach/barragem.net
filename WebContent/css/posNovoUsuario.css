@@ -492,8 +492,6 @@ li {
 	clear: none;
 }
 .perfilFotoUploadFotoContainer {
-/*	background-color: #ffffff;
-	border: 1px solid #C4C0B9;*/
 	padding: 10px;
 	max-width: 500px;
 	overflow: auto;
@@ -501,6 +499,7 @@ li {
 	margin-right: auto;
 	position: relative;
 	text-align: center;
+	max-height: 380px;
 }
 
 .perfilBtnUploadFotoContainer {
