@@ -1384,14 +1384,15 @@ td.actions {
 }
 
 .perfilFotoUploadFotoContainer {
-	background-color: #ffffff;
+/*	background-color: #ffffff;
+	border: 1px solid #C4C0B9;*/
 	padding: 10px;
-	border: 1px solid #C4C0B9;
 	max-width: 500px;
 	overflow: auto;
-	position: relative;
 	margin-left: auto;
 	margin-right: auto;
+	position: relative;
+	text-align: center;
 }
 
 .perfilBtnUploadFotoContainer {
