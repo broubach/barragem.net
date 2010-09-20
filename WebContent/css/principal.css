@@ -1385,13 +1385,10 @@ td.actions {
 
 .perfilFotoUploadFotoContainer {
 	padding: 10px;
-	max-width: 500px;
-	overflow: auto;
 	margin-left: auto;
 	margin-right: auto;
 	position: relative;
 	text-align: center;
-	max-height: 380px;
 }
 
 .perfilBtnUploadFotoContainer {

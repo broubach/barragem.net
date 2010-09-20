@@ -39,12 +39,13 @@
 		<script type="text/javascript">
 			$j(function(){
 				$j('#perfil\\:info').Jcrop({
+					boxWidth: 550,
+					boxHeight: 380,
 					bgColor: '#ffffff',
 					onChange: showCoords,
 					onSelect: showCoords,
 					aspectRatio: .76
 				});
-				//$j('.perfilFotoUploadFotoContainer').width($j('#perfil\\:info').width());
 				if ($j.browser.mozilla) {
 					$j('#perfil\\:upload').css('margin-left', ($j('.perfilBtnUploadFotoContainer').width() - $j('.rich-fileupload-toolbar-decor').width()) / 2);
 				} else {
