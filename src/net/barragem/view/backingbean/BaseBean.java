@@ -1,6 +1,8 @@
 package net.barragem.view.backingbean;
 
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.Transparency;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -56,7 +58,7 @@ public abstract class BaseBean {
 	public static final Integer FOTO_DEFAULT_JOGADOR_ID = new Integer(2);
 	public static final Integer FOTO_PEQUENA_DEFAULT_JOGADOR_ID = new Integer(64);
 
-	public static final int FOTO_PEQUENA_HEIGHT = 52;
+	public static final int FOTO_PEQUENA_HEIGHT = 49;
 	public static final int FOTO_PEQUENA_WIDTH = 37;
 	public static final int FOTO_DEFAULT_HEIGHT = 162;
 	public static final int FOTO_DEFAULT_WIDTH = 123;
@@ -430,16 +432,13 @@ public abstract class BaseBean {
 	public byte[] cropAndScaleImage(byte[] original, int x1, int y1, int x2, int y2, int width, int height)
 			throws IOException {
 		BufferedImage bsrc = ImageIO.read(new ByteArrayInputStream(original));
-		BufferedImage bdest = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+		BufferedImage bdest = null;
 
-		Graphics2D g = bdest.createGraphics();
-		AffineTransform at = null;
 		if (x2 - x1 > 0 && y2 - y1 > 0) {
-			at = AffineTransform.getScaleInstance((double) width / (x2 - x1), (double) height / (y2 - y1));
-			g.drawRenderedImage(bsrc.getSubimage(x1, y1, x2 - x1, y2 - y1), at);
+			bdest = getScaledInstance(bsrc.getSubimage(x1, y1, x2 - x1, y2 - y1), width, height,
+					RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
 		} else {
-			at = AffineTransform.getScaleInstance((double) width / bsrc.getWidth(), (double) height / bsrc.getHeight());
-			g.drawRenderedImage(bsrc, at);
+			bdest = getScaledInstance(bsrc, width, height, RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
 		}
 
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -453,5 +452,77 @@ public abstract class BaseBean {
 				.getRequest();
 
 		return request.getParameter(parametro);
+	}
+
+	/**
+	 * Convenience method that returns a scaled instance of the
+	 * provided {@code BufferedImage}.
+	 *
+	 * @param img the original image to be scaled
+	 * @param targetWidth the desired width of the scaled instance,
+	 *    in pixels
+	 * @param targetHeight the desired height of the scaled instance,
+	 *    in pixels
+	 * @param hint one of the rendering hints that corresponds to
+	 *    {@code RenderingHints.KEY_INTERPOLATION} (e.g.
+	 *    {@code RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR},
+	 *    {@code RenderingHints.VALUE_INTERPOLATION_BILINEAR},
+	 *    {@code RenderingHints.VALUE_INTERPOLATION_BICUBIC})
+	 * @param higherQuality if true, this method will use a multi-step
+	 *    scaling technique that provides higher quality than the usual
+	 *    one-step technique (only useful in downscaling cases, where
+	 *    {@code targetWidth} or {@code targetHeight} is
+	 *    smaller than the original dimensions, and generally only when
+	 *    the {@code BILINEAR} hint is specified)
+	 * @return a scaled version of the original {@code BufferedImage}
+	 */
+	public static BufferedImage getScaledInstance(BufferedImage img, int targetWidth, int targetHeight, Object hint,
+			boolean higherQuality) {
+		int type = (img.getTransparency() == Transparency.OPAQUE) ? BufferedImage.TYPE_INT_RGB
+				: BufferedImage.TYPE_INT_ARGB;
+		BufferedImage ret = (BufferedImage) img;
+		int w, h;
+		if (higherQuality) {
+			// Use multi-step technique: start with original size, then
+			// scale down in multiple passes with drawImage()
+			// until the target size is reached
+			w = img.getWidth();
+			h = img.getHeight();
+		} else {
+			// Use one-step technique: scale directly from original
+			// size to target size with a single drawImage() call
+			w = targetWidth;
+			h = targetHeight;
+		}
+
+		do {
+			if (higherQuality && w > targetWidth) {
+				w /= 2;
+				if (w < targetWidth) {
+					w = targetWidth;
+				}
+			} else if (w <= targetWidth) {
+				w = targetWidth;
+			}
+
+			if (higherQuality && h > targetHeight) {
+				h /= 2;
+				if (h < targetHeight) {
+					h = targetHeight;
+				}
+			} else if (h <= targetHeight) {
+				h = targetHeight;
+			}
+
+			BufferedImage tmp = new BufferedImage(w, h, type);
+			Graphics2D g2 = tmp.createGraphics();
+			g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, hint);
+			g2.drawImage(ret, 0, 0, w, h, null);
+			g2.dispose();
+
+			ret = tmp;
+		} while (w != targetWidth || h != targetHeight);
+
+		return ret;
 	}
 }
