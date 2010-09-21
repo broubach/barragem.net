@@ -8,6 +8,8 @@ import javax.persistence.Table;
 
 import net.barragem.scaffold.MessageBundleUtils;
 
+import org.apache.commons.lang.StringEscapeUtils;
+
 @Entity
 @NamedQuery(name = "lastTwitterUpdateQuery", query = "from AtualizacaoTwitter")
 @Table(name = "atualizacaotwitter")
@@ -19,6 +21,10 @@ public class AtualizacaoTwitter extends BaseEntity {
 
 	public String getTexto() {
 		return texto;
+	}
+
+	public String getTextoEncoded() {
+		return StringEscapeUtils.escapeXml(texto);
 	}
 
 	public void setTexto(String texto) {
@@ -66,5 +72,9 @@ public class AtualizacaoTwitter extends BaseEntity {
 
 	public String getTextoResumido() {
 		return texto.substring(0, texto.length() >= 20 ? 20 : texto.length());
+	}
+
+	public String getTextoResumidoEncoded() {
+		return StringEscapeUtils.escapeXml(getTextoResumido());
 	}
 }

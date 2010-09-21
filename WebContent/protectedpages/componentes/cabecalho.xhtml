@@ -48,7 +48,7 @@
 	</div>
 	
 	<script type="text/javascript">
-	  	document.getElementById('descricao_pequena').innerHTML = unescape("#{applicationScope['last-twitt'].textoResumido}");
-	  	document.getElementById('descricao_grande').innerHTML = unescape("#{applicationScope['last-twitt'].texto}");
+	  	document.getElementById('descricao_pequena').innerHTML = "#{applicationScope['last-twitt'].textoResumidoEncoded}";
+	  	document.getElementById('descricao_grande').innerHTML = "#{applicationScope['last-twitt'].textoEncoded}";
 	</script> 
 </html>

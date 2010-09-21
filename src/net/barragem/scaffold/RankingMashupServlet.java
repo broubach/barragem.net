@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.richfaces.json.JSONArray;
-import org.richfaces.json.JSONException;
-import org.richfaces.json.JSONObject;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONException;
+import net.sf.json.JSONObject;
 
 public class RankingMashupServlet extends HttpServlet {
 
@@ -43,7 +43,7 @@ public class RankingMashupServlet extends HttpServlet {
 				cicloJogadorJson.put("nome", cicloJogador[0]);
 				cicloJogadorJson.put("ranking", cicloJogador[1]);
 				cicloJogadorJson.put("pontuacao", cicloJogador[2]);
-				rankingJson.put(cicloJogadorJson);
+				rankingJson.add(cicloJogadorJson);
 			}
 			barragemJson.put("ranking", rankingJson);
 			resp.setCharacterEncoding("UTF-8");

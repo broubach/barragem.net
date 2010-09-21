@@ -7,9 +7,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 
@@ -25,21 +24,19 @@ public class AtualizaTwitterJob implements Job {
 	public void execute(JobExecutionContext ctx) throws JobExecutionException {
 		try {
 			String response = obtemUltimoTwitt();
+			response = response.replace("twitterCallback([", "");
+			response = response.replace("]);", "");
 
-			String twitt = extraiTwitt(response);
-			List<Date> twittDates = new ArrayList<Date>();
-			extraiTwittDate(twittDates, response, 0);
-			Date twittDateMaisRecente = twittDates.get(0);
-			for (Date twittDate : twittDates) {
-				if (twittDateMaisRecente.before(twittDate)) {
-					twittDateMaisRecente = twittDate;
-				}
-			}
+			Json2Java j = new Json2Java();
+			Map<String, Object> resp = j.getMap(response);
+
+			String twitt = (String) resp.get("text");
+			Date twittDate = toDate((String) resp.get("created_at"));
 
 			AtualizacaoTwitter atualizacaoTwitter = (AtualizacaoTwitter) PersistenceHelper.findByNamedQuery(
 					"lastTwitterUpdateQuery").get(0);
 			atualizacaoTwitter.setTexto(twitt);
-			atualizacaoTwitter.setData(twittDateMaisRecente);
+			atualizacaoTwitter.setData(twittDate);
 			atualizacaoTwitter.setDataGravacao(new Date());
 			PersistenceHelper.persiste(atualizacaoTwitter);
 			((ServletContext) ctx.getMergedJobDataMap().get("servletContext")).setAttribute("last-twitt",
@@ -72,31 +69,11 @@ public class AtualizaTwitterJob implements Job {
 		}
 	}
 
-	private String extraiTwitt(String response) {
-		int beginIndex = response.indexOf("\"text\":\"");
-		String twitt = response.substring(beginIndex + "\"text\":\"".length(), response.indexOf("\"", beginIndex
-				+ "\"text\":\"".length()));
-		return twitt;
-	}
-
-	private void extraiTwittDate(List<Date> twittDates, String response, int beginIndex) {
+	private Date toDate(String date) {
 		try {
-			if (beginIndex == 0) {
-				beginIndex = response.indexOf("\"created_at\":\"") + "\"created_at\":\"".length();
-			} else {
-				beginIndex = response.indexOf("\"created_at\":\"", beginIndex) >= 0 ? response.indexOf(
-						"\"created_at\":\"", beginIndex)
-						+ "\"created_at\":\"".length() : -1;
-			}
-			if (beginIndex < 0) { // condicao de parada
-				return;
-			}
-			int endIndex = response.indexOf("\"", beginIndex + 1);
-			String data = response.substring(beginIndex, endIndex);
-			extraiTwittDate(twittDates, response, endIndex);
 			SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss ZZZZZ yyyy", new java.util.Locale("eng",
 					"US"));
-			twittDates.add(sdf.parse(data));
+			return sdf.parse(date);
 		} catch (ParseException e) {
 			throw new RuntimeException(e);
 		}
