@@ -1,5 +1,6 @@
 package net.barragem.business.bo;
 
+import java.text.MessageFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,7 @@ import net.barragem.persistence.entity.JogoBarragem;
 import net.barragem.persistence.entity.Parcial;
 import net.barragem.persistence.entity.Placar;
 import net.barragem.persistence.entity.Rodada;
+import net.barragem.persistence.entity.Usuario;
 import net.barragem.scaffold.Paginavel;
 import net.barragem.scaffold.PersistenceHelper;
 
@@ -50,6 +52,17 @@ public class EventoBo extends BaseBo {
 			}
 		}
 
+		if (evento.getId() == null) {
+			for (JogadorEvento jogadorEvento : evento.getJogadoresEventos()) {
+				if (jogadorEvento.getJogador().getUsuarioCorrespondente() != null
+						&& !jogadorEvento.getJogador().equals(getUsuarioLogado().getJogador())) {
+					Usuario destino = jogadorEvento.getJogador().getUsuarioCorrespondente();
+					sendMail("no-reply@barragem.net", getUsuarioLogado().getNomeCompletoCapital(), destino.getEmail(),
+							"barragem.net - novo jogo cadastrado", MessageFormat.format(emailTemplateNovoJogo, evento
+									.getJogadoresEventosStr(destino.getJogador())));
+				}
+			}
+		}
 		PersistenceHelper.persiste(evento);
 	}
 

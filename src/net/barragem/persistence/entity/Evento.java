@@ -191,4 +191,37 @@ public abstract class Evento extends BaseEntity implements Cloneable {
 	}
 
 	public abstract String getTipoValue();
+
+	public String getJogadoresEventosStr(Jogador jogador) {
+		int totalJogadores = 0;
+		for (int i = 0; i < jogadoresEventos.size(); i++) {
+			if (!jogadoresEventos.get(i).getJogador().equals(jogador)) {
+				totalJogadores++;
+			}
+		}
+
+		StringBuilder result = new StringBuilder();
+		if (totalJogadores > 1) {
+			int numJogadores = 0;
+			for (JogadorEvento jogadorEvento : jogadoresEventos) {
+				if (!jogadorEvento.getJogador().equals(jogador)) {
+					result.append(jogadorEvento.getJogador().getNome());
+					if (numJogadores < totalJogadores - 1) {
+						numJogadores++;
+						result.append(", ");
+					} else {
+						result.append(" e ");
+					}
+				}
+			}
+		} else {
+			for (JogadorEvento jogadorEvento : jogadoresEventos) {
+				if (!jogadorEvento.getJogador().equals(jogador)) {
+					result.append(jogadorEvento.getJogador().getNome());
+				}
+			}
+		}
+
+		return result.toString();
+	}
 }

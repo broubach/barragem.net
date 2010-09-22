@@ -28,6 +28,7 @@ import net.barragem.view.backingbean.componentes.JogadorEventoComparatorVencedor
 import net.barragem.view.backingbean.componentes.JogadorEventoUsuarioLogadoComparator;
 
 import org.ajax4jsf.model.KeepAlive;
+import org.apache.commons.beanutils.BeanComparator;
 
 @KeepAlive
 public class GerirEventoBean extends BaseBean {
@@ -223,6 +224,7 @@ public class GerirEventoBean extends BaseBean {
 		List<SelectItem> items = new ArrayList<SelectItem>();
 		List<Jogador> jogadores = PersistenceHelper.findByNamedQuery("jogadoresPorUsuarioDonoQuery", getUsuarioLogado()
 				.getId());
+		Collections.sort(jogadores, new BeanComparator("nome"));
 		Jogador jogador = null;
 		for (Iterator<Jogador> it = jogadores.iterator(); it.hasNext();) {
 			jogador = it.next();

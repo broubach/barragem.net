@@ -91,6 +91,14 @@ public abstract class BaseBean {
 			.append(
 					"<p>Atenciosamente,<br />Equipe <a href='https://www.barragem.net/login.xhtml'>barragem.net</a></p>")
 			.toString();
+	protected static final String emailTemplateNovoJogo = new StringBuilder()
+			.append("<p>Olá,</p>")
+			.append("<p>Um novo jogo entre você e {0} foi cadastrado.</p>")
+			.append(
+					"<p>Acesse <a href='https://www.barragem.net/login.xhtml'>www.barragem.net</a> e confira outros dados do evento.</p>")
+			.append(
+					"<p>Atenciosamente,<br />Equipe <a href='https://www.barragem.net/login.xhtml'>barragem.net</a></p>")
+			.toString();
 
 	private HtmlDataTable dataTable;
 

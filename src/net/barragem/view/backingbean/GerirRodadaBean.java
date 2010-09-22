@@ -21,6 +21,7 @@ import net.barragem.view.backingbean.componentes.JogadorEventoComparatorVencedor
 import net.barragem.view.backingbean.componentes.JogoBarragemComparator;
 
 import org.ajax4jsf.model.KeepAlive;
+import org.apache.commons.beanutils.BeanComparator;
 
 @KeepAlive
 public class GerirRodadaBean extends BaseBean {
@@ -132,6 +133,7 @@ public class GerirRodadaBean extends BaseBean {
 
 	public List<SelectItem> getListaJogadoresHabilitados() {
 		List<Jogador> jogadores = rodadaEmFoco.getCiclo().getJogadoresHabilitadosDoRanking();
+		Collections.sort(jogadores, new BeanComparator("nome"));
 
 		List<SelectItem> items = new ArrayList<SelectItem>();
 		Jogador jogador = null;
