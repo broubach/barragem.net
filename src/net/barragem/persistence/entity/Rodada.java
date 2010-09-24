@@ -8,6 +8,8 @@ import java.util.Map;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -16,6 +18,7 @@ import net.barragem.scaffold.ReflectionHelper;
 
 @Entity
 @Table(name = "rodada")
+@NamedQueries( { @NamedQuery(name = "rodadaQuery", query = "select distinct j.id, jg.nome, je.vencedor, je.pontuacaoObtida, j.data, j.hora, p from Rodada r join r.ciclo c join c.barragem b join r.jogos j join j.jogadoresEventos je left outer join j.placar p join je.jogador jg where r.numero = :numRodada and b.id = :barragemId") })
 public class Rodada extends BaseEntity implements Atualizavel {
 	@TextoAtualizacao
 	private Integer numero;

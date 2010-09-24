@@ -175,6 +175,28 @@
 		<url-pattern>/publicpages/mashup/ranking.json</url-pattern>
 	</servlet-mapping>
 
+	<!-- Rodada Mashup Servlet -->
+	<servlet>
+		<servlet-name>Rodada Mashup Servlet</servlet-name>
+		<servlet-class>net.barragem.scaffold.RodadaMashupServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Rodada Mashup Servlet</servlet-name>
+		<url-pattern>/publicpages/mashup/rodada.json</url-pattern>
+	</servlet-mapping>
+
+	<!-- Rodadas Mashup Servlet -->
+	<servlet>
+		<servlet-name>Rodadas Mashup Servlet</servlet-name>
+		<servlet-class>net.barragem.scaffold.RodadasMashupServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Rodadas Mashup Servlet</servlet-name>
+		<url-pattern>/publicpages/mashup/rodadas.json</url-pattern>
+	</servlet-mapping>
+
 	<!-- Estatisticas Servlet -->
 	<servlet>
 		<servlet-name>Estatisticas Servlet</servlet-name>
