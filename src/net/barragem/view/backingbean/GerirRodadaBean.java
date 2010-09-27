@@ -110,8 +110,8 @@ public class GerirRodadaBean extends BaseBean {
 	}
 
 	public void carregaRodada(Ciclo ciclo, int index) {
-		rodadaEmFoco = (Rodada) PersistenceHelper
-				.findByPk(Rodada.class, ciclo.getRodadas().get(index).getId(), "jogos");
+		rodadaEmFoco = (Rodada) PersistenceHelper.findByPk(Rodada.class, ciclo.getRodadas().get(index).getId(),
+				"jogos", "bonuses");
 		PersistenceHelper.initialize("ranking", rodadaEmFoco.getCiclo());
 		List<Placar> proxys = new ArrayList<Placar>();
 		for (Jogo jogo : rodadaEmFoco.getJogos()) {

@@ -30,6 +30,9 @@ public class Rodada extends BaseEntity implements Atualizavel {
 	@OneToMany(mappedBy = "rodada", cascade = { CascadeType.ALL })
 	private List<JogoBarragem> jogos;
 
+	@OneToMany(mappedBy = "rodada", cascade = { CascadeType.ALL })
+	private List<Bonus> bonuses;
+
 	@Transient
 	private List<JogoBarragem> jogosOrdenados;
 
@@ -74,6 +77,14 @@ public class Rodada extends BaseEntity implements Atualizavel {
 
 	public void setJogosOrdenados(List<JogoBarragem> jogosOrdenados) {
 		this.jogosOrdenados = jogosOrdenados;
+	}
+
+	public List<Bonus> getBonuses() {
+		return bonuses;
+	}
+
+	public void setBonuses(List<Bonus> bonuses) {
+		this.bonuses = bonuses;
 	}
 
 	public JogoBarragem criaJogoBarragem(Jogador jogador1, Jogador jogador2) {
@@ -166,6 +177,16 @@ public class Rodada extends BaseEntity implements Atualizavel {
 					}
 				}
 			}
+		}
+
+		for (Bonus bonus : bonuses) {
+			if (pontuacaoJogadores.get(bonus.getJogador()) == null) {
+				pontuacaoJogadores.put(bonus.getJogador(), bonus.getValor());
+			} else {
+				pontuacaoJogadores.put(bonus.getJogador(), pontuacaoJogadores.get(bonus.getJogador())
+						+ bonus.getValor());
+			}
+
 		}
 		return pontuacaoJogadores;
 	}

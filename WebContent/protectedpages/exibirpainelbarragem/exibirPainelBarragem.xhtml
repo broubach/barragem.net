@@ -19,7 +19,7 @@
 					$j('input:text').setMask();
 				});
 			</script>
-			<h:form>
+			<h:form id="painelBarragem">
 			<h2>#{exibirPainelBarragemBean.cicloEmFoco.barragem.local}</h2>
 			<h3>#{msg[exibirPainelBarragemBean.cicloEmFoco.barragem.categoria.nome]}</h3>
 		    <div class="menu-contextual">
@@ -37,63 +37,77 @@
 		    </div>
 
 			<div class="exibirPainelBarragemRanking">
-			    <h:dataTable styleClass="exibirPainelBarragemRankingTable" rowClasses="exibirPainelBarragemRankingBodyBackground,exibirPainelBarragemRankingBodyBackgroundAlt" columnClasses="exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBody" value="#{exibirPainelBarragemBean.ranking}" var="item" headerClass="exibirPainelBarragemRankingTableHead">
-					<f:facet name="header">
-						#{msg.label_ranking}
-					</f:facet>
-				    <h:column>
-					    <ui:include src="../componentes/foto-perfil-small.xhtml">
-					    	<ui:param name="usuario" value="#{item.jogador.usuarioCorrespondente}"/>
-					    </ui:include>
-				    </h:column>
-				    <h:column>
-						<h:commandLink action="exibirPerfil" actionListener="#{exibirPerfilBean.exibePerfil}" rendered="#{item.jogador.usuarioCorrespondente != null}">#{item.ranking}<f:param name="id" value="#{item.jogador.usuarioCorrespondente.id}"/></h:commandLink>
-						<h:outputText value="#{item.ranking}" rendered="#{item.jogador.usuarioCorrespondente == null}"/>
-				    </h:column>
-				    <h:column>
-						<h:commandLink action="exibirPerfil" actionListener="#{exibirPerfilBean.exibePerfil}" rendered="#{item.jogador.usuarioCorrespondente != null}">#{item.pontuacao}<f:param name="id" value="#{item.jogador.usuarioCorrespondente.id}"/></h:commandLink>
-						<h:outputText value="#{item.pontuacao}" rendered="#{item.jogador.usuarioCorrespondente == null}"/>
-				    </h:column>
-				    <h:column>
-						<h:commandLink action="exibirPerfil" actionListener="#{exibirPerfilBean.exibePerfil}" rendered="#{item.jogador.usuarioCorrespondente != null}">#{item.jogador.nome}<f:param name="id" value="#{item.jogador.usuarioCorrespondente.id}"/></h:commandLink>
-						<h:outputText value="#{item.jogador.nome}" rendered="#{item.jogador.usuarioCorrespondente == null}"/>
-				    </h:column>
-			    </h:dataTable>
+				<table class="gradient">
+				<thead>
+					<tr>
+						<th colspan="4">#{msg.label_ranking}</th>
+					</tr>
+				</thead>
+				<tbody>
+				<c:forEach items="#{exibirPainelBarragemBean.ranking}" var="item" varStatus="status">
+					<tr class="#{status.index % 2 ==0 ? '' : 'alt'}">
+						<td>
+						    <ui:include src="../componentes/foto-perfil-small.xhtml">
+						    	<ui:param name="usuario" value="#{item.jogador.usuarioCorrespondente}"/>
+						    </ui:include>
+						</td>
+						<td>
+							<h:commandLink action="exibirPerfil" actionListener="#{exibirPerfilBean.exibePerfil}" rendered="#{item.jogador.usuarioCorrespondente != null}">#{item.ranking}<f:param name="id" value="#{item.jogador.usuarioCorrespondente.id}"/></h:commandLink>
+							<h:outputText value="#{item.ranking}" rendered="#{item.jogador.usuarioCorrespondente == null}"/>
+						</td>
+						<td>
+							<h:commandLink action="exibirPerfil" actionListener="#{exibirPerfilBean.exibePerfil}" rendered="#{item.jogador.usuarioCorrespondente != null}">#{item.pontuacao}<f:param name="id" value="#{item.jogador.usuarioCorrespondente.id}"/></h:commandLink>
+							<h:outputText value="#{item.pontuacao}" rendered="#{item.jogador.usuarioCorrespondente == null}"/>
+						</td>
+						<td>
+							<h:commandLink action="exibirPerfil" actionListener="#{exibirPerfilBean.exibePerfil}" rendered="#{item.jogador.usuarioCorrespondente != null}">#{item.jogador.nome}<f:param name="id" value="#{item.jogador.usuarioCorrespondente.id}"/></h:commandLink>
+							<h:outputText value="#{item.jogador.nome}" rendered="#{item.jogador.usuarioCorrespondente == null}"/>
+						</td>
+					</tr>
+				</c:forEach>
+				</tbody>
+				</table>
 			</div>
 
 			<div class="exibirPainelBarragemRodada">
 				<c:forEach items="#{exibirPainelBarragemBean.rodadas}" var="rodadaAtual" begin="#{exibirPainelBarragemBean.startIndex}" end="#{exibirPainelBarragemBean.endIndex}">
-				    <h:dataTable styleClass="exibirPainelBarragemRodadaTable" rowClasses="exibirPainelBarragemRankingBodyBackground,exibirPainelBarragemRankingBodyBackgroundAlt" columnClasses="exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBody,exibirPainelBarragemRodadaBodyVersus,exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBody,exibirPainelBarragem-ranking-nowrap,exibirPainelBarragem-ranking-nowrap" value="#{rodadaAtual.jogosOrdenados}" var="item" headerClass="exibirPainelBarragemRankingTableHead">
-						<f:facet name="header">
-							#{msg.label_rodada} #{rodadaAtual.numero}
-						</f:facet>
-					    <h:column>
-							#{item.jogadoresEventosOrdenados[0].jogador.nome}
-					    </h:column>
-					    <h:column>
-							#{item.jogadoresEventosOrdenados[0].pontuacaoObtida}
-					    </h:column>
-					    <h:column>
-							&#160;&#160;
-					    </h:column>
-					    <h:column>
-							#{item.jogadoresEventosOrdenados[1].jogador.nome}
-					    </h:column>
-					    <h:column>
-							#{item.jogadoresEventosOrdenados[1].pontuacaoObtida}
-					    </h:column>
-					    <h:column>
-							#{item.placar}
-					    </h:column>
-					    <h:column>
-							<h:outputText value="#{item.data}" >
-								<f:convertDateTime pattern="dd MMM" timeZone="GMT-3" locale="pt"/>
-							</h:outputText>&#160;
-							<h:outputText value="#{item.hora}" >
-								<f:convertDateTime pattern="HH:mm" timeZone="GMT-3" locale="pt"/>
-							</h:outputText>
-					    </h:column>
-				    </h:dataTable>
+					<table class="gradient">
+					<thead>
+						<tr>
+							<th colspan="7">#{msg.label_rodada} #{rodadaAtual.numero}</th>
+						</tr>
+					</thead>
+					<tbody>
+					<c:forEach items="#{rodadaAtual.jogosOrdenados}" var="item" varStatus="status">
+						<tr class="#{status.index % 2 ==0 ? '' : 'alt'}">
+							<td>#{item.jogadoresEventosOrdenados[0].jogador.nome}</td>
+							<td>#{item.jogadoresEventosOrdenados[0].pontuacaoObtida}</td>
+							<td class="exibirPainelBarragemRodadaBodyVersus">&#160;&#160;</td>
+							<td>#{item.jogadoresEventosOrdenados[1].jogador.nome}</td>
+							<td>#{item.jogadoresEventosOrdenados[1].pontuacaoObtida}</td>
+							<td>#{item.placar}</td>
+							<td>
+								<h:outputText value="#{item.data}" >
+									<f:convertDateTime pattern="dd MMM" timeZone="GMT-3" locale="pt"/>
+								</h:outputText>&#160;
+								<h:outputText value="#{item.hora}" >
+									<f:convertDateTime pattern="HH:mm" timeZone="GMT-3" locale="pt"/>
+								</h:outputText>
+							</td>
+						</tr>
+					</c:forEach>
+					</tbody>
+					</table>
+					<c:if test="#{not empty rodadaAtual.bonuses}">
+						<fieldset class="fieldset_bonus">
+							<legend>#{msg.label_bonus}</legend>
+							<ul>
+							<c:forEach items="#{rodadaAtual.bonuses}" var="item" varStatus="status">
+								<li>#{item.jogador.nome}: #{item.justificativa} (#{item.valor} #{msg.label_pts_})</li>
+							</c:forEach>
+							</ul>
+						</fieldset>
+					</c:if>
 					<br/>
 				</c:forEach>
 

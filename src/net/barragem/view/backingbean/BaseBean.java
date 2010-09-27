@@ -99,6 +99,14 @@ public abstract class BaseBean {
 			.append(
 					"<p>Atenciosamente,<br />Equipe <a href='https://www.barragem.net/login.xhtml'>barragem.net</a></p>")
 			.toString();
+	protected static final String emailTemplateNovoBonus = new StringBuilder()
+			.append("<p>Olá,</p>")
+			.append("<p>Você ganhou bonus na rodada {0} da barragem {1}!</p>")
+			.append(
+					"<p>Acesse <a href='https://www.barragem.net/login.xhtml'>www.barragem.net</a> e confira quantos pontos de bônus você irá acumular no fechamento da rodada {0}.</p>")
+			.append(
+					"<p>Atenciosamente,<br />Equipe <a href='https://www.barragem.net/login.xhtml'>barragem.net</a></p>")
+			.toString();
 
 	private HtmlDataTable dataTable;
 
@@ -259,8 +267,16 @@ public abstract class BaseBean {
 	}
 
 	protected boolean valida(Validatable validatable) {
+		return valida(validatable, false);
+	}
+
+	protected boolean valida(Validatable validatable, boolean apenasUmCampoObrigatorio) {
+		boolean possuiUmCampoObrigatorio = false;
 		for (String clientId : validatable.validate()) {
-			messages.addErrorMessage(clientId, "label_true");
+			if (!apenasUmCampoObrigatorio || !possuiUmCampoObrigatorio) {
+				messages.addErrorMessage(clientId, "label_true");
+				possuiUmCampoObrigatorio = true;
+			}
 		}
 
 		return messages.getErrorMessages().isEmpty();

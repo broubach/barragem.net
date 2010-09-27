@@ -66,10 +66,9 @@ public class RodadaBo extends BaseBo {
 			if (cicloJogador.getJogador().getUsuarioCorrespondente() != null) {
 				sendMail("no-reply@barragem.net", getUsuarioLogado().getNomeCompletoCapital(), cicloJogador
 						.getJogador().getUsuarioCorrespondente().getEmail(), new StringBuilder().append(
-						"barragem.net - sorteio da barragem ").append(
-						rodada.getCiclo().getBarragem().getCategoria().getNome()).append(" realizado").toString(),
-						MessageFormat.format(emailTemplateSorteioBarragem, rodada.getCiclo().getBarragem()
-								.getCategoria().getNome()));
+						"barragem.net - sorteio da barragem ").append(rodada.getCiclo().getBarragem().getCategoria())
+						.append(" realizado").toString(), MessageFormat.format(emailTemplateSorteioBarragem, rodada
+						.getCiclo().getBarragem().getCategoria().getNome()));
 			}
 		}
 	}

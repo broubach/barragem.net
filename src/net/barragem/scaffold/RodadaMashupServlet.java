@@ -3,6 +3,7 @@ package net.barragem.scaffold;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 import java.util.TimeZone;
 
 import javax.servlet.ServletException;
@@ -31,17 +32,19 @@ public class RodadaMashupServlet extends HttpServlet {
 				return;
 			}
 
-			List<Object[]> rodada = PersistenceHelper.findByNamedQuery("rodadaQuery", numRodada, barragemId);
-
+			JSONObject rodadaEBonusJson = new JSONObject();
 			JSONArray rodadaJson = new JSONArray();
+			JSONArray bonusesJson = new JSONArray();
+
+			List<Object[]> rodada = PersistenceHelper.findByNamedQuery("rodadaQuery", numRodada, barragemId);
 			JSONObject jogoBarragemJson = null;
 			Integer jogoId = null;
 			Object[] jogadorVencedor = null;
 			Object[] jogadorPerdedor = null;
 			Object[] dataHoraEPlacar = null;
-			SimpleDateFormat sdfData = new SimpleDateFormat("dd MMM");
+			SimpleDateFormat sdfData = new SimpleDateFormat("dd MMM", new Locale("PT", "br"));
 			sdfData.setTimeZone(TimeZone.getTimeZone("GMT-3"));
-			SimpleDateFormat sdfHora = new SimpleDateFormat(" HH:mm");
+			SimpleDateFormat sdfHora = new SimpleDateFormat(" HH:mm", new Locale("PT", "br"));
 			sdfHora.setTimeZone(TimeZone.getTimeZone("GMT-3"));
 			for (Object[] evento : rodada) {
 				if (jogoId == null || !jogoId.equals(evento[0])) {
@@ -79,12 +82,26 @@ public class RodadaMashupServlet extends HttpServlet {
 					dataHoraEPlacar[1] = "";
 				}
 			}
+
+			List<Object[]> bonuses = PersistenceHelper.findByNamedQuery("bonusQuery", numRodada, barragemId);
+			JSONObject bonusJson = null;
+			for (Object[] bonus : bonuses) {
+				bonusJson = new JSONObject();
+				bonusJson.put("jogadorNome", bonus[0]);
+				bonusJson.put("justificativa", bonus[1]);
+				bonusJson.put("valor", bonus[2]);
+				bonusesJson.add(bonusJson);
+			}
+
+			rodadaEBonusJson.put("jogos", rodadaJson);
+			rodadaEBonusJson.put("bonus", bonusesJson);
+
 			resp.setCharacterEncoding("UTF-8");
 			if (req.getParameter("callback") != null) {
 				resp.getWriter().print(req.getParameter("callback"));
 			}
 			resp.getWriter().print("(");
-			resp.getWriter().print(rodadaJson);
+			resp.getWriter().print(rodadaEBonusJson);
 			resp.getWriter().print(");");
 
 		} catch (NullPointerException e) {

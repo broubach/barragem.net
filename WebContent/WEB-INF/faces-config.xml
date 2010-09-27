@@ -119,6 +119,11 @@
 		<managed-bean-class>net.barragem.view.backingbean.ExibirEventosBean</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>gerirBonusBean</managed-bean-name>
+		<managed-bean-class>net.barragem.view.backingbean.GerirBonusBean</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
 	<navigation-rule>
 		<display-name>protectedpages/gerirbarragem/barragensQueAdministro.xhtml</display-name>
 		<from-view-id>/protectedpages/gerirbarragem/barragensQueAdministro.xhtml</from-view-id>

@@ -1,0 +1,42 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<script type="text/javascript" src="#{request.contextPath}/js/jquery.meio.mask.min_custom.js" charset="utf-8" ></script>
+	<div class="add-bonus">
+		<h:form id="add-bonus">
+			<script>
+	            $j(function(){
+	            	$j('input:text').setMask();
+	            });
+	         </script>
+		    <ui:include src="../componentes/mensagem-erro.xhtml"/>
+		    <ui:include src="../componentes/mensagem-sucesso.xhtml"/>
+			<div class="dados-popup">
+				<div class="input text">
+					<label for="add-bonus:jogador">#{msg.label_jogador}*</label>
+					<h:selectOneMenu id="jogador" value="#{gerirBonusBean.bonusEmFoco.jogador}" converter="JogadorConverter" disabled="#{gerirBonusBean.bonusEmFoco.id != null}">
+						<f:selectItem itemLabel="" />
+						<f:selectItems value="#{gerirBonusBean.listaJogadores}" />
+					</h:selectOneMenu>
+				</div>
+				<div class="input text">
+					<label for="add-bonus:justificativa">#{msg.label_justificativa}*</label>
+					<h:inputText id="justificativa" value="#{gerirBonusBean.bonusEmFoco.justificativa}" size="55" maxlength="45"/>
+				</div>
+				<div class="input text">
+					<label for="add-bonus:valor">#{msg.label_valor}*</label>
+					<h:inputText id="valor" value="#{gerirBonusBean.bonusEmFoco.valor}" size="3" maxlength="3" alt="small-integer"/> <span class="complemento">#{msg.label_pts_}</span>
+				</div>
+				<div class="salvar">
+					<label class="campos_obrigatorios">#{msg.label_campos_marcados_sao_obrigatorios}</label>
+					<a4j:commandButton actionListener="#{gerirBonusBean.salva}" value="#{msg.label_salvar}" styleClass="submit" reRender="add-bonus" oncomplete="$j.fn.colorbox.resize()"/>
+				</div>
+			</div>
+		</h:form>
+	</div>
+</html>

@@ -3,7 +3,6 @@ package net.barragem.view.backingbean;
 import java.util.List;
 
 import javax.faces.event.ActionEvent;
-import javax.faces.model.ListDataModel;
 
 import net.barragem.business.bo.BarragemBo;
 import net.barragem.persistence.entity.Barragem;
@@ -21,20 +20,20 @@ public class GerirBarragemBean extends BaseBean {
 	private Integer tipoPesquisa = new Integer(1);
 	private Barragem barragemEmFoco;
 	private List<Barragem> barragensQueAdministro;
-	private ListDataModel barragensQueParticipo;
+	private List<Barragem> barragensQueParticipo;
 	private Paginavel<Barragem> paginacaoBarragens;
 
 	public GerirBarragemBean() {
 		lista();
-		paginacaoBarragens = new PaginavelSampleImpl<Barragem>((List<Barragem>) barragensQueParticipo.getWrappedData());
-		barragensQueParticipo = new ListDataModel(paginacaoBarragens.getPagina());
+		paginacaoBarragens = new PaginavelSampleImpl<Barragem>(barragensQueParticipo);
+		barragensQueParticipo = paginacaoBarragens.getPagina();
 	}
 
 	public List<Barragem> getBarragensQueAdministro() {
 		return barragensQueAdministro;
 	}
 
-	public ListDataModel getBarragensQueParticipo() {
+	public List<Barragem> getBarragensQueParticipo() {
 		return barragensQueParticipo;
 	}
 
@@ -104,8 +103,7 @@ public class GerirBarragemBean extends BaseBean {
 
 	private void lista() {
 		barragensQueAdministro = PersistenceHelper.findByNamedQuery("barragensQueAdministroQuery", getUsuarioLogado());
-		barragensQueParticipo = new ListDataModel(PersistenceHelper.findByNamedQuery("barragensQueParticipoQuery",
-				getUsuarioLogado()));
+		barragensQueParticipo = PersistenceHelper.findByNamedQuery("barragensQueParticipoQuery", getUsuarioLogado());
 	}
 
 	public void detalhaBarragem(ActionEvent e) {
@@ -149,7 +147,7 @@ public class GerirBarragemBean extends BaseBean {
 			messages.addInfoMessage("label_nenhum_resultado_encontrado", "label_nenhum_resultado_encontrado");
 		} else {
 			paginacaoBarragens = new PaginavelSampleImpl<Barragem>(resultado);
-			barragensQueParticipo = new ListDataModel(paginacaoBarragens.getPagina());
+			barragensQueParticipo = paginacaoBarragens.getPagina();
 			pesquisaSalva = pesquisa;
 		}
 		return "";
@@ -158,6 +156,6 @@ public class GerirBarragemBean extends BaseBean {
 	public void limpaFiltro(ActionEvent e) {
 		pesquisaSalva = null;
 		paginacaoBarragens = new PaginavelSampleImpl<Barragem>(paginacaoBarragens.getSourceList());
-		barragensQueParticipo = new ListDataModel(paginacaoBarragens.getPagina());
+		barragensQueParticipo = paginacaoBarragens.getPagina();
 	}
 }

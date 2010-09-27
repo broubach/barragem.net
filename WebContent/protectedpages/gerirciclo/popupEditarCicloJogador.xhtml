@@ -15,10 +15,6 @@
 	         </script>
 			<div class="dados-popup">
 				<div class="input text">
-					<label for="editar-ciclo-jogador:pontuacao">#{msg.label_pontuacao}</label>
-					<h:inputText id="pontuacao" alt="small-integer" value="#{gerirCicloBean.pontuacao}" size="10" maxlength="6" readonly="#{fn:length(gerirCicloBean.cicloEmFoco.rodadas) > 0 and gerirCicloBean.cicloEmFoco.rodadas[0].fechada == true}"/>
-				</div>
-				<div class="input text">
 					<label for="editar-ciclo-jogador:habilitado">#{msg.label_habilitado}</label>
 					<h:selectBooleanCheckbox id="habilitado" value="#{gerirCicloBean.habilitado}"/> <span class="complemento">#{msg.label_sim}</span>
 				</div>

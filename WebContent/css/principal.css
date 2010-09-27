@@ -198,8 +198,16 @@ fieldset {
 	border: none;
 }
 
+/********************* BONUS *********************/
+.add-bonus .dados-popup label {
+	width:70px;
+}
+.fieldset_bonus li {
+	list-style: disc inside none;
+}
+
 /********************* FIELDSETS *********************/
-fieldset#ranking,fieldset#jogos {
+fieldset#ranking,fieldset#jogos, fieldset#bonuses {
 	float: left;
 	width: 460px;
 }
@@ -1015,46 +1023,13 @@ td.actions {
 }
 
 /********************* EXIBIR PAINEL BARRAGEM *********************/
-.exibirPainelBarragemRanking {
+#painelBarragem .exibirPainelBarragemRanking {
 	width: 38%;
+}
+
+.exibirPainelBarragemRanking {
 	float: left;
 	padding: 3px;
-}
-
-.exibirPainelBarragemRankingTable {
-	width: 100%;
-	border-collapse: collapse;
-	-moz-border-radius: 10px;
-	-webkit-border-radius: 10px;
-	background-color: #adc0fe;
-	font-family: Arial, Helvetica, Sans-Serif;
-	font-size: 12px;
-}
-
-.exibirPainelBarragemRankingTableHead {
-	padding: 4px;
-	border-bottom: 1px solid #FFFFFF;
-}
-
-.exibirPainelBarragemRankingBodyBackground {
-	background-color: #dce4ff;
-}
-
-.exibirPainelBarragemRankingBodyBackgroundAlt {
-	background-color: #e8d9d9
-}
-
-.exibirPainelBarragemRankingBody {
-	padding: 2px;
-	border-bottom: 1px solid #FFFFFF;
-	border-top: 1px solid #FFFFFF;
-}
-
-.exibirPainelBarragem-ranking-nowrap {
-	padding: 2px;
-	border-bottom: 1px solid #FFFFFF;
-	border-top: 1px solid #FFFFFF;
-	white-space: nowrap;
 }
 
 .float-left {
@@ -1071,20 +1046,8 @@ td.actions {
 	padding: 3px;
 }
 
-.exibirPainelBarragemRodadaTable {
-	width: 100%;
-	border-collapse: collapse;
-	-moz-border-radius: 10px;
-	-webkit-border-radius: 10px;
-	background-color: #adc0fe;
-	font-family: Arial, Helvetica, Sans-Serif;
-	font-size: 12px;
-}
-
 .exibirPainelBarragemRodadaBodyVersus {
 	padding: 2px;
-	border-bottom: 1px solid #FFFFFF;
-	border-top: 1px solid #FFFFFF;
 	background: transparent url('../img/versus.png') no-repeat 50%;
 }
 
@@ -1750,7 +1713,7 @@ label {
 	font-weight: bold;
 }
 
-.dados label,.dados .exemplo,.dados .complemento,.dadosExibirPerfil label,.dados .spanBtn,.texto_informativo,.container-mensagens,.mensagem_sucesso,.dados-popup label, .botao-padrao-redondo, .instrucao_upload {
+.dados label,.dados .exemplo,.dados .complemento,.dadosExibirPerfil label,.dados .spanBtn,.texto_informativo,.container-mensagens,.mensagem_sucesso,.dados-popup label, .botao-padrao-redondo, .instrucao_upload, .dados-popup .complemento, .fieldset_bonus {
 	color: #444;
 	font-size: 12px;
 }

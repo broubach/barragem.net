@@ -25,6 +25,8 @@ public class ValidatableSampleImpl implements Validatable {
 					result.add(field.getName());
 				} else if (content instanceof String && content.toString().trim().equals("")) {
 					result.add(field.getName());
+				} else if (content instanceof Number && ((Number) content).doubleValue() == 0) {
+					result.add(field.getName());
 				}
 			}
 			return result;

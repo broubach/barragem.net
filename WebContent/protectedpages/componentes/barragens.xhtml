@@ -8,22 +8,30 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
 	<div class="exibirPainelBarragemRanking">
-	    <h:dataTable styleClass="exibirPainelBarragemRankingTable" rowClasses="exibirPainelBarragemRankingBodyBackground,exibirPainelBarragemRankingBodyBackgroundAlt" columnClasses="exibirPainelBarragemRankingBody,exibirPainelBarragemRankingBody" value="#{barragens}" var="item" headerClass="exibirPainelBarragemRankingTableHead">
-		    <h:column>
-				<f:facet name="header">
-					#{msg.label_local}
-				</f:facet>
-				<h:commandLink action="exibirPainelBarragem">#{item.local}<f:param name="id" value="#{item.id}"/></h:commandLink>
-		    </h:column>
-		    <h:column>
-				<f:facet name="header">
-					#{msg.label_categoria}
-				</f:facet>
-				<h:commandLink action="exibirPainelBarragem">#{msg[item.categoria.nome]}<f:param name="id" value="#{item.id}"/></h:commandLink>
-		    </h:column>
-			<f:facet name="footer">
-				<h:commandLink actionListener="#{gerirBarragemBean.limpaFiltro}" rendered="#{gerirBarragemBean.pesquisaSalva != null}" styleClass="linkLimpaFiltro">#{msg.label_limpar_filtro_pesquisa}</h:commandLink>
-			</f:facet>
-	    </h:dataTable>
+		<table class="gradient">
+		<thead>
+			<tr>
+				<th>#{msg.label_local}</th>
+				<th>#{msg.label_categoria}</th>
+			</tr>
+		</thead>
+		<tbody>
+		<c:forEach items="#{barragens}" var="item" varStatus="status">
+			<tr class="#{status.index % 2 ==0 ? '' : 'alt'}">
+				<td>
+				    <h:commandLink action="exibirPainelBarragem">#{item.local}<f:param name="id" value="#{item.id}"/></h:commandLink>
+				</td>
+				<td>
+					<h:commandLink action="exibirPainelBarragem">#{msg[item.categoria.nome]}<f:param name="id" value="#{item.id}"/></h:commandLink>
+				</td>
+			</tr>
+ 				</c:forEach>
+		</tbody>
+		<c:if test="#{gerirBarragemBean.pesquisaSalva != null}">
+			<tfoot>
+				<tr><td colspan="2"><h:commandLink actionListener="#{gerirBarragemBean.limpaFiltro}" rendered="#{gerirBarragemBean.pesquisaSalva != null}" styleClass="linkLimpaFiltro">#{msg.label_limpar_filtro_pesquisa}</h:commandLink></td></tr>
+			</tfoot>
+		</c:if>
+		</table>
 	</div>
 </html>

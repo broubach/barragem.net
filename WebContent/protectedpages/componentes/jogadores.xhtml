@@ -8,17 +8,21 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
 	<h:panelGroup id="tabelaJogadores" styleClass="exibirPainelBarragemRanking" layout="block">
-		<table class="exibirPainelBarragemRankingTable">
-		<thead><tr><th class="exibirPainelBarragemRankingTableHead" colspan="3" scope="colgroup">#{msg.label_jogadores}</th></tr></thead>
+		<table class="gradient">
+		<thead>
+			<tr>
+				<th colspan="3">#{msg.label_jogadores}</th>
+			</tr>
+		</thead>
 		<tbody>
 		<c:forEach items="#{jogadores}" var="item" varStatus="status">
-			<tr class="#{status.index % 2 ==0 ? 'exibirPainelBarragemRankingBodyBackground' : 'exibirPainelBarragemRankingBodyBackgroundAlt'}">
-				<td class="exibirPainelBarragemRankingBody">
+			<tr class="#{status.index % 2 ==0 ? '' : 'alt'}">
+				<td>
 				    <ui:include src="../componentes/foto-perfil-small.xhtml">
 				    	<ui:param name="usuario" value="#{item.usuarioCorrespondente}"/>
 				    </ui:include>
 				</td>
-				<td class="exibirPainelBarragem-ranking-nowrap">
+				<td>
 					<h:commandLink action="exibirPerfil" actionListener="#{exibirPerfilBean.exibePerfil}" rendered="#{item.usuarioCorrespondente != null and !podeVincularJogadores}" onclick="">#{item.nome}<f:param name="id" value="#{item.usuarioCorrespondente.id}"/></h:commandLink>
 					<h:commandLink actionListener="#{vincularJogadorBean.vinculaJogador}" rendered="#{item.usuarioCorrespondente != null and podeVincularJogadores}" onclick="return confirm('#{msg.label_confirma_vincular1} #{vincularJogadorBean.jogadorEmFoco.nome}#{msg.label_confirma_vincular2} #{item.nome}?');">
 						#{item.nome}
@@ -32,7 +36,7 @@
 					</div>
 					<div class="float-left"><h:outputText value="#{item.nome}" rendered="#{item.usuarioCorrespondente == null}" /></div>
 				</td>
-				<td class="exibirPainelBarragemRankingBody">
+				<td>
 					<c:if test="#{podeEditarJogadores}">
 						<h:panelGroup layout="block" rendered="#{item.usuarioCorrespondente == null or sessionScope['usuario'].id != item.usuarioCorrespondente.id}" styleClass="botao-jogadores">
 							<h:commandLink onclick="return confirm('#{msg.label_confirma_exclusao}');" actionListener="#{gerirJogadorBean.remove}" rendered="#{item.usuarioCorrespondente == null or sessionScope['usuario'].id != item.usuarioCorrespondente.id}"><img src="#{request.contextPath}/img/buttons/btn-deletar.png" alt="#{msg.label_excluir}" title="#{msg.label_excluir}" width="18px" height="18px"/><f:param name="index" value="#{status.index}"/></h:commandLink>&#160;
@@ -58,10 +62,13 @@
 			</tr>
 		</c:forEach>
 		</tbody>
-		<tfoot>
-			<tr><td colspan="3"><h:commandLink actionListener="#{gerirJogadorBean.limpaFiltro}" rendered="#{gerirJogadorBean.pesquisaSalva != null}" styleClass="linkLimpaFiltro">#{msg.label_limpar_filtro_pesquisa}</h:commandLink></td></tr>
-		</tfoot>
+		<c:if test="#{gerirJogadorBean.pesquisaSalva != null}">
+			<tfoot>
+				<tr><td colspan="3"><h:commandLink actionListener="#{gerirJogadorBean.limpaFiltro}" rendered="#{gerirJogadorBean.pesquisaSalva != null}" styleClass="linkLimpaFiltro">#{msg.label_limpar_filtro_pesquisa}</h:commandLink></td></tr>
+			</tfoot>
+		</c:if>
 		</table>
+
 	    <ui:include src="paginacao.xhtml">
 	    	<ui:param name="paginavel" value="#{paginavel}"/>
 	    	<ui:param name="toReRender" value="tabelaJogadores"/>

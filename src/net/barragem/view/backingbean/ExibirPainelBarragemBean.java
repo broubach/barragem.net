@@ -47,6 +47,7 @@ public class ExibirPainelBarragemBean extends BaseBean {
 	private void inicializaRodadas() {
 		for (int i = startIndex; i <= endIndex; i++) {
 			if (i < rodadas.size()) {
+				PersistenceHelper.initialize("bonuses", rodadas.get(i));
 				PersistenceHelper.initialize("jogos", rodadas.get(i));
 				for (Jogo jogoBarragem : rodadas.get(i).getJogos()) {
 					PersistenceHelper.initialize("parciais", jogoBarragem.getPlacar());

@@ -19,6 +19,8 @@ import javax.persistence.Table;
 
 import net.barragem.scaffold.PersistenceHelper;
 
+import org.apache.commons.beanutils.BeanComparator;
+
 @Entity
 @Table(name = "ciclo")
 @NamedQueries( {
@@ -177,6 +179,7 @@ public class Ciclo extends BaseEntity {
 		for (CicloJogador cicloJogador : ranking) {
 			jogadoresDoRanking.add(cicloJogador.getJogador());
 		}
+		Collections.sort(jogadoresDoRanking, new BeanComparator("nome"));
 		return jogadoresDoRanking;
 	}
 
@@ -201,10 +204,19 @@ public class Ciclo extends BaseEntity {
 
 	public int getPontuacaoExcedente(Integer numero, Jogador jogador) {
 		if (getParametros().getRodadasDeHistoricoMantidasParaCalculoDoRanking() != null
+				&& getParametros().getRodadasDeHistoricoMantidasParaCalculoDoRanking() > 0
 				&& numero > getParametros().getRodadasDeHistoricoMantidasParaCalculoDoRanking()) {
 			int indiceRodadaExcedente = numero - getParametros().getRodadasDeHistoricoMantidasParaCalculoDoRanking()
 					- 1;
-			return getRodadas().get(indiceRodadaExcedente).getJogadorJogoBarragem(jogador).getPontuacaoObtida();
+			Integer pontuacaoExcedente = getRodadas().get(indiceRodadaExcedente).getJogadorJogoBarragem(jogador)
+					.getPontuacaoObtida();
+			for (Bonus bonus : getRodadas().get(indiceRodadaExcedente).getBonuses()) {
+				if (bonus.getJogador().equals(jogador)) {
+					pontuacaoExcedente += bonus.getValor();
+					break;
+				}
+			}
+			return pontuacaoExcedente;
 		}
 
 		return 0;
