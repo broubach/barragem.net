@@ -10,6 +10,7 @@
 	<div class="add-evento">
 		<h:form id="add-evento">
 			<script type="text/javascript" src="#{request.contextPath}/js/jquery.NobleCount.min.js"></script>
+			<script type="text/javascript" src="#{request.contextPath}/js/jquery.poshytip.min.js"></script>
 
 			<ui:include src="../componentes/mensagem-erro.xhtml"/>
 		    <ui:include src="../componentes/mensagem-sucesso.xhtml"/>
@@ -48,7 +49,7 @@
 							<h:selectBooleanCheckbox id="wo" value="#{gerirEventoBean.eventoEmFoco.placar.wo}" class="wo" onclick="$j('div.vencedorWo').slideToggle('fast');$j('#add-evento\\:vencedorParcial1,#add-evento\\:vencedorParcial2,#add-evento\\:vencedorParcial3,#add-evento\\:perdedorParcial1,#add-evento\\:perdedorParcial2,#add-evento\\:perdedorParcial3').attr('disabled', $j('#add-evento\\:wo').is(':checked'));$j.fn.colorbox.resize();" disabled="#{gerirEventoBean.tipo == 3 and gerirEventoBean.eventoEmFoco.rodada.fechada}"/>
 							<div class="vencedorWo" style="#{gerirEventoBean.eventoEmFoco.placar.wo == true ? 'display:block' : '' }">
 								<label for="add-evento:vencedor" class="blank">#{msg.label_selecione_o_vencedor}:</label>
-								<h:selectOneMenu id="vencedorWo" value="#{gerirEventoBean.jogadorVencedorWo}" converter="JogadorConverter" rendered="#{gerirEventoBean.eventoEmFoco != null}" disabled="#{gerirEventoBean.tipo == 3 and gerirEventoBean.eventoEmFoco.rodada.fechada}">
+								<h:selectOneMenu id="vencedorWo" value="#{gerirEventoBean.jogadorVencedorWo}" converter="JogadorConverter" rendered="#{gerirEventoBean.eventoEmFoco != null}" disabled="#{gerirEventoBean.tipo == 3 and gerirEventoBean.eventoEmFoco.rodada.fechada}" styleClass="fonte-padrao">
 									<f:selectItems value="#{gerirEventoBean.listaJogadoresSelecionados}" />
 								</h:selectOneMenu>
 							</div>
@@ -91,10 +92,10 @@
 				</c:if>
 
 				<fieldset id="comentario">
-					<legend>#{msg.label_comentario}</legend>
+					<legend>#{msg.label_comentario_privado} <span><a href="#" id="demo-tip-yellowsimple" title="#{msg.label_ajuda_comentario_privado}">&#160;</a></span></legend>
 					<div class="input text">
-						<h:inputTextarea id="comentario" value="#{gerirEventoBean.comentario}" styleClass="comentario"/><br/>
-						<span class="caracteres-restantes"><span id='contador'></span>&#160;#{msg.label_caracteres_restantes}</span>
+						<h:inputTextarea id="comentario" value="#{gerirEventoBean.comentario}" styleClass="comentario fonte-padrao"/><br/>
+						<span class="caracteres-restantes fonte-padrao"><span id='contador'></span>&#160;#{msg.label_caracteres_restantes}</span>
 					</div>
 				</fieldset>
 
@@ -106,6 +107,14 @@
 				</div>
 
 		        <script type="text/javascript">
+					$j('#demo-tip-yellowsimple').poshytip({
+						className: 'tip-yellowsimple',
+						showTimeout: 1,
+						alignTo: 'target',
+						alignX: 'center',
+						offsetY: 5,
+						allowTipHover: false
+					});
 					$j('#add-evento\\:comentario').NobleCount('#contador',{
 						on_negative: 'go_red',
 						on_positive: 'go_green',
@@ -117,7 +126,7 @@
 								}
 				        }
 					});
-		        </script>
+				</script>
 			</h:panelGroup>
 		</h:form>
 	</div>

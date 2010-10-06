@@ -843,6 +843,79 @@ fieldset#parciais {
 .grafico {
 	margin-bottom: 5px;
 }
+.legend-picture {
+	vertical-align: bottom;
+}
+#demo-tip-yellowsimple:HOVER {
+	text-decoration: none;
+}
+#demo-tip-yellowsimple {
+	background: #fff url('../img/help.png') no-repeat;
+	padding-left: 6px;
+	padding-right: 6px;
+	padding-top: 2px;
+	text-decoration: none;
+}
+.tip-yellowsimple {
+	z-index:10000;
+	text-align:left;
+	border:1px solid #c7bf93;
+	border-radius:4px;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	padding:6px 8px;
+	min-width:50px;
+	max-width:300px;
+	color:#000;
+	background-color:#fff9c9;
+	/**
+	 * - If you set a background-image, border/padding/background-color will be ingnored.
+	 *   You can set any padding to .tip-inner instead if you need.
+	 * - If you want a tiled background-image and border/padding for the tip,
+	 *   set the background-image to .tip-inner instead.
+	 */
+}
+.tip-yellowsimple .tip-inner {
+	font:12px/16px arial,helvetica,sans-serif;
+}
+
+/* Configure an arrow image - the script will automatically position it on the correct side of the tip */
+.tip-yellowsimple .tip-arrow-top {
+	margin-top:-6px;
+	margin-left:-5px; /* approx. half the width to center it */
+	top:0;
+	left:50%;
+	width:9px;
+	height:6px;
+	background:url('../img/tip-yellowsimple_arrows.gif') no-repeat;
+}
+.tip-yellowsimple .tip-arrow-right {
+	margin-top:-4px; /* approx. half the height to center it */
+	margin-left:0;
+	top:50%;
+	left:100%;
+	width:6px;
+	height:9px;
+	background:url('../img/tip-yellowsimple_arrows.gif') no-repeat -9px 0;
+}
+.tip-yellowsimple .tip-arrow-bottom {
+	margin-top:0;
+	margin-left:-5px; /* approx. half the width to center it */
+	top:100%;
+	left:50%;
+	width:9px;
+	height:6px;
+	background:url('../img/tip-yellowsimple_arrows.gif') no-repeat -18px 0;
+}
+.tip-yellowsimple .tip-arrow-left {
+	margin-top:-4px; /* approx. half the height to center it */
+	margin-left:-6px;
+	top:50%;
+	left:0;
+	width:6px;
+	height:9px;
+	background:url('../img/tip-yellowsimple_arrows.gif') no-repeat -27px 0;
+}
 
 /********************* BOTOES *********************/
 .menu-contextual .btn_perfil_bckgnd, .menu-contextual .btn_mensagens_bckgnd, .menu-contextual .btn_eventos_bckgnd, .menu-contextual .btn_adicionar_bckgnd {
@@ -1713,7 +1786,7 @@ label {
 	font-weight: bold;
 }
 
-.dados label,.dados .exemplo,.dados .complemento,.dadosExibirPerfil label,.dados .spanBtn,.texto_informativo,.container-mensagens,.mensagem_sucesso,.dados-popup label, .botao-padrao-redondo, .instrucao_upload, .dados-popup .complemento, .fieldset_bonus {
+.dados label,.dados .exemplo,.dados .complemento,.dadosExibirPerfil label,.dados .spanBtn,.texto_informativo,.container-mensagens,.mensagem_sucesso,.dados-popup label, .botao-padrao-redondo, .instrucao_upload, .dados-popup .complemento, .fieldset_bonus, .fonte-padrao {
 	color: #444;
 	font-size: 12px;
 }
