@@ -132,6 +132,9 @@ public class GerirRodadaBean extends BaseBean {
 	}
 
 	public List<SelectItem> getListaJogadoresHabilitados() {
+		if (rodadaEmFoco == null || rodadaEmFoco.getCiclo() == null) {
+			return new ArrayList<SelectItem>();
+		}
 		List<Jogador> jogadores = rodadaEmFoco.getCiclo().getJogadoresHabilitadosDoRanking();
 		Collections.sort(jogadores, new BeanComparator("nome"));
 

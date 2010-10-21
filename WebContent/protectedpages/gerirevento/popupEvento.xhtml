@@ -58,7 +58,7 @@
 						</h:panelGroup>
 					</c:if>
 				</fieldset>
-				
+
 				<c:if test="#{gerirEventoBean.tipo != 2 and gerirEventoBean.eventoEmFoco != null}">
 				    <ui:include src="../componentes/parciais.xhtml">
 				    	<ui:param name="formId" value="add-evento"/>
@@ -68,6 +68,22 @@
 				    	<ui:param name="isRodadaBarragemFechada" value="#{gerirEventoBean.tipo == 3 and gerirEventoBean.eventoEmFoco.rodada.fechada}"/>
 				    </ui:include>
 			    </c:if>
+
+				<fieldset>
+					<legend>#{msg.label_nao_encontrou_quem_procurava} <span><a href="#" id="demo-tip-yellowsimple" title="#{msg.label_ajuda_criar_jogador}">&#160;</a></span></legend>
+					<div class="dados">
+						<div class="input text">
+							<label class="adicionarJogadorLabel">#{msg.label_nome}</label>
+							<h:inputText size="30" styleClass="adicionarJogadorInput" value="#{gerirEventoBean.jogadorNome}" maxlength="45"/>
+							<div class="btn-novo">
+								<a4j:commandLink actionListener="#{gerirEventoBean.criaJogador}" reRender="add-evento" oncomplete="$j.fn.colorbox.resize();">
+									#{msg.label_criar_jogador}
+									<ui:include src="../../publicpages/componentes/bordas-redondas-span.xhtml"/>
+								</a4j:commandLink>&#160;
+							</div>
+						</div>
+					</div>
+				</fieldset>
 
 				<c:if test="#{gerirEventoBean.tipo == 2}">
 					<fieldset id="detalhes-jogo">
@@ -94,7 +110,7 @@
 				</c:if>
 
 				<fieldset id="comentario">
-					<legend>#{msg.label_comentario_privado} <span><a href="#" id="demo-tip-yellowsimple" title="#{msg.label_ajuda_comentario_privado}">&#160;</a></span></legend>
+					<legend>#{msg.label_comentario_privado} <span><a href="#" id="demo-tip-yellowsimple-2" title="#{msg.label_ajuda_comentario_privado}">&#160;</a></span></legend>
 					<div class="input text">
 						<h:inputTextarea id="comentario" value="#{gerirEventoBean.comentario}" styleClass="comentario fonte-padrao"/><br/>
 						<span class="caracteres-restantes fonte-padrao"><span id='contador'></span>&#160;#{msg.label_caracteres_restantes}</span>
@@ -109,7 +125,7 @@
 				</div>
 
 		        <script type="text/javascript">
-					$j('#demo-tip-yellowsimple').poshytip({
+					$j('#demo-tip-yellowsimple,#demo-tip-yellowsimple-2').poshytip({
 						className: 'tip-yellowsimple',
 						showTimeout: 1,
 						alignTo: 'target',

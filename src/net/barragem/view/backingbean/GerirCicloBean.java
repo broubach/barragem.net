@@ -243,8 +243,8 @@ public class GerirCicloBean extends BaseBean {
         ArrayList<String> result = new ArrayList<String>();
 
         for (Jogador jogador : getUsuarioLogado().getJogadores()) {
-            if ((jogador.getNome() != null && jogador.getNome().toLowerCase().indexOf(pref.toLowerCase()) == 0) || "".equals(pref)) {
-                result.add(jogador.getNome());
+            if ((jogador.getNome() != null && jogador.getNome().toLowerCase().indexOf(pref.toLowerCase()) == 0 && !cicloEmFoco.getJogadoresDoRanking().contains(jogador)) || "".equals(pref)) {
+            	result.add(jogador.getNome());
             }
         }
 

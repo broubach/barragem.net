@@ -868,10 +868,10 @@ fieldset#parciais {
 .legend-picture {
 	vertical-align: bottom;
 }
-#demo-tip-yellowsimple:HOVER {
+#demo-tip-yellowsimple:HOVER,#demo-tip-yellowsimple-2:HOVER {
 	text-decoration: none;
 }
-#demo-tip-yellowsimple {
+#demo-tip-yellowsimple,#demo-tip-yellowsimple-2 {
 	background: #fff url('../img/help.png') no-repeat;
 	padding-left: 6px;
 	padding-right: 6px;
@@ -1595,7 +1595,7 @@ td.actions {
 }
 .add-evento .comentario {
     width: 100%;
-    height: 60px;
+    height: 50px;
 }
 .tipo-evento td {
 	vertical-align:top;

@@ -15,6 +15,8 @@
 				<h:inputText id="filtroJogador" value="#{gerirCicloBean.filtroJogador}" styleClass="filtro-jogador"/><a4j:commandButton id="btnFiltro" actionListener="#{gerirCicloBean.pesquisaJogador}" image="../../img/pesquisaLen.gif" styleClass="botao-pesquisa-lupa" alt="#{msg.label_pesquisar_}" title="#{msg.label_pesquisar_}" reRender="add-jogador" oncomplete="$j.fn.colorbox.resize();"/>
 				<rich:suggestionbox id="suggestion" for="filtroJogador"
                     suggestionAction="#{gerirCicloBean.autocomplete}" var="jogadorNome"
+                    ignoreDupResponses="true"
+                    ajaxSingle="true"
                     tokens=",[]"
                     fetchValue="#{result}" rows="4"
                     first="0"
@@ -25,7 +27,6 @@
                     shadowDepth="2"
                     cellpadding="2"
                     nothingLabel="#{msg.label_nenhum_resultado_encontrado}"
-                    selfRendered="true"
                     zindex="1000000">
                     <h:column>
                         <h:outputText value="#{jogadorNome}" />
@@ -34,7 +35,7 @@
             </fieldset>
 			<fieldset>
 				<legend>#{msg.label_escolha_os_jogadores_que_irao_participar_da_barragem}</legend>
-				<div style="overflow: auto; width: 260px; height: 200px;">
+				<div style="overflow: auto; height: 200px;">
 					<h:panelGroup layout="block" styleClass="input checkbox fonte-padrao" rendered="#{empty gerirCicloBean.filtroJogador}">
 						<h:selectBooleanCheckbox id="todos" onclick="$j('form#add-jogador INPUT[type=checkbox]').attr('checked', $j('#add-jogador\\:todos').is(':checked'));"/>
 						#{msg.label_todos}

@@ -76,6 +76,8 @@ public class VincularJogadorBean extends BaseBean {
 
 	public void vinculaJogador(ActionEvent e) {
 		getBo(JogadorBo.class).vinculaJogador(jogadorEmFoco);
+		
+		((GerirJogadorBean)getRequestAttribute("gerirJogadorBean")).prepara(null);
 
 		addMensagemAtualizacaoComSucesso();
 	}

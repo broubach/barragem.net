@@ -11,6 +11,7 @@ import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 
 import net.barragem.business.bo.EventoBo;
+import net.barragem.business.bo.JogadorBo;
 import net.barragem.exception.SaldoInsuficienteException;
 import net.barragem.persistence.entity.Evento;
 import net.barragem.persistence.entity.Jogador;
@@ -41,6 +42,7 @@ public class GerirEventoBean extends BaseBean {
 	private Jogador jogadorVencedorWo;
 	private String comentario;
 	private List<JogadorEvento> jogadoresEventosExcluidos;
+	private String jogadorNome;
 
 	public Evento getEventoEmFoco() {
 		return eventoEmFoco;
@@ -85,6 +87,14 @@ public class GerirEventoBean extends BaseBean {
 	public void setComentario(String comentario) {
 		this.comentario = comentario;
 	}
+
+	public String getJogadorNome() {
+    	return jogadorNome;
+    }
+
+	public void setJogadorNome(String jogadorNome) {
+    	this.jogadorNome = jogadorNome;
+    }
 
 	public void removeEvento(ActionEvent e) {
 		getBo(EventoBo.class).removeEvento(paginacaoEventos, getIndex());
@@ -245,5 +255,23 @@ public class GerirEventoBean extends BaseBean {
 		if (jogadorEventoExcluido.getId() != null) {
 			jogadoresEventosExcluidos.add(jogadorEventoExcluido);
 		}
+	}
+
+	public void criaJogador(ActionEvent e) {
+		if (validaNovo()) {
+			getBo(JogadorBo.class).adicionaJogador(jogadorNome);
+
+			addMensagemAtualizacaoComSucesso();
+			jogadorNome = null;
+		}
+	}
+
+	private boolean validaNovo() {
+		if (jogadorNome == null || jogadorNome.isEmpty()) {
+			messages.addErrorMessage(null, "label_digite_o_nome_do_novo_jogador");
+		} else if (getUsuarioLogado().jahPossuiJogador(jogadorNome)) {
+			messages.addErrorMessage(null, "label_jogador_com_mesmo_nome_jah_existente");
+		}
+		return messages.getErrorMessages().isEmpty();
 	}
 }

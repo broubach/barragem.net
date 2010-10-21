@@ -6,14 +6,8 @@
 	xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich">
 
-	<script type="text/javascript" src="#{request.contextPath}/js/jquery.meio.mask.min_custom.js" charset="utf-8" ></script>
 	<div class="add-bonus">
 		<h:form id="add-bonus">
-			<script>
-	            $j(function(){
-	            	$j('input:text').setMask();
-	            });
-	         </script>
 		    <ui:include src="../componentes/mensagem-erro.xhtml"/>
 		    <ui:include src="../componentes/mensagem-sucesso.xhtml"/>
 			<div class="dados-popup">
@@ -34,7 +28,7 @@
 				</div>
 				<div class="salvar">
 					<label class="campos_obrigatorios">#{msg.label_campos_marcados_sao_obrigatorios}</label>
-					<a4j:commandButton actionListener="#{gerirBonusBean.salva}" value="#{msg.label_salvar}" styleClass="submit" reRender="add-bonus" oncomplete="$j.fn.colorbox.resize()"/>
+					<a4j:commandButton actionListener="#{gerirBonusBean.salva}" value="#{msg.label_salvar}" styleClass="submit" reRender="add-bonus" oncomplete="$j.fn.colorbox.resize(); loadjsfile('#{request.contextPath}/js/jquery.meio.mask.min_custom.js', 'js'); $j('input:text').setMask();"/>
 				</div>
 			</div>
 		</h:form>

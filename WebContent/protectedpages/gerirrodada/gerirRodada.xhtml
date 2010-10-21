@@ -20,10 +20,21 @@
 	        <script type="text/javascript" src="#{request.contextPath}/js/jquery.colorbox-min.js"></script>
 
 			<script>
-	            $j(function(){
+				function loadjsfile(filename, filetype){
+					if (filetype=="js"){
+						var fileref=document.createElement('script');
+						fileref.setAttribute("type","text/javascript");
+						fileref.setAttribute("src", filename);
+					}
+					if (typeof fileref!="undefined") {
+						document.getElementsByTagName("head")[0].appendChild(fileref);
+					}
+				}
+
+				$j(function(){
 		            $j(".popup").colorbox({overlayClose:false, inline:true, href:".add-jogo", scrolling:false, onClosed: function() {$j('#gerirRodadaForm\\:fechaJanelaEscondido').click();}}, function(){aplicarMascaras();$j('#add-jogo\\:data').focus();});
 		            $j(".popupBarragem").colorbox({overlayClose:false, inline:true, href:".add-barragens", scrolling:false}, function() {$j('#add-barragens\\:local').focus();});
-		            $j(".popupBonus").colorbox({overlayClose:false, inline:true, href:".add-bonus", scrolling:false, onClosed: function() {$j('#gerirRodadaForm\\:fechaJanelaEscondido').click();}}, function(){$j('#add-bonus\\:jogador').focus();});
+		            $j(".popupBonus").colorbox({overlayClose:false, inline:true, href:".add-bonus", scrolling:false, onClosed: function() {$j('#gerirRodadaForm\\:fechaJanelaEscondido').click();}}, function(){$j('#add-bonus\\:jogador').focus(); loadjsfile('#{request.contextPath}/js/jquery.meio.mask.min_custom.js', 'js'); $j('input:text').setMask();});
 	            });
 	         </script>
 			
