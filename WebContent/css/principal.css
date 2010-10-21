@@ -616,13 +616,13 @@ fieldset#parciais {
 	float: left;
 }
 
-#add-jogador .adicionarJogadorInput {
+#add-jogador .adicionarJogadorInput, #add-evento .adicionarJogadorInput {
 	float: left;
 	clear: none;
 	margin-right: 10px;
 }
 
-#add-jogador .btn-novo {
+#add-jogador .btn-novo, #add-evento .btn-novo {
 	float: left;
 	clear: none;
 	padding-bottom: 5px;
