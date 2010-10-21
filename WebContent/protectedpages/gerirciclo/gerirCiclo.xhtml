@@ -21,7 +21,7 @@
 	        <script type="text/javascript" src="#{request.contextPath}/js/jquery.colorbox-min.js"></script>
 			<script>
 	            $j(function(){
-		            $j(".popup").colorbox({overlayClose:false, inline:true, href:".add-jogador", scrolling:false});
+		            $j(".popup").colorbox({overlayClose:false, inline:true, href:".add-jogador", scrolling:false}, function() {$j('#add-jogador\\:filtroJogador').focus();});
 		            $j(".popupRenomearCiclo").colorbox({overlayClose:false, inline:true, href:".rename-ciclo", scrolling:false}, function() {$j('#rename-ciclo\\:nome').focus();});
 		            $j(".popupEditarCicloJogador").colorbox({overlayClose:false, inline:true, href:".editar-ciclo-jogador", scrolling:false}, function() {$j('#editar-ciclo-jogador\\:pontuacao').focus();});
 		            $j(".popupBarragem").colorbox({overlayClose:false, inline:true, href:".add-barragens", scrolling:false}, function() {$j('#add-barragens\\:local').focus();});
@@ -68,7 +68,7 @@
 				    <legend>#{msg.label_ranking}</legend>
 		
 					<div class="btn-novo">
-						<a4j:commandLink actionListener="#{gerirCicloBean.criaJogadoresSelecionaveis}" reRender="add-jogador" oncomplete="$j('.popup').click();">
+						<a4j:commandLink actionListener="#{gerirCicloBean.pesquisaJogadorPrimeiraVez}" reRender="add-jogador" oncomplete="$j('.popup').click();">
 							#{msg.label_adicionar_jogador}
 							<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 						</a4j:commandLink>&#160;

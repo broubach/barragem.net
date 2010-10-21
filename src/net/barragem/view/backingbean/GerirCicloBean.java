@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.faces.event.ActionEvent;
 
+import net.barragem.business.bo.JogadorBo;
 import net.barragem.persistence.entity.Barragem;
 import net.barragem.persistence.entity.Ciclo;
 import net.barragem.persistence.entity.CicloJogador;
@@ -25,6 +26,8 @@ public class GerirCicloBean extends BaseBean {
 	private List<CicloJogador> cicloJogadoresRemovidos;
 	private List<JogadorSelecionavelDto> jogadoresSelecionaveis;
 	private String novoNome;
+	private String filtroJogador;
+	private String jogadorNome;
 	private boolean habilitado;
 
 	public String getNovoNome() {
@@ -66,6 +69,22 @@ public class GerirCicloBean extends BaseBean {
 	public void setJogadoresSelecionaveis(List<JogadorSelecionavelDto> jogadoresSelecionaveis) {
 		this.jogadoresSelecionaveis = jogadoresSelecionaveis;
 	}
+
+	public String getFiltroJogador() {
+		return filtroJogador;
+	}
+
+	public void setFiltroJogador(String filtroJogador) {
+		this.filtroJogador = filtroJogador;
+	}
+
+	public String getJogadorNome() {
+    	return jogadorNome;
+    }
+
+	public void setJogadorNome(String jogadorNome) {
+    	this.jogadorNome = jogadorNome;
+    }
 
 	public boolean isHabilitado() {
 		return habilitado;
@@ -126,6 +145,25 @@ public class GerirCicloBean extends BaseBean {
 			addMensagemAtualizacaoComSucesso();
 		}
 	}
+	
+	public void pesquisaJogadorPrimeiraVez(ActionEvent e) {
+		filtroJogador = null;
+		pesquisaJogador(e);
+	}
+
+	public void pesquisaJogador(ActionEvent e) {
+		jogadoresSelecionaveis = new ArrayList<JogadorSelecionavelDto>();
+		List<Jogador> todosJogadores = PersistenceHelper.findByNamedQuery("jogadoresPorUsuarioDonoQuery",
+		        filtroJogador != null ? filtroJogador + "%" : "%", getUsuarioLogado().getId());
+		JogadorSelecionavelDto jogadorSelecionavel = null;
+		for (Jogador jogador : todosJogadores) {
+			if (!cicloEmFoco.getJogadoresDoRanking().contains(jogador)) {
+				jogadorSelecionavel = new JogadorSelecionavelDto();
+				jogadorSelecionavel.setJogador(jogador);
+				jogadoresSelecionaveis.add(jogadorSelecionavel);
+			}
+		}
+	}
 
 	private void salvaCiclo() {
 		for (Rodada rodada : cicloEmFoco.getRodadas()) {
@@ -177,20 +215,6 @@ public class GerirCicloBean extends BaseBean {
 		setRequestAttribute("gerirRodadaBean", rodadaBean);
 	}
 
-	public void criaJogadoresSelecionaveis(ActionEvent e) {
-		jogadoresSelecionaveis = new ArrayList<JogadorSelecionavelDto>();
-		List<Jogador> todosJogadores = PersistenceHelper.findByNamedQuery("jogadoresPorUsuarioDonoQuery",
-				getUsuarioLogado().getId());
-		JogadorSelecionavelDto jogadorSelecionavel = null;
-		for (Jogador jogador : todosJogadores) {
-			if (!cicloEmFoco.getJogadoresDoRanking().contains(jogador)) {
-				jogadorSelecionavel = new JogadorSelecionavelDto();
-				jogadorSelecionavel.setJogador(jogador);
-				jogadoresSelecionaveis.add(jogadorSelecionavel);
-			}
-		}
-	}
-
 	public void criaNovoCiclo(ActionEvent e) {
 		Integer proximoNome = barragemEmFoco.getCiclos().get(barragemEmFoco.getCiclos().size() - 1)
 				.getNomeAlternativoBaseadoEmAno() + 1;
@@ -212,5 +236,38 @@ public class GerirCicloBean extends BaseBean {
 		cicloJogadorEmFoco.setHabilitado(habilitado);
 		PersistenceHelper.persiste(cicloJogadorEmFoco);
 		addMensagemAtualizacaoComSucesso();
+	}
+
+    public List<String> autocomplete(Object suggest) {
+        String pref = (String)suggest;
+        ArrayList<String> result = new ArrayList<String>();
+
+        for (Jogador jogador : getUsuarioLogado().getJogadores()) {
+            if ((jogador.getNome() != null && jogador.getNome().toLowerCase().indexOf(pref.toLowerCase()) == 0) || "".equals(pref)) {
+                result.add(jogador.getNome());
+            }
+        }
+
+        return result;
+    }
+    
+	public void adicionaJogador(ActionEvent e) {
+		if (validaNovo()) {
+			getBo(JogadorBo.class).adicionaJogador(jogadorNome);
+			filtroJogador = null;
+			pesquisaJogador(e);
+
+			addMensagemAtualizacaoComSucesso();
+			jogadorNome = null;
+		}
+	}
+
+	private boolean validaNovo() {
+		if (jogadorNome == null || jogadorNome.isEmpty()) {
+			messages.addErrorMessage(null, "label_digite_o_nome_do_novo_jogador");
+		} else if (getUsuarioLogado().jahPossuiJogador(jogadorNome)) {
+			messages.addErrorMessage(null, "label_jogador_com_mesmo_nome_jah_existente");
+		}
+		return messages.getErrorMessages().isEmpty();
 	}
 }

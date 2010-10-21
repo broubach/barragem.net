@@ -17,8 +17,11 @@
 	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/jquery.colorbox.css" />
 	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/jquery.colorbox-barragem.css" />
 	        <script type="text/javascript" src="#{request.contextPath}/js/jquery.colorbox-min.js"></script>
+			<script type="text/javascript" src="#{request.contextPath}/js/jquery.maskedinput-1.2.2.min.js"></script>
+        	<script type="text/javascript" src="#{request.contextPath}/js/barragem.js?v1.2.29"></script>
 			<script>
-	            $j(function(){
+				$j(function(){
+					aplicarMascaras();
 		            $j(".popupSenha").colorbox({overlayClose:false, inline:true, href:".alterar-senha", scrolling:false});
 	            });
 	         </script>
@@ -49,11 +52,6 @@
 			        </ul>
 				</h:panelGroup>
 
-				<script>
-			        $j(function(){
-						aplicarMascaras();
-					});
-				</script>
 			    <ui:include src="../componentes/mensagem-sucesso.xhtml"/>
 				<div class="dados">
 					<h:panelGroup id="mensagemErro" layout="block" styleClass="mensagem-erro" rendered="#{! empty messageBean.errorMessages}">

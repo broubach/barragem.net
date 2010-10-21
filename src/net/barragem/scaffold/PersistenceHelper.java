@@ -39,7 +39,6 @@ public class PersistenceHelper {
 				session.save(entidade);
 			}
 
-			session.merge(entidade);
 			if (!isTest) {
 				t.commit();
 			}

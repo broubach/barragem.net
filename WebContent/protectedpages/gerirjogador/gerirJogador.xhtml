@@ -14,7 +14,7 @@
 	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/jquery.colorbox.css" />
 	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/jquery.colorbox-barragem.css" />
 	        <script type="text/javascript" src="#{request.contextPath}/js/jquery.colorbox-min.js"></script>
-			<script>
+			<script type="text/javascript">
 	            $j(function(){
 		            $j(".popupRenomearJogador").colorbox({overlayClose:false, inline:true, href:".editar-jogador", scrolling:false}, function() {$j('#editar-jogador\\:nome').focus();});
 		            $j(".popupVincularJogador").colorbox({overlayClose:false, inline:true, href:".vincular-jogador", scrolling:false}, function() {$j('#vincular-jogador\\:pesquisa').focus();});
@@ -53,19 +53,6 @@
 					<legend>#{msg.label_lista_jogadores}</legend>
 					<a href="#" class="popupRenomearJogador" title="#{msg.label_editar_jogador}" style="visibility:hidden"/>
 					<a href="#" class="popupVincularJogador" title="#{msg.label_vincular_jogador}" style="visibility:hidden"/>
-					<div class="dados">
-						<div class="input text">
-							<label class="adicionarJogadorLabel">#{msg.label_nome}</label>
-							<h:inputText size="30" styleClass="adicionarJogadorInput" value="#{gerirJogadorBean.jogadorNome}" maxlength="45"/>
-							<div class="btn-novo">
-								<h:commandLink actionListener="#{gerirJogadorBean.adicionaJogador}">
-									#{msg.label_adicionar_jogador}
-									<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
-								</h:commandLink>&#160;
-							</div>
-						</div>
-					</div>
-					<br/>
 					<ui:include src="../componentes/jogadores.xhtml">
 						<ui:param name="jogadores" value="#{gerirJogadorBean.paginacaoJogadores.pagina}"/>
 						<ui:param name="paginavel" value="#{gerirJogadorBean.paginacaoJogadores}"/>

@@ -7,26 +7,80 @@
 	xmlns:rich="http://richfaces.org/rich">
 
 	<div class="add-jogador">
+
 		<h:form id="add-jogador">
+			<script type="text/javascript" src="#{request.contextPath}/js/jquery.poshytip.min.js"></script>
+			<fieldset>
+				<legend>#{msg.label_filtro_jogadores}</legend>
+				<h:inputText id="filtroJogador" value="#{gerirCicloBean.filtroJogador}" styleClass="filtro-jogador"/><a4j:commandButton id="btnFiltro" actionListener="#{gerirCicloBean.pesquisaJogador}" image="../../img/pesquisaLen.gif" styleClass="botao-pesquisa-lupa" alt="#{msg.label_pesquisar_}" title="#{msg.label_pesquisar_}" reRender="add-jogador" oncomplete="$j.fn.colorbox.resize();"/>
+				<rich:suggestionbox id="suggestion" for="filtroJogador"
+                    suggestionAction="#{gerirCicloBean.autocomplete}" var="jogadorNome"
+                    tokens=",[]"
+                    fetchValue="#{result}" rows="4"
+                    first="0"
+                    minChars="1"
+                    shadowOpacity="1"
+                    border="1"
+                    height="150"
+                    shadowDepth="2"
+                    cellpadding="2"
+                    nothingLabel="#{msg.label_nenhum_resultado_encontrado}"
+                    selfRendered="true"
+                    zindex="1000000">
+                    <h:column>
+                        <h:outputText value="#{jogadorNome}" />
+                    </h:column>
+                </rich:suggestionbox>
+            </fieldset>
 			<fieldset>
 				<legend>#{msg.label_escolha_os_jogadores_que_irao_participar_da_barragem}</legend>
 				<div style="overflow: auto; width: 260px; height: 200px;">
-					<div class="input checkbox">
+					<h:panelGroup layout="block" styleClass="input checkbox fonte-padrao" rendered="#{empty gerirCicloBean.filtroJogador}">
 						<h:selectBooleanCheckbox id="todos" onclick="$j('form#add-jogador INPUT[type=checkbox]').attr('checked', $j('#add-jogador\\:todos').is(':checked'));"/>
 						#{msg.label_todos}
-					</div>
+					</h:panelGroup>
 					<c:forEach items="#{gerirCicloBean.jogadoresSelecionaveis}" var="item">
-						<div class="input checkbox">
+						<div class="input checkbox fonte-padrao">
 							<h:selectBooleanCheckbox value="#{item.selecionado}"/>
 							#{item.jogador.nome}
 						</div>
 					</c:forEach>
 				</div>
 			</fieldset>
+
+			<fieldset>
+				<legend>#{msg.label_nao_encontrou_quem_procurava} <span><a href="#" id="demo-tip-yellowsimple" title="#{msg.label_ajuda_criar_jogador}">&#160;</a></span></legend>
+			    <ui:include src="../componentes/mensagem-erro.xhtml"/>
+			    <ui:include src="../componentes/mensagem-sucesso.xhtml"/>
+				<div class="dados">
+					<div class="input text">
+						<label class="adicionarJogadorLabel">#{msg.label_nome}</label>
+						<h:inputText size="30" styleClass="adicionarJogadorInput" value="#{gerirCicloBean.jogadorNome}" maxlength="45"/>
+						<div class="btn-novo">
+							<a4j:commandLink actionListener="#{gerirCicloBean.adicionaJogador}" reRender="add-jogador" oncomplete="$j.fn.colorbox.resize();">
+								#{msg.label_criar_jogador}
+								<ui:include src="../../publicpages/componentes/bordas-redondas-span.xhtml"/>
+							</a4j:commandLink>&#160;
+						</div>
+					</div>
+				</div>
+			</fieldset>
+
 			<div class="salvar">
 				<h:commandButton actionListener="#{gerirCicloBean.adicionaJogadores}" styleClass="submit"
 					value="#{msg.label_salvar}"/>
 			</div>
+
+		        <script type="text/javascript">
+					$j('#demo-tip-yellowsimple').poshytip({
+						className: 'tip-yellowsimple',
+						showTimeout: 1,
+						alignTo: 'target',
+						alignX: 'center',
+						offsetY: 5,
+						allowTipHover: false
+					});
+				</script>
 		</h:form>
 	</div>
 </html>

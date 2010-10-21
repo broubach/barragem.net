@@ -18,11 +18,10 @@
 	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/jquery.colorbox.css" />
 	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/jquery.colorbox-barragem.css" />
 	        <script type="text/javascript" src="#{request.contextPath}/js/jquery.colorbox-min.js"></script>
-			<script type="text/javascript" src="#{request.contextPath}/js/jquery.meio.mask.min_custom.js" charset="utf-8"></script>
-			<script type="text/javascript" src="#{request.contextPath}/js/jquery.maskedinput-1.2.2.min.js"></script>
+
 			<script>
 	            $j(function(){
-		            $j(".popup").colorbox({overlayClose:false, inline:true, href:".add-jogo", scrolling:false, onClosed: function() {$j('#add-jogo\\:fechaJanelaEscondido').click();}}, function(){aplicarMascaras();$j('#add-jogo\\:data').focus();});
+		            $j(".popup").colorbox({overlayClose:false, inline:true, href:".add-jogo", scrolling:false, onClosed: function() {$j('#gerirRodadaForm\\:fechaJanelaEscondido').click();}}, function(){aplicarMascaras();$j('#add-jogo\\:data').focus();});
 		            $j(".popupBarragem").colorbox({overlayClose:false, inline:true, href:".add-barragens", scrolling:false}, function() {$j('#add-barragens\\:local').focus();});
 		            $j(".popupBonus").colorbox({overlayClose:false, inline:true, href:".add-bonus", scrolling:false, onClosed: function() {$j('#gerirRodadaForm\\:fechaJanelaEscondido').click();}}, function(){$j('#add-bonus\\:jogador').focus();});
 	            });
@@ -131,7 +130,7 @@
 						    <f:facet name="header">
 								#{msg.label_acoes}
 						    </f:facet>
-							<h:commandLink reRender="add-jogo" styleClass="deletar" onclick="return confirm('#{msg.label_confirma_exclusao}');"  disabled="#{gerirRodadaBean.rodadaEmFoco.inoperavel == true}" actionListener="#{gerirRodadaBean.removeJogo}"><img src="#{request.contextPath}/img/buttons/btn-deletar.png" alt="#{msg.label_excluir}" title="#{msg.label_excluir}" width="18px" height="18px"/></h:commandLink>&#160;
+							<h:commandLink reRender="add-jogo" styleClass="deletar" onclick="return confirm('#{msg.label_confirma_exclusao}');" disabled="#{gerirRodadaBean.rodadaEmFoco.inoperavel == true}" actionListener="#{gerirRodadaBean.removeJogo}"><img src="#{request.contextPath}/img/buttons/btn-deletar.png" alt="#{msg.label_excluir}" title="#{msg.label_excluir}" width="18px" height="18px"/></h:commandLink>&#160;
 							<a4j:commandLink actionListener="#{gerirRodadaBean.editaJogo}" oncomplete="$j('.popup').click();" reRender="add-jogo"><img src="#{request.contextPath}/img/buttons/btn-editar.png" alt="#{msg.label_editar}" title="#{msg.label_editar}" width="18px" height="18px"/></a4j:commandLink>
 					    </h:column>
 				    </h:dataTable>

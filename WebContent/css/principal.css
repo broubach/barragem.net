@@ -608,17 +608,38 @@ fieldset#parciais {
 }
 
 /********************* ADD JOGADOR *********************/
-.add-jogador .submit {
+#add-jogador .filtro-jogador {
+	width: 230px;
+}
+
+#add-jogador .checkbox {
+	float: left;
+}
+
+#add-jogador .adicionarJogadorInput {
+	float: left;
+	clear: none;
+	margin-right: 10px;
+}
+
+#add-jogador .btn-novo {
+	float: left;
+	clear: none;
+	padding-bottom: 5px;
+}
+
+#add-jogador .salvar {
+	float: left;
+	clear: left;
+}
+
+#add-jogador .submit {
 	margin-top: 10px;
 	background: green;
 	padding: 4px 20px;
 	height: 24px;
 	-moz-border-radius: 6px;
 	-webkit-border-radius: 6px;
-}
-
-.add-jogador .input {
-	float: none;
 }
 
 /********************* PERFIL *************/
@@ -718,11 +739,14 @@ fieldset#parciais {
 
 /********************* EXIBIR PERFIL *********************/
 .botao-jogadores {
-	padding-right: 2px;
 	height: 18px;
 	width: 18px;
 	vertical-align: middle;
 	float: left;
+}
+
+.botao-jogadores-padding {
+	padding-right: 6px;
 }
 
 .dadosExibirPerfil {
@@ -788,16 +812,14 @@ fieldset#parciais {
 	white-space: nowrap;
 }
 
-#gerirJogador .searchFormInput,#vincular-jogador .searchFormInput,#gerirBarragem .searchFormInput
-	{
+#gerirJogador .searchFormInput,#vincular-jogador .searchFormInput,#gerirBarragem .searchFormInput, #add-jogador .filtro-jogador {
 	background-color: #DDE4EF;
 	height: 17px;
 	padding: 1px;
 	vertical-align: bottom;
 }
 
-#gerirJogador .searchFormButton,#vincular-jogador .searchFormButton,#searchForm .searchFormButton
-	{
+#gerirJogador .searchFormButton,#vincular-jogador .searchFormButton,#searchForm .searchFormButton, #add-jogador .botao-pesquisa-lupa {
 	border: none;
 	background-color: inherit;
 	padding: 0px;
@@ -1043,7 +1065,9 @@ fieldset#parciais {
 }
 
 .gradient td {
-	padding: 6px;
+	padding-left: 6px;
+	padding-top: 6px;
+	padding-bottom: 6px;
 	border-bottom: 1px solid #fff;
 	border-top: 1px solid #fff;
 }
@@ -1230,9 +1254,19 @@ td.actions {
 }
 
 .dados label,.dados .exemplo {
-	width: 250px;
 	padding-right: 5px;
 	clear: both;
+}
+
+#perfil label, #perfil .exemplo, #dadosBasicos label, #dadosBasicos .exemplo {
+	width: 250px;
+}
+
+#perfil .dados .categoria label {
+	width: auto;
+	white-space: nowrap;
+	border: none;
+	clear: none;
 }
 
 .dados .input {
@@ -1251,13 +1285,6 @@ td.actions {
 	float: right;
 	width: auto;
 	margin-left: 5px;
-}
-
-.dados .categoria label {
-	width: auto;
-	white-space: nowrap;
-	border: none;
-	clear: none;
 }
 
 /********************* DADOS POPUP *********************/
@@ -1301,10 +1328,6 @@ td.actions {
 
 .input .disabled {
 	background: #D3D7DE;
-}
-
-.add-jogador #add-jogador .checkbox {
-	float: left;
 }
 
 .add-jogo .dados-popup {

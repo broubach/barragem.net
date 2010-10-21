@@ -222,7 +222,7 @@ public class GerirEventoBean extends BaseBean {
 
 	public List<SelectItem> getListaJogadoresHabilitados() {
 		List<SelectItem> items = new ArrayList<SelectItem>();
-		List<Jogador> jogadores = PersistenceHelper.findByNamedQuery("jogadoresPorUsuarioDonoQuery", getUsuarioLogado()
+		List<Jogador> jogadores = PersistenceHelper.findByNamedQuery("jogadoresPorUsuarioDonoQuery", "%", getUsuarioLogado()
 				.getId());
 		Collections.sort(jogadores, new BeanComparator("nome"));
 		Jogador jogador = null;

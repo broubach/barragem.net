@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.faces.event.ActionEvent;
 
-import net.barragem.business.bo.JogadorBo;
 import net.barragem.business.bo.UsuarioBo;
 import net.barragem.persistence.entity.Jogador;
 import net.barragem.persistence.entity.Usuario;
@@ -23,7 +22,6 @@ public class GerirJogadorBean extends BaseBean {
 	private Usuario usuarioEmFoco;
 	private Jogador jogadorEmFoco;
 	private String nome;
-	private String novoNome;
 	private String pesquisa;
 	private String pesquisaSalva;
 	private Integer tipoPesquisa = new Integer(1);
@@ -63,14 +61,6 @@ public class GerirJogadorBean extends BaseBean {
 
 	public void setUsuarioEmFoco(Usuario usuarioEmFoco) {
 		this.usuarioEmFoco = usuarioEmFoco;
-	}
-
-	public String getJogadorNome() {
-		return novoNome;
-	}
-
-	public void setJogadorNome(String jogadorNome) {
-		this.novoNome = jogadorNome;
 	}
 
 	public String getNovoNome() {
@@ -113,17 +103,6 @@ public class GerirJogadorBean extends BaseBean {
 		this.tipoPesquisa = tipoPesquisa;
 	}
 
-	public void adicionaJogador(ActionEvent e) {
-		if (validaNovo()) {
-			Jogador novoJogador = getBo(JogadorBo.class).adicionaJogador(novoNome);
-
-			prepara(novoJogador);
-
-			addMensagemAtualizacaoComSucesso();
-			novoNome = null;
-		}
-	}
-
 	public String pesquisaJogador() {
 		if (tipoPesquisa.equals(new Integer(1))) {
 			PesquisarBean pesquisarBean = new PesquisarBean();
@@ -160,15 +139,6 @@ public class GerirJogadorBean extends BaseBean {
 			PersistenceHelper.persiste(usuarioEmFoco);
 			addMensagemAtualizacaoComSucesso();
 		}
-	}
-
-	private boolean validaNovo() {
-		if (novoNome == null || novoNome.isEmpty()) {
-			messages.addErrorMessage(null, "label_digite_o_nome_do_novo_jogador");
-		} else if (getUsuarioLogado().jahPossuiJogador(novoNome)) {
-			messages.addErrorMessage(null, "label_jogador_com_mesmo_nome_jah_existente");
-		}
-		return messages.getErrorMessages().isEmpty();
 	}
 
 	private boolean validaEdicao() {

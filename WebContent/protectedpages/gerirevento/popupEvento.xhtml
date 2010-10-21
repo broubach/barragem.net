@@ -9,6 +9,8 @@
 
 	<div class="add-evento">
 		<h:form id="add-evento">
+			<script type="text/javascript" src="#{request.contextPath}/js/jquery.maskedinput-1.2.2.min.js"></script>
+	       	<script type="text/javascript" src="#{request.contextPath}/js/barragem.js?v1.2.29"></script>
 			<script type="text/javascript" src="#{request.contextPath}/js/jquery.NobleCount.min.js"></script>
 			<script type="text/javascript" src="#{request.contextPath}/js/jquery.poshytip.min.js"></script>
 
@@ -46,7 +48,7 @@
 					<c:if test="#{gerirEventoBean.tipo != 2}">
 						<h:panelGroup layout="block" styleClass="input text">
 							<label for="add-evento:wo">#{msg.label_wo}</label>
-							<h:selectBooleanCheckbox id="wo" value="#{gerirEventoBean.eventoEmFoco.placar.wo}" class="wo" onclick="$j('div.vencedorWo').slideToggle('fast');$j('#add-evento\\:vencedorParcial1,#add-evento\\:vencedorParcial2,#add-evento\\:vencedorParcial3,#add-evento\\:perdedorParcial1,#add-evento\\:perdedorParcial2,#add-evento\\:perdedorParcial3').attr('disabled', $j('#add-evento\\:wo').is(':checked'));$j.fn.colorbox.resize();" disabled="#{gerirEventoBean.tipo == 3 and gerirEventoBean.eventoEmFoco.rodada.fechada}"/>
+							<h:selectBooleanCheckbox id="wo" value="#{gerirEventoBean.eventoEmFoco.placar.wo}" class="wo" onclick="$j('div.vencedorWo').slideToggle('fast');$j('#add-evento\\:vencedorParcial1,#add-evento\\:vencedorParcial2,#add-evento\\:vencedorParcial3,#add-evento\\:perdedorParcial1,#add-evento\\:perdedorParcial2,#add-evento\\:perdedorParcial3').attr('disabled', $j('#add-evento\\:wo').is(':checked'));$j.fn.colorbox.resize();aplicarMascaras();" disabled="#{gerirEventoBean.tipo == 3 and gerirEventoBean.eventoEmFoco.rodada.fechada}"/>
 							<div class="vencedorWo" style="#{gerirEventoBean.eventoEmFoco.placar.wo == true ? 'display:block' : '' }">
 								<label for="add-evento:vencedor" class="blank">#{msg.label_selecione_o_vencedor}:</label>
 								<h:selectOneMenu id="vencedorWo" value="#{gerirEventoBean.jogadorVencedorWo}" converter="JogadorConverter" rendered="#{gerirEventoBean.eventoEmFoco != null}" disabled="#{gerirEventoBean.tipo == 3 and gerirEventoBean.eventoEmFoco.rodada.fechada}" styleClass="fonte-padrao">
@@ -78,9 +80,9 @@
 						</div>
 						<h:panelGrid columns="1" id="jogadores" rendered="#{gerirEventoBean.eventoEmFoco != null}">
 							<c:forEach var="item" items="#{gerirEventoBean.eventoEmFoco.jogadoresEventos}" varStatus="status">
-								<h:outputText value="#{gerirEventoBean.eventoEmFoco.jogadoresEventos[status.index].jogador.nome}" rendered="#{status.index == 0}"/>
+								<h:outputText value="#{gerirEventoBean.eventoEmFoco.jogadoresEventos[status.index].jogador.nome}" rendered="#{status.index == 0}" styleClass="fonte-padrao"/>
 								<h:panelGroup layout="block" rendered="#{status.index > 0}" styleClass="jogadoresTreino">
-									<h:selectOneMenu value="#{gerirEventoBean.eventoEmFoco.jogadoresEventos[status.index].jogador}" converter="JogadorConverter">
+									<h:selectOneMenu value="#{gerirEventoBean.eventoEmFoco.jogadoresEventos[status.index].jogador}" converter="JogadorConverter" styleClass="fonte-padrao">
 										<f:selectItem itemLabel="" />
 										<f:selectItems value="#{gerirEventoBean.listaJogadoresHabilitados}" />
 									</h:selectOneMenu>

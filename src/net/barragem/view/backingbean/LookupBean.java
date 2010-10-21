@@ -27,7 +27,7 @@ public class LookupBean extends BaseBean {
 			jogadores = jogoBarragemBean.getMestreDetalhe().getMestre().getCiclo().getJogadoresDoRanking();
 
 		} else {
-			jogadores = PersistenceHelper.findByNamedQuery("jogadoresPorUsuarioDonoQuery", getUsuarioLogado().getId());
+			jogadores = PersistenceHelper.findByNamedQuery("jogadoresPorUsuarioDonoQuery", "%", getUsuarioLogado().getId());
 		}
 
 		List<SelectItem> items = new ArrayList<SelectItem>();
