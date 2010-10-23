@@ -12,8 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import net.barragem.exception.SaldoInsuficienteException;
 import net.barragem.persistence.entity.Atualizacao;
 import net.barragem.persistence.entity.CicloJogador;
+import net.barragem.persistence.entity.Jogo;
 import net.barragem.persistence.entity.JogoBarragem;
 import net.barragem.persistence.entity.Rodada;
+import net.barragem.persistence.entity.Usuario;
+import net.barragem.scaffold.MessageBundleUtils;
 import net.barragem.scaffold.PersistenceHelper;
 import net.barragem.view.backingbean.componentes.JogoBarragemComparator;
 
@@ -73,4 +76,35 @@ public class RodadaBo extends BaseBo {
 		}
 	}
 
+	public void recalculaRankingEFechaRodada(Rodada rodada) {
+		PersistenceHelper.initialize("rodadas", rodada.getCiclo());
+		PersistenceHelper.initialize("ranking", rodada.getCiclo());
+		List<Rodada> proxys = new ArrayList<Rodada>();
+		for (Rodada outraRodada : rodada.getCiclo().getRodadas()) {
+			proxys.add(outraRodada);
+		}
+		PersistenceHelper.initialize("jogos", proxys.toArray());
+
+		rodada.recalculaPontuacoes();
+		rodada.getCiclo().recalculaRanking();
+		rodada.setFechada(Boolean.TRUE);
+
+		rodada.getCiclo().getRodadas().remove(rodada);
+		rodada.getCiclo().getRodadas().add(rodada);
+		for (Jogo jogoBarragem : rodada.getJogos()) {
+			getBo(EventoBo.class).removeSetsIncompletos(jogoBarragem.getPlacar());
+		}
+		PersistenceHelper.persiste(rodada.getCiclo());
+
+		for (CicloJogador cicloJogador : rodada.getCiclo().getRanking()) {
+			if (cicloJogador.getJogador().getUsuarioCorrespondente() != null
+					&& !cicloJogador.getJogador().equals(getUsuarioLogado().getJogador())) {
+				Usuario destino = cicloJogador.getJogador().getUsuarioCorrespondente();
+				sendMail("no-reply@barragem.net", getUsuarioLogado().getNomeCompletoCapital(), destino.getEmail(),
+						"barragem.net - ranking atualizado", MessageFormat.format(emailTemplateRankingAtualizado,
+								rodada.getCiclo().getBarragem().getLocal(), MessageBundleUtils.getInstance().get(
+										rodada.getCiclo().getBarragem().getCategoria().getNome())));
+			}
+		}
+	}
 }

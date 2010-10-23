@@ -69,24 +69,7 @@ public class GerirRodadaBean extends BaseBean {
 	}
 
 	public void recalculaRankingEFechaRodada(ActionEvent e) {
-		PersistenceHelper.initialize("rodadas", rodadaEmFoco.getCiclo());
-		PersistenceHelper.initialize("ranking", rodadaEmFoco.getCiclo());
-		List<Rodada> proxys = new ArrayList<Rodada>();
-		for (Rodada rodada : rodadaEmFoco.getCiclo().getRodadas()) {
-			proxys.add(rodada);
-		}
-		PersistenceHelper.initialize("jogos", proxys.toArray());
-
-		rodadaEmFoco.recalculaPontuacoes();
-		rodadaEmFoco.getCiclo().recalculaRanking();
-		rodadaEmFoco.setFechada(Boolean.TRUE);
-
-		rodadaEmFoco.getCiclo().getRodadas().remove(rodadaEmFoco);
-		rodadaEmFoco.getCiclo().getRodadas().add(rodadaEmFoco);
-		for (Jogo jogoBarragem : rodadaEmFoco.getJogos()) {
-			getBo(EventoBo.class).removeSetsIncompletos(jogoBarragem.getPlacar());
-		}
-		PersistenceHelper.persiste(rodadaEmFoco.getCiclo());
+		getBo(RodadaBo.class).recalculaRankingEFechaRodada(rodadaEmFoco);
 
 		GerirCicloBean cicloBean = (GerirCicloBean) getRequestAttribute("gerirCicloBean");
 		cicloBean.editaCiclo(e);
