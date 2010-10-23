@@ -1,0 +1,1 @@
+alter table perfil add usuarioTwitter varchar(100);

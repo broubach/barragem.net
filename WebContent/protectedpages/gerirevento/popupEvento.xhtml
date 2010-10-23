@@ -69,22 +69,6 @@
 				    </ui:include>
 			    </c:if>
 
-				<fieldset>
-					<legend>#{msg.label_nao_encontrou_quem_procurava} <span><a href="#" id="demo-tip-yellowsimple" title="#{msg.label_ajuda_criar_jogador}">&#160;</a></span></legend>
-					<div class="dados">
-						<div class="input text">
-							<label class="adicionarJogadorLabel">#{msg.label_nome}</label>
-							<h:inputText size="30" styleClass="adicionarJogadorInput" value="#{gerirEventoBean.jogadorNome}" maxlength="45"/>
-							<div class="btn-novo">
-								<a4j:commandLink actionListener="#{gerirEventoBean.criaJogador}" reRender="add-evento" oncomplete="$j.fn.colorbox.resize();">
-									#{msg.label_criar_jogador}
-									<ui:include src="../../publicpages/componentes/bordas-redondas-span.xhtml"/>
-								</a4j:commandLink>&#160;
-							</div>
-						</div>
-					</div>
-				</fieldset>
-
 				<c:if test="#{gerirEventoBean.tipo == 2}">
 					<fieldset id="detalhes-jogo">
 						<legend>#{msg.label_participantes}</legend>
@@ -106,6 +90,24 @@
 								</h:panelGroup>
 							</c:forEach>
 						</h:panelGrid>
+					</fieldset>
+				</c:if>
+
+				<c:if test="#{gerirEventoBean.eventoEmFoco.id == null}">
+					<fieldset>
+						<legend>#{msg.label_nao_encontrou_quem_procurava} <span><a href="#" id="demo-tip-yellowsimple" title="#{msg.label_ajuda_criar_jogador}">&#160;</a></span></legend>
+						<div class="dados">
+							<div class="input text">
+								<label class="adicionarJogadorLabel">#{msg.label_nome}</label>
+								<h:inputText size="30" styleClass="adicionarJogadorInput" value="#{gerirEventoBean.jogadorNome}" maxlength="45"/>
+								<div class="btn-novo">
+									<a4j:commandLink actionListener="#{gerirEventoBean.criaJogador}" reRender="add-evento" oncomplete="$j.fn.colorbox.resize();">
+										#{msg.label_criar_jogador}
+										<ui:include src="../../publicpages/componentes/bordas-redondas-span.xhtml"/>
+									</a4j:commandLink>&#160;
+								</div>
+							</div>
+						</div>
 					</fieldset>
 				</c:if>
 

@@ -35,6 +35,7 @@ public class Perfil extends BaseEntity implements Cloneable {
 	private TipoBackhandEnum tipoBackhand;
 	private String raquete;
 	private String hash;
+	private String usuarioTwitter;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
 	private Arquivo foto;
@@ -159,6 +160,14 @@ public class Perfil extends BaseEntity implements Cloneable {
 	public void setFotoPequena(Arquivo fotoPequena) {
 		this.fotoPequena = fotoPequena;
 	}
+
+	public String getUsuarioTwitter() {
+    	return usuarioTwitter;
+    }
+
+	public void setUsuarioTwitter(String usuarioTwitter) {
+    	this.usuarioTwitter = usuarioTwitter;
+    }
 
 	public String getJogoHa() {
 		if (dataInicioPratica == null) {
