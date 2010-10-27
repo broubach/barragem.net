@@ -41,7 +41,7 @@
 			            </li>
 			        </ul>
 				</h:panelGroup>
-				<span class="texto_informativo">#{msg.label_total_mensagens}: #{exibirMensagensBean.totalMensagens}</span>
+				<span class="texto_informativo">#{msg.label_total_mensagens}: #{exibirMensagensBean.totalMensagens} / #{msg.label_total_mensagens_privadas}: #{exibirMensagensBean.totalMensagensPrivadas}</span>
 
 	            <div class="clear"></div>
 	            <br/>
@@ -50,7 +50,7 @@
 				<div class="container-mensagens">
 					<div class="container-mensagem">
 						<div class="container-resposta">
-							<h:inputTextarea id="novaMensagem" value="#{exibirMensagensBean.mensagem}" styleClass="resposta"/>
+							<h:inputTextarea id="novaMensagem" value="#{exibirMensagensBean.mensagem.texto}" styleClass="resposta fonte-padrao"/>
 							<span class="caracteres-restantes"><span id='contador'></span>&#160;#{msg.label_caracteres_restantes}</span>
 							<span class="botao-enviar">
 								<ui:include src="../componentes/botao-padrao.xhtml">
@@ -58,6 +58,10 @@
 									<ui:param name="bean" value="#{exibirMensagensBean}"/>
 									<ui:param name="metodo" value="envia"/>
 								</ui:include>
+							</span>
+							<span class="mensagem-privada">
+								<h:selectBooleanCheckbox id="mensagemPrivada#{status.index}" value="#{exibirMensagensBean.mensagem.privada}"/>
+								<label for="exibirMensagens:mensagemPrivada#{status.index}" class="fonte-padrao">#{msg.label_mensagem_privada}</label>
 							</span>
 						</div>
 						<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
@@ -80,7 +84,7 @@
 			        </script>
 
 					<c:forEach items="#{exibirMensagensBean.paginacaoMensagens.pagina}" var="item" varStatus="status">
-						<div class="container-mensagem">
+						<h:panelGroup layout="block" styleClass="container-mensagem" rendered="#{!item.privada or item.remetente.id == sessionScope['usuario'].id}">
 							<div class="container-remetente">
 								<span class="foto">
 								    <ui:include src="../componentes/foto-perfil-small.xhtml">
@@ -96,11 +100,14 @@
 							</div>
 							<div class="container-texto">
 								<p class="texto">#{item.mensagem}</p>
-								<span class="container-acoes"><h:commandLink onclick="return confirm('#{msg.label_confirma_exclusao}');" rendered="#{exibirMensagensBean.paginacaoMensagens.pagina[status.index].remetente.id == sessionScope['usuario'].id}" actionListener="#{exibirMensagensBean.exclui}"><f:param name="index" value="#{status.index}"/><img src="#{request.contextPath}/img/buttons/btn-lixeira.png" alt="#{msg.label_responder}" title="#{msg.label_responder}" width="16px" height="16px"/> #{msg.label_excluir}</h:commandLink></span>
+								<span class="container-acoes">
+									<h:commandLink onclick="return confirm('#{msg.label_confirma_exclusao}');" rendered="#{exibirMensagensBean.paginacaoMensagens.pagina[status.index].remetente.id == sessionScope['usuario'].id}" actionListener="#{exibirMensagensBean.exclui}"><f:param name="index" value="#{status.index}"/><img src="#{request.contextPath}/img/buttons/btn-lixeira.png" alt="#{msg.label_responder}" title="#{msg.label_responder}" width="16px" height="16px"/> #{msg.label_excluir}</h:commandLink>
+									<h:panelGroup layout="block" styleClass="is-mensagem-privada fonte-padrao" rendered="#{item.privada}"><img src="#{request.contextPath}/img/lock.png" width="16px" height="16px"/> #{msg.label_mensagem_privada}</h:panelGroup>
+								</span>
 							</div>
 							<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 							<div class="clear"></div>
-						</div>
+						</h:panelGroup>
 					</c:forEach>
 				</div>
 

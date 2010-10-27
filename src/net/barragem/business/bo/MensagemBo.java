@@ -16,16 +16,17 @@ public class MensagemBo extends BaseBo {
 		super(request, response);
 	}
 
-	public Mensagem responde(Mensagem mensagem, String textoResposta) {
-		return envia(mensagem.getRemetente(), textoResposta);
+	public Mensagem responde(Mensagem mensagem, String textoResposta, Boolean privada) {
+		return envia(mensagem.getRemetente(), textoResposta, privada);
 	}
 
-	public Mensagem envia(Usuario destinatario, String texto) {
+	public Mensagem envia(Usuario destinatario, String texto, Boolean privada) {
 		Mensagem mensagem = new Mensagem();
 		mensagem.setData(new Date());
 		mensagem.setDestinatario(destinatario);
 		mensagem.setMensagem(texto);
 		mensagem.setRemetente(getUsuarioLogado());
+		mensagem.setPrivada(privada);
 		PersistenceHelper.persiste(mensagem);
 
 		sendMail("no-reply@barragem.net", mensagem.getRemetente().getNomeCompletoCapital(), mensagem.getDestinatario()

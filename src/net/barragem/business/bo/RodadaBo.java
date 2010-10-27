@@ -48,8 +48,8 @@ public class RodadaBo extends BaseBo {
 		List<JogoBarragem> jogosSorteados = new ArrayList<JogoBarragem>();
 		while (jogadores.size() >= 2) {
 			int posicaoJogadorSorteado = rodada.getCiclo().sorteiaBaseadoNoRaio(jogadores.size());
-			jogosSorteados.add(rodada.criaJogoBarragem(jogadores.get(0).getJogador(), jogadores.get(
-					posicaoJogadorSorteado).getJogador()));
+			jogosSorteados.add(rodada.criaJogoBarragem(getUsuarioLogado(), jogadores.get(0).getJogador(), jogadores
+					.get(posicaoJogadorSorteado).getJogador()));
 
 			jogadores.remove(posicaoJogadorSorteado);
 			jogadores.remove(0);

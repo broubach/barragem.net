@@ -16,7 +16,7 @@
 
 			<h:form id="receberMensagem">
 				<h2>#{msg.label_mensagens}</h2>
-				<span class="texto_informativo">#{msg.label_total_mensagens}: #{receberMensagemBean.totalMensagens}</span><br/>
+				<span class="texto_informativo">#{msg.label_total_mensagens}: #{fn:length(receberMensagemBean.paginacaoMensagens.sourceList)}</span><br/>
 
 				<c:if test="#{empty receberMensagemBean.paginacaoMensagens.sourceList}">
 					<span class="texto_informativo">#{msg.label_lista_mensagens_vazia_1} <a href="#{request.contextPath}/protectedpages/gerirjogador/gerirJogador.xhtml">#{fn:toLowerCase(msg.label_jogador)}</a> #{msg.label_lista_mensagens_vazia_2}</span>
@@ -41,12 +41,14 @@
 							</div>
 							<div class="container-texto">
 								<p class="texto">#{item.mensagem}</p>
-								<span class="container-acoes"><h:commandLink onclick="return confirm('#{msg.label_confirma_exclusao}');" actionListener="#{receberMensagemBean.exclui}"><f:param name="index" value="#{status.index}"/><img src="#{request.contextPath}/img/buttons/btn-lixeira.png" alt="#{msg.label_responder}" title="#{msg.label_responder}" width="16px" height="16px"/> #{msg.label_excluir}</h:commandLink>&#160; 
+								<span class="container-acoes">
 									<a id="r#{status.index}" href="#"><img src="#{request.contextPath}/img/buttons/btn-reply.png" alt="#{msg.label_responder}" title="#{msg.label_responder}" width="16px" height="16px"/>#{msg.label_responder}</a>
+									<h:commandLink onclick="return confirm('#{msg.label_confirma_exclusao}');" actionListener="#{receberMensagemBean.exclui}"><f:param name="index" value="#{status.index}"/><img src="#{request.contextPath}/img/buttons/btn-lixeira.png" alt="#{msg.label_responder}" title="#{msg.label_responder}" width="16px" height="16px"/> #{msg.label_excluir}</h:commandLink> 
+									<h:panelGroup layout="block" styleClass="is-mensagem-privada fonte-padrao" rendered="#{item.privada}"><img src="#{request.contextPath}/img/lock.png" width="16px" height="16px"/> #{msg.label_mensagem_privada}</h:panelGroup>
 								</span>
 							</div>
-							<div class="container-resposta r#{status.index}">
-								<h:inputTextarea id="resposta#{status.index}" value="#{receberMensagemBean.respostas[status.index]}" styleClass="resposta"/>
+							<div class="container-resposta r#{status.index}" style="#{status.index == 0 ? 'display: visible;' : 'display: none;'}">
+								<h:inputTextarea id="resposta#{status.index}" value="#{receberMensagemBean.respostas[status.index].texto}" styleClass="resposta fonte-padrao"/>
 								<span class="caracteres-restantes"><span id='contador#{status.index}'></span>&#160;#{msg.label_caracteres_restantes}</span>
 								<span class="botao-enviar">
 									<ui:include src="../componentes/botao-padrao.xhtml">
@@ -55,6 +57,10 @@
 										<ui:param name="metodo" value="responde"/>
 										<ui:param name="index" value="#{status.index}"/>
 									</ui:include>
+								</span>
+								<span class="mensagem-privada">
+									<h:selectBooleanCheckbox id="mensagemPrivada#{status.index}" value="#{receberMensagemBean.respostas[status.index].privada}"/>
+									<label for="receberMensagem:mensagemPrivada#{status.index}" class="fonte-padrao">#{msg.label_mensagem_privada}</label>
 								</span>
 							</div>
 							<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>

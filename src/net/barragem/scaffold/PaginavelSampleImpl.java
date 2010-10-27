@@ -18,6 +18,7 @@ public class PaginavelSampleImpl<T> implements Paginavel<T> {
 	private Integer pageCount;
 	private Integer paginaAtual = 1;
 	private Integer totalRegistros;
+	private PaginacaoListener<T> paginacaoListener;
 
 	private List<T> sourceList;
 	private String sourceHibernateNamedQuery;
@@ -123,6 +124,9 @@ public class PaginavelSampleImpl<T> implements Paginavel<T> {
 			return;
 		}
 		pesquisaPaginavel(Integer.parseInt(getIndex()));
+		if (paginacaoListener != null) {
+			paginacaoListener.afterPageChange(this);
+		}
 	}
 
 	private String getIndex() {
@@ -181,5 +185,10 @@ public class PaginavelSampleImpl<T> implements Paginavel<T> {
 	@Override
 	public int calculaPagina(int zeroBasedPosicao) {
 		return (zeroBasedPosicao / pageSize) + 1;
+	}
+
+	@Override
+	public void setListener(PaginacaoListener<T> paginacaoListener) {
+		this.paginacaoListener = paginacaoListener;
 	}
 }

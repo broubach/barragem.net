@@ -292,7 +292,7 @@ public class PersistenceHelper {
 		try {
 			session = HibernateUtil.getSession();
 			t = session.beginTransaction();
-			Query query = session.getNamedQuery("atualizaNomesJogadoresQuery");
+			Query query = session.getNamedQuery(namedQuery);
 			if (paramValues != null) {
 				for (int i = 0; i < query.getNamedParameters().length; i++) {
 					query.setParameter(query.getNamedParameters()[i], paramValues[i]);

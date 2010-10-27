@@ -87,12 +87,13 @@ public class Rodada extends BaseEntity implements Atualizavel {
 		this.bonuses = bonuses;
 	}
 
-	public JogoBarragem criaJogoBarragem(Jogador jogador1, Jogador jogador2) {
+	public JogoBarragem criaJogoBarragem(Usuario usuarioResponsavel, Jogador jogador1, Jogador jogador2) {
 		JogoBarragem jogo = new JogoBarragem();
 		jogo.setRodada(this);
 		jogo.setTipo(SimplesDuplasEnum.Simples);
 		jogo.setPlacar(new Placar());
 		jogo.getPlacar().setParciais(new ArrayList<Parcial>());
+		jogo.setUsuarioResponsavel(usuarioResponsavel);
 
 		JogadorJogoBarragem jogadorEvento1 = new JogadorJogoBarragem();
 		jogadorEvento1.setEvento(jogo);

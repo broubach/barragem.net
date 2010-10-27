@@ -8,6 +8,7 @@ import net.barragem.persistence.entity.Usuario;
 import net.barragem.scaffold.Paginavel;
 import net.barragem.scaffold.PaginavelSampleImpl;
 import net.barragem.scaffold.PersistenceHelper;
+import net.barragem.view.backingbean.componentes.TextoEFlagPrivadoDto;
 
 import org.ajax4jsf.model.KeepAlive;
 
@@ -15,9 +16,8 @@ import org.ajax4jsf.model.KeepAlive;
 public class ExibirMensagensBean extends BaseBean {
 
 	private Usuario usuarioEmFoco;
-	private String mensagem;
+	private TextoEFlagPrivadoDto mensagem = new TextoEFlagPrivadoDto();
 	private Paginavel<Mensagem> paginacaoMensagens;
-	private Integer totalMensagens;
 
 	public Usuario getUsuarioEmFoco() {
 		return usuarioEmFoco;
@@ -27,11 +27,11 @@ public class ExibirMensagensBean extends BaseBean {
 		this.usuarioEmFoco = usuarioEmFoco;
 	}
 
-	public String getMensagem() {
+	public TextoEFlagPrivadoDto getMensagem() {
 		return mensagem;
 	}
 
-	public void setMensagem(String mensagem) {
+	public void setMensagem(TextoEFlagPrivadoDto mensagem) {
 		this.mensagem = mensagem;
 	}
 
@@ -43,36 +43,39 @@ public class ExibirMensagensBean extends BaseBean {
 		this.paginacaoMensagens = paginacaoMensagens;
 	}
 
-	public Integer getTotalMensagens() {
-		return totalMensagens;
-	}
-
-	public void setTotalMensagens(Integer totalMensagens) {
-		this.totalMensagens = totalMensagens;
-	}
-
 	public String envia() {
-		Mensagem focus = getBo(MensagemBo.class).envia(usuarioEmFoco, mensagem);
-		paginacaoMensagens = new PaginavelSampleImpl<Mensagem>(PersistenceHelper.findByNamedQuery("mensagemQuery",
-				usuarioEmFoco), focus, null, 5);
-		totalMensagens = paginacaoMensagens.getSourceList().size();
-		mensagem = "";
+		Mensagem focus = getBo(MensagemBo.class).envia(usuarioEmFoco, mensagem.getTexto(), mensagem.getPrivada());
+		paginacaoMensagens = new PaginavelSampleImpl<Mensagem>(PersistenceHelper.findByNamedQuery("mensagensVisiveisQuery",
+				getUsuarioLogado(), usuarioEmFoco), focus, null, 5);
+		mensagem = new TextoEFlagPrivadoDto();
 		addMensagemAtualizacaoComSucesso();
 		return "";
 	}
 
 	public void exclui(ActionEvent e) {
 		PersistenceHelper.remove(paginacaoMensagens.getPagina().get(getIndex()));
-		paginacaoMensagens = new PaginavelSampleImpl<Mensagem>(PersistenceHelper.findByNamedQuery("mensagemQuery",
-				usuarioEmFoco), paginacaoMensagens.getPaginaAtual(), 5);
-		totalMensagens = paginacaoMensagens.getSourceList().size();
+		paginacaoMensagens = new PaginavelSampleImpl<Mensagem>(PersistenceHelper.findByNamedQuery("mensagensVisiveisQuery",
+				getUsuarioLogado(), usuarioEmFoco), paginacaoMensagens.getPaginaAtual(), 5);
 		addMensagemAtualizacaoComSucesso();
 	}
 
 	public void exibeMensagens(ActionEvent e) {
 		usuarioEmFoco = PersistenceHelper.findByPk(Usuario.class, getId());
-		paginacaoMensagens = new PaginavelSampleImpl<Mensagem>(PersistenceHelper.findByNamedQuery("mensagemQuery",
-				usuarioEmFoco), null, 5);
-		totalMensagens = paginacaoMensagens.getSourceList().size();
+		paginacaoMensagens = new PaginavelSampleImpl<Mensagem>(PersistenceHelper.findByNamedQuery("mensagensVisiveisQuery",
+				getUsuarioLogado(), usuarioEmFoco), null, 5);
+	}
+	
+	public Integer getTotalMensagens() {
+		return paginacaoMensagens.getSourceList().size();
+	}
+
+	public Integer getTotalMensagensPrivadas() {
+		Integer result = 0;
+		for (Mensagem mensagem : paginacaoMensagens.getSourceList()) {
+			if (mensagem.isPrivada()) {
+				result++;
+			}
+		}
+		return result;
 	}
 }

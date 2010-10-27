@@ -433,10 +433,6 @@ public abstract class BaseBean {
 		return (String) ReflectionHelper.execute(this, metodo);
 	}
 
-	protected void setTotalNovasMensagens(Integer totalNovasMensagens) {
-		setSessionAttribute("totalNovasMensagens", totalNovasMensagens);
-	}
-
 	protected boolean updateModelValues(FacesEvent evt) {
 		PhaseId phaseId = evt.getPhaseId();
 		if (phaseId.equals(PhaseId.ANY_PHASE)) {

@@ -10,8 +10,10 @@ import javax.persistence.Table;
 
 @Entity
 @NamedQueries( {
-		@NamedQuery(name = "mensagemQuery", query = "from Mensagem m where m.destinatario = :usuario order by m.data desc"),
-		@NamedQuery(name = "novasMensagens", query = "select count(*) from Mensagem m where m.destinatario = :usuario and m.data > :dataUltimoAcesso") })
+		@NamedQuery(name = "todasMensagensQuery", query = "from Mensagem m where m.destinatario = :usuario order by m.data desc"),
+		@NamedQuery(name = "mensagensVisiveisQuery", query = "from Mensagem m where m.destinatario = :usuario and (m.privada = 1 and m.remetente = :remetente or m.privada = 0) order by m.data desc"),
+		@NamedQuery(name = "novasMensagensQuery", query = "select count(*) from Mensagem m where m.destinatario = :usuario and m.lida = 0"),
+		@NamedQuery(name = "marcaMensagensComoLidasQuery", query = "update Mensagem m set m.lida = 1 where m.lida = 0 and m.destinatario.id = :usuarioId")})
 @Table(name = "mensagem")
 public class Mensagem extends BaseEntity {
 
@@ -21,6 +23,8 @@ public class Mensagem extends BaseEntity {
 	private Usuario remetente;
 	private String mensagem;
 	private Date data;
+	private boolean lida;
+	private boolean privada;
 
 	public Usuario getDestinatario() {
 		return destinatario;
@@ -53,6 +57,22 @@ public class Mensagem extends BaseEntity {
 	public void setData(Date data) {
 		this.data = data;
 	}
+
+	public boolean isLida() {
+    	return lida;
+    }
+
+	public void setLida(boolean lida) {
+    	this.lida = lida;
+    }
+
+	public boolean isPrivada() {
+    	return privada;
+    }
+
+	public void setPrivada(boolean privada) {
+    	this.privada = privada;
+    }
 
 	@Override
 	public int hashCode() {

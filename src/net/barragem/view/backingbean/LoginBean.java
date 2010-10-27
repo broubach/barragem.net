@@ -9,6 +9,7 @@ import net.barragem.persistence.entity.Jogador;
 import net.barragem.persistence.entity.Predicado;
 import net.barragem.persistence.entity.Rodada;
 import net.barragem.persistence.entity.Usuario;
+import net.barragem.scaffold.PersistenceHelper;
 
 public class LoginBean extends BaseBean {
 	private String login;
@@ -76,5 +77,11 @@ public class LoginBean extends BaseBean {
 		}
 
 		return "";
+	}
+
+	public Integer getTotalNovasMensagens() {
+		setSessionAttribute("cachedTotalNovasMensagens", new Integer(((Long) PersistenceHelper.findByNamedQuery(
+				"novasMensagensQuery", getUsuarioLogado()).get(0)).intValue()));
+		return (Integer) getSessionAttribute("cachedTotalNovasMensagens");
 	}
 }

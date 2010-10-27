@@ -89,12 +89,12 @@ public class GerirEventoBean extends BaseBean {
 	}
 
 	public String getJogadorNome() {
-    	return jogadorNome;
-    }
+		return jogadorNome;
+	}
 
 	public void setJogadorNome(String jogadorNome) {
-    	this.jogadorNome = jogadorNome;
-    }
+		this.jogadorNome = jogadorNome;
+	}
 
 	public void removeEvento(ActionEvent e) {
 		getBo(EventoBo.class).removeEvento(paginacaoEventos, getIndex());
@@ -178,6 +178,7 @@ public class GerirEventoBean extends BaseBean {
 		tipo = JOGO_AVULSO;
 		eventoEmFoco = new Jogo();
 		eventoEmFoco.setUsuarioLogado(getUsuarioLogado());
+		eventoEmFoco.setUsuarioResponsavel(getUsuarioLogado());
 		((Jogo) eventoEmFoco).setPlacar(new Placar());
 		((Jogo) eventoEmFoco).getPlacar().setParciais(new ArrayList<Parcial>());
 		((Jogo) eventoEmFoco).getPlacar().completaSetsSeNecessario(3);
@@ -197,6 +198,7 @@ public class GerirEventoBean extends BaseBean {
 			inicializaJogadoresEvento(JogadorEvento.class);
 		}
 		eventoEmFoco.setUsuarioLogado(getUsuarioLogado());
+		eventoEmFoco.setUsuarioResponsavel(getUsuarioLogado());
 	}
 
 	private void inicializaJogadoresEvento(Class<?> clazz) {
@@ -232,8 +234,8 @@ public class GerirEventoBean extends BaseBean {
 
 	public List<SelectItem> getListaJogadoresHabilitados() {
 		List<SelectItem> items = new ArrayList<SelectItem>();
-		List<Jogador> jogadores = PersistenceHelper.findByNamedQuery("jogadoresPorUsuarioDonoQuery", "%", getUsuarioLogado()
-				.getId());
+		List<Jogador> jogadores = PersistenceHelper.findByNamedQuery("jogadoresPorUsuarioDonoQuery", "%",
+				getUsuarioLogado().getId());
 		Collections.sort(jogadores, new BeanComparator("nome"));
 		Jogador jogador = null;
 		for (Iterator<Jogador> it = jogadores.iterator(); it.hasNext();) {

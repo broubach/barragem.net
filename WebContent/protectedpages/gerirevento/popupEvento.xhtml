@@ -72,24 +72,25 @@
 				<c:if test="#{gerirEventoBean.tipo == 2}">
 					<fieldset id="detalhes-jogo">
 						<legend>#{msg.label_participantes}</legend>
-						<div class="btn-novo">
+						<h:panelGrid columns="2" id="jogadores" rendered="#{gerirEventoBean.eventoEmFoco != null}" styleClass="jogadores-treino">
+							<h:outputText value="#{gerirEventoBean.eventoEmFoco.jogadoresEventos[0].jogador.nome}" styleClass="fonte-padrao"/>
+							&#160;
+							<c:forEach var="item" items="#{gerirEventoBean.eventoEmFoco.jogadoresEventos}" varStatus="status" begin="1">
+								<h:selectOneMenu value="#{gerirEventoBean.eventoEmFoco.jogadoresEventos[status.index].jogador}" converter="JogadorConverter" styleClass="fonte-padrao" rendered="#{gerirEventoBean.eventoEmFoco.id == null}">
+									<f:selectItem itemLabel="" />
+									<f:selectItems value="#{gerirEventoBean.listaJogadoresHabilitados}" />
+								</h:selectOneMenu>
+								<h:outputText value="#{gerirEventoBean.eventoEmFoco.jogadoresEventos[status.index].jogador.nome}" styleClass="fonte-padrao" rendered="#{gerirEventoBean.eventoEmFoco.id != null}"/>
+								<a4j:commandLink actionListener="#{gerirEventoBean.removeJogador}" rendered="#{gerirEventoBean.eventoEmFoco.id == null}" reRender="jogadores" oncomplete="$j.fn.colorbox.resize();aplicarMascaras();"><img src="#{request.contextPath}/img/buttons/btn-deletar.png" alt="#{msg.label_excluir}" title="#{msg.label_excluir}" width="18px" height="18px"/><f:param name="index" value="#{status.index}"/></a4j:commandLink>
+								<h:outputText value="&#160;" rendered="#{gerirEventoBean.eventoEmFoco.id != null}" />
+							</c:forEach>
+						</h:panelGrid>
+						<h:panelGroup styleClass="btn-novo" layout="block" rendered="#{gerirEventoBean.eventoEmFoco.id == null}">
 							<a4j:commandLink actionListener="#{gerirEventoBean.adicionaJogador}" reRender="jogadores" oncomplete="$j.fn.colorbox.resize();aplicarMascaras();">
 								#{msg.label_adicionar_jogador}
 								<ui:include src="../../publicpages/componentes/bordas-redondas-span.xhtml"/>
 							</a4j:commandLink>&#160;
-						</div>
-						<h:panelGrid columns="1" id="jogadores" rendered="#{gerirEventoBean.eventoEmFoco != null}">
-							<c:forEach var="item" items="#{gerirEventoBean.eventoEmFoco.jogadoresEventos}" varStatus="status">
-								<h:outputText value="#{gerirEventoBean.eventoEmFoco.jogadoresEventos[status.index].jogador.nome}" rendered="#{status.index == 0}" styleClass="fonte-padrao"/>
-								<h:panelGroup layout="block" rendered="#{status.index > 0}" styleClass="jogadoresTreino">
-									<h:selectOneMenu value="#{gerirEventoBean.eventoEmFoco.jogadoresEventos[status.index].jogador}" converter="JogadorConverter" styleClass="fonte-padrao">
-										<f:selectItem itemLabel="" />
-										<f:selectItems value="#{gerirEventoBean.listaJogadoresHabilitados}" />
-									</h:selectOneMenu>
-									<a4j:commandLink actionListener="#{gerirEventoBean.removeJogador}" reRender="jogadores" oncomplete="$j.fn.colorbox.resize();aplicarMascaras();"><img src="#{request.contextPath}/img/buttons/btn-deletar.png" alt="#{msg.label_excluir}" title="#{msg.label_excluir}" width="18px" height="18px"/><f:param name="index" value="#{status.index}"/></a4j:commandLink>
-								</h:panelGroup>
-							</c:forEach>
-						</h:panelGrid>
+						</h:panelGroup>
 					</fieldset>
 				</c:if>
 

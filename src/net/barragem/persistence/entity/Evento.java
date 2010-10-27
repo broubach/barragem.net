@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -42,6 +43,9 @@ public abstract class Evento extends BaseEntity implements Cloneable {
 
 	@OneToMany(mappedBy = "evento", cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
 	private List<JogadorEvento> jogadoresEventos;
+
+	@ManyToOne
+	private Usuario usuarioResponsavel;
 
 	@Transient
 	private List<JogadorEvento> jogadoresEventosOrdenados;
@@ -82,6 +86,14 @@ public abstract class Evento extends BaseEntity implements Cloneable {
 
 	public void setHora(Date hora) {
 		this.hora = hora;
+	}
+
+	public Usuario getUsuarioResponsavel() {
+		return usuarioResponsavel;
+	}
+
+	public void setUsuarioResponsavel(Usuario usuarioResponsavel) {
+		this.usuarioResponsavel = usuarioResponsavel;
 	}
 
 	public List<JogadorEvento> getJogadoresEventosOrdenados() {

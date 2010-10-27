@@ -709,12 +709,10 @@ fieldset#parciais {
 	float: right;
 	clear: right;
 	white-space: nowrap;
+	width: 300px;
 }
 
 /******** Resposta ********/
-#receberMensagem .container-resposta {
-	display: none;
-}
 .container-resposta .resposta {
 	width: 100%;
 	clear: both;
@@ -735,6 +733,27 @@ fieldset#parciais {
 }
 .go_green {
 	color: green;
+}
+.mensagem-privada {
+	float: right;
+	clear: none;
+	margin-right: 3px;
+}
+.internas .mensagem-privada input {
+	float: left;
+	clear: none;
+}
+.internas .mensagem-privada label {
+	float: left;
+	margin-left: 3px;
+}
+.is-mensagem-privada {
+	float: right;
+	margin-right:3px;
+}
+.container-acoes a {
+	float: right;
+	margin-right: 3px;
 }
 
 /********************* EXIBIR PERFIL *********************/
@@ -1585,10 +1604,9 @@ td.actions {
 #add-evento\:tipo-jogo .negrito {
 	width: auto;
 }
-.jogadoresTreino a {
-	margin: 0px;
-	padding: 0px;
-	vertical-align: bottom;
+.jogadores-treino {
+	float: left;
+	margin-right: 3px;
 }
 .add-evento label {
 	width: 60px;

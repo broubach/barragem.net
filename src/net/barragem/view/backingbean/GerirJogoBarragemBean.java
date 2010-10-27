@@ -37,7 +37,7 @@ public class GerirJogoBarragemBean extends BaseBean {
 	}
 
 	public void adicionaJogo(Rodada rodada) {
-		mestreDetalhe.preparaJogoParaEdicao(rodada.criaJogoBarragem(null, null));
+		mestreDetalhe.preparaJogoParaEdicao(rodada.criaJogoBarragem(getUsuarioLogado(), null, null));
 	}
 
 	public void editaProximoJogo(ActionEvent e) {
