@@ -26,6 +26,8 @@
 
 		<!-- Altera o isys.html -->
 		<replace dir="${basedir}/temp/staticpages" token="/barragem/" value="/" includes="isys.html" defaultexcludes="false" />
+		
+		<antcall target="compilaJasperReports"/>
 
 		<!-- Minifica todos os CSSs - todos os css dentro da pasta css -->
 		<java jar="yuicompressor-2.4.2.jar" fork="true" output="${basedir}/temp/ie-fix.css">
@@ -130,5 +132,28 @@
 		<!-- Compacta todo o conteudo em barragem.war -->
 		<zip destfile="${basedir}/barragem.war" basedir="${basedir}/temp" level="9" />
 
+	</target>
+	
+	<target name="compilaJasperReports">
+		<!-- Altera os jrxml com caminhos relativos a localhost -->
+		<replace dir="${basedir}/temp/WEB-INF/classes/jasper" token="localhost:8080/barragem" value="www.barragem.net" includes="*.jrxml" defaultexcludes="false" />
+		
+		<!-- Exclui jasper existentes -->
+		<delete>
+			<fileset dir="${basedir}/temp/WEB-INF/classes/jasper">
+				<include name="*.jasper"/>
+			</fileset>
+		</delete>
+
+		<taskdef name="jrc" classname="net.sf.jasperreports.ant.JRAntCompileTask">
+			<classpath>
+				<fileset dir="../lib">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+		</taskdef>
+
+		<!-- Recompila os jrxml alterados -->
+		<jrc srcdir="${basedir}/temp/WEB-INF/classes/jasper" />
 	</target>
 </project>

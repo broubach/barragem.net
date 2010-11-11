@@ -40,7 +40,7 @@
 				<table class="gradient">
 				<thead>
 					<tr>
-						<th colspan="4">#{msg.label_ranking}</th>
+						<th colspan="4">#{msg.label_ranking} <h:commandLink actionListener="#{exibirPainelBarragemBean.exibeRelatorioRodadas}">botaozum</h:commandLink> <h:commandLink actionListener="#{exibirPainelBarragemBean.exibeRelatorioRanking}">botaozim</h:commandLink></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -60,8 +60,8 @@
 							<h:outputText value="#{item.pontuacao}" rendered="#{item.jogador.usuarioCorrespondente == null}"/>
 						</td>
 						<td>
-							<h:commandLink action="exibirPerfil" actionListener="#{exibirPerfilBean.exibePerfil}" rendered="#{item.jogador.usuarioCorrespondente != null}">#{item.jogador.nome}<f:param name="id" value="#{item.jogador.usuarioCorrespondente.id}"/></h:commandLink>
-							<h:outputText value="#{item.jogador.nome}" rendered="#{item.jogador.usuarioCorrespondente == null}"/>
+							<h:commandLink action="exibirPerfil" actionListener="#{exibirPerfilBean.exibePerfil}" rendered="#{item.jogador.usuarioCorrespondente != null}">#{item.jogador.nome} #{!item.habilitado ? msg.label_desabilitado : ''}<f:param name="id" value="#{item.jogador.usuarioCorrespondente.id}"/></h:commandLink>
+							<h:outputText rendered="#{item.jogador.usuarioCorrespondente == null}">#{item.jogador.nome} #{!item.habilitado ? msg.label_desabilitado : ''}</h:outputText>
 						</td>
 					</tr>
 				</c:forEach>

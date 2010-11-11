@@ -161,7 +161,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Image Servlet</servlet-name>
-		<url-pattern>/protectedpages/exibirimagem/exibirImagem.do</url-pattern>
+		<url-pattern>/publicpages/exibirimagem/exibirImagem.do</url-pattern>
 	</servlet-mapping>
 
 	<!-- Ranking Mashup Servlet -->

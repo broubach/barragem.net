@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.el.ValueExpression;
 import javax.faces.application.Application;
@@ -45,6 +46,11 @@ import net.barragem.scaffold.BarragemJmsTemplate;
 import net.barragem.scaffold.Paginavel;
 import net.barragem.scaffold.PersistenceHelper;
 import net.barragem.scaffold.ReflectionHelper;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.jms.core.MessageCreator;
@@ -63,58 +69,47 @@ public abstract class BaseBean {
 	public static final int FOTO_DEFAULT_HEIGHT = 162;
 	public static final int FOTO_DEFAULT_WIDTH = 123;
 
-	protected static final String emailTemplateAdicaoJogador = new StringBuilder().append("<p>Olá,</p>").append(
-			"<p>Agora você faz parte da lista de jogadores de {0}.</p>").append(
-			"<p>Se você conhece {0}, você também pode adicioná-lo(a) à sua lista de jogadores.</p>").append(
-			"<p>Atenciosamente,<br />Equipe <a href='https://www.barragem.net/login.xhtml'>barragem.net</a></p>")
-			.toString();
+	protected static final String emailTemplateAdicaoJogador = new StringBuilder()
+	        .append("<p>Olá,</p>")
+	        .append("<p>Agora você faz parte da lista de jogadores de {0}.</p>")
+	        .append("<p>Se você conhece {0}, você também pode adicioná-lo(a) à sua lista de jogadores.</p>")
+	        .append("<p>Atenciosamente,<br />Equipe <a href='https://www.barragem.net/login.xhtml'>barragem.net</a></p>")
+	        .toString();
 	protected static final String emailNovaMensagem = new StringBuilder()
-			.append("<p>Olá,</p>")
-			.append("<p>Você recebeu uma mensagem de {0}.</p>")
-			.append(
-					"<p>Para ler o seu conteúdo, acesse <a href='https://www.barragem.net/login.xhtml'>barragem.net</a>.</p>")
-			.append(
-					"<p>Atenciosamente,<br />Equipe <a href='https://www.barragem.net/login.xhtml'>barragem.net</a></p>")
-			.toString();
+	        .append("<p>Olá,</p>")
+	        .append("<p>Você recebeu uma mensagem de {0}.</p>")
+	        .append("<p>Para ler o seu conteúdo, acesse <a href='https://www.barragem.net/login.xhtml'>barragem.net</a>.</p>")
+	        .append("<p>Atenciosamente,<br />Equipe <a href='https://www.barragem.net/login.xhtml'>barragem.net</a></p>")
+	        .toString();
 	protected static final String emailTemplateRecuperarSenha = new StringBuilder()
-			.append("<p>Olá,</p>")
-			.append(
-					"<p>Visite <a href=\"https://www.barragem.net/publicpages/recuperarsenha/recuperarSenha.xhtml?hash={0}\">esta página</a> para recuperar a sua senha. Esta página será válida por 2 dias.</p>")
-			.append(
-					"<p>Atenciosamente,<br />Equipe <a href='https://www.barragem.net/login.xhtml'>barragem.net</a></p>")
-			.toString();
+	        .append("<p>Olá,</p>")
+	        .append("<p>Visite <a href=\"https://www.barragem.net/publicpages/recuperarsenha/recuperarSenha.xhtml?hash={0}\">esta página</a> para recuperar a sua senha. Esta página será válida por 2 dias.</p>")
+	        .append("<p>Atenciosamente,<br />Equipe <a href='https://www.barragem.net/login.xhtml'>barragem.net</a></p>")
+	        .toString();
 	protected static final String emailTemplateSorteioBarragem = new StringBuilder()
-			.append("<p>Olá,</p>")
-			.append("<p>O sorteio da barragem {0} foi realizado.</p>")
-			.append(
-					"<p>Acesse <a href='https://www.barragem.net/login.xhtml'>www.barragem.net</a> e confira quem será o seu próximo(a) adversário(a).</p>")
-			.append(
-					"<p>Atenciosamente,<br />Equipe <a href='https://www.barragem.net/login.xhtml'>barragem.net</a></p>")
-			.toString();
+	        .append("<p>Olá,</p>")
+	        .append("<p>O sorteio da barragem {0} foi realizado.</p>")
+	        .append("<p>Acesse <a href='https://www.barragem.net/login.xhtml'>www.barragem.net</a> e confira quem será o seu próximo(a) adversário(a).</p>")
+	        .append("<p>Atenciosamente,<br />Equipe <a href='https://www.barragem.net/login.xhtml'>barragem.net</a></p>")
+	        .toString();
 	protected static final String emailTemplateNovoJogo = new StringBuilder()
-			.append("<p>Olá,</p>")
-			.append("<p>Um novo jogo entre você e {0} foi cadastrado.</p>")
-			.append(
-					"<p>Acesse <a href='https://www.barragem.net/login.xhtml'>www.barragem.net</a> e confira outros dados do evento.</p>")
-			.append(
-					"<p>Atenciosamente,<br />Equipe <a href='https://www.barragem.net/login.xhtml'>barragem.net</a></p>")
-			.toString();
+	        .append("<p>Olá,</p>")
+	        .append("<p>Um novo jogo entre você e {0} foi cadastrado.</p>")
+	        .append("<p>Acesse <a href='https://www.barragem.net/login.xhtml'>www.barragem.net</a> e confira outros dados do evento.</p>")
+	        .append("<p>Atenciosamente,<br />Equipe <a href='https://www.barragem.net/login.xhtml'>barragem.net</a></p>")
+	        .toString();
 	protected static final String emailTemplateNovoBonus = new StringBuilder()
-			.append("<p>Olá,</p>")
-			.append("<p>Você ganhou bonus na rodada {0} da barragem {1}!</p>")
-			.append(
-					"<p>Acesse <a href='https://www.barragem.net/login.xhtml'>www.barragem.net</a> e confira quantos pontos de bônus você irá acumular no fechamento da rodada {0}.</p>")
-			.append(
-					"<p>Atenciosamente,<br />Equipe <a href='https://www.barragem.net/login.xhtml'>barragem.net</a></p>")
-			.toString();
+	        .append("<p>Olá,</p>")
+	        .append("<p>Você ganhou bonus na rodada {0} da barragem {1}!</p>")
+	        .append("<p>Acesse <a href='https://www.barragem.net/login.xhtml'>www.barragem.net</a> e confira quantos pontos de bônus você irá acumular no fechamento da rodada {0}.</p>")
+	        .append("<p>Atenciosamente,<br />Equipe <a href='https://www.barragem.net/login.xhtml'>barragem.net</a></p>")
+	        .toString();
 	protected static final String emailTemplateRankingAtualizado = new StringBuilder()
-			.append("<p>Olá,</p>")
-			.append("<p>A barragem {0} - {1} teve o seu ranking atualizado.</p>")
-			.append(
-					"<p>Acesse <a href='https://www.barragem.net/login.xhtml'>www.barragem.net</a> e confira as atualizações da sua barragem.</p>")
-			.append(
-					"<p>Atenciosamente,<br />Equipe <a href='https://www.barragem.net/login.xhtml'>barragem.net</a></p>")
-			.toString();
+	        .append("<p>Olá,</p>")
+	        .append("<p>A barragem {0} - {1} teve o seu ranking atualizado.</p>")
+	        .append("<p>Acesse <a href='https://www.barragem.net/login.xhtml'>www.barragem.net</a> e confira as atualizações da sua barragem.</p>")
+	        .append("<p>Atenciosamente,<br />Equipe <a href='https://www.barragem.net/login.xhtml'>barragem.net</a></p>")
+	        .toString();
 
 	private HtmlDataTable dataTable;
 
@@ -130,21 +125,21 @@ public abstract class BaseBean {
 
 	public static void setApplicationAttribute(String key, Object value) {
 		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
-				.getRequest();
+		        .getRequest();
 
 		request.getSession().getServletContext().setAttribute(key, value);
 	}
 
 	public void setSessionAttribute(String key, Object value) {
 		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
-				.getRequest();
+		        .getRequest();
 
 		request.getSession().setAttribute(key, value);
 	}
 
 	public void setRequestAttribute(String key, Object value) {
 		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
-				.getRequest();
+		        .getRequest();
 
 		request.setAttribute(key, value);
 	}
@@ -162,7 +157,7 @@ public abstract class BaseBean {
 	 */
 	public static Object getApplicationAttribute(String key) {
 		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
-				.getRequest();
+		        .getRequest();
 
 		return request.getSession().getServletContext().getAttribute(key);
 	}
@@ -173,27 +168,27 @@ public abstract class BaseBean {
 
 	public HttpSession getSession() {
 		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
-				.getRequest();
+		        .getRequest();
 		return request.getSession(true);
 	}
 
 	public Object getSessionAttribute(String atributo) {
 		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
-				.getRequest();
+		        .getRequest();
 
 		return request.getSession().getAttribute(atributo);
 	}
 
 	public Object getRequestAttribute(String atributo) {
 		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
-				.getRequest();
+		        .getRequest();
 
 		return request.getAttribute(atributo);
 	}
 
 	public void removeSessionAttribute(String key) {
 		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
-				.getRequest();
+		        .getRequest();
 
 		request.getSession().removeAttribute(key);
 	}
@@ -321,9 +316,9 @@ public abstract class BaseBean {
 	}
 
 	protected void sendMail(final String from, final String fromName, final String to, final String subject,
-			final String body) {
+	        final String body) {
 		BarragemJmsTemplate template = (BarragemJmsTemplate) WebApplicationContextUtils.getWebApplicationContext(
-				getRequest().getSession().getServletContext()).getBean("jmsTemplate");
+		        getRequest().getSession().getServletContext()).getBean("jmsTemplate");
 		if (template.getEnabled()) {
 			template.send(new MessageCreator() {
 				public Message createMessage(Session session) throws JMSException {
@@ -355,7 +350,7 @@ public abstract class BaseBean {
 		FacesContext context = FacesContext.getCurrentInstance();
 		Application app = context.getApplication();
 		ValueExpression expression = app.getExpressionFactory().createValueExpression(context.getELContext(),
-				elExpression, Object.class);
+		        elExpression, Object.class);
 		return expression.getValue(context.getELContext());
 	}
 
@@ -404,7 +399,7 @@ public abstract class BaseBean {
 	protected <T> T getBo(Class<T> bo) {
 		try {
 			return bo.getConstructor(HttpServletRequest.class, HttpServletResponse.class).newInstance(getRequest(),
-					getResponse());
+			        getResponse());
 		} catch (IllegalArgumentException e) {
 			throw new RuntimeException(e);
 		} catch (SecurityException e) {
@@ -447,8 +442,8 @@ public abstract class BaseBean {
 		BufferedImage bsrc = ImageIO.read(new ByteArrayInputStream(original));
 		BufferedImage bdest = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
-		AffineTransform at = AffineTransform.getScaleInstance((double) width / bsrc.getWidth(), (double) height
-				/ bsrc.getHeight());
+		AffineTransform at = AffineTransform.getScaleInstance((double) width / bsrc.getWidth(),
+		        (double) height / bsrc.getHeight());
 		Graphics2D g = bdest.createGraphics();
 		g.drawRenderedImage(bsrc, at);
 
@@ -458,13 +453,13 @@ public abstract class BaseBean {
 	}
 
 	public byte[] cropAndScaleImage(byte[] original, int x1, int y1, int x2, int y2, int width, int height)
-			throws IOException {
+	        throws IOException {
 		BufferedImage bsrc = ImageIO.read(new ByteArrayInputStream(original));
 		BufferedImage bdest = null;
 
 		if (x2 - x1 > 0 && y2 - y1 > 0) {
 			bdest = getScaledInstance(bsrc.getSubimage(x1, y1, x2 - x1, y2 - y1), width, height,
-					RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
+			        RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
 		} else {
 			bdest = getScaledInstance(bsrc, width, height, RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
 		}
@@ -477,14 +472,35 @@ public abstract class BaseBean {
 
 	public String getRequestParameter(String parametro) {
 		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
-				.getRequest();
+		        .getRequest();
 
 		return request.getParameter(parametro);
 	}
 
+	public void flushReport(String jasperReport, String saveAsName, Map<String, Object> parametros,
+	        Collection dataSource) {
+		JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(dataSource);
+
+		JasperPrint impressao = null;
+		try {
+			getResponse().setHeader("Content-Disposition",
+			        new StringBuilder().append("Attachment; filename=\"").append(saveAsName).append("\"").toString());
+			getResponse().setHeader("Cache-Control", "no-cache");
+			getResponse().setContentType("application/pdf");
+
+			impressao = JasperFillManager.fillReport(this.getClass().getResourceAsStream(jasperReport), parametros, ds);
+			JasperExportManager.exportReportToPdfStream(impressao, getResponse().getOutputStream());
+			getFacesContext().responseComplete();
+		} catch (JRException ex) {
+			throw new RuntimeException(ex);
+		} catch (IOException ex) {
+			throw new RuntimeException(ex);
+		}
+	}
+
 	/**
-	 * Convenience method that returns a scaled instance of the provided {@code
-	 * BufferedImage}.
+	 * Convenience method that returns a scaled instance of the provided
+	 * {@code BufferedImage}.
 	 * 
 	 * @param img
 	 *            the original image to be scaled
@@ -493,11 +509,11 @@ public abstract class BaseBean {
 	 * @param targetHeight
 	 *            the desired height of the scaled instance, in pixels
 	 * @param hint
-	 *            one of the rendering hints that corresponds to {@code
-	 *            RenderingHints.KEY_INTERPOLATION} (e.g. {@code
-	 *            RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR}, {@code
-	 *            RenderingHints.VALUE_INTERPOLATION_BILINEAR}, {@code
-	 *            RenderingHints.VALUE_INTERPOLATION_BICUBIC})
+	 *            one of the rendering hints that corresponds to
+	 *            {@code RenderingHints.KEY_INTERPOLATION} (e.g.
+	 *            {@code RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR},
+	 *            {@code RenderingHints.VALUE_INTERPOLATION_BILINEAR},
+	 *            {@code RenderingHints.VALUE_INTERPOLATION_BICUBIC})
 	 * @param higherQuality
 	 *            if true, this method will use a multi-step scaling technique
 	 *            that provides higher quality than the usual one-step technique
@@ -508,9 +524,9 @@ public abstract class BaseBean {
 	 * @return a scaled version of the original {@code BufferedImage}
 	 */
 	public static BufferedImage getScaledInstance(BufferedImage img, int targetWidth, int targetHeight, Object hint,
-			boolean higherQuality) {
+	        boolean higherQuality) {
 		int type = (img.getTransparency() == Transparency.OPAQUE) ? BufferedImage.TYPE_INT_RGB
-				: BufferedImage.TYPE_INT_ARGB;
+		        : BufferedImage.TYPE_INT_ARGB;
 		BufferedImage ret = (BufferedImage) img;
 		int w, h;
 		if (higherQuality) {

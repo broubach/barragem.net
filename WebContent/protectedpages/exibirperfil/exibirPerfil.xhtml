@@ -56,9 +56,9 @@
 	            <br/>
 				
 				<div class="foto-exibir-perfil">
-			        <h:graphicImage value="/protectedpages/exibirimagem/exibirImagem.do?hash=#{exibirPerfilBean.usuarioEmFoco.perfil.hash}" styleClass="foto-perfil" 
+			        <h:graphicImage value="/publicpages/exibirimagem/exibirImagem.do?hash=#{exibirPerfilBean.usuarioEmFoco.perfil.hash}" styleClass="foto-perfil" 
 			        	rendered="#{exibirPerfilBean.usuarioEmFoco.perfil != null and exibirPerfilBean.usuarioEmFoco.perfil.hash != null}"/>
-			        <h:graphicImage value="/protectedpages/exibirimagem/exibirImagem.do?v=1.2.25&#38;hash=default" styleClass="foto-perfil" 
+			        <h:graphicImage value="/publicpages/exibirimagem/exibirImagem.do?v=1.2.25&#38;hash=default" styleClass="foto-perfil" 
 			        	rendered="#{exibirPerfilBean.usuarioEmFoco.perfil == null or exibirPerfilBean.usuarioEmFoco.perfil.hash == null}"/>
 				</div>
 				

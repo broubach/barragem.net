@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rodadas" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" resourceBundle="message-bundle">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="CATEGORIA" class="java.lang.String"/>
+	<parameter name="LOCAL" class="java.lang.String"/>
+	<parameter name="CICLO" class="java.lang.String"/>
+	<field name="rodada" class="java.lang.String"/>
+	<field name="data" class="java.util.Date"/>
+	<field name="hora" class="java.util.Date"/>
+	<field name="pontuacaoVencedor" class="java.lang.Integer"/>
+	<field name="jogadorVencedorNome" class="java.lang.String"/>
+	<field name="jogadorVencedorHash" class="java.lang.String"/>
+	<field name="pontuacaoPerdedor" class="java.lang.Integer"/>
+	<field name="jogadorPerdedorNome" class="java.lang.String"/>
+	<field name="jogadorPerdedorHash" class="java.lang.String"/>
+	<field name="placar" class="java.lang.String"/>
+	<group name="Rodada" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{rodada}]]></groupExpression>
+		<groupHeader>
+			<band height="33">
+				<textField>
+					<reportElement mode="Opaque" x="0" y="0" width="555" height="32" forecolor="#006699" backcolor="#E6E6E6"/>
+					<textElement>
+						<font size="24" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{rodada}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="-20" y="32" width="595" height="1" forecolor="#666666"/>
+				</line>
+				<line>
+					<reportElement x="-20" y="-1" width="595" height="1" forecolor="#666666"/>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band/>
+	</title>
+	<pageHeader>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#E6E6E6"/>
+				<textField>
+					<reportElement x="20" y="20" width="234" height="43" forecolor="#006699"/>
+					<textElement verticalAlignment="Bottom">
+						<font size="34" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{CATEGORIA}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="296" y="41" width="279" height="20" forecolor="#006699"/>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{LOCAL} + " - " + $P{CICLO}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20"/>
+	</columnHeader>
+	<detail>
+		<band height="55">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="54" width="555" height="1"/>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="90" height="20" forecolor="#444444"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[new java.text.SimpleDateFormat($R{format_day_month_year}).format($F{data}) + " " + new java.text.SimpleDateFormat("HH:mm").format($F{hora})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="175" y="0" width="153" height="20" forecolor="#444444"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{jogadorVencedorNome}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="20" width="115" height="33" forecolor="#444444"/>
+				<textElement>
+					<font size="24"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{placar}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="402" y="0" width="153" height="20" forecolor="#444444"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{jogadorPerdedorNome}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame" isUsingCache="true">
+				<reportElement mode="Opaque" x="137" y="1" width="37" height="52"/>
+				<imageExpression class="java.lang.String"><![CDATA["http://localhost:8080/barragem/publicpages/exibirimagem/exibirImagem.do?hash="+$F{jogadorVencedorHash}+"&fotoPequena=true"]]></imageExpression>
+			</image>
+			<image scaleImage="FillFrame" isUsingCache="true">
+				<reportElement mode="Opaque" x="364" y="1" width="37" height="52"/>
+				<imageExpression class="java.lang.String"><![CDATA["http://localhost:8080/barragem/publicpages/exibirimagem/exibirImagem.do?hash="+$F{jogadorPerdedorHash}+"&fotoPequena=true"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="332" y="22" width="9" height="11"/>
+				<imageExpression class="java.lang.String"><![CDATA["http://www.barragem.net/img/versus.png"]]></imageExpression>
+			</image>
+			<textField isBlankWhenNull="true">
+				<reportElement x="116" y="17" width="21" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{pontuacaoVencedor}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="343" y="17" width="21" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{pontuacaoPerdedor}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="40">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="19" width="100" height="13" forecolor="#444444" backcolor="#FFFFFF"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{label_pagina}+" "+$V{PAGE_NUMBER}+" "+$R{label_de}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="58" y="19" width="40" height="13" forecolor="#444444" backcolor="#FFFFFF"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="RealSize" hAlign="Right">
+				<reportElement x="345" y="3" width="210" height="37"/>
+				<imageExpression class="java.lang.String"><![CDATA["http://www.barragem.net/img/logo-barragem.gif"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="238" y="18" width="100" height="20" forecolor="#7F7F7F"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[powered by]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>
