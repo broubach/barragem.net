@@ -148,7 +148,7 @@
 			<staticText>
 				<reportElement x="238" y="18" width="100" height="20" forecolor="#7F7F7F"/>
 				<textElement textAlignment="Right">
-					<font fontName="Arial" size="11" isBold="true"/>
+					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[powered by]]></text>
 			</staticText>
