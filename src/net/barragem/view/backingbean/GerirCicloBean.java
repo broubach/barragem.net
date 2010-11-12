@@ -1,19 +1,30 @@
 package net.barragem.view.backingbean;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.TimeZone;
 
 import javax.faces.event.ActionEvent;
 
 import net.barragem.business.bo.JogadorBo;
+import net.barragem.business.bo.RelatorioBo;
+import net.barragem.business.bo.UsuarioBo;
 import net.barragem.persistence.entity.Barragem;
 import net.barragem.persistence.entity.Ciclo;
 import net.barragem.persistence.entity.CicloJogador;
 import net.barragem.persistence.entity.Jogador;
+import net.barragem.persistence.entity.JogadorJogoBarragem;
+import net.barragem.persistence.entity.JogoBarragem;
 import net.barragem.persistence.entity.Rodada;
+import net.barragem.scaffold.MessageBundleUtils;
 import net.barragem.scaffold.PersistenceHelper;
 import net.barragem.view.backingbean.componentes.JogadorSelecionavelDto;
+import net.barragem.view.backingbean.componentes.RelatorioRankingDto;
+import net.barragem.view.backingbean.componentes.RelatorioRodadasDto;
 
 import org.ajax4jsf.model.KeepAlive;
 
@@ -79,12 +90,12 @@ public class GerirCicloBean extends BaseBean {
 	}
 
 	public String getJogadorNome() {
-    	return jogadorNome;
-    }
+		return jogadorNome;
+	}
 
 	public void setJogadorNome(String jogadorNome) {
-    	this.jogadorNome = jogadorNome;
-    }
+		this.jogadorNome = jogadorNome;
+	}
 
 	public boolean isHabilitado() {
 		return habilitado;
@@ -145,7 +156,7 @@ public class GerirCicloBean extends BaseBean {
 			addMensagemAtualizacaoComSucesso();
 		}
 	}
-	
+
 	public void pesquisaJogadorPrimeiraVez(ActionEvent e) {
 		filtroJogador = null;
 		pesquisaJogador(e);
@@ -154,7 +165,7 @@ public class GerirCicloBean extends BaseBean {
 	public void pesquisaJogador(ActionEvent e) {
 		jogadoresSelecionaveis = new ArrayList<JogadorSelecionavelDto>();
 		List<Jogador> todosJogadores = PersistenceHelper.findByNamedQuery("jogadoresPorUsuarioDonoQuery",
-		        filtroJogador != null ? filtroJogador + "%" : "%", getUsuarioLogado().getId());
+				filtroJogador != null ? filtroJogador + "%" : "%", getUsuarioLogado().getId());
 		JogadorSelecionavelDto jogadorSelecionavel = null;
 		for (Jogador jogador : todosJogadores) {
 			if (!cicloEmFoco.getJogadoresDoRanking().contains(jogador)) {
@@ -238,19 +249,21 @@ public class GerirCicloBean extends BaseBean {
 		addMensagemAtualizacaoComSucesso();
 	}
 
-    public List<String> autocomplete(Object suggest) {
-        String pref = (String)suggest;
-        ArrayList<String> result = new ArrayList<String>();
+	public List<String> autocomplete(Object suggest) {
+		String pref = (String) suggest;
+		ArrayList<String> result = new ArrayList<String>();
 
-        for (Jogador jogador : getUsuarioLogado().getJogadores()) {
-            if ((jogador.getNome() != null && jogador.getNome().toLowerCase().indexOf(pref.toLowerCase()) == 0 && !cicloEmFoco.getJogadoresDoRanking().contains(jogador)) || "".equals(pref)) {
-            	result.add(jogador.getNome());
-            }
-        }
+		for (Jogador jogador : getUsuarioLogado().getJogadores()) {
+			if ((jogador.getNome() != null && jogador.getNome().toLowerCase().indexOf(pref.toLowerCase()) == 0 && !cicloEmFoco
+					.getJogadoresDoRanking().contains(jogador))
+					|| "".equals(pref)) {
+				result.add(jogador.getNome());
+			}
+		}
 
-        return result;
-    }
-    
+		return result;
+	}
+
 	public void adicionaJogador(ActionEvent e) {
 		if (validaNovo()) {
 			getBo(JogadorBo.class).adicionaJogador(jogadorNome);
@@ -269,5 +282,98 @@ public class GerirCicloBean extends BaseBean {
 			messages.addErrorMessage(null, "label_jogador_com_mesmo_nome_jah_existente");
 		}
 		return messages.getErrorMessages().isEmpty();
+	}
+
+	public void exibeRelatorioRanking(ActionEvent e) {
+		List<RelatorioRankingDto> reportSource = new ArrayList<RelatorioRankingDto>();
+		RelatorioRankingDto dto = null;
+		for (CicloJogador cicloJogador : cicloEmFoco.getRanking()) {
+			if (!cicloJogador.getHabilitado()) {
+				continue;
+			}
+			dto = new RelatorioRankingDto();
+			dto.setJogadorNome(cicloJogador.getJogador().getNome());
+			dto.setPontuacao(cicloJogador.getPontuacao());
+			dto.setRanking(cicloJogador.getRanking());
+			if (cicloJogador.getJogador().getUsuarioCorrespondente() != null
+					&& cicloJogador.getJogador().getUsuarioCorrespondente().getPerfil() != null
+					&& cicloJogador.getJogador().getUsuarioCorrespondente().getPerfil().getHash() != null) {
+				dto.setJogadorHash(cicloJogador.getJogador().getUsuarioCorrespondente().getPerfil().getHash());
+			} else {
+				dto.setJogadorHash("default");
+			}
+			reportSource.add(dto);
+		}
+
+		Map<String, Object> parametros = new HashMap<String, Object>();
+
+		parametros.put("CICLO", cicloEmFoco.getNome());
+		parametros.put("LOCAL", cicloEmFoco.getBarragem().getLocal());
+		parametros.put("CATEGORIA", MessageBundleUtils.getInstance().get(
+				cicloEmFoco.getBarragem().getCategoria().getNome()));
+		parametros.put("REPORT_LOCALE", new Locale("pt", "BR"));
+		parametros.put("REPORT_TIME_ZONE", TimeZone.getTimeZone("GMT-3"));
+
+		flushReport("/jasper/ranking.jasper", "ranking.pdf", parametros, reportSource);
+	}
+
+	public void exibeRelatorioRodadas(ActionEvent e) {
+		getBo(UsuarioBo.class).carregaFotosJogadores(cicloEmFoco.getJogadoresDoRanking());
+		getBo(RelatorioBo.class).inicializaRodadas(null, null, cicloEmFoco.getRodadas());
+		List<RelatorioRodadasDto> reportSource = new ArrayList<RelatorioRodadasDto>();
+		RelatorioRodadasDto dto = null;
+		for (Rodada rodada : cicloEmFoco.getRodadas()) {
+			for (JogoBarragem jogoBarragem : rodada.getJogosOrdenados()) {
+				dto = new RelatorioRodadasDto();
+				dto.setRodada(rodada.getNumero() + MessageBundleUtils.getInstance().get("label_rodada_posfixo"));
+				dto.setData(jogoBarragem.getData());
+				dto.setHora(jogoBarragem.getHora());
+				dto.setPontuacaoVencedor(((JogadorJogoBarragem) jogoBarragem.getJogadoresEventosOrdenados().get(0))
+						.getPontuacaoObtida());
+				dto.setJogadorVencedorNome(jogoBarragem.getJogadoresEventosOrdenados().get(0).getJogador().getNome());
+				if (jogoBarragem.getJogadoresEventosOrdenados().get(0).getJogador().getUsuarioCorrespondente() != null
+						&& jogoBarragem.getJogadoresEventosOrdenados().get(0).getJogador().getUsuarioCorrespondente()
+								.getPerfil() != null
+						&& jogoBarragem.getJogadoresEventosOrdenados().get(0).getJogador().getUsuarioCorrespondente()
+								.getPerfil().getHash() != null) {
+					dto.setJogadorVencedorHash(jogoBarragem.getJogadoresEventosOrdenados().get(0).getJogador()
+							.getUsuarioCorrespondente().getPerfil().getHash());
+				} else {
+					dto.setJogadorVencedorHash("default");
+				}
+				dto.setPontuacaoPerdedor(((JogadorJogoBarragem) jogoBarragem.getJogadoresEventosOrdenados().get(1))
+						.getPontuacaoObtida());
+				dto.setJogadorPerdedorNome(jogoBarragem.getJogadoresEventosOrdenados().get(1).getJogador().getNome());
+				if (jogoBarragem.getJogadoresEventosOrdenados().get(1).getJogador().getUsuarioCorrespondente() != null
+						&& jogoBarragem.getJogadoresEventosOrdenados().get(1).getJogador().getUsuarioCorrespondente()
+								.getPerfil() != null
+						&& jogoBarragem.getJogadoresEventosOrdenados().get(1).getJogador().getUsuarioCorrespondente()
+								.getPerfil().getHash() != null) {
+					dto.setJogadorPerdedorHash(jogoBarragem.getJogadoresEventosOrdenados().get(1).getJogador()
+							.getUsuarioCorrespondente().getPerfil().getHash());
+				} else {
+					dto.setJogadorPerdedorHash("default");
+				}
+				if (jogoBarragem.getPlacar() != null && jogoBarragem.getPlacar().getWo()) {
+					dto.setPlacar("WO");
+				} else {
+					dto.setPlacar(jogoBarragem.getPlacar() != null && jogoBarragem.getPlacar().getParciais() != null
+							&& jogoBarragem.getPlacar().getParciais().size() > 0 ? jogoBarragem.getPlacar().toString()
+							: "_/_ _/_ _/_");
+				}
+				reportSource.add(dto);
+			}
+		}
+
+		Map<String, Object> parametros = new HashMap<String, Object>();
+
+		parametros.put("CICLO", cicloEmFoco.getNome());
+		parametros.put("LOCAL", cicloEmFoco.getBarragem().getLocal());
+		parametros.put("CATEGORIA", MessageBundleUtils.getInstance().get(
+				cicloEmFoco.getBarragem().getCategoria().getNome()));
+		parametros.put("REPORT_LOCALE", new Locale("pt", "BR"));
+		parametros.put("REPORT_TIME_ZONE", TimeZone.getTimeZone("GMT-3"));
+
+		flushReport("/jasper/rodadas.jasper", "rodadas.pdf", parametros, reportSource);
 	}
 }

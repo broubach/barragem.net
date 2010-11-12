@@ -54,6 +54,18 @@
 							    <ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
 							</a4j:commandLink>&#160;
 			            </li>
+			            <li>
+							<h:commandLink actionListener="#{gerirCicloBean.exibeRelatorioRanking}">
+								#{msg.label_imprimir_ranking}
+							    <ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
+							</h:commandLink>&#160;
+			            </li>
+			            <li>
+							<h:commandLink actionListener="#{gerirCicloBean.exibeRelatorioRodadas}">
+								#{msg.label_imprimir_rodadas}
+							    <ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
+							</h:commandLink>&#160;
+			            </li>
 			        </ul>
 			    </div>
 		        <c:if test="#{! empty messageBean.errorMessages}">

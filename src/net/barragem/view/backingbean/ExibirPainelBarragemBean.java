@@ -2,28 +2,15 @@ package net.barragem.view.backingbean;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.TimeZone;
 
 import javax.faces.event.ActionEvent;
 
-import net.barragem.business.bo.UsuarioBo;
+import net.barragem.business.bo.RelatorioBo;
 import net.barragem.persistence.entity.Ciclo;
 import net.barragem.persistence.entity.CicloJogador;
-import net.barragem.persistence.entity.JogadorEvento;
-import net.barragem.persistence.entity.JogadorJogoBarragem;
-import net.barragem.persistence.entity.Jogo;
-import net.barragem.persistence.entity.JogoBarragem;
 import net.barragem.persistence.entity.Rodada;
-import net.barragem.scaffold.MessageBundleUtils;
 import net.barragem.scaffold.PersistenceHelper;
-import net.barragem.view.backingbean.componentes.EventoMaisRecenteComparator;
-import net.barragem.view.backingbean.componentes.JogadorEventoComparatorVencedorPrimeiro;
-import net.barragem.view.backingbean.componentes.RelatorioRankingDto;
-import net.barragem.view.backingbean.componentes.RelatorioRodadasDto;
 
 import org.ajax4jsf.model.KeepAlive;
 
@@ -47,36 +34,10 @@ public class ExibirPainelBarragemBean extends BaseBean {
 		PersistenceHelper.initialize("rodadas", cicloEmFoco);
 		rodadas = new ArrayList<Rodada>(cicloEmFoco.getRodadas());
 		Collections.reverse(rodadas);
-		inicializaRodadas();
+		getBo(RelatorioBo.class).inicializaRodadas(startIndex, endIndex, getRodadas());
 
 		PersistenceHelper.initialize("ranking", cicloEmFoco);
 		ranking = cicloEmFoco.getRanking();
-	}
-
-	private void inicializaRodadas() {
-		inicializaRodadas(startIndex, endIndex);
-	}
-
-	private void inicializaRodadas(Integer startIndex, Integer endIndex) {
-		if (startIndex == null || endIndex == null) {
-			startIndex = 0;
-			endIndex = rodadas.size() - 1;
-		}
-		for (int i = startIndex; i <= endIndex; i++) {
-			if (i < rodadas.size()) {
-				PersistenceHelper.initialize("bonuses", rodadas.get(i));
-				PersistenceHelper.initialize("jogos", rodadas.get(i));
-				for (Jogo jogoBarragem : rodadas.get(i).getJogos()) {
-					PersistenceHelper.initialize("parciais", jogoBarragem.getPlacar());
-					jogoBarragem.setJogadoresEventosOrdenados(new ArrayList<JogadorEvento>(jogoBarragem
-					        .getJogadoresEventos()));
-					Collections.sort(jogoBarragem.getJogadoresEventosOrdenados(),
-					        new JogadorEventoComparatorVencedorPrimeiro());
-				}
-				rodadas.get(i).setJogosOrdenados(new ArrayList<JogoBarragem>(rodadas.get(i).getJogos()));
-				Collections.sort(rodadas.get(i).getJogosOrdenados(), new EventoMaisRecenteComparator());
-			}
-		}
 	}
 
 	public Ciclo getCicloEmFoco() {
@@ -154,102 +115,9 @@ public class ExibirPainelBarragemBean extends BaseBean {
 			startIndex = 0;
 			endIndex = 1;
 		}
-		inicializaRodadas();
+		getBo(RelatorioBo.class).inicializaRodadas(startIndex, endIndex, getRodadas());
 		refreshView();
 
 		return null;
-	}
-
-	public void exibeRelatorioRanking(ActionEvent e) {
-		List<RelatorioRankingDto> reportSource = new ArrayList<RelatorioRankingDto>();
-		RelatorioRankingDto dto = null;
-		for (CicloJogador cicloJogador : ranking) {
-			if (!cicloJogador.getHabilitado()) {
-				continue;
-			}
-			dto = new RelatorioRankingDto();
-			dto.setJogadorNome(cicloJogador.getJogador().getNome());
-			dto.setPontuacao(cicloJogador.getPontuacao());
-			dto.setRanking(cicloJogador.getRanking());
-			if (cicloJogador.getJogador().getUsuarioCorrespondente() != null
-			        && cicloJogador.getJogador().getUsuarioCorrespondente().getPerfil() != null
-			        && cicloJogador.getJogador().getUsuarioCorrespondente().getPerfil().getHash() != null) {
-				dto.setJogadorHash(cicloJogador.getJogador().getUsuarioCorrespondente().getPerfil().getHash());
-			} else {
-				dto.setJogadorHash("default");
-			}
-			reportSource.add(dto);
-		}
-
-		Map<String, Object> parametros = new HashMap<String, Object>();
-
-		parametros.put("CICLO", cicloEmFoco.getNome());
-		parametros.put("LOCAL", cicloEmFoco.getBarragem().getLocal());
-		parametros.put("CATEGORIA",
-		        MessageBundleUtils.getInstance().get(cicloEmFoco.getBarragem().getCategoria().getNome()));
-		parametros.put("REPORT_LOCALE", new Locale("pt", "BR"));
-		parametros.put("REPORT_TIME_ZONE", TimeZone.getTimeZone("GMT-3"));
-
-		flushReport("/jasper/ranking.jasper", "ranking.pdf", parametros, reportSource);
-	}
-
-	public void exibeRelatorioRodadas(ActionEvent e) {
-		getBo(UsuarioBo.class).carregaFotosJogadores(cicloEmFoco.getJogadoresDoRanking());
-		inicializaRodadas(null, null);
-		List<RelatorioRodadasDto> reportSource = new ArrayList<RelatorioRodadasDto>();
-		RelatorioRodadasDto dto = null;
-		for (Rodada rodada : rodadas) {
-			for (JogoBarragem jogoBarragem : rodada.getJogosOrdenados()) {
-				dto = new RelatorioRodadasDto();
-				dto.setRodada(rodada.getNumero() + MessageBundleUtils.getInstance().get("label_rodada_posfixo"));
-				dto.setData(jogoBarragem.getData());
-				dto.setHora(jogoBarragem.getHora());
-				dto.setPontuacaoVencedor(((JogadorJogoBarragem) jogoBarragem.getJogadoresEventosOrdenados().get(0))
-				        .getPontuacaoObtida());
-				dto.setJogadorVencedorNome(jogoBarragem.getJogadoresEventosOrdenados().get(0).getJogador().getNome());
-				if (jogoBarragem.getJogadoresEventosOrdenados().get(0).getJogador().getUsuarioCorrespondente() != null
-				        && jogoBarragem.getJogadoresEventosOrdenados().get(0).getJogador().getUsuarioCorrespondente()
-				                .getPerfil() != null
-				        && jogoBarragem.getJogadoresEventosOrdenados().get(0).getJogador().getUsuarioCorrespondente()
-				                .getPerfil().getHash() != null) {
-					dto.setJogadorVencedorHash(jogoBarragem.getJogadoresEventosOrdenados().get(0).getJogador()
-					        .getUsuarioCorrespondente().getPerfil().getHash());
-				} else {
-					dto.setJogadorVencedorHash("default");
-				}
-				dto.setPontuacaoPerdedor(((JogadorJogoBarragem) jogoBarragem.getJogadoresEventosOrdenados().get(1))
-				        .getPontuacaoObtida());
-				dto.setJogadorPerdedorNome(jogoBarragem.getJogadoresEventosOrdenados().get(1).getJogador().getNome());
-				if (jogoBarragem.getJogadoresEventosOrdenados().get(1).getJogador().getUsuarioCorrespondente() != null
-				        && jogoBarragem.getJogadoresEventosOrdenados().get(1).getJogador().getUsuarioCorrespondente()
-				                .getPerfil() != null
-				        && jogoBarragem.getJogadoresEventosOrdenados().get(1).getJogador().getUsuarioCorrespondente()
-				                .getPerfil().getHash() != null) {
-					dto.setJogadorPerdedorHash(jogoBarragem.getJogadoresEventosOrdenados().get(1).getJogador()
-					        .getUsuarioCorrespondente().getPerfil().getHash());
-				} else {
-					dto.setJogadorPerdedorHash("default");
-				}
-				if (jogoBarragem.getPlacar() != null && jogoBarragem.getPlacar().getWo()) {
-					dto.setPlacar("WO");
-				} else {
-					dto.setPlacar(jogoBarragem.getPlacar() != null && jogoBarragem.getPlacar().getParciais() != null
-					        && jogoBarragem.getPlacar().getParciais().size() > 0 ? jogoBarragem.getPlacar().toString()
-					        : "_/_ _/_ _/_");
-				}
-				reportSource.add(dto);
-			}
-		}
-
-		Map<String, Object> parametros = new HashMap<String, Object>();
-
-		parametros.put("CICLO", cicloEmFoco.getNome());
-		parametros.put("LOCAL", cicloEmFoco.getBarragem().getLocal());
-		parametros.put("CATEGORIA",
-		        MessageBundleUtils.getInstance().get(cicloEmFoco.getBarragem().getCategoria().getNome()));
-		parametros.put("REPORT_LOCALE", new Locale("pt", "BR"));
-		parametros.put("REPORT_TIME_ZONE", TimeZone.getTimeZone("GMT-3"));
-
-		flushReport("/jasper/rodadas.jasper", "rodadas.pdf", parametros, reportSource);
 	}
 }
