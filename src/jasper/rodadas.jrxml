@@ -7,8 +7,7 @@
 	<parameter name="LOCAL" class="java.lang.String"/>
 	<parameter name="CICLO" class="java.lang.String"/>
 	<field name="rodada" class="java.lang.String"/>
-	<field name="data" class="java.util.Date"/>
-	<field name="hora" class="java.util.Date"/>
+	<field name="dataHora" class="java.util.Date"/>
 	<field name="pontuacaoVencedor" class="java.lang.Integer"/>
 	<field name="jogadorVencedorNome" class="java.lang.String"/>
 	<field name="jogadorVencedorHash" class="java.lang.String"/>
@@ -79,7 +78,7 @@
 				<textElement>
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[new java.text.SimpleDateFormat($R{format_day_month_year}).format($F{data}) + " " + new java.text.SimpleDateFormat("HH:mm").format($F{hora})]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[new java.text.SimpleDateFormat(timeZone: java.util.TimeZone.getTimeZone("GMT-3")).format($F{dataHora})]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="175" y="0" width="153" height="20" forecolor="#444444"/>

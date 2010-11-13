@@ -1,6 +1,7 @@
 package net.barragem.view.backingbean;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -322,12 +323,24 @@ public class GerirCicloBean extends BaseBean {
 		getBo(RelatorioBo.class).inicializaRodadas(null, null, cicloEmFoco.getRodadas());
 		List<RelatorioRodadasDto> reportSource = new ArrayList<RelatorioRodadasDto>();
 		RelatorioRodadasDto dto = null;
+		Calendar dataHora = null;
+		Calendar hora = null;
 		for (Rodada rodada : cicloEmFoco.getRodadas()) {
 			for (JogoBarragem jogoBarragem : rodada.getJogosOrdenados()) {
 				dto = new RelatorioRodadasDto();
 				dto.setRodada(rodada.getNumero() + MessageBundleUtils.getInstance().get("label_rodada_posfixo"));
-				dto.setData(jogoBarragem.getData());
-				dto.setHora(jogoBarragem.getHora());
+				if (jogoBarragem.getData() != null) {
+					dataHora = Calendar.getInstance(TimeZone.getTimeZone("GMT-3"));
+					dataHora.setTime(jogoBarragem.getData());
+					if (jogoBarragem.getHora() != null) {
+						hora = Calendar.getInstance(TimeZone.getTimeZone("GMT-3"));
+						hora.setTime(jogoBarragem.getHora());
+						dataHora.set(Calendar.HOUR_OF_DAY, hora.get(Calendar.HOUR_OF_DAY));
+						dataHora.set(Calendar.MINUTE, hora.get(Calendar.MINUTE));
+						dataHora.set(Calendar.SECOND, hora.get(Calendar.SECOND));
+					}
+					dto.setDataHora(dataHora.getTime());
+				}
 				dto.setPontuacaoVencedor(((JogadorJogoBarragem) jogoBarragem.getJogadoresEventosOrdenados().get(0))
 						.getPontuacaoObtida());
 				dto.setJogadorVencedorNome(jogoBarragem.getJogadoresEventosOrdenados().get(0).getJogador().getNome());

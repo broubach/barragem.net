@@ -155,5 +155,12 @@
 
 		<!-- Recompila os jrxml alterados -->
 		<jrc srcdir="${basedir}/temp/WEB-INF/classes/jasper" />
+
+		<!-- Exclui fontes -->
+		<delete>
+			<fileset dir="${basedir}/temp/WEB-INF/classes/jasper">
+				<include name="*.jrxml"/>
+			</fileset>
+		</delete>
 	</target>
 </project>

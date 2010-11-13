@@ -4,8 +4,7 @@ import java.util.Date;
 
 public class RelatorioRodadasDto {
 	private String rodada;
-	private Date data;
-	private Date hora;
+	private Date dataHora;
 	private Integer pontuacaoVencedor;
 	private String jogadorVencedorNome;
 	private String jogadorVencedorHash;
@@ -18,12 +17,11 @@ public class RelatorioRodadasDto {
 
 	}
 
-	public RelatorioRodadasDto(String rodada, Date data, Date hora, Integer pontuacaoVencedor,
-			String jogadorVencedorNome, String jogadorVencedorHash, Integer pontuacaoPerdedor,
-			String jogadorPerdedorNome, String jogadorPerdedorHash, String placar) {
+	public RelatorioRodadasDto(String rodada, Date dataHora, Integer pontuacaoVencedor, String jogadorVencedorNome,
+	        String jogadorVencedorHash, Integer pontuacaoPerdedor, String jogadorPerdedorNome,
+	        String jogadorPerdedorHash, String placar) {
 		this.rodada = rodada;
-		this.data = data;
-		this.hora = hora;
+		this.dataHora = dataHora;
 		this.pontuacaoVencedor = pontuacaoVencedor;
 		this.jogadorVencedorNome = jogadorVencedorNome;
 		this.jogadorVencedorHash = jogadorVencedorHash;
@@ -41,20 +39,12 @@ public class RelatorioRodadasDto {
 		this.rodada = rodada;
 	}
 
-	public Date getData() {
-		return data;
+	public Date getDataHora() {
+		return dataHora;
 	}
 
-	public void setData(Date data) {
-		this.data = data;
-	}
-
-	public Date getHora() {
-		return hora;
-	}
-
-	public void setHora(Date hora) {
-		this.hora = hora;
+	public void setDataHora(Date data) {
+		this.dataHora = data;
 	}
 
 	public String getJogadorVencedorNome() {
