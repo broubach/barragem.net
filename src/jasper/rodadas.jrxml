@@ -73,12 +73,12 @@
 			<line>
 				<reportElement positionType="FixRelativeToBottom" x="0" y="54" width="555" height="1"/>
 			</line>
-			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyy HH:mm" isBlankWhenNull="true">
 				<reportElement x="0" y="0" width="90" height="20" forecolor="#444444"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[new java.text.SimpleDateFormat(timeZone: java.util.TimeZone.getTimeZone("GMT-3")).format($F{dataHora})]]></textFieldExpression>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{dataHora}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="175" y="0" width="153" height="20" forecolor="#444444"/>
