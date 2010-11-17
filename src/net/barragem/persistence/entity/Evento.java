@@ -120,6 +120,7 @@ public abstract class Evento extends BaseEntity implements Cloneable {
 		((Evento) newObject).setId(getId());
 		((Evento) newObject).setData(data);
 		((Evento) newObject).setHora(hora);
+		((Evento) newObject).setUsuarioResponsavel(usuarioResponsavel);
 
 		List<JogadorEvento> clonedJogadoresEventos = new ArrayList<JogadorEvento>();
 		JogadorEvento clonedJogadorEvento = null;
@@ -149,7 +150,7 @@ public abstract class Evento extends BaseEntity implements Cloneable {
 		}
 		for (JogadorEvento jogadorEvento : jogadoresEventos) {
 			if (jogadorEvento.getJogador().getUsuarioCorrespondente() != null
-					&& usuarioLogado.getId().equals(jogadorEvento.getJogador().getUsuarioCorrespondente().getId())) {
+			        && usuarioLogado.getId().equals(jogadorEvento.getJogador().getUsuarioCorrespondente().getId())) {
 				return jogadorEvento;
 			}
 		}
@@ -167,13 +168,13 @@ public abstract class Evento extends BaseEntity implements Cloneable {
 		Usuario usuario = null;
 		for (JogadorEvento jogadorEvento : getJogadoresEventos()) {
 			if (!jogadorEvento.getJogador().equals(getUsuarioLogado().getJogador())
-					&& jogadorEvento.getJogador().getUsuarioCorrespondente() != null) {
+			        && jogadorEvento.getJogador().getUsuarioCorrespondente() != null) {
 				usuario = jogadorEvento.getJogador().getUsuarioCorrespondente();
 				if (usuario.getPerfil() != null && usuario.getPerfil().getLadoForehand() != null
-						&& usuario.getPerfil().getLadoForehand().equals(LadoForehandEnum.Esquerdo)) {
+				        && usuario.getPerfil().getLadoForehand().equals(LadoForehandEnum.Esquerdo)) {
 					return MessageBundleUtils.getInstance().get("label_sim");
 				} else if (usuario.getPerfil() != null && usuario.getPerfil().getLadoForehand() != null
-						&& usuario.getPerfil().getLadoForehand().equals(LadoForehandEnum.Direito)) {
+				        && usuario.getPerfil().getLadoForehand().equals(LadoForehandEnum.Direito)) {
 					return MessageBundleUtils.getInstance().get("label_nao");
 				}
 			}
@@ -188,13 +189,13 @@ public abstract class Evento extends BaseEntity implements Cloneable {
 		Usuario usuario = null;
 		for (JogadorEvento jogadorEvento : getJogadoresEventos()) {
 			if (!jogadorEvento.getJogador().equals(getUsuarioLogado().getJogador())
-					&& jogadorEvento.getJogador().getUsuarioCorrespondente() != null) {
+			        && jogadorEvento.getJogador().getUsuarioCorrespondente() != null) {
 				usuario = jogadorEvento.getJogador().getUsuarioCorrespondente();
 				if (usuario.getPerfil() != null && usuario.getPerfil().getLadoForehand() != null
-						&& usuario.getPerfil().getLadoForehand().equals(LadoForehandEnum.Esquerdo)) {
+				        && usuario.getPerfil().getLadoForehand().equals(LadoForehandEnum.Esquerdo)) {
 					return CANHOTO_SIM;
 				} else if (usuario.getPerfil() != null && usuario.getPerfil().getLadoForehand() != null
-						&& usuario.getPerfil().getLadoForehand().equals(LadoForehandEnum.Direito)) {
+				        && usuario.getPerfil().getLadoForehand().equals(LadoForehandEnum.Direito)) {
 					return CANHOTO_NAO;
 				}
 			}
