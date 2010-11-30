@@ -235,11 +235,18 @@ public abstract class BaseBean {
 	}
 
 	protected int getId() {
-		String id = getRequest().getParameter("id");
+		Object id = getRequest().getParameter("id");
 		if (id == null || "".equals(id)) {
-			id = (String) getRequestAttribute("id");
+			id = getRequestAttribute("id");
+			if (id == null || "".equals(id)) {
+				throw new IllegalStateException();
+			}
+			if (id instanceof String) {
+				return Integer.parseInt((String) id);
+			}
+			return (Integer) id;
 		}
-		return Integer.parseInt(id);
+		return Integer.parseInt((String) id);
 	}
 
 	protected Object getById(Collection<? extends Object> collection, int id) {
