@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.barragem.persistence.entity.Atualizacao;
+import net.barragem.persistence.entity.CicloJogador;
 import net.barragem.persistence.entity.Jogador;
 import net.barragem.persistence.entity.Usuario;
 import net.barragem.scaffold.PersistenceHelper;
@@ -22,12 +23,12 @@ public class JogadorBo extends BaseBo {
 
 		jogadorDesvinculado.setNome(jogador.getNome());
 		jogadorDesvinculado.setUsuarioCorrespondente(jogador.getUsuarioCorrespondente());
-		PersistenceHelper.persiste(Atualizacao.criaAdicionarUsuario(getUsuarioLogado(), jogadorDesvinculado
-				.getUsuarioCorrespondente()));
+		PersistenceHelper.persiste(Atualizacao.criaAdicionarUsuario(getUsuarioLogado(),
+		        jogadorDesvinculado.getUsuarioCorrespondente()));
 		sendMail("no-reply@barragem.net", getUsuarioLogado().getNomeCompletoCapital(), jogadorDesvinculado
-				.getUsuarioCorrespondente().getEmail(),
-				"barragem.net - você foi adicionado(a) à lista de jogadores do(a) " + getUsuarioLogado().getNome(),
-				MessageFormat.format(emailTemplateAdicaoJogador, getUsuarioLogado().getNomeCompletoCapital()));
+		        .getUsuarioCorrespondente().getEmail(),
+		        "barragem.net - você foi adicionado(a) à lista de jogadores do(a) " + getUsuarioLogado().getNome(),
+		        MessageFormat.format(emailTemplateAdicaoJogador, getUsuarioLogado().getNomeCompletoCapital()));
 
 		PersistenceHelper.persiste(jogadorDesvinculado);
 	}
@@ -65,10 +66,28 @@ public class JogadorBo extends BaseBo {
 			PersistenceHelper.persiste(Atualizacao.criaAdicionarUsuario(getUsuarioLogado(), usuarioAAdicionar));
 
 			sendMail("no-reply@barragem.net", getUsuarioLogado().getNomeCompletoCapital(),
-					usuarioAAdicionar.getEmail(), "barragem.net - você foi adicionado(a) à lista de jogadores do(a) "
-							+ getUsuarioLogado().getNome(), MessageFormat.format(emailTemplateAdicaoJogador,
-							getUsuarioLogado().getNomeCompletoCapital()));
+			        usuarioAAdicionar.getEmail(), "barragem.net - você foi adicionado(a) à lista de jogadores do(a) "
+			                + getUsuarioLogado().getNome(),
+			        MessageFormat.format(emailTemplateAdicaoJogador, getUsuarioLogado().getNomeCompletoCapital()));
 		}
 		return novoJogador;
+	}
+
+	public void congelaJogador(CicloJogador cicloJogador) {
+		// TODO: congelamento só pode ocorrer se jogador não possuir nenhum jogo
+		// em aberto
+		cicloJogador.setPontuacaoCongelada(cicloJogador.getPontuacao());
+		cicloJogador.setPontuacao(0);
+		cicloJogador.setCongelado(Boolean.FALSE);
+		cicloJogador.getCiclo().recalculaRanking();
+		PersistenceHelper.persiste(cicloJogador.getCiclo());
+	}
+
+	public void descongelaJogador(CicloJogador cicloJogador) {
+		cicloJogador.setPontuacao(cicloJogador.getPontuacaoCongelada());
+		cicloJogador.setPontuacaoCongelada(0);
+		cicloJogador.setCongelado(Boolean.TRUE);
+		cicloJogador.getCiclo().recalculaRanking();
+		PersistenceHelper.persiste(cicloJogador.getCiclo());
 	}
 }

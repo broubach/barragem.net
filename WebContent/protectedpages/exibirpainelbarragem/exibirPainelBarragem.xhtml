@@ -60,8 +60,8 @@
 							<h:outputText value="#{item.pontuacao}" rendered="#{item.jogador.usuarioCorrespondente == null}"/>
 						</td>
 						<td>
-							<h:commandLink action="exibirPerfil" actionListener="#{exibirPerfilBean.exibePerfil}" rendered="#{item.jogador.usuarioCorrespondente != null}">#{item.jogador.nome} #{!item.habilitado ? msg.label_desabilitado : ''}<f:param name="id" value="#{item.jogador.usuarioCorrespondente.id}"/></h:commandLink>
-							<h:outputText rendered="#{item.jogador.usuarioCorrespondente == null}">#{item.jogador.nome} #{!item.habilitado ? msg.label_desabilitado : ''}</h:outputText>
+							<h:commandLink action="exibirPerfil" actionListener="#{exibirPerfilBean.exibePerfil}" rendered="#{item.jogador.usuarioCorrespondente != null}">#{item.jogador.nome} #{item.congelado ? msg.label_congelado : ''}<f:param name="id" value="#{item.jogador.usuarioCorrespondente.id}"/></h:commandLink>
+							<h:outputText rendered="#{item.jogador.usuarioCorrespondente == null}">#{item.jogador.nome} #{item.congelado ? msg.label_congelado : ''}</h:outputText>
 						</td>
 					</tr>
 				</c:forEach>

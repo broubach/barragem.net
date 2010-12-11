@@ -34,13 +34,15 @@ public class RodadaJogosBarragemMestreDetalhe extends MestreDetalheImpl<Rodada, 
 
 		ordena();
 		getDetalheEmFoco().getPlacar().completaSetsSeNecessario(
-				getMestre().getCiclo().getParametros().getModalidadeDeSets().getNumeroDeSets());
+		        getMestre().getCiclo().getParametros().getModalidadeDeSets().getNumeroDeSets());
 	}
 
 	private void ordena() {
 		for (Jogo jogo : getDetalhes()) {
 			Collections.sort(jogo.getJogadoresEventos(), new JogadorEventoComparatorVencedorPrimeiro());
 		}
+		// TODO: adicionar ordenacao para deixar jogador com ranking inferior a
+		// direita nos jogos
 		Collections.sort(getDetalhes(), new JogoBarragemComparator());
 	}
 

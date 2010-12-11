@@ -84,8 +84,8 @@ public class GerirRodadaBean extends BaseBean {
 		rodadaEmFoco.getCiclo().adicionaRodada();
 		PersistenceHelper.persiste(rodadaEmFoco.getCiclo());
 
-		setRequestAttribute("index", String.valueOf(rodadaEmFoco.getCiclo().getBarragem().getIndiceNaLista(
-				rodadaEmFoco.getCiclo())));
+		setRequestAttribute("index",
+		        String.valueOf(rodadaEmFoco.getCiclo().getBarragem().getIndiceNaLista(rodadaEmFoco.getCiclo())));
 		GerirCicloBean gerirCicloBean = (GerirCicloBean) getRequestAttribute("gerirCicloBean");
 		gerirCicloBean.editaCiclo(null);
 
@@ -94,13 +94,15 @@ public class GerirRodadaBean extends BaseBean {
 
 	public void carregaRodada(Ciclo ciclo, int index) {
 		rodadaEmFoco = (Rodada) PersistenceHelper.findByPk(Rodada.class, ciclo.getRodadas().get(index).getId(),
-				"jogos", "bonuses");
+		        "jogos", "bonuses");
 		PersistenceHelper.initialize("ranking", rodadaEmFoco.getCiclo());
 		List<Placar> proxys = new ArrayList<Placar>();
 		for (Jogo jogo : rodadaEmFoco.getJogos()) {
 			proxys.add(jogo.getPlacar());
 			Collections.sort(jogo.getJogadoresEventos(), new JogadorEventoComparatorVencedorPrimeiro());
 		}
+		// TODO: adicionar ordenacao para deixar jogador com ranking inferior a
+		// direita nos jogos
 		Collections.sort(rodadaEmFoco.getJogos(), new JogoBarragemComparator());
 		PersistenceHelper.initialize("parciais", proxys.toArray());
 	}

@@ -34,13 +34,11 @@ public class GerirCicloBean extends BaseBean {
 
 	private Barragem barragemEmFoco;
 	private Ciclo cicloEmFoco;
-	private CicloJogador cicloJogadorEmFoco;
 	private List<CicloJogador> cicloJogadoresRemovidos;
 	private List<JogadorSelecionavelDto> jogadoresSelecionaveis;
 	private String novoNome;
 	private String filtroJogador;
 	private String jogadorNome;
-	private boolean habilitado;
 
 	public String getNovoNome() {
 		return novoNome;
@@ -66,14 +64,6 @@ public class GerirCicloBean extends BaseBean {
 		this.cicloEmFoco = ciclo;
 	}
 
-	public CicloJogador getCicloJogadorEmFoco() {
-		return cicloJogadorEmFoco;
-	}
-
-	public void setCicloJogadorEmFoco(CicloJogador cicloJogadorEmFoco) {
-		this.cicloJogadorEmFoco = cicloJogadorEmFoco;
-	}
-
 	public List<JogadorSelecionavelDto> getJogadoresSelecionaveis() {
 		return jogadoresSelecionaveis;
 	}
@@ -96,14 +86,6 @@ public class GerirCicloBean extends BaseBean {
 
 	public void setJogadorNome(String jogadorNome) {
 		this.jogadorNome = jogadorNome;
-	}
-
-	public boolean isHabilitado() {
-		return habilitado;
-	}
-
-	public void setHabilitado(boolean habilitado) {
-		this.habilitado = habilitado;
 	}
 
 	public void editaCiclo(ActionEvent e) {
@@ -141,7 +123,7 @@ public class GerirCicloBean extends BaseBean {
 			CicloJogador cicloJogador = new CicloJogador();
 			if (!cicloEmFoco.getRanking().isEmpty()) {
 				cicloJogador
-						.setRanking(cicloEmFoco.getRanking().get(cicloEmFoco.getRanking().size() - 1).getRanking() + 1);
+				        .setRanking(cicloEmFoco.getRanking().get(cicloEmFoco.getRanking().size() - 1).getRanking() + 1);
 			} else {
 				cicloJogador.setRanking(1);
 			}
@@ -166,7 +148,7 @@ public class GerirCicloBean extends BaseBean {
 	public void pesquisaJogador(ActionEvent e) {
 		jogadoresSelecionaveis = new ArrayList<JogadorSelecionavelDto>();
 		List<Jogador> todosJogadores = PersistenceHelper.findByNamedQuery("jogadoresPorUsuarioDonoQuery",
-				filtroJogador != null ? filtroJogador + "%" : "%", getUsuarioLogado().getId());
+		        filtroJogador != null ? filtroJogador + "%" : "%", getUsuarioLogado().getId());
 		JogadorSelecionavelDto jogadorSelecionavel = null;
 		for (Jogador jogador : todosJogadores) {
 			if (!cicloEmFoco.getJogadoresDoRanking().contains(jogador)) {
@@ -229,7 +211,7 @@ public class GerirCicloBean extends BaseBean {
 
 	public void criaNovoCiclo(ActionEvent e) {
 		Integer proximoNome = barragemEmFoco.getCiclos().get(barragemEmFoco.getCiclos().size() - 1)
-				.getNomeAlternativoBaseadoEmAno() + 1;
+		        .getNomeAlternativoBaseadoEmAno() + 1;
 		PersistenceHelper.persiste(barragemEmFoco.criaCicloERodada(proximoNome));
 
 		GerirCicloBean cicloBean = new GerirCicloBean();
@@ -239,15 +221,12 @@ public class GerirCicloBean extends BaseBean {
 		addMensagemAtualizacaoComSucesso();
 	}
 
-	public void preparaCicloJogador(ActionEvent e) {
-		cicloJogadorEmFoco = cicloEmFoco.getRanking().get(getIndex());
-		habilitado = cicloJogadorEmFoco.getHabilitado();
+	public void congelaJogador(ActionEvent e) {
+		getBo(JogadorBo.class).congelaJogador(cicloEmFoco.getRanking().get(getIndex()));
 	}
 
-	public void salvaCicloJogador(ActionEvent e) {
-		cicloJogadorEmFoco.setHabilitado(habilitado);
-		PersistenceHelper.persiste(cicloJogadorEmFoco);
-		addMensagemAtualizacaoComSucesso();
+	public void descongelaJogador(ActionEvent e) {
+		getBo(JogadorBo.class).descongelaJogador(cicloEmFoco.getRanking().get(getIndex()));
 	}
 
 	public List<String> autocomplete(Object suggest) {
@@ -256,8 +235,7 @@ public class GerirCicloBean extends BaseBean {
 
 		for (Jogador jogador : getUsuarioLogado().getJogadores()) {
 			if ((jogador.getNome() != null && jogador.getNome().toLowerCase().indexOf(pref.toLowerCase()) == 0 && !cicloEmFoco
-					.getJogadoresDoRanking().contains(jogador))
-					|| "".equals(pref)) {
+			        .getJogadoresDoRanking().contains(jogador)) || "".equals(pref)) {
 				result.add(jogador.getNome());
 			}
 		}
@@ -284,12 +262,32 @@ public class GerirCicloBean extends BaseBean {
 		}
 		return messages.getErrorMessages().isEmpty();
 	}
+	
+	public List<CicloJogador> getRanking() {
+		List<CicloJogador> result = new ArrayList<CicloJogador>();
+		for (CicloJogador cicloJogador : cicloEmFoco.getRanking()) {
+			if (!cicloJogador.isCongelado()) {
+				result.add(cicloJogador);
+			}
+		}
+		return result;
+	}
+
+	public List<CicloJogador> getJogadoresCongelados() {
+		List<CicloJogador> result = new ArrayList<CicloJogador>();
+		for (CicloJogador cicloJogador : cicloEmFoco.getRanking()) {
+			if (cicloJogador.isCongelado()) {
+				result.add(cicloJogador);
+			}
+		}
+		return result;
+	}
 
 	public void exibeRelatorioRanking(ActionEvent e) {
 		List<RelatorioRankingDto> reportSource = new ArrayList<RelatorioRankingDto>();
 		RelatorioRankingDto dto = null;
 		for (CicloJogador cicloJogador : cicloEmFoco.getRanking()) {
-			if (!cicloJogador.getHabilitado()) {
+			if (cicloJogador.isCongelado()) {
 				continue;
 			}
 			dto = new RelatorioRankingDto();
@@ -297,8 +295,8 @@ public class GerirCicloBean extends BaseBean {
 			dto.setPontuacao(cicloJogador.getPontuacao());
 			dto.setRanking(cicloJogador.getRanking());
 			if (cicloJogador.getJogador().getUsuarioCorrespondente() != null
-					&& cicloJogador.getJogador().getUsuarioCorrespondente().getPerfil() != null
-					&& cicloJogador.getJogador().getUsuarioCorrespondente().getPerfil().getHash() != null) {
+			        && cicloJogador.getJogador().getUsuarioCorrespondente().getPerfil() != null
+			        && cicloJogador.getJogador().getUsuarioCorrespondente().getPerfil().getHash() != null) {
 				dto.setJogadorHash(cicloJogador.getJogador().getUsuarioCorrespondente().getPerfil().getHash());
 			} else {
 				dto.setJogadorHash("default");
@@ -310,8 +308,8 @@ public class GerirCicloBean extends BaseBean {
 
 		parametros.put("CICLO", cicloEmFoco.getNome());
 		parametros.put("LOCAL", cicloEmFoco.getBarragem().getLocal());
-		parametros.put("CATEGORIA", MessageBundleUtils.getInstance().get(
-				cicloEmFoco.getBarragem().getCategoria().getNome()));
+		parametros.put("CATEGORIA",
+		        MessageBundleUtils.getInstance().get(cicloEmFoco.getBarragem().getCategoria().getNome()));
 		parametros.put("REPORT_LOCALE", new Locale("pt", "BR"));
 		parametros.put("REPORT_TIME_ZONE", TimeZone.getTimeZone("GMT-3"));
 
@@ -342,28 +340,28 @@ public class GerirCicloBean extends BaseBean {
 					dto.setDataHora(dataHora.getTime());
 				}
 				dto.setPontuacaoVencedor(((JogadorJogoBarragem) jogoBarragem.getJogadoresEventosOrdenados().get(0))
-						.getPontuacaoObtida());
+				        .getPontuacaoObtida());
 				dto.setJogadorVencedorNome(jogoBarragem.getJogadoresEventosOrdenados().get(0).getJogador().getNome());
 				if (jogoBarragem.getJogadoresEventosOrdenados().get(0).getJogador().getUsuarioCorrespondente() != null
-						&& jogoBarragem.getJogadoresEventosOrdenados().get(0).getJogador().getUsuarioCorrespondente()
-								.getPerfil() != null
-						&& jogoBarragem.getJogadoresEventosOrdenados().get(0).getJogador().getUsuarioCorrespondente()
-								.getPerfil().getHash() != null) {
+				        && jogoBarragem.getJogadoresEventosOrdenados().get(0).getJogador().getUsuarioCorrespondente()
+				                .getPerfil() != null
+				        && jogoBarragem.getJogadoresEventosOrdenados().get(0).getJogador().getUsuarioCorrespondente()
+				                .getPerfil().getHash() != null) {
 					dto.setJogadorVencedorHash(jogoBarragem.getJogadoresEventosOrdenados().get(0).getJogador()
-							.getUsuarioCorrespondente().getPerfil().getHash());
+					        .getUsuarioCorrespondente().getPerfil().getHash());
 				} else {
 					dto.setJogadorVencedorHash("default");
 				}
 				dto.setPontuacaoPerdedor(((JogadorJogoBarragem) jogoBarragem.getJogadoresEventosOrdenados().get(1))
-						.getPontuacaoObtida());
+				        .getPontuacaoObtida());
 				dto.setJogadorPerdedorNome(jogoBarragem.getJogadoresEventosOrdenados().get(1).getJogador().getNome());
 				if (jogoBarragem.getJogadoresEventosOrdenados().get(1).getJogador().getUsuarioCorrespondente() != null
-						&& jogoBarragem.getJogadoresEventosOrdenados().get(1).getJogador().getUsuarioCorrespondente()
-								.getPerfil() != null
-						&& jogoBarragem.getJogadoresEventosOrdenados().get(1).getJogador().getUsuarioCorrespondente()
-								.getPerfil().getHash() != null) {
+				        && jogoBarragem.getJogadoresEventosOrdenados().get(1).getJogador().getUsuarioCorrespondente()
+				                .getPerfil() != null
+				        && jogoBarragem.getJogadoresEventosOrdenados().get(1).getJogador().getUsuarioCorrespondente()
+				                .getPerfil().getHash() != null) {
 					dto.setJogadorPerdedorHash(jogoBarragem.getJogadoresEventosOrdenados().get(1).getJogador()
-							.getUsuarioCorrespondente().getPerfil().getHash());
+					        .getUsuarioCorrespondente().getPerfil().getHash());
 				} else {
 					dto.setJogadorPerdedorHash("default");
 				}
@@ -371,8 +369,8 @@ public class GerirCicloBean extends BaseBean {
 					dto.setPlacar("WO");
 				} else {
 					dto.setPlacar(jogoBarragem.getPlacar() != null && jogoBarragem.getPlacar().getParciais() != null
-							&& jogoBarragem.getPlacar().getParciais().size() > 0 ? jogoBarragem.getPlacar().toString()
-							: "_/_ _/_ _/_");
+					        && jogoBarragem.getPlacar().getParciais().size() > 0 ? jogoBarragem.getPlacar().toString()
+					        : "_/_ _/_ _/_");
 				}
 				reportSource.add(dto);
 			}
@@ -382,8 +380,8 @@ public class GerirCicloBean extends BaseBean {
 
 		parametros.put("CICLO", cicloEmFoco.getNome());
 		parametros.put("LOCAL", cicloEmFoco.getBarragem().getLocal());
-		parametros.put("CATEGORIA", MessageBundleUtils.getInstance().get(
-				cicloEmFoco.getBarragem().getCategoria().getNome()));
+		parametros.put("CATEGORIA",
+		        MessageBundleUtils.getInstance().get(cicloEmFoco.getBarragem().getCategoria().getNome()));
 		parametros.put("REPORT_LOCALE", new Locale("pt", "BR"));
 		parametros.put("REPORT_TIME_ZONE", TimeZone.getTimeZone("GMT-3"));
 

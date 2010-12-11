@@ -23,9 +23,9 @@ import org.apache.commons.beanutils.BeanComparator;
 
 @Entity
 @Table(name = "ciclo")
-@NamedQueries( {
-		@NamedQuery(name = "ultimoCicloPorBarragemQuery", query = "select c from Barragem b join b.ciclos c where b.id = :idBarragem and c.id = (select max(ciclo.id) from Ciclo ciclo where ciclo.barragem.id = b.id)"),
-		@NamedQuery(name = "ciclosDeBarragemQuery", query = "select c from Barragem b join b.ciclos c where b.id = :idBarragem"), })
+@NamedQueries({
+        @NamedQuery(name = "ultimoCicloPorBarragemQuery", query = "select c from Barragem b join b.ciclos c where b.id = :idBarragem and c.id = (select max(ciclo.id) from Ciclo ciclo where ciclo.barragem.id = b.id)"),
+        @NamedQuery(name = "ciclosDeBarragemQuery", query = "select c from Barragem b join b.ciclos c where b.id = :idBarragem"), })
 public class Ciclo extends BaseEntity {
 
 	@ManyToOne
@@ -104,7 +104,7 @@ public class Ciclo extends BaseEntity {
 	public int sorteiaBaseadoNoRaio(int limiteRaio) {
 		double sorteio = Math.random();
 		int raio = getParametros().getRaioParaSorteioDeJogosNoRanking() < limiteRaio ? getParametros()
-				.getRaioParaSorteioDeJogosNoRanking() : limiteRaio - 1;
+		        .getRaioParaSorteioDeJogosNoRanking() : limiteRaio - 1;
 		double range = 1.0d / raio;
 		int i = 1;
 		while (sorteio > range * i) {
@@ -186,7 +186,7 @@ public class Ciclo extends BaseEntity {
 	public List<Jogador> getJogadoresHabilitadosDoRanking() {
 		List<Jogador> jogadoresDoRanking = new ArrayList<Jogador>();
 		for (CicloJogador cicloJogador : ranking) {
-			if (cicloJogador.getHabilitado()) {
+			if (!cicloJogador.isCongelado()) {
 				jogadoresDoRanking.add(cicloJogador.getJogador());
 			}
 		}
@@ -204,18 +204,23 @@ public class Ciclo extends BaseEntity {
 
 	public int getPontuacaoExcedente(Integer numero, Jogador jogador) {
 		if (getParametros().getRodadasDeHistoricoMantidasParaCalculoDoRanking() != null
-				&& getParametros().getRodadasDeHistoricoMantidasParaCalculoDoRanking() > 0
-				&& numero > getParametros().getRodadasDeHistoricoMantidasParaCalculoDoRanking()) {
+		        && getParametros().getRodadasDeHistoricoMantidasParaCalculoDoRanking() > 0
+		        && numero > getParametros().getRodadasDeHistoricoMantidasParaCalculoDoRanking()) {
 			int indiceRodadaExcedente = numero - getParametros().getRodadasDeHistoricoMantidasParaCalculoDoRanking()
-					- 1;
+			        - 1;
 			Integer pontuacaoExcedente = getRodadas().get(indiceRodadaExcedente).getJogadorJogoBarragem(jogador)
-					.getPontuacaoObtida();
+			        .getPontuacaoObtida();
 			for (Bonus bonus : getRodadas().get(indiceRodadaExcedente).getBonuses()) {
 				if (bonus.getJogador().equals(jogador)) {
 					pontuacaoExcedente += bonus.getValor();
 					break;
 				}
 			}
+			// TODO: procura no cicloJogador se existe rodadaDescongelamento. Se
+			// existe, procurar saber se a rodada de descongelamento é igual a
+			// rodadaExcedente. Se for, deduzir pontuacaoCongelada e depois
+			// zerar pontuacaoCongelada e rodadaCongelamento.
+
 			return pontuacaoExcedente;
 		}
 

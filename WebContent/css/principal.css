@@ -207,7 +207,7 @@ fieldset {
 }
 
 /********************* FIELDSETS *********************/
-fieldset#ranking,fieldset#jogos, fieldset#bonuses {
+fieldset#ranking,fieldset#jogos,fieldset#bonuses,fieldset#jogadoresCongelados {
 	float: left;
 	width: 460px;
 }

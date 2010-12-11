@@ -23,7 +23,6 @@
 	            $j(function(){
 		            $j(".popup").colorbox({overlayClose:false, inline:true, href:".add-jogador", scrolling:false}, function() {$j('#add-jogador\\:filtroJogador').focus();$j('#add-jogador\\:filtroJogador').attr('checked', 'false');});
 		            $j(".popupRenomearCiclo").colorbox({overlayClose:false, inline:true, href:".rename-ciclo", scrolling:false}, function() {$j('#rename-ciclo\\:nome').focus();});
-		            $j(".popupEditarCicloJogador").colorbox({overlayClose:false, inline:true, href:".editar-ciclo-jogador", scrolling:false}, function() {$j('#editar-ciclo-jogador\\:pontuacao').focus();});
 		            $j(".popupBarragem").colorbox({overlayClose:false, inline:true, href:".add-barragens", scrolling:false}, function() {$j('#add-barragens\\:local').focus();});
 	            });
 	         </script>
@@ -87,10 +86,9 @@
 					</div>
 					<a href="#" class="popup" title="#{msg.label_jogadores}" style="visibility:hidden"/>
 					<a href="#" class="popupRenomearCiclo" title="#{msg.label_renomear_ciclo}" style="visibility:hidden"/>
-					<a href="#" class="popupEditarCicloJogador" title="#{msg.label_editar_jogador}" style="visibility:hidden"/>
 					<a href="#" class="popupBarragem" title="#{msg.label_editar_barragem}" style="visibility:hidden"/>
 		
-				    <h:dataTable id="ranking" styleClass="gradient" rowClasses=",alt" columnClasses=",,,actions" value="#{gerirCicloBean.cicloEmFoco.ranking}" var="item" binding="#{gerirCicloBean.dataTable}">
+				    <h:dataTable id="ranking" styleClass="gradient" rowClasses=",alt" columnClasses=",,,actions" value="#{gerirCicloBean.ranking}" var="item" binding="#{gerirCicloBean.dataTable}">
 					    <h:column>
 						    <f:facet name="header">
 								#{msg.label_colocacao}
@@ -107,7 +105,7 @@
 						    <f:facet name="header">
 								#{msg.label_jogador}
 						    </f:facet>
-							#{gerirCicloBean.cicloEmFoco.ranking[gerirCicloBean.dataTable.rowIndex].jogador.nome} #{!gerirCicloBean.cicloEmFoco.ranking[gerirCicloBean.dataTable.rowIndex].habilitado ? msg.label_desabilitado : ''}
+							#{gerirCicloBean.cicloEmFoco.ranking[gerirCicloBean.dataTable.rowIndex].jogador.nome} #{gerirCicloBean.cicloEmFoco.ranking[gerirCicloBean.dataTable.rowIndex].congelado ? msg.label_congelado : ''}
 					    </h:column>
 					    <h:column headerClass="actions">
 						    <f:facet name="header">
@@ -117,14 +115,47 @@
 								actionListener="#{gerirCicloBean.removeJogador}">
 								<img src="#{request.contextPath}/img/buttons/btn-deletar.png" alt="#{msg.label_excluir}" title="#{msg.label_excluir}" width="18px" height="18px"/>
 							</h:commandLink>
-							<a4j:commandLink actionListener="#{gerirCicloBean.preparaCicloJogador}" oncomplete="$j('.popupEditarCicloJogador').click();" reRender="editar-ciclo-jogador"><img src="#{request.contextPath}/img/buttons/btn-editar.png" alt="#{msg.label_editar}" title="#{msg.label_editar}" width="18px" height="18px"/></a4j:commandLink>
+							<h:commandLink onclick="return confirm('#{msg.label_confirma_congelamento}');" actionListener="#{gerirCicloBean.congelaJogador}"><img src="#{request.contextPath}/img/buttons/btn-ice-mais.png" alt="#{msg.label_congelar}" title="#{msg.label_congelar}" width="16px" height="16px"/><f:param name="index" value="#{status.index}"/></h:commandLink>&#160;
 					    </h:column>
 				    </h:dataTable>
 				</fieldset>
-			
+
 				<ui:include src="../componentes/rodadas.xhtml" />
 			
 				<ui:include src="../componentes/ciclos.xhtml" />
+
+				<fieldset id="jogadoresCongelados">
+				    <legend>#{msg.label_jogadores_congelados}</legend>
+					<table class="gradient">
+					<thead>
+						<tr>
+							<th>#{msg.label_nome}</th>
+							<th>#{msg.label_pts}</th>
+							<th>#{msg.label_inicio_congelamento}</th>
+							<th>#{msg.label_acoes}</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="#{gerirCicloBean.jogadoresCongelados}" var="item" varStatus="status">
+							<tr class="#{status.index % 2 ==0 ? '' : 'alt'}">
+								<td>
+									#{item.jogador.nome}
+								</td>
+								<td>
+									#{item.pontuacaoCongelada}
+								</td>
+								<td>
+									#{item.rodadaDescongelamento.numero} #{msg.label_rodada_posfixo}
+								</td>
+								<td>
+									<h:commandLink onclick="return confirm('#{msg.label_confirma_descongelamento}');" actionListener="#{gerirCicloBean.descongelaJogador}"><img src="#{request.contextPath}/img/buttons/btn-ice-menos.png" alt="#{msg.label_descongelar}" title="#{msg.label_descongelar}" width="16px" height="16px"/><f:param name="index" value="#{status.index}"/></h:commandLink>
+								</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+					</table>
+				</fieldset>
+			
 			</h:form>
 			<div class="clear"></div>
 		</div>
@@ -132,7 +163,6 @@
 		<div style="display:none">
 			<ui:include src="popupJogador.xhtml" />
 			<ui:include src="popupRenomearCiclo.xhtml" />
-			<ui:include src="popupEditarCicloJogador.xhtml" />
 			<ui:include src="../gerirbarragem/popupBarragem.xhtml">
 				<ui:param name="novaBarragem" value="false"/>
 			</ui:include>
