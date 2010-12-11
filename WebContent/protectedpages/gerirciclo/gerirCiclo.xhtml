@@ -93,19 +93,19 @@
 						    <f:facet name="header">
 								#{msg.label_colocacao}
 						    </f:facet>
-							#{gerirCicloBean.cicloEmFoco.ranking[gerirCicloBean.dataTable.rowIndex].ranking}
+							#{gerirCicloBean.ranking[gerirCicloBean.dataTable.rowIndex].ranking}
 					    </h:column>
 					    <h:column>
 						    <f:facet name="header">
 								#{msg.label_pontuacao}
 						    </f:facet>
-							#{gerirCicloBean.cicloEmFoco.ranking[gerirCicloBean.dataTable.rowIndex].pontuacao}
+							#{gerirCicloBean.ranking[gerirCicloBean.dataTable.rowIndex].pontuacao}
 					    </h:column>
 					    <h:column>
 						    <f:facet name="header">
 								#{msg.label_jogador}
 						    </f:facet>
-							#{gerirCicloBean.cicloEmFoco.ranking[gerirCicloBean.dataTable.rowIndex].jogador.nome} #{gerirCicloBean.cicloEmFoco.ranking[gerirCicloBean.dataTable.rowIndex].congelado ? msg.label_congelado : ''}
+							#{gerirCicloBean.ranking[gerirCicloBean.dataTable.rowIndex].jogador.nome}
 					    </h:column>
 					    <h:column headerClass="actions">
 						    <f:facet name="header">

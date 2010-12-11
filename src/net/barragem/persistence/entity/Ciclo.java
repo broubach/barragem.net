@@ -263,4 +263,14 @@ public class Ciclo extends BaseEntity {
 			return false;
 		return true;
 	}
+
+    public List<CicloJogador> getCicloJogadoresCongelados() {
+        List<CicloJogador> result = new ArrayList<CicloJogador>();
+        for (CicloJogador cicloJogador : ranking) {
+            if (cicloJogador.isCongelado()) {
+                result.add(cicloJogador);
+            }
+        }
+        return result;
+    }
 }
