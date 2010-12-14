@@ -33,6 +33,9 @@
 							</h:commandLink>&#160;
 						</li>
 					</c:forEach>
+					<li>
+						<a href="http://wiki.barragem.net/doku.php?id=regulamento" target="_blank">#{msg.label_regulamento} <img src="#{request.contextPath}/img/new.png" class="new" width="16px" height="16px"/><ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/></a>&#160;
+					</li>
 		        </ul>
 		    </div>
 
@@ -40,7 +43,7 @@
 				<table class="gradient">
 				<thead>
 					<tr>
-						<th colspan="4">#{msg.label_ranking}</th>
+						<th colspan="4">#{msg.label_ranking} (#{fn:length(exibirPainelBarragemBean.ranking)} #{msg.label_jogadores})</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -111,7 +114,7 @@
 					<br/>
 				</c:forEach>
 
-				<div class="dados">
+				<div class="dados fonte-padrao">
 					#{msg.label_esta_barragem_possui} #{fn:length(exibirPainelBarragemBean.rodadas)} #{msg.label__rodadas}.<br/>
 					#{msg.label_confira_outra_rodada}:&#160;<h:inputText value="#{exibirPainelBarragemBean.numeroRodada}" alt="small-integer" maxlength="3" size="3"/>&#160;
 					<ui:include src="../componentes/botao-padrao.xhtml">

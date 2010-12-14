@@ -76,7 +76,7 @@
 		        </c:if>
 			    <ui:include src="../componentes/mensagem-sucesso.xhtml"/>
 				<fieldset id="ranking">
-				    <legend>#{msg.label_ranking}</legend>
+				    <legend>#{msg.label_ranking} (#{fn:length(gerirCicloBean.ranking)} #{msg.label_jogadores})</legend>
 		
 					<div class="btn-novo">
 						<a4j:commandLink actionListener="#{gerirCicloBean.pesquisaJogadorPrimeiraVez}" reRender="add-jogador" oncomplete="$j('.popup').click();">
@@ -125,7 +125,7 @@
 				<ui:include src="../componentes/ciclos.xhtml" />
 
 				<fieldset id="jogadoresCongelados">
-				    <legend>#{msg.label_jogadores_congelados}</legend>
+				    <legend>#{msg.label_jogadores_congelados} (#{fn:length(gerirCicloBean.jogadoresCongelados)} #{msg.label_jogadores})</legend>
 					<table class="gradient">
 					<thead>
 						<tr>
