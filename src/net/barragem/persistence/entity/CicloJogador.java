@@ -19,14 +19,11 @@ public class CicloJogador extends BaseEntity {
 	@ManyToOne
 	private Ciclo ciclo;
 
-	@ManyToOne
-	private Rodada rodadaDescongelamento;
-
 	private Integer ranking;
 	private Integer pontuacao;
 	private boolean congelado;
 	private Integer pontuacaoCongelada;
-
+	private Integer pontuacaoCongeladaExcedente;
 
 	public Jogador getJogador() {
 		return jogador;
@@ -76,12 +73,12 @@ public class CicloJogador extends BaseEntity {
 		this.congelado = congelado;
 	}
 
-	public Rodada getRodadaDescongelamento() {
-		return rodadaDescongelamento;
+	public Integer getPontuacaoCongeladaExcedente() {
+		return pontuacaoCongeladaExcedente;
 	}
 
-	public void setRodadaDescongelamento(Rodada rodadaDescongelamento) {
-		this.rodadaDescongelamento = rodadaDescongelamento;
+	public void setPontuacaoCongeladaExcedente(Integer pontuacaoCongeladaExcedente) {
+		this.pontuacaoCongeladaExcedente = pontuacaoCongeladaExcedente;
 	}
 
 	public static void removeJogadoresQuePossuemJogos(List<CicloJogador> cicloJogadores,

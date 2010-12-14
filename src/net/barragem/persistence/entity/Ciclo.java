@@ -208,23 +208,36 @@ public class Ciclo extends BaseEntity {
 		        && numero > getParametros().getRodadasDeHistoricoMantidasParaCalculoDoRanking()) {
 			int indiceRodadaExcedente = numero - getParametros().getRodadasDeHistoricoMantidasParaCalculoDoRanking()
 			        - 1;
-			Integer pontuacaoExcedente = getRodadas().get(indiceRodadaExcedente).getJogadorJogoBarragem(jogador)
-			        .getPontuacaoObtida();
+			Integer pontuacaoExcedente = getRodadas().get(indiceRodadaExcedente).getJogadorJogoBarragem(jogador) != null
+			        && getRodadas().get(indiceRodadaExcedente).getJogadorJogoBarragem(jogador).getPontuacaoObtida() != null ? getRodadas()
+			        .get(indiceRodadaExcedente).getJogadorJogoBarragem(jogador).getPontuacaoObtida()
+			        : 0;
 			for (Bonus bonus : getRodadas().get(indiceRodadaExcedente).getBonuses()) {
 				if (bonus.getJogador().equals(jogador)) {
 					pontuacaoExcedente += bonus.getValor();
 					break;
 				}
 			}
-			// TODO: procura no cicloJogador se existe rodadaDescongelamento. Se
-			// existe, procurar saber se a rodada de descongelamento é igual a
-			// rodadaExcedente. Se for, deduzir pontuacaoCongelada e depois
-			// zerar pontuacaoCongelada e rodadaCongelamento.
+
+			CicloJogador cicloJogador = getCicloJogador(jogador);
+			if (cicloJogador.getPontuacaoCongeladaExcedente() != null) {
+				pontuacaoExcedente += cicloJogador.getPontuacaoCongeladaExcedente();
+				cicloJogador.setPontuacaoCongeladaExcedente(null);
+			}
 
 			return pontuacaoExcedente;
 		}
 
 		return 0;
+	}
+
+	public CicloJogador getCicloJogador(Jogador jogador) {
+		for (CicloJogador cicloJogador : ranking) {
+			if (cicloJogador.getJogador().equals(jogador)) {
+				return cicloJogador;
+			}
+		}
+		return null;
 	}
 
 	@Override
@@ -264,13 +277,13 @@ public class Ciclo extends BaseEntity {
 		return true;
 	}
 
-    public List<CicloJogador> getCicloJogadoresCongelados() {
-        List<CicloJogador> result = new ArrayList<CicloJogador>();
-        for (CicloJogador cicloJogador : ranking) {
-            if (cicloJogador.isCongelado()) {
-                result.add(cicloJogador);
-            }
-        }
-        return result;
-    }
+	public List<CicloJogador> getCicloJogadoresCongelados() {
+		List<CicloJogador> result = new ArrayList<CicloJogador>();
+		for (CicloJogador cicloJogador : ranking) {
+			if (cicloJogador.isCongelado()) {
+				result.add(cicloJogador);
+			}
+		}
+		return result;
+	}
 }

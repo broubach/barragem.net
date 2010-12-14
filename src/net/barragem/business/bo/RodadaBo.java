@@ -22,100 +22,97 @@ import net.barragem.view.backingbean.componentes.JogoBarragemComparator;
 
 public class RodadaBo extends BaseBo {
 
-	public RodadaBo(HttpServletRequest request, HttpServletResponse response) {
-		super(request, response);
-	}
+    public RodadaBo(HttpServletRequest request, HttpServletResponse response) {
+        super(request, response);
+    }
 
-	public void sorteiaJogos(Rodada rodada) throws SaldoInsuficienteException {
-		PersistenceHelper.initialize("ranking", rodada.getCiclo());
-		List<CicloJogador> jogadores = new ArrayList<CicloJogador>(rodada.getCiclo().getRanking());
-		CicloJogador.removeJogadoresQuePossuemJogos(jogadores, rodada.getJogadoresDosJogos());
+    public void sorteiaJogos(Rodada rodada) throws SaldoInsuficienteException {
+        PersistenceHelper.initialize("ranking", rodada.getCiclo());
+        List<CicloJogador> jogadores = new ArrayList<CicloJogador>(rodada.getCiclo().getRanking());
+        CicloJogador.removeJogadoresQuePossuemJogos(jogadores, rodada.getJogadoresDosJogos());
 
-		// remove jogadores que não estejam habilitados
-		for (Iterator<CicloJogador> it = jogadores.iterator(); it.hasNext();) {
-			CicloJogador cicloJogador = it.next();
-			if (cicloJogador.isCongelado()) {
-				it.remove();
-			}
-		}
+        // remove jogadores que não estejam habilitados
+        for (Iterator<CicloJogador> it = jogadores.iterator(); it.hasNext();) {
+            CicloJogador cicloJogador = it.next();
+            if (cicloJogador.isCongelado()) {
+                it.remove();
+            }
+        }
 
-		// verifica se saldo é suficiente
-		if (!getContaUsuario().possuiSaldoSuficiente(jogadores.size() / 2)) {
-			throw new SaldoInsuficienteException();
-		}
+        // verifica se saldo é suficiente
+        if (!getContaUsuario().possuiSaldoSuficiente(jogadores.size() / 2)) {
+            throw new SaldoInsuficienteException();
+        }
 
-		// sorteia jogos
-		List<JogoBarragem> jogosSorteados = new ArrayList<JogoBarragem>();
-		while (jogadores.size() >= 2) {
-			int posicaoJogadorSorteado = rodada.getCiclo().sorteiaBaseadoNoRaio(jogadores.size());
-			jogosSorteados.add(rodada.criaJogoBarragem(getUsuarioLogado(), jogadores.get(0).getJogador(), jogadores
-			        .get(posicaoJogadorSorteado).getJogador()));
+        // sorteia jogos
+        List<JogoBarragem> jogosSorteados = new ArrayList<JogoBarragem>();
+        while (jogadores.size() >= 2) {
+            int posicaoJogadorSorteado = rodada.getCiclo().sorteiaBaseadoNoRaio(jogadores.size());
+            jogosSorteados.add(rodada.criaJogoBarragem(getUsuarioLogado(), jogadores.get(0).getJogador(), jogadores
+                    .get(posicaoJogadorSorteado).getJogador()));
 
-			jogadores.remove(posicaoJogadorSorteado);
-			jogadores.remove(0);
-		}
-		rodada.getJogos().addAll(jogosSorteados);
+            jogadores.remove(posicaoJogadorSorteado);
+            jogadores.remove(0);
+        }
+        rodada.getJogos().addAll(jogosSorteados);
 
-		// cria operacao de debito e atualiza saldo da conta
-		PersistenceHelper.persiste(getContaUsuario().criaOperacaoDebitoJogoBarragem(jogosSorteados.size()));
-		PersistenceHelper.persiste(getContaUsuario());
+        // cria operacao de debito e atualiza saldo da conta
+        PersistenceHelper.persiste(getContaUsuario().criaOperacaoDebitoJogoBarragem(jogosSorteados.size()));
+        PersistenceHelper.persiste(getContaUsuario());
 
-		PersistenceHelper.persiste(rodada);
-		// TODO: adicionar ordenacao para deixar jogador com ranking inferior a
-		// direita nos jogos
-		Collections.sort(rodada.getJogos(), new JogoBarragemComparator());
+        PersistenceHelper.persiste(rodada);
+        // TODO: adicionar ordenacao para deixar jogador com ranking inferior a
+        // direita nos jogos
+        Collections.sort(rodada.getJogos(), new JogoBarragemComparator());
 
-		PersistenceHelper.persiste(Atualizacao.criaSortearJogosBarragem(getUsuarioLogado(), rodada, rodada.getCiclo()
-		        .getBarragem()));
-		for (CicloJogador cicloJogador : jogadores) {
-			if (cicloJogador.getJogador().getUsuarioCorrespondente() != null) {
-				sendMail(
-				        "no-reply@barragem.net",
-				        getUsuarioLogado().getNomeCompletoCapital(),
-				        cicloJogador.getJogador().getUsuarioCorrespondente().getEmail(),
-				        new StringBuilder().append("barragem.net - sorteio da barragem ")
-				                .append(rodada.getCiclo().getBarragem().getCategoria()).append(" realizado").toString(),
-				        MessageFormat.format(emailTemplateSorteioBarragem, rodada.getCiclo().getBarragem()
-				                .getCategoria().getNome()));
-			}
-		}
-	}
+        PersistenceHelper.persiste(Atualizacao.criaSortearJogosBarragem(getUsuarioLogado(), rodada, rodada.getCiclo()
+                .getBarragem()));
+        for (CicloJogador cicloJogador : jogadores) {
+            if (cicloJogador.getJogador().getUsuarioCorrespondente() != null) {
+                sendMail(
+                        "no-reply@barragem.net",
+                        getUsuarioLogado().getNomeCompletoCapital(),
+                        cicloJogador.getJogador().getUsuarioCorrespondente().getEmail(),
+                        new StringBuilder().append("barragem.net - sorteio da barragem ")
+                                .append(rodada.getCiclo().getBarragem().getCategoria()).append(" realizado").toString(),
+                        MessageFormat.format(emailTemplateSorteioBarragem, rodada.getCiclo().getBarragem()
+                                .getCategoria().getNome()));
+            }
+        }
+    }
 
-	public void recalculaRankingEFechaRodada(Rodada rodada) {
-		// TODO: levar em conta pontos iniciais sem vinculo com jogos, como
-		// aqueles que o jogador possui quando é descongelado
-		// após o numero historico de rodadas para sorteio, o valor deve ser
-		// zerado
-		PersistenceHelper.initialize("rodadas", rodada.getCiclo());
-		PersistenceHelper.initialize("ranking", rodada.getCiclo());
-		List<Rodada> proxys = new ArrayList<Rodada>();
-		for (Rodada outraRodada : rodada.getCiclo().getRodadas()) {
-			proxys.add(outraRodada);
-		}
-		PersistenceHelper.initialize("jogos", proxys.toArray());
+    public void recalculaRankingEFechaRodada(Rodada rodada) {
+        PersistenceHelper.initialize("rodadas", rodada.getCiclo());
+        PersistenceHelper.initialize("ranking", rodada.getCiclo());
+        List<Rodada> proxys = new ArrayList<Rodada>();
+        for (Rodada outraRodada : rodada.getCiclo().getRodadas()) {
+            proxys.add(outraRodada);
+        }
+        PersistenceHelper.initialize("jogos", proxys.toArray());
+        PersistenceHelper.initialize("bonuses", proxys.toArray());
 
-		rodada.recalculaPontuacoes();
-		rodada.getCiclo().recalculaRanking();
-		rodada.setFechada(Boolean.TRUE);
+        rodada.recalculaPontuacoes();
+        rodada.getCiclo().recalculaRanking();
+        rodada.setFechada(Boolean.TRUE);
 
-		rodada.getCiclo().getRodadas().remove(rodada);
-		rodada.getCiclo().getRodadas().add(rodada);
-		for (Jogo jogoBarragem : rodada.getJogos()) {
-			getBo(EventoBo.class).removeSetsIncompletos(jogoBarragem.getPlacar());
-		}
-		PersistenceHelper.persiste(rodada.getCiclo());
+        rodada.getCiclo().getRodadas().remove(rodada);
+        rodada.getCiclo().getRodadas().add(rodada);
+        for (Jogo jogoBarragem : rodada.getJogos()) {
+            getBo(EventoBo.class).removeSetsIncompletos(jogoBarragem.getPlacar());
+        }
+        PersistenceHelper.persiste(rodada.getCiclo());
 
-		for (CicloJogador cicloJogador : rodada.getCiclo().getRanking()) {
-			if (cicloJogador.getJogador().getUsuarioCorrespondente() != null
-			        && !cicloJogador.getJogador().equals(getUsuarioLogado().getJogador())) {
-				Usuario destino = cicloJogador.getJogador().getUsuarioCorrespondente();
-				sendMail("no-reply@barragem.net", getUsuarioLogado().getNomeCompletoCapital(), destino.getEmail(),
-				        "barragem.net - ranking atualizado", MessageFormat.format(
-				                emailTemplateRankingAtualizado,
-				                rodada.getCiclo().getBarragem().getLocal(),
-				                MessageBundleUtils.getInstance().get(
-				                        rodada.getCiclo().getBarragem().getCategoria().getNome())));
-			}
-		}
-	}
+        for (CicloJogador cicloJogador : rodada.getCiclo().getRanking()) {
+            if (cicloJogador.getJogador().getUsuarioCorrespondente() != null
+                    && !cicloJogador.getJogador().equals(getUsuarioLogado().getJogador())) {
+                Usuario destino = cicloJogador.getJogador().getUsuarioCorrespondente();
+                sendMail("no-reply@barragem.net", getUsuarioLogado().getNomeCompletoCapital(), destino.getEmail(),
+                        "barragem.net - ranking atualizado", MessageFormat.format(
+                                emailTemplateRankingAtualizado,
+                                rodada.getCiclo().getBarragem().getLocal(),
+                                MessageBundleUtils.getInstance().get(
+                                        rodada.getCiclo().getBarragem().getCategoria().getNome())));
+            }
+        }
+    }
 }

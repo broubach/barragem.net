@@ -114,8 +114,8 @@
 							<h:commandLink reRender="add-jogador" styleClass="deletar" onclick="return confirm('#{msg.label_confirma_exclusao}');"
 								actionListener="#{gerirCicloBean.removeJogador}">
 								<img src="#{request.contextPath}/img/buttons/btn-deletar.png" alt="#{msg.label_excluir}" title="#{msg.label_excluir}" width="18px" height="18px"/>
-							</h:commandLink>
-							<h:commandLink onclick="return confirm('#{msg.label_confirma_congelamento}');" actionListener="#{gerirCicloBean.congelaJogador}"><img src="#{request.contextPath}/img/buttons/btn-ice-mais.png" alt="#{msg.label_congelar}" title="#{msg.label_congelar}" width="16px" height="16px"/><f:param name="index" value="#{status.index}"/></h:commandLink>&#160;
+							</h:commandLink>&#160;
+							<h:commandLink styleClass="top" onclick="return confirm('#{msg.label_confirma_congelamento}');" actionListener="#{gerirCicloBean.congelaJogador}"><img src="#{request.contextPath}/img/buttons/btn-ice-mais.png" alt="#{msg.label_congelar}" title="#{msg.label_congelar}" width="16px" height="16px"/><f:param name="index" value="#{status.index}"/></h:commandLink>
 					    </h:column>
 				    </h:dataTable>
 				</fieldset>
@@ -131,7 +131,6 @@
 						<tr>
 							<th>#{msg.label_nome}</th>
 							<th>#{msg.label_pts}</th>
-							<th>#{msg.label_inicio_congelamento}</th>
 							<th>#{msg.label_acoes}</th>
 						</tr>
 					</thead>
@@ -143,9 +142,6 @@
 								</td>
 								<td>
 									#{item.pontuacaoCongelada}
-								</td>
-								<td>
-									#{item.rodadaDescongelamento.numero} #{msg.label_rodada_posfixo}
 								</td>
 								<td>
 									<h:commandLink onclick="return confirm('#{msg.label_confirma_descongelamento}');" actionListener="#{gerirCicloBean.descongelaJogador}"><img src="#{request.contextPath}/img/buttons/btn-ice-menos.png" alt="#{msg.label_descongelar}" title="#{msg.label_descongelar}" width="16px" height="16px"/><f:param name="index" value="#{status.index}"/></h:commandLink>

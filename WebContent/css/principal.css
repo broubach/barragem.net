@@ -1404,6 +1404,10 @@ td.actions {
 	width: 60px;
 }
 
+.top {
+	vertical-align: top;
+}
+
 /********************* CICLOS *********************/
 .ciclos a {
 	background: transparent url('../img/marcador-ciclo.gif') no-repeat 0 4px;
