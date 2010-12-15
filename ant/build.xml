@@ -24,9 +24,6 @@
 		<!-- Altera web.xml - facelets.DEVELOPMENT false - com.sun.faces.verifyObjects false - -->
 		<replace dir="${basedir}/temp/WEB-INF" replacefilterfile="tokens.properties" includes="web.xml" defaultexcludes="false" />
 
-		<!-- Altera o isys.html -->
-		<replace dir="${basedir}/temp/staticpages" token="/barragem/" value="/" includes="isys.html" defaultexcludes="false" />
-		
 		<antcall target="compilaJasperReports"/>
 
 		<!-- Minifica todos os CSSs - todos os css dentro da pasta css -->
