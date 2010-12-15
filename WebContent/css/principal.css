@@ -959,13 +959,16 @@ fieldset#parciais {
 }
 
 /********************* BOTOES *********************/
-.menu-contextual .btn_perfil_bckgnd, .menu-contextual .btn_mensagens_bckgnd, .menu-contextual .btn_eventos_bckgnd, .menu-contextual .btn_adicionar_bckgnd {
+.menu-contextual .btn_perfil_bckgnd, .menu-contextual .btn_mensagens_bckgnd, .menu-contextual .btn_eventos_bckgnd, .menu-contextual .btn_adicionar_bckgnd, .menu-contextual .btn_regulamento_bckgnd {
 	padding-left: 20px;
 }
 .menu-contextual .btn_perfil_bckgnd, .menu-contextual .btn_mensagens_bckgnd, .menu-contextual .btn_eventos_bckgnd, .menu-contextual .btn_adicionar_bckgnd {
 	padding-left: 20px;
 }
-.btn_perfil_bckgnd {
+.btn_regulamento_bckgnd {
+	background-image: url('../img/new.png');
+}
+	.btn_perfil_bckgnd {
 	background-image: url('../img/buttons/btn-perfil.png');
 }
 .btn_mensagens_bckgnd {

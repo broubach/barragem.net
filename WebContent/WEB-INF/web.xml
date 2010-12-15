@@ -208,17 +208,6 @@
 		<url-pattern>/protectedpages/exibireventos/exibirEstatisticas.do</url-pattern>
 	</servlet-mapping>
 
-	<!-- Servlet temporario de atualizacao de jogadores congelados -->
-	<servlet>
-		<servlet-name>Congelados Servlet</servlet-name>
-		<servlet-class>net.barragem.scaffold.CongeladosServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Congelados Servlet</servlet-name>
-		<url-pattern>/protectedpages/atualizaCongelados.do</url-pattern>
-	</servlet-mapping>
-
     <!-- Spring config -->
    	<context-param>
 		<param-name>contextConfigLocation</param-name>
