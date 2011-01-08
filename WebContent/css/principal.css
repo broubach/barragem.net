@@ -378,9 +378,8 @@ fieldset#parciais {
 }
 
 .menu a {
-	background: #596E94;
+	background-color: #596E94;
 	position: relative;
-	padding-left: 12px;
 	display: block;
 	margin-left:4px;
 	margin-right:4px;
@@ -388,12 +387,38 @@ fieldset#parciais {
 }
 
 .menu a:hover {
-	background: #0D286F;
+	background-color: #0D286F;
 }
 
 .menu li {
 	text-align: left;
 	height: 22px;
+}
+
+.menu .btn_home, .menu .btn_jogadores, .menu .btn_barragens, .menu .btn_meus_jogos, .menu .btn_mensagens {
+	padding-left: 20px;
+	background-repeat: no-repeat;
+	background-position: 3px center;
+}
+
+.btn_home {
+	background-image: url('../img/buttons/btn-home.png');
+}
+
+.btn_jogadores {
+	background-image: url('../img/buttons/btn-jogadores.png');
+}
+
+.btn_barragens {
+	background-image: url('../img/buttons/btn-barragens.png');
+}
+
+.btn_meus_jogos {
+	background-image: url('../img/buttons/btn-eventos-2.png');
+}
+
+.btn_mensagens {
+	background-image: url('../img/buttons/btn-enviar.png');
 }
 
 .new {
@@ -962,13 +987,10 @@ fieldset#parciais {
 .menu-contextual .btn_perfil_bckgnd, .menu-contextual .btn_mensagens_bckgnd, .menu-contextual .btn_eventos_bckgnd, .menu-contextual .btn_adicionar_bckgnd, .menu-contextual .btn_regulamento_bckgnd {
 	padding-left: 20px;
 }
-.menu-contextual .btn_perfil_bckgnd, .menu-contextual .btn_mensagens_bckgnd, .menu-contextual .btn_eventos_bckgnd, .menu-contextual .btn_adicionar_bckgnd {
-	padding-left: 20px;
-}
 .btn_regulamento_bckgnd {
 	background-image: url('../img/new.png');
 }
-	.btn_perfil_bckgnd {
+.btn_perfil_bckgnd {
 	background-image: url('../img/buttons/btn-perfil.png');
 }
 .btn_mensagens_bckgnd {
