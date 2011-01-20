@@ -68,14 +68,14 @@
 	</filter-mapping>
 
 	<!-- Elementos específicos da aplicação -->
-	<filter>
+	<!-- filter>
 		<filter-name>CookieTweakFilter</filter-name>
 		<filter-class>net.barragem.scaffold.CookieTweakFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>CookieTweakFilter</filter-name>
 		<url-pattern>*.xhtml</url-pattern>
-	</filter-mapping>
+	</filter-mapping-->
 
 	<filter>
 		<filter-name>LoginFilter</filter-name>
@@ -122,14 +122,14 @@
 		<url-pattern>/publicpages/recuperarsenha/recuperarSenha.xhtml</url-pattern>
 	</filter-mapping>
 	
-	<filter>
+	<!-- filter>
 		<filter-name>PosNovoUsuarioFilter</filter-name>
 		<filter-class>net.barragem.scaffold.PosNovoUsuarioFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>PosNovoUsuarioFilter</filter-name>
 		<url-pattern>/protectedpages/novousuario/passo-2-perfil.xhtml</url-pattern>
-	</filter-mapping>
+	</filter-mapping -->
 	
 	<listener>
 		<listener-class>net.barragem.scaffold.BarragemServletContextListener</listener-class>

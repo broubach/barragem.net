@@ -61,8 +61,6 @@ public class RodadaBo extends BaseBo {
         PersistenceHelper.persiste(getContaUsuario());
 
         PersistenceHelper.persiste(rodada);
-        // TODO: adicionar ordenacao para deixar jogador com ranking inferior a
-        // direita nos jogos
         Collections.sort(rodada.getJogos(), new JogoBarragemComparator());
 
         PersistenceHelper.persiste(Atualizacao.criaSortearJogosBarragem(getUsuarioLogado(), rodada, rodada.getCiclo()

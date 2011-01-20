@@ -9,61 +9,59 @@ import net.barragem.persistence.entity.Rodada;
 
 public class RodadaJogosBarragemMestreDetalhe extends MestreDetalheImpl<Rodada, JogoBarragem> {
 
-	public Jogador jogadorVencedorWo;
+    public Jogador jogadorVencedorWo;
 
-	public Jogador getJogadorVencedorWo() {
-		return jogadorVencedorWo;
-	}
+    public Jogador getJogadorVencedorWo() {
+        return jogadorVencedorWo;
+    }
 
-	public void setJogadorVencedorWo(Jogador jogadorVencedorWo) {
-		this.jogadorVencedorWo = jogadorVencedorWo;
-	}
+    public void setJogadorVencedorWo(Jogador jogadorVencedorWo) {
+        this.jogadorVencedorWo = jogadorVencedorWo;
+    }
 
-	public void preparaJogoParaEdicao(int index) {
-		preparaJogoParaEdicao(getDetalhes().get(index));
-	}
+    public void preparaJogoParaEdicao(int index) {
+        preparaJogoParaEdicao(getDetalhes().get(index));
+    }
 
-	public void preparaJogoParaEdicao() {
-		preparaJogoParaEdicao(getDetalheEmFoco());
-	}
+    public void preparaJogoParaEdicao() {
+        preparaJogoParaEdicao(getDetalheEmFoco());
+    }
 
-	public void preparaJogoParaEdicao(JogoBarragem jogoBarragem) {
-		setDetalheEmFoco(jogoBarragem);
-		setMestre(getDetalheEmFoco().getRodada());
-		setDetalhes(getMestre().getJogos());
+    public void preparaJogoParaEdicao(JogoBarragem jogoBarragem) {
+        setDetalheEmFoco(jogoBarragem);
+        setMestre(getDetalheEmFoco().getRodada());
+        setDetalhes(getMestre().getJogos());
 
-		ordena();
-		getDetalheEmFoco().getPlacar().completaSetsSeNecessario(
-		        getMestre().getCiclo().getParametros().getModalidadeDeSets().getNumeroDeSets());
-	}
+        ordena();
+        getDetalheEmFoco().getPlacar().completaSetsSeNecessario(
+                getMestre().getCiclo().getParametros().getModalidadeDeSets().getNumeroDeSets());
+    }
 
-	private void ordena() {
-		for (Jogo jogo : getDetalhes()) {
-			Collections.sort(jogo.getJogadoresEventos(), new JogadorEventoComparatorVencedorPrimeiro());
-		}
-		// TODO: adicionar ordenacao para deixar jogador com ranking inferior a
-		// direita nos jogos
-		Collections.sort(getDetalhes(), new JogoBarragemComparator());
-	}
+    private void ordena() {
+        for (Jogo jogo : getDetalhes()) {
+            Collections.sort(jogo.getJogadoresEventos(), new JogadorEventoComparatorVencedorPrimeiro());
+        }
+        Collections.sort(getDetalhes(), new JogoBarragemComparator());
+    }
 
-	public void editaProximoJogo() {
-		Integer i = getIndiceNosDetalhes();
-		if (i != null && i.intValue() + 1 < getDetalhes().size()) {
-			preparaJogoParaEdicao(i.intValue() + 1);
-		}
-	}
+    public void editaProximoJogo() {
+        Integer i = getIndiceNosDetalhes();
+        if (i != null && i.intValue() + 1 < getDetalhes().size()) {
+            preparaJogoParaEdicao(i.intValue() + 1);
+        }
+    }
 
-	public void editaJogoAnterior() {
-		Integer i = getIndiceNosDetalhes();
-		if (i != null && i.intValue() - 1 >= 0) {
-			preparaJogoParaEdicao(i.intValue() - 1);
-		}
-	}
+    public void editaJogoAnterior() {
+        Integer i = getIndiceNosDetalhes();
+        if (i != null && i.intValue() - 1 >= 0) {
+            preparaJogoParaEdicao(i.intValue() - 1);
+        }
+    }
 
-	public void adicionaDetalheNaLista() {
-		if (getDetalhes().contains(getDetalheEmFoco())) {
-			getDetalhes().remove(getDetalheEmFoco());
-		}
-		getDetalhes().add(getDetalheEmFoco());
-	}
+    public void adicionaDetalheNaLista() {
+        if (getDetalhes().contains(getDetalheEmFoco())) {
+            getDetalhes().remove(getDetalheEmFoco());
+        }
+        getDetalhes().add(getDetalheEmFoco());
+    }
 }
