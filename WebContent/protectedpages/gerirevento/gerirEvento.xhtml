@@ -25,6 +25,23 @@
 
       	<h:form>
   		  <h2><h:outputText value="#{msg.label_meus_jogos}" /></h2>
+				<h:panelGroup id="menu-contextual" styleClass="menu-contextual" layout="block">
+			        <ul>
+			            <li>
+							<h:commandLink disabled="true">
+								#{msg.label_lista}
+							    <ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
+							</h:commandLink>&#160;
+			            </li>
+			            <li>
+							<h:commandLink action="exibirGrafico" actionListener="#{exibirEventosBean.prepara}" immediate="true">
+							    #{msg.label_grafico}
+							    <ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
+								<f:param name="id" value="#{gerirEventoBean.usuarioLogado.id}"/>
+							</h:commandLink>&#160;
+			            </li>
+			        </ul>
+				</h:panelGroup>
 
 	    <ui:include src="../componentes/mensagem-sucesso.xhtml"/>
 		<div class="btn-novo">

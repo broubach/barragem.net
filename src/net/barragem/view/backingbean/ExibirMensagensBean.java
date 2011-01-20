@@ -45,8 +45,8 @@ public class ExibirMensagensBean extends BaseBean {
 
 	public String envia() {
 		Mensagem focus = getBo(MensagemBo.class).envia(usuarioEmFoco, mensagem.getTexto(), mensagem.getPrivada());
-		paginacaoMensagens = new PaginavelSampleImpl<Mensagem>(PersistenceHelper.findByNamedQuery("mensagensVisiveisQuery",
-				getUsuarioLogado(), usuarioEmFoco), focus, null, 5);
+		paginacaoMensagens = new PaginavelSampleImpl<Mensagem>(PersistenceHelper.findByNamedQuery(
+		        "mensagensVisiveisQuery", getUsuarioLogado(), usuarioEmFoco), focus, null, 5);
 		mensagem = new TextoEFlagPrivadoDto();
 		addMensagemAtualizacaoComSucesso();
 		return "";
@@ -54,17 +54,17 @@ public class ExibirMensagensBean extends BaseBean {
 
 	public void exclui(ActionEvent e) {
 		PersistenceHelper.remove(paginacaoMensagens.getPagina().get(getIndex()));
-		paginacaoMensagens = new PaginavelSampleImpl<Mensagem>(PersistenceHelper.findByNamedQuery("mensagensVisiveisQuery",
-				getUsuarioLogado(), usuarioEmFoco), paginacaoMensagens.getPaginaAtual(), 5);
+		paginacaoMensagens = new PaginavelSampleImpl<Mensagem>(PersistenceHelper.findByNamedQuery(
+		        "mensagensVisiveisQuery", getUsuarioLogado(), usuarioEmFoco), paginacaoMensagens.getPaginaAtual(), 5);
 		addMensagemAtualizacaoComSucesso();
 	}
 
 	public void exibeMensagens(ActionEvent e) {
 		usuarioEmFoco = PersistenceHelper.findByPk(Usuario.class, getId());
-		paginacaoMensagens = new PaginavelSampleImpl<Mensagem>(PersistenceHelper.findByNamedQuery("mensagensVisiveisQuery",
-				getUsuarioLogado(), usuarioEmFoco), null, 5);
+		paginacaoMensagens = new PaginavelSampleImpl<Mensagem>(PersistenceHelper.findByNamedQuery(
+		        "mensagensVisiveisQuery", getUsuarioLogado(), usuarioEmFoco), null, 5);
 	}
-	
+
 	public Integer getTotalMensagens() {
 		return paginacaoMensagens.getSourceList().size();
 	}

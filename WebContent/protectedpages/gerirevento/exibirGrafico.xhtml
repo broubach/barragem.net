@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<ui:composition template="/protectedpages/layout/layoutPrincipal.xhtml">
+	<ui:param name="pageStyle" value="barragens"/>
+
+	<ui:define name="conteudo">
+      <div class="maincontent equalheights">
+
+      	<h:form>
+  		  <h2><h:outputText value="#{msg.label_meus_jogos}" /></h2>
+			<h:panelGroup id="menu-contextual" styleClass="menu-contextual" layout="block">
+			       <ul>
+			           <li>
+						<h:commandLink action="gerirEvento" immediate="true">
+							#{msg.label_lista}
+						    <ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
+						</h:commandLink>&#160;
+			           </li>
+			           <li>
+						<h:commandLink disabled="true">
+						    #{msg.label_grafico}
+						    <ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
+						</h:commandLink>&#160;
+			           </li>
+			       </ul>
+			</h:panelGroup>
+
+			<ui:include src="../componentes/graficoComEventos.xhtml" />
+        </h:form>
+
+		<ui:include src="../../publicpages/componentes/bordas-redondas-div.xhtml"/>
+      </div>
+
+	</ui:define>
+</ui:composition>
+
+</html>

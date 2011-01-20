@@ -103,7 +103,7 @@ public class GerirBarragemBean extends BaseBean {
 
 	private void lista() {
 		barragensQueAdministro = PersistenceHelper.findByNamedQuery("barragensQueAdministroQuery", getUsuarioLogado());
-		barragensQueParticipo = PersistenceHelper.findByNamedQuery("barragensQueParticipoQuery", getUsuarioLogado());
+		barragensQueParticipo = getBarragens(getUsuarioLogado().getId());
 	}
 
 	public void detalhaBarragem(ActionEvent e) {
@@ -113,8 +113,8 @@ public class GerirBarragemBean extends BaseBean {
 
 	public void editaCiclo(ActionEvent e) {
 		if (getIndex() != -1) {
-			barragemEmFoco = (Barragem) PersistenceHelper.findByPk(Barragem.class, barragensQueAdministro.get(
-					getIndex()).getId(), "ciclos");
+			barragemEmFoco = (Barragem) PersistenceHelper.findByPk(Barragem.class,
+			        barragensQueAdministro.get(getIndex()).getId(), "ciclos");
 		} else {
 			GerirBarragemBean bean = (GerirBarragemBean) getRequestAttribute("gerirBarragemBean");
 			barragemEmFoco = bean.getBarragemEmFoco();
@@ -141,8 +141,8 @@ public class GerirBarragemBean extends BaseBean {
 			return "";
 		}
 		List<Barragem> resultado = PersistenceHelper.findByNamedQuery("pesquisaBarragemDeUsuarioQuery",
-				getUsuarioLogado(), new StringBuilder().append("%").append(pesquisa).append("%").toString()
-						.toUpperCase());
+		        getUsuarioLogado(), new StringBuilder().append("%").append(pesquisa).append("%").toString()
+		                .toUpperCase());
 		if (resultado.isEmpty()) {
 			messages.addInfoMessage("label_nenhum_resultado_encontrado", "label_nenhum_resultado_encontrado");
 		} else {

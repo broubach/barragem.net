@@ -278,6 +278,14 @@
 			<to-view-id>/protectedpages/editarperfil/editarFoto.xhtml</to-view-id>
 			<redirect/>
 		</navigation-case>
+		<navigation-case>
+			<from-outcome>exibirGrafico</from-outcome>
+			<to-view-id>/protectedpages/gerirevento/exibirGrafico.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>gerirEvento</from-outcome>
+			<to-view-id>/protectedpages/gerirevento/gerirEvento.xhtml</to-view-id>
+		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
 		<from-view-id>*</from-view-id>

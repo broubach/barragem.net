@@ -384,7 +384,7 @@ public abstract class BaseBean {
 	}
 
 	protected List<Barragem> getBarragens(Integer usuarioId) {
-		return (List<Barragem>) PersistenceHelper.findByNamedQuery("barragensDeUsuarioQuery", usuarioId);
+		return (List<Barragem>) PersistenceHelper.findByNamedQuery("barragensQueParticipoQuery", usuarioId);
 	}
 
 	protected void setContaUsuario(Conta conta) {

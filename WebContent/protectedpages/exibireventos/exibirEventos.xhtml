@@ -17,7 +17,7 @@
 				<h2>#{exibirEventosBean.usuarioEmFoco.nomeCompletoCapital}</h2>
 				<h:panelGroup id="menu-contextual" styleClass="menu-contextual" layout="block">
 			        <ul>
-			        	<c:if test="#{not exibirPerfilBean.usuarioJahAdicionado}">
+			        	<c:if test="#{not exibirEventosBean.usuarioJahAdicionado}">
 				            <li>
 								<h:commandLink actionListener="#{exibirPerfilBean.adicionaUsuario}" styleClass="btn_adicionar_bckgnd">
 									#{msg.label_adicionar_a_minha_lista_de_jogadores}
@@ -50,102 +50,10 @@
 			        </ul>
 				</h:panelGroup>
 
-			    <ui:include src="../componentes/mensagem-erro.xhtml"/>
-			    <ui:include src="../componentes/mensagem-sucesso.xhtml"/>
 	            <div class="clear"></div>
 	            <br/>
 
-	            <img class="float-right grafico" src="#{request.contextPath}/protectedpages/exibireventos/exibirEstatisticas.do?vitorias=#{exibirEventosBean.vitorias}&#38;derrotas=#{exibirEventosBean.derrotas}" border="0" width="200px" height="120px"/>
-	            
-				<table class="gradient">
-				<thead>
-					<tr>
-						<th>#{msg.label_data}</th>
-						<th>#{msg.label_tipo}</th>
-						<th>#{msg.label_participantes}</th>
-						<th>#{msg.label_placar}</th>
-						<th>#{msg.label_resultado}</th>
-						<th>#{msg.label_participantes_canhotos}</th>
-					</tr>
-					<tr>
-						<th>
-							<h:selectOneMenu value="#{exibirEventosBean.filtroData}" onchange="submit()" valueChangeListener="#{exibirEventosBean.filtra}">
-								<f:selectItem itemLabel="" itemValue=""/>
-								<f:selectItems value="#{exibirEventosBean.listaDatas}"/>
-							</h:selectOneMenu>
-						</th>
-						<th>
-							<h:selectOneMenu value="#{exibirEventosBean.filtroTipo}" onchange="submit()" valueChangeListener="#{exibirEventosBean.filtra}">
-								<f:selectItem itemLabel="" itemValue=""/>
-								<f:selectItem itemLabel="#{msg.label_jogo_avulso}" itemValue="ja"/>
-								<f:selectItem itemLabel="#{msg.label_jogo_barragem}" itemValue="jb"/>
-								<f:selectItem itemLabel="#{msg.label_treino}" itemValue="t"/>
-							</h:selectOneMenu>
-						</th>
-						<th>
-							<h:selectOneMenu value="#{exibirEventosBean.filtroParticipantes}" converter="JogadorConverter" styleClass="participantes" onchange="submit()" valueChangeListener="#{exibirEventosBean.filtra}">
-								<f:selectItem itemLabel="" itemValue=""/>
-								<f:selectItems value="#{exibirEventosBean.listaParticipantes}"/>
-							</h:selectOneMenu>
-						</th>
-						<th>
-							<h:selectOneMenu value="#{exibirEventosBean.filtroPlacar}" onchange="submit()" valueChangeListener="#{exibirEventosBean.filtra}">
-								<f:selectItem itemLabel="" itemValue=""/>
-								<f:selectItems value="#{exibirEventosBean.listaPlacares}"/>
-							</h:selectOneMenu>
-						</th>
-						<th>
-							<h:selectOneMenu value="#{exibirEventosBean.filtroVitoria}" onchange="submit()" valueChangeListener="#{exibirEventosBean.filtra}">
-								<f:selectItem itemLabel="" itemValue=""/>
-								<f:selectItem itemLabel="#{msg.label_vitoria}" itemValue="v"/>
-								<f:selectItem itemLabel="#{msg.label_derrota}" itemValue="d"/>
-								<f:selectItem itemLabel="#{msg.label_indefinido}" itemValue="i"/>
-							</h:selectOneMenu>
-						</th>
-						<th>
-							<h:selectOneMenu value="#{exibirEventosBean.filtroCanhotos}" onchange="submit()" valueChangeListener="#{exibirEventosBean.filtra}">
-								<f:selectItem itemLabel="" itemValue=""/>
-								<f:selectItem itemLabel="#{msg.label_sim}" itemValue="s"/>
-								<f:selectItem itemLabel="#{msg.label_nao}" itemValue="n"/>
-								<f:selectItem itemLabel="#{msg.label_indefinido}" itemValue="i"/>
-							</h:selectOneMenu>
-						</th>
-					</tr>
-				</thead>
-				<tbody>
-				<c:forEach items="#{exibirEventosBean.paginacaoEventos.pagina}" var="item" varStatus="status">
-					<tr class="#{status.index % 2 ==0 ? '' : 'alt'}">
-						<td>
-							<h:outputText value="#{item.data}" >
-								<f:convertDateTime pattern="dd MMM" timeZone="GMT-3" locale="pt"/>
-							</h:outputText>&#160;
-							<h:outputText value="#{item.hora}" >
-								<f:convertDateTime pattern="HH:mm" timeZone="GMT-3" locale="pt"/>
-							</h:outputText>
-						</td>
-						<td>
-							<h:outputText value="#{item.tipoLabel}" />
-						</td>
-						<td>
-							<h:outputText value="#{item.jogadoresLabel}" />
-						</td>
-						<td>
-							<h:outputText value="#{item.placar}" />
-						</td>
-						<td>
-							<h:outputText value="#{item.resultadoLabel}" />
-						</td>
-						<td>
-							<h:outputText value="#{item.participantesCanhotosLabel}" />
-						</td>
-					</tr>
-				</c:forEach>
-				</tbody>
-				</table>
-
-			    <ui:include src="../componentes/paginacao.xhtml">
-			    	<ui:param name="paginavel" value="#{exibirEventosBean.paginacaoEventos}"/>
-			    </ui:include>
+				<ui:include src="../componentes/graficoComEventos.xhtml" />
 			</h:form>
 		</div>
 	</ui:define>

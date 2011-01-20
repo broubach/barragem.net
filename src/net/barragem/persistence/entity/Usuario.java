@@ -24,13 +24,12 @@ import net.barragem.scaffold.ValidatableSampleImpl;
 import org.apache.commons.beanutils.BeanUtils;
 
 @Entity
-@NamedQueries( {
-		@NamedQuery(name = "loginQuery", query = "select u from Usuario u left outer join u.perfil p where u.email = :email and u.senha = :senha"),
-		@NamedQuery(name = "recuperarSenhaQuery", query = "from Usuario u where u.email = :email"),
-		@NamedQuery(name = "perfilQuery", query = "select u from Usuario u left outer join u.perfil p where u.id = :id"),
-		@NamedQuery(name = "barragensDeUsuarioQuery", query = "select distinct c.barragem from Ciclo c join c.ranking r join r.jogador j join j.usuarioCorrespondente uc where uc.id = :id"),
-		@NamedQuery(name = "emailExistenteQuery", query = "select 1 from Usuario usuario where usuario.email = :email"),
-		@NamedQuery(name = "alteracaoEmailExistenteQuery", query = "select 1 from Usuario usuario where usuario.email = :email and usuario != :usuario") })
+@NamedQueries({
+        @NamedQuery(name = "loginQuery", query = "select u from Usuario u left outer join u.perfil p where u.email = :email and u.senha = :senha"),
+        @NamedQuery(name = "recuperarSenhaQuery", query = "from Usuario u where u.email = :email"),
+        @NamedQuery(name = "perfilQuery", query = "select u from Usuario u left outer join u.perfil p where u.id = :id"),
+        @NamedQuery(name = "emailExistenteQuery", query = "select 1 from Usuario usuario where usuario.email = :email"),
+        @NamedQuery(name = "alteracaoEmailExistenteQuery", query = "select 1 from Usuario usuario where usuario.email = :email and usuario != :usuario") })
 @Table(name = "usuario")
 public class Usuario extends BaseEntity implements Validatable, Cloneable, Atualizavel {
 
@@ -191,7 +190,7 @@ public class Usuario extends BaseEntity implements Validatable, Cloneable, Atual
 	public boolean hasJogador(Usuario usuario) {
 		for (Jogador jogador : getJogadores()) {
 			if (jogador.getUsuarioCorrespondente() != null
-					&& jogador.getUsuarioCorrespondente().getId().equals(usuario.getId())) {
+			        && jogador.getUsuarioCorrespondente().getId().equals(usuario.getId())) {
 				return true;
 			}
 		}
@@ -205,7 +204,7 @@ public class Usuario extends BaseEntity implements Validatable, Cloneable, Atual
 		for (Iterator<Jogador> it = result.iterator(); it.hasNext();) {
 			jogador = it.next();
 			if (jogador.getUsuarioCorrespondente() != null
-					&& jogador.getUsuarioCorrespondente().getId().equals(getId())) {
+			        && jogador.getUsuarioCorrespondente().getId().equals(getId())) {
 				it.remove();
 			}
 		}
