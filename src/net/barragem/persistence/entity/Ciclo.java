@@ -231,13 +231,16 @@ public class Ciclo extends BaseEntity {
 		return 0;
 	}
 
-	public CicloJogador getCicloJogador(Jogador jogador) {
+	public Map<Jogador, CicloJogador> getCicloJogadorPorJogador() {
+		Map<Jogador, CicloJogador> result = new HashMap<Jogador, CicloJogador>();
 		for (CicloJogador cicloJogador : ranking) {
-			if (cicloJogador.getJogador().equals(jogador)) {
-				return cicloJogador;
-			}
+			result.put(cicloJogador.getJogador(), cicloJogador);
 		}
-		return null;
+		return result;
+	}
+
+	public CicloJogador getCicloJogador(Jogador jogador) {
+		return getCicloJogadorPorJogador().get(jogador);
 	}
 
 	@Override

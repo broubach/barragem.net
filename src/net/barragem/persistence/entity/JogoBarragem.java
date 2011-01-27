@@ -78,4 +78,22 @@ public class JogoBarragem extends Jogo implements Validatable {
 	public String getTipoValue() {
 		return "jb";
 	}
+
+	@Override
+	public String getDescricaoCalculada() {
+		StringBuilder result = new StringBuilder();
+		result.append(getRodada().getCiclo().getBarragem().getLocal());
+		result.append(" - ");
+		result.append(getRodada().getCiclo().getNome());
+		result.append(", ");
+		result.append(getRodada().getCiclo().getBarragem().getCategoria());
+		result.append(", ");
+		result.append(getRodada().getNumero());
+		result.append(MessageBundleUtils.getInstance().get("label_rodada_posfixo"));
+		if (getData() != null || getHora() != null) {
+			result.append(", ");
+			result.append(getDataHoraFormatada());
+		}
+		return result.toString();
+	}
 }

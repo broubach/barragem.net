@@ -55,4 +55,20 @@ public class Treino extends Evento {
 	public String getResultadoValue() {
 		return RESULTADO_INDEFINIDO;
 	}
+
+	@Override
+	public Jogador getJogadorVencedorSimples() {
+		return null;
+	}
+
+	@Override
+	public String getDescricaoCalculada() {
+		StringBuilder result = new StringBuilder();
+		result.append(getTipoLabel());
+		if (getData() != null || getHora() != null) {
+			result.append(", ");
+			result.append(getDataHoraFormatada());
+		}
+		return result.toString();
+	}
 }

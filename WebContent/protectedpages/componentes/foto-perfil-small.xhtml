@@ -4,5 +4,5 @@
 	<h:graphicImage value="/publicpages/exibirimagem/exibirImagem.do?hash=#{usuario.perfil.hash}&#38;fotoPequena=true" styleClass="foto-perfil-small" 
 		rendered="#{usuario != null and usuario.perfil != null and usuario.perfil.hash != null}"/>
 	<h:graphicImage value="/publicpages/exibirimagem/exibirImagem.do?v=1.2.25&#38;hash=default&#38;fotoPequena=true" styleClass="foto-perfil-small" 
-		rendered="#{usuario != null and (usuario.perfil == null or usuario.perfil.hash == null)}"/>
+		rendered="#{usuario != null and (usuario.perfil == null or usuario.perfil.hash == null) || usuario == null}"/>
 </html>

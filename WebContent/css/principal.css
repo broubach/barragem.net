@@ -1769,6 +1769,109 @@ td.actions {
 .mensagem_sucesso .top, .mensagem_sucesso .left, .mensagem_sucesso .bottom, .mensagem_sucesso .right {
 	display: none;
 }
+
+/********************* CAROUSEL *********************/
+.container-jogo {
+	background-color: #ffffff;
+	border: 1px solid #95A3BA;
+	padding: 5px;
+	margin: 5px;
+	position: relative;
+	float: left;
+	clear: both;
+	width: 95%;
+}
+.container-jogo .corner {
+	background-color: #EEF1F3;
+	width: 3px;
+	height: 3px;
+}
+.container-jogo .tl {
+	background-position: -80px -7px;
+	top: -1px;
+	left: -1px;
+}
+.container-jogo .tr {
+	background-position: -83px -7px;
+	top: -1px;
+	right: -1px;
+}
+.container-jogo .bl {
+	background-position: -80px -10px;
+	bottom: -1px;
+	left: -1px;
+}
+.container-jogo .br {
+	background-position: -83px -10px;
+	bottom: -1px;
+	right: -1px;
+}
+.container-jogo .top, .container-jogo .bottom, .container-jogo .left, .container-jogo .right {
+	display: none;
+}
+
+.container-jogo h5 {
+	margin-top: 0px;
+	margin-bottom: 5px;
+}
+
+.container-jogo .jogador1 {
+	float: left;
+}
+
+.container-jogo .detalhe-jogo {
+	float: left;
+	padding: 2px;
+}
+
+.container-jogo .jogador2 {
+	position: absolute;
+	margin-left: 60px;
+	right: 5px;
+	top: 27px;
+}
+
+.detalhe-jogo .placar {
+	position: absolute;
+}
+
+.detalhe-jogo .placar1 {
+	right: 90px;
+}
+
+.detalhe-jogo .placar2 {
+	right: 70px;
+}
+
+.detalhe-jogo .placar3 {
+	right: 50px;
+}
+
+.detalhe-jogo .alto {
+	top: 32px;
+}
+
+.detalhe-jogo .baixo {
+	top: 52px;
+}
+.roller {
+	height: 109px;
+	visibility: hidden;
+}
+.roller_buttons {
+	position: absolute;
+	bottom: 0px;
+	right: 2px;
+}
+.roller_buttons a:hover {
+	cursor: pointer;
+}
+.roller_buttons a, .roller_buttons p {
+	float: left;
+	clear: none;
+	margin-left: 1px;
+	margin-right: 1px;
+}
 /********************* TYPOGRAPHY *********************/
 body {
 	font-family: Tahoma, Arial, Helvetica, sans serif;
@@ -1957,10 +2060,10 @@ legend {
 	font-size: 0.8em;
 }
 
-#form_atualizacoes .label_atualizacoes {
+h6 {
 	color: #009900;
 }
-#form_atualizacoes .label_atualizacoes, #atualizacoes {
+h6, #atualizacoes {
 	font-size: 0.8em;
 }
 .twitterDiv #descricao {
@@ -1968,5 +2071,21 @@ legend {
 	font-size:0.7em;
 }
 #atualizacoes .sujeito {
+	font-weight: bold;
+}
+.container-jogo h5 {
+	font-size: 10px;
+	color: #444444;
+}
+.detalhe-jogo .placar {
+	font-size: 16px;
+	color: #4F6AAD;
+	font-weight: bold;
+}
+.detalhe-jogo .jogador {
+	font-size: 12px;
+}
+.detalhe-jogo .ranking {
+	color: #4F6AAD;
 	font-weight: bold;
 }

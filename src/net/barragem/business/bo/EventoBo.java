@@ -1,6 +1,9 @@
 package net.barragem.business.bo;
 
 import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +30,7 @@ public class EventoBo extends BaseBo {
 	}
 
 	public void salvaEvento(Evento evento, Jogador jogadorVencedorWo, List<JogadorEvento> jogadoresEventosExcluidos)
-			throws SaldoInsuficienteException {
+	        throws SaldoInsuficienteException {
 		if (jogadoresEventosExcluidos != null && !jogadoresEventosExcluidos.isEmpty()) {
 			for (JogadorEvento jogadorEvento : jogadoresEventosExcluidos) {
 				PersistenceHelper.remove(jogadorEvento);
@@ -42,12 +45,12 @@ public class EventoBo extends BaseBo {
 					PersistenceHelper.persiste(getContaUsuario().criaOperacaoDebitoJogoBarragem(1));
 					PersistenceHelper.persiste(getContaUsuario());
 					PersistenceHelper.persiste(Atualizacao.criaCriarJogoBarragem(getUsuarioLogado(),
-							((JogoBarragem) evento).getRodada().getCiclo().getBarragem(), evento.getJogadoresEventos()
-									.get(0).getJogador(), evento.getJogadoresEventos().get(1).getJogador()));
+					        ((JogoBarragem) evento).getRodada().getCiclo().getBarragem(), evento.getJogadoresEventos()
+					                .get(0).getJogador(), evento.getJogadoresEventos().get(1).getJogador()));
 				} else {
 					PersistenceHelper.persiste(Atualizacao.criaAtualizarJogoBarragem(getUsuarioLogado(),
-							((JogoBarragem) evento).getRodada().getCiclo().getBarragem(), evento.getJogadoresEventos()
-									.get(0).getJogador(), evento.getJogadoresEventos().get(1).getJogador()));
+					        ((JogoBarragem) evento).getRodada().getCiclo().getBarragem(), evento.getJogadoresEventos()
+					                .get(0).getJogador(), evento.getJogadoresEventos().get(1).getJogador()));
 				}
 			}
 		}
@@ -55,11 +58,15 @@ public class EventoBo extends BaseBo {
 		if (evento.getId() == null) {
 			for (JogadorEvento jogadorEvento : evento.getJogadoresEventos()) {
 				if (jogadorEvento.getJogador().getUsuarioCorrespondente() != null
-						&& !jogadorEvento.getJogador().equals(getUsuarioLogado().getJogador())) {
+				        && !jogadorEvento.getJogador().equals(getUsuarioLogado().getJogador())) {
 					Usuario destino = jogadorEvento.getJogador().getUsuarioCorrespondente();
-					sendMail("no-reply@barragem.net", getUsuarioLogado().getNomeCompletoCapital(), destino.getEmail(),
-							"barragem.net - novo jogo cadastrado", MessageFormat.format(emailTemplateNovoJogo, evento
-									.getJogadoresEventosStr(destino.getJogador())));
+					sendMail(
+					        "no-reply@barragem.net",
+					        getUsuarioLogado().getNomeCompletoCapital(),
+					        destino.getEmail(),
+					        "barragem.net - novo jogo cadastrado",
+					        MessageFormat.format(emailTemplateNovoJogo,
+					                evento.getJogadoresEventosStr(destino.getJogador())));
 				}
 			}
 		}
@@ -91,6 +98,18 @@ public class EventoBo extends BaseBo {
 		if (evento instanceof JogoBarragem) {
 			PersistenceHelper.persiste(getContaUsuario().criaOperacaoDevolucao(1));
 			PersistenceHelper.persiste(getContaUsuario());
+		}
+	}
+
+	public void inicializaParcial(Jogo jogo, Comparator<JogadorEvento> comparator) {
+		PersistenceHelper.initialize("parciais", jogo.getPlacar());
+		ordenaJogadoresEventos(jogo, comparator);
+	}
+
+	public void ordenaJogadoresEventos(Evento evento, Comparator<JogadorEvento> comparator) {
+		evento.setJogadoresEventosOrdenados(new ArrayList<JogadorEvento>(evento.getJogadoresEventos()));
+		if (comparator != null) {
+			Collections.sort(evento.getJogadoresEventosOrdenados(), comparator);
 		}
 	}
 }

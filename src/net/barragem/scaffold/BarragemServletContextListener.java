@@ -2,10 +2,9 @@ package net.barragem.scaffold;
 
 import java.text.ParseException;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-
-import net.barragem.persistence.entity.AtualizacaoTwitter;
 
 import org.quartz.CronTrigger;
 import org.quartz.JobDetail;
@@ -21,23 +20,37 @@ public class BarragemServletContextListener implements ServletContextListener {
 			Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
 			e.getServletContext().setAttribute("quartz-scheduler", scheduler);
 
-			JobDetail job = new JobDetail("job1", "group1", AtualizaTwitterJob.class);
-			job.getJobDataMap().put("servletContext", e.getServletContext());
+			instalaJobTwitter(e.getServletContext(), scheduler);
+			instalaJobUltimosEventos(e.getServletContext(), scheduler);
 
-			CronTrigger trigger = new CronTrigger("trigger1", "group1", "job1", "group1", "0 0 0/12 * * ?");
-
-			scheduler.scheduleJob(job, trigger);
 			scheduler.start();
-
-			AtualizacaoTwitter atualizacaoTwitter = (AtualizacaoTwitter) PersistenceHelper.findByNamedQuery(
-					"lastTwitterUpdateQuery").get(0);
-			e.getServletContext().setAttribute("last-twitt", atualizacaoTwitter);
 
 		} catch (ParseException ex) {
 			throw new RuntimeException(ex);
 		} catch (SchedulerException ex) {
 			throw new RuntimeException(ex);
 		}
+	}
+
+	private void instalaJobUltimosEventos(ServletContext ctx, Scheduler scheduler) throws ParseException,
+	        SchedulerException {
+		JobDetail jobUltimosEventos = new JobDetail("jobUltimosEventos", "group1", UltimosEventosJob.class);
+		jobUltimosEventos.getJobDataMap().put("servletContext", ctx);
+		CronTrigger ultimosEventosTrigger = new CronTrigger("trigger1", "group1", "jobUltimosEventos", "group1",
+		        "0 0/10 * * * ?");
+		scheduler.scheduleJob(jobUltimosEventos, ultimosEventosTrigger);
+
+		UltimosEventosJob.doExecute(ctx);
+	}
+
+	private void instalaJobTwitter(ServletContext ctx, Scheduler scheduler) throws ParseException, SchedulerException {
+		JobDetail jobTwitter = new JobDetail("jobTwitter", "group1", AtualizaTwitterJob.class);
+		jobTwitter.getJobDataMap().put("servletContext", ctx);
+		CronTrigger twitterTrigger = new CronTrigger("trigger2", "group1", "jobTwitter", "group1", "0 0 0/12 * * ?");
+
+		scheduler.scheduleJob(jobTwitter, twitterTrigger);
+
+		AtualizaTwitterJob.doExecute(ctx);
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package net.barragem.persistence.entity;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -18,7 +20,9 @@ import javax.persistence.Transient;
 import net.barragem.scaffold.MessageBundleUtils;
 
 @Entity
-@NamedQuery(name = "meusEventosQuery", query = "select distinct e from Evento e join e.jogadoresEventos je where je.jogador.usuarioCorrespondente = :usuario order by e.data desc")
+@NamedQueries({
+        @NamedQuery(name = "meusEventosQuery", query = "select distinct e from Evento e join e.jogadoresEventos je where je.jogador.usuarioCorrespondente = :usuario order by e.data desc"),
+        @NamedQuery(name = "ultimosEventosQuery", query = "select distinct(je.evento) from JogadorEvento je join je.evento e left outer join e.placar p where (je.vencedor = 1 and p.wo = 0) or e.class = Treino order by je.evento.data desc, je.evento.hora desc") })
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "evento")
 public abstract class Evento extends BaseEntity implements Cloneable {
@@ -235,6 +239,26 @@ public abstract class Evento extends BaseEntity implements Cloneable {
 			}
 		}
 
+		return result.toString();
+	}
+
+	public abstract Jogador getJogadorVencedorSimples();
+
+	public abstract String getDescricaoCalculada();
+
+	protected String getDataHoraFormatada() {
+		SimpleDateFormat df = new SimpleDateFormat(MessageBundleUtils.getInstance().get("format_day_month_year"));
+		SimpleDateFormat tf = new SimpleDateFormat("HH:mm");
+
+		StringBuilder result = new StringBuilder();
+		if (getData() != null) {
+			result.append(df.format(getData()));
+		}
+		if (getHora() != null) {
+			result.append(" (");
+			result.append(tf.format(getHora()));
+			result.append(")");
+		}
 		return result.toString();
 	}
 }

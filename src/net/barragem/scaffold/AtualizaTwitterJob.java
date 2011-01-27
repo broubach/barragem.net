@@ -22,6 +22,10 @@ public class AtualizaTwitterJob implements Job {
 
 	@Override
 	public void execute(JobExecutionContext ctx) throws JobExecutionException {
+		doExecute((ServletContext) ctx.getMergedJobDataMap().get("servletContext"));
+	}
+
+	public static void doExecute(ServletContext ctx) {
 		try {
 			String response = obtemUltimoTwitt();
 			response = response.replace("twitterCallback([", "");
@@ -34,13 +38,12 @@ public class AtualizaTwitterJob implements Job {
 			Date twittDate = toDate((String) resp.get("created_at"));
 
 			AtualizacaoTwitter atualizacaoTwitter = (AtualizacaoTwitter) PersistenceHelper.findByNamedQuery(
-					"lastTwitterUpdateQuery").get(0);
+			        "lastTwitterUpdateQuery").get(0);
 			atualizacaoTwitter.setTexto(twitt);
 			atualizacaoTwitter.setData(twittDate);
 			atualizacaoTwitter.setDataGravacao(new Date());
 			PersistenceHelper.persiste(atualizacaoTwitter);
-			((ServletContext) ctx.getMergedJobDataMap().get("servletContext")).setAttribute("last-twitt",
-					atualizacaoTwitter);
+			ctx.setAttribute("last-twitt", atualizacaoTwitter);
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		} catch (IOException e) {
@@ -48,9 +51,9 @@ public class AtualizaTwitterJob implements Job {
 		}
 	}
 
-	private String obtemUltimoTwitt() throws MalformedURLException, IOException {
+	private static String obtemUltimoTwitt() throws MalformedURLException, IOException {
 		URL lastTwitt = new URL(
-				"http://twitter.com/statuses/user_timeline/barragemnet.json?callback=twitterCallback&count=1");
+		        "http://twitter.com/statuses/user_timeline/barragemnet.json?callback=twitterCallback&count=1");
 
 		BufferedReader in = null;
 		try {
@@ -69,10 +72,10 @@ public class AtualizaTwitterJob implements Job {
 		}
 	}
 
-	private Date toDate(String date) {
+	private static Date toDate(String date) {
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss ZZZZZ yyyy", new java.util.Locale("eng",
-					"US"));
+			        "US"));
 			return sdf.parse(date);
 		} catch (ParseException e) {
 			throw new RuntimeException(e);

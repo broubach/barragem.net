@@ -50,7 +50,7 @@ public class LoginBo extends BaseBo {
 
 		// carrega atualizacoes
 		List<Atualizacao> atualizacoes = PersistenceHelper.findByNamedQueryWithLimits("atualizacaoPaginaInicialQuery",
-				0, 10, getUsuarioLogado().getId());
+		        0, 10, getUsuarioLogado().getId());
 		if (!atualizacoes.isEmpty()) {
 			Map<Integer, Atualizacao> mapAtualizacoes = new HashMap<Integer, Atualizacao>();
 			for (Atualizacao atualizacao : atualizacoes) {
@@ -71,7 +71,7 @@ public class LoginBo extends BaseBo {
 			}
 		}
 		carregaAtualizacoes(atualizacoes);
-		Paginavel<Atualizacao> paginacaoAtualizacoes = new PaginavelSampleImpl<Atualizacao>(atualizacoes, null, 6);
+		Paginavel<Atualizacao> paginacaoAtualizacoes = new PaginavelSampleImpl<Atualizacao>(atualizacoes, null, 4);
 		setAtualizacoes(paginacaoAtualizacoes);
 	}
 
@@ -79,20 +79,20 @@ public class LoginBo extends BaseBo {
 		try {
 			List<Usuario> sujeitos = new ArrayList<Usuario>();
 			for (Atualizacao atualizacao : atualizacoes) {
-				atualizacao.setLoadedSujeito((BaseEntity) PersistenceHelper.findByPk(Class.forName(atualizacao
-						.getSujeitoClassName()), atualizacao.getSujeitoId()));
+				atualizacao.setLoadedSujeito((BaseEntity) PersistenceHelper.findByPk(
+				        Class.forName(atualizacao.getSujeitoClassName()), atualizacao.getSujeitoId()));
 				if (atualizacao.getSujeitoClassName().equals("net.barragem.persistence.entity.Usuario")) {
 					sujeitos.add((Usuario) atualizacao.getLoadedSujeito());
 				}
 				if (atualizacao.getObjetoId() != null) {
-					atualizacao.setLoadedObjeto((BaseEntity) PersistenceHelper.findByPk(Class.forName(atualizacao
-							.getObjetoClassName()), atualizacao.getObjetoId()));
+					atualizacao.setLoadedObjeto((BaseEntity) PersistenceHelper.findByPk(
+					        Class.forName(atualizacao.getObjetoClassName()), atualizacao.getObjetoId()));
 				}
 				for (Predicado predicado : atualizacao.getPredicados()) {
 					if (predicado.getTipoPredicadoValue() != null
-							&& predicado.getTipoPredicadoValue().equals(TipoPredicadoValueEnum.Clazz)) {
-						predicado.setLoadedPredicado((BaseEntity) PersistenceHelper.findByPk(Class.forName(predicado
-								.getPredicadoValue()), predicado.getPredicadoValueId()));
+					        && predicado.getTipoPredicadoValue().equals(TipoPredicadoValueEnum.Clazz)) {
+						predicado.setLoadedPredicado((BaseEntity) PersistenceHelper.findByPk(
+						        Class.forName(predicado.getPredicadoValue()), predicado.getPredicadoValueId()));
 					}
 				}
 			}

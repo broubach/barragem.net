@@ -6,18 +6,85 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:c="http://java.sun.com/jstl/core"
 	xmlns:a4j="http://richfaces.org/a4j"
-	xmlns:rich="http://richfaces.org/rich">
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
 <ui:composition template="/protectedpages/layout/layoutPrincipal.xhtml">
 	<ui:define name="conteudo">
 		<div class="maincontent equalheights">
+	        <script type="text/javascript" src="#{request.contextPath}/js/jcarousellite_1.0.1.min.js"></script>
+	        <script type="text/javascript">
+				$j(function() {
+				    $j(".roller").jCarouselLite({
+				        btnNext: ".next",
+				        btnPrev: ".prev",
+				        auto: 5000,
+				        visible: 1
+				    });
+				});
+			</script>
 			<h2>#{msg.label_bem_vindo}</h2> <c:if test="#{loginBean.totalNovasMensagens > 0}"><span class="new_mail"><a href="#{request.contextPath}/protectedpages/recebermensagem/receberMensagem.xhtml"><img src="#{request.contextPath}/img/buttons/btn-newmail.png" height="16px" width="16px"/> #{msg.label_voce_possui} #{sessionScope['cachedTotalNovasMensagens']} #{msg.label_novas_mensagens}</a></span></c:if>
 		    <ui:include src="componentes/mensagem-sucesso.xhtml"/>
 			<br/>
+			<h6>#{msg.label_ultimos_eventos}</h6>
+			<div class="roller">
+				<h:form>
+				<ul>
+					<c:forEach items="#{applicationScope['ultimosEventos']}" var="evento">
+						<li>
+							<div class="container-jogo">
+								<h5>#{evento.descricaoCalculada}</h5>
+								<div class="jogador1">
+								    <ui:include src="componentes/foto-perfil-small.xhtml">
+								    	<ui:param name="usuario" value="#{evento.jogadoresEventosOrdenados[0].jogador.usuarioCorrespondente}"/>
+								    </ui:include>
+								</div>
+								<div class="detalhe-jogo">
+									<table>
+									<c:forEach items="#{evento.jogadoresEventosOrdenados}" var="jogadorEvento" begin="0" end="1">
+										<tr>
+											<c:if test="#{evento.tipoValue == 'jb'}">
+												<td class="ranking">[#{evento.rodada.ciclo.cicloJogadorPorJogador[jogadorEvento.jogador].ranking}]</td>
+											</c:if>
+											<td class="jogador">
+												<h:commandLink action="exibirPerfil" actionListener="#{exibirPerfilBean.exibePerfil}" rendered="#{jogadorEvento.jogador.usuarioCorrespondente != null}">#{jogadorEvento.jogador.nome}<f:param name="id" value="#{jogadorEvento.jogador.usuarioCorrespondente.id}"/></h:commandLink>
+												<h:outputText value="#{jogadorEvento.jogador.nome}" rendered="#{jogadorEvento.jogador.usuarioCorrespondente == null}" />
+											</td>
+											<c:if test="#{evento.tipoValue != 't'}">
+												<c:forEach items="#{evento.placar.parciais}" var="parcial" varStatus="status">
+													<td class="placar placar#{status.index+1} #{evento.jogadorVencedorSimples eq jogadorEvento.jogador ? 'alto' : 'baixo'}">#{evento.jogadorVencedorSimples eq jogadorEvento.jogador ? parcial.parcialVencedor : parcial.parcialPerdedor}</td>
+												</c:forEach>
+											</c:if>
+										</tr>
+									</c:forEach>
+									</table>
+								</div>
+								<c:if test="#{fn:length(evento.jogadoresEventosOrdenados) > 1}">
+									<div class="jogador2">
+									    <ui:include src="componentes/foto-perfil-small.xhtml">
+									    	<ui:param name="usuario" value="#{evento.jogadoresEventosOrdenados[1].jogador.usuarioCorrespondente}"/>
+									    </ui:include>
+									</div>
+								</c:if>
+								<ui:include src="../publicpages/componentes/bordas-redondas-div.xhtml"/>
+							</div>
+						</li>
+					</c:forEach>
+				</ul>
+				</h:form>
+				<div class="roller_buttons">
+					<a class="setaPaginacao setaPaginacaoAnterior prev"><img src="#{request.contextPath}/img/transparency.gif" class="setaPaginacaoTransparenciaSimples" title="#{msg.label_anterior}"/></a>
+					<p class="fonte-padrao">#{msg.label_eventos_atualizados_a_cada_10_minutos}</p>
+					<a class="setaPaginacao setaPaginacaoProxima next"><img src="#{request.contextPath}/img/transparency.gif" class="setaPaginacaoTransparenciaSimples" title="#{msg.label_proximo}"/></a>
+				</div>
+			</div>
+			<br/>
+			
 			<c:if test="#{empty sessionScope['atualizacoes'].pagina}">
-				<p>Que tal comecar pesquisando por <a href="#{request.contextPath}/protectedpages/gerirjogador/gerirJogador.xhtml">jogadores</a> ou pelas <a href="#{request.contextPath}/protectedpages/gerirbarragem/gerirBarragem.xhtml">barragens</a> ativas?</p>
+				<p class="fonte-padrao">Que tal comecar pesquisando por <a href="#{request.contextPath}/protectedpages/gerirjogador/gerirJogador.xhtml">jogadores</a> ou pelas <a href="#{request.contextPath}/protectedpages/gerirbarragem/gerirBarragem.xhtml">barragens</a> ativas?</p>
 			</c:if>
 			<c:if test="#{!empty sessionScope['atualizacoes'].pagina}">
+				<h6>#{msg.label_ultimas_atualizacoes}</h6>
 		        <ui:include src="componentes/atualizacoes.xhtml"/>
 	        </c:if>
 			<ui:include src="../publicpages/componentes/bordas-redondas-div.xhtml"/>

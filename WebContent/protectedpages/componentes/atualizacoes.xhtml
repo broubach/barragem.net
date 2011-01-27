@@ -6,7 +6,6 @@
 	xmlns:a4j="http://richfaces.org/a4j">
 
 	<h:form id="form_atualizacoes">
-	<h3 class="label_atualizacoes">#{msg.label_ultimas_atualizacoes}</h3>
 	<div id="atualizacoes">
 		<c:forEach items="#{sessionScope['atualizacoes'].pagina}" var="atualizacao" varStatus="status">
 			<div id="atualizacao">
@@ -57,9 +56,9 @@
 				</p>
 			</div>
 		</c:forEach>
+	    <ui:include src="../componentes/paginacao.xhtml">
+	    	<ui:param name="paginavel" value="#{sessionScope['atualizacoes']}"/>
+	    </ui:include>
 	</div>
-    <ui:include src="../componentes/paginacao.xhtml">
-    	<ui:param name="paginavel" value="#{sessionScope['atualizacoes']}"/>
-    </ui:include>
 	</h:form>
 </html>

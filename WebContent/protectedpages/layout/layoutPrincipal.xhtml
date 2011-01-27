@@ -19,48 +19,13 @@
 	        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/fileupload/fileupload.css" />
 	    </c:if>
         <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/principalGrid.css" />
-        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/principal.css?v1.2.34" />
+        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/principal.css?v1.2.35" />
 
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
         <script type="text/javascript" src="#{request.contextPath}/js/jquery.equalheights.js"></script>
         <script type="text/javascript">
         //<![CDATA[
         	var $j = jQuery.noConflict();
-        //]]>
-        </script>
-        <script type="text/javascript">
-        //<![CDATA[
-                $j(function(){
-                	$j('.equalheights').equalHeights();
-                    $j('#searchForm input').each(function() {
-	                    if($j(this).val() === '') {
-	                        $j(this).val($j(this).attr('title'));	
-	                    }
-	                    
-	                    $j(this).focus(function() {
-	                        if($j(this).val() == $j(this).attr('title')) {
-	                            $j(this).val('').addClass('focused');	
-	                        }
-	                    });
-	                    $j(this).blur(function() {
-	                        if($j(this).val() === '') {
-	                            $j(this).val($j(this).attr('title')).removeClass('focused');	
-	                        }
-	                    });
-                	});
-					$j('#twitter_toggle').hover(function(){toggleTwitter();});
-                });
-                function toggleTwitter() {
-					if ($j('#descricao #descricao_grande').css('display') == 'none') {
-						$j('#descricao #descricao_pequena').toggle();
-						$j('#descricao #descricao_grande').fadeIn(200);
-					} else {
-						$j('#descricao #descricao_grande').fadeOut(200, function() {
-							$j('#descricao #descricao_pequena').toggle();
-						});
-					}
-					return false;
-				}
         //]]>
         </script>
     </head>
@@ -96,6 +61,42 @@
 			</div>
         </div>
 
+        <script type="text/javascript">
+        //<![CDATA[
+                $j(function(){
+                	$j('.equalheights').equalHeights();
+                    $j('#searchForm input').each(function() {
+	                    if($j(this).val() === '') {
+	                        $j(this).val($j(this).attr('title'));	
+	                    }
+	                    
+	                    $j(this).focus(function() {
+	                        if($j(this).val() == $j(this).attr('title')) {
+	                            $j(this).val('').addClass('focused');	
+	                        }
+	                    });
+	                    $j(this).blur(function() {
+	                        if($j(this).val() === '') {
+	                            $j(this).val($j(this).attr('title')).removeClass('focused');	
+	                        }
+	                    });
+                	});
+					$j('#twitter_toggle').hover(function(){toggleTwitter();});
+                });
+                function toggleTwitter() {
+					if ($j('#descricao #descricao_grande').css('display') == 'none') {
+						$j('#descricao #descricao_pequena').toggle();
+						$j('#descricao #descricao_grande').fadeIn(200);
+					} else {
+						$j('#descricao #descricao_grande').fadeOut(200, function() {
+							$j('#descricao #descricao_pequena').toggle();
+						});
+					}
+					return false;
+				}
+        //]]>
+        </script>
+    
 		<script type="text/javascript">
 			var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
 			document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));

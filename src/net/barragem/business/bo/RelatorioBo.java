@@ -7,7 +7,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.barragem.persistence.entity.JogadorEvento;
 import net.barragem.persistence.entity.Jogo;
 import net.barragem.persistence.entity.JogoBarragem;
 import net.barragem.persistence.entity.Rodada;
@@ -32,10 +31,7 @@ public class RelatorioBo extends BaseBo {
                 PersistenceHelper.initialize("jogos", rodadas.get(i));
                 getBo(BarragemBo.class).atribuiPontuacaoGeralAJogadoresDeJogosBarragem(rodadas.get(i).getJogos());
                 for (Jogo jogoBarragem : rodadas.get(i).getJogos()) {
-                    PersistenceHelper.initialize("parciais", jogoBarragem.getPlacar());
-                    jogoBarragem.setJogadoresEventosOrdenados(new ArrayList<JogadorEvento>(jogoBarragem
-                            .getJogadoresEventos()));
-                    Collections.sort(jogoBarragem.getJogadoresEventosOrdenados(),
+                    getBo(EventoBo.class).inicializaParcial(jogoBarragem,
                             new JogadorEventoComparatorVencedorPrimeiroBarragem());
                 }
                 rodadas.get(i).setJogosOrdenados(new ArrayList<JogoBarragem>(rodadas.get(i).getJogos()));
