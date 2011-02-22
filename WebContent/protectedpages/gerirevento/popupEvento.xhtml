@@ -102,7 +102,7 @@
 								<label class="adicionarJogadorLabel">#{msg.label_nome}</label>
 								<h:inputText size="30" styleClass="adicionarJogadorInput" value="#{gerirEventoBean.jogadorNome}" maxlength="45"/>
 								<div class="btn-novo">
-									<a4j:commandLink actionListener="#{gerirEventoBean.criaJogador}" reRender="add-evento" oncomplete="$j.fn.colorbox.resize();">
+									<a4j:commandLink actionListener="#{gerirEventoBean.criaJogador}" reRender="add-evento" oncomplete="$j.fn.colorbox.resize();aplicarMascaras();">
 										#{msg.label_criar_jogador}
 										<ui:include src="../../publicpages/componentes/bordas-redondas-span.xhtml"/>
 									</a4j:commandLink>&#160;
@@ -139,11 +139,11 @@
 					$j('#add-evento\\:comentario').NobleCount('#contador',{
 						on_negative: 'go_red',
 						on_positive: 'go_green',
-						max_chars: 255,
+						max_chars: 1000,
 						block_negative: true,
 						on_update: function(t_obj, char_area, c_settings, char_rem) {
 								if (char_rem &lt; 0) {
-									t_obj[0].value = t_obj[0].value.substring(0, 255);
+									t_obj[0].value = t_obj[0].value.substring(0, 1000);
 								}
 				        }
 					});

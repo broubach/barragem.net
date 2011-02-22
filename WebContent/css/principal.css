@@ -1813,6 +1813,7 @@ td.actions {
 .container-jogo h5 {
 	margin-top: 0px;
 	margin-bottom: 5px;
+	min-width: 400px;
 }
 
 .container-jogo .jogador1 {
