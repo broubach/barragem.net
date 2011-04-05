@@ -2,6 +2,7 @@ package net.barragem.persistence.entity;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -13,32 +14,32 @@ import javax.persistence.Table;
 @Table(name = "operacao")
 public class Operacao extends BaseEntity {
 
-	@OneToOne
-	private Conta conta;
-	private Integer quantidade;
-	private Date data;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Conta conta;
+    private Integer quantidade;
+    private Date data;
 
-	public Conta getConta() {
-		return conta;
-	}
+    public Conta getConta() {
+        return conta;
+    }
 
-	public void setConta(Conta conta) {
-		this.conta = conta;
-	}
+    public void setConta(Conta conta) {
+        this.conta = conta;
+    }
 
-	public Integer getQuantidade() {
-		return quantidade;
-	}
+    public Integer getQuantidade() {
+        return quantidade;
+    }
 
-	public void setQuantidade(Integer quantidade) {
-		this.quantidade = quantidade;
-	}
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
+    }
 
-	public Date getData() {
-		return data;
-	}
+    public Date getData() {
+        return data;
+    }
 
-	public void setData(Date data) {
-		this.data = data;
-	}
+    public void setData(Date data) {
+        this.data = data;
+    }
 }

@@ -148,7 +148,6 @@ public class RegistrarNovoUsuarioBean extends BaseBean {
 
                 Conta conta = new Conta();
                 conta.setProprietario(usuarioEmFoco);
-                PersistenceHelper.persiste(conta);
                 PersistenceHelper.persiste(conta.criaOperacaoCarga(150, 4));
                 setContaUsuario(conta);
 

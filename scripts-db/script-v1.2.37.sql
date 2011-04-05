@@ -1,0 +1,1 @@
+update conta set saldo = 150 where proprietario_id not in(113, 115);
