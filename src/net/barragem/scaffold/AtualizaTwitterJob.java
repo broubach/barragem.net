@@ -20,65 +20,69 @@ import org.quartz.JobExecutionException;
 
 public class AtualizaTwitterJob implements Job {
 
-	@Override
-	public void execute(JobExecutionContext ctx) throws JobExecutionException {
-		doExecute((ServletContext) ctx.getMergedJobDataMap().get("servletContext"));
-	}
+    @Override
+    public void execute(JobExecutionContext ctx) throws JobExecutionException {
+        doExecute((ServletContext) ctx.getMergedJobDataMap().get("servletContext"));
+    }
 
-	public static void doExecute(ServletContext ctx) {
-		try {
-			String response = obtemUltimoTwitt();
-			response = response.replace("twitterCallback([", "");
-			response = response.replace("]);", "");
+    public static void doExecute(ServletContext ctx) {
+        try {
+            String response = obtemUltimoTwitt();
+            response = response.replace("twitterCallback([", "");
+            response = response.replace("]);", "");
 
-			Json2Java j = new Json2Java();
-			Map<String, Object> resp = j.getMap(response);
+            AtualizacaoTwitter atualizacaoTwitter = (AtualizacaoTwitter) PersistenceHelper.findByNamedQuery(
+                    "lastTwitterUpdateQuery").get(0);
+            try {
+                Json2Java j = new Json2Java();
+                Map<String, Object> resp = j.getMap(response);
 
-			String twitt = (String) resp.get("text");
-			Date twittDate = toDate((String) resp.get("created_at"));
+                String twitt = (String) resp.get("text");
+                Date twittDate = toDate((String) resp.get("created_at"));
 
-			AtualizacaoTwitter atualizacaoTwitter = (AtualizacaoTwitter) PersistenceHelper.findByNamedQuery(
-			        "lastTwitterUpdateQuery").get(0);
-			atualizacaoTwitter.setTexto(twitt);
-			atualizacaoTwitter.setData(twittDate);
-			atualizacaoTwitter.setDataGravacao(new Date());
-			PersistenceHelper.persiste(atualizacaoTwitter);
-			ctx.setAttribute("last-twitt", atualizacaoTwitter);
-		} catch (MalformedURLException e) {
-			throw new RuntimeException(e);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-	}
+                atualizacaoTwitter.setTexto(twitt);
+                atualizacaoTwitter.setData(twittDate);
+                atualizacaoTwitter.setDataGravacao(new Date());
+                PersistenceHelper.persiste(atualizacaoTwitter);
+            } catch (RuntimeException e) {
+                // problema ao buscar ultimo twitt
+            }
+            ctx.setAttribute("last-twitt", atualizacaoTwitter);
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-	private static String obtemUltimoTwitt() throws MalformedURLException, IOException {
-		URL lastTwitt = new URL(
-		        "http://twitter.com/statuses/user_timeline/barragemnet.json?callback=twitterCallback&count=1");
+    private static String obtemUltimoTwitt() throws MalformedURLException, IOException {
+        URL lastTwitt = new URL(
+                "http://twitter.com/statuses/user_timeline/barragemnet.json?callback=twitterCallback&count=1");
 
-		BufferedReader in = null;
-		try {
-			in = new BufferedReader(new InputStreamReader(lastTwitt.openStream()));
+        BufferedReader in = null;
+        try {
+            in = new BufferedReader(new InputStreamReader(lastTwitt.openStream()));
 
-			StringBuffer response = new StringBuffer();
-			String inputLine = null;
-			while ((inputLine = in.readLine()) != null) {
-				response.append(inputLine);
-			}
-			return response.toString();
-		} finally {
-			if (in != null) {
-				in.close();
-			}
-		}
-	}
+            StringBuffer response = new StringBuffer();
+            String inputLine = null;
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            return response.toString();
+        } finally {
+            if (in != null) {
+                in.close();
+            }
+        }
+    }
 
-	private static Date toDate(String date) {
-		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss ZZZZZ yyyy", new java.util.Locale("eng",
-			        "US"));
-			return sdf.parse(date);
-		} catch (ParseException e) {
-			throw new RuntimeException(e);
-		}
-	}
+    private static Date toDate(String date) {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss ZZZZZ yyyy", new java.util.Locale("eng",
+                    "US"));
+            return sdf.parse(date);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
