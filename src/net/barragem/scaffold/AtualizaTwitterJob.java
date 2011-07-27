@@ -26,33 +26,36 @@ public class AtualizaTwitterJob implements Job {
     }
 
     public static void doExecute(ServletContext ctx) {
+        AtualizacaoTwitter atualizacaoTwitter = (AtualizacaoTwitter) PersistenceHelper.findByNamedQuery(
+                "lastTwitterUpdateQuery").get(0);
+
         try {
             String response = obtemUltimoTwitt();
             response = response.replace("twitterCallback([", "");
             response = response.replace("]);", "");
 
-            AtualizacaoTwitter atualizacaoTwitter = (AtualizacaoTwitter) PersistenceHelper.findByNamedQuery(
-                    "lastTwitterUpdateQuery").get(0);
-            try {
-                Json2Java j = new Json2Java();
-                Map<String, Object> resp = j.getMap(response);
+            Json2Java j = new Json2Java();
+            Map<String, Object> resp = j.getMap(response);
 
-                String twitt = (String) resp.get("text");
-                Date twittDate = toDate((String) resp.get("created_at"));
+            String twitt = (String) resp.get("text");
+            Date twittDate = toDate((String) resp.get("created_at"));
 
-                atualizacaoTwitter.setTexto(twitt);
-                atualizacaoTwitter.setData(twittDate);
-                atualizacaoTwitter.setDataGravacao(new Date());
-                PersistenceHelper.persiste(atualizacaoTwitter);
-            } catch (RuntimeException e) {
-                // problema ao buscar ultimo twitt
-            }
-            ctx.setAttribute("last-twitt", atualizacaoTwitter);
+            atualizacaoTwitter.setTexto(twitt);
+            atualizacaoTwitter.setData(twittDate);
+            atualizacaoTwitter.setDataGravacao(new Date());
+            PersistenceHelper.persiste(atualizacaoTwitter);
         } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
+            // problema ao buscar ultimo twitt
+
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            // problema ao buscar ultimo twitt
+
+        } catch (RuntimeException e) {
+            // problema ao buscar ultimo twitt
+            // TODO: ser mais especifico no erro
+
         }
+        ctx.setAttribute("last-twitt", atualizacaoTwitter);
     }
 
     private static String obtemUltimoTwitt() throws MalformedURLException, IOException {
