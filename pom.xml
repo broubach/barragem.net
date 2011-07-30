@@ -1,0 +1,152 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>net.barragem</groupId>
+	<artifactId>web</artifactId>
+	<version>0.0.1</version>
+	<packaging>war</packaging>
+
+	<repositories>
+		<repository>
+			<id>jasperreports</id>
+			<url>http://jasperreports.sourceforge.net/maven2</url>
+		</repository>
+		<repository>
+		    <id>JBoss</id>
+		    <name>JBoss Repsitory</name>
+		    <url>http://repository.jboss.org/nexus/content/groups/public</url>
+		</repository>		
+	</repositories>
+
+	<properties>
+		<org.springframework.version>3.0.5.RELEASE</org.springframework.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-expression</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>jfree</groupId>
+			<artifactId>jfreechart</artifactId>
+			<version>1.0.13</version>
+		</dependency>
+
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>3.7.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sun.facelets</groupId>
+			<artifactId>jsf-facelets</artifactId>
+			<version>1.1.14</version>
+		</dependency>
+
+		<dependency>
+		  <groupId>org.hibernate</groupId>
+		  <artifactId>hibernate-core</artifactId>
+		  <version>3.6.6.Final</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>mysql</groupId>
+		    <artifactId>mysql-connector-java</artifactId>
+		    <version>5.1.17</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>org.quartz-scheduler</groupId>
+		    <artifactId>quartz</artifactId>
+		    <version>1.8.0</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>javax.faces</groupId>
+		    <artifactId>jsf-api</artifactId>
+		    <version>1.2_15-B02</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>javax.jms</groupId>
+		    <artifactId>jms</artifactId>
+		    <version>1.1</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>javax.mail</groupId>
+		    <artifactId>mail</artifactId>
+		    <version>1.4</version>
+		</dependency>
+
+		<dependency>
+		  <groupId>org.gatein.captcha</groupId>
+		  <artifactId>simplecaptcha</artifactId>
+		  <version>1.1.1-GA-Patch01</version>
+		</dependency>
+
+		<dependency>
+		  <groupId>org.richfaces.framework</groupId>
+		  <artifactId>richfaces-impl</artifactId>
+		  <version>3.3.3.Final</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>commons-collections</groupId>
+		    <artifactId>commons-collections</artifactId>
+		    <version>3.2.1</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>net.sf.json-lib</groupId>
+		    <artifactId>json-lib</artifactId>
+		    <version>2.2.3</version>
+		</dependency>
+	</dependencies>
+</project>
