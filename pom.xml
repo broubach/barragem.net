@@ -16,10 +16,18 @@
 		    <name>JBoss Repsitory</name>
 		    <url>http://repository.jboss.org/nexus/content/groups/public</url>
 		</repository>		
+		<repository>
+		  <id>java.net.maven1</id>
+		  <name>java.net</name>
+		  <url>http://download.java.net/maven/1</url>
+		</repository>
 	</repositories>
 
 	<properties>
-		<org.springframework.version>3.0.5.RELEASE</org.springframework.version>
+		<project.build.sourceEncoding>Cp1252</project.build.sourceEncoding>
+	    <maven.compiler.source>1.6</maven.compiler.source>
+	    <maven.compiler.target>1.6</maven.compiler.target>
+		<org.springframework.version>3.0.6.RELEASE</org.springframework.version>
 	</properties>
 
 	<dependencies>
@@ -72,15 +80,39 @@
 		</dependency>
 
 		<dependency>
-			<groupId>jfree</groupId>
-			<artifactId>jfreechart</artifactId>
-			<version>1.0.13</version>
-		</dependency>
-
-		<dependency>
 			<groupId>net.sf.jasperreports</groupId>
 			<artifactId>jasperreports</artifactId>
 			<version>3.7.6</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>bcmail-jdk14</artifactId>
+					<groupId>org.bouncycastle</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>bcprov-jdk14</artifactId>
+					<groupId>bouncycastle</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>bcprov-jdk14</artifactId>
+					<groupId>org.bouncycastle</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>bcmail-jdk14</artifactId>
+					<groupId>bouncycastle</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>bctsp-jdk14</artifactId>
+					<groupId>org.bouncycastle</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>jdtcore</artifactId>
+					<groupId>eclipse</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>xml-apis</artifactId>
+					<groupId>xml-apis</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
@@ -92,7 +124,31 @@
 		<dependency>
 		  <groupId>org.hibernate</groupId>
 		  <artifactId>hibernate-core</artifactId>
-		  <version>3.6.6.Final</version>
+		  <version>3.3.1.GA</version>
+		  <exclusions>
+		  	<exclusion>
+		  		<artifactId>xml-apis</artifactId>
+		  		<groupId>xml-apis</groupId>
+		  	</exclusion>
+		  </exclusions>
+		</dependency>
+
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-c3p0</artifactId>
+		    <version>3.3.1.GA</version>
+		</dependency>
+
+		<dependency>
+		  <groupId>org.hibernate</groupId>
+		  <artifactId>ejb3-persistence</artifactId>
+		  <version>1.0.2.GA</version>
+		</dependency>
+
+		<dependency>
+		  <groupId>org.hibernate</groupId>
+		  <artifactId>hibernate-annotations</artifactId>
+		  <version>3.4.0.GA</version>
 		</dependency>
 
 		<dependency>
@@ -108,11 +164,17 @@
 		</dependency>
 
 		<dependency>
-		    <groupId>javax.faces</groupId>
-		    <artifactId>jsf-api</artifactId>
-		    <version>1.2_15-B02</version>
+		  <groupId>javax.faces</groupId>
+		  <artifactId>jsf-api</artifactId>
+		  <version>1.2_15-B02</version>
 		</dependency>
 
+		<dependency>
+		  <groupId>javax.faces</groupId>
+		  <artifactId>jsf-impl</artifactId>
+		  <version>1.2_15-B02</version>
+		</dependency>
+		
 		<dependency>
 		    <groupId>javax.jms</groupId>
 		    <artifactId>jms</artifactId>
@@ -129,12 +191,34 @@
 		  <groupId>org.gatein.captcha</groupId>
 		  <artifactId>simplecaptcha</artifactId>
 		  <version>1.1.1-GA-Patch01</version>
+		  <exclusions>
+		  	<exclusion>
+		  		<artifactId>servlet-api</artifactId>
+		  		<groupId>javax.servlet</groupId>
+		  	</exclusion>
+		  	<exclusion>
+		  		<artifactId>filters</artifactId>
+		  		<groupId>com.jhlabs</groupId>
+		  	</exclusion>
+		  </exclusions>
 		</dependency>
 
 		<dependency>
 		  <groupId>org.richfaces.framework</groupId>
 		  <artifactId>richfaces-impl</artifactId>
 		  <version>3.3.3.Final</version>
+		</dependency>
+
+		<dependency>
+		  <groupId>org.richfaces.ui</groupId>
+		  <artifactId>richfaces-ui</artifactId>
+		  <version>3.3.3.Final</version>
+		</dependency>
+
+		<dependency>
+		  <groupId>org.apache.activemq</groupId>
+		  <artifactId>activemq-all</artifactId>
+		  <version>5.3.0</version>
 		</dependency>
 
 		<dependency>
@@ -148,5 +232,45 @@
 		    <artifactId>json-lib</artifactId>
 		    <version>2.2.3</version>
 		</dependency>
+
+		<dependency>
+		    <groupId>org.dbunit</groupId>
+		    <artifactId>dbunit</artifactId>
+		    <version>2.4.8</version>
+		    <scope>test</scope>
+		</dependency>
+
+		<dependency>
+		    <groupId>javassist</groupId>
+		    <artifactId>javassist</artifactId>
+		    <version>3.4.GA</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>javax</groupId>
+		    <artifactId>javaee-web-api</artifactId>
+		    <version>6.0</version>
+		    <scope>provided</scope>
+		</dependency>
 	</dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>commons-digester</groupId>
+				<artifactId>commons-digester</artifactId>
+				<version>1.8.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12</artifactId>
+				<version>1.5.6</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>1.5.6</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 </project>
